@@ -1,0 +1,13 @@
+{
+  "name": "matchma",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MatchMa product catalog matching",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
