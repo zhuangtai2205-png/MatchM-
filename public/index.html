@@ -316,7 +316,7 @@ body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(
   </g>
  </g>
 </svg></div><div><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="field theme-picker" style="margin:0;min-width:145px"><select id="themeSelect" aria-label="Chọn chủ đề màu"><option value="ocean">🌊 Biển xanh</option><option value="retro">◼ Đen trắng retro</option><option value="pink">🌸 Hồng pastel</option><option value="vampire">🦇 Vampire</option><option value="cat">🐈 Mèo dễ thương</option></select></div><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option></select></div></div></header>
-<div class="shell"><aside class="sidebar"><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button><button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button><button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span>Điền mã từ file gốc</span></button><button class="navbtn" data-page="account"><span class="navicon">♙</span><span data-i18n="navAccount">Tài khoản</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
+<div class="shell"><aside class="sidebar"><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button><button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button><button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span>Điền mã từ file gốc</span></button><button class="navbtn" data-page="stockforecast"><span class="navicon">▥</span><span>Dự báo âm kho</span></button><button class="navbtn" data-page="account"><span class="navicon">♙</span><span data-i18n="navAccount">Tài khoản</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
 <main class="main">
 <section class="page active" id="page-overview"><div class="hero"><div class="eyebrow" data-i18n="eyebrow">PRODUCT MATCHING WORKSPACE</div><h2 data-i18n="heroTitle">So khớp tên khác nhau — cùng một sản phẩm?</h2><p data-i18n="heroDesc">Ví dụ “sữa vinamil CO DUONG 1l” có thể gợi ý “SUA VNM 1L”. Hệ thống chuẩn hóa dấu, tên thương hiệu viết tắt và dung tích; bạn chọn ngưỡng phần trăm được xem là OK trong Cài đặt.</p><div class="actions"><button class="btn" data-goto="catalog" data-i18n="startCatalog">Bắt đầu với danh mục →</button><button class="btn alt" data-goto="settings" data-i18n="openSettings">Cài đặt ngưỡng OK</button></div></div>
 <div class="stats"><div class="stat"><small data-i18n="statCatalog">Dòng danh mục chuẩn</small><b id="overviewMaster">0</b></div><div class="stat"><small data-i18n="statCheck">Dòng cần soát</small><b id="overviewCheck">0</b></div><div class="stat good"><small data-i18n="statOk">Được tính là OK</small><b id="overviewGood">0</b></div><div class="stat review"><small data-i18n="statReview">Cần kiểm tra</small><b id="overviewReview">0</b></div></div>
@@ -376,6 +376,47 @@ body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(
  </div>
  <div class="panel"><div class="sectionhead"><div><h2>3. Xem trước file sau rà soát</h2><p>Hiển thị STT nguồn, mã đề xuất, điểm tương đồng và trạng thái điền. Excel xuất ra giữ nguyên thứ tự dòng ban đầu.</p></div></div><div id="autoFillPreview" class="empty">Chưa chạy rà soát.</div></div>
 </section>
+
+<section class="page" id="page-stockforecast">
+ <div class="sectionhead"><div><h2>📦 Dự báo âm kho</h2><p>Nhập file mua vào, bán ra và tồn kho hiện tại để tính tồn dự kiến theo từng mặt hàng.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div>
+ <div class="panel"><h2>1. Tải ba file dữ liệu</h2><p>Hãy dùng file mua vào và bán ra của cùng kỳ cần dự báo; toàn bộ các dòng trong hai file sẽ được cộng/trừ. Dữ liệu được xử lý ngay trên trình duyệt.</p>
+  <div class="grid3">
+   <div class="panel"><h2>🟢 Mua vào / nhập kho</h2><label class="upload"><span class="bigicon">📥</span><strong>Chọn file mua vào</strong><input id="forecastPurchaseFile" type="file" accept=".csv,.xlsx,.xls"></label><div id="forecastPurchaseInfo" class="hint">Chưa tải file mua vào.</div>
+    <div class="field"><label for="forecastPurchaseSkuCol">Cột mã hàng / SKU</label><select id="forecastPurchaseSkuCol" disabled><option value="">— Không chọn —</option></select></div>
+    <div class="field"><label for="forecastPurchaseNameCol">Cột tên hàng (nếu có)</label><select id="forecastPurchaseNameCol" disabled><option value="">— Không chọn —</option></select></div>
+    <div class="field"><label for="forecastPurchaseQtyCol">Cột số lượng nhập</label><select id="forecastPurchaseQtyCol" disabled><option value="">— Chọn cột —</option></select></div>
+   </div>
+   <div class="panel"><h2>🔵 Bán ra / xuất kho</h2><label class="upload"><span class="bigicon">📤</span><strong>Chọn file bán ra</strong><input id="forecastSalesFile" type="file" accept=".csv,.xlsx,.xls"></label><div id="forecastSalesInfo" class="hint">Chưa tải file bán ra.</div>
+    <div class="field"><label for="forecastSalesSkuCol">Cột mã hàng / SKU</label><select id="forecastSalesSkuCol" disabled><option value="">— Không chọn —</option></select></div>
+    <div class="field"><label for="forecastSalesNameCol">Cột tên hàng (nếu có)</label><select id="forecastSalesNameCol" disabled><option value="">— Không chọn —</option></select></div>
+    <div class="field"><label for="forecastSalesQtyCol">Cột số lượng bán</label><select id="forecastSalesQtyCol" disabled><option value="">— Chọn cột —</option></select></div>
+   </div>
+   <div class="panel"><h2>🟣 Tồn kho hiện tại</h2><label class="upload"><span class="bigicon">🗃️</span><strong>Chọn file tồn kho</strong><input id="forecastStockFile" type="file" accept=".csv,.xlsx,.xls"></label><div id="forecastStockInfo" class="hint">Chưa tải file tồn kho.</div>
+    <div class="field"><label for="forecastStockSkuCol">Cột mã hàng / SKU</label><select id="forecastStockSkuCol" disabled><option value="">— Không chọn —</option></select></div>
+    <div class="field"><label for="forecastStockNameCol">Cột tên hàng (nếu có)</label><select id="forecastStockNameCol" disabled><option value="">— Không chọn —</option></select></div>
+    <div class="field"><label for="forecastStockQtyCol">Cột tồn hiện tại</label><select id="forecastStockQtyCol" disabled><option value="">— Chọn cột —</option></select></div>
+   </div>
+  </div>
+ </div>
+ <div class="panel"><h2>2. Cách ghép và ngưỡng cảnh báo</h2><div class="grid">
+  <div class="field"><label for="forecastKeyMode">Ghép mặt hàng theo</label><select id="forecastKeyMode"><option value="sku">Mã hàng / SKU (khuyến nghị)</option><option value="name">Tên hàng đã chuẩn hóa</option></select><p class="hint">Ghép theo SKU sẽ chính xác hơn. Ghép theo tên chỉ khớp tên giống nhau sau khi bỏ dấu và chuẩn hóa ký tự.</p></div>
+  <div class="field"><label for="forecastAlertThreshold">Ngưỡng “sắp âm” (tồn dự kiến ≤ số này)</label><input id="forecastAlertThreshold" type="number" min="0" step="any" value="0"><p class="hint">Mặc định 0: cảnh báo âm kho và hết tồn. Có thể nhập ví dụ 5 để báo mặt hàng còn 5 đơn vị trở xuống.</p></div>
+ </div>
+ <div class="actions"><button class="btn" id="runStockForecast" disabled>🔮 Tính dự báo âm kho</button><button class="btn alt" id="exportStockForecast" disabled>Xuất báo cáo Excel ↓</button></div>
+ <div id="forecastRunInfo" class="hint">Tải đủ ba file, kiểm tra các cột rồi chạy dự báo.</div>
+ </div>
+ <div class="panel"><div class="sectionhead"><div><h2>3. Kết quả dự báo</h2><p>Tồn dự kiến = tồn hiện tại + tổng mua vào − tổng bán ra. Mặt hàng thiếu trong file tồn kho hoặc có số lượng không đọc được sẽ được đánh dấu, không tự đoán tồn.</p></div></div>
+  <div class="stats">
+   <div class="stat"><small>Tổng dòng mặt hàng</small><b id="forecastTotal">0</b></div>
+   <div class="stat none"><small>Dự kiến âm kho</small><b id="forecastNegative">0</b></div>
+   <div class="stat review"><small>Hết tồn / sắp âm</small><b id="forecastLow">0</b></div>
+   <div class="stat"><small>Thiếu trong file tồn kho</small><b id="forecastMissing">0</b></div>
+  </div>
+  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="all">Tất cả mặt hàng</option><option value="negative">Chỉ dự kiến âm kho</option><option value="low">Hết tồn / sắp âm</option><option value="noStock">Không có trong tồn kho</option><option value="issue">Thiếu mã hoặc lỗi số lượng</option></select></div>
+  <div id="forecastOutput" class="empty">Chưa có kết quả. Tải file và bấm “Tính dự báo âm kho”.</div>
+  <div class="pager"><button class="btn alt" id="forecastPrev" disabled>← Trước</button><span id="forecastPageInfo">Trang 0/0</span><button class="btn alt" id="forecastNext" disabled>Tiếp →</button></div>
+ </div>
+</section>
 <section class="page" id="page-account">
  <div class="sectionhead"><div><h2>♙ Tài khoản & đồng bộ bộ nhớ</h2><p>Đăng ký/đăng nhập bằng email và mật khẩu để đồng bộ các cặp hàng đã xác nhận trên nhiều thiết bị.</p></div></div>
  <div class="panel"><h2>1. Kết nối dịch vụ đám mây</h2><p>Tạo dự án Supabase, lấy Project URL và anon/publishable key rồi nhập dưới đây. Mật khẩu đăng nhập được Supabase Auth xử lý; ứng dụng không lưu mật khẩu.</p>
@@ -401,6 +442,7 @@ body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(
 <script>
 let masterRows=[],checkRows=[],out=[],masterHeaders=[],checkHeaders=[],currentPage=1,pageSize=50,threshold=80,lang='vi',running=false,savedMemory=[];
 let platformSourceRows=[],platformSourceHeaders=[],platformPage=1,platformPageSize=30,platformBuilt=false,autoFillRows=[],autoFillHeaders=[],autoFillResults=[],autoFillTargetOptions=[];
+let stockForecastFiles={purchase:null,sales:null,stock:null},stockForecastResults=[],stockForecastPage=1,stockForecastPageSize=50,stockForecastKeyModeTouched=false,stockForecastBuilt=false;
 let supabaseClient=null,accountUser=null,accountSubscription=null,cloudBusy=false;const SUPABASE_CONFIG_KEY='matchma-supabase-config-v1';
 const $=id=>document.getElementById(id);
 const MEMORY_KEY='matchma-confirmed-pairs-v1';
@@ -417,6 +459,185 @@ async function updateAccountPassword(){if(!supabaseClient){accountStatus('Kết 
 async function signOutAccount(){if(!supabaseClient)return;try{const {error}=await supabaseClient.auth.signOut();if(error)throw error;accountUser=null;renderAccountState();accountStatus('Đã đăng xuất. Bộ nhớ cục bộ vẫn được giữ nguyên.')}catch(e){accountStatus('Đăng xuất thất bại: '+(e.message||String(e)),true)}}
 async function deleteRemoteMemory(item){if(!supabaseClient||!accountUser||!item)return;const {error}=await supabaseClient.from('matchma_confirmed_pairs').delete().eq('user_id',accountUser.id).eq('key',item.key).eq('sku',item.sku);if(error)accountStatus('Đã xóa ở trình duyệt, nhưng xóa đám mây thất bại: '+error.message,true)}
 async function syncRemoteMemory(){if(!supabaseClient||!accountUser||cloudBusy)return;cloudBusy=true;renderAccountState();accountStatus('Đang đồng bộ bộ nhớ…');if($('syncStatus'))$('syncStatus').textContent='Đang tải bản ghi từ đám mây…';try{const {data:remote,error}=await supabaseClient.from('matchma_confirmed_pairs').select('key,source_name,master_name,sku,spec,unit,confirmed_at,confirmations').eq('user_id',accountUser.id);if(error)throw error;const map=new Map();const merge=m=>{if(!m||!m.key||!m.sku)return;const id=m.key+'|'+normalizeSku(m.sku),old=map.get(id);if(!old){map.set(id,m);return}const od=Date.parse(old.confirmedAt||old.confirmed_at||'')||0,nd=Date.parse(m.confirmedAt||m.confirmed_at||'')||0;map.set(id,{...old,...(nd>=od?m:old),confirmations:Math.max(Number(old.confirmations)||1,Number(m.confirmations)||1)})};savedMemory.forEach(merge);(remote||[]).forEach(r=>merge({key:r.key,sourceName:r.source_name,masterName:r.master_name,sku:r.sku,spec:r.spec||'',unit:r.unit||'',confirmedAt:r.confirmed_at,confirmations:r.confirmations||1}));savedMemory=[...map.values()];if(!persistMemory())throw new Error('Không lưu được bộ nhớ trình duyệt.');const payload=savedMemory.map(m=>({user_id:accountUser.id,key:m.key,source_name:m.sourceName||m.source_name||'',master_name:m.masterName||m.master_name||'',sku:String(m.sku),spec:m.spec||'',unit:m.unit||'',confirmed_at:m.confirmedAt||m.confirmed_at||new Date().toISOString(),confirmations:Number(m.confirmations)||1}));if(payload.length){const {error:pushError}=await supabaseClient.from('matchma_confirmed_pairs').upsert(payload,{onConflict:'user_id,key,sku'});if(pushError)throw pushError}renderMemoryPage();if(out.length)renderResults();accountStatus('Đồng bộ thành công: '+savedMemory.length+' cặp đã xác nhận.');if($('syncStatus'))$('syncStatus').textContent='Đã đồng bộ '+savedMemory.length+' cặp cho '+accountUser.email+'.'}catch(e){accountStatus('Đồng bộ chưa hoàn tất: '+(e.message||String(e))+'. Kiểm tra cấu hình và SQL/RLS.',true);if($('syncStatus'))$('syncStatus').textContent='Chưa đồng bộ được. Kiểm tra URL/key, bảng và RLS.'}finally{cloudBusy=false;renderAccountState()}}
+
+const stockForecastConfig={
+ purchase:{label:'mua vào',fileId:'forecastPurchaseFile',infoId:'forecastPurchaseInfo',skuId:'forecastPurchaseSkuCol',nameId:'forecastPurchaseNameCol',qtyId:'forecastPurchaseQtyCol',qtyPattern:/số lượng nhập|so luong nhap|qty nhập|qty nhap|quantity in|purchase qty|số lượng|so luong|quantity|qty|\bsl\b/i},
+ sales:{label:'bán ra',fileId:'forecastSalesFile',infoId:'forecastSalesInfo',skuId:'forecastSalesSkuCol',nameId:'forecastSalesNameCol',qtyId:'forecastSalesQtyCol',qtyPattern:/số lượng xuất|so luong xuat|qty xuất|qty xuat|quantity out|sold qty|số lượng|so luong|quantity|qty|\bsl\b/i},
+ stock:{label:'tồn kho',fileId:'forecastStockFile',infoId:'forecastStockInfo',skuId:'forecastStockSkuCol',nameId:'forecastStockNameCol',qtyId:'forecastStockQtyCol',qtyPattern:/tồn hiện tại|ton hien tai|tồn kho|ton kho|số lượng tồn|so luong ton|on hand|current stock|closing stock|ending stock|stock qty|số lượng|so luong|quantity|qty|\bsl\b/i}
+};
+function forecastSkuPattern(){return /sku|mã hàng|ma hang|mã sp|ma sp|mã vật tư|ma vat tu|item code|product code|code hàng|\bcode\b/i}
+function forecastNamePattern(){return /tên hàng|ten hang|tên sản phẩm|ten san pham|mặt hàng|mat hang|product name|item name|product|name/i}
+function parseForecastQuantity(value){
+ let raw=String(value??'').trim();if(!raw)return null;
+ let paren=/^\(.*\)$/.test(raw);raw=raw.replace(/[\s\u00a0]/g,'').replace(/[^0-9,\.\-+]/g,'');
+ if(!raw||!/[0-9]/.test(raw))return null;
+ let sign=1;if(paren)sign=-1;if(raw[0]==='-'){sign*=-1;raw=raw.slice(1)}else if(raw[0]==='+')raw=raw.slice(1);
+ const dots=(raw.match(/\./g)||[]).length,commas=(raw.match(/,/g)||[]).length;
+ if(dots&&commas){const decimalAt=Math.max(raw.lastIndexOf('.'),raw.lastIndexOf(','));const dec=raw[decimalAt];raw=raw.slice(0,decimalAt).replace(/[.,]/g,'')+'.'+raw.slice(decimalAt+1).replace(/[.,]/g,'');}
+ else if(dots+commas>0){const sep=dots?'.':',';const parts=raw.split(sep);if(parts.length>2){const last=parts[parts.length-1];if(last.length>0&&last.length<3)raw=parts.slice(0,-1).join('')+'.'+last;else raw=parts.join('');}else{const last=parts[1]||'';if(last.length===3)raw=parts.join('');else raw=parts[0]+'.'+last;}}
+ const n=Number(raw);return Number.isFinite(n)?n*sign:null;
+}
+function forecastNormalizedName(value){return plainText(value).replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ')}
+function forecastMakeKey(row,kind,mode){
+ const cfg=stockForecastConfig[kind];
+ if(mode==='sku'){const raw=String(row[$(cfg.skuId).value]??'').trim();return {key:raw?normalizeSku(raw):'',raw:raw}}
+ const raw=String(row[$(cfg.nameId).value]??'').trim();return {key:raw?forecastNormalizedName(raw):'',raw:raw};
+}
+function updateStockForecastButtons(){
+ const allLoaded=['purchase','sales','stock'].every(k=>stockForecastFiles[k]);
+ const mode=$('forecastKeyMode').value;
+ const mappingsOk=['purchase','sales','stock'].every(k=>{
+  const c=stockForecastConfig[k];return !!$(c.qtyId).value&&(mode==='sku'?!!$(c.skuId).value:!!$(c.nameId).value);
+ });
+ $('runStockForecast').disabled=!(allLoaded&&mappingsOk);
+ if(!allLoaded)$('forecastRunInfo').textContent='Tải đủ file mua vào, bán ra và tồn kho hiện tại.';
+ else if(!mappingsOk)$('forecastRunInfo').textContent=mode==='sku'?'Chọn cột mã hàng/SKU và số lượng cho cả ba file.':'Chọn cột tên hàng và số lượng cho cả ba file.';
+ else if(!stockForecastBuilt)$('forecastRunInfo').textContent='Đã sẵn sàng. Kiểm tra kỳ dữ liệu và các cột trước khi tính.';
+}
+function updateForecastDefaultKeyMode(){
+ if(stockForecastKeyModeTouched)return;
+ const haveAllSku=['purchase','sales','stock'].every(k=>stockForecastFiles[k]&&$(stockForecastConfig[k].skuId).value);
+ $('forecastKeyMode').value=haveAllSku?'sku':'name';
+}
+function invalidateStockForecast(){
+ stockForecastBuilt=false;$('exportStockForecast').disabled=true;
+ updateStockForecastButtons();
+}
+function loadStockForecastFile(kind,file){
+ if(!file)return;
+ const cfg=stockForecastConfig[kind];
+ $(cfg.infoId).textContent='Đang đọc file…';
+ readFile(file).then(d=>{
+  stockForecastFiles[kind]={headers:d.headers,rows:d.rows,fileName:file.name};
+  fillSelect(cfg.skuId,d.headers,guess(d.headers,forecastSkuPattern()),true);
+  fillSelect(cfg.nameId,d.headers,guess(d.headers,forecastNamePattern())||'',true);
+  fillSelect(cfg.qtyId,d.headers,guess(d.headers,cfg.qtyPattern)||'',false);
+  $(cfg.infoId).textContent='Đã tải '+file.name+' · '+d.rows.length+' dòng'+(d.sheetName?' · Sheet: '+d.sheetName:'');
+  updateForecastDefaultKeyMode();invalidateStockForecast();renderStockForecast();
+ }).catch(err=>{stockForecastFiles[kind]=null;$(cfg.infoId).textContent='Không đọc được file.';alert(err.message||'Không đọc được file');invalidateStockForecast()});
+}
+function forecastEnsureProduct(map,id,key,kind,row){
+ let p=map.get(id);
+ if(!p){p={id,key:key||'',sku:'',name:'',inStock:false,stockQty:0,stockRows:0,badStockQty:0,purchaseQty:0,purchaseRows:0,badPurchaseQty:0,salesQty:0,salesRows:0,badSalesQty:0,issues:[],unresolvedKey:false};map.set(id,p)}
+ const cfg=stockForecastConfig[kind];
+ const sku=cfg.skuId&&$(cfg.skuId).value?String(row[$(cfg.skuId).value]??'').trim():'';
+ const name=cfg.nameId&&$(cfg.nameId).value?String(row[$(cfg.nameId).value]??'').trim():'';
+ if(sku&&!p.sku)p.sku=sku;if(name&&!p.name)p.name=name;
+ return p;
+}
+function forecastAppendIssue(p,text){if(text&&!p.issues.includes(text))p.issues.push(text)}
+function runStockForecast(){
+ if(!['purchase','sales','stock'].every(k=>stockForecastFiles[k])){alert('Hãy tải đủ ba file mua vào, bán ra và tồn kho.');return}
+ const mode=$('forecastKeyMode').value;const cfgs=stockForecastConfig;
+ for(const kind of ['purchase','sales','stock']){
+  const c=cfgs[kind];if(!$(c.qtyId).value||(mode==='sku'&&!$(c.skuId).value)||(mode==='name'&&!$(c.nameId).value)){alert('Kiểm tra lại cột mã/tên và số lượng của file '+c.label+'.');return}
+ }
+ const thresholdRaw=parseForecastQuantity($('forecastAlertThreshold').value);
+ const warningThreshold=Math.max(0,thresholdRaw===null?0:thresholdRaw);
+ const map=new Map();
+ const consume=(kind,type)=>{
+  const cfg=cfgs[kind],file=stockForecastFiles[kind],qtyColumn=$(cfg.qtyId).value;
+  file.rows.forEach((row,index)=>{
+   const {key,raw}=forecastMakeKey(row,kind,mode);
+   const id=key||('__missing_'+kind+'_'+index);
+   const p=forecastEnsureProduct(map,id,key,kind,row);
+   if(!key){p.unresolvedKey=true;forecastAppendIssue(p,'Thiếu '+(mode==='sku'?'mã/SKU':'tên hàng')+' ở file '+cfg.label+' (dòng '+(index+2)+')');}
+   const q=parseForecastQuantity(row[qtyColumn]);
+   if(type==='stock'){
+    p.inStock=true;p.stockRows++;
+    if(q===null){p.badStockQty++;forecastAppendIssue(p,'Không đọc được số tồn ở dòng '+(index+2)+' của file tồn kho')}else p.stockQty+=q;
+   }else if(type==='purchase'){
+    p.purchaseRows++;
+    if(q===null){p.badPurchaseQty++;forecastAppendIssue(p,'Không đọc được số lượng mua vào ở dòng '+(index+2))}else p.purchaseQty+=q;
+   }else{
+    p.salesRows++;
+    if(q===null){p.badSalesQty++;forecastAppendIssue(p,'Không đọc được số lượng bán ra ở dòng '+(index+2))}else p.salesQty+=q;
+   }
+   if(!p.name)p.name=raw||'';
+   if(!p.sku&&mode==='sku')p.sku=raw||'';
+  });
+ };
+ // Build from stock first so the inventory's canonical name/code takes precedence.
+ consume('stock','stock');consume('purchase','purchase');consume('sales','sales');
+ stockForecastResults=[...map.values()].map(p=>{
+  p.projected=null;
+  if(p.unresolvedKey)p.status='noKey';
+  else if(!p.inStock)p.status='noStock';
+  else if(p.badStockQty||p.badPurchaseQty||p.badSalesQty)p.status='issue';
+  else{
+   p.projected=p.stockQty+p.purchaseQty-p.salesQty;
+   p.status=p.projected<0?'negative':p.projected===0?'zero':p.projected<=warningThreshold?'low':'ok';
+  }
+  if(p.inStock&&p.badStockQty)p.projected=null;
+  p.issueText=p.issues.join(' · ');
+  p.displaySku=p.sku||(mode==='sku'?p.key:'');
+  p.displayName=p.name||p.displaySku||p.key||'(Không xác định)';
+  return p;
+ }).sort((a,b)=>{
+  const order={negative:0,zero:1,low:2,issue:3,noKey:4,noStock:5,ok:6};
+  return (order[a.status]??9)-(order[b.status]??9)||(a.projected??Infinity)-(b.projected??Infinity)||a.displayName.localeCompare(b.displayName,'vi');
+ });
+ stockForecastPage=1;stockForecastBuilt=true;$('exportStockForecast').disabled=!stockForecastResults.length;
+ $('forecastRunInfo').textContent='Đã tính xong '+stockForecastResults.length+' mã/tên hàng từ ba file. Công thức: tồn hiện tại + mua vào − bán ra. Hãy kiểm tra các dòng cảnh báo trước khi sử dụng báo cáo.';
+ renderStockForecast();
+}
+function forecastStatusLabel(status){
+ return ({negative:'Dự kiến âm kho',zero:'Hết tồn',low:'Sắp âm',ok:'Còn tồn',noStock:'Không có trong tồn kho',noKey:'Thiếu mã/tên',issue:'Kiểm tra dữ liệu'})[status]||status;
+}
+function forecastStatusBadge(status){const cls=({negative:'none',zero:'rejected',low:'review',ok:'good',noStock:'rejected',noKey:'rejected',issue:'review'})[status]||'review';return '<span class="badge '+cls+'">'+esc(forecastStatusLabel(status))+'</span>'}
+function renderStockForecast(){
+ const q=String($('forecastSearch').value||'').toLowerCase().trim(),filter=$('forecastFilter').value;
+ const negatives=stockForecastResults.filter(p=>p.status==='negative').length;
+ const low=stockForecastResults.filter(p=>p.status==='zero'||p.status==='low').length;
+ const missing=stockForecastResults.filter(p=>p.status==='noStock'||p.status==='noKey'||p.status==='issue').length;
+ $('forecastTotal').textContent=stockForecastResults.length;$('forecastNegative').textContent=negatives;$('forecastLow').textContent=low;$('forecastMissing').textContent=missing;
+ let rows=stockForecastResults.filter(p=>{
+  const searchable=(p.displaySku+' '+p.displayName+' '+p.issueText).toLowerCase();
+  if(q&&!searchable.includes(q))return false;
+  if(filter==='negative'&&p.status!=='negative')return false;
+  if(filter==='low'&&p.status!=='zero'&&p.status!=='low')return false;
+  if(filter==='noStock'&&p.status!=='noStock')return false;
+  if(filter==='issue'&&p.status!=='issue'&&p.status!=='noKey')return false;
+  return true;
+ });
+ const pages=Math.max(1,Math.ceil(rows.length/stockForecastPageSize));if(stockForecastPage>pages)stockForecastPage=pages;
+ const shown=rows.slice((stockForecastPage-1)*stockForecastPageSize,stockForecastPage*stockForecastPageSize);
+ const root=$('forecastOutput');
+ if(!stockForecastBuilt){root.className='empty';root.textContent='Chưa có kết quả. Tải file và bấm “Tính dự báo âm kho”.';$('forecastPageInfo').textContent='Trang 0/0';$('forecastPrev').disabled=true;$('forecastNext').disabled=true;return}
+ if(!shown.length){root.className='empty';root.textContent='Không có mặt hàng phù hợp bộ lọc.'}
+ else{
+  root.className='tablewrap';
+  root.innerHTML='<table><thead><tr><th>Mã hàng / SKU</th><th>Tên hàng</th><th>Tồn hiện tại</th><th>Mua vào</th><th>Bán ra</th><th>Tồn dự kiến</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead><tbody>'+
+   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.inStock&&p.projected!==null?forecastNumber(p.stockQty):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn dự kiến âm sau khi trừ bán ra.':p.status==='noStock'?'Có giao dịch nhưng không tìm thấy mặt hàng trong file tồn kho.':''))+'</td></tr>').join('')+'</tbody></table>';
+ }
+ $('forecastPageInfo').textContent='Trang '+(rows.length?stockForecastPage:0)+'/'+(rows.length?pages:0)+' · '+rows.length+' mặt hàng';
+ $('forecastPrev').disabled=stockForecastPage<=1;$('forecastNext').disabled=stockForecastPage>=pages;
+}
+function forecastNumber(n){return Number.isFinite(n)?Number(n.toFixed(4)).toLocaleString('vi-VN',{maximumFractionDigits:4}):'—'}
+function exportStockForecast(){
+ if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
+ if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
+ const rows=stockForecastResults.map(p=>({
+  'SKU / Mã hàng':p.displaySku,'Tên hàng':p.displayName,'Tồn hiện tại':p.inStock&&!p.badStockQty?p.stockQty:'','Tổng mua vào':p.purchaseQty,'Tổng bán ra':p.salesQty,'Tồn dự kiến':p.projected===null?'':p.projected,'Trạng thái':forecastStatusLabel(p.status),'Số dòng tồn kho':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,'Ghi chú':p.issueText
+ }));
+ const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(rows);XLSX.utils.book_append_sheet(wb,ws,'Du bao am kho');XLSX.writeFile(wb,'matchma-du-bao-am-kho.xlsx');
+}
+function initStockForecast(){
+ for(const kind of ['purchase','sales','stock']){
+  const c=stockForecastConfig[kind];
+  $(c.fileId).addEventListener('change',e=>loadStockForecastFile(kind,e.target.files&&e.target.files[0]));
+  [c.skuId,c.nameId,c.qtyId].forEach(id=>$(id).addEventListener('change',()=>{invalidateStockForecast()}));
+ }
+ $('forecastKeyMode').addEventListener('change',()=>{stockForecastKeyModeTouched=true;invalidateStockForecast()});
+ $('forecastAlertThreshold').addEventListener('change',()=>{if(stockForecastBuilt)runStockForecast()});
+ $('runStockForecast').addEventListener('click',runStockForecast);
+ $('exportStockForecast').addEventListener('click',exportStockForecast);
+ $('forecastSearch').addEventListener('input',()=>{stockForecastPage=1;renderStockForecast()});
+ $('forecastFilter').addEventListener('change',()=>{stockForecastPage=1;renderStockForecast()});
+ $('forecastPrev').addEventListener('click',()=>{if(stockForecastPage>1){stockForecastPage--;renderStockForecast()}});
+ $('forecastNext').addEventListener('click',()=>{stockForecastPage++;renderStockForecast()});
+}
+
 function initAccount(){const c=getSupabaseConfig();$('supabaseUrl').value=c.url||'';$('supabaseAnonKey').value=c.key||'';$('accountSql').value=SUPABASE_SCHEMA_SQL;$('connectSupabase').addEventListener('click',connectSupabase);$('showAccountSql').addEventListener('click',()=>{$('accountSqlWrap').hidden=!$('accountSqlWrap').hidden});$('copyAccountSql').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(SUPABASE_SCHEMA_SQL);accountStatus('Đã sao chép SQL. Dán vào Supabase → SQL Editor rồi chạy.')}catch(e){$('accountSql').focus();$('accountSql').select();accountStatus('Hãy sao chép thủ công đoạn SQL đang được chọn.')}});$('accountSignUp').addEventListener('click',signUpAccount);$('accountSignIn').addEventListener('click',signInAccount);$('accountResetPassword').addEventListener('click',resetAccountPassword);$('accountUpdatePassword').addEventListener('click',updateAccountPassword);$('accountSignOut').addEventListener('click',signOutAccount);$('syncMemory').addEventListener('click',syncRemoteMemory);if(c.url&&c.key&&window.supabase&&window.supabase.createClient)connectSupabase();else{renderAccountState();accountStatus('Chưa cấu hình dịch vụ đám mây. Bộ nhớ cục bộ vẫn hoạt động.')}}
 
 function loadMemory(){try{const v=JSON.parse(localStorage.getItem(MEMORY_KEY)||'[]');return Array.isArray(v)?v.filter(x=>x&&typeof x.key==='string'&&typeof x.sku==='string'):[]}catch(e){return []}}
@@ -563,7 +784,7 @@ $('fontUp').onclick=()=>setFontScale(fontScale+.05);
 try{const savedScale=Number(localStorage.getItem('matchma-font-scale'));if(savedScale>=.85&&savedScale<=1.25)fontScale=savedScale}catch(e){}
 document.documentElement.style.setProperty('--font-scale',fontScale);
 
-function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();window.scrollTo({top:0,behavior:'smooth'})}
+function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>showPage(b.dataset.goto));
 function parseCSV(s){let rows=[],row=[],v='',q=false;for(let i=0;i<s.length;i++){let c=s[i];if(c==='"'&&q&&s[i+1]==='"'){v+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){row.push(v);v=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&s[i+1]==='\n')i++;row.push(v);if(row.some(x=>x.trim()))rows.push(row);row=[];v=''}else v+=c}row.push(v);if(row.some(x=>x.trim()))rows.push(row);return rows}
 async function readFile(file){const ext=(file.name.split('.').pop()||'').toLowerCase();let headers=[],rows=[],sheetName='';if(ext==='csv'){const matrix=parseCSV(await file.text());headers=(matrix.shift()||[]).map((h,i)=>String(h??'').trim()||'Column '+(i+1));rows=matrix.filter(r=>r.some(v=>String(v??'').trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,String(r[i]??'').trim()])))}else if(ext==='xlsx'||ext==='xls'){if(typeof XLSX==='undefined')throw Error(tr('libErr'));const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellText:true,cellDates:true});sheetName=wb.SheetNames[0]||'';if(!sheetName)throw Error(tr('fileEmpty'));const matrix=XLSX.utils.sheet_to_json(wb.Sheets[sheetName],{header:1,defval:'',raw:false,blankrows:false});if(!matrix.length)throw Error(tr('fileEmpty'));headers=(matrix.shift()||[]).map((h,i)=>String(h??'').trim()||'Column '+(i+1));rows=matrix.filter(r=>r.some(v=>String(v??'').trim()!=='')).map(r=>Object.fromEntries(headers.map((h,i)=>[h,String(r[i]??'').trim()]))) }else throw Error(tr('selectFileErr'));if(!headers.length)throw Error(tr('fileEmpty'));return {headers,rows,sheetName}}
@@ -822,5 +1043,5 @@ $('useRememberedName').addEventListener('click',()=>{if(!savedMemory.length){ale
 
 updateThresholdLabels();setLanguage('vi');updateCanRun();updateStats();
 initAccount();renderMemoryPage();
-initTheme();initPlatformAudit();initAutoFill();
+initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();
 </script></body></html>
