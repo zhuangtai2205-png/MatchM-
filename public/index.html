@@ -238,11 +238,59 @@ function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt
 function setProgress(done,total,doneFlag){const box=$('progressBox');box.classList.add('show');$('progressBar').style.width=(total?Math.round(done/total*100):0)+'%';$('progressText').textContent=doneFlag?tr('progressDone')+': '+total+' '+tr('rows'):tr('progressRunning')+' '+done+' / '+total+'…'}
 function getStatusLabel(s){return s==='good'?tr('statusGood'):s==='review'?tr('statusReview'):s==='rejected'?tr('statusRejected'):tr('statusNone')}
 function calcStatus(item){if(item.familyConflict)return 'none';if(!item.match||item.score<.45)return 'none';if(item.conflict||item.skuMismatch||item.unitConflict||item.packConflict)return 'review';if(item.evidence<2)return 'review';if(item.score*100>=threshold)return 'good';return 'review'}
-async function runMatch(){if(running)return;if(!masterRows.length||!checkRows.length){alert(tr('masterRequired'));return}const sku=$('skuCol').value,name=$('nameCol').value,q=$('queryCol').value,spec=$('specCol').value;if(!sku||!name||!q){alert(tr('columnErr'));return}const eligible=masterRows.filter(r=>String(r[sku]||'').trim()!=='');if(!eligible.length){alert(tr('blankSku'));return}running=true;updateCanRun();out=[];currentPage=1;$('export').disabled=true;$('results').className='empty';$('results').textContent=tr('progressPreparing');setProgress(0,checkRows.length,false);
-const master=eligible.map((r,i)=>{const n=norm(String(r[name]||'')+' '+(spec?String(r[spec]||''):''));const ts=[...new Set(getTokens(n))];return {row:r,code:String(r[sku]).trim(),name:String(r[name]||''),spec:spec?String(r[spec]||''):'',tokens:ts,index:i}});
-const index=new Map();for(const m of master){for(const token of m.tokens){if(!index.has(token))index.set(token,[]);index.get(token).push(m)}}
-for(let offset=0;offset<checkRows.length;offset+=20){const batch=checkRows.slice(offset,offset+20);for(let b=0;b<batch.length;b++){const row=batch[b],queryName=String(row[q]||''),queryTokens=[...new Set(getTokens(queryName))];const candidates=new Map();for(const token of queryTokens){const list=index.get(token)||[];for(const m of list)candidates.set(m.index,m)}let best=null,bestRank=-1;for(const m of candidates.values()){const c=conflictTokens(queryTokens,m.tokens),fc=incompatibleFamily(queryTokens,m.tokens),s=similarity(queryTokens,m.tokens),e=sharedEvidence(queryTokens,m.tokens),rank=fc?-1:c?s*.7:s;if(rank>bestRank){bestRank=rank;best={m,score:s,conflict:c,familyConflict:fc,evidence:e}}}let item={i:offset+b+1,query:queryName,sku:best&&best.score>=.45&&!best.familyConflict?best.m.code:'',match:best&&best.score>=.45&&!best.familyConflict?best.m.name:'',spec:best&&best.score>=.45&&!best.familyConflict?best.m.spec:'',score:best?best.score:0,confidence:best&&!best.familyConflict?Math.round(best.score*100):0,conflict:!!(best&&best.conflict),familyConflict:!!(best&&best.familyConflict),evidence:best?best.evidence:0,status:'none',reason:''};item.status=queryTokens.length?calcStatus(item):'none';item.reason=!queryTokens.length?tr('reasonEmpty'):!best?tr('reasonNo'):best.familyConflict?tr('reasonFamilyMismatch'):best.conflict?tr('reasonConflict'):item.evidence<2&&item.status!=='none'?tr('reasonWeakEvidence'):item.status==='good'?tr('reasonGood'):item.status==='review'?tr('reasonReview'):tr('reasonLow');out.push(item)}setProgress(Math.min(offset+batch.length,checkRows.length),checkRows.length,false);await new Promise(resolve=>setTimeout(resolve,0))}
-running=false;setProgress(checkRows.length,checkRows.length,true);updateCanRun();updateStats();$('export').disabled=!out.length;renderResults();showPage('results')}
+async function runMatch(){
+ if(running)return;
+ if(!masterRows.length||!checkRows.length){alert(tr('masterRequired'));return}
+ const sku=$('skuCol').value,name=$('nameCol').value,spec=$('specCol').value,unit=$('unitCol').value;
+ const q=$('queryCol').value,qsku=$('querySkuCol').value,qspec=$('querySpecCol').value,qunit=$('queryUomCol').value;
+ if(!sku||!name||!q){alert(tr('columnErr'));return}
+ const eligible=masterRows.filter(r=>String(r[sku]||'').trim()!=='');
+ if(!eligible.length){alert(tr('blankSku'));return}
+ running=true;updateCanRun();out=[];currentPage=1;$('export').disabled=true;$('results').className='empty';$('results').textContent=tr('progressPreparing');setProgress(0,checkRows.length,false);
+ const master=eligible.map((r,i)=>{
+  const masterName=String(r[name]||''),masterSpec=spec?String(r[spec]||''):'',masterUnit=unit?String(r[unit]||''):'';
+  const nameTokens=[...new Set(getTokens(masterName))];
+  const tokens=[...new Set(getTokens(masterName+' '+masterSpec+' '+masterUnit))];
+  return {row:r,code:String(r[sku]).trim(),name:masterName,spec:masterSpec,unit:masterUnit,nameTokens,tokens,index:i};
+ });
+ const index=new Map();
+ for(const m of master)for(const token of m.tokens){if(!index.has(token))index.set(token,[]);index.get(token).push(m)}
+ for(let offset=0;offset<checkRows.length;offset+=20){
+  const batch=checkRows.slice(offset,offset+20);
+  for(let b=0;b<batch.length;b++){
+   const row=batch[b],queryName=String(row[q]||''),querySpec=qspec?String(row[qspec]||''):'',queryUnit=qunit?String(row[qunit]||''):'',querySku=qsku?String(row[qsku]||'').trim():'';
+   const queryNameTokens=[...new Set(getTokens(queryName))];
+   const queryTokens=[...new Set(getTokens(queryName+' '+querySpec+' '+queryUnit))];
+   const candidates=new Map();
+   for(const token of queryTokens){const list=index.get(token)||[];for(const m of list)candidates.set(m.index,m)}
+   let best=null,bestRank=-1;
+   for(const m of candidates.values()){
+    const nameScore=similarity(queryNameTokens,m.nameTokens);
+    if(nameScore<.45)continue;
+    const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
+    const attributeConflict=conflictTokens(queryTokens,m.tokens);
+    const evidence=sharedEvidence(queryNameTokens,m.nameTokens);
+    const uConflict=unitConflict(queryUnit,m.unit);
+    const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
+    const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
+    const rank=familyConflict?-1:nameScore-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0);
+    if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch}}
+   }
+   const eligibleMatch=!!(best&&best.score>=.45&&!best.familyConflict);
+   const item={i:offset+b+1,query:queryName,querySpec,querySku,queryUnit,
+    sku:eligibleMatch?best.m.code:'',match:eligibleMatch?best.m.name:'',spec:eligibleMatch?best.m.spec:'',unit:eligibleMatch?best.m.unit:'',
+    score:best?best.score:0,confidence:eligibleMatch?Math.round(best.score*100):0,evidence:best?best.evidence:0,
+    conflict:!!(best&&best.conflict),familyConflict:!!(best&&best.familyConflict),
+    skuMismatch:!!(eligibleMatch&&best.skuMismatch),unitConflict:!!(eligibleMatch&&best.unitConflict),packConflict:!!(eligibleMatch&&best.packConflict),status:'none',reason:''};
+   item.status=queryNameTokens.length?calcStatus(item):'none';
+   item.reason=!queryNameTokens.length?tr('reasonEmpty'):!best?tr('reasonNo'):best.familyConflict?tr('reasonFamilyMismatch'):!eligibleMatch?tr('reasonNo'):item.skuMismatch?tr('reasonSkuMismatch'):item.unitConflict?tr('reasonUnitMismatch'):item.packConflict?tr('reasonPackMismatch'):item.conflict?tr('reasonConflict'):item.status==='good'?tr('reasonGood'):item.status==='review'?tr('reasonReview'):tr('reasonLow');
+   out.push(item);
+  }
+  setProgress(Math.min(offset+batch.length,checkRows.length),checkRows.length,false);
+  await new Promise(resolve=>setTimeout(resolve,0));
+ }
+ running=false;setProgress(checkRows.length,checkRows.length,true);updateCanRun();updateStats();$('export').disabled=!out.length;renderResults();showPage('results')
+}
 $('run').addEventListener('click',runMatch);
 function updateThresholdLabels(){$('thresholdValue').textContent=threshold;$('thresholdInline').textContent=threshold+'%';$('thresholdSummary').textContent=threshold+'%';$('thresholdRun').textContent=(lang==='en'?'OK threshold: ':'Ngưỡng OK: ')+threshold+'%';$('okRule').textContent='≥ '+threshold+'%';$('reviewRule').textContent='45–'+(threshold-1)+'%';$('noneRule').textContent='< 45%';$('thresholdExplanation').textContent='≥ '+threshold+'% = '+tr('statusGood')+' · 45–'+(threshold-1)+'% = '+tr('statusReview')+' · < 45% = '+tr('statusNone')+'. '+(lang==='en'?'Any conflicting attribute requires review.':'Có thuộc tính xung đột luôn cần rà soát.')}
 function applyThreshold(){threshold=Number($('threshold').value)||80;updateThresholdLabels();for(const item of out){if(item.manualStatus)continue;item.status=calcStatus(item);item.reason=item.conflict?tr('reasonConflict'):item.status==='good'?tr('reasonGood'):item.status==='review'?tr('reasonReview'):item.match?tr('reasonLow'):tr('reasonNo')}updateStats();renderResults()}
