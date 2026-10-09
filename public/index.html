@@ -378,8 +378,8 @@ body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(
 </section>
 
 <section class="page" id="page-stockforecast">
- <div class="sectionhead"><div><h2>📦 Dự báo âm kho</h2><p>Nhập file mua vào, bán ra và tồn kho hiện tại để tính tồn dự kiến theo từng mặt hàng.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div>
- <div class="panel"><h2>1. Tải ba file dữ liệu</h2><p>Hãy dùng file mua vào và bán ra của cùng kỳ cần dự báo; toàn bộ các dòng trong hai file sẽ được cộng/trừ. Dữ liệu được xử lý ngay trên trình duyệt.</p>
+ <div class="sectionhead"><div><h2>📦 Dự báo âm kho cuối tháng</h2><p>Đối chiếu duy nhất theo SKU để biết mặt hàng nào sẽ âm khi chốt sổ cuối tháng.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div>
+ <div class="panel"><h2>1. Tải ba file dữ liệu</h2><p>Chốt sổ theo tháng, không tính theo từng ngày: tải file tồn đầu kỳ (trước các giao dịch trong tháng), cùng file mua vào và bán ra đã lọc đủ cả tháng. Ứng dụng bỏ qua cột ngày, cộng tổng số lượng của từng SKU trong toàn bộ file.</p>
   <div class="grid3">
    <div class="panel"><h2>🟢 Mua vào / nhập kho</h2><label class="upload"><span class="bigicon">📥</span><strong>Chọn file mua vào</strong><input id="forecastPurchaseFile" type="file" accept=".csv,.xlsx,.xls"></label><div id="forecastPurchaseInfo" class="hint">Chưa tải file mua vào.</div>
     <div class="field"><label for="forecastPurchaseSkuCol">Cột mã hàng / SKU</label><select id="forecastPurchaseSkuCol" disabled><option value="">— Không chọn —</option></select></div>
@@ -391,29 +391,29 @@ body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(
     <div class="field"><label for="forecastSalesNameCol">Cột tên hàng (nếu có)</label><select id="forecastSalesNameCol" disabled><option value="">— Không chọn —</option></select></div>
     <div class="field"><label for="forecastSalesQtyCol">Cột số lượng bán</label><select id="forecastSalesQtyCol" disabled><option value="">— Chọn cột —</option></select></div>
    </div>
-   <div class="panel"><h2>🟣 Tồn kho hiện tại</h2><label class="upload"><span class="bigicon">🗃️</span><strong>Chọn file tồn kho</strong><input id="forecastStockFile" type="file" accept=".csv,.xlsx,.xls"></label><div id="forecastStockInfo" class="hint">Chưa tải file tồn kho.</div>
+   <div class="panel"><h2>🟣 Tồn đầu kỳ</h2><label class="upload"><span class="bigicon">🗃️</span><strong>Chọn file tồn kho</strong><input id="forecastStockFile" type="file" accept=".csv,.xlsx,.xls"></label><div id="forecastStockInfo" class="hint">Chưa tải file tồn đầu kỳ.</div>
     <div class="field"><label for="forecastStockSkuCol">Cột mã hàng / SKU</label><select id="forecastStockSkuCol" disabled><option value="">— Không chọn —</option></select></div>
     <div class="field"><label for="forecastStockNameCol">Cột tên hàng (nếu có)</label><select id="forecastStockNameCol" disabled><option value="">— Không chọn —</option></select></div>
-    <div class="field"><label for="forecastStockQtyCol">Cột tồn hiện tại</label><select id="forecastStockQtyCol" disabled><option value="">— Chọn cột —</option></select></div>
+    <div class="field"><label for="forecastStockQtyCol">Cột số lượng tồn đầu kỳ</label><select id="forecastStockQtyCol" disabled><option value="">— Chọn cột —</option></select></div>
    </div>
   </div>
  </div>
- <div class="panel"><h2>2. Cách ghép và ngưỡng cảnh báo</h2><div class="grid">
-  <div class="field"><label for="forecastKeyMode">Ghép mặt hàng theo</label><select id="forecastKeyMode"><option value="sku">Mã hàng / SKU (khuyến nghị)</option><option value="name">Tên hàng đã chuẩn hóa</option></select><p class="hint">Ghép theo SKU sẽ chính xác hơn. Ghép theo tên chỉ khớp tên giống nhau sau khi bỏ dấu và chuẩn hóa ký tự.</p></div>
-  <div class="field"><label for="forecastAlertThreshold">Ngưỡng “sắp âm” (tồn dự kiến ≤ số này)</label><input id="forecastAlertThreshold" type="number" min="0" step="any" value="0"><p class="hint">Mặc định 0: cảnh báo âm kho và hết tồn. Có thể nhập ví dụ 5 để báo mặt hàng còn 5 đơn vị trở xuống.</p></div>
+ <div class="panel"><h2>2. Quy tắc chốt sổ và ngưỡng cảnh báo</h2><div class="grid">
+  <div class="field"><label for="forecastKeyMode">Khóa đối chiếu</label><input id="forecastKeyMode" type="text" value="SKU — bắt buộc ở cả 3 file" readonly><p class="hint">Chỉ ghép theo SKU đã chuẩn hóa. Không tự ghép theo tên; dòng thiếu SKU hoặc SKU không có trong tồn đầu kỳ sẽ được cảnh báo riêng.</p></div>
+  <div class="field"><label for="forecastAlertThreshold">Ngưỡng “sắp hết tồn” (tồn cuối tháng ≤ số này)</label><input id="forecastAlertThreshold" type="number" min="0" step="any" value="0"><p class="hint">Mặc định 0: cảnh báo hết tồn/âm kho. Nhập ví dụ 5 để báo SKU còn 5 đơn vị trở xuống.</p></div>
  </div>
  <div class="actions"><button class="btn" id="runStockForecast" disabled>🔮 Tính dự báo âm kho</button><button class="btn alt" id="exportStockForecast" disabled>Xuất báo cáo Excel ↓</button></div>
  <div id="forecastRunInfo" class="hint">Tải đủ ba file, kiểm tra các cột rồi chạy dự báo.</div>
  </div>
- <div class="panel"><div class="sectionhead"><div><h2>3. Kết quả dự báo</h2><p>Tồn dự kiến = tồn hiện tại + tổng mua vào − tổng bán ra. Mặt hàng thiếu trong file tồn kho hoặc có số lượng không đọc được sẽ được đánh dấu, không tự đoán tồn.</p></div></div>
+ <div class="panel"><div class="sectionhead"><div><h2>3. Kết quả chốt sổ cuối tháng</h2><p>Tồn cuối tháng = tồn đầu kỳ + tổng mua vào trong tháng − tổng bán ra trong tháng. Không phân bổ theo ngày. Dòng thiếu SKU, thiếu tồn đầu kỳ hoặc có số lượng lỗi không bị tự suy đoán.</p></div></div>
   <div class="stats">
    <div class="stat"><small>Tổng dòng mặt hàng</small><b id="forecastTotal">0</b></div>
-   <div class="stat none"><small>Dự kiến âm kho</small><b id="forecastNegative">0</b></div>
-   <div class="stat review"><small>Hết tồn / sắp âm</small><b id="forecastLow">0</b></div>
+   <div class="stat none"><small>SKU âm cuối tháng</small><b id="forecastNegative">0</b></div>
+   <div class="stat review"><small>Hết tồn / sắp hết</small><b id="forecastLow">0</b></div>
    <div class="stat"><small>Thiếu trong file tồn kho</small><b id="forecastMissing">0</b></div>
   </div>
-  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="all">Tất cả mặt hàng</option><option value="negative">Chỉ dự kiến âm kho</option><option value="low">Hết tồn / sắp âm</option><option value="noStock">Không có trong tồn kho</option><option value="issue">Thiếu mã hoặc lỗi số lượng</option></select></div>
-  <div id="forecastOutput" class="empty">Chưa có kết quả. Tải file và bấm “Tính dự báo âm kho”.</div>
+  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="negative" selected>Chỉ SKU âm cuối tháng</option><option value="all">Tất cả SKU</option><option value="low">Hết tồn / sắp hết</option><option value="noStock">Thiếu trong tồn đầu kỳ</option><option value="issue">Thiếu SKU hoặc lỗi số lượng</option></select></div>
+  <div id="forecastOutput" class="empty">Chưa có kết quả. Tải đủ ba file rồi tính tồn cuối tháng.</div>
   <div class="pager"><button class="btn alt" id="forecastPrev" disabled>← Trước</button><span id="forecastPageInfo">Trang 0/0</span><button class="btn alt" id="forecastNext" disabled>Tiếp →</button></div>
  </div>
 </section>
@@ -480,24 +480,22 @@ function parseForecastQuantity(value){
 function forecastNormalizedName(value){return plainText(value).replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ')}
 function forecastMakeKey(row,kind,mode){
  const cfg=stockForecastConfig[kind];
- if(mode==='sku'){const raw=String(row[$(cfg.skuId).value]??'').trim();return {key:raw?normalizeSku(raw):'',raw:raw}}
- const raw=String(row[$(cfg.nameId).value]??'').trim();return {key:raw?forecastNormalizedName(raw):'',raw:raw};
+ const raw=String(row[$(cfg.skuId).value]??'').trim();
+ return {key:raw?normalizeSku(raw):'',raw:raw};
 }
 function updateStockForecastButtons(){
  const allLoaded=['purchase','sales','stock'].every(k=>stockForecastFiles[k]);
- const mode=$('forecastKeyMode').value;
+ const mode='sku';
  const mappingsOk=['purchase','sales','stock'].every(k=>{
-  const c=stockForecastConfig[k];return !!$(c.qtyId).value&&(mode==='sku'?!!$(c.skuId).value:!!$(c.nameId).value);
+  const c=stockForecastConfig[k];return !!$(c.qtyId).value&&!!$(c.skuId).value;
  });
  $('runStockForecast').disabled=!(allLoaded&&mappingsOk);
- if(!allLoaded)$('forecastRunInfo').textContent='Tải đủ file mua vào, bán ra và tồn kho hiện tại.';
- else if(!mappingsOk)$('forecastRunInfo').textContent=mode==='sku'?'Chọn cột mã hàng/SKU và số lượng cho cả ba file.':'Chọn cột tên hàng và số lượng cho cả ba file.';
+ if(!allLoaded)$('forecastRunInfo').textContent='Tải đủ file mua vào, bán ra và tồn đầu kỳ.';
+ else if(!mappingsOk)$('forecastRunInfo').textContent='Chọn cột mã hàng/SKU và số lượng cho cả ba file.';
  else if(!stockForecastBuilt)$('forecastRunInfo').textContent='Đã sẵn sàng. Kiểm tra kỳ dữ liệu và các cột trước khi tính.';
 }
 function updateForecastDefaultKeyMode(){
- if(stockForecastKeyModeTouched)return;
- const haveAllSku=['purchase','sales','stock'].every(k=>stockForecastFiles[k]&&$(stockForecastConfig[k].skuId).value);
- $('forecastKeyMode').value=haveAllSku?'sku':'name';
+ if($('forecastKeyMode'))$('forecastKeyMode').value='SKU — bắt buộc ở cả 3 file';
 }
 function invalidateStockForecast(){
  stockForecastBuilt=false;stockForecastResults=[];stockForecastPage=1;$('exportStockForecast').disabled=true;
@@ -527,10 +525,10 @@ function forecastEnsureProduct(map,id,key,kind,row){
 }
 function forecastAppendIssue(p,text){if(text&&!p.issues.includes(text))p.issues.push(text)}
 function runStockForecast(){
- if(!['purchase','sales','stock'].every(k=>stockForecastFiles[k])){alert('Hãy tải đủ ba file mua vào, bán ra và tồn kho.');return}
- const mode=$('forecastKeyMode').value;const cfgs=stockForecastConfig;
+ if(!['purchase','sales','stock'].every(k=>stockForecastFiles[k])){alert('Hãy tải đủ ba file mua vào, bán ra và tồn đầu kỳ.');return}
+ const mode='sku';const cfgs=stockForecastConfig;
  for(const kind of ['purchase','sales','stock']){
-  const c=cfgs[kind];if(!$(c.qtyId).value||(mode==='sku'&&!$(c.skuId).value)||(mode==='name'&&!$(c.nameId).value)){alert('Kiểm tra lại cột mã/tên và số lượng của file '+c.label+'.');return}
+  const c=cfgs[kind];if(!$(c.qtyId).value||!$(c.skuId).value){alert('Kiểm tra lại cột SKU và số lượng của file '+c.label+'.');return}
  }
  const thresholdRaw=parseForecastQuantity($('forecastAlertThreshold').value);
  const warningThreshold=Math.max(0,thresholdRaw===null?0:thresholdRaw);
@@ -541,11 +539,11 @@ function runStockForecast(){
    const {key,raw}=forecastMakeKey(row,kind,mode);
    const id=key||('__missing_'+kind+'_'+index);
    const p=forecastEnsureProduct(map,id,key,kind,row);
-   if(!key){p.unresolvedKey=true;forecastAppendIssue(p,'Thiếu '+(mode==='sku'?'mã/SKU':'tên hàng')+' ở file '+cfg.label+' (dòng '+(index+2)+')');}
+   if(!key){p.unresolvedKey=true;forecastAppendIssue(p,'Thiếu mã/SKU ở file '+cfg.label+' (dòng '+(index+2)+')');}
    const q=parseForecastQuantity(row[qtyColumn]);
    if(type==='stock'){
     p.inStock=true;p.stockRows++;
-    if(q===null){p.badStockQty++;forecastAppendIssue(p,'Không đọc được số tồn ở dòng '+(index+2)+' của file tồn kho')}else p.stockQty+=q;
+    if(q===null){p.badStockQty++;forecastAppendIssue(p,'Không đọc được số tồn đầu kỳ ở dòng '+(index+2)+' của file tồn đầu kỳ')}else p.stockQty+=q;
    }else if(type==='purchase'){
     p.purchaseRows++;
     if(q===null){p.badPurchaseQty++;forecastAppendIssue(p,'Không đọc được số lượng mua vào ở dòng '+(index+2))}else p.purchaseQty+=q;
@@ -570,7 +568,7 @@ function runStockForecast(){
   }
   if(p.inStock&&p.badStockQty)p.projected=null;
   p.issueText=p.issues.join(' · ');
-  p.displaySku=p.sku||(mode==='sku'?p.key:'');
+  p.displaySku=p.sku||p.key||'';
   p.displayName=p.name||p.displaySku||p.key||'(Không xác định)';
   return p;
  }).sort((a,b)=>{
@@ -578,11 +576,11 @@ function runStockForecast(){
   return (order[a.status]??9)-(order[b.status]??9)||(a.projected??Infinity)-(b.projected??Infinity)||a.displayName.localeCompare(b.displayName,'vi');
  });
  stockForecastPage=1;stockForecastBuilt=true;$('exportStockForecast').disabled=!stockForecastResults.length;
- $('forecastRunInfo').textContent='Đã tính xong '+stockForecastResults.length+' mã/tên hàng từ ba file. Công thức: tồn hiện tại + mua vào − bán ra. Hãy kiểm tra các dòng cảnh báo trước khi sử dụng báo cáo.';
+ $('forecastRunInfo').textContent='Đã tính xong '+stockForecastResults.length+' SKU. Công thức chốt sổ cuối tháng: tồn đầu kỳ + tổng mua vào tháng − tổng bán ra tháng. Không sử dụng cột ngày để chia hoặc tính từng ngày.';
  renderStockForecast();
 }
 function forecastStatusLabel(status){
- return ({negative:'Dự kiến âm kho',zero:'Hết tồn',low:'Sắp âm',ok:'Còn tồn',noStock:'Không có trong tồn kho',noKey:'Thiếu mã/tên',issue:'Kiểm tra dữ liệu'})[status]||status;
+ return ({negative:'Âm cuối tháng',zero:'Hết tồn cuối tháng',low:'Sắp hết tồn',ok:'Còn tồn cuối tháng',noStock:'Thiếu tồn đầu kỳ',noKey:'Thiếu SKU',issue:'Kiểm tra dữ liệu'})[status]||status;
 }
 function forecastStatusBadge(status){const cls=({negative:'none',zero:'rejected',low:'review',ok:'good',noStock:'rejected',noKey:'rejected',issue:'review'})[status]||'review';return '<span class="badge '+cls+'">'+esc(forecastStatusLabel(status))+'</span>'}
 function renderStockForecast(){
@@ -607,8 +605,8 @@ function renderStockForecast(){
  if(!shown.length){root.className='empty';root.textContent='Không có mặt hàng phù hợp bộ lọc.'}
  else{
   root.className='tablewrap';
-  root.innerHTML='<table><thead><tr><th>Mã hàng / SKU</th><th>Tên hàng</th><th>Tồn hiện tại</th><th>Mua vào</th><th>Bán ra</th><th>Tồn dự kiến</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead><tbody>'+
-   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.inStock&&p.projected!==null?forecastNumber(p.stockQty):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn dự kiến âm sau khi trừ bán ra.':p.status==='noStock'?'Có giao dịch nhưng không tìm thấy mặt hàng trong file tồn kho.':''))+'</td></tr>').join('')+'</tbody></table>';
+  root.innerHTML='<table><thead><tr><th>Mã hàng / SKU</th><th>Tên hàng</th><th>Tồn đầu kỳ</th><th>Tổng mua vào tháng</th><th>Tổng bán ra tháng</th><th>Tồn cuối tháng</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead><tbody>'+
+   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.inStock&&p.projected!==null?forecastNumber(p.stockQty):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
  }
  $('forecastPageInfo').textContent='Trang '+(rows.length?stockForecastPage:0)+'/'+(rows.length?pages:0)+' · '+rows.length+' mặt hàng';
  $('forecastPrev').disabled=stockForecastPage<=1;$('forecastNext').disabled=stockForecastPage>=pages;
@@ -617,10 +615,13 @@ function forecastNumber(n){return Number.isFinite(n)?Number(n.toFixed(4)).toLoca
 function exportStockForecast(){
  if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
  if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
- const rows=stockForecastResults.map(p=>({
-  'SKU / Mã hàng':p.displaySku,'Tên hàng':p.displayName,'Tồn hiện tại':p.inStock&&!p.badStockQty?p.stockQty:'','Tổng mua vào':p.purchaseQty,'Tổng bán ra':p.salesQty,'Tồn dự kiến':p.projected===null?'':p.projected,'Trạng thái':forecastStatusLabel(p.status),'Số dòng tồn kho':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,'Ghi chú':p.issueText
- }));
- const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(rows);XLSX.utils.book_append_sheet(wb,ws,'Du bao am kho');XLSX.writeFile(wb,'matchma-du-bao-am-kho.xlsx');
+ const mapRows=list=>list.map(p=>({'SKU / Mã hàng':p.displaySku,'Tên hàng':p.displayName,'Tồn đầu kỳ':p.inStock&&!p.badStockQty?p.stockQty:'','Tổng mua vào tháng':p.purchaseQty,'Tổng bán ra tháng':p.salesQty,'Tồn chốt cuối tháng':p.projected===null?'':p.projected,'Trạng thái':forecastStatusLabel(p.status),'Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,'Ghi chú':p.issueText}));
+ const wb=XLSX.utils.book_new();
+ const negRows=mapRows(stockForecastResults.filter(p=>p.status==='negative'));
+ const allRows=mapRows(stockForecastResults);
+ XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(negRows),'SKU am cuoi thang');
+ XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(allRows),'Tong hop');
+ XLSX.writeFile(wb,'matchma-chot-so-cuoi-thang.xlsx');
 }
 function initStockForecast(){
  for(const kind of ['purchase','sales','stock']){
