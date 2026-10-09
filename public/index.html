@@ -410,7 +410,7 @@ body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(
    <div class="stat"><small>Tổng dòng mặt hàng</small><b id="forecastTotal">0</b></div>
    <div class="stat none"><small>SKU âm cuối tháng</small><b id="forecastNegative">0</b></div>
    <div class="stat review"><small>Hết tồn / sắp hết</small><b id="forecastLow">0</b></div>
-   <div class="stat"><small>Thiếu trong file tồn kho</small><b id="forecastMissing">0</b></div>
+   <div class="stat"><small>SKU thiếu trong tồn đầu kỳ</small><b id="forecastMissing">0</b></div>
   </div>
   <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="negative" selected>Chỉ SKU âm cuối tháng</option><option value="all">Tất cả SKU</option><option value="low">Hết tồn / sắp hết</option><option value="noStock">Thiếu trong tồn đầu kỳ</option><option value="issue">Thiếu SKU hoặc lỗi số lượng</option></select></div>
   <div id="forecastOutput" class="empty">Chưa có kết quả. Tải đủ ba file rồi tính tồn cuối tháng.</div>
@@ -559,14 +559,19 @@ function runStockForecast(){
  consume('stock','stock');consume('purchase','purchase');consume('sales','sales');
  stockForecastResults=[...map.values()].map(p=>{
   p.projected=null;
+  p.assumedOpeningZero=!p.inStock&&!p.unresolvedKey;
   if(p.unresolvedKey)p.status='noKey';
-  else if(!p.inStock)p.status='noStock';
   else if(p.badStockQty||p.badPurchaseQty||p.badSalesQty)p.status='issue';
   else{
-   p.projected=p.stockQty+p.purchaseQty-p.salesQty;
+   // If a transaction SKU has no row in the opening inventory file, calculate from 0
+   // but keep a visible warning so the user can verify the missing opening-stock row.
+   if(p.assumedOpeningZero)forecastAppendIssue(p,'SKU không có dòng trong file tồn đầu kỳ — tạm tính tồn đầu kỳ = 0');
+   const openingQty=p.inStock?p.stockQty:0;
+   p.projected=openingQty+p.purchaseQty-p.salesQty;
+   p.stockQty=openingQty;
    p.status=p.projected<0?'negative':p.projected===0?'zero':p.projected<=warningThreshold?'low':'ok';
   }
-  if(p.inStock&&p.badStockQty)p.projected=null;
+  if(p.badStockQty)p.projected=null;
   p.issueText=p.issues.join(' · ');
   p.displaySku=p.sku||p.key||'';
   p.displayName=p.name||p.displaySku||p.key||'(Không xác định)';
@@ -587,14 +592,14 @@ function renderStockForecast(){
  const q=String($('forecastSearch').value||'').toLowerCase().trim(),filter=$('forecastFilter').value;
  const negatives=stockForecastResults.filter(p=>p.status==='negative').length;
  const low=stockForecastResults.filter(p=>p.status==='zero'||p.status==='low').length;
- const missing=stockForecastResults.filter(p=>p.status==='noStock'||p.status==='noKey').length;
+ const missing=stockForecastResults.filter(p=>p.assumedOpeningZero||p.status==='noKey').length;
  $('forecastTotal').textContent=stockForecastResults.length;$('forecastNegative').textContent=negatives;$('forecastLow').textContent=low;$('forecastMissing').textContent=missing;
  let rows=stockForecastResults.filter(p=>{
   const searchable=(p.displaySku+' '+p.displayName+' '+p.issueText).toLowerCase();
   if(q&&!searchable.includes(q))return false;
   if(filter==='negative'&&p.status!=='negative')return false;
   if(filter==='low'&&p.status!=='zero'&&p.status!=='low')return false;
-  if(filter==='noStock'&&p.status!=='noStock')return false;
+  if(filter==='noStock'&&!p.assumedOpeningZero)return false;
   if(filter==='issue'&&p.status!=='issue'&&p.status!=='noKey')return false;
   return true;
  });
@@ -606,7 +611,7 @@ function renderStockForecast(){
  else{
   root.className='tablewrap';
   root.innerHTML='<table><thead><tr><th>Mã hàng / SKU</th><th>Tên hàng</th><th>Tồn đầu kỳ</th><th>Tổng mua vào tháng</th><th>Tổng bán ra tháng</th><th>Tồn cuối tháng</th><th>Trạng thái</th><th>Ghi chú</th></tr></thead><tbody>'+
-   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.inStock&&p.projected!==null?forecastNumber(p.stockQty):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
+   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.projected!==null?forecastNumber(p.stockQty)+(p.assumedOpeningZero?' (giả định)':''):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
  }
  $('forecastPageInfo').textContent='Trang '+(rows.length?stockForecastPage:0)+'/'+(rows.length?pages:0)+' · '+rows.length+' mặt hàng';
  $('forecastPrev').disabled=stockForecastPage<=1;$('forecastNext').disabled=stockForecastPage>=pages;
@@ -615,7 +620,7 @@ function forecastNumber(n){return Number.isFinite(n)?Number(n.toFixed(4)).toLoca
 function exportStockForecast(){
  if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
  if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
- const mapRows=list=>list.map(p=>({'SKU / Mã hàng':p.displaySku,'Tên hàng':p.displayName,'Tồn đầu kỳ':p.inStock&&!p.badStockQty?p.stockQty:'','Tổng mua vào tháng':p.purchaseQty,'Tổng bán ra tháng':p.salesQty,'Tồn chốt cuối tháng':p.projected===null?'':p.projected,'Trạng thái':forecastStatusLabel(p.status),'Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,'Ghi chú':p.issueText}));
+ const mapRows=list=>list.map(p=>({'SKU / Mã hàng':p.displaySku,'Tên hàng':p.displayName,'Tồn đầu kỳ':p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),'Tổng mua vào tháng':p.purchaseQty,'Tổng bán ra tháng':p.salesQty,'Tồn chốt cuối tháng':p.projected===null?'':p.projected,'Trạng thái':forecastStatusLabel(p.status),'Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,'Ghi chú':p.issueText}));
  const wb=XLSX.utils.book_new();
  const negRows=mapRows(stockForecastResults.filter(p=>p.status==='negative'));
  const allRows=mapRows(stockForecastResults);
