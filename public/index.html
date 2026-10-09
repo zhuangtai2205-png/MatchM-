@@ -500,8 +500,8 @@ function updateForecastDefaultKeyMode(){
  $('forecastKeyMode').value=haveAllSku?'sku':'name';
 }
 function invalidateStockForecast(){
- stockForecastBuilt=false;$('exportStockForecast').disabled=true;
- updateStockForecastButtons();
+ stockForecastBuilt=false;stockForecastResults=[];stockForecastPage=1;$('exportStockForecast').disabled=true;
+ updateStockForecastButtons();renderStockForecast();
 }
 function loadStockForecastFile(kind,file){
  if(!file)return;
@@ -589,7 +589,7 @@ function renderStockForecast(){
  const q=String($('forecastSearch').value||'').toLowerCase().trim(),filter=$('forecastFilter').value;
  const negatives=stockForecastResults.filter(p=>p.status==='negative').length;
  const low=stockForecastResults.filter(p=>p.status==='zero'||p.status==='low').length;
- const missing=stockForecastResults.filter(p=>p.status==='noStock'||p.status==='noKey'||p.status==='issue').length;
+ const missing=stockForecastResults.filter(p=>p.status==='noStock'||p.status==='noKey').length;
  $('forecastTotal').textContent=stockForecastResults.length;$('forecastNegative').textContent=negatives;$('forecastLow').textContent=low;$('forecastMissing').textContent=missing;
  let rows=stockForecastResults.filter(p=>{
   const searchable=(p.displaySku+' '+p.displayName+' '+p.issueText).toLowerCase();
