@@ -116,5 +116,26 @@ function renderResults(){if(!out.length){$('results').className='empty';$('resul
 $('prevPage').onclick=()=>{if(currentPage>1){currentPage--;renderResults()}};$('nextPage').onclick=()=>{currentPage++;renderResults()};$('searchResult').addEventListener('input',()=>{currentPage=1;renderResults()});$('statusFilter').addEventListener('change',()=>{currentPage=1;renderResults()});
 $('export').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));return}const rows=out.map(r=>({'STT':r.i,'Tên cần soát':r.query,'Tên hàng đề xuất':r.match,'SKU chuẩn':r.sku,'Quy cách':r.spec,'Điểm tương đồng (%)':r.confidence,'Trạng thái':r.status==='good'?'OK':r.status==='review'?'Cần rà soát':r.status==='rejected'?'Không khớp thủ công':'Không khớp','Mâu thuẫn thuộc tính':r.conflict?'Có':'Không','Ghi chú':r.reason}));const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(rows);XLSX.utils.book_append_sheet(wb,ws,'Ket qua');XLSX.writeFile(wb,'matchma-ket-qua.xlsx')};
 $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));return}const wb=XLSX.utils.book_new(),ws=XLSX.utils.aoa_to_sheet([['SKU','Tên hàng','Quy cách'],['SKU001','Sữa VINAMIL có đường 1L','1L'],['SKU002','Sữa VNM không đường 1L','1000 ml'],['SKU003','Băng keo trong 48mm','48mm']]);XLSX.utils.book_append_sheet(wb,ws,'Danh muc mau');XLSX.writeFile(wb,'matchma-danh-muc-mau.xlsx')};
+
+// Hiệu ứng khi click: mèo con và hoa nhỏ bay lên, có giới hạn để không làm nặng trang.
+(function(){
+ const layer=$('catClickFX');if(!layer||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const icons=['🐱','🌸','🌼','🌷','🐾','✿'];
+ let live=0;
+ document.addEventListener('pointerdown',function(e){
+   if(live>18)return;
+   const count=2+(Math.random()>.55?1:0);
+   for(let i=0;i<count;i++){
+     const particle=document.createElement('span');particle.className='cat-flower-particle';
+     particle.textContent=icons[Math.floor(Math.random()*icons.length)];
+     particle.style.left=e.clientX+'px';particle.style.top=e.clientY+'px';
+     particle.style.setProperty('--dx',(Math.random()*100-50)+'px');
+     particle.style.setProperty('--dy',(-28-Math.random()*64)+'px');
+     particle.style.animationDelay=(Math.random()*75)+'ms';layer.appendChild(particle);live++;
+     particle.addEventListener('animationend',()=>{particle.remove();live=Math.max(0,live-1)},{once:true});
+     setTimeout(()=>{if(particle.isConnected){particle.remove();live=Math.max(0,live-1)}},1100);
+   }
+ },{passive:true});
+})();
 updateThresholdLabels();setLanguage('vi');updateCanRun();updateStats();
 </script></body></html>
