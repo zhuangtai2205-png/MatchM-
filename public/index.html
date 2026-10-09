@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MatchMã — Kiểm tra danh mục sản phẩm</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#302b48;--muted:#77738b;--line:#e8e0f1;--lav:#ebe6ff;--pink:#f7e2ed;--mint:#dff4eb;--purple:#7865c5;--paper:#fffdfd;--green:#287653;--amber:#966514;--red:#9d4d66}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7fa,#f4f1ff 55%,#f1fbf7);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,sans-serif}button,input,select{font:inherit}button{cursor:pointer}header{max-width:1500px;margin:auto;padding:22px 26px 14px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#dfd7ff,#f7dce8);display:grid;place-items:center;font-size:24px;box-shadow:0 8px 25px #7565af20}h1{font-size:clamp(24px,3vw,34px);letter-spacing:-1.1px;margin:0}h1 span{color:#a66a9a}.subbrand{font-size:12px;color:var(--muted)}.headright{display:flex;align-items:center;gap:10px}.pill{background:#ffffffbd;border:1px solid #fff;border-radius:99px;padding:9px 14px;color:#726a8b}.shell{max-width:1500px;margin:auto;padding:0 26px 44px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px}.sidebar{align-self:start;background:#ffffffac;border:1px solid #fff;border-radius:22px;padding:12px;position:sticky;top:12px}.navtitle{font-size:11px;letter-spacing:1.1px;color:#9890a8;padding:10px 12px}.navbtn{width:100%;border:0;background:transparent;color:#716984;border-radius:13px;text-align:left;padding:12px;display:flex;align-items:center;gap:12px;margin:2px 0}.navbtn:hover{background:#f4f0fc}.navbtn.active{background:#eae5fb;color:#574b91;font-weight:750}.navicon{width:25px;text-align:center;font-size:17px}.sidefoot{margin:14px 5px 5px;padding:13px;border-radius:14px;background:#f7f3ff;color:#77708e;font-size:12px}.main{min-width:0}.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:none}}.hero,.panel{background:#ffffffc9;border:1px solid #fff;border-radius:23px;padding:23px;box-shadow:0 12px 38px #8c7ca10b;margin-bottom:16px}.hero{background:linear-gradient(120deg,#fffdfdce,#f2edffdc);padding:27px}.eyebrow{text-transform:uppercase;letter-spacing:1.3px;color:#8a7caa;font-size:11px;font-weight:800}.hero h2{font-size:clamp(24px,3vw,33px);line-height:1.2;letter-spacing:-.8px;margin:9px 0}.hero p,.muted,.hint{color:var(--muted);font-size:13px}.hero p{max-width:760px}.sectionhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:15px}.sectionhead h2,.panel h2{margin:0 0 6px;font-size:19px}.sectionhead p,.panel p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.upload{display:block;border:1.5px dashed #c5b8dc;border-radius:17px;padding:22px;text-align:center;background:#faf8ff;cursor:pointer;margin:15px 0}.upload:hover{background:#f4efff;border-color:#aa9cdb}.upload .bigicon{font-size:27px;display:block;margin-bottom:7px}.upload input{display:block;width:100%;margin-top:12px;font-size:12px}.btn{border:0;background:var(--purple);color:white;padding:11px 17px;border-radius:12px;font-weight:750;box-shadow:0 5px 14px #7968c62b}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.btn.alt{background:#eee9fb;color:#574b89;box-shadow:none}.btn.soft{background:#e4f5ed;color:#286c4d;box-shadow:none}.field{margin:12px 0}.field label{display:block;font-size:12px;font-weight:750;color:#6c6580;margin-bottom:5px}.field input[type=text],.field select,.field input[type=number],.field input[type=range],.search{width:100%}.field input[type=text],.field select,.field input[type=number],.search{padding:10px 12px;border:1px solid #e4ddec;border-radius:11px;background:#fff;color:var(--ink);outline-color:#aa9ddd}.field input[type=range]{accent-color:var(--purple)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0}.stat{background:#fff;border:1px solid #fff;border-radius:18px;padding:16px;min-width:0}.stat b{display:block;font-size:29px;letter-spacing:-.6px}.stat small{color:var(--muted);font-size:12px}.stat.good b{color:var(--green)}.stat.review b{color:var(--amber)}.stat.none b{color:var(--red)}.twostat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{background:#fff;border:1px solid #eee8f5;border-radius:15px;padding:13px}.mini b{font-size:19px;display:block}.mini span{font-size:12px;color:var(--muted)}.tablewrap{overflow:auto;border-radius:15px;border:1px solid #eee8f5;background:#fff}table{border-collapse:collapse;width:100%;min-width:770px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #f0ecf5;font-size:12px;vertical-align:top}th{background:#faf7ff;color:#71668e;position:sticky;top:0;z-index:1}td select{margin:0;min-width:115px;border:1px solid #e4ddec;border-radius:9px;padding:7px;background:#fff;color:var(--ink);font-size:12px}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:11px;font-weight:750;white-space:nowrap}.badge.good{background:#ddf5e8;color:#2c7c58}.badge.review{background:#fff0cf;color:#946a19}.badge.none{background:#f9e1e8;color:#9a4b64}.badge.rejected{background:#eee9fb;color:#635588}.empty{text-align:center;padding:34px 16px;color:var(--muted)}.progressbox{display:none;background:#f5f1ff;border:1px solid #e8e0fc;border-radius:14px;padding:13px;margin-top:14px}.progressbox.show{display:block}.bar{height:8px;background:#ded6f5;border-radius:99px;overflow:hidden;margin-top:8px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#9e8bde,#6bba9b);transition:width .12s}.resulttools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}.search{max-width:340px}.pager{display:flex;gap:9px;align-items:center;justify-content:flex-end;padding:12px}.pager span{font-size:12px;color:var(--muted)}.thresholdvalue{font-size:30px;font-weight:850;color:#6554ad}.rule{padding:12px;border-radius:13px;background:#f5f0ff;color:#6e628e;font-size:13px;margin-top:12px}.okmsg{padding:12px;border-radius:13px;background:#eaf8f0;color:#367554;font-size:13px}.foot{text-align:center;color:#8a8499;font-size:12px;padding:16px}@media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow-x:auto;gap:3px;padding:8px}.navtitle,.sidefoot{display:none}.navbtn{width:auto;flex:0 0 auto;padding:10px 13px}.navicon{width:auto}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:650px){header{padding:15px 14px;align-items:flex-start;flex-direction:column}.headright{width:100%;justify-content:space-between}.shell{padding:0 12px 25px;gap:12px}.hero,.panel{padding:17px;border-radius:18px}.grid,.grid3,.twostat{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:12px}.stat b{font-size:25px}.sectionhead{flex-direction:column}.search{max-width:none}.navbtn{font-size:12px;gap:7px}.navicon{font-size:15px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -89,8 +90,76 @@ body:after{content:"";position:fixed;left:-5vw;right:-5vw;bottom:-38px;height:11
 header,.shell{position:relative;z-index:1}
 @media(max-width:650px){.page{padding:7px;border-radius:20px}.font-tools button{padding:6px;min-width:29px}}
 @media(prefers-reduced-motion:reduce){.page.active{animation:none}body:after{opacity:.12}}
+
+/* Final pass: calm translucent ocean, simple typewriter UI, transparent cat-and-sword logo */
+:root{--ink:#194764;--muted:#5a7e92;--line:#bfe5f1;--lav:#e7f7fc;--pink:#fbeaf2;--mint:#e0f6ef;--purple:#338fb2;--paper:#fafdff;--green:#267a65;--amber:#916b2e;--red:#a44f6d;--frame:rgba(104,190,217,.55);--font-scale:1}
+html{background:#eaf8fc}
+body{font-family:'Courier Prime','Special Elite','Courier New',monospace!important;color:var(--ink);background:linear-gradient(135deg,rgba(222,246,253,.58),rgba(248,253,255,.68) 48%,rgba(221,245,239,.48)),#e8f7fc!important}
+body:before{content:"🌊　·　🐾　·　🌸　·　🐚　·　🌊";white-space:pre;position:fixed;inset:0 0 auto 0;z-index:0;pointer-events:none;overflow:hidden;opacity:.045;font-size:clamp(15px,1.3vw,20px);line-height:90px;letter-spacing:9px;transform:none;color:#276f8d}
+body:after{opacity:.11;height:72px;bottom:-24px}
+header,.shell{position:relative;z-index:1}
+header{padding-top:18px;padding-bottom:12px}
+.brand{gap:10px}
+.logo{width:58px;height:58px;flex:0 0 58px;border-radius:0!important;background:transparent!important;box-shadow:none!important;overflow:visible;padding:0}
+.logo svg{width:100%;height:100%;display:block;overflow:visible}
+h1,.hero h2,.sectionhead h2,.panel h2,.stat b,.thresholdvalue,.navbtn,.subbrand,.pill,.field label,.field select,.btn,.muted,.hint,table,.foot{font-family:'Courier Prime','Special Elite','Courier New',monospace!important;letter-spacing:0}
+h1{font-size:clamp(24px,3vw,33px);letter-spacing:.025em;margin:0;color:#174d6c}
+h1 span{color:#348eb1}
+.subbrand{color:#557f94}
+.page{background:rgba(249,253,255,.52)!important;border:1.5px solid rgba(93,183,210,.58)!important;box-shadow:0 12px 32px rgba(45,125,155,.06),inset 0 0 0 2px rgba(255,255,255,.4)!important;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);border-radius:24px}
+.hero,.panel{background:rgba(255,255,255,.63)!important;border:1px solid rgba(142,209,228,.70)!important;box-shadow:0 7px 22px rgba(45,125,155,.055)!important;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.hero{background:linear-gradient(120deg,rgba(222,246,253,.68),rgba(255,255,255,.62) 62%,rgba(231,248,245,.60))!important}
+.sidebar{background:rgba(248,253,255,.58)!important;border:1px solid rgba(151,213,230,.68)!important;box-shadow:0 8px 24px rgba(45,125,155,.05)!important;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.navbtn{color:#38647c}
+.navbtn:hover{background:rgba(211,241,250,.65)}
+.navbtn.active{background:rgba(201,237,248,.82);color:#185a7a;box-shadow:inset 0 0 0 1px rgba(107,191,217,.5)}
+.sidefoot,.rule{background:rgba(222,245,251,.58);border:1px solid rgba(172,220,234,.48);color:#4d778c}
+.stat,.mini{background:rgba(255,255,255,.63)!important;border-color:rgba(169,219,232,.68)!important;box-shadow:0 4px 14px rgba(44,129,157,.035)!important}
+.upload{background:rgba(241,251,255,.60);border-color:#a9ddec}
+.upload:hover{background:rgba(224,247,253,.78)}
+.btn{background:#3c9cbe;box-shadow:none;border:1px solid rgba(36,133,169,.18)}
+.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.btn.alt{background:rgba(217,242,249,.82);color:#246c89;border:1px solid rgba(132,203,223,.6);box-shadow:none}
+.btn.soft,.okmsg{background:rgba(219,246,235,.85);color:#286e5b}
+.field input[type=text],.field select,.field input[type=number],.search,td select{background:rgba(255,255,255,.74);border-color:rgba(148,207,225,.72)}
+th{background:rgba(223,245,252,.9);color:#2a6b87}
+.tablewrap{background:rgba(255,255,255,.64);border-color:rgba(157,212,229,.64)}
+.progressbox{background:rgba(226,247,252,.72);border-color:rgba(155,214,231,.62)}
+.bar{background:rgba(195,231,242,.75)}
+.font-tools{background:rgba(245,252,255,.6);border-color:rgba(161,216,231,.62)}
+.pill{background:rgba(255,255,255,.58);border-color:rgba(172,221,234,.6);color:#47758a}
+.cat-flower-particle{filter:drop-shadow(0 2px 2px rgba(70,135,160,.14))}
+@media(max-width:650px){.logo{width:50px;height:50px;flex-basis:50px}.page{border-radius:20px}}
+@media(prefers-reduced-motion:reduce){body:after{opacity:.05}}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div>
-<header><div class="brand"><div class="logo">✳</div><div><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option></select></div></div></header>
+<header><div class="brand"><div class="logo" aria-label="MatchMã — mèo, kiếm và biển" title="MatchMã">
+<svg viewBox="0 0 100 100" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M74 72 87 22 92 15 91 29 81 76" fill="#e9faff" stroke="#367f9e" stroke-width="2.5"/>
+    <path d="M70 67 83 72M77 72 71 83 77 88 84 77" fill="#f6d79a" stroke="#367f9e" stroke-width="2.5"/>
+    <path d="M23 32 13 12 34 23Q50 15 66 23L87 12 78 34Q88 46 84 64L76 72 72 68 66 77 59 73 50 82 41 73 33 77 27 68 22 72 16 64Q12 46 23 32Z" fill="#dff5fc" stroke="#287da0" stroke-width="2.8"/>
+    <path d="M27 31 21 22 33 28M73 31 79 22 67 28" stroke="#8ac7dc" stroke-width="2"/>
+    <path d="M19 56Q11 60 19 68L26 72M81 56Q89 60 81 68L74 72" stroke="#287da0" stroke-width="2.8"/>
+    <path d="M29 43Q37 38 43 44M57 44Q64 38 71 43" stroke="#287da0" stroke-width="2.6"/>
+    <ellipse cx="36" cy="49" rx="5.2" ry="6.5" fill="#43b8cf" stroke="#287da0" stroke-width="1.7"/>
+    <ellipse cx="64" cy="49" rx="5.2" ry="6.5" fill="#43b8cf" stroke="#287da0" stroke-width="1.7"/>
+    <ellipse cx="37.5" cy="49" rx="1.5" ry="3" fill="#163e59" stroke="none"/>
+    <ellipse cx="62.5" cy="49" rx="1.5" ry="3" fill="#163e59" stroke="none"/>
+    <path d="M46 58Q50 54 54 58L50 62Z" fill="#eaa5bb" stroke="#287da0" stroke-width="1.2"/>
+    <path d="M50 62Q46 68 42 64M50 62Q54 68 58 64" stroke="#287da0" stroke-width="1.8"/>
+    <path d="M27 59 9 56M27 64 10 66M73 59 91 56M73 64 90 66" stroke="#6da9c0" stroke-width="1.5"/>
+    <path d="M19 80Q34 74 50 81Q66 74 81 80" stroke="#42a9ca" stroke-width="3"/>
+    <path d="M27 84Q50 91 73 84" stroke="#95d7e8" stroke-width="2.2"/>
+  </g>
+  <g transform="translate(17 78)">
+    <g fill="#f3b5d0" stroke="#c779a5" stroke-width="1">
+      <ellipse cx="0" cy="-5.5" rx="3.5" ry="5"/><ellipse cx="5.5" cy="0" rx="5" ry="3.5"/>
+      <ellipse cx="0" cy="5.5" rx="3.5" ry="5"/><ellipse cx="-5.5" cy="0" rx="5" ry="3.5"/>
+    </g><circle r="3.3" fill="#f7d985" stroke="#c779a5" stroke-width="1"/>
+  </g>
+  <path d="M79 8q3-6 6 0q6-3 5 3q-2 5-7 3q-6 0-4-6Z" fill="#d9f4ff" stroke="#4697b5" stroke-width="1.4"/>
+</svg></div><div><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option></select></div></div></header>
 <div class="shell"><aside class="sidebar"><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
 <main class="main">
 <section class="page active" id="page-overview"><div class="hero"><div class="eyebrow" data-i18n="eyebrow">PRODUCT MATCHING WORKSPACE</div><h2 data-i18n="heroTitle">So khớp tên khác nhau — cùng một sản phẩm?</h2><p data-i18n="heroDesc">Ví dụ “sữa vinamil CO DUONG 1l” có thể gợi ý “SUA VNM 1L”. Hệ thống chuẩn hóa dấu, tên thương hiệu viết tắt và dung tích; bạn chọn ngưỡng phần trăm được xem là OK trong Cài đặt.</p><div class="actions"><button class="btn" data-goto="catalog" data-i18n="startCatalog">Bắt đầu với danh mục →</button><button class="btn alt" data-goto="settings" data-i18n="openSettings">Cài đặt ngưỡng OK</button></div></div>
@@ -322,7 +391,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
 // Hiệu ứng khi click: mèo con và hoa nhỏ bay lên, có giới hạn để không làm nặng trang.
 (function(){
  const layer=$('catClickFX');if(!layer||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- const icons=['🐱','🌸','🌼','🌷','🐾','✿'];
+ const icons=['🐈','🌸','🌼','🌷','🐾','🌊','🐚'];
  let live=0;
  document.addEventListener('pointerdown',function(e){
    if(live>18)return;
