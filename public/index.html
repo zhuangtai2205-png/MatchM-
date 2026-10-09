@@ -187,10 +187,57 @@ function sharedEvidence(a,b){
  return a.filter(t=>B.has(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!ignored.has(t)).length
 }
 function similarity(aTokens,bTokens){if(!aTokens.length||!bTokens.length)return 0;let common=0;const small=aTokens.length<=bTokens.length?aTokens:bTokens,large=new Set(aTokens.length<=bTokens.length?bTokens:aTokens);for(const token of small)if(large.has(token))common++;return 2*common/(aTokens.length+bTokens.length)}
+function plainText(s){return String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim()}
+function unitGroup(value){
+ const s=plainText(value).replace(/[._-]/g,' ').trim();if(!s)return '';
+ if(/\b(ml|milliliter|millilitre|millilit|l|lit|litre|liter|litro|litre)\b/.test(s))return 'volume';
+ if(/\b(kg|kilogram|kilograms|kilo|g|gr|gram|grams|gam)\b/.test(s))return 'weight';
+ if(/\b(chai|bottle|bottles)\b/.test(s))return 'bottle';
+ if(/\b(lon|can|cans)\b/.test(s))return 'can';
+ if(/\b(thung|carton|case)\b/.test(s))return 'carton';
+ if(/\b(hop|box|boxes)\b/.test(s))return 'box';
+ if(/\b(goi|pack|packet|sachet)\b/.test(s))return 'pack';
+ if(/\b(tui|bag|bags)\b/.test(s))return 'bag';
+ if(/\b(vi|blister)\b/.test(s))return 'blister';
+ if(/\b(cai|chiec|piece|pieces|pcs|pc|unit|units)\b/.test(s))return 'piece';
+ if(/\b(cuon|roll|rolls)\b/.test(s))return 'roll';
+ if(/\b(cap|set|bo)\b/.test(s))return 'set';
+ return s.replace(/\s+/g,' ');
+}
+function normalizeSku(value){return String(value??'').toUpperCase().replace(/[\s._/-]+/g,'').trim()}
+function getMeasureMap(value){
+ const s=plainText(value).replace(/,/g,'.'),map={};
+ const push=(k,v)=>{if(!map[k])map[k]=[];map[k].push(v)};
+ const physical=/\b(\d+(?:\.\d+)?)\s*(milliliters?|millilitres?|ml|liters?|litres?|lit|l|kilograms?|kg|grams?|gram|gr|g)\b/g;
+ let m;
+ while((m=physical.exec(s))!==null){
+  const n=parseFloat(m[1]),u=m[2];
+  if(/^(ml|milliliter|millilitre)/.test(u))push('volume',Math.round(n));
+  else if(/^(l|lit)/.test(u))push('volume',Math.round(n*1000));
+  else if(/^(kg|kilo)/.test(u))push('weight',Math.round(n*1000));
+  else push('weight',Math.round(n));
+ }
+ const packRe=/\b(\d+(?:\.\d+)?)\s*(lon|can|chai|bottle|hop|box|thung|carton|goi|pack|tui|bag|vi|blister|cai|chiec|pcs|piece|cuon|roll)\b/g;
+ while((m=packRe.exec(s))!==null)push('pack:'+unitGroup(m[2]),parseFloat(m[1]));
+ return map;
+}
+function measureConflict(a,b){
+ const A=getMeasureMap(a),B=getMeasureMap(b);
+ for(const key of Object.keys(A))if(B[key]){
+  const av=A[key],bv=B[key];
+  if(!av.every(x=>bv.some(y=>Math.abs(x-y)<=Math.max(.001,Math.max(x,y)*.005))))return true;
+ }
+ return false;
+}
+function unitConflict(a,b){
+ const x=unitGroup(a),y=unitGroup(b);if(!x||!y||x===y)return false;
+ if((x==='volume'&&y==='volume')||(x==='weight'&&y==='weight'))return false;
+ return true;
+}
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function setProgress(done,total,doneFlag){const box=$('progressBox');box.classList.add('show');$('progressBar').style.width=(total?Math.round(done/total*100):0)+'%';$('progressText').textContent=doneFlag?tr('progressDone')+': '+total+' '+tr('rows'):tr('progressRunning')+' '+done+' / '+total+'…'}
 function getStatusLabel(s){return s==='good'?tr('statusGood'):s==='review'?tr('statusReview'):s==='rejected'?tr('statusRejected'):tr('statusNone')}
-function calcStatus(item){if(item.familyConflict)return 'none';if(item.conflict)return 'review';if(!item.match||item.score<.45)return 'none';if(item.evidence<2)return 'review';if(item.score*100>=threshold)return 'good';return 'review'}
+function calcStatus(item){if(item.familyConflict)return 'none';if(!item.match||item.score<.45)return 'none';if(item.conflict||item.skuMismatch||item.unitConflict||item.packConflict)return 'review';if(item.evidence<2)return 'review';if(item.score*100>=threshold)return 'good';return 'review'}
 async function runMatch(){if(running)return;if(!masterRows.length||!checkRows.length){alert(tr('masterRequired'));return}const sku=$('skuCol').value,name=$('nameCol').value,q=$('queryCol').value,spec=$('specCol').value;if(!sku||!name||!q){alert(tr('columnErr'));return}const eligible=masterRows.filter(r=>String(r[sku]||'').trim()!=='');if(!eligible.length){alert(tr('blankSku'));return}running=true;updateCanRun();out=[];currentPage=1;$('export').disabled=true;$('results').className='empty';$('results').textContent=tr('progressPreparing');setProgress(0,checkRows.length,false);
 const master=eligible.map((r,i)=>{const n=norm(String(r[name]||'')+' '+(spec?String(r[spec]||''):''));const ts=[...new Set(getTokens(n))];return {row:r,code:String(r[sku]).trim(),name:String(r[name]||''),spec:spec?String(r[spec]||''):'',tokens:ts,index:i}});
 const index=new Map();for(const m of master){for(const token of m.tokens){if(!index.has(token))index.set(token,[]);index.get(token).push(m)}}
