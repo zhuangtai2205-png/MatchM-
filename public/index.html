@@ -251,28 +251,70 @@ body[data-theme="retro"] .page > .sectionhead h2::before,#page-overview .hero h2
 body[data-theme="vampire"] .page > .sectionhead h2::before,#page-overview .hero h2::before{box-shadow:0 2px 8px #b52c4a35}
 @media(max-width:650px){body[data-theme] .page > .sectionhead h2::before,#page-overview .hero h2::before{width:23px;height:23px;margin-right:6px;vertical-align:-5px}}
 
+
+/* Cute workspace atmosphere: soft moving light, floating paw motif, and gentle card response. */
+body[data-theme] .logo{position:relative;isolation:isolate;animation:matchmaLogoFloat 5.8s ease-in-out infinite;transform-origin:50% 70%}
+body[data-theme] .logo-sparkle{animation:matchmaSparkle 3.2s ease-in-out infinite;transform-origin:50% 50%}
+body[data-theme] .page{position:relative;isolation:isolate}
+body[data-theme] .page::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;border-radius:inherit;background:radial-gradient(ellipse at 95% 3%,color-mix(in srgb,var(--ui-accent) 13%,transparent),transparent 34%),radial-gradient(ellipse at 2% 100%,color-mix(in srgb,var(--ui-accent) 8%,transparent),transparent 37%);opacity:.9}
+body[data-theme] .page::after{content:"✦   🐾   ✧";position:absolute;z-index:-1;right:17px;bottom:13px;pointer-events:none;letter-spacing:8px;font-size:clamp(18px,2.4vw,27px);color:var(--ui-accent);opacity:.12;animation:matchmaWorkspaceFloat 13s ease-in-out infinite}
+body[data-theme] .page.active{animation:matchmaPageEnter .38s cubic-bezier(.2,.75,.25,1) both}
+body[data-theme] .navbtn{transition:background .22s ease,transform .22s ease,box-shadow .22s ease}
+body[data-theme] .navbtn:hover{transform:translateX(3px)}
+body[data-theme] .navbtn.active::after{content:"🐾";margin-left:auto;font-size:12px;opacity:.7;filter:saturate(.65)}
+body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .mini,body[data-theme] .upload{transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease}
+body[data-theme] .panel:hover,body[data-theme] .stat:hover,body[data-theme] .mini:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--ui-accent) 52%,var(--ui-border))!important;box-shadow:0 12px 28px color-mix(in srgb,var(--ui-accent) 12%,transparent)!important}
+body[data-theme] .upload:hover{transform:translateY(-2px);box-shadow:0 8px 22px color-mix(in srgb,var(--ui-accent) 13%,transparent)}
+body[data-theme] :is(button,a,select,input):focus-visible{outline:2px solid var(--ui-accent);outline-offset:2px}
+@keyframes matchmaLogoFloat{0%,100%{transform:translateY(0) rotate(-.5deg)}50%{transform:translateY(-2.5px) rotate(.6deg)}}
+@keyframes matchmaSparkle{0%,100%{opacity:.8}50%{opacity:.3}}
+@keyframes matchmaWorkspaceFloat{0%,100%{transform:translate(0,0) rotate(0)}50%{transform:translate(-9px,-5px) rotate(4deg)}}
+@keyframes matchmaPageEnter{from{opacity:.72;transform:translateY(5px) scale(.997)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(prefers-reduced-motion:reduce){body[data-theme] .logo,body[data-theme] .logo-sparkle,body[data-theme] .page::after,body[data-theme] .page.active{animation:none!important}body[data-theme] .navbtn,body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .mini,body[data-theme] .upload{transition:none!important}body[data-theme] .navbtn:hover,body[data-theme] .panel:hover,body[data-theme] .stat:hover,body[data-theme] .mini:hover,body[data-theme] .upload:hover{transform:none!important}}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div>
 <header><div class="brand"><div class="logo" aria-label="MatchMã — mèo, kiếm và biển" title="MatchMã">
 <svg viewBox="0 0 100 100" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  <g stroke="#171717" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M73 70 87 23 94 10 92 29 80 75Z" fill="#fff"/>
-    <path d="M69 68 84 74M77 72 71 84 79 90 86 77Z" fill="#171717"/>
-    <path d="M23 33 16 12 36 24Q50 16 64 24L84 12 77 35Q89 46 83 64L73 74 63 70 50 82 37 70 27 74 17 64Q11 47 23 33Z" fill="#fff"/>
-    <path d="M22 28 21 18 31 26M78 28 79 18 69 26" fill="#fff"/>
-    <path d="M27 30 24 23 32 28M73 30 76 23 68 28" fill="#171717" stroke-width="2.1"/>
-    <path d="M31 43Q37 38 43 43M57 43Q63 38 69 43" fill="none" stroke-width="2.7"/>
-    <ellipse cx="36.5" cy="48.5" rx="6.1" ry="7.3" fill="#171717"/>
-    <ellipse cx="63.5" cy="48.5" rx="6.1" ry="7.3" fill="#171717"/>
-    <circle cx="38.5" cy="46.3" r="2" fill="#fff" stroke="none"/>
-    <circle cx="65.5" cy="46.3" r="2" fill="#fff" stroke="none"/>
-    <path d="M46 58Q50 54 54 58L50 62Z" fill="#171717" stroke-width="1.5"/>
-    <path d="M50 62Q46 68 41 64M50 62Q54 68 59 64" fill="none" stroke-width="2"/>
-    <path d="M27 58 10 54M27 63 9 64M73 58 90 54M73 63 91 64" fill="none" stroke-width="1.6"/>
-    <path d="M30 67Q35 64 39 67M61 67Q65 64 70 67" fill="none" stroke="#777" stroke-width="1.7"/>
-    <path d="M43 28Q50 33 57 28" fill="none" stroke-width="2"/>
+ <defs>
+  <linearGradient id="mmBlade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff"/><stop offset=".48" stop-color="#b8e9ff"/><stop offset="1" stop-color="#649bc8"/></linearGradient>
+  <linearGradient id="mmIris" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#54d4ec"/><stop offset="1" stop-color="#3378c5"/></linearGradient>
+  <linearGradient id="mmFur" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#fffef9"/><stop offset="1" stop-color="#dceaf7"/></linearGradient>
+ </defs>
+ <g stroke-linecap="round" stroke-linejoin="round">
+  <g stroke="#385a83" stroke-width="2.5">
+   <path d="M70 71 83 25 92 9 91 29 78 77Z" fill="url(#mmBlade)"/>
+   <path d="M72 70 81 74 77 81 69 78Z" fill="#8e5b9c"/>
+   <path d="M64 75 86 81" fill="none" stroke="#f3c76e" stroke-width="4.5"/>
+   <path d="M74 79 68 89 76 93 82 82" fill="#8e5b9c"/>
+   <path d="M82 26 88 19" fill="none" stroke="#fff" stroke-width="2"/>
   </g>
-  <path d="M18 78Q25 73 31 79L34 84 28 85 25 91 20 86 14 87 14 81Z" fill="#171717"/>
-  <circle cx="22" cy="80" r="1.8" fill="#fff"/><circle cx="27" cy="80" r="1.8" fill="#fff"/><circle cx="24.5" cy="83.5" r="2.4" fill="#fff"/>
+  <path d="M23 36 17 12 37 26Q50 18 63 26L83 12 77 37Q88 49 83 63L76 70 70 68 64 77 57 74 50 83 42 75 34 78 28 69 21 72 16 63Q12 48 23 36Z" fill="url(#mmFur)" stroke="#536c91" stroke-width="2.8"/>
+  <path d="M23 30 21 18 32 27M77 30 79 18 68 27" fill="#e9f5ff" stroke="#536c91" stroke-width="2.1"/>
+  <path d="M25 29 23 20 31 28M75 29 77 20 69 28" fill="#f5aeca" stroke="#d47d9f" stroke-width="1.5"/>
+  <path d="M28 38Q36 32 43 39M57 39Q64 32 72 38" fill="none" stroke="#607c9e" stroke-width="2.3"/>
+  <ellipse cx="36.2" cy="47.5" rx="7.2" ry="9.3" fill="#fff" stroke="#536c91" stroke-width="1.7"/>
+  <ellipse cx="63.8" cy="47.5" rx="7.2" ry="9.3" fill="#fff" stroke="#536c91" stroke-width="1.7"/>
+  <ellipse cx="37" cy="48" rx="5.1" ry="7" fill="url(#mmIris)" stroke="#264f7d" stroke-width="1.1"/>
+  <ellipse cx="63" cy="48" rx="5.1" ry="7" fill="url(#mmIris)" stroke="#264f7d" stroke-width="1.1"/>
+  <ellipse cx="38.4" cy="45.2" rx="1.9" ry="2.5" fill="#fff" stroke="none"/>
+  <ellipse cx="64.4" cy="45.2" rx="1.9" ry="2.5" fill="#fff" stroke="none"/>
+  <circle cx="33.7" cy="54" r="1.1" fill="#fff" stroke="none"/>
+  <circle cx="59.7" cy="54" r="1.1" fill="#fff" stroke="none"/>
+  <ellipse cx="25.8" cy="59" rx="5" ry="3.2" fill="#f6bfd0" opacity=".8" stroke="none"/>
+  <ellipse cx="74.2" cy="59" rx="5" ry="3.2" fill="#f6bfd0" opacity=".8" stroke="none"/>
+  <path d="M46.5 59Q50 55.8 53.5 59L50 62.4Z" fill="#df7b9e" stroke="#855575" stroke-width="1.2"/>
+  <path d="M50 62Q46 68 41.5 64.5M50 62Q54 68 58.5 64.5" fill="none" stroke="#536c91" stroke-width="1.8"/>
+  <path d="M27 59 12 56M27 63 11 65M73 59 88 56M73 63 89 65" fill="none" stroke="#8a9eb8" stroke-width="1.2"/>
+  <path d="M32 30 38 28M34 33 40 31M68 31 62 28" fill="none" stroke="#c4d6e8" stroke-width="1.6"/>
+  <path d="M39 72Q50 77 61 72" fill="none" stroke="#bbd4eb" stroke-width="2.2"/>
+  <g class="logo-sparkle" stroke="#e3b85f" stroke-linecap="round" stroke-width="2">
+   <path d="M12 34V42M8 38H16"/><path d="M87 44V52M83 48H91"/><path d="M18 75V81M15 78H21"/>
+  </g>
+  <g transform="translate(19 79)">
+   <path d="M0 0Q-8 -8 -8 -2Q-8 3 -1 4L0 8 2 4Q9 3 8 -2Q8 -8 0 0Z" fill="#f1b4cd" stroke="#b96794" stroke-width="1.2"/>
+   <circle cx="-3" cy="-2" r="1.4" fill="#fff"/><circle cx="3" cy="-2" r="1.4" fill="#fff"/>
+  </g>
+ </g>
 </svg></div><div><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="field theme-picker" style="margin:0;min-width:145px"><select id="themeSelect" aria-label="Chọn chủ đề màu"><option value="ocean">🌊 Biển xanh</option><option value="retro">◼ Đen trắng retro</option><option value="pink">🌸 Hồng pastel</option><option value="vampire">🦇 Vampire</option><option value="cat">🐈 Mèo dễ thương</option></select></div><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option></select></div></div></header>
 <div class="shell"><aside class="sidebar"><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button><button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button><button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span>Điền mã từ file gốc</span></button><button class="navbtn" data-page="account"><span class="navicon">♙</span><span data-i18n="navAccount">Tài khoản</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
 <main class="main">
