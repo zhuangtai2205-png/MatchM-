@@ -224,33 +224,55 @@ body[data-theme="cat"] .cat-flower-particle{font-size:27px;filter:drop-shadow(0 
 .cat-flower-particle.cat-mode{animation:catPounce .9s cubic-bezier(.18,.78,.2,1) forwards}
 @keyframes catPounce{0%{opacity:0;transform:translate(-50%,-50%) scale(.2) rotate(-28deg)}18%{opacity:1;transform:translate(-50%,-70%) scale(1.22) rotate(10deg)}48%{transform:translate(calc(-50% + var(--dx)*.45),calc(-50% + var(--dy)*.45)) scale(.96) rotate(-8deg)}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.76) rotate(18deg)}}
 
+
+/* Theme completion: make every tool/page use the selected palette consistently. */
+body[data-theme="ocean"]{--ui-surface:#ffffffed;--ui-soft:#eaf8fd;--ui-input:#fbfeff;--ui-border:#cce8f2;--ui-head:#e5f6fc;--ui-accent:#3c9bc0;--logo-surface:linear-gradient(135deg,#b7eaf8,#fbdbe9);--logo-tint:#dff4fc}
+body[data-theme="retro"]{--ui-surface:#f9f9f5;--ui-soft:#ededeb;--ui-input:#fff;--ui-border:#555;--ui-head:#ddd;--ui-accent:#222;--logo-surface:linear-gradient(135deg,#fff,#e2e2df);--logo-tint:#f0f0ec}
+body[data-theme="pink"]{--ui-surface:#fff9fc;--ui-soft:#fff0f7;--ui-input:#fffafd;--ui-border:#e8b9d2;--ui-head:#f8e3ee;--ui-accent:#c66c9c;--logo-surface:linear-gradient(135deg,#ffe1ef,#f5bfd8);--logo-tint:#fde8f2}
+body[data-theme="vampire"]{--ui-surface:#291823;--ui-soft:#351d2a;--ui-input:#160f15;--ui-border:#633047;--ui-head:#401d2c;--ui-accent:#b52c4a;--logo-surface:linear-gradient(135deg,#4a1729,#170e16);--logo-tint:#351521}
+body[data-theme="cat"]{--ui-surface:rgba(255,253,247,.94);--ui-soft:#f8ead9;--ui-input:#fffdf8;--ui-border:#e4c4a9;--ui-head:#f2e0ce;--ui-accent:#ba835e;--logo-surface:linear-gradient(135deg,#fff4df,#edcfb4);--logo-tint:#f6e5d2}
+body[data-theme] .logo{background:var(--logo-surface)!important;border:1px solid var(--ui-border);overflow:hidden;box-shadow:0 7px 22px #00000012!important}
+body[data-theme] .logo svg{filter:none!important}
+body[data-theme] .upload,body[data-theme] .filterbox,body[data-theme] .mini,body[data-theme] .stat,body[data-theme] .tablewrap,body[data-theme] .progressbox{background:var(--ui-surface)!important;border-color:var(--ui-border)!important}
+body[data-theme] .upload{border-style:dashed;color:var(--ink)!important}
+body[data-theme] .upload:hover{background:var(--ui-soft)!important;border-color:var(--ui-accent)!important}
+body[data-theme] .field input[type=text],body[data-theme] .field input[type=number],body[data-theme] .field select,body[data-theme] .resulttools select,body[data-theme] .resulttools input,body[data-theme] .search,body[data-theme] textarea,body[data-theme] td select{background:var(--ui-input)!important;color:var(--ink)!important;border-color:var(--ui-border)!important}
+body[data-theme] .field label,body[data-theme] .empty,body[data-theme] .muted,body[data-theme] .hint,body[data-theme] .foot{color:var(--muted)!important}
+body[data-theme] th{background:var(--ui-head)!important;color:var(--ink)!important}
+body[data-theme] td{border-bottom-color:var(--ui-border)!important}
+body[data-theme] .progressbox{color:var(--ink)!important}
+body[data-theme] .bar{background:var(--ui-soft)!important}
+body[data-theme] .bar>div{background:linear-gradient(90deg,var(--ui-accent),var(--green))!important}
+body[data-theme] .okmsg{background:var(--ui-soft)!important;color:var(--ink)!important;border:1px solid var(--ui-border)!important}
+body[data-theme] .platform-link{border-color:var(--ui-border)!important}
+body[data-theme] .page > .sectionhead h2::before,#page-overview .hero h2::before{content:"";display:inline-block;width:27px;height:27px;margin-right:9px;vertical-align:-6px;border:1px solid var(--ui-border);border-radius:9px;background-color:var(--logo-tint);background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%0A%3Cpath%20d%3D%22M44%2046%2054%2012%2061%205%2059%2020%2049%2050Z%22%20fill%3D%22white%22%20stroke%3D%22black%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M42%2044%2053%2049%2047%2058%2039%2055Z%22%20fill%3D%22black%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%2F%3E%0A%3Cpath%20d%3D%22M14%2025%2010%207%2025%2017Q32%2013%2039%2017L54%207%2049%2027Q57%2035%2051%2046L43%2053%2035%2049%2032%2056%2024%2049%2017%2052%2011%2045Q7%2034%2014%2025Z%22%20fill%3D%22white%22%20stroke%3D%22black%22%20stroke-width%3D%223%22%20stroke-linejoin%3D%22round%22%2F%3E%0A%3Cpath%20d%3D%22M18%2025%2019%2015%2026%2022M46%2025%2045%2015%2038%2022%22%20fill%3D%22white%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%2F%3E%0A%3Cellipse%20cx%3D%2223%22%20cy%3D%2233%22%20rx%3D%223%22%20ry%3D%224%22%20fill%3D%22black%22%2F%3E%3Cellipse%20cx%3D%2241%22%20cy%3D%2233%22%20rx%3D%223%22%20ry%3D%224%22%20fill%3D%22black%22%2F%3E%0A%3Ccircle%20cx%3D%2224%22%20cy%3D%2232%22%20r%3D%221%22%20fill%3D%22white%22%2F%3E%3Ccircle%20cx%3D%2242%22%20cy%3D%2232%22%20r%3D%221%22%20fill%3D%22white%22%2F%3E%0A%3Cpath%20d%3D%22M29%2040%2032%2038%2035%2040%2032%2042Z%22%20fill%3D%22black%22%2F%3E%3Cpath%20d%3D%22M32%2042Q28%2046%2025%2043M32%2042Q36%2046%2039%2043%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%2F%3E%0A%3C%2Fsvg%3E");background-repeat:no-repeat;background-position:center;background-size:contain;box-shadow:0 2px 4px #0000000a}
+body[data-theme="retro"] .page{border-radius:5px!important}
+body[data-theme="retro"] .page > .sectionhead h2::before,#page-overview .hero h2::before{border-radius:3px!important;box-shadow:2px 2px 0 #bbb}
+body[data-theme="vampire"] .page > .sectionhead h2::before,#page-overview .hero h2::before{box-shadow:0 2px 8px #b52c4a35}
+@media(max-width:650px){body[data-theme] .page > .sectionhead h2::before,#page-overview .hero h2::before{width:23px;height:23px;margin-right:6px;vertical-align:-5px}}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div>
 <header><div class="brand"><div class="logo" aria-label="MatchMã — mèo, kiếm và biển" title="MatchMã">
 <svg viewBox="0 0 100 100" role="img" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M74 72 87 22 92 15 91 29 81 76" fill="#e9faff" stroke="#367f9e" stroke-width="2.5"/>
-    <path d="M70 67 83 72M77 72 71 83 77 88 84 77" fill="#f6d79a" stroke="#367f9e" stroke-width="2.5"/>
-    <path d="M23 32 13 12 34 23Q50 15 66 23L87 12 78 34Q88 46 84 64L76 72 72 68 66 77 59 73 50 82 41 73 33 77 27 68 22 72 16 64Q12 46 23 32Z" fill="#dff5fc" stroke="#287da0" stroke-width="2.8"/>
-    <path d="M27 31 21 22 33 28M73 31 79 22 67 28" stroke="#8ac7dc" stroke-width="2"/>
-    <path d="M19 56Q11 60 19 68L26 72M81 56Q89 60 81 68L74 72" stroke="#287da0" stroke-width="2.8"/>
-    <path d="M29 43Q37 38 43 44M57 44Q64 38 71 43" stroke="#287da0" stroke-width="2.6"/>
-    <ellipse cx="36" cy="49" rx="5.2" ry="6.5" fill="#43b8cf" stroke="#287da0" stroke-width="1.7"/>
-    <ellipse cx="64" cy="49" rx="5.2" ry="6.5" fill="#43b8cf" stroke="#287da0" stroke-width="1.7"/>
-    <ellipse cx="37.5" cy="49" rx="1.5" ry="3" fill="#163e59" stroke="none"/>
-    <ellipse cx="62.5" cy="49" rx="1.5" ry="3" fill="#163e59" stroke="none"/>
-    <path d="M46 58Q50 54 54 58L50 62Z" fill="#eaa5bb" stroke="#287da0" stroke-width="1.2"/>
-    <path d="M50 62Q46 68 42 64M50 62Q54 68 58 64" stroke="#287da0" stroke-width="1.8"/>
-    <path d="M27 59 9 56M27 64 10 66M73 59 91 56M73 64 90 66" stroke="#6da9c0" stroke-width="1.5"/>
-    <path d="M19 80Q34 74 50 81Q66 74 81 80" stroke="#42a9ca" stroke-width="3"/>
-    <path d="M27 84Q50 91 73 84" stroke="#95d7e8" stroke-width="2.2"/>
+  <g stroke="#171717" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M73 70 87 23 94 10 92 29 80 75Z" fill="#fff"/>
+    <path d="M69 68 84 74M77 72 71 84 79 90 86 77Z" fill="#171717"/>
+    <path d="M23 33 16 12 36 24Q50 16 64 24L84 12 77 35Q89 46 83 64L73 74 63 70 50 82 37 70 27 74 17 64Q11 47 23 33Z" fill="#fff"/>
+    <path d="M22 28 21 18 31 26M78 28 79 18 69 26" fill="#fff"/>
+    <path d="M27 30 24 23 32 28M73 30 76 23 68 28" fill="#171717" stroke-width="2.1"/>
+    <path d="M31 43Q37 38 43 43M57 43Q63 38 69 43" fill="none" stroke-width="2.7"/>
+    <ellipse cx="36.5" cy="48.5" rx="6.1" ry="7.3" fill="#171717"/>
+    <ellipse cx="63.5" cy="48.5" rx="6.1" ry="7.3" fill="#171717"/>
+    <circle cx="38.5" cy="46.3" r="2" fill="#fff" stroke="none"/>
+    <circle cx="65.5" cy="46.3" r="2" fill="#fff" stroke="none"/>
+    <path d="M46 58Q50 54 54 58L50 62Z" fill="#171717" stroke-width="1.5"/>
+    <path d="M50 62Q46 68 41 64M50 62Q54 68 59 64" fill="none" stroke-width="2"/>
+    <path d="M27 58 10 54M27 63 9 64M73 58 90 54M73 63 91 64" fill="none" stroke-width="1.6"/>
+    <path d="M30 67Q35 64 39 67M61 67Q65 64 70 67" fill="none" stroke="#777" stroke-width="1.7"/>
+    <path d="M43 28Q50 33 57 28" fill="none" stroke-width="2"/>
   </g>
-  <g transform="translate(17 78)">
-    <g fill="#f3b5d0" stroke="#c779a5" stroke-width="1">
-      <ellipse cx="0" cy="-5.5" rx="3.5" ry="5"/><ellipse cx="5.5" cy="0" rx="5" ry="3.5"/>
-      <ellipse cx="0" cy="5.5" rx="3.5" ry="5"/><ellipse cx="-5.5" cy="0" rx="5" ry="3.5"/>
-    </g><circle r="3.3" fill="#f7d985" stroke="#c779a5" stroke-width="1"/>
-  </g>
-  <path d="M79 8q3-6 6 0q6-3 5 3q-2 5-7 3q-6 0-4-6Z" fill="#d9f4ff" stroke="#4697b5" stroke-width="1.4"/>
+  <path d="M18 78Q25 73 31 79L34 84 28 85 25 91 20 86 14 87 14 81Z" fill="#171717"/>
+  <circle cx="22" cy="80" r="1.8" fill="#fff"/><circle cx="27" cy="80" r="1.8" fill="#fff"/><circle cx="24.5" cy="83.5" r="2.4" fill="#fff"/>
 </svg></div><div><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="field theme-picker" style="margin:0;min-width:145px"><select id="themeSelect" aria-label="Chọn chủ đề màu"><option value="ocean">🌊 Biển xanh</option><option value="retro">◼ Đen trắng retro</option><option value="pink">🌸 Hồng pastel</option><option value="vampire">🦇 Vampire</option><option value="cat">🐈 Mèo dễ thương</option></select></div><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option></select></div></div></header>
 <div class="shell"><aside class="sidebar"><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button><button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button><button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span>Điền mã từ file gốc</span></button><button class="navbtn" data-page="account"><span class="navicon">♙</span><span data-i18n="navAccount">Tài khoản</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
 <main class="main">
