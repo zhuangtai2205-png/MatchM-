@@ -60,6 +60,35 @@ button,a,select,input[type=file],input[type=range]{cursor:url("data:image/svg+xm
 @media(max-width:650px){.page{padding:7px;border-radius:20px}.font-tools button{padding:6px;min-width:29px}}
 @media(prefers-reduced-motion:reduce){.page.active{animation:none}body:after{opacity:.12}}
 
+
+/* Sea-blue pastel, cute typography and framed navigation pages */
+:root{--ink:#254155;--muted:#617f91;--line:#cce8f2;--lav:#dff4fc;--pink:#fbe7f1;--mint:#d9f5ed;--purple:#3c9bc0;--paper:#fbfeff;--green:#267a65;--amber:#986d2d;--red:#aa5870;--frame:#b9e6f2;--font-scale:1}
+body{font-family:'Nunito','Trebuchet MS',system-ui,sans-serif;font-size:calc(15px * var(--font-scale,1));background:radial-gradient(ellipse at 5% 4%,#fff8fc 0,transparent 28%),radial-gradient(ellipse at 90% 12%,#d5f2fa 0,transparent 30%),linear-gradient(155deg,#e8f9ff 0%,#f4fbff 45%,#e9f8f4 100%);color:var(--ink)}
+h1,.hero h2,.sectionhead h2,.panel h2,.stat b,.thresholdvalue{font-family:'Baloo 2','Nunito',system-ui,sans-serif}
+.logo{background:linear-gradient(135deg,#b7eaf8,#fbdbe9);box-shadow:0 8px 25px #3099b61f}h1 span{color:#2998bd}
+.pill{color:#47758a;border-color:#d8f1fa;background:#ffffffda}
+.sidebar{background:#f8fdffdf;border:2px solid #c5eaf5;box-shadow:0 12px 30px #3f9ab514}
+.navbtn:hover{background:#e4f7fc}.navbtn.active{background:linear-gradient(120deg,#d4f2fb,#f7e7f2);color:#246e8d;box-shadow:inset 0 0 0 1px #b5e4f2}.sidefoot{background:#e6f7fc;border:1px solid #cdeef7;color:#507b8d}
+.page{padding:12px;border:2px solid var(--frame);border-radius:29px;background:linear-gradient(145deg,#f3fcffbf,#fbf7ffbf);box-shadow:0 18px 48px #378eaf12,inset 0 0 0 4px #ffffff75;min-width:0}
+.page.active{animation:seaAppear .22s ease both}@keyframes seaAppear{from{opacity:.65;transform:translateY(3px)}to{opacity:1;transform:none}}
+.hero,.panel{background:linear-gradient(145deg,#ffffffef,#f5fcffe8);border:1.5px solid #d5edf5;box-shadow:0 9px 28px #388eaa10,inset 0 0 0 2px #ffffffad}
+.hero{background:linear-gradient(120deg,#e1f7ffed,#fff3f9e8 62%,#eafbf7ed)}.eyebrow{color:#3e93b3}
+.upload{background:#f2fbff;border-color:#9bd9ed}.upload:hover{background:#e7f8ff;border-color:#56bad9}
+.btn{background:linear-gradient(135deg,#4ca9c9,#388eb4);box-shadow:0 6px 14px #368fb326}.btn.alt{background:#e0f4fa;color:#2e7694;box-shadow:none;border:1px solid #c4e9f4}.btn.soft,.okmsg{background:#def7ee;color:#2b7861}
+input[type=text],select,.field input[type=number],.search{border-color:#cae8f1;outline-color:#75c8e1}.field input[type=range]{accent-color:#3a9fc3}
+.stat{background:#ffffffed;border-color:#d7eef5;box-shadow:0 7px 18px #4a9fb012}.stat.good b{color:#27876f}.stat.review b{color:#a07834}.stat.none b{color:#ae5a75}
+.mini{border-color:#d7edf4;background:#fbfeff}th{background:#e9f8fd;color:#326f87}td{border-color:#e8f4f8}.tablewrap{border-color:#cfe9f3}
+.progressbox{background:#e8f8fd;border-color:#cbeaf4}.bar{background:#cdebf4}.bar>div{background:linear-gradient(90deg,#4aaecf,#64c5a6)}
+.rule{background:#eaf8fc;color:#4b7c90;border:1px solid #d2edf5}.badge.good{background:#dff7ec;color:#26755f}.badge.review{background:#fff0d3;color:#916b2e}.badge.none{background:#fce6ef;color:#a04e6c}
+.font-tools{display:flex;align-items:center;gap:4px;padding:4px;border-radius:13px;border:1px solid #cbeaf5;background:#f5fcff}.font-tools button{border:0;border-radius:9px;background:transparent;padding:7px 9px;min-width:34px;font-weight:900;color:#367e9b}.font-tools button:hover,.font-tools button[aria-pressed=true]{background:#d9f3fb}
+.navtitle,.subbrand,.sidefoot,.eyebrow,.hero p,.muted,.hint,.sectionhead p,.panel p,.stat small,.mini span,.foot,.field label,.pager span{font-size:calc(12px * var(--font-scale,1))}
+.navbtn{font-size:calc(14px * var(--font-scale,1))}.hero h2{font-size:calc(clamp(24px,3vw,33px) * var(--font-scale,1))}.sectionhead h2,.panel h2{font-size:calc(19px * var(--font-scale,1))}
+.stat b{font-size:calc(29px * var(--font-scale,1))}.mini b{font-size:calc(19px * var(--font-scale,1))}table th,table td{font-size:calc(12px * var(--font-scale,1))}.badge{font-size:calc(11px * var(--font-scale,1))}.thresholdvalue{font-size:calc(30px * var(--font-scale,1))}
+body:before{content:"🐱　🌸　🌊　🐾　🌼　🐚\A　🌷　🐱　🌼　🌊　🌸　🐾\A🌼　🌸　🐚　🐈　🌷　🐱　🌊\A　🐾　🌷　🌸　🐱　🌼　🐚";white-space:pre;pointer-events:none;position:fixed;inset:-28px;z-index:0;overflow:hidden;opacity:.15;font-size:clamp(18px,1.9vw,28px);line-height:clamp(95px,10vw,145px);letter-spacing:clamp(1px,1vw,16px);transform:rotate(-3deg);color:#438aa5}
+body:after{content:"";position:fixed;left:-5vw;right:-5vw;bottom:-38px;height:115px;z-index:0;pointer-events:none;opacity:.33;background:radial-gradient(80px 35px at 12% 15%,#a5deec 98%,transparent 100%),radial-gradient(120px 42px at 34% 8%,#bdeaf2 98%,transparent 100%),radial-gradient(95px 36px at 57% 16%,#a5deec 98%,transparent 100%),radial-gradient(130px 42px at 80% 8%,#bdeaf2 98%,transparent 100%)}
+header,.shell{position:relative;z-index:1}
+@media(max-width:650px){.page{padding:7px;border-radius:20px}.font-tools button{padding:6px;min-width:29px}}
+@media(prefers-reduced-motion:reduce){.page.active{animation:none}body:after{opacity:.12}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div>
 <header><div class="brand"><div class="logo">✳</div><div><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option></select></div></div></header>
 <div class="shell"><aside class="sidebar"><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
@@ -120,8 +149,8 @@ function norm(s){
  ];
  for(const [re,sub] of phrases)t=t.replace(re,' '+sub+' ');
  // CĐ là cách viết tắt của có đường trong tên sữa; chỉ diễn giải khi có ngữ cảnh sữa/VNM.
- const dairyContext=/\\b(sua|vnm|vinamil|milk)\\b/.test(t);
- if(dairyContext)t=t.replace(/\\b(c\\s*\\.?\\s*d|cd)\\b/g,' co_duong ');
+ const dairyContext=/\b(sua|vnm|vinamil|milk)\b/.test(t);
+ if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ');
  t=t.replace(/\b(\d+(?:[.,]\d+)?)\s*(?:liters?|litres?|lit|l)\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'ml ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*ml\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.')))+'ml ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*kg\b/g,(_,n)=>' weight_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'g ')
