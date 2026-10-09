@@ -407,7 +407,7 @@ function initAutoFill(){
  ['autoFillNameCol','autoFillSttCol','autoFillSpecCol','autoFillUomCol','autoFillTargetCodeCol','autoFillOverwrite'].forEach(id=>$(id).addEventListener('change',updateAutoFillButton));
  $('runAutoFill').addEventListener('click',runAutoFill);$('exportAutoFill').addEventListener('click',exportAutoFill);
 }
-function fillAutoFillTargets(headers){const s=$('autoFillTargetCodeCol');s.innerHTML='';const first=document.createElement('option');first.value='';first.textContent='— Thêm cột SKU được điền —';s.appendChild(first);headers.filter(h=>/(sku|mã hàng|ma hang|mã sp|ma sp|item code|product code|code hàng|code$)/i.test(h)&&!/(stt|số thứ tự|serial|row id)/i.test(h)).forEach(h=>{const o=document.createElement('option');o.value=h;o.textContent=h;s.appendChild(o)});s.disabled=!headers.length}
+function fillAutoFillTargets(headers){const s=$('autoFillTargetCodeCol');s.innerHTML='';const first=document.createElement('option');first.value='';first.textContent='— Thêm cột SKU được điền —';s.appendChild(first);const targets=headers.filter(h=>/(sku|mã hàng|ma hang|mã sp|ma sp|item code|product code|code hàng|code$)/i.test(h)&&!/(stt|số thứ tự|serial|row id)/i.test(h));targets.forEach(h=>{const o=document.createElement('option');o.value=h;o.textContent=h;s.appendChild(o)});if(targets.length)s.value=targets[0];s.disabled=!headers.length}
 function updateAutoFillButton(){$('runAutoFill').disabled=!(autoFillRows.length&&$('autoFillNameCol').value&&masterRows.length&&$('skuCol').value&&$('nameCol').value)}
 function runAutoFill(){
  if(!autoFillRows.length){alert('Hãy tải file nguồn trước.');return}if(!masterRows.length||!$('skuCol').value||!$('nameCol').value){alert('Hãy tải và xác nhận cột danh mục chuẩn trước.');return}const srcName=$('autoFillNameCol').value;if(!srcName){alert('Chọn cột tên sản phẩm trong file gốc.');return}
@@ -417,7 +417,7 @@ function runAutoFill(){
  if(!eligible.length){alert('Danh mục chuẩn không có dòng nào có SKU/mã hàng.');return}
  const index=new Map();for(const m of eligible)for(const t of m.tokens){if(!index.has(t))index.set(t,[]);index.get(t).push(m)}
  const used=new Set(autoFillHeaders);const unique=(name)=>{let out=name,n=2;while(used.has(out))out=name+' ('+(n++)+')';used.add(out);return out};
- const proposalCol=unique('SKU đề xuất'),suggestedNameCol=unique('Tên chuẩn gợi ý'),scoreCol=unique('Điểm tương đồng (%)'),statusCol=unique('Trạng thái tự điền'),reasonCol=unique('Ghi chú rà soát');
+ const filledCol=target?'':unique('SKU được điền'),proposalCol=unique('SKU đề xuất'),suggestedNameCol=unique('Tên chuẩn gợi ý'),scoreCol=unique('Điểm tương đồng (%)'),statusCol=unique('Trạng thái tự điền'),reasonCol=unique('Ghi chú rà soát');
  autoFillResults=autoFillRows.map((row,i)=>{
   const name=String(row[srcName]||''),spec=qSpecCol?String(row[qSpecCol]||''):'',unit=qUnitCol?String(row[qUnitCol]||''):'',tokens=[...new Set(getTokens(name))],allTokens=[...new Set(getTokens(name+' '+spec+' '+unit))];
   const candidates=new Map();for(const t of allTokens)for(const m of (index.get(t)||[]))candidates.set(m.index,m);
@@ -439,7 +439,7 @@ function runAutoFill(){
   }
   const output={...row};
   if(target){if(canFill&&(overwrite||!originalCode))output[target]=best.m.sku}
-  else if(canFill)output['SKU được điền']=best.m.sku;else output['SKU được điền']='';
+  else output[filledCol]=canFill?best.m.sku:'';
   output[proposalCol]=canFill?best.m.sku:'';
   output[suggestedNameCol]=canFill?best.m.name:'';
   output[scoreCol]=canFill?Math.round(best.score*100):0;
