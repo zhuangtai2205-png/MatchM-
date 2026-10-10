@@ -42,8 +42,13 @@
     }
   }
   function initBear(){
-    document.querySelectorAll('.app-header .logo .bear-icon,.app-header .logo .icon3d,.app-header .logo .theme-nav-doodle').forEach(el=>el.remove());
-    document.querySelectorAll('.navbtn .icon3d,.navbtn .bear-icon').forEach(el=>el.remove());
+    const logo=document.querySelector('.app-header .logo');
+    if(logo){
+      logo.querySelectorAll(':scope > :not(.brand-logo-img)').forEach(el=>el.remove());
+      logo.querySelectorAll('img').forEach(img=>{if(!img.classList.contains('brand-logo-img'))img.remove();});
+    }
+    document.querySelectorAll('.nav-folder>summary .navicon,.nav-folder>summary .navfolder-tab-icon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(el=>el.remove());
+    document.querySelectorAll('.app-header .logo::before,.app-header .logo::after').forEach(()=>{});
   }
   function start(){
     renderScenery();
