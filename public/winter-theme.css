@@ -2000,3 +2000,35 @@ html body[data-theme="forest"]::before{content:none!important;display:none!impor
 html body[data-theme="forest"]::after{pointer-events:none!important}
 html body[data-theme="forest"] #themeScene .scene-doodle{opacity:.58!important}
 html body[data-theme="minimal"] .sidebar .navicon{display:none!important}
+
+/* MatchMã: final direct theme fixes */
+html body header.app-header .brand-mark{display:inline-flex!important;width:64px!important;height:64px!important;min-width:64px!important;flex:0 0 64px!important;overflow:visible!important;color:#111!important;background:transparent!important;border:0!important;box-shadow:none!important}
+html body header.app-header .brand-mark svg{display:block!important;width:100%!important;height:100%!important}
+html body #themeScene{pointer-events:none!important}
+html body[data-theme="forest"] #themeScene .scene-doodle{width:clamp(44px,6vw,78px)!important;height:clamp(44px,6vw,78px)!important;opacity:.5!important;filter:drop-shadow(0 2px 2px #543a2020)}
+html body[data-theme="forest"] #themeScene .scene-doodle svg{width:100%!important;height:100%!important}
+html body[data-theme="forest"] .theme-click-doodle{z-index:99999!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art{width:56px!important;height:56px!important}
+html body[data-theme="minimal"] #themeScene,
+html body[data-theme="minimal"] .theme-scenery,
+html body[data-theme="minimal"] .winter-snow-layer,
+html body[data-theme="minimal"] .winter-paper-speckle,
+html body[data-theme="minimal"] .winter-doodle,
+html body[data-theme="minimal"] .winter-bear-spot,
+html body[data-theme="minimal"] #bear-container,
+html body[data-theme="minimal"] #fat-bear-overlay,
+html body[data-theme="minimal"] .theme-click-doodle{display:none!important;visibility:hidden!important;opacity:0!important}
+html body[data-theme="minimal"]{background:#fff!important;background-image:none!important}
+html body[data-theme="minimal"] *,html body[data-theme="minimal"] *::before,html body[data-theme="minimal"] *::after{animation:none!important;transition:none!important}
+html body[data-theme="minimal"] .nav-folder::before,
+html body[data-theme="minimal"] .nav-folder::after,
+html body[data-theme="minimal"] .navbtn::before,
+html body[data-theme="minimal"] .navbtn::after,
+html body[data-theme="minimal"] .navicon::before,
+html body[data-theme="minimal"] .navicon::after,
+html body[data-theme="minimal"] .folder-chevron,
+html body[data-theme="minimal"] .folder-icon{display:none!important;content:none!important}
+html body[data-theme="minimal"] .nav-folder,
+html body[data-theme="minimal"] .nav-folder-items,
+html body[data-theme="minimal"] .navbtn{background:transparent!important;box-shadow:none!important}
+@keyframes forestBearHoneyFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
