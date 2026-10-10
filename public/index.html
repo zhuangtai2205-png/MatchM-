@@ -2995,7 +2995,7 @@ renderBearSnow();
       img.alt='Logo MatchMã';
       img.draggable=false;
     });
-    document.querySelectorAll('.app-header .winter-bear-spot,.app-header .bear-icon,.app-header .theme-nav-doodle,.app-header .icon3d,.navbtn .navicon,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(node=>node.remove());
+    document.querySelectorAll('.app-header .winter-bear-spot,.app-header .bear-icon,.app-header .theme-nav-doodle,.app-header .icon3d,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(node=>node.remove());
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fixBrand,{once:true}); else fixBrand();
   new MutationObserver(fixBrand).observe(document.documentElement,{subtree:true,childList:true});
