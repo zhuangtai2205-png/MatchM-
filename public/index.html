@@ -3434,22 +3434,22 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 
 <div id="mmBackgroundBear" aria-label="Gấu MatchMã ở nền website">
  <canvas id="mmBackgroundBearCanvas" width="320" height="210" aria-label="Gấu 2D và cá hồi"></canvas>
- <div class="mm-bg-bear-controls"><span id="mmBackgroundBearHint">🐻 Gấu đang nghỉ</span><button type="button" id="mmBackgroundFishToggle" aria-pressed="false">🐟 Bật thả cá</button></div>
+ <div class="mm-bg-bear-controls"><span id="mmBackgroundBearHint">🐻 Gấu đang nghỉ</span><div class="mm-bg-bear-actions"><button type="button" id="mmBackgroundFishDrop" disabled>🐟 Thả cá hồi</button><button type="button" id="mmBackgroundFishToggle" aria-pressed="false">▶ Bật chế độ</button></div></div>
 </div>
 <style id="mm-background-bear-css">
 #mmBackgroundBear{position:fixed;right:14px;bottom:12px;z-index:1200;width:min(320px,46vw);pointer-events:none;display:flex;flex-direction:column;align-items:stretch;gap:3px;opacity:.97}
 #mmBackgroundBear canvas{display:block;width:100%;height:auto;max-height:190px;object-fit:contain;pointer-events:none}
 #mmBackgroundBear .mm-bg-bear-controls{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:5px 7px;border:1px solid #c9e0d2;border-radius:12px;background:color-mix(in srgb,var(--panel,#fff) 88%,transparent);box-shadow:0 3px 14px #193d2b1c;pointer-events:auto;backdrop-filter:blur(6px)}
 #mmBackgroundBearHint{font-size:11px;color:var(--text,#31483a);font-weight:700;min-width:0}
-#mmBackgroundFishToggle{border:1px solid #6eae83;background:#e2f5e7;color:#235b35;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}
-#mmBackgroundFishToggle[aria-pressed="true"]{background:#2c8050;color:#fff;border-color:#2c8050}
+#mmBackgroundBear .mm-bg-bear-actions{display:flex;gap:5px;align-items:center}#mmBackgroundFishDrop,#mmBackgroundFishToggle{border:1px solid #6eae83;background:#e2f5e7;color:#235b35;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}
+#mmBackgroundFishToggle[aria-pressed="true"]{background:#2c8050;color:#fff;border-color:#2c8050}#mmBackgroundFishDrop:disabled{opacity:.45;cursor:not-allowed}
 @media(max-width:600px){#mmBackgroundBear{right:6px;bottom:6px;width:min(225px,54vw)}#mmBackgroundBear canvas{max-height:125px}#mmBackgroundBear .mm-bg-bear-controls{padding:4px 5px}#mmBackgroundBearHint{font-size:10px}#mmBackgroundFishToggle{padding:6px 7px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){#mmBackgroundBear canvas{animation:none}}
 </style>
 <script id="mm-background-bear-js">
 (()=>{'use strict';
 const canvas=document.getElementById('mmBackgroundBearCanvas'),toggle=document.getElementById('mmBackgroundFishToggle'),hint=document.getElementById('mmBackgroundBearHint');if(!canvas||!toggle||!hint)return;
-const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;let active=false,frame=0,growth=0,t=0,fish=[],last=0;
+const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,drop=document.getElementById('mmBackgroundFishDrop');let active=false,frame=0,growth=0,t=0,fish=[],last=0;
 function fishShape(x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.fillStyle='#f18c47';ctx.beginPath();ctx.ellipse(0,0,10,6,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(-8,0);ctx.lineTo(-15,-6);ctx.lineTo(-15,6);ctx.closePath();ctx.fillStyle='#e36b38';ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(5,-2,2,0,Math.PI*2);ctx.fill();ctx.fillStyle='#263d45';ctx.beginPath();ctx.arc(5,-2,1,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#fff5';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-1,0);ctx.lineTo(2,0);ctx.stroke();ctx.restore()}
 function bear(){const z=1+Math.min(growth,14)*.035,x=158,y=153;ctx.save();ctx.translate(x,y);ctx.scale(z,z);
 ctx.fillStyle='#6e4933';ctx.beginPath();ctx.ellipse(0,0,51,37,0,0,Math.PI*2);ctx.fill();
@@ -3464,7 +3464,7 @@ function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle='#dff4e4';ctx.globalAlpha=.
 fish.forEach(f=>fishShape(f.x,f.y,1));bear();
 if(active){ctx.fillStyle='#2d7045';ctx.font='bold 11px system-ui';ctx.fillText('THẢ CÁ HỒI',10,18)}}
 function tick(now){if(!active){frame=0;draw();return}if(now-last>24){last=now;t++;fish.forEach(f=>{f.y+=f.v;f.x+=Math.sin(t*.08+f.phase)*.5});for(let i=fish.length-1;i>=0;i--){if(fish[i].y>132&&fish[i].y<176&&fish[i].x>105&&fish[i].x<210){fish.splice(i,1);growth=Math.min(18,growth+1);hint.textContent='🐻 Gấu no bụng · '+growth+' cá';}else if(fish[i].y>H+10)fish.splice(i,1)}draw()}frame=requestAnimationFrame(tick)}
-toggle.addEventListener('click',()=>{active=!active;toggle.setAttribute('aria-pressed',String(active));toggle.textContent=active?'⏸ Dừng thả cá':'🐟 Bật thả cá';hint.textContent=active?'🐟 Chạm để thả cá':'🐻 Gấu đang nghỉ';if(active){if(!fish.length)fish.push({x:145+Math.random()*35,y:15,v:2.4,phase:Math.random()*6});if(!frame)frame=requestAnimationFrame(tick)}else{if(frame)cancelAnimationFrame(frame);frame=0;draw()}});
+toggle.addEventListener('click',()=>{active=!active;toggle.setAttribute('aria-pressed',String(active));toggle.textContent=active?'⏸ Tắt chế độ':'▶ Bật chế độ';drop.disabled=!active;hint.textContent=active?'🐟 Chế độ thả cá đang bật':'🐻 Gấu đang nghỉ';if(active){if(!frame)frame=requestAnimationFrame(tick)}else{if(frame)cancelAnimationFrame(frame);frame=0;draw()}});drop.addEventListener('click',()=>{if(!active)return;fish.push({x:110+Math.random()*95,y:8,v:2+Math.random()*1.6,phase:Math.random()*6});hint.textContent='🐟 Cá hồi đang rơi xuống!'});
 canvas.addEventListener('click',()=>{if(!active)return;fish.push({x:110+Math.random()*95,y:8,v:2+Math.random()*1.6,phase:Math.random()*6});});
 function autoTick(){if(active&&!frame)frame=requestAnimationFrame(tick);else if(!active)draw()}
 draw();
