@@ -1408,3 +1408,12 @@ html body[data-theme] #funToggleBtn{display:flex!important;visibility:visible!im
 html body[data-theme] #funWidget[hidden]{display:none!important}
 html body[data-theme] #funWidget:not([hidden]){display:block!important;visibility:visible!important;pointer-events:auto!important}
 @media(max-width:650px){html body #bear-container{left:12px!important;bottom:12px!important;width:clamp(118px,34vw,168px)!important;height:clamp(132px,36vw,184px)!important}}
+
+/* Final logo guard: fixed compact size on phones, preserve artwork aspect ratio. */
+html body header.app-header .brand>.logo{width:60px!important;height:77px!important;min-width:60px!important;min-height:77px!important;max-width:60px!important;max-height:77px!important;flex:0 0 60px!important;overflow:visible!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:0!important}
+html body header.app-header .brand>.logo>img.brand-logo-img{width:60px!important;height:77px!important;min-width:60px!important;min-height:77px!important;max-width:60px!important;max-height:77px!important;flex:0 0 60px!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:none!important;clip-path:none!important}
+html body header.app-header .brand-copy{min-width:0!important}
+html body header.app-header .brand-copy h1{font-size:clamp(19px,5vw,29px)!important;line-height:1.15!important;letter-spacing:normal!important}
+html body #bear-container{width:clamp(116px,29vw,170px)!important;height:clamp(160px,40vw,220px)!important}
+html body #bear-sprite svg{width:100%!important;height:100%!important;display:block!important;overflow:visible!important}
+@media(max-width:650px){html body header.app-header{align-items:center!important}html body header.app-header .brand>.logo,html body header.app-header .brand>.logo>img.brand-logo-img{width:48px!important;height:62px!important;min-width:48px!important;min-height:62px!important;max-width:48px!important;max-height:62px!important;flex-basis:48px!important}html body #bear-container{width:clamp(112px,31vw,150px)!important;height:clamp(150px,42vw,190px)!important}}
