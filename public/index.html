@@ -1874,6 +1874,27 @@ header.app-header .headright{
  header.app-header .headright{width:100%!important;max-width:100%!important}
 }
 </style>
+<style id="matchma-logo-visible-enlarge-v61">
+/* Enlarge the visible artwork itself, not just its wrapper. Keep clipping inside a fixed left-anchored box. */
+header.app-header .brand{justify-content:flex-start!important; margin-left:0!important; transform:none!important}
+header.app-header .brand-mark{
+ box-sizing:border-box!important;position:relative!important;display:block!important;
+ width:152px!important;height:152px!important;min-width:152px!important;flex:0 0 152px!important;
+ margin:0!important;padding:0!important;overflow:hidden!important;transform:none!important;
+}
+header.app-header .brand-mark img.brand-logo-img{
+ position:absolute!important;left:0!important;top:0!important;
+ width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+ object-fit:contain!important;object-position:center!important;
+ transform:scale(1.45)!important;transform-origin:center center!important;
+}
+@media(max-width:700px){
+ header.app-header .brand-mark{
+  width:116px!important;height:116px!important;min-width:116px!important;flex:0 0 116px!important;
+ }
+ header.app-header .brand-mark img.brand-logo-img{transform:scale(1.35)!important}
+}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
