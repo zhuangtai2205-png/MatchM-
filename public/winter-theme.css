@@ -286,3 +286,34 @@ body[data-theme="cat"]{background:radial-gradient(ellipse at 12% 8%,#fffaf4 0,tr
 body[data-theme="cat"] .page,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{border-color:#dfc2b4!important}
 body[data-theme="cat"] #themeScene .scene-doodle{opacity:.17}
 @media(prefers-reduced-motion:reduce){#themeScene .scene-doodle,.theme-click-doodle{animation:none!important}.theme-click-doodle{display:none!important}}
+
+/* Hand-drawn menu treatment; retain the existing MatchMã logo asset and remove muddy/yellow blending. */
+.app-header .logo{width:48px!important;height:48px!important;flex:0 0 48px!important;overflow:hidden!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;padding:0!important}
+.app-header .brand-logo-img{width:48px!important;height:48px!important;object-fit:contain!important;object-position:center!important;display:block!important}
+.app-header .brand{flex-shrink:0!important}
+.app-header .brand-copy{min-width:max-content}
+.app-header .headright{flex:1 1 auto}
+.sidebar{background:color-mix(in srgb,var(--theme-surface,#fff) 88%,transparent)!important}
+.navbtn{position:relative!important;border:1.5px solid transparent!important;border-radius:13px 10px 14px 9px!important;transition:background .2s ease,border-color .2s ease,transform .2s ease!important}
+.navbtn::after{content:"";position:absolute;inset:3px;border:1px dashed currentColor;border-radius:10px 8px 11px 7px;opacity:0;pointer-events:none;transition:opacity .2s ease}
+.navbtn:hover{transform:translateX(2px)!important;border-color:currentColor!important;border-style:dashed!important}
+.navbtn:hover::after,.navbtn.active::after{opacity:.24}
+.navbtn.active{border:1.5px dashed currentColor!important;border-radius:12px 9px 14px 8px!important}
+.theme-nav-doodle{width:28px!important;height:28px!important;flex-basis:28px!important;margin-right:4px!important;border:1.4px dashed currentColor!important;border-radius:9px 7px 10px 6px!important;background:rgba(255,255,255,.24)!important;filter:none!important;font-size:17px!important}
+.navbtn:hover .theme-nav-doodle{transform:rotate(-5deg) scale(1.05)}
+/* Cool, clean theme surfaces: no yellow/cream wash mixed into the theme palettes. */
+body[data-theme="ocean"]{--theme-surface:#e8faff!important;background:linear-gradient(160deg,#eafaff 0%,#d2f1f8 52%,#e9fbf8 100%)!important}
+body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .hero,body[data-theme="ocean"] .panel,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .mini,body[data-theme="ocean"] .page{background:rgba(239,252,255,.94)!important}
+body[data-theme="retro"]{--theme-surface:#f1f1f1!important;background:linear-gradient(145deg,#f0f0f0,#dcdfe2)!important}
+body[data-theme="retro"] .sidebar,body[data-theme="retro"] .hero,body[data-theme="retro"] .panel,body[data-theme="retro"] .stat,body[data-theme="retro"] .mini,body[data-theme="retro"] .page{background:#f5f5f3!important}
+body[data-theme="pink"]{--theme-surface:#fff0f7!important;background:linear-gradient(145deg,#fff4fa 0%,#f8e1ef 55%,#fff7fc 100%)!important}
+body[data-theme="pink"] .sidebar,body[data-theme="pink"] .hero,body[data-theme="pink"] .panel,body[data-theme="pink"] .stat,body[data-theme="pink"] .mini,body[data-theme="pink"] .page{background:rgba(255,244,250,.96)!important}
+body[data-theme="vampire"]{--theme-surface:#26192f!important;background:radial-gradient(ellipse at top,#382340 0%,#201529 58%,#11101a 100%)!important;color:#f7e7ef!important}
+body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini,body[data-theme="vampire"] .page{background:rgba(39,26,48,.97)!important;color:#f7e7ef!important}
+body[data-theme="cat"]{--theme-surface:#fff1eb!important;background:linear-gradient(145deg,#fff4ef 0%,#f0dfd8 58%,#fff8f5 100%)!important}
+body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini,body[data-theme="cat"] .page{background:rgba(255,246,242,.96)!important}
+body[data-theme="bear"]{--theme-surface:#edf7e8!important;background:radial-gradient(ellipse at 12% 8%,#f2fae9 0,transparent 34%),linear-gradient(145deg,#eaf5e5,#d9eddf)!important}
+body[data-theme="bear"] .sidebar,body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini,body[data-theme="bear"] .page{background:rgba(242,249,234,.96)!important}
+body[data-theme="bear"] .winter-bear-spot{z-index:1!important;pointer-events:none!important}
+body[data-theme="bear"] .hero h2,body[data-theme="bear"] .hero p,body[data-theme="bear"] .hero .eyebrow{z-index:2!important}
+@media(max-width:720px){.app-header .brand-copy{min-width:0}.app-header .brand-logo-img{width:44px!important;height:44px!important}.app-header .logo{width:44px!important;height:44px!important;flex-basis:44px!important}}
