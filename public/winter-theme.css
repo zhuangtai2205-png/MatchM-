@@ -528,27 +528,15 @@ body[data-theme="vampire"] .navbtn:hover,body[data-theme="vampire"] .navbtn.acti
 .app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
 
 
-/* Bear corner: one clean hand-drawn bear only inside the hero; never on the logo or menu. */
-body[data-theme="bear"] .hero{position:relative!important;overflow:hidden}
-body[data-theme="bear"] #bear-container{position:absolute!important;right:12px!important;left:auto!important;bottom:0!important;width:clamp(100px,12vw,150px)!important;height:auto!important;aspect-ratio:240/220!important;display:block!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;z-index:3!important;cursor:pointer!important;transform:none!important;filter:drop-shadow(0 4px 3px #4d38251c)!important}
-body[data-theme="bear"] #bear-sprite{display:block!important;width:100%!important;height:auto!important;font-size:initial!important;overflow:visible!important;animation:bearIdleBreathe 3.6s ease-in-out infinite!important}
-body[data-theme="bear"] #bear-container.is-munching #bear-sprite{animation:bearChomp .42s ease-in-out!important}
-body:not([data-theme="bear"]) #bear-container{display:none!important}
-.navbtn .theme-nav-doodle,.navbtn .icon3d,.navbtn .bear-icon{display:none!important}
+
+/* Authoritative fix: original logo stays clean; bear is shown only inside the optional Bear Corner overlay. */
+.app-header .logo{position:relative!important;isolation:isolate!important;overflow:hidden!important;background:transparent!important}
 .app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
-
-
-
-
-/* Keep the bear corner widget independent from the selected site theme. */
-#fat-bear-overlay[hidden],#funWidget[hidden]{display:none!important}
-#fat-bear-overlay:not([hidden]){display:block!important;position:fixed!important;inset:0!important;z-index:120!important;pointer-events:none!important;overflow:hidden!important}
-#bear-container{display:block!important;position:absolute!important;pointer-events:auto!important;visibility:visible!important;opacity:1!important}
-#bear-sprite{display:block!important;visibility:visible!important;opacity:1!important;overflow:visible!important}
-#funWidget:not([hidden]){display:block!important;z-index:1000!important}
+.app-header .brand-logo-img{position:relative!important;display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;z-index:1!important;opacity:1!important;visibility:visible!important;filter:none!important;transform:none!important}
+#fat-bear-overlay[hidden],#funWidget[hidden]{display:none!important;visibility:hidden!important}
+#fat-bear-overlay:not([hidden]){display:block!important;position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:99998!important;pointer-events:none!important;overflow:hidden!important;visibility:visible!important}
+#fat-bear-overlay #bear-container{display:block!important;position:absolute!important;right:clamp(8px,4vw,48px)!important;bottom:clamp(70px,10vh,120px)!important;left:auto!important;top:auto!important;width:min(58vw,430px)!important;height:auto!important;aspect-ratio:620/390!important;pointer-events:auto!important;visibility:visible!important;opacity:1!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;z-index:2!important;transform-origin:center bottom}
+#fat-bear-overlay #bear-sprite{display:block!important;width:100%!important;height:auto!important;max-height:54vh!important;visibility:visible!important;opacity:1!important;overflow:visible!important}
+#fat-bear-overlay #bear-snow,#fat-bear-overlay #fish-pool,#fat-bear-overlay #bear-plus-layer{position:absolute!important;inset:0!important;pointer-events:none!important}
+#funWidget:not([hidden]){display:block!important;visibility:visible!important;z-index:100000!important}
 #funToggleBtn{display:inline-flex!important;visibility:visible!important}
-body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .nav-folder{background:#f4fcff!important;color:#164c62!important;border-color:#b9dfe9!important}
-body[data-theme="retro"] .sidebar,body[data-theme="retro"] .nav-folder{background:#fafaf8!important;color:#292929!important;border-color:#bdbdb9!important}
-body[data-theme="pink"] .sidebar,body[data-theme="pink"] .nav-folder{background:#fff8fb!important;color:#874563!important;border-color:#efc8d9!important}
-body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .nav-folder{background:#281d32!important;color:#f7eaf8!important;border-color:#5e426c!important}
-body[data-theme="cat"] .sidebar,body[data-theme="cat"] .nav-folder{background:#fff9f5!important;color:#60443b!important;border-color:#e4cfc4!important}
