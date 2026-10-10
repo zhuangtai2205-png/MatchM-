@@ -1895,6 +1895,20 @@ header.app-header .brand-mark img.brand-logo-img{
  header.app-header .brand-mark img.brand-logo-img{transform:scale(1.35)!important}
 }
 </style>
+<style id="matchma-logo-size-only-v62">
+/* Logo artwork only: double its visible size without changing header, title, toolbar, or layout dimensions. */
+header.app-header .brand .brand-mark{
+ position:relative!important;overflow:visible!important;
+}
+header.app-header .brand .brand-mark img.brand-logo-img{
+ position:absolute!important;
+ width:200%!important;height:200%!important;
+ max-width:none!important;max-height:none!important;
+ left:50%!important;top:50%!important;
+ object-fit:contain!important;object-position:center!important;
+ transform:translate(-50%,-50%)!important;
+}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
