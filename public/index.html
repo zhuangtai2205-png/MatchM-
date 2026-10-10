@@ -2753,3 +2753,37 @@ body[data-theme="minimal"] .app-shell .main { min-width:0; }
  body[data-theme="forest"] .app-header,body[data-theme="minimal"] .app-header{align-items:flex-start}
 }
 </style>
+
+
+<style id="matchma-theme-logo-cleanup-v2">
+/* One consistent header logo treatment across every theme */
+.app-header .brand-mark,
+body .app-header .brand-mark,
+body[data-theme] .app-header .brand-mark {
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:64px!important;height:64px!important;flex:0 0 64px!important;
+  padding:0!important;margin:0!important;box-sizing:border-box!important;
+  background:transparent!important;background-color:transparent!important;
+  border:0!important;border-radius:0!important;box-shadow:none!important;
+  overflow:visible!important;
+}
+.app-header .brand-mark .matchma-logo-image {
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  background:transparent!important;mix-blend-mode:multiply;
+}
+.app-header .brand {align-items:center!important;gap:14px!important}
+.app-header .brand-copy {min-width:0!important}
+.app-header .brand-copy h1 {margin:0!important;line-height:1.08!important}
+.app-header .subbrand {line-height:1.35!important}
+/* Remove accumulated font overrides; themes change colors/decoration, not the base type system */
+body[data-theme="forest"],body[data-theme="minimal"] {font-family:'Nunito','Trebuchet MS',system-ui,sans-serif!important;letter-spacing:normal!important}
+body[data-theme="forest"] :is(button,input,select,textarea,h1,h2,h3,h4,p,label,small,strong,span,td,th),
+body[data-theme="minimal"] :is(button,input,select,textarea,h1,h2,h3,h4,p,label,small,strong,span,td,th) {font-family:inherit!important;letter-spacing:normal!important}
+body[data-theme="forest"] .app-header,body[data-theme="minimal"] .app-header {align-items:center!important;flex-wrap:wrap!important;gap:12px!important}
+body[data-theme="forest"] .brand,body[data-theme="minimal"] .brand {align-items:center!important;gap:14px!important}
+@media(max-width:650px){
+ .app-header .brand-mark,body .app-header .brand-mark,body[data-theme] .app-header .brand-mark {width:54px!important;height:54px!important;flex-basis:54px!important}
+ .app-header .brand {gap:10px!important}
+}
+</style>
