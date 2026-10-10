@@ -611,3 +611,20 @@ html body .nav-folder>summary .icon3d,html body .nav-folder>summary .bear-icon{d
 html body .navbtn{gap:10px!important}
 html body .app-header .logo::before,html body .app-header .logo::after{content:none!important;display:none!important}
 html body .app-header .brand-logo-img{content:url('/matchma-logo.svg?v=17')!important}
+
+/* Theme-specific soft illustrated ambience. */
+html body #themeScene .scene-doodle{position:absolute;display:block;pointer-events:none;user-select:none;opacity:.12;font-size:var(--doodle-size,24px);animation:themeFloat 9s ease-in-out infinite;animation-delay:var(--doodle-delay,0s)}
+html body[data-theme="ocean"] #themeScene .scene-wave{font-size:54px;color:#178ab5;opacity:.11;transform:scaleX(2.5);animation:oceanWaveDrift 11s ease-in-out infinite}
+html body[data-theme="ocean"] #themeScene .scene-bubble{color:#158db4;opacity:.18}
+html body[data-theme="pink"] #themeScene .scene-petal,html body[data-theme="pink"] #themeScene .scene-flower,html body[data-theme="pink"] #themeScene .scene-sakura{color:#d85b99;opacity:.19;animation:petalFall 13s linear infinite}
+html body[data-theme="vampire"] #themeScene .scene-web{color:#d2b9e8;opacity:.23;font-size:38px}
+html body[data-theme="vampire"] #themeScene .scene-bat{color:#d7c1e8;opacity:.19}
+html body[data-theme="cat"] #themeScene .scene-cat,html body[data-theme="cat"] #themeScene .scene-yarn{opacity:.18;color:#9c6651}
+html body[data-theme="bear"]{--theme-bg:#edf6e8!important;--theme-panel:#f8fcf5!important;--theme-ink:#345b45!important;--theme-muted:#6e927b!important;--theme-line:#c5dfc8!important;--theme-accent:#72a786!important;--theme-soft:#deefdf!important;background:#edf6e8!important;color:#345b45!important}
+html body[data-theme="bear"] #themeScene .scene-pine,html body[data-theme="bear"] #themeScene .scene-snow,html body[data-theme="bear"] #themeScene .scene-paw{opacity:.23;color:#679777}
+html body[data-theme="bear"] .brand-logo-img{display:block!important;visibility:visible!important}
+html body .navbtn .navicon,html body .nav-folder>summary .navicon,html body .nav-folder>summary .navfolder-tab-icon,html body .nav-folder>summary .theme-nav-doodle,html body .nav-folder>summary .icon3d,html body .nav-folder>summary .bear-icon{display:none!important}
+@keyframes themeFloat{0%,100%{translate:0 0;rotate:-3deg}50%{translate:0 -12px;rotate:4deg}}
+@keyframes oceanWaveDrift{0%,100%{translate:-8px 0}50%{translate:14px 7px}}
+@keyframes petalFall{0%{translate:0 -20px;rotate:0deg}100%{translate:25px 95px;rotate:120deg}}
+@media(prefers-reduced-motion:reduce){html body #themeScene .scene-doodle{animation:none!important}}
