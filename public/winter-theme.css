@@ -540,3 +540,33 @@ body[data-theme="vampire"] .navbtn:hover,body[data-theme="vampire"] .navbtn.acti
 #fat-bear-overlay #bear-snow,#fat-bear-overlay #fish-pool,#fat-bear-overlay #bear-plus-layer{position:absolute!important;inset:0!important;pointer-events:none!important}
 #funWidget:not([hidden]){display:block!important;visibility:visible!important;z-index:100000!important}
 #funToggleBtn{display:inline-flex!important;visibility:visible!important}
+
+
+/* Definitive fix for reported bear overlay: suppress logo pseudo-elements globally,
+   hide 3D emoji at folder headings, and keep only the actual brand image. */
+html body .logo::before,html body .logo::after,
+html body .logo:before,html body .logo:after,
+html body .app-header .brand .logo::before,html body .app-header .brand .logo::after{
+  content:none!important;display:none!important;visibility:hidden!important;
+  background-image:none!important;-webkit-mask:none!important;mask:none!important;
+}
+html body .app-header .logo{
+  position:relative!important;isolation:isolate!important;overflow:hidden!important;
+  width:48px!important;height:58px!important;min-width:48px!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+html body .app-header .logo > *:not(.brand-logo-img){display:none!important}
+html body .app-header .brand-logo-img{
+  display:block!important;position:relative!important;inset:auto!important;
+  width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;object-position:center!important;z-index:1!important;
+  opacity:1!important;visibility:visible!important;filter:none!important;transform:none!important;
+}
+html body .nav-folder>summary .navicon,
+html body .nav-folder>summary .navfolder-tab-icon,
+html body .nav-folder>summary .theme-nav-doodle,
+html body .nav-folder>summary .icon3d,
+html body .nav-folder>summary .bear-icon{
+  display:none!important;visibility:hidden!important;content:none!important;
+}
+html body .nav-folder>summary.navfolder-title{display:flex!important;gap:8px!important}
