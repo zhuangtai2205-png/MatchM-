@@ -1394,3 +1394,17 @@ html body[data-theme="vampire"] header.app-header .brand>.logo>img.brand-logo-im
  html body header.app-header .brand>.logo{flex:0 0 60px!important;width:60px!important;height:74px!important;min-width:60px!important;min-height:74px!important;max-width:60px!important;max-height:74px!important}
  html body header.app-header .brand>.logo>img.brand-logo-img{flex:0 0 60px!important;width:60px!important;height:74px!important;min-width:60px!important;min-height:74px!important;max-width:60px!important;max-height:74px!important}
 }
+
+/* Single-source bear scene: no second corner mascot and no bear drawn over the brand logo. */
+#winterBearCorner{display:none!important;visibility:hidden!important}
+html body .app-header .logo::before,html body .app-header .logo::after,
+html body .brand .logo::before,html body .brand .logo::after{content:none!important;display:none!important;background:none!important;background-image:none!important}
+html body #fat-bear-overlay[hidden]{display:none!important}
+html body #fat-bear-overlay:not([hidden]){display:block!important;visibility:visible!important;pointer-events:none!important;z-index:99998!important}
+html body #bear-container{display:flex!important;visibility:visible!important;pointer-events:auto!important;z-index:5!important;width:clamp(132px,26vw,220px)!important;height:clamp(144px,30vw,240px)!important}
+html body #bear-sprite{display:block!important;width:100%!important;height:100%!important;font-size:0!important;opacity:1!important;visibility:visible!important;overflow:visible!important}
+html body #bear-sprite svg{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;overflow:visible!important}
+html body[data-theme] #funToggleBtn{display:flex!important;visibility:visible!important;pointer-events:auto!important}
+html body[data-theme] #funWidget[hidden]{display:none!important}
+html body[data-theme] #funWidget:not([hidden]){display:block!important;visibility:visible!important;pointer-events:auto!important}
+@media(max-width:650px){html body #bear-container{left:12px!important;bottom:12px!important;width:clamp(118px,34vw,168px)!important;height:clamp(132px,36vw,184px)!important}}
