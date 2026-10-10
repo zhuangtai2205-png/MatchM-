@@ -1954,7 +1954,7 @@ function updateThemeScene(theme){
   retro:['♪','♫','♬','♩','𝄞','♭','♫','♪'],
   pink:['🌸','🌺','🌷','🌼','🌹','🌸','❀','🌸'],
   vampire:['🦇','🎃','🕸️','🕯️','🦇','💀','🕷️','☠️'],
-  cat:['🐈','🐈‍⬛','🐟','🦴','🧶','🐾','🐱','🐠'],forest:['🐻','🌲','🍃','🍄','🦋','🌿','🐾','🍯'],minimal:['○','◌','◇','□','△','—','＋','✓'],bear:['','🐟','🌲','🍯','🐾','🌿','🐟','']
+  cat:['🐈','🐈‍⬛','🐟','🦴','🧶','🐾','🐱','🐠'],forest:['🐻','🌲','🍃','🍄','🦋','🌿','🐾','🍯'],minimal:['○','◌','◇','□','△','—','＋','✓'],bear:['🐻','🐾','🌲','🍯','🍄','🌿','🪵','🍃']
  };
  const spots=[[3,19,23],[15,37,18],[29,14,25],[43,33,19],[56,12,21],[67,41,23],[78,20,17],[91,36,24],[8,69,20],[26,83,18],[74,76,22],[94,68,18]];
  spots.forEach((p,i)=>{const el=document.createElement('span');el.className='theme-drift';el.innerHTML=themeDoodleSvg(theme,i);el.style.setProperty('--x',p[0]+'%');el.style.setProperty('--y',p[1]+'%');el.style.setProperty('--size',p[2]+'px');el.style.setProperty('--opacity',theme==='retro'?'0.17':theme==='vampire'?'0.23':'0.19');el.style.setProperty('--dur',(4.2+(i%5)*.7)+'s');el.style.setProperty('--delay',(-i*.63)+'s');el.style.setProperty('--dx',((i%2?1:-1)*(7+i%4*4))+'px');el.style.setProperty('--dy',(-9-i%3*5)+'px');el.style.setProperty('--turn',((i%2?1:-1)*8)+'deg');root.appendChild(el)});
@@ -2660,7 +2660,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
   retro:['♪','♫','♬','♩','𝄞','♭'],
   pink:['🌸','🌺','🌷','🌼','🌹','🌻','❀'],
   vampire:['🦇','🎃','🕷️','🕸️','💀','🕯️','☠️'],
-  cat:['🐈','🐈‍⬛','🐟','🦴','🐾','🧶','🐱'],bear:['🐟','🐠','','🐾','🍃','🫧','🐟','✨']
+  cat:['🐈','🐈‍⬛','🐟','🦴','🐾','🧶','🐱'],bear:['🐻','🌲','🍃','🍄','🦋','🌿','🐾','🍯']
  };
  let live=0;
  document.addEventListener('pointerdown',function(e){
@@ -3219,4 +3219,19 @@ body[data-theme="minimal"] .hero p,body[data-theme="minimal"] .muted,body[data-t
  .app-header .brand-copy h1{font-size:clamp(34px,8.5vw,48px)!important;letter-spacing:-.05em!important}
  .app-header .brand-copy .subbrand{font-size:11px!important;max-width:240px!important;line-height:1.3!important;margin-top:5px!important}
 }
+</style>
+
+
+<style id="matchma-theme-specific-sticker-cleanup-v47">
+/* Do not let ocean decorations leak into Forest or Minimal */
+body[data-theme="forest"]::before,
+body[data-theme="forest"]::after,
+body[data-theme="minimal"]::before,
+body[data-theme="minimal"]::after {content:none!important;background:none!important}
+body[data-theme="forest"] .theme-drift svg,
+body[data-theme="minimal"] .theme-drift svg {display:none!important}
+body[data-theme="forest"] .theme-drift {opacity:.34!important}
+body[data-theme="minimal"] .theme-drift {display:none!important;opacity:0!important}
+body[data-theme="forest"] .cat-flower-particle,
+body[data-theme="minimal"] .cat-flower-particle {display:none!important}
 </style>
