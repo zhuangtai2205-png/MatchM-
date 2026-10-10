@@ -362,7 +362,7 @@ body[data-theme="vampire"] .overview-account-pill.is-online{background:#243a31;c
 .sidebar-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ui-accent,#3c9bc0);background:var(--ui-soft,#eaf8fd);color:var(--ui-accent,#3c9bc0);font-weight:900;font-size:17px}
 .sidebar-account-copy{display:grid;gap:2px;min-width:0;flex:1}.sidebar-account-copy strong{font-size:13px;font-weight:900}.sidebar-account-copy small{font-size:10px;overflow-wrap:anywhere;color:var(--muted)}.sidebar-account-arrow{font-weight:900}
 body[data-theme] .sectionhead h2,body[data-theme] .hero h2{font-weight:900!important;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--ui-accent,#3c9bc0);text-shadow:0 1px 0 var(--ui-surface,#fff)}
-body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=3");filter:none}
+body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=4");filter:none}
 body[data-theme] .upload .bigicon{font-size:0!important;display:grid!important;place-items:center;width:58px;height:46px;margin:0 auto 8px!important;line-height:1}
 body[data-theme] .upload .bigicon::before{content:"";display:block;width:56px;height:42px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 48'%3E%3Cpath fill='%232F9BC5' d='M4 8a3 3 0 0 1 3-3h16l6 6h28a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='%238DE0F4' d='M4 18h56v21a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='none' stroke='%231F6587' stroke-width='2' d='M24 25h16m-8-8v16m-5-5 5 5 5-5'/%3E%3C/svg%3E")}
 body[data-theme="pink"] .upload .bigicon::before{filter:hue-rotate(300deg) saturate(.8)}
@@ -372,9 +372,131 @@ body[data-theme="cat"] .upload .bigicon::before{filter:sepia(.45) saturate(.8)}
 body[data-theme="ocean"] .upload .bigicon::before{filter:saturate(1.15)}
 @media(max-width:1120px){.overview-analytics{grid-template-columns:1fr 1fr}.chart-card:last-child{grid-column:1/-1}}
 @media(max-width:700px){.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.sidebar-account-copy small{max-width:170px}}
+/* MatchMã usability refresh: strong contrast, grouped 2D folders and compact controls */
+:root{--ink:#1b2739;--muted:#435066;--line:#d6dfeb}
+body{color:#1b2739}
+header{background:#ffffffd9;border:1px solid #ffffffed;border-radius:20px;margin:12px auto 16px;padding:12px 20px;box-shadow:0 8px 24px #24334b10;min-height:82px}
+.brand{gap:12px;min-width:0}
+.logo{width:56px!important;height:70px!important;flex:0 0 56px!important;border-radius:9px!important;background:#fff!important;border:1px solid #e6e8ed!important;box-shadow:none!important;overflow:hidden!important;padding:1px!important}
+.brand-logo-img{display:block;width:100%;height:100%;object-fit:contain;filter:none!important;border-radius:7px}
+.brand-copy h1{display:none}
+.brand-copy .subbrand{display:flex;align-items:center;flex-wrap:wrap;gap:7px;color:#344257;font-size:13px;font-weight:800;line-height:1.35}
+.subbrand [data-i18n="tagline"]{color:#46556a;font-weight:750}
+.crumb-sep{color:#7c8aa0;font-size:17px;font-weight:900}
+#currentPageLabel{color:#17243a;font-size:14px;font-weight:950}
+.headright{margin-left:auto;display:flex;align-items:center;gap:8px}
+.quick-settings{position:relative;z-index:20}
+.quick-settings>summary{list-style:none;display:flex;align-items:center;gap:9px;cursor:pointer;padding:11px 14px;border:1px solid #cbd5e1;border-radius:13px;background:#fff;color:#1e2b40;font-size:13px;font-weight:900;box-shadow:0 3px 10px #26374a0d;white-space:nowrap}
+.quick-settings>summary::-webkit-details-marker{display:none}
+.quick-settings[open]>summary{border-color:#7898bc;background:#f7faff}
+.quick-settings-wheel{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#e7eef7;color:#233c59;font-size:17px}
+.quick-settings-chevron{margin-left:3px;color:#47576d}
+.quick-settings-menu{position:absolute;right:0;top:calc(100% + 8px);width:min(340px,calc(100vw - 28px));padding:14px;border:1px solid #d5deea;border-radius:17px;background:#fff;box-shadow:0 18px 48px #17243b26;color:#1d293d;display:grid;gap:12px}
+.quick-setting-row{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:9px}
+.quick-setting-row>label{font-size:12px;font-weight:900;color:#33445c}
+.quick-setting-row select{width:100%;min-width:0;padding:9px 10px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:#17243a;font-size:13px;font-weight:700}
+.quick-settings-menu .font-tools{display:flex;align-items:center;gap:5px}
+.quick-settings-menu .font-tools button{min-width:38px;padding:7px 8px;border:1px solid #d1dbe7;border-radius:9px;background:#f5f8fc;color:#18263a;font-weight:900}
+.quick-settings-note{margin:0!important;padding:9px 10px;border-radius:9px;background:#f3f7fc;color:#46566a!important;font-size:11px!important;font-weight:700}
+.quick-settings-full{width:100%;text-align:center}
+.sidebar{width:100%;background:#fffffff0;border:1px solid #dce4ef;border-radius:20px;padding:11px;box-shadow:0 9px 25px #20334d0a;max-height:calc(100vh - 24px);overflow:auto;scrollbar-width:thin}
+.navtitle{padding:9px 7px 4px;color:#46556b;font-weight:950;font-size:10px;letter-spacing:1.2px}
+.nav-folder{position:relative;padding:8px 7px 7px;margin:9px 0 11px;border:1px solid #d6e0eb;border-radius:14px;background:linear-gradient(180deg,#f7faff 0,#ffffff 38%);box-shadow:0 3px 8px #22364a08}
+.nav-folder::before{content:"";position:absolute;left:11px;top:-5px;width:40px;height:5px;border-radius:5px 5px 0 0;background:#b8cbe1;border:1px solid #c5d4e5;border-bottom:0}
+.navfolder-title{display:flex;align-items:center;gap:7px;padding:3px 7px 7px;color:#33435a;font-size:10px;letter-spacing:.8px;font-weight:950}
+.navfolder-tab-icon{font-size:0;display:inline-block;width:18px;height:14px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'%3E%3Cpath fill='%236f9bc5' stroke='%233c648b' stroke-width='1.4' d='M2 5a2 2 0 0 1 2-2h9l3 4h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z'/%3E%3Cpath fill='%23b8d6f2' d='M2 9h28v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z'/%3E%3C/svg%3E")}
+.navbtn{width:100%;min-width:0;display:flex;align-items:center;gap:9px;padding:9px 9px;margin:2px 0;border:1px solid transparent;border-radius:10px;background:transparent!important;color:#1c2b41!important;font-size:13px!important;font-weight:850!important;line-height:1.3;text-align:left}
+.navbtn:hover{background:#edf4fc!important;border-color:#d7e4f2}
+.navbtn.active{background:#e2edf9!important;border-color:#b6cde5;color:#132b47!important;box-shadow:inset 3px 0 0 #4779a7}
+.navbtn>span:last-child:not(.nav-account-status){overflow-wrap:anywhere}
+.navicon{font-size:0!important;line-height:0;width:24px!important;flex:0 0 24px;height:20px;display:block;position:relative;color:transparent!important}
+.navicon::before{content:"";display:block;width:23px;height:19px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 24'%3E%3Cpath fill='%23efbd57' stroke='%23856b31' stroke-width='1.4' d='M2 5a2 2 0 0 1 2-2h9l3 4h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z'/%3E%3Cpath fill='%23ffe3a1' d='M2 9h28v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z'/%3E%3C/svg%3E")}
+body[data-theme="retro"] .navicon::before,body[data-theme="retro"] .navfolder-tab-icon{filter:grayscale(1)}
+body[data-theme="pink"] .navicon::before,body[data-theme="pink"] .navfolder-tab-icon{filter:hue-rotate(300deg) saturate(.85)}
+body[data-theme="vampire"] .navicon::before,body[data-theme="vampire"] .navfolder-tab-icon{filter:hue-rotate(290deg) brightness(.8)}
+body[data-theme="cat"] .navicon::before,body[data-theme="cat"] .navfolder-tab-icon{filter:sepia(.5) saturate(.9)}
+.sidebar-account-shortcut{padding:8px 9px;margin:1px 0 6px;border:1px solid #ccd8e5;border-radius:14px;background:#f8fbff;color:#1c2b40;box-shadow:none}
+.sidebar-avatar{width:44px;height:44px;flex:0 0 44px;border-radius:50%;border:2px solid #577da7;background:#fff;color:#244466;font-size:17px;font-weight:950;box-shadow:0 2px 7px #173a5b12}
+.sidebar-account-copy strong{font-size:13px;font-weight:950;color:#1b2c42}
+.sidebar-account-copy small{font-size:11px;color:#45566c;font-weight:700}
+.sidebar-account-arrow{color:#385b83}
+.sidebar-help{margin:12px 2px 2px;border:1px solid #d5dfeb;border-radius:12px;background:#f7faff}
+.sidebar-help>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:10px;cursor:pointer;font-size:12px;color:#2d4059;font-weight:900}
+.sidebar-help>summary::-webkit-details-marker{display:none}
+.help-question{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1.5px solid #55799f;color:#2a537c;background:#e8f1fa;font-weight:950}
+.sidebar-help-content{padding:0 10px 10px}
+.sidebar-help-content p{margin:7px 0;color:#3c4d63!important;font-size:12px!important;line-height:1.45;font-weight:600}
+.sidebar-help-content .btn{font-size:11px;padding:8px 10px}
+.shell{grid-template-columns:246px minmax(0,1fr);gap:18px}
+.hero h2,.sectionhead h2,.panel h2{color:#1a273a;font-weight:950!important}
+.hero h2{font-size:clamp(25px,3vw,34px);line-height:1.18;letter-spacing:-.45px;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:7px;text-decoration-color:#7297bb}
+.sectionhead h2,.panel h2{font-size:19px!important;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px;text-decoration-color:#8daecf}
+body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:none!important;display:none!important}
+.hero p,.sectionhead p,.panel p,.hint,.muted{color:#435166}
+.eyebrow{color:#334966;font-size:11px;font-weight:950}
+.pill{color:#34465f;font-weight:800}
+.stat small,.mini span,.pager span{color:#435166!important;font-weight:750}
+.stat{border-color:#dbe4ef;box-shadow:0 5px 15px #26374a08}
+.overview-account-grid{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+.overview-account-card,.overview-memory-card{width:100%;height:100%;min-width:0}
+body[data-theme="vampire"] header{background:#201429;border-color:#4d3557;color:#f9edf8}
+body[data-theme="vampire"] .brand-copy .subbrand,body[data-theme="vampire"] .subbrand [data-i18n="tagline"],body[data-theme="vampire"] #currentPageLabel{color:#fae9f5!important}
+body[data-theme="vampire"] .quick-settings>summary{background:#2b1b38;border-color:#65446b;color:#fae9f5}
+body[data-theme="vampire"] .quick-settings-wheel{background:#4b2d58;color:#ffe4f2}
+body[data-theme="vampire"] .nav-folder{background:linear-gradient(180deg,#f9f4fb,#fff);border-color:#d1c2d9}
+@media(max-width:1120px){.shell{grid-template-columns:220px minmax(0,1fr)}}
+@media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:block;max-height:none;overflow:visible}.navtitle{display:block}.nav-folder{display:block}.navbtn{width:100%;flex:initial;padding:9px}.sidefoot{display:none}.grid3{grid-template-columns:1fr 1fr}}
+@media(max-width:650px){header{flex-direction:row;align-items:center;gap:8px;margin:8px 10px 12px;padding:10px 11px}.brand{gap:8px}.logo{width:44px!important;height:55px!important;flex-basis:44px!important}.brand-copy .subbrand{display:grid;grid-template-columns:auto auto;justify-content:start;gap:2px 6px;font-size:11px}.crumb-sep{display:none}.brand-copy .subbrand #currentPageLabel{grid-column:1/-1;font-size:12px}.headright{width:auto;flex:0 0 auto}.quick-settings>summary{padding:9px 10px;font-size:0;gap:5px}.quick-settings-wheel{font-size:16px}.quick-settings-chevron{font-size:13px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr}.quick-setting-row{grid-template-columns:88px minmax(0,1fr)}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
-<header><div class="brand"><div class="logo" aria-label="match mã — logo mèo samurai cầm kiếm"><img class="brand-logo-img" src="/matchma-logo.svg?v=3" alt="Logo MatchMã: mèo samurai cầm kiếm"></div><div class="brand-copy"><h1>Match<span>Mã</span></h1><div class="subbrand" data-i18n="tagline">Đối chiếu danh mục sản phẩm</div></div></div><div class="headright"><span class="pill" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span><div class="field theme-picker" style="margin:0;min-width:145px"><select id="themeSelect" aria-label="Chọn chủ đề màu"><option value="ocean">🌊 Biển xanh</option><option value="retro">◼ Đen trắng retro</option><option value="pink">🌸 Hồng pastel</option><option value="vampire">🦇 Vampire</option><option value="cat">🐈 Mèo dễ thương</option></select></div><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div><div class="field" style="margin:0;min-width:145px"><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></div></div></header>
-<div class="shell"><aside class="sidebar"><button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản"><span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span></button><div class="navtitle" data-i18n="workspace">KHÔNG GIAN LÀM VIỆC</div><button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button><button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button><button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button><button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button><button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button><button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button><button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span>Điền mã từ file gốc</span></button><button class="navbtn" data-page="stockforecast"><span class="navicon">▥</span><span>Dự báo âm kho</span></button><button class="navbtn" data-page="account"><span class="navicon">♙</span><span class="nav-account-label" data-i18n="navAccount">Tài khoản</span><span id="navAccountStatus" class="nav-account-status">Chưa đăng nhập</span></button><button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button><div class="sidefoot" data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</div></aside>
+<header>
+ <div class="brand">
+  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=4" alt="Logo MatchMã: mèo đội nón lá cầm kiếm"></div>
+  <div class="brand-copy">
+   <h1>Match<span>Mã</span></h1>
+   <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel" data-i18n="navOverview">Tổng quan</strong></div>
+  </div>
+ </div>
+ <div class="headright">
+  <details class="quick-settings" id="quickSettings">
+   <summary><span class="quick-settings-wheel">⚙</span><span data-i18n="quickSettings">Cài đặt nhanh</span><span class="quick-settings-chevron">⌄</span></summary>
+   <div class="quick-settings-menu">
+    <div class="quick-setting-row"><label for="themeSelect" data-i18n="themeLabel">Giao diện</label><select id="themeSelect" aria-label="Chọn chủ đề màu"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng pastel</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐈 Mèo</option></select></div>
+    <div class="quick-setting-row"><label data-i18n="fontSizeTitle">Cỡ chữ</label><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div></div>
+    <div class="quick-setting-row"><label for="quickLang" data-i18n="languageLabel">Ngôn ngữ</label><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></div>
+    <p class="quick-settings-note" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</p>
+    <button type="button" class="btn alt quick-settings-full" data-goto="settings" data-i18n="quickSettingsFull">Tất cả cài đặt →</button>
+   </div>
+  </details>
+ </div>
+</header>
+<div class="shell"><aside class="sidebar">
+ <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản">
+  <span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span>
+ </button>
+ <div class="navtitle" data-i18n="navSectionTitle">ĐIỀU HƯỚNG</div>
+ <section class="nav-folder">
+  <div class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupMain">CHÍNH</span></div>
+  <button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button>
+  <button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button>
+  <button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button>
+  <button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button>
+ </section>
+ <section class="nav-folder">
+  <div class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupTools">CÔNG CỤ</span></div>
+  <button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button>
+  <button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button>
+  <button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
+  <button class="navbtn" data-page="stockforecast"><span class="navicon">▥</span><span data-i18n="navStockForecast">Dự báo âm kho</span></button>
+ </section>
+ <section class="nav-folder nav-folder-system">
+  <div class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupSystem">CÁ NHÂN & HỆ THỐNG</span></div>
+  <button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button>
+ </section>
+ <details class="sidebar-help">
+  <summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary>
+  <div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div>
+ </details>
+</aside>
 <main class="main">
 <section class="page active" id="page-overview"><div class="hero"><div class="eyebrow" data-i18n="eyebrow">PRODUCT MATCHING WORKSPACE</div><h2 data-i18n="heroTitle">So khớp tên khác nhau — cùng một sản phẩm?</h2><p data-i18n="heroDesc">Ví dụ “sữa vinamil CO DUONG 1l” có thể gợi ý “SUA VNM 1L”. Hệ thống chuẩn hóa dấu, tên thương hiệu viết tắt và dung tích; bạn chọn ngưỡng phần trăm được xem là OK trong Cài đặt.</p><div class="actions"><button class="btn" data-goto="catalog" data-i18n="startCatalog">Bắt đầu với danh mục →</button><button class="btn alt" data-goto="settings" data-i18n="openSettings">Cài đặt ngưỡng OK</button></div></div>
 <div class="stats"><div class="stat"><small data-i18n="statCatalog">Dòng danh mục chuẩn</small><b id="overviewMaster">0</b></div><div class="stat"><small data-i18n="statCheck">Dòng cần soát</small><b id="overviewCheck">0</b></div><div class="stat good"><small data-i18n="statOk">Được tính là OK</small><b id="overviewGood">0</b></div><div class="stat review"><small data-i18n="statReview">Cần kiểm tra</small><b id="overviewReview">0</b></div></div>
@@ -862,7 +984,7 @@ function updateThemeScene(theme){
 
 const THEME_KEY='matchma-theme-v1';
 function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
-function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>applyTheme(e.target.value))}
+function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
  $('platformFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);platformSourceHeaders=d.headers;platformSourceRows=d.rows.map((row,i)=>({row:{...row},sourceIndex:i+1,status:'todo'}));platformPage=1;fillSelect('platformNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('platformIdCol',d.headers,guessStt(d.headers),true);$('platformFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng. STT/ID nguồn sẽ không bị chỉnh sửa.';$('buildPlatformAudit').disabled=!d.headers.length;$('exportPlatformAudit').disabled=true;platformBuilt=false;renderPlatformAudit()}catch(err){alert(err.message||'Không đọc được file');}});
@@ -1041,8 +1163,16 @@ Object.assign(I18N.de,{forecastRunDone:'{count} SKUs berechnet. Formel: Anfangsb
 Object.assign(I18N['zh-TW'],{forecastRunDone:'已計算 {count} 個 SKU。公式：期初庫存 + 本月進貨 − 本月銷貨。不按日拆分。',forecastPageCount:'個品項'});
 Object.assign(I18N['zh-CN'],{forecastRunDone:'已计算 {count} 个 SKU。公式：期初库存 + 本月进货 − 本月销售。不按日拆分。',forecastPageCount:'个商品'});
 
+
+Object.assign(I18N.vi,{navSectionTitle:'ĐIỀU HƯỚNG',navGroupMain:'CHÍNH',navGroupTools:'CÔNG CỤ',navGroupSystem:'CÁ NHÂN & HỆ THỐNG',navAutoFill:'Điền mã từ file gốc',navStockForecast:'Dự báo âm kho',helpTitle:'Trợ giúp & quy tắc',helpDesc:'Kiểm tra đúng cột SKU, tên hàng, quy cách và đơn vị trước khi xác nhận kết quả.',helpOpenSettings:'Mở cài đặt →',quickSettings:'Cài đặt nhanh',themeLabel:'Giao diện',fontSizeTitle:'Cỡ chữ',themeOcean:'🌊 Biển xanh',themeRetro:'◼ Đen trắng retro',themePink:'🌸 Hồng pastel',themeVampire:'🦇 Vampire',themeCat:'🐈 Mèo',quickSettingsFull:'Tất cả cài đặt →'});
+Object.assign(I18N.en,{navSectionTitle:'NAVIGATION',navGroupMain:'MAIN',navGroupTools:'TOOLS',navGroupSystem:'PERSONAL & SYSTEM',navAutoFill:'Fill SKU from source',navStockForecast:'Negative stock forecast',helpTitle:'Help & matching rules',helpDesc:'Verify SKU, product name, specification, and unit columns before confirming results.',helpOpenSettings:'Open settings →',quickSettings:'Quick settings',themeLabel:'Theme',fontSizeTitle:'Font size',themeOcean:'🌊 Ocean blue',themeRetro:'◼ Retro monochrome',themePink:'🌸 Sakura pink',themeVampire:'🦇 Vampire',themeCat:'🐈 Cats',quickSettingsFull:'All settings →'});
+Object.assign(I18N.de,{navSectionTitle:'NAVIGATION',navGroupMain:'HAUPTBEREICH',navGroupTools:'WERKZEUGE',navGroupSystem:'KONTO & SYSTEM',navAutoFill:'SKU aus Quelldatei füllen',navStockForecast:'Prognose negativer Bestände',helpTitle:'Hilfe & Abgleichregeln',helpDesc:'Prüfen Sie SKU, Produktname, Spezifikation und Einheit vor der Bestätigung.',helpOpenSettings:'Einstellungen öffnen →',quickSettings:'Schnelleinstellungen',themeLabel:'Design',fontSizeTitle:'Schriftgröße',themeOcean:'🌊 Ozeanblau',themeRetro:'◼ Retro monochrom',themePink:'🌸 Sakura-Rosa',themeVampire:'🦇 Vampir',themeCat:'🐈 Katzen',quickSettingsFull:'Alle Einstellungen →'});
+Object.assign(I18N['zh-TW'],{navSectionTitle:'導覽',navGroupMain:'主要',navGroupTools:'工具',navGroupSystem:'個人與系統',navAutoFill:'從來源檔填入 SKU',navStockForecast:'月底負庫存預測',helpTitle:'說明與比對規則',helpDesc:'確認前請檢查 SKU、商品名稱、規格與單位欄位。',helpOpenSettings:'開啟設定 →',quickSettings:'快速設定',themeLabel:'主題',fontSizeTitle:'字體大小',themeOcean:'🌊 海洋藍',themeRetro:'◼ 復古黑白',themePink:'🌸 櫻花粉',themeVampire:'🦇 吸血鬼',themeCat:'🐈 貓咪',quickSettingsFull:'所有設定 →'});
+Object.assign(I18N['zh-CN'],{navSectionTitle:'导航',navGroupMain:'主要',navGroupTools:'工具',navGroupSystem:'个人与系统',navAutoFill:'从源文件填入 SKU',navStockForecast:'月末负库存预测',helpTitle:'帮助与比对规则',helpDesc:'确认前请检查 SKU、商品名称、规格和单位字段。',helpOpenSettings:'打开设置 →',quickSettings:'快速设置',themeLabel:'主题',fontSizeTitle:'字体大小',themeOcean:'🌊 海洋蓝',themeRetro:'◼ 复古黑白',themePink:'🌸 樱花粉',themeVampire:'🦇 吸血鬼',themeCat:'🐈 猫咪',quickSettingsFull:'所有设置 →'});
+
 function tr(k){return (I18N[lang]&&I18N[lang][k])||I18N.vi[k]||k}
-function translate(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(tr(k))el.textContent=tr(k)});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.getAttribute('data-i18n-placeholder'))});updateThresholdLabels();updateStats();if(out.length)renderResults();if(masterRows.length)renderMasterPreview();if($('forecastRunInfo'))$('forecastRunInfo').textContent=stockForecastBuilt?tr('forecastRunDone').replace('{count}',stockForecastResults.length):tr('forecastRunHelp');if(typeof renderStockForecast==='function'&&stockForecastBuilt)renderStockForecast()}
+function updatePageBreadcrumb(){const active=document.querySelector('.page.active');const page=active?active.id.replace(/^page-/,''):'overview';const map={overview:'navOverview',catalog:'navCatalog',run:'navRun',results:'navResults',memory:'navMemory',platforms:'navPlatforms',autofill:'navAutoFill',stockforecast:'navStockForecast',account:'navAccount',settings:'navSettings'};const el=$('currentPageLabel');if(el)el.textContent=tr(map[page]||'navOverview')}
+function translate(){document.documentElement.lang=lang;updatePageBreadcrumb();document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(tr(k))el.textContent=tr(k)});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.getAttribute('data-i18n-placeholder'))});updateThresholdLabels();updateStats();if(out.length)renderResults();if(masterRows.length)renderMasterPreview();if($('forecastRunInfo'))$('forecastRunInfo').textContent=stockForecastBuilt?tr('forecastRunDone').replace('{count}',stockForecastResults.length):tr('forecastRunHelp');if(typeof renderStockForecast==='function'&&stockForecastBuilt)renderStockForecast()}
 function setLanguage(value){lang=['vi','en','de','zh-TW','zh-CN'].includes(value)?value:'vi';$('language').value=lang;$('quickLang').value=lang;document.documentElement.lang=lang;try{localStorage.setItem('matchma-language',lang)}catch(e){}translate()}
 let fontScale=1;
 function setFontScale(value){fontScale=Math.min(1.25,Math.max(.85,Math.round(value*20)/20));document.documentElement.style.setProperty('--font-scale',fontScale);['fontDown','fontReset','fontUp'].forEach(id=>$(id).setAttribute('aria-pressed','false'));$('fontReset').setAttribute('aria-pressed',fontScale===1?'true':'false');$('fontDown').setAttribute('aria-pressed',fontScale===.85?'true':'false');$('fontUp').setAttribute('aria-pressed',fontScale===1.25?'true':'false');try{localStorage.setItem('matchma-font-scale',String(fontScale))}catch(e){}}
@@ -1052,7 +1182,7 @@ $('fontUp').onclick=()=>setFontScale(fontScale+.05);
 try{const savedScale=Number(localStorage.getItem('matchma-font-scale'));if(savedScale>=.85&&savedScale<=1.25)fontScale=savedScale}catch(e){}
 document.documentElement.style.setProperty('--font-scale',fontScale);
 
-function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
+function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 $('sidebarAccountShortcut').addEventListener('click',()=>showPage('account'));document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>showPage(b.dataset.goto));
 function parseCSV(s){let rows=[],row=[],v='',q=false;for(let i=0;i<s.length;i++){let c=s[i];if(c==='"'&&q&&s[i+1]==='"'){v+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){row.push(v);v=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&s[i+1]==='\n')i++;row.push(v);if(row.some(x=>x.trim()))rows.push(row);row=[];v=''}else v+=c}row.push(v);if(row.some(x=>x.trim()))rows.push(row);return rows}
@@ -1361,5 +1491,6 @@ $('useRememberedName').addEventListener('click',()=>{if(!savedMemory.length){ale
 
 updateThresholdLabels();let preferredLang='vi';try{preferredLang=localStorage.getItem('matchma-language')||'vi'}catch(e){}setLanguage(preferredLang);updateCanRun();updateStats();
 initAccount();renderMemoryPage();
+['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
 initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();
 </script></body></html>
