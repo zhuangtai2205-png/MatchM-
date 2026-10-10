@@ -480,3 +480,26 @@ body[data-theme="retro"] .sidebar,body[data-theme="retro"] .nav-folder{border-co
 body[data-theme="pink"] .sidebar,body[data-theme="pink"] .nav-folder{border-color:#efc8d9!important}
 body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .nav-folder{border-color:#5e426c!important}
 body[data-theme="cat"] .sidebar,body[data-theme="cat"] .nav-folder{border-color:#e4cfc4!important}
+
+
+/* Hard reset: brand logo must never receive a bear/3D overlay from any theme. */
+html body .app-header .brand .logo::before,
+html body .app-header .brand .logo::after,
+html body .app-header .logo::before,
+html body .app-header .logo::after{
+ content:none!important;display:none!important;visibility:hidden!important;
+ background:none!important;filter:none!important;box-shadow:none!important;
+}
+html body .app-header .brand .logo{background:transparent!important;box-shadow:none!important;overflow:visible!important}
+html body .app-header .brand .brand-logo-img{
+ display:block!important;opacity:1!important;visibility:visible!important;
+ position:relative!important;inset:auto!important;z-index:2!important;
+ width:48px!important;height:58px!important;object-fit:contain!important;
+ filter:none!important;transform:none!important;
+}
+html body .navbtn .theme-nav-doodle{display:none!important}
+html body .navbtn .navicon{display:none!important}
+html body .sidebar{background:var(--theme-panel,#fff)!important;border-color:var(--theme-line,#ddd)!important}
+html body .navtitle,html body .nav-folder>summary{background:var(--theme-soft,#eee)!important;color:var(--theme-ink,#333)!important;border-color:var(--theme-accent,#888)!important}
+html body .navbtn{background:transparent!important;color:var(--theme-ink,#333)!important;border-color:transparent!important}
+html body .navbtn:hover,html body .navbtn.active{background:var(--theme-soft,#eee)!important;border:1px dashed var(--theme-accent,#888)!important;color:var(--theme-ink,#333)!important}
