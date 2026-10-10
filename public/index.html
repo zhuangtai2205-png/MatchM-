@@ -950,6 +950,48 @@ body::after{left:0!important;right:0!important;bottom:0!important;width:100%!imp
 #bear-container{outline:none!important;border:0!important;box-shadow:none!important;background:transparent!important}
 #bear-container:hover{filter:drop-shadow(0 -4px 8px #3f2c1c18)!important}
 @media(max-width:650px){body::after{height:76px!important;bottom:0!important}}
+/* Controlled scale + illustrated life-cycle: breathe, feed, snow, hibernate */
+#fat-bear-overlay{z-index:99998!important}
+#bear-container{width:clamp(215px,27vw,310px)!important;height:auto!important;aspect-ratio:320/180;bottom:-2px!important;left:50%!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;max-width:calc(100vw - 24px)!important;overflow:visible!important;z-index:3!important}
+#bear-sprite{width:100%!important;height:auto!important;display:block;overflow:visible;animation:bearIdleBreathe 3.6s ease-in-out infinite;transform-origin:50% 100%;filter:none!important}
+#bear-sprite #bearHead{transform-box:fill-box;transform-origin:center 100%;animation:bearHeadTilt 5.4s ease-in-out infinite}
+@keyframes bearIdleBreathe{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-3px) scaleY(1.012)}}
+@keyframes bearHeadTilt{0%,100%{transform:rotate(0deg)}45%{transform:rotate(-1.7deg)}65%{transform:rotate(1deg)}}
+#bear-container.is-munching #bear-sprite{animation:bearChomp .42s cubic-bezier(.2,.8,.2,1)!important}
+#bear-container.is-munching #bearHead{animation:bearMunchHead .42s ease-in-out!important}
+@keyframes bearMunchHead{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(4px) rotate(-2deg)}65%{transform:translateY(-3px) rotate(1deg)}}
+#bear-container.is-hibernating{transform:translateX(-50%) scale(var(--bear-scale,1)) translateY(6px)!important;filter:drop-shadow(0 -3px 7px #33473320)!important}
+#bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.1s ease-in-out infinite!important;transform-origin:50% 100%}
+#bear-container.is-hibernating #bearHead{animation:bearSleepNod 5s ease-in-out infinite!important}
+@keyframes bearSleepBreathe{0%,100%{transform:translateY(2px) scaleY(.985)}50%{transform:translateY(-1px) scaleY(1.008)}}
+@keyframes bearSleepNod{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2.2deg) translateY(1px)}}
+#bearSleepBlanket{display:none}
+#bear-container.is-hibernating #bearSleepBlanket,#bear-container.is-hibernating #bearSleepQuilt{display:block!important}
+#bear-sleep-z{display:none;position:absolute;right:8%;top:0;width:22%;height:auto;overflow:visible;pointer-events:none;animation:bearZzzFloat 2.6s ease-in-out infinite}
+#bear-container.is-hibernating #bear-sleep-z{display:block!important}
+@keyframes bearZzzFloat{0%,100%{transform:translateY(3px) rotate(-6deg);opacity:.65}50%{transform:translateY(-9px) rotate(3deg);opacity:1}}
+.bear-caption{bottom:6px!important;z-index:3}
+#bear-snow{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .6s;z-index:0}
+#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.48}
+#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.88}
+body[data-fun-effects="off"] #bear-snow{display:none!important}
+.bear-snowflake{position:absolute;top:-8vh;display:block;width:var(--snow-size,13px);height:var(--snow-size,13px);opacity:var(--snow-opacity,.5);pointer-events:none;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite;will-change:transform}
+.bear-snowflake svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1px #688a9a12)}
+@keyframes bearSnowFall{0%{transform:translate3d(0,-10vh,0) rotate(0deg)}100%{transform:translate3d(var(--snow-drift,40px),112vh,0) rotate(320deg)}}
+#funWidget .fun-widget-mascot{width:38px;height:38px;flex:0 0 38px}
+.fun-widget-mascot svg,.fun-toggle-icon svg{display:block;width:100%;height:100%;overflow:visible}
+.fun-toggle-icon{display:inline-grid;place-items:center;width:22px;height:22px}
+.navicon{display:inline-grid!important;place-items:center;flex:0 0 24px}
+.navicon svg{width:21px;height:21px;display:block;overflow:visible}
+.bear-panel-sprite{display:grid;place-items:center;width:92px;height:82px;font-size:0;transform:scale(var(--bear-scale,1));transition:transform .35s}
+.bear-panel-sprite svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 2px 2px #8b684115)}
+.bear-panel-expression{display:none!important}
+#funBearMessage{min-height:31px;line-height:1.5}
+body[data-theme="ocean"] .theme-drift svg,body[data-theme="retro"] .theme-drift svg,body[data-theme="pink"] .theme-drift svg,body[data-theme="vampire"] .theme-drift svg,body[data-theme="cat"] .theme-drift svg,body[data-theme="bear"] .theme-drift svg{filter:drop-shadow(0 1px 1px #5a483512)}
+.cat-flower-particle{width:32px!important;height:32px!important;overflow:visible!important}
+.cat-flower-particle svg{width:100%;height:100%;overflow:visible}
+@media(max-width:650px){#bear-container{width:clamp(190px,43vw,245px)!important;bottom:-2px!important;max-width:calc(100vw - 16px)!important}#bear-sleep-z{width:21%}}
+@media(prefers-reduced-motion:reduce){#bear-sprite,#bear-sprite #bearHead,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite,#bear-snow .bear-snowflake,.bear-snowflake{animation:none!important;transition:none!important}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -986,26 +1028,28 @@ body::after{left:0!important;right:0!important;bottom:0!important;width:100%!imp
    <circle cx="207" cy="49" r="9" fill="#7c3d20" stroke="#78350f" stroke-width="2"/>
    <path id="bearHead" d="M85 77 C78 56 91 32 118 30 C137 27 148 37 159 43 C178 31 204 42 222 60 C239 80 220 103 194 108 L121 108 C99 104 88 94 85 77Z" fill="#c46a24" stroke="#78350f" stroke-width="4" stroke-dasharray="3 1.5"/>
    <path d="M100 68 Q118 61 132 70 M185 69 Q202 60 216 71" fill="none" stroke="#e9a55d" stroke-width="2.4" stroke-dasharray="2 2"/>
-   <path d="M125 70 Q133 62 141 70" fill="none" stroke="#422519" stroke-width="3.4"/>
-   <path d="M181 70 Q189 62 197 70" fill="none" stroke="#422519" stroke-width="3.4"/>
+   <path id="bearEyeLeft" d="M125 70 Q133 62 141 70" fill="none" stroke="#422519" stroke-width="3.4"/>
+   <path id="bearEyeRight" d="M181 70 Q189 62 197 70" fill="none" stroke="#422519" stroke-width="3.4"/>
    <ellipse cx="160" cy="84" rx="35" ry="24" fill="#f6d2a0" stroke="#78350f" stroke-width="3" stroke-dasharray="3 1.5"/>
    <path d="M151 76 Q160 70 169 77 Q168 85 160 86 Q152 85 151 76Z" fill="#4a2c20" stroke="#462819" stroke-width="2"/>
    <path id="bear-mouth" d="M145 88 Q160 100 176 88" fill="none" stroke="#542b20" stroke-width="3" stroke-linecap="round"/>
    <path d="M160 86 L160 91" fill="none" stroke="#542b20" stroke-width="2.5"/>
    <path d="M119 94 Q128 101 137 96 M182 96 Q192 101 201 94" fill="none" stroke="#b75d35" stroke-width="2" stroke-dasharray="2 2"/>
    <path d="M44 112 Q56 118 58 127 M272 113 Q263 120 265 129 M105 117 Q114 122 118 129 M207 120 Q215 116 222 123" fill="none" stroke="#763a1b" stroke-width="1.5" stroke-dasharray="2 3" opacity=".75"/>
+   <path id="bearSleepBlanket" d="M39 128 Q61 109 94 126 Q126 145 159 127 Q195 108 226 127 Q255 117 281 136 L276 157 Q163 177 45 159Z" fill="#81996a" stroke="#4d6846" stroke-width="3" stroke-dasharray="4 2" style="display:none"/>
+   <path id="bearSleepQuilt" d="M64 137 Q88 133 109 146 M131 151 Q160 157 184 145 M210 145 Q233 133 257 142" fill="none" stroke="#d7e3b9" stroke-width="2" stroke-dasharray="3 3" style="display:none"/>
   </g>
  </svg>
- <span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
+ <svg id="bear-sleep-z" viewBox="0 0 68 30" aria-hidden="true"><path d="M3 5 H21 L4 24 H24 M29 3 H47 L30 21 H50 M52 5 H66 L53 21 H66" fill="none" stroke="#75563d" stroke-width="2.7" stroke-dasharray="3 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
 </button>
- <div id="fish-pool" aria-label="Cá cho gấu ăn"></div><div id="bear-plus-layer" aria-hidden="true"></div>
+ <div id="bear-snow" aria-hidden="true"></div><div id="fish-pool" aria-label="Cá cho gấu ăn"></div><div id="bear-plus-layer" aria-hidden="true"></div>
 </div>
 <aside id="funWidget" class="fun-widget" hidden aria-label="Góc Gấu MatchMã">
  <div class="fun-widget-bar" id="funWidgetDragBar"><div class="fun-widget-brand"><span class="fun-widget-mascot">🐻</span><div><strong data-i18n="funTitle">Góc Gấu MatchMã</strong><small data-i18n="funSubTitle">Cho gấu ăn cá · hiệu ứng vui</small></div></div>
  <div class="fun-widget-actions"><button type="button" id="funMinimizeBtn" title="Thu gọn" aria-label="Thu gọn">−</button><button type="button" id="funMaximizeBtn" title="Phóng to" aria-label="Phóng to">□</button><button type="button" id="funCloseBtn" title="Tắt góc gấu" aria-label="Tắt">×</button></div></div>
  <div class="fun-widget-content"><p class="fun-widget-intro" data-i18n="funIntro">Bấm cá đang bơi trên trang để cho gấu ăn. Mỗi con cá làm gấu lớn thêm một chút.</p>
  <div class="bear-stats"><div><small data-i18n="funFishEaten">Cá đã ăn</small><b id="funFishCount">0</b></div><div><small data-i18n="funBearStage">Trạng thái gấu</small><b id="funBearStage">Gấu đói bụng</b></div><div><small data-i18n="funGrowth">Kích thước</small><b id="funBearGrowth">100%</b></div></div>
- <div class="bear-panel-preview"><span class="bear-panel-sprite" id="funBearPreview">🐻</span><span class="bear-panel-expression" id="funBearFace">🥺</span><p id="funBearMessage" aria-live="polite" data-i18n="funWelcome">Gấu đang đợi cá. Bấm vào một con cá để bắt đầu!</p></div>
+ <div class="bear-panel-preview"><span class="bear-panel-sprite" id="funBearPreview" aria-hidden="true"></span><span class="bear-panel-expression" id="funBearFace" aria-hidden="true">🥺</span><p id="funBearMessage" aria-live="polite" data-i18n="funWelcome">Gấu đang đợi cá. Bấm vào một con cá để bắt đầu!</p></div>
  <div class="fun-footer-actions"><button type="button" class="btn" id="funSpawnFish" data-i18n="funMoreFish">Thả thêm cá 🐟</button><button type="button" class="btn alt" id="funResetBear" data-i18n="funReset">Cho chơi lại</button></div>
  <div class="fun-effects-row"><span data-i18n="funEffectsLabel">Hiệu ứng nền</span><button type="button" id="funEffectsToggle" aria-pressed="true" data-i18n="funEffectsOff">Tắt hiệu ứng</button></div>
  <p class="fun-local-note" data-i18n="funLocalNote">Góc giải trí không ảnh hưởng dữ liệu đối chiếu. Bộ đếm chỉ lưu trên thiết bị này.</p>
@@ -1575,7 +1619,7 @@ function updateThemeDecorations(theme){
   vampire:{overview:'🦇',catalog:'🕸️',run:'🗡️',results:'🕯️',memory:'🦇',platforms:'🎃',autofill:'☠️',stockforecast:'🩸',account:'🦇',settings:'🕷️'},
   cat:{overview:'🐈',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},bear:{overview:'🐻',intro:'🐾',catalog:'🐟',run:'🐻‍❄️',results:'🐾',memory:'🍯',platforms:'🐟',autofill:'🌲',stockforecast:'🐟',account:'🐻',settings:'🍃'}
  };
- document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&iconMaps[theme][page])icon.textContent=iconMaps[theme][page]});
+ document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&iconMaps[theme][page]){icon.innerHTML=themeDoodleSvg(theme,Math.max(0,Object.keys(iconMaps[theme]).indexOf(page)));icon.setAttribute('aria-hidden','true')}});
 }
 function updateThemeScene(theme){
  const root=$('themeScene');if(!root)return;root.textContent='';
@@ -1590,50 +1634,112 @@ function updateThemeScene(theme){
  spots.forEach((p,i)=>{const el=document.createElement('span');el.className='theme-drift';el.innerHTML=themeDoodleSvg(theme,i);el.style.setProperty('--x',p[0]+'%');el.style.setProperty('--y',p[1]+'%');el.style.setProperty('--size',p[2]+'px');el.style.setProperty('--opacity',theme==='retro'?'0.17':theme==='vampire'?'0.23':'0.19');el.style.setProperty('--dur',(4.2+(i%5)*.7)+'s');el.style.setProperty('--delay',(-i*.63)+'s');el.style.setProperty('--dx',((i%2?1:-1)*(7+i%4*4))+'px');el.style.setProperty('--dy',(-9-i%3*5)+'px');el.style.setProperty('--turn',((i%2?1:-1)*8)+'deg');root.appendChild(el)});
 }
 
-const BEAR_EATEN_KEY='matchma-bear-fish-eaten-v1',BEAR_EFFECT_KEY='matchma-bear-effects-v1';
+const BEAR_EATEN_KEY='matchma-bear-fish-eaten-v2',BEAR_EFFECT_KEY='matchma-bear-effects-v1';
 let fishEaten=0,fishSerial=0;
 try{fishEaten=Math.max(0,Math.min(10000,Number(localStorage.getItem(BEAR_EATEN_KEY))||0))}catch(e){fishEaten=0}
-function bearScale(){const base=$('bear-container');const width=base?base.offsetWidth:320;const fitCap=window.innerWidth/(Math.max(1,width)*1.08);return Math.min(2,fitCap,1+fishEaten*.12)}
-function bearStageKey(){return fishEaten>=10?'funKing':fishEaten>=7?'funFull':fishEaten>=4?'funChubby':fishEaten>=1?'funHappy':'funHungry'}
-function bearExpression(){return fishEaten>=10?'🤩':fishEaten>=7?'😋':fishEaten>=4?'😌':fishEaten>=1?'😊':'🥺'}
+const BEAR_HIBERNATE_AT=10;
+let bearHibernating=false,bearHibernateTimer=null,bearSnowLevel='';
+function bearScale(){
+ const base=$('bear-container'),width=base?base.offsetWidth:300;
+ const fitCap=Math.max(1,Math.min(1.72,(window.innerWidth-24)/(Math.max(1,width)*1.04)));
+ return Math.min(fitCap,1+Math.min(fishEaten,9)*.075);
+}
+function bearStageKey(){if(bearHibernating)return 'funSleeping';return fishEaten>=9?'funKing':fishEaten>=7?'funFull':fishEaten>=4?'funChubby':fishEaten>=1?'funHappy':'funHungry'}
+function bearExpression(){return bearHibernating?'😴':fishEaten>=9?'😌':fishEaten>=7?'😋':fishEaten>=4?'😊':fishEaten>=1?'☺':'•'}
 let bearVisualScale=1,bearScaleVelocity=0,bearScaleFrame=0,bearLastFrame=0,bearReady=false;
 function animateBearScale(target){
  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){bearVisualScale=target;bearScaleVelocity=0;document.documentElement.style.setProperty('--bear-scale',String(target));return}
- if(bearScaleFrame)cancelAnimationFrame(bearScaleFrame);
- bearLastFrame=0;
+ if(bearScaleFrame)cancelAnimationFrame(bearScaleFrame);bearLastFrame=0;
  const tick=(now)=>{
   const dt=Math.min(.032,Math.max(.001,(now-(bearLastFrame||now))/1000));bearLastFrame=now;
-  const acceleration=(target-bearVisualScale)*125-bearScaleVelocity*21;
-  bearScaleVelocity+=acceleration*dt;bearVisualScale+=bearScaleVelocity*dt;
+  const acceleration=(target-bearVisualScale)*105-bearScaleVelocity*20;bearScaleVelocity+=acceleration*dt;bearVisualScale+=bearScaleVelocity*dt;
   if(Math.abs(target-bearVisualScale)<.002&&Math.abs(bearScaleVelocity)<.015){bearVisualScale=target;bearScaleVelocity=0;document.documentElement.style.setProperty('--bear-scale',String(target));bearScaleFrame=0;return}
   document.documentElement.style.setProperty('--bear-scale',String(bearVisualScale));bearScaleFrame=requestAnimationFrame(tick)
  };
  bearScaleFrame=requestAnimationFrame(tick)
+}
+function bearSnowflakeSvg(i=0){
+ const stroke=i%2?'#8db9cd':'#b4c8d1';
+ return '<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="'+stroke+'" stroke-width="1.65" stroke-dasharray="2.2 1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2 V30 M3.7 9 L28.3 23 M3.7 23 L28.3 9"/><path d="M12 5 L16 9 L20 5 M12 27 L16 23 L20 27 M4 14 L9 14 L8 9 M24 23 L23 18 L28 18 M4 18 L9 18 L8 23 M24 9 L23 14 L28 14"/></g></svg>';
+}
+function renderBearSnow(){
+ const root=$('bear-snow'),overlay=$('fat-bear-overlay');if(!root||!overlay)return;
+ const level=fishEaten>=8?'heavy':fishEaten>=4?'light':'off';
+ if(level==='off'){root.replaceChildren();overlay.dataset.snowLevel='off';bearSnowLevel='off';return}
+ const count=level==='heavy'?30:17;
+ if(bearSnowLevel!==level||root.childElementCount!==count){
+  root.replaceChildren();
+  for(let i=0;i<count;i++){
+   const flake=document.createElement('span');flake.className='bear-snowflake';flake.innerHTML=bearSnowflakeSvg(i);
+   flake.style.left=(Math.random()*100)+'%';
+   flake.style.setProperty('--snow-size',(7+Math.random()*(level==='heavy'?15:11))+'px');
+   flake.style.setProperty('--snow-duration',(8+Math.random()*(level==='heavy'?7:9))+'s');
+   flake.style.setProperty('--snow-delay',(-Math.random()*17)+'s');
+   flake.style.setProperty('--snow-drift',((Math.random()-.5)*190)+'px');
+   flake.style.setProperty('--snow-opacity',(0.32+Math.random()*.52).toFixed(2));
+   flake.style.top=(-4-Math.random()*24)+'vh';root.appendChild(flake);
+  }
+  bearSnowLevel=level;
+ }
+ overlay.dataset.snowLevel=level;
 }
 function updateBearDisplay(){
  const scale=bearScale(),title=tr(bearStageKey()),count=tr('funFishCountLabel').replace('{count}',fishEaten);
  if(!bearReady){bearVisualScale=scale;document.documentElement.style.setProperty('--bear-scale',String(scale));bearReady=true}else animateBearScale(scale);
  const sprite=$('bear-sprite'),body=sprite&&sprite.querySelector('#bearBody'),head=sprite&&sprite.querySelector('#bearHead'),mouth=sprite&&sprite.querySelector('#bear-mouth');
  if(body){body.setAttribute('fill',fishEaten>=4?'#9a3412':'#b45309');body.setAttribute('stroke-dasharray',fishEaten>=4?'3 .8':'3 1.5')}
- if(head){head.setAttribute('fill',fishEaten>=4?'#ae481b':'#c46a24')}
- if(mouth){mouth.setAttribute('d',fishEaten>=1?'M145 86 Q160 103 176 86':'M145 89 Q160 79 176 89')}
+ if(head)head.setAttribute('fill',fishEaten>=4?'#ae481b':'#c46a24');
+ if(mouth)mouth.setAttribute('d',bearHibernating?'M145 88 Q160 92 176 88':fishEaten>=1?'M145 86 Q160 103 176 86':'M145 89 Q160 79 176 89');
+ const leftEye=sprite&&sprite.querySelector('#bearEyeLeft'),rightEye=sprite&&sprite.querySelector('#bearEyeRight');
+ if(leftEye)leftEye.setAttribute('d',bearHibernating?'M125 67 Q133 77 141 67':'M125 70 Q133 62 141 70');
+ if(rightEye)rightEye.setAttribute('d',bearHibernating?'M181 67 Q189 77 197 67':'M181 70 Q189 62 197 70');
+ const blanket=sprite&&sprite.querySelector('#bearSleepBlanket'),quilt=sprite&&sprite.querySelector('#bearSleepQuilt');
+ if(blanket)blanket.style.display=bearHibernating?'block':'none';if(quilt)quilt.style.display=bearHibernating?'block':'none';
+ const sleepZ=$('bear-sleep-z');if(sleepZ)sleepZ.style.display=bearHibernating?'block':'none';
  const preview=$('funBearPreview'),previewFace=$('funBearFace');
- if(preview)preview.textContent=fishEaten>=10?'🐻‍❄️':'🐻';
+ if(preview)preview.innerHTML=themeDoodleSvg('bear',Math.min(2,Math.floor(fishEaten/3)));
  if(previewFace)previewFace.textContent=bearExpression();
- if($('bear-caption-title'))$('bear-caption-title').textContent=title;if($('bear-caption-count'))$('bear-caption-count').textContent=count;
- if($('funFishCount'))$('funFishCount').textContent=String(fishEaten);if($('funBearStage'))$('funBearStage').textContent=title;if($('funBearGrowth'))$('funBearGrowth').textContent=Math.round(scale*100)+'%';
- if($('funBearMessage')&&$('funBearMessage').dataset.manual!=='1')$('funBearMessage').textContent=fishEaten?tr('funChomp'):tr('funWelcome');
+ if($('bear-caption-title'))$('bear-caption-title').textContent=title;
+ if($('bear-caption-count'))$('bear-caption-count').textContent=count;
+ if($('funFishCount'))$('funFishCount').textContent=String(fishEaten);
+ if($('funBearStage'))$('funBearStage').textContent=title;
+ if($('funBearGrowth'))$('funBearGrowth').textContent=Math.round(scale*100)+'%';
+ if($('funBearMessage')&&$('funBearMessage').dataset.manual!=='1')$('funBearMessage').textContent=bearHibernating?tr('funSleepText'):fishEaten?tr('funChomp'):tr('funWelcome');
+ renderBearSnow();
 }
-
 function showBearPlus(x,y,textValue){const layer=$('bear-plus-layer');if(!layer)return;const p=document.createElement('span');p.className='bear-plus-one';p.textContent=textValue||tr('funChomp');p.style.left=x+'px';p.style.top=y+'px';layer.appendChild(p);setTimeout(()=>p.remove(),950)}
-function fishPosition(){const width=window.innerWidth,height=window.innerHeight;const x=18+Math.random()*Math.max(40,width-100);const band=Math.min(265,Math.max(115,height*.28));const y=height-55-Math.random()*band;return{x:Math.max(8,Math.min(x,width-58)),y:Math.max(60,Math.min(y,height-54))}}
-function spawnBearFish(n=1){const pool=$('fish-pool'),overlay=$('fat-bear-overlay');if(!pool||overlay.hidden)return;for(let i=0;i<n&&pool.children.length<9;i++){const fish=document.createElement('button');fish.type='button';fish.className='bear-fish';fish.innerHTML=themeFishSvg(Math.floor(Math.random()*6));fish.setAttribute('aria-label',lang==='vi'?'Bấm để cho gấu ăn cá':'Click to feed the bear');fish.title=lang==='vi'?'Cho gấu ăn':'Feed the bear';const p=fishPosition();fish.style.left=p.x+'px';fish.style.top=p.y+'px';fish.style.setProperty('--fish-dx',((Math.random()-.5)*48)+'px');fish.style.setProperty('--fish-dy',((Math.random()-.5)*36)+'px');fish.style.setProperty('--fish-speed',(2.3+Math.random()*2)+'s');fish.dataset.fishId=String(++fishSerial);fish.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();feedBear(fish,e.clientX,e.clientY)});pool.appendChild(fish)}}
-function feedBear(fish,x,y){if(!fish||!fish.isConnected)return;fish.disabled=true;fish.style.transition='transform .28s,opacity .28s';fish.style.transform='scale(.2) rotate(35deg)';fish.style.opacity='0';const rect=fish.getBoundingClientRect();const px=Number.isFinite(x)?x:rect.left,py=Number.isFinite(y)?y:rect.top;fishEaten++;try{localStorage.setItem(BEAR_EATEN_KEY,String(fishEaten))}catch(e){}fish.remove();updateBearDisplay();showBearPlus(px,py);const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funChomp');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1200)}if(!$('fat-bear-overlay').hidden&&$('fish-pool').children.length<7)setTimeout(()=>spawnBearFish(1),380);if(document.body.dataset.funEffects!=='off')spawnBearConfetti(px,py)}
-function petBear(){const mouth=$('bear-sprite')&&$('bear-sprite').querySelector('#bear-mouth');if(mouth)mouth.setAttribute('d','M143 85 Q160 106 178 85');if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funPet');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay()},1300)}const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}}
+function fishPosition(){const width=window.innerWidth,height=window.innerHeight;const band=Math.min(235,Math.max(110,height*.27));const x=20+Math.random()*Math.max(35,width-95);const y=height-48-Math.random()*band;return{x:Math.max(9,Math.min(x,width-62)),y:Math.max(56,Math.min(y,height-52))}}
+function spawnBearFish(n=1){const pool=$('fish-pool'),overlay=$('fat-bear-overlay');if(!pool||overlay.hidden||bearHibernating)return;for(let i=0;i<n&&pool.children.length<8;i++){const fish=document.createElement('button');fish.type='button';fish.className='bear-fish';fish.innerHTML=themeFishSvg(Math.floor(Math.random()*6));fish.setAttribute('aria-label',lang==='vi'?'Bấm để cho gấu ăn cá':'Click to feed the bear');fish.title=lang==='vi'?'Cho gấu ăn':'Feed the bear';const p=fishPosition();fish.style.left=p.x+'px';fish.style.top=p.y+'px';fish.style.setProperty('--fish-dx',((Math.random()-.5)*48)+'px');fish.style.setProperty('--fish-dy',((Math.random()-.5)*36)+'px');fish.style.setProperty('--fish-speed',(2.3+Math.random()*2)+'s');fish.dataset.fishId=String(++fishSerial);fish.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();feedBear(fish,e.clientX,e.clientY)});pool.appendChild(fish)}}
+function feedBear(fish,x,y){
+ if(!fish||!fish.isConnected||bearHibernating)return;
+ fish.disabled=true;fish.style.transition='transform .26s,opacity .26s';fish.style.transform='scale(.1) rotate(28deg)';fish.style.opacity='0';
+ const rect=fish.getBoundingClientRect(),px=Number.isFinite(x)?x:rect.left,py=Number.isFinite(y)?y:rect.top;
+ fishEaten++;try{localStorage.setItem(BEAR_EATEN_KEY,String(fishEaten))}catch(e){}
+ fish.remove();updateBearDisplay();showBearPlus(px,py);
+ const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}
+ if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funChomp');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1000)}
+ if(fishEaten>=BEAR_HIBERNATE_AT){if(bearHibernateTimer)clearTimeout(bearHibernateTimer);bearHibernateTimer=setTimeout(goBearHibernation,2600)}
+ else if(!$('fat-bear-overlay').hidden&&$('fish-pool').children.length<6)setTimeout(()=>spawnBearFish(1),420);
+ if(document.body.dataset.funEffects!=='off')spawnBearConfetti(px,py);
+}
+function goBearHibernation(){
+ bearHibernateTimer=null;if(fishEaten<BEAR_HIBERNATE_AT)return;
+ bearHibernating=true;
+ const bear=$('bear-container');if(bear)bear.classList.add('is-hibernating');
+ const pool=$('fish-pool');if(pool)pool.replaceChildren();
+ if($('funBearMessage')){delete $('funBearMessage').dataset.manual;$('funBearMessage').textContent=tr('funSleepText')}
+ updateBearDisplay();
+}
+function petBear(){
+ if(bearHibernating){resetBear();if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funWakeText');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1600)}return}
+ const mouth=$('bear-sprite')&&$('bear-sprite').querySelector('#bear-mouth');if(mouth)mouth.setAttribute('d','M143 85 Q160 106 178 85');
+ if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funPet');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay()},1300)}
+ const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}
+}
 function spawnBearConfetti(x,y){const layer=$('bear-plus-layer');if(!layer)return;const arr=document.body.dataset.theme==='bear'?['🍃','🐟','🐾','✨']:['🐟','✨','🐾','💚'];for(let i=0;i<6;i++){const p=document.createElement('span');p.className='bear-plus-one';p.textContent=arr[Math.floor(Math.random()*arr.length)];p.style.left=(x+(Math.random()-.5)*100)+'px';p.style.top=(y+(Math.random()-.5)*40)+'px';p.style.animationDelay=(Math.random()*100)+'ms';layer.appendChild(p);setTimeout(()=>p.remove(),1050)}}
-function resetBear(){fishEaten=0;bearScaleVelocity=0;try{localStorage.setItem(BEAR_EATEN_KEY,'0')}catch(e){}const pool=$('fish-pool');if(pool)pool.textContent='';if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay();spawnBearFish(7)}
-function setFunWidgetOpen(open){const widget=$('funWidget'),btn=$('funToggleBtn'),overlay=$('fat-bear-overlay');if(!widget||!btn||!overlay)return;widget.hidden=!open;overlay.hidden=!open;overlay.setAttribute('aria-hidden',String(!open));btn.setAttribute('aria-expanded',String(!!open));btn.title=tr(open?'funClose':'funTitleButton');if(open){widget.classList.remove('is-minimized','is-maximized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent='□';updateBearDisplay();if(!$('fish-pool').children.length)spawnBearFish(7)}}
-function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overlay=$('fat-bear-overlay'),drag=$('funWidgetDragBar');if(!btn||!widget||!overlay)return;btn.addEventListener('click',()=>setFunWidgetOpen(widget.hidden));$('funCloseBtn').addEventListener('click',()=>setFunWidgetOpen(false));$('funMinimizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-minimized');$('funMinimizeBtn').textContent=widget.classList.contains('is-minimized')?'+':'−';$('funMinimizeBtn').title=tr(widget.classList.contains('is-minimized')?'funExpand':'funMinimize')});$('funMaximizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-maximized');widget.classList.remove('is-minimized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent=widget.classList.contains('is-maximized')?'❐':'□';$('funMaximizeBtn').title=tr(widget.classList.contains('is-maximized')?'funRestore':'funMaximize')});$('funResetBear').addEventListener('click',resetBear);$('funSpawnFish').addEventListener('click',()=>{spawnBearFish(3);if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=lang==='vi'?'Đã thả thêm cá! Hãy bắt một con cho gấu.':'More fish added! Catch one for the bear.';setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1300)}});$('funEffectsToggle').addEventListener('click',()=>{const off=document.body.dataset.funEffects!=='off';document.body.dataset.funEffects=off?'off':'on';$('funEffectsToggle').textContent=tr(off?'funEffectsOn':'funEffectsOff');$('funEffectsToggle').setAttribute('aria-pressed',String(!off));try{localStorage.setItem(BEAR_EFFECT_KEY,off?'0':'1')}catch(e){}});$('bear-container').addEventListener('click',petBear);let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;drag.addEventListener('pointerdown',e=>{if(e.target.closest('button')||widget.classList.contains('is-maximized'))return;dragging=true;const r=widget.getBoundingClientRect();startX=e.clientX;startY=e.clientY;startLeft=r.left;startTop=r.top;widget.style.left=r.left+'px';widget.style.top=r.top+'px';widget.style.right='auto';widget.style.bottom='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){} });drag.addEventListener('pointermove',e=>{if(!dragging)return;const maxLeft=Math.max(0,window.innerWidth-widget.offsetWidth),maxTop=Math.max(0,window.innerHeight-65);widget.style.left=Math.min(maxLeft,Math.max(0,startLeft+e.clientX-startX))+'px';widget.style.top=Math.min(maxTop,Math.max(0,startTop+e.clientY-startY))+'px'});const stop=()=>{dragging=false};drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);let effects=true;try{effects=localStorage.getItem(BEAR_EFFECT_KEY)!=='0'}catch(e){}document.body.dataset.funEffects=effects?'on':'off';$('funEffectsToggle').textContent=tr(effects?'funEffectsOff':'funEffectsOn');$('funEffectsToggle').setAttribute('aria-pressed',String(effects));updateBearDisplay()}
+function resetBear(){if(bearHibernateTimer){clearTimeout(bearHibernateTimer);bearHibernateTimer=null}bearHibernating=false;fishEaten=0;bearScaleVelocity=0;bearSnowLevel='';const bear=$('bear-container');if(bear)bear.classList.remove('is-hibernating');try{localStorage.setItem(BEAR_EATEN_KEY,'0')}catch(e){}const pool=$('fish-pool');if(pool)pool.textContent='';if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay();spawnBearFish(7)}
+function setFunWidgetOpen(open){const widget=$('funWidget'),btn=$('funToggleBtn'),overlay=$('fat-bear-overlay');if(!widget||!btn||!overlay)return;widget.hidden=!open;overlay.hidden=!open;overlay.setAttribute('aria-hidden',String(!open));btn.setAttribute('aria-expanded',String(!!open));btn.title=tr(open?'funClose':'funTitleButton');if(open){widget.classList.remove('is-minimized','is-maximized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent='□';updateBearDisplay();if(!$('fish-pool').children.length&&!bearHibernating)spawnBearFish(7)}}
+function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overlay=$('fat-bear-overlay'),drag=$('funWidgetDragBar');if(!btn||!widget||!overlay)return;btn.addEventListener('click',()=>setFunWidgetOpen(widget.hidden));$('funCloseBtn').addEventListener('click',()=>setFunWidgetOpen(false));$('funMinimizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-minimized');$('funMinimizeBtn').textContent=widget.classList.contains('is-minimized')?'+':'−';$('funMinimizeBtn').title=tr(widget.classList.contains('is-minimized')?'funExpand':'funMinimize')});$('funMaximizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-maximized');widget.classList.remove('is-minimized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent=widget.classList.contains('is-maximized')?'❐':'□';$('funMaximizeBtn').title=tr(widget.classList.contains('is-maximized')?'funRestore':'funMaximize')});$('funResetBear').addEventListener('click',resetBear);$('funSpawnFish').addEventListener('click',()=>{spawnBearFish(3);if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=lang==='vi'?'Đã thả thêm cá! Hãy bắt một con cho gấu.':'More fish added! Catch one for the bear.';setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1300)}});$('funEffectsToggle').addEventListener('click',()=>{const off=document.body.dataset.funEffects!=='off';document.body.dataset.funEffects=off?'off':'on';$('funEffectsToggle').textContent=tr(off?'funEffectsOn':'funEffectsOff');$('funEffectsToggle').setAttribute('aria-pressed',String(!off));try{localStorage.setItem(BEAR_EFFECT_KEY,off?'0':'1')}catch(e){}});$('bear-container').addEventListener('click',petBear);let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;drag.addEventListener('pointerdown',e=>{if(e.target.closest('button')||widget.classList.contains('is-maximized'))return;dragging=true;const r=widget.getBoundingClientRect();startX=e.clientX;startY=e.clientY;startLeft=r.left;startTop=r.top;widget.style.left=r.left+'px';widget.style.top=r.top+'px';widget.style.right='auto';widget.style.bottom='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){} });drag.addEventListener('pointermove',e=>{if(!dragging)return;const maxLeft=Math.max(0,window.innerWidth-widget.offsetWidth),maxTop=Math.max(0,window.innerHeight-65);widget.style.left=Math.min(maxLeft,Math.max(0,startLeft+e.clientX-startX))+'px';widget.style.top=Math.min(maxTop,Math.max(0,startTop+e.clientY-startY))+'px'});const stop=()=>{dragging=false};drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);let effects=true;try{effects=localStorage.getItem(BEAR_EFFECT_KEY)!=='0'}catch(e){}document.body.dataset.funEffects=effects?'on':'off';$('funEffectsToggle').textContent=tr(effects?'funEffectsOff':'funEffectsOn');$('funEffectsToggle').setAttribute('aria-pressed',String(effects));updateBearDisplay();if(fishEaten>=BEAR_HIBERNATE_AT)goBearHibernation();const mascot=$('funWidget').querySelector('.fun-widget-mascot');if(mascot)mascot.innerHTML=themeDoodleSvg('bear',0);const toggleIcon=$('funToggleBtn').querySelector('.fun-toggle-icon');if(toggleIcon)toggleIcon.innerHTML=themeDoodleSvg('bear',0)}
 
 const THEME_KEY='matchma-theme-v1';
 function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
@@ -1844,6 +1950,12 @@ Object.assign(I18N.de,{themeBear:'🐻 Bärenwald',navIntro:'Überblick & Anleit
 Object.assign(I18N['zh-TW'],{themeBear:'🐻 森林熊',navIntro:'介紹與指南',introEyebrow:'MATCHMÃ · 快速指南',introTitle:'關於 MatchMã',introLead:'MatchMã 統一商品名稱並找出不同檔案中的可能相符項目，協助您加快檢查，同時保留最終判斷權。',introStart:'從標準目錄開始 →',introTry:'試著檢查 →',introPurposeTitle:'用途',introPurposeText:'找出名稱不同但可能是同一商品的項目，確認前比對 SKU、名稱、規格與單位。',introFilesTitle:'準備資料',introFilesText:'先載入含 SKU 的標準目錄。匯入時使用範本以保持欄名與資料型態一致。',introMatchTitle:'檢查並確認',introMatchText:'載入檔案、對應欄位並執行比對。確認前請檢查相似度與警示。',introSaveTitle:'儲存與隱私',introSaveText:'登入後可同步確認記憶與個人目錄。檔案會在瀏覽器中處理。',introWorkflowTitle:'建議流程',introWorkflowText:'依序操作可減少欄位錯誤與誤確認。',introStep1Title:'載入標準目錄',introStep1Text:'確認 SKU、商品名稱、規格與單位。',introStep2Title:'載入待檢查檔案',introStep2Text:'選擇商品名稱、代碼與可用屬性欄。',introStep3Title:'檢查結果',introStep3Text:'篩選需複查的列，核對候選項後匯出 Excel。',introStep4Title:'儲存個人記憶',introStep4Text:'登入以跨裝置同步確認記憶與個人目錄。',introOpen:'開啟 →',introNotice:'MatchMã 只提供建議，不能取代業務檢查。名稱相同不代表規格相同；缺少 SKU 或屬性衝突時需人工複查。',funOpen:'熊熊角落',funTitle:'MatchMã 熊熊角落',funSubTitle:'餵熊吃魚 · 趣味效果',funIntro:'點擊頁面上游動的魚來餵熊。每吃一條魚，熊就會長大一點。',funFishEaten:'吃掉的魚',funBearStage:'熊的狀態',funGrowth:'體型',funWelcome:'熊正在等魚，點一條魚開始吧！',funMoreFish:'再放一些魚 🐟',funReset:'重新開始',funEffectsLabel:'背景效果',funEffectsOff:'關閉效果',funEffectsOn:'開啟效果',funLocalNote:'趣味遊戲不影響比對資料。計數只保存在這台裝置。',funHungry:'肚子餓的熊',funHappy:'開心的熊',funChubby:'圓滾滾的熊',funFull:'吃飽的熊',funKing:'鮭魚之王',funFishCountLabel:'吃了 {count} 條魚',funChomp:'咔嚓！+1 條魚 🐟',funPet:'熊熊喜歡被摸摸！',funClose:'關閉熊熊角落',funMinimize:'收合',funExpand:'展開',funMaximize:'放大',funRestore:'還原',funTitleButton:'開啟熊熊角落'});
 Object.assign(I18N['zh-CN'],{themeBear:'🐻 森林熊',navIntro:'介绍与指南',introEyebrow:'MATCHMÃ · 快速指南',introTitle:'关于 MatchMã',introLead:'MatchMã 统一商品名称并找出不同文件中的可能匹配项，帮助您更快检查，同时保留最终判断权。',introStart:'从标准目录开始 →',introTry:'试着检查 →',introPurposeTitle:'用途',introPurposeText:'找出名称不同但可能是同一商品的项目，确认前比对 SKU、名称、规格和单位。',introFilesTitle:'准备数据',introFilesText:'先加载含 SKU 的标准目录。导入时使用模板以保持列名与数据类型一致。',introMatchTitle:'检查并确认',introMatchText:'加载文件、映射字段并运行比对。确认前请检查相似度和警告。',introSaveTitle:'存储与隐私',introSaveText:'登录后可同步确认记忆与个人目录。文件会在浏览器中处理。',introWorkflowTitle:'建议流程',introWorkflowText:'按步骤操作可减少字段错误和误确认。',introStep1Title:'加载标准目录',introStep1Text:'确认 SKU、商品名称、规格和单位。',introStep2Title:'加载待检查文件',introStep2Text:'选择商品名称、商品代码及可用属性列。',introStep3Title:'检查结果',introStep3Text:'筛选需复查的行，核对候选项后导出 Excel。',introStep4Title:'保存个人记忆',introStep4Text:'登录以跨设备同步确认记忆与个人目录。',introOpen:'打开 →',introNotice:'MatchMã 只提供建议，不能取代业务检查。名称相同不代表规格相同；缺少 SKU 或属性冲突时需人工复查。',funOpen:'熊熊角落',funTitle:'MatchMã 熊熊角落',funSubTitle:'喂熊吃鱼 · 趣味效果',funIntro:'点击页面上游动的鱼来喂熊。每吃一条鱼，熊就会长大一点。',funFishEaten:'吃掉的鱼',funBearStage:'熊的状态',funGrowth:'体型',funWelcome:'熊正在等鱼，点击一条鱼开始吧！',funMoreFish:'再放一些鱼 🐟',funReset:'重新开始',funEffectsLabel:'背景效果',funEffectsOff:'关闭效果',funEffectsOn:'开启效果',funLocalNote:'趣味游戏不会影响比对数据。计数只保存在这台设备。',funHungry:'肚子饿的熊',funHappy:'开心的熊',funChubby:'圆滚滚的熊',funFull:'吃饱的熊',funKing:'鲑鱼之王',funFishCountLabel:'吃了 {count} 条鱼',funChomp:'咔嚓！+1 条鱼 🐟',funPet:'熊熊喜欢被摸摸！',funClose:'关闭熊熊角落',funMinimize:'收起',funExpand:'展开',funMaximize:'放大',funRestore:'还原',funTitleButton:'打开熊熊角落'});
 
+
+Object.assign(I18N.vi,{funSleeping:'Đang ngủ đông',funSleepText:'Gấu đã ăn no, cuộn mình ngủ đông. Bấm gấu hoặc “Cho chơi lại” để thức dậy.',funWakeText:'Gấu vừa thức dậy! Cùng bắt cá nhé.',funPet:'Gấu thích được vuốt ve!',funSnow:'Tuyết đang rơi'});
+Object.assign(I18N.en,{funSleeping:'Hibernating',funSleepText:'The bear is full and curled up for winter sleep. Tap the bear or “Play again” to wake it.',funWakeText:'The bear woke up! Let’s catch some fish.',funPet:'The bear loves a gentle pat!',funSnow:'Snow is falling'});
+Object.assign(I18N.de,{funSleeping:'Winterschlaf',funSleepText:'Der Bär ist satt und schläft eingerollt. Tippe auf den Bären oder „Neu spielen“, um ihn zu wecken.',funWakeText:'Der Bär ist wach! Lass uns Fische fangen.',funPet:'Der Bär mag sanfte Streicheleinheiten!',funSnow:'Es schneit'});
+Object.assign(I18N['zh-TW'],{funSleeping:'冬眠中',funSleepText:'熊吃飽後蜷起來冬眠了。點熊或按「重新開始」喚醒牠。',funWakeText:'熊醒來了！一起抓魚吧。',funPet:'熊熊喜歡輕輕摸摸！',funSnow:'正在下雪'});
+Object.assign(I18N['zh-CN'],{funSleeping:'冬眠中',funSleepText:'熊吃饱后蜷起来冬眠了。点击熊或按“重新开始”唤醒它。',funWakeText:'熊醒来啦！一起抓鱼吧。',funPet:'熊熊喜欢轻轻摸摸！',funSnow:'正在下雪'});
 function tr(k){return (I18N[lang]&&I18N[lang][k])||I18N.vi[k]||k}
 function updatePageBreadcrumb(){const active=document.querySelector('.page.active');const page=active?active.id.replace(/^page-/,''):'overview';const map={overview:'navOverview',catalog:'navCatalog',run:'navRun',results:'navResults',memory:'navMemory',platforms:'navPlatforms',autofill:'navAutoFill',stockforecast:'navStockForecast',account:'navAccount',settings:'navSettings',intro:'navIntro'};const el=$('currentPageLabel');if(el)el.textContent=tr(map[page]||'navOverview')}
 function translate(){document.documentElement.lang=lang;updatePageBreadcrumb();document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(tr(k))el.textContent=tr(k)});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.getAttribute('data-i18n-placeholder'))});updateThresholdLabels();updateStats();if(out.length)renderResults();if(masterRows.length)renderMasterPreview();if($('forecastRunInfo'))$('forecastRunInfo').textContent=stockForecastBuilt?tr('forecastRunDone').replace('{count}',stockForecastResults.length):tr('forecastRunHelp');if(typeof renderStockForecast==='function'&&stockForecastBuilt)renderStockForecast()}
