@@ -25,11 +25,7 @@
       el.style.setProperty('--doodle-size',(18+(i%3)*10)+'px');
       root.appendChild(el);
     });
-    document.querySelectorAll('.navbtn').forEach((btn,i)=>{
-      let badge=btn.querySelector('.theme-nav-doodle');
-      if(!badge){badge=document.createElement('span');badge.className='theme-nav-doodle';badge.setAttribute('aria-hidden','true');btn.prepend(badge)}
-      badge.textContent=cfg.nav[i%cfg.nav.length];
-    });
+    document.querySelectorAll('.navbtn .theme-nav-doodle').forEach(el=>el.remove());
   }
   function showClick(e){
     if(e.button!==0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
