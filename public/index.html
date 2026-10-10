@@ -2751,27 +2751,5 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 
 /* Entertainment and bear snow startup removed. */
 
-</script><!-- Removed duplicate static bear mascot; the interactive SVG bear belongs to the entertainment scene only. --><script>
-/* Permanent removal of the retired entertainment feature and old bear mascot. */
-(function(){
- const isEntertainmentLabel=s=>/^(giải trí|góc gấu|entertainment|bear corner)$/i.test((s||'').replace(/[🐻🐟❄️🍃🌲]/gu,'').trim());
- const cleanup=()=>{
-  document.querySelectorAll('[id*="funWidget" i],[id*="funToggle" i],[id*="fat-bear" i],[id*="bear-container" i],[id*="bear-sprite" i],[id*="bear-snow" i],[id*="fish-pool" i],[id*="bear-plus" i],[class*="fun-widget" i],[class*="fun-toggle" i],[class*="bear-fish" i],[class*="bear-caption" i],[data-feature*="entertainment" i]').forEach(el=>el.remove());
-  document.querySelectorAll('button,a,[role="button"],summary,li').forEach(el=>{
-   if(el.closest('.brand-mark')) return;
-   const label=(el.innerText||el.getAttribute('aria-label')||el.title||'').trim();
-   if(isEntertainmentLabel(label)) el.remove();
-  });
-  const theme=document.querySelector('#themeSelect');
-  if(theme) [...theme.options].filter(o=>/bear|gấu/i.test(o.value+' '+o.textContent)).forEach(o=>o.remove());
-  if(document.body.dataset.theme==='bear') document.body.dataset.theme='ocean';
- };
- const start=()=>{cleanup();const observer=new MutationObserver(cleanup);observer.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['data-theme']});};
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();
- window.setFunWidgetOpen=()=>{};
- window.resetBear=()=>{};
- window.feedBear=()=>{};
-})();
-</script>
-<script src="/winter-theme.js?v=13"></script>
+</script><script src="/winter-theme.js?v=13"></script>
 </body></html>
