@@ -1324,7 +1324,7 @@ body[data-theme="minimal"] .theme-drift{opacity:.08!important;filter:none!import
  </div>
  <div class="headright">
   <span class="local-pill"><i></i><span data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span></span>
-  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐱 Mèo</option><option value="bear">🐻 Gấu rừng</option><option value="forest">🌿 Rừng xanh</option><option value="minimal">◻ Tối giản</option></select></label>
+  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐱 Mèo</option><option value="bear">🐻 Gấu rừng</option><option value="minimal">◻ Tối giản</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
@@ -2768,5 +2768,19 @@ h2{line-height:1.25}
  .app-header .brand{gap:8px!important}
  .app-header .brand-mark,.brand .brand-mark{width:76px!important;height:76px!important;flex-basis:76px!important;min-width:76px!important}
  h1{font-size:clamp(22px,6vw,30px)!important}
+}
+</style>
+
+<style id="matchma-logo-size-final-v56">
+/* Logo artwork only: fill the empty left header space without enlarging title. */
+.app-header .brand{gap:8px!important;align-items:center!important}
+.app-header .brand-mark,.brand .brand-mark{width:168px!important;height:142px!important;flex:0 0 168px!important;min-width:168px!important;margin:0!important;overflow:visible!important}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.5)!important;transform-origin:center!important}
+.app-header .brand-copy{flex:0 1 auto!important;min-width:0!important}
+.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important}
+@media(max-width:650px){
+ .app-header .brand-mark,.brand .brand-mark{width:112px!important;height:104px!important;flex-basis:112px!important;min-width:112px!important}
+ .app-header .brand-logo-img{transform:scale(1.35)!important}
+ .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
 }
 </style>
