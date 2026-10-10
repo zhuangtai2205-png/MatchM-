@@ -34,8 +34,8 @@
     const makeBear = (className) => {
       const img = document.createElement('img');
       img.className = className;
-      img.src = '/winter-bear.svg?v=3';
-      img.alt = className === 'winter-bear-spot' ? 'Gấu nâu vẽ tay quàng khăn xanh, ôm cá giữa tuyết' : '';
+      img.src = '/winter-bear.svg?v=4';
+      img.alt = className === 'winter-bear-spot' ? 'Gấu con pastel chuyển động, ôm cá nhỏ' : '';
       img.decoding = 'async';
       if (className !== 'winter-bear-spot') img.setAttribute('aria-hidden', 'true');
       return img;
@@ -57,7 +57,7 @@
     placeHeroBear();
     const observer = new MutationObserver(() => placeHeroBear());
     document.querySelectorAll('.page').forEach(page => observer.observe(page, {attributes:true, attributeFilter:['class']}));
-    document.querySelectorAll('.navbtn').forEach(btn => btn.addEventListener('click', () => setTimeout(placeHeroBear, 80)));
+    document.querySelectorAll('.navbtn').forEach(btn => btn.addEventListener('click', () => setTimeout(placeHeroBear, 80)));\n    new MutationObserver(() => placeHeroBear()).observe(document.body, {attributes:true, attributeFilter:['data-theme']});
     window.addEventListener('resize', placeHeroBear, {passive:true});
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
