@@ -3140,36 +3140,29 @@ header.app-header .headright{grid-column:2!important;grid-row:1!important;min-wi
 
 
 
-<style id="matchma-logo-balanced-layout-v71">
-/* Balanced fixed-size brand: the icon stays compact and never overlays content. */
-header.app-header .brand{
- display:flex!important;align-items:center!important;gap:10px!important;
- min-width:0!important;flex:0 1 auto!important;
-}
+<style id="matchma-logo-symbol-crop-v72">
+/* The current PNG includes its own “match mã” lettering. Crop the lower lettering
+   so only the emblem appears beside the separate HTML title; otherwise it duplicates/overlaps. */
+header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
 header.app-header .brand-mark{
- display:flex!important;align-items:center!important;justify-content:center!important;
- width:64px!important;height:64px!important;min-width:64px!important;
- flex:0 0 64px!important;overflow:hidden!important;
+ display:block!important;position:relative!important;overflow:hidden!important;
+ width:58px!important;height:58px!important;min-width:58px!important;flex:0 0 58px!important;
 }
 header.app-header .brand-mark img.brand-logo-img{
- display:block!important;width:100%!important;height:100%!important;
- max-width:100%!important;max-height:100%!important;object-fit:contain!important;
- transform:none!important;position:static!important;
+ position:absolute!important;top:0!important;left:0!important;
+ width:100%!important;height:150%!important;max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:top center!important;
+ transform:none!important;
 }
-header.app-header .brand-copy{min-width:0!important}
+header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
 header.app-header .brand-copy h1{
- display:block!important;margin:0!important;
- font-family:"Be Vietnam Pro",Arial,sans-serif!important;
- font-size:clamp(24px,2.6vw,32px)!important;line-height:1.12!important;
- white-space:nowrap!important;
+ margin:0!important;font-family:"Be Vietnam Pro",Arial,sans-serif!important;
+ font-size:clamp(24px,2.6vw,32px)!important;line-height:1.12!important;white-space:nowrap!important;
 }
 header.app-header .brand-copy h1 span{font-family:inherit!important}
 @media(max-width:700px){
- header.app-header .brand{gap:7px!important}
- header.app-header .brand-mark{
-  width:56px!important;height:56px!important;min-width:56px!important;flex-basis:56px!important;
- }
+ header.app-header .brand{gap:8px!important}
+ header.app-header .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important}
  header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,24px)!important;white-space:normal!important}
- header.app-header .brand-copy .subbrand{font-size:11px!important;gap:4px!important}
 }
 </style>
