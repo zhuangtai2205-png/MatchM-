@@ -503,3 +503,10 @@ html body .sidebar{background:var(--theme-panel,#fff)!important;border-color:var
 html body .navtitle,html body .nav-folder>summary{background:var(--theme-soft,#eee)!important;color:var(--theme-ink,#333)!important;border-color:var(--theme-accent,#888)!important}
 html body .navbtn{background:transparent!important;color:var(--theme-ink,#333)!important;border-color:transparent!important}
 html body .navbtn:hover,html body .navbtn.active{background:var(--theme-soft,#eee)!important;border:1px dashed var(--theme-accent,#888)!important;color:var(--theme-ink,#333)!important}
+
+
+/* Final guard: never decorate/replace the MatchMã logo with a bear, and remove Góc Gấu UI. */
+.app-header .logo,.brand .logo{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.app-header .logo::before,.app-header .logo::after,.brand .logo::before,.brand .logo::after{content:none!important;display:none!important;visibility:hidden!important}
+.app-header .brand-logo-img{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:2!important;filter:none!important;object-fit:contain!important}
+#funToggleBtn,#funWidget,#fat-bear-overlay{display:none!important;visibility:hidden!important;pointer-events:none!important}
