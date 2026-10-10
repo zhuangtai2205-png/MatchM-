@@ -447,6 +447,15 @@ body[data-theme="vampire"] .nav-folder{background:linear-gradient(180deg,#f9f4fb
 @media(max-width:1120px){.shell{grid-template-columns:220px minmax(0,1fr)}}
 @media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:block;max-height:none;overflow:visible}.navtitle{display:block}.nav-folder{display:block}.navbtn{width:100%;flex:initial;padding:9px}.sidefoot{display:none}.grid3{grid-template-columns:1fr 1fr}}
 @media(max-width:650px){header{flex-direction:row;align-items:center;gap:8px;margin:8px 10px 12px;padding:10px 11px}.brand{gap:8px}.logo{width:44px!important;height:55px!important;flex-basis:44px!important}.brand-copy .subbrand{display:grid;grid-template-columns:auto auto;justify-content:start;gap:2px 6px;font-size:11px}.crumb-sep{display:none}.brand-copy .subbrand #currentPageLabel{grid-column:1/-1;font-size:12px}.headright{width:auto;flex:0 0 auto}.quick-settings>summary{padding:9px 10px;font-size:0;gap:5px}.quick-settings-wheel{font-size:16px}.quick-settings-chevron{font-size:13px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr}.quick-setting-row{grid-template-columns:88px minmax(0,1fr)}}
+/* Folder sections expand/collapse to keep the sidebar compact */
+.nav-folder>summary.navfolder-title{list-style:none;cursor:pointer;user-select:none;padding:4px 7px 6px;display:flex;align-items:center;gap:7px}
+.nav-folder>summary.navfolder-title::-webkit-details-marker{display:none}
+.nav-folder>summary.navfolder-title::marker{display:none;content:""}
+.nav-folder-items{display:grid;gap:2px}
+.nav-folder:not([open]){padding-bottom:4px}
+.folder-chevron{margin-left:auto;color:#4e6681;font-size:15px;font-weight:950;transition:transform .15s}
+.nav-folder[open]>.navfolder-title .folder-chevron{transform:rotate(180deg)}
+@media(max-width:950px){.nav-folder>summary.navfolder-title{display:flex}.nav-folder-items{display:grid}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header>
  <div class="brand">
@@ -474,24 +483,30 @@ body[data-theme="vampire"] .nav-folder{background:linear-gradient(180deg,#f9f4fb
   <span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span>
  </button>
  <div class="navtitle" data-i18n="navSectionTitle">ĐIỀU HƯỚNG</div>
- <section class="nav-folder">
-  <div class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupMain">CHÍNH</span></div>
-  <button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button>
-  <button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button>
-  <button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button>
-  <button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button>
- </section>
- <section class="nav-folder">
-  <div class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupTools">CÔNG CỤ</span></div>
-  <button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button>
-  <button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button>
-  <button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
-  <button class="navbtn" data-page="stockforecast"><span class="navicon">▥</span><span data-i18n="navStockForecast">Dự báo âm kho</span></button>
- </section>
- <section class="nav-folder nav-folder-system">
-  <div class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupSystem">CÁ NHÂN & HỆ THỐNG</span></div>
-  <button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button>
- </section>
+ <details class="nav-folder" open>
+  <summary class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupMain">CHÍNH</span><span class="folder-chevron">⌄</span></summary>
+  <div class="nav-folder-items">
+   <button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button>
+   <button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button>
+   <button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button>
+   <button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button>
+  </div>
+ </details>
+ <details class="nav-folder">
+  <summary class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupTools">CÔNG CỤ</span><span class="folder-chevron">⌄</span></summary>
+  <div class="nav-folder-items">
+   <button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button>
+   <button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button>
+   <button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
+   <button class="navbtn" data-page="stockforecast"><span class="navicon">▥</span><span data-i18n="navStockForecast">Dự báo âm kho</span></button>
+  </div>
+ </details>
+ <details class="nav-folder nav-folder-system">
+  <summary class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupSystem">CÁ NHÂN & HỆ THỐNG</span><span class="folder-chevron">⌄</span></summary>
+  <div class="nav-folder-items">
+   <button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button>
+  </div>
+ </details>
  <details class="sidebar-help">
   <summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary>
   <div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div>
@@ -1182,7 +1197,7 @@ $('fontUp').onclick=()=>setFontScale(fontScale+.05);
 try{const savedScale=Number(localStorage.getItem('matchma-font-scale'));if(savedScale>=.85&&savedScale<=1.25)fontScale=savedScale}catch(e){}
 document.documentElement.style.setProperty('--font-scale',fontScale);
 
-function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
+function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();const targetGroup=[...document.querySelectorAll('.nav-folder')].find(g=>g.querySelector('.navbtn[data-page="'+page+'"]'));if(targetGroup)document.querySelectorAll('.nav-folder').forEach(g=>g.open=g===targetGroup);if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 $('sidebarAccountShortcut').addEventListener('click',()=>showPage('account'));document.querySelectorAll('[data-goto]').forEach(b=>b.onclick=()=>showPage(b.dataset.goto));
 function parseCSV(s){let rows=[],row=[],v='',q=false;for(let i=0;i<s.length;i++){let c=s[i];if(c==='"'&&q&&s[i+1]==='"'){v+='"';i++}else if(c==='"')q=!q;else if(c===','&&!q){row.push(v);v=''}else if((c==='\n'||c==='\r')&&!q){if(c==='\r'&&s[i+1]==='\n')i++;row.push(v);if(row.some(x=>x.trim()))rows.push(row);row=[];v=''}else v+=c}row.push(v);if(row.some(x=>x.trim()))rows.push(row);return rows}
