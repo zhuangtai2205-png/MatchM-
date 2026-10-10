@@ -1173,46 +1173,48 @@ button:hover,.navbtn:hover,.btn:hover{filter:none!important;transform:none!impor
 </aside>
 <div id="fat-bear-overlay" hidden aria-label="Góc tương tác Gấu" aria-hidden="true">
  <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu">
- <svg id="bear-sprite" viewBox="0 0 600 430" role="img" aria-label="Gấu nâu mập phong cách tranh vẽ tay bằng phấn màu">
+ <svg id="bear-sprite" viewBox="0 0 600 430" role="img" aria-label="Gấu nâu mập vẽ tay bằng phấn màu, đầu và thân liền mạch">
  <defs>
-  <linearGradient id="bearCoat" x1="0" y1="0" x2=".82" y2="1"><stop offset="0" stop-color="#c97837"/><stop offset=".52" stop-color="#ad5929"/><stop offset="1" stop-color="#884323"/></linearGradient>
-  <linearGradient id="bearMuzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f3c77d"/><stop offset="1" stop-color="#d99a50"/></linearGradient>
-  <pattern id="bearFurLines" width="17" height="15" patternUnits="userSpaceOnUse"><path d="M2 4q4-3 7 0m1 8q3-3 6-1" fill="none" stroke="#6f3d28" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1.5 2.4" opacity=".42"/></pattern>
-  <pattern id="bearHatch" width="21" height="19" patternUnits="userSpaceOnUse"><path d="M0 15L10 5m4 13 7-8" fill="none" stroke="#e7a05c" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 3" opacity=".3"/></pattern>
-  <clipPath id="bearBodyClip"><path d="M48 359C26 316 36 259 65 211 91 168 147 141 212 136 279 127 350 147 398 187 440 222 458 278 446 328 438 367 402 391 354 395L105 396C78 392 58 380 48 359Z"/></clipPath>
-  <filter id="bearRoughEdge" x="-3%" y="-3%" width="106%" height="106%"><feTurbulence type="fractalNoise" baseFrequency=".55" numOctaves="2" seed="9" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale=".65" xChannelSelector="R" yChannelSelector="G"/></filter>
+  <linearGradient id="bearCoat" x1=".08" y1=".05" x2=".85" y2=".95"><stop stop-color="#d88b49"/><stop offset=".48" stop-color="#b96b35"/><stop offset="1" stop-color="#98512d"/></linearGradient>
+  <linearGradient id="bearMuzzle" x1="0" y1="0" x2=".1" y2="1"><stop stop-color="#f6d18d"/><stop offset="1" stop-color="#dfa35c"/></linearGradient>
+  <pattern id="bearFurLines" width="19" height="17" patternUnits="userSpaceOnUse"><path d="M2 4q4-3 7 0m2 9q3-3 6-1" fill="none" stroke="#663b29" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1.5 3" opacity=".37"/></pattern>
+  <pattern id="bearWarmHatch" width="24" height="21" patternUnits="userSpaceOnUse"><path d="M1 18L10 8m5 10 7-8" fill="none" stroke="#f0b36f" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" opacity=".42"/></pattern>
+  <clipPath id="bearWholeBodyClip"><path d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z"/></clipPath>
  </defs>
  <g id="bearTorso" stroke-linecap="round" stroke-linejoin="round">
-  <!-- silhouette stays connected: broad rump, shoulder, neck and head all inside the canvas -->
-  <path id="bearBackLeg" d="M82 315C48 324 38 359 58 383 76 405 123 408 155 389L185 361 145 309Z" fill="#92502f" stroke="#673c2b" stroke-width="7"/>
-  <path id="bearBody" d="M51 350C27 309 39 257 66 215 94 172 150 146 213 139 282 130 348 150 396 189 432 219 455 268 449 311 446 347 420 375 380 390 347 402 295 400 247 399L111 398C82 394 62 377 51 350Z" fill="url(#bearCoat)" stroke="#633b2b" stroke-width="8"/>
-  <path d="M51 350C27 309 39 257 66 215 94 172 150 146 213 139 282 130 348 150 396 189 432 219 455 268 449 311 446 347 420 375 380 390 347 402 295 400 247 399L111 398C82 394 62 377 51 350Z" fill="url(#bearFurLines)" clip-path="url(#bearBodyClip)" opacity=".95"/>
-  <path d="M58 350C56 300 77 251 118 217 158 183 213 168 267 177M92 370C143 385 196 382 231 379M142 205q24-13 46-11m14-20q24-7 42 0M250 164q25 1 42 12M302 184q25 8 39 25M85 282q17-18 36-21M110 326q19-9 39-3M188 357q23 8 44 2" fill="none" stroke="#e8a05d" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 8" opacity=".6"/>
-  <path d="M337 220C366 216 392 246 392 282L389 356C385 382 360 393 338 378 321 365 328 335 317 308 304 276 309 237 337 220Z" fill="#a85b31" stroke="#633b2b" stroke-width="7"/>
-  <path id="bearFrontLeg" d="M331 316C353 328 374 326 391 313L389 365Q377 390 350 387 330 384 331 362Z" fill="#a65a31" stroke="#633b2b" stroke-width="6"/>
-  <path id="bearFrontPaw" d="M330 360Q356 374 390 358L386 383Q361 399 339 386Z" fill="#92502f" stroke="#633b2b" stroke-width="5"/>
-  <path d="M350 386l1-12m15 14 2-13m14 7 3-12" fill="none" stroke="#e5ae70" stroke-width="3" stroke-linecap="round"/>
-  <path id="bearTail" d="M57 319Q25 302 25 326 27 347 54 349" fill="#a95b30" stroke="#633b2b" stroke-width="6"/>
-  <path d="M43 320q-8 16 2 26" fill="none" stroke="#d38a4e" stroke-width="3" stroke-dasharray="2 5"/>
-  <path id="bearSleepBlanket" d="M44 263Q90 222 144 258T256 259Q329 227 400 276L421 340Q394 390 330 397L110 397Q64 390 48 357Z" fill="#718a68" stroke="#4d6345" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
-  <path id="bearSleepQuilt" d="M79 291q25 20 52 2m18 26q28 15 55-4m18-28q25 18 52 1m14 29q28 14 53-4m-237 55q25 13 49 0m23 5q27 13 52-2m30 1q25 13 49-1m17-2q21 8 37-4" fill="none" stroke="#d4dfb3" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
+  <!-- Full rounded rump and belly: one continuous silhouette -->
+  <path id="bearBackLeg" d="M83 319C49 324 43 354 62 378 80 400 124 405 156 385L183 353 140 309Z" fill="#99542f" stroke="#663c2a" stroke-width="7"/>
+  <path id="bearBody" d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z" fill="url(#bearCoat)" stroke="#633b2a" stroke-width="8"/>
+  <path d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z" fill="url(#bearFurLines)" clip-path="url(#bearWholeBodyClip)" opacity=".96"/>
+  <path d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z" fill="url(#bearWarmHatch)" clip-path="url(#bearWholeBodyClip)" opacity=".8"/>
+  <path d="M74 330C72 284 93 239 129 210M99 367q44 17 91 10m-45-167q24-12 49-10m7-26q23-7 43 1m17 3q22 5 39 20m-202 93q14-15 32-20m7 65q18-9 34-3m57 34q21 8 39 1" fill="none" stroke="#efb16e" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 8" opacity=".65"/>
+  <!-- Front paws rest fully inside the silhouette -->
+  <path id="bearFrontLeg" d="M307 286C329 276 353 283 366 306L386 360C385 380 369 391 349 385L326 365C312 348 301 317 307 286Z" fill="#b66b37" stroke="#633b2a" stroke-width="6"/>
+  <path id="bearFrontPaw" d="M323 357Q351 371 382 354L388 374Q376 394 350 390 329 388 323 372Z" fill="#a65a31" stroke="#633b2a" stroke-width="5"/>
+  <path d="M344 386l1-11m15 13 2-12m13 6 3-11" fill="none" stroke="#efb16e" stroke-width="3.5" stroke-linecap="round"/>
+  <path id="bearTail" d="M65 325Q35 304 31 328 32 349 62 351" fill="#b66b37" stroke="#633b2a" stroke-width="6"/>
+  <path d="M45 320q-6 14 4 25" fill="none" stroke="#e8a15f" stroke-width="3" stroke-dasharray="2 5"/>
+  <path id="bearSleepBlanket" d="M51 270Q94 230 145 261T254 263Q324 234 401 278L425 341Q393 389 330 397L110 397Q66 389 49 355Z" fill="#7d9270" stroke="#526746" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
+  <path id="bearSleepQuilt" d="M79 293q25 20 52 2m18 26q28 15 55-4m18-28q25 18 52 1m14 29q28 14 53-4m-237 55q25 13 49 0m23 5q27 13 52-2m30 1q25 13 49-1m17-2q21 8 37-4" fill="none" stroke="#e0e5c1" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
  </g>
  <g id="bearHead" stroke-linecap="round" stroke-linejoin="round">
-  <!-- ears sit behind the head, with ample space from the SVG edge -->
-  <path d="M330 105C314 84 324 55 347 52 368 50 383 72 379 97Z" fill="#a85b31" stroke="#633b2b" stroke-width="7"/>
-  <path d="M444 91C438 65 457 43 478 51 499 59 503 85 488 105Z" fill="#a85b31" stroke="#633b2b" stroke-width="7"/>
-  <path d="M342 78q15-12 25 4M460 76q12-9 20 5" fill="none" stroke="#e4a05d" stroke-width="4" stroke-dasharray="2 4"/>
-  <path id="bearHeadShape" d="M319 139C314 111 337 87 367 83 393 72 427 79 450 94 475 102 497 124 502 148 509 176 491 199 467 211 448 222 418 220 398 211L360 204C337 196 321 174 319 151Z" fill="url(#bearCoat)" stroke="#633b2b" stroke-width="8"/>
-  <path d="M333 133q16-17 34-15m12-13q17-6 31 1m21 1q18 0 31 13m-118 32q12-7 21-2" fill="none" stroke="#e7a05d" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 5" opacity=".8"/>
-  <path id="bearEyeLeft" d="M367 139q8-10 17 0" fill="none" stroke="#422b24" stroke-width="7"/>
-  <path id="bearEyeRight" d="M432 137q8-10 17 0" fill="none" stroke="#422b24" stroke-width="7"/>
-  <ellipse cx="446" cy="169" rx="37" ry="27" fill="url(#bearMuzzle)" stroke="#633b2b" stroke-width="5"/>
-  <path d="M431 158q0-8 11-9l18 1q7 2 3 11l-8 9q-11 4-19-2Z" fill="#422b24" stroke="#422b24" stroke-width="3"/>
-  <path id="bear-mouth" d="M445 170q-1 13-14 14m14-14q8 14 22 7" fill="none" stroke="#422b24" stroke-width="5"/>
-  <path id="bearMouthOpen" d="M429 169q16 28 34 0l-4 18q-13 12-25 0Z" fill="#572b25" stroke="#422b24" stroke-width="3" opacity="0"/>
-  <path d="M414 185q-8 4-12 0m61 3q9 4 14-2" fill="none" stroke="#bd7845" stroke-width="3" stroke-dasharray="2 4"/>
+  <!-- Both ears are attached behind the broad head; no cropping at the canvas edge -->
+  <path d="M161 125C142 103 150 72 174 66 198 61 218 82 211 111Z" fill="#a95f33" stroke="#633b2a" stroke-width="7"/>
+  <path d="M183 102q13-13 23 2" fill="none" stroke="#e6a260" stroke-width="4" stroke-dasharray="2 4"/>
+  <path d="M339 111C337 85 358 63 382 71 405 79 412 103 398 124Z" fill="#a95f33" stroke="#633b2a" stroke-width="7"/>
+  <path d="M359 95q13-11 24 4" fill="none" stroke="#e6a260" stroke-width="4" stroke-dasharray="2 4"/>
+  <path id="bearHeadShape" d="M157 170C150 136 171 107 207 96 240 82 284 84 318 97 350 108 373 134 376 164 382 196 359 223 330 237 299 251 263 246 234 238L197 233C173 222 158 198 157 170Z" fill="url(#bearCoat)" stroke="#633b2a" stroke-width="8"/>
+  <path d="M172 151q14-18 33-17m18-22q20-7 37 0m15-1q23 0 40 13m-155 33q12-8 22-3" fill="none" stroke="#efb16e" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 6" opacity=".8"/>
+  <path d="M179 180C180 158 198 144 221 144 240 143 257 153 265 171 274 191 258 215 237 223 214 231 190 219 181 201Z" fill="url(#bearMuzzle)" stroke="#633b2a" stroke-width="5"/>
+  <path id="bearEyeLeft" d="M197 145q8-10 17 0" fill="none" stroke="#452c25" stroke-width="7"/>
+  <path id="bearEyeRight" d="M289 143q8-10 17 0" fill="none" stroke="#452c25" stroke-width="7"/>
+  <ellipse cx="279" cy="180" rx="35" ry="25" fill="url(#bearMuzzle)" stroke="#633b2a" stroke-width="4.5"/>
+  <path d="M262 169q0-9 11-10l18 1q8 2 3 11l-8 8q-11 4-19-2Z" fill="#452c25" stroke="#452c25" stroke-width="3"/>
+  <path id="bear-mouth" d="M278 181q-2 14-15 15m15-15q9 14 22 7" fill="none" stroke="#452c25" stroke-width="5.5"/>
+  <path id="bearMouthOpen" d="M262 177q16 28 34 0l-4 18q-13 12-25 0Z" fill="#572b25" stroke="#452c25" stroke-width="3" opacity="0"/>
+  <path d="M249 197q-8 4-12 0m61 3q9 4 14-2" fill="none" stroke="#bd7845" stroke-width="3" stroke-dasharray="2 4"/>
  </g>
- <path id="bearMotionStroke" d="M24 247q-9 18-3 36m429-42q16 16 13 34" fill="none" stroke="#d59a63" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 7" opacity=".65"/>
+ <path id="bearMotionStroke" d="M25 247q-9 18-3 36m429-42q16 16 13 34" fill="none" stroke="#d59a63" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 7" opacity=".65"/>
 </svg>
  <svg id="bear-sleep-z" viewBox="0 0 68 30" aria-hidden="true"><path d="M3 5 H21 L4 24 H24 M29 3 H47 L30 21 H50 M52 5 H66 L53 21 H66" fill="none" stroke="#75563d" stroke-width="2.7" stroke-dasharray="3 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
 </button>
