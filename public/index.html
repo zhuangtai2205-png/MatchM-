@@ -362,7 +362,7 @@ body[data-theme="vampire"] .overview-account-pill.is-online{background:#243a31;c
 .sidebar-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ui-accent,#3c9bc0);background:var(--ui-soft,#eaf8fd);color:var(--ui-accent,#3c9bc0);font-weight:900;font-size:17px}
 .sidebar-account-copy{display:grid;gap:2px;min-width:0;flex:1}.sidebar-account-copy strong{font-size:13px;font-weight:900}.sidebar-account-copy small{font-size:10px;overflow-wrap:anywhere;color:var(--muted)}.sidebar-account-arrow{font-weight:900}
 body[data-theme] .sectionhead h2,body[data-theme] .hero h2{font-weight:900!important;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--ui-accent,#3c9bc0);text-shadow:0 1px 0 var(--ui-surface,#fff)}
-body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=4");filter:none}
+body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=5");filter:none}
 body[data-theme] .upload .bigicon{font-size:0!important;display:grid!important;place-items:center;width:58px;height:46px;margin:0 auto 8px!important;line-height:1}
 body[data-theme] .upload .bigicon::before{content:"";display:block;width:56px;height:42px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 48'%3E%3Cpath fill='%232F9BC5' d='M4 8a3 3 0 0 1 3-3h16l6 6h28a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='%238DE0F4' d='M4 18h56v21a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='none' stroke='%231F6587' stroke-width='2' d='M24 25h16m-8-8v16m-5-5 5 5 5-5'/%3E%3C/svg%3E")}
 body[data-theme="pink"] .upload .bigicon::before{filter:hue-rotate(300deg) saturate(.8)}
@@ -456,13 +456,119 @@ body[data-theme="vampire"] .nav-folder{background:linear-gradient(180deg,#f9f4fb
 .folder-chevron{margin-left:auto;color:#4e6681;font-size:15px;font-weight:950;transition:transform .15s}
 .nav-folder[open]>.navfolder-title .folder-chevron{transform:rotate(180deg)}
 @media(max-width:950px){.nav-folder>summary.navfolder-title{display:flex}.nav-folder-items{display:grid}}
+/* MatchMã visual cleanup v2 — keep motifs subtle and controls legible */
+:root{--ink:#18263a;--muted:#43536a;--line:#d7e1ec;--surface:#fff;--accent:#426d95;--font-scale:1}
+body{color:#18263a;line-height:1.55;font-size:calc(15px * var(--font-scale,1));background:#edf3f8!important}
+body[data-theme="ocean"]{background:radial-gradient(ellipse at 8% 0%,#cfedf7 0,transparent 33%),radial-gradient(ellipse at 96% 22%,#dce7fb 0,transparent 31%),linear-gradient(140deg,#eaf6fb,#f1f5fc 55%,#e4f7f0)!important}
+body[data-theme="retro"]{background:repeating-linear-gradient(0deg,#f3f1e9 0 29px,#e8e5dc 30px),linear-gradient(90deg,#f6f4ed,#ebe9e1)!important}
+body[data-theme="pink"]{background:radial-gradient(ellipse at 12% 0%,#fce0ed 0,transparent 32%),radial-gradient(ellipse at 92% 6%,#f7d9ea 0,transparent 34%),linear-gradient(140deg,#fff4f9,#fbeaf3 55%,#fff8f5)!important}
+body[data-theme="vampire"]{background:radial-gradient(ellipse at 4% 0%,#57233f 0,transparent 36%),radial-gradient(ellipse at 93% 12%,#302044 0,transparent 38%),linear-gradient(145deg,#130e19,#211624 58%,#28101d)!important}
+body[data-theme="cat"]{background:radial-gradient(ellipse at 8% 0%,#fff3d6 0,transparent 32%),radial-gradient(ellipse at 94% 10%,#ffdfca 0,transparent 35%),linear-gradient(140deg,#fff8eb,#f9ebdf 54%,#fff4e9)!important}
+#themeScene{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;user-select:none}
+.theme-drift{opacity:var(--opacity,.12)!important;filter:none!important;text-shadow:none!important}
+header,.shell,.foot{position:relative;z-index:1}
+header{max-width:1480px;margin:14px auto 18px;padding:13px 20px;min-height:80px;border:1px solid #d9e3ee;border-radius:18px;background:#ffffffed;box-shadow:0 7px 22px #263d550d}
+body[data-theme="vampire"] header{background:#21182aee;border-color:#513c5c}
+.brand{min-width:0}
+.logo{width:54px!important;height:68px!important;flex-basis:54px!important;padding:1px!important;background:#fff!important;border:1px solid #e0e6ed!important;border-radius:9px!important;box-shadow:none!important;overflow:hidden!important}
+.brand-logo-img{width:100%;height:100%;display:block;object-fit:contain;filter:none!important}
+body[data-theme="vampire"] .brand-logo-img{filter:none!important}
+.brand-copy .subbrand{color:#394d65!important;font-size:13px;line-height:1.4;font-weight:800}
+body[data-theme="vampire"] .brand-copy .subbrand,body[data-theme="vampire"] #currentPageLabel{color:#f6ecf7!important}
+#currentPageLabel{font-size:14px;font-weight:950;color:#172840}
+.headright{gap:8px}
+.quick-settings{position:relative;z-index:80}
+.quick-settings>summary{border-color:#cbd7e5;background:#fff;color:#1b2c43;font-weight:900;box-shadow:0 3px 8px #253e590c}
+body[data-theme="vampire"] .quick-settings>summary{background:#2a1e35;border-color:#684c75;color:#fff0fa}
+.quick-settings-menu{z-index:100;background:#fff;color:#18263a;border-color:#d2dce8;box-shadow:0 20px 45px #20344e2e}
+.shell{max-width:1480px;grid-template-columns:242px minmax(0,1fr);gap:18px;padding-left:20px;padding-right:20px}
+.sidebar{max-height:calc(100vh - 28px);overflow-y:auto;overscroll-behavior:contain;padding:10px;background:#ffffffef;border-color:#d9e2ec;border-radius:18px;box-shadow:0 8px 20px #23384c0b}
+body[data-theme="vampire"] .sidebar{background:#f8f3fa;border-color:#d6c6df}
+.sidebar-account-shortcut{background:#f4f8fc;border-color:#cfdae7;border-radius:13px}
+.sidebar-avatar{background:#fff;border-color:#456b92;color:#1c3958}
+.sidebar-account-copy strong{font-weight:950;color:#1a2b43}
+.sidebar-account-copy small{color:#40536c;font-weight:750}
+.navtitle{color:#43536b;font-size:10px;font-weight:950}
+.nav-folder{margin:8px 0 10px;background:linear-gradient(180deg,#f4f8fc,#fff 65%);border-color:#d4e0ec;border-radius:13px;box-shadow:none}
+.nav-folder::before{background:#a8c2db;border-color:#a8c2db}
+.navfolder-title{color:#314760;font-size:10px;font-weight:950}
+.nav-folder>summary.navfolder-title{color:#314760}
+.nav-folder>summary.navfolder-title:hover{background:#eaf2fa;border-radius:8px}
+.navbtn{padding:9px 8px!important;margin:2px 0!important;gap:9px;border:1px solid transparent!important;border-radius:10px!important;font-size:13px!important;font-weight:900!important;color:#202e43!important;text-shadow:none!important}
+.navbtn:hover{background:#edf4fb!important;border-color:#d7e3ef!important}
+.navbtn.active{background:#dfebf7!important;border-color:#b5cbe1!important;color:#142e4b!important;box-shadow:inset 3px 0 0 #3e709f!important}
+.navicon{font-size:19px!important;line-height:1!important;width:24px!important;flex:0 0 24px!important;height:auto!important;display:inline-flex!important;align-items:center;justify-content:center;color:inherit!important}
+.navicon::before{content:none!important;display:none!important}
+body[data-theme="ocean"] .navbtn .navicon{filter:saturate(1.1)}
+body[data-theme="retro"] .navbtn .navicon{filter:grayscale(1)}
+body[data-theme="pink"] .navbtn .navicon{filter:saturate(.85)}
+body[data-theme="vampire"] .navbtn .navicon{filter:saturate(.8)}
+body[data-theme="cat"] .navbtn .navicon{filter:saturate(.95)}
+.nav-folder-items{gap:1px}
+.sidebar-help{background:#f4f8fc;border-color:#d6e1ed}
+.sidebar-help>summary{color:#263e59;font-weight:900}
+.sidebar-help-content p{color:#40536a!important}
+.main{min-width:0}
+.hero,.panel{background:#fffffff0;border:1px solid #dbe4ee;border-radius:18px;box-shadow:0 7px 22px #263b500b}
+body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel:not(.nav-folder){background:#f8f1f7ed;border-color:#765a7d}
+.hero{padding:26px 28px;background:linear-gradient(115deg,#fff 0%,#f2f7fc 74%,#ebf4fb 100%)}
+body[data-theme="ocean"] .hero{background:linear-gradient(118deg,#fff 0%,#effaff 100%);border-color:#cce6f0}
+body[data-theme="retro"] .hero{background:linear-gradient(120deg,#fffefa,#f1efe8);border-color:#d9d6cc}
+body[data-theme="pink"] .hero{background:linear-gradient(120deg,#fff,#fff0f6);border-color:#f0cede}
+body[data-theme="vampire"] .hero{background:linear-gradient(120deg,#24182e,#332039)!important;color:#fbf3fa}
+body[data-theme="vampire"] .hero h2,body[data-theme="vampire"] .hero p{color:#fbf3fa}
+body[data-theme="cat"] .hero{background:linear-gradient(120deg,#fff,#fff2e5);border-color:#f1dbc6}
+.hero h2{font-size:clamp(25px,2.7vw,34px)!important;font-weight:950!important;letter-spacing:-.35px!important;color:#15283f!important;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:7px;text-decoration-color:#6b98c1}
+body[data-theme="vampire"] .hero h2{color:#fff5fb!important;text-decoration-color:#e28aa9}
+.sectionhead{margin-bottom:18px}
+.sectionhead h2,.panel h2,.chart-heading h2{color:#1a2a40;font-weight:900!important;letter-spacing:-.15px}
+.sectionhead h2,.chart-heading h2{font-size:18px!important}
+body[data-theme="vampire"] .sectionhead h2,body[data-theme="vampire"] .panel h2,body[data-theme="vampire"] .chart-heading h2{color:#281b31}
+body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:none!important;display:none!important}
+.hero p,.sectionhead p,.panel p,.hint,.muted{color:#41526a}
+.eyebrow{color:#36516f;font-weight:950}
+.stat{background:#fff;border:1px solid #dbe4ed;border-radius:15px;box-shadow:0 5px 14px #20354c08}
+.stat small,.mini span,.pager span{color:#405269!important;font-weight:750}
+.stat b{font-weight:950;font-variant-numeric:tabular-nums}
+.overview-analytics{gap:14px;margin:0 0 16px}
+.chart-card{border-radius:17px;padding:19px;box-shadow:0 6px 20px #20354c08}
+.overview-account-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px;align-items:stretch}
+.overview-account-card,.overview-memory-card{height:100%;min-width:0}
+.overview-memory-row{border-color:#dce5ef}
+.upload{border-color:#b7cadf;background:#f7faff;color:#1d3049;border-radius:15px}
+.upload:hover{border-color:#7398be;background:#eff6fc}
+.field label{color:#2c4059;font-weight:850}
+.field input[type=text],.field select,.field input[type=number],.search,textarea{border-color:#c9d5e2;background:#fff;color:#1a2a40}
+th{background:#eaf1f8;color:#253d58;font-weight:900}
+td{color:#25354b}
+.btn{font-weight:900}
+.btn.alt{background:#e7eff8;color:#203c59}
+.template-row{color:#3f5269;border-color:#d3deea;background:#f4f8fc}
+#themeScene .theme-drift{user-select:none;pointer-events:none;opacity:var(--opacity,.12)!important}
+body[data-theme="ocean"]::before{opacity:.035!important}
+body[data-theme="retro"]::before{opacity:.055!important}
+body[data-theme="pink"]::before{opacity:.045!important}
+body[data-theme="vampire"]::before{opacity:.045!important}
+body[data-theme="cat"]::before{opacity:.05!important}
+body[data-theme="ocean"]::after{opacity:.21!important}
+body[data-theme="pink"]::after{opacity:.10!important}
+body[data-theme="vampire"]::after{opacity:.13!important}
+body[data-theme="cat"]::after{opacity:.11!important}
+body[data-theme="ocean"] .panel::after,body[data-theme="retro"] .panel::after,body[data-theme="pink"] .panel::after,body[data-theme="vampire"] .panel::after,body[data-theme="cat"] .panel::after{opacity:.08!important}
+#catClickFX{position:fixed;inset:0;pointer-events:none;z-index:120;overflow:hidden}
+.cat-flower-particle{font-size:27px!important;opacity:0;filter:none!important;text-shadow:0 2px 5px #1112}
+.navbtn:focus-visible,.quick-settings>summary:focus-visible,.sidebar-account-shortcut:focus-visible,.btn:focus-visible{outline:3px solid #5b91c4!important;outline-offset:2px}
+@media(max-width:1120px){.shell{grid-template-columns:218px minmax(0,1fr);gap:14px}.overview-analytics{grid-template-columns:1fr 1fr}.chart-card:last-child{grid-column:1/-1}}
+@media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{max-height:none;overflow:visible;display:block;padding:10px}.nav-folder{display:block}.nav-folder-items{display:grid}.navbtn{width:100%;padding:9px!important}.shell{padding-left:14px;padding-right:14px}}
+@media(max-width:700px){header{margin:8px 8px 12px;padding:10px 11px}.logo{width:42px!important;height:53px!important;flex-basis:42px!important}.brand-copy .subbrand{font-size:11px}.brand-copy .subbrand #currentPageLabel{font-size:12px}.shell{padding:0 10px 25px}.hero,.panel{padding:16px;border-radius:15px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr!important}.quick-settings-menu{right:-4px}.stat b{font-size:24px}}
+@media(prefers-reduced-motion:reduce){#themeScene .theme-drift,.cat-flower-particle{animation:none!important;transition:none!important}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header>
  <div class="brand">
-  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=4" alt="Logo MatchMã: mèo đội nón lá cầm kiếm"></div>
+  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=5" alt="Logo MatchMã: mèo đội nón lá cầm kiếm"></div>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
-   <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel" data-i18n="navOverview">Tổng quan</strong></div>
+   <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
   </div>
  </div>
  <div class="headright">
@@ -681,7 +787,7 @@ function renderOverviewAccount(){
  if(sidebarName)sidebarName.textContent=ready?accountUser.email:'Chưa đăng nhập';
  if(sidebarAvatar)sidebarAvatar.textContent=ready?String(accountUser.email||'U').trim().slice(0,1).toUpperCase():'♙';
 }
-function renderAccountState(){const ready=!!(supabaseClient&&accountUser);if($('syncMemory'))$('syncMemory').disabled=!ready||cloudBusy;if($('accountSignOut'))$('accountSignOut').disabled=!ready;if($('syncStatus'))$('syncStatus').textContent=ready?'Đã đăng nhập: '+accountUser.email+' · bộ nhớ đám mây sẵn sàng.':(supabaseClient?'Chưa đăng nhập.':'Chưa kết nối Supabase.');const nav=$('navAccountStatus');if(nav){nav.textContent=ready?accountUser.email:'Chưa đăng nhập';nav.title=ready?accountUser.email:'Chưa đăng nhập';nav.classList.toggle('signed-in',ready)}renderOverviewAccount();renderPersonalCatalogState()}
+function renderAccountState(){const ready=!!(supabaseClient&&accountUser);if($('syncMemory'))$('syncMemory').disabled=!ready||cloudBusy;if($('accountSignOut'))$('accountSignOut').disabled=!ready;if($('syncStatus'))$('syncStatus').textContent=ready?'Đã đăng nhập: '+accountUser.email+' · bộ nhớ đám mây sẵn sàng.':(supabaseClient?'Chưa đăng nhập.':'Chưa kết nối Supabase.');renderOverviewAccount();renderPersonalCatalogState()}
 async function connectSupabase(){const url=String($('supabaseUrl').value||'').trim().replace(/\/$/,'');const key=String($('supabaseAnonKey').value||'').trim();if(!/^https:\/\/[a-zA-Z0-9.-]+$/.test(url)||!key){accountStatus('Nhập Project URL và anon/publishable key hợp lệ.',true);return}if(!window.supabase||typeof window.supabase.createClient!=='function'){accountStatus('Chưa tải được thư viện Supabase. Kiểm tra mạng rồi tải lại trang.',true);return}try{localStorage.setItem(SUPABASE_CONFIG_KEY,JSON.stringify({url,key}));if(accountSubscription&&accountSubscription.unsubscribe)accountSubscription.unsubscribe();supabaseClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});accountSubscription=supabaseClient.auth.onAuthStateChange((event,session)=>{accountUser=session&&session.user?session.user:null;switchMemoryScope(accountUser?accountUser.id:null);renderAccountState();if(accountUser&&event==='SIGNED_IN')setTimeout(()=>syncRemoteMemory(),0)}).data.subscription;const {data,error}=await supabaseClient.auth.getSession();if(error)throw error;accountUser=data.session?data.session.user:null;switchMemoryScope(accountUser?accountUser.id:null);renderAccountState();accountStatus('Đã kết nối Supabase. '+(accountUser?'Đang đăng nhập: '+accountUser.email:'Bạn có thể đăng nhập hoặc đăng ký.'));if(accountUser)await syncRemoteMemory()}catch(e){accountStatus('Không thể kết nối: '+(e.message||String(e)),true)}}
 async function signUpAccount(){if(!supabaseClient){accountStatus('Hãy lưu cấu hình Supabase và kết nối trước.',true);return}const email=String($('accountEmail').value||'').trim(),password=$('accountPassword').value||'';if(!email||password.length<8){accountStatus('Nhập email và mật khẩu ít nhất 8 ký tự.',true);return}try{const {data,error}=await supabaseClient.auth.signUp({email,password,options:{emailRedirectTo:window.location.origin}});if(error)throw error;if(data.session){accountUser=data.user;switchMemoryScope(accountUser?accountUser.id:null);renderAccountState();await syncRemoteMemory()}else accountStatus('Đã gửi đăng ký. Hãy xác nhận email trước khi đăng nhập.')}catch(e){accountStatus('Đăng ký thất bại: '+(e.message||String(e)),true)}}
 async function resendConfirmationEmail(){if(!supabaseClient){accountStatus('Dịch vụ tài khoản chưa kết nối.',true);return}const email=String($('accountEmail').value||'').trim();if(!email){accountStatus('Nhập email đã đăng ký trước.',true);return}try{const {error}=await supabaseClient.auth.resend({type:'signup',email,options:{emailRedirectTo:window.location.origin}});if(error)throw error;accountStatus('Nếu email đủ điều kiện nhận thư, liên kết xác nhận mới sẽ được gửi. Kiểm tra cả thư rác và đợi trước khi thử lại.')}catch(e){accountStatus('Chưa gửi được email: '+(e.message||String(e))+' · Có thể đang chạm giới hạn gửi thư của Supabase.',true)}}
@@ -1486,7 +1592,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
      particle.textContent=icons[Math.floor(Math.random()*icons.length)];
      particle.style.left=e.clientX+'px';particle.style.top=e.clientY+'px';
      particle.style.setProperty('--dx',(Math.random()*128-64)+'px');
-     particle.style.setProperty('--dy',(-30-Math.random()*(isCat?82:64))+'px');
+     particle.style.setProperty('--dy',(-24-Math.random()*(theme==='cat'?82:64))+'px');
      particle.style.animationDelay=(Math.random()*75)+'ms';layer.appendChild(particle);live++;
      particle.addEventListener('animationend',()=>{particle.remove();live=Math.max(0,live-1)},{once:true});
      setTimeout(()=>{if(particle.isConnected){particle.remove();live=Math.max(0,live-1)}},1150);
