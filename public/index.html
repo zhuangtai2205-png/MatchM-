@@ -1388,7 +1388,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
-</style><link rel="stylesheet" href="/winter-theme.css?v=15"><style id="logo-bear-fix">
+</style><link rel="stylesheet" href="/winter-theme.css?v=16"><style id="logo-bear-fix">
 /* Logo is brand artwork only. Never overlay mascots, emoji, pseudo-elements or theme effects. */
 html body header.app-header .brand>.logo{
  position:relative!important;display:flex!important;flex:0 0 48px!important;
@@ -2247,7 +2247,7 @@ function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overl
 
 const THEME_KEY='matchma-theme-v2';
 function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
-function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}if(saved==='bear')saved='ocean';applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
+function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
  $('platformFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);platformSourceHeaders=d.headers;platformSourceRows=d.rows.map((row,i)=>({row:{...row},sourceIndex:i+1,status:'todo'}));platformPage=1;fillSelect('platformNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('platformIdCol',d.headers,guessStt(d.headers),true);$('platformFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng. STT/ID nguồn sẽ không bị chỉnh sửa.';$('buildPlatformAudit').disabled=!d.headers.length;$('exportPlatformAudit').disabled=true;platformBuilt=false;renderPlatformAudit()}catch(err){alert(err.message||'Không đọc được file');}});
