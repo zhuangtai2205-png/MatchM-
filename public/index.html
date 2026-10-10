@@ -2050,6 +2050,7 @@ header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inhe
  <button class="navbtn" data-page="stockforecast" title="Dự báo tồn kho"><span class="navicon" aria-hidden="true"></span><span data-i18n="navStockForecast">Dự báo tồn kho</span></button>
  <div class="sidebar-bottom">
   <button class="navbtn" data-page="settings" title="Cài đặt"><span class="navicon" aria-hidden="true"></span><span data-i18n="navSettings">Cài đặt</span></button>
+  <button class="navbtn" type="button" id="openEntertainment" title="Giải trí"><span class="navicon" aria-hidden="true">🎮</span><span>Giải trí</span></button>
   <details class="sidebar-help"><summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary><div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div></details>
  </div>
 </aside>
@@ -3427,4 +3428,5 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
 })();</script>
+<script>document.getElementById("openEntertainment")?.addEventListener("click",()=>window.open("/entertainment.html","_blank","noopener"));</script>
 </body></html>
