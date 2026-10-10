@@ -16,27 +16,25 @@
       <div class="fbw-speech" aria-live="polite">Nhấp cá để cho gấu ăn!</div>
       <div class="fbw-ground"></div>
       <button class="fbw-bear" type="button" aria-label="Gấu nhỏ">
-        <svg viewBox="0 0 100 110" role="img" aria-label="Gấu nâu hoạt hình 2D dễ thương">
+        <svg viewBox="0 0 100 150" role="img" aria-label="Gấu nâu mập phong cách minh họa Fat Bear Week">
           <defs>
-            <linearGradient id="fbw-fur" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9a36d"/><stop offset="1" stop-color="#a96d42"/></linearGradient>
-            <linearGradient id="fbw-belly" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0d5"/><stop offset="1" stop-color="#eac79b"/></linearGradient>
+            <linearGradient id="fbw-fur" x1="0" y1="0" x2=".85" y2="1"><stop stop-color="#f0b52f"/><stop offset=".52" stop-color="#d98a18"/><stop offset="1" stop-color="#a95b19"/></linearGradient>
+            <linearGradient id="fbw-shadow" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#9b5019" stop-opacity=".1"/><stop offset="1" stop-color="#7a3d17" stop-opacity=".48"/></linearGradient>
+            <filter id="fbw-grain"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="8" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .11"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
           </defs>
-          <g stroke="#70462f" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 29Q10 27 13 16Q16 5 27 12L35 23M65 23L73 12Q84 5 87 16Q90 27 80 30" fill="url(#fbw-fur)"/>
-            <circle cx="24" cy="19" r="5.5" fill="#edc39a" stroke-width="1.8"/><circle cx="76" cy="19" r="5.5" fill="#edc39a" stroke-width="1.8"/>
-            <path d="M20 47Q18 27 36 25Q50 20 64 25Q82 29 80 49L77 78Q75 96 50 98Q25 96 23 78Z" fill="url(#fbw-fur)"/>
-            <path d="M29 65Q19 64 18 76Q17 88 31 88L39 82M71 65Q81 64 82 76Q83 88 69 88L61 82" fill="url(#fbw-fur)"/>
-            <path d="M34 67Q31 57 41 55Q50 52 59 55Q69 58 66 68L63 84Q50 92 37 84Z" fill="url(#fbw-belly)" stroke-width="2"/>
-            <ellipse cx="37" cy="43" rx="5.2" ry="6.2" fill="#fff9ec" stroke="none"/><ellipse cx="63" cy="43" rx="5.2" ry="6.2" fill="#fff9ec" stroke="none"/>
-            <ellipse cx="38" cy="44" rx="2.8" ry="4" fill="#38271f" stroke="none"/><ellipse cx="62" cy="44" rx="2.8" ry="4" fill="#38271f" stroke="none"/>
-            <circle cx="39" cy="42.5" r="1.1" fill="#fff" stroke="none"/><circle cx="63" cy="42.5" r="1.1" fill="#fff" stroke="none"/>
-            <ellipse cx="29" cy="54" rx="5" ry="3.2" fill="#e98f83" stroke="none" opacity=".8"/><ellipse cx="71" cy="54" rx="5" ry="3.2" fill="#e98f83" stroke="none" opacity=".8"/>
-            <path d="M39 53Q44 47 50 52Q56 47 61 53Q60 62 50 63Q40 62 39 53Z" fill="#f9dfbd" stroke-width="1.8"/>
-            <path d="M46 53Q50 49 54 53Q54 57 50 57Q46 57 46 53Z" fill="#56372a" stroke-width="1.4"/>
-            <path class="fbw-mouth-closed" d="M50 57v3m0 0q-4 4-7 0m7 0q4 4 7 0" fill="none" stroke-width="1.8"/>
-            <ellipse class="fbw-mouth-open" cx="50" cy="61" rx="4" ry="5" fill="#874e45" stroke-width="1.5"/>
-            <path d="M41 76Q50 72 59 76" fill="none" stroke="#d1a574" stroke-width="2"/>
-            <path d="M38 92Q34 101 43 102L48 101M62 92Q66 101 57 102L52 101" fill="#70462f" stroke-width="2"/>
+          <g stroke="#79411f" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#fbw-grain)">
+            <path d="M43 24Q36 9 45 7Q54 7 58 17L62 27" fill="url(#fbw-fur)"/>
+            <path d="M35 30Q27 25 31 17Q35 12 41 19L45 29" fill="#bd721d"/>
+            <path d="M42 26Q49 19 57 26Q65 32 66 45L73 63Q81 79 82 99Q83 117 72 130L69 145L55 145L50 126L43 145L28 145L29 122Q17 111 20 94Q21 76 28 62L29 44Q29 33 42 26Z" fill="url(#fbw-fur)"/>
+            <path d="M31 47Q20 44 16 53Q13 60 24 66L33 68" fill="url(#fbw-fur)"/>
+            <path d="M62 56Q70 61 72 76L77 99Q79 111 69 120" fill="url(#fbw-shadow)" stroke="none"/>
+            <path d="M34 37Q27 39 26 46Q27 52 35 53Q43 51 44 45Q43 38 34 37Z" fill="#eab047" stroke-width="1.7"/>
+            <circle cx="39" cy="35" r="2.2" fill="#38251a" stroke="none"/>
+            <path d="M27 44Q22 47 25 50Q28 52 31 49" fill="#f3bd4d" stroke-width="1.6"/>
+            <path d="M29 69Q39 76 43 88Q45 99 39 111M60 69Q56 84 57 96Q57 107 51 116" fill="none" stroke="#87431d" stroke-width="3.1"/>
+            <path d="M31 120Q37 125 42 120M56 119Q62 125 68 119" fill="none" stroke="#87431d" stroke-width="2.5"/>
+            <path d="M32 143L30 147L45 147L44 143M57 143L56 147L72 147L70 142" fill="#70401f" stroke-width="2"/>
+            <path d="M34 28Q39 24 43 29M48 23Q54 20 59 26" fill="none" stroke="#f8ce61" stroke-width="2"/>
           </g>
         </svg>      </button>
       <div class="fbw-hearts" aria-hidden="true">♥ ✦ ♥</div>
