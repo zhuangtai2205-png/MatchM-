@@ -1497,20 +1497,7 @@ body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] canvas{displa
 body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,
 body[data-theme="minimal"] button,body[data-theme="minimal"] a,body[data-theme="minimal"] select{pointer-events:auto!important;cursor:pointer!important}
 </style>
-<style id="matchma-logo-actually-large-v60">
-/* Make the complete original PNG mark visibly dominant; keep MatchMã title size unchanged. */
-header.app-header{overflow:visible!important;min-height:250px!important}
-header.app-header .brand{display:flex!important;align-items:center!important;gap:0!important;overflow:visible!important;flex:0 1 auto!important}
-header.app-header .brand-mark{width:330px!important;height:270px!important;min-width:330px!important;flex:0 0 330px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:0 -14px 0 -8px!important;padding:0!important}
-header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(2.35)!important;transform-origin:center center!important}
-header.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important}
-@media(max-width:650px){
- header.app-header{min-height:150px!important}
- header.app-header .brand-mark{width:175px!important;height:145px!important;min-width:175px!important;flex-basis:175px!important;margin:0 -8px 0 -4px!important}
- header.app-header .brand-mark img.brand-logo-img{transform:scale(1.8)!important}
- header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-</style>
+
 <style id="matchma-replace-minimal-theme-v61">
 /* Replace the old minimal-theme styling with a clean, flat theme. */
 body[data-theme="minimal"]{
@@ -1895,18 +1882,19 @@ header.app-header .brand-mark img.brand-logo-img{
  header.app-header .brand-mark img.brand-logo-img{transform:scale(1.35)!important}
 }
 </style>
-<style id="matchma-logo-size-only-v62">
-/* Logo artwork only: double its visible size without changing header, title, toolbar, or layout dimensions. */
-header.app-header .brand .brand-mark{
- position:relative!important;overflow:visible!important;
-}
-header.app-header .brand .brand-mark img.brand-logo-img{
- position:absolute!important;
- width:200%!important;height:200%!important;
- max-width:none!important;max-height:none!important;
- left:50%!important;top:50%!important;
- object-fit:contain!important;object-position:center!important;
- transform:translate(-50%,-50%)!important;
+
+<style id="matchma-compact-header-logo-only-v63">
+/* Remove legacy blank header space. Keep normal header flow; enlarge only the logo box. */
+header.app-header{min-height:0!important;height:auto!important;padding-top:8px!important;padding-bottom:8px!important;margin-top:0!important;margin-bottom:0!important;row-gap:8px!important}
+header.app-header .brand{width:auto!important;max-width:100%!important;min-width:0!important;gap:10px!important;flex:0 1 auto!important}
+header.app-header .brand-mark{box-sizing:border-box!important;position:relative!important;display:block!important;width:152px!important;height:76px!important;min-width:152px!important;flex:0 0 152px!important;margin:0!important;padding:0!important;overflow:visible!important}
+header.app-header .brand-mark img.brand-logo-img{position:absolute!important;left:0!important;top:50%!important;width:152px!important;height:76px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;transform:translateY(-50%)!important}
+header.app-header .brand-copy{flex:0 1 auto!important;min-width:0!important}
+header.app-header .brand-copy h1{white-space:nowrap!important}
+@media(max-width:700px){
+ header.app-header{min-height:0!important;padding-top:6px!important;padding-bottom:6px!important;row-gap:6px!important}
+ header.app-header .brand-mark{width:116px!important;height:58px!important;min-width:116px!important;flex:0 0 116px!important}
+ header.app-header .brand-mark img.brand-logo-img{width:116px!important;height:58px!important}
 }
 </style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
