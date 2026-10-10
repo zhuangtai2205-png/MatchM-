@@ -2004,6 +2004,7 @@ header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inhe
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
   <button type="button" id="calculatorToggleBtn" class="calculator-toggle-button" aria-controls="calculatorWidget" aria-expanded="false" title="Mở máy tính" data-i18n-title="calculatorOpen"><span class="calculator-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.3 1"><rect x="4" y="2.5" width="16" height="19" rx="2.2"/><path d="M7.5 6.5 H16.5 M7.5 10 H16.5"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="12" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/></g></svg></span><span data-i18n="calculatorName">Máy tính</span></button>
+  <button type="button" id="mmOpenBearCorner" class="calculator-toggle-button" title="Mở Góc gấu" aria-expanded="false"><span class="calculator-toggle-icon" aria-hidden="true">🐻</span><span>Góc gấu</span></button>
   <button type="button" id="openEntertainment" class="calculator-toggle-button mm-ent-toolbar-button" title="Mở giải trí" aria-haspopup="dialog"><span class="calculator-toggle-icon" aria-hidden="true">🎮</span><span>Giải trí</span></button>
  </div>
 </header>
@@ -3432,42 +3433,54 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 
 
 
-<div id="mmBackgroundBear" aria-label="Gấu MatchMã ở nền website">
- <canvas id="mmBackgroundBearCanvas" width="320" height="210" aria-label="Gấu 2D và cá hồi"></canvas>
- <div class="mm-bg-bear-controls"><span id="mmBackgroundBearHint">🐻 Gấu đang nghỉ</span><div class="mm-bg-bear-actions"><button type="button" id="mmBackgroundFishDrop" disabled>🐟 Thả cá hồi</button><button type="button" id="mmBackgroundFishToggle" aria-pressed="false">▶ Bật chế độ</button></div></div>
+<div id="mmBackgroundBear" aria-label="Góc gấu và đại dương 2D">
+ <div class="mm-bg-bear-head"><strong>🐻 Góc gấu</strong><div class="mm-bg-bear-head-actions"><button type="button" id="mmBearZoomOut" aria-label="Thu nhỏ gấu">−</button><button type="button" id="mmBearZoomIn" aria-label="Phóng to gấu">＋</button><button type="button" id="mmBearVisibility" aria-pressed="true">Ẩn gấu</button></div></div>
+ <canvas id="mmBackgroundBearCanvas" width="360" height="250" aria-label="Gấu, cá và sinh vật biển 2D; nhấn vào cá để cho gấu ăn"></canvas>
+ <div class="mm-bg-bear-controls"><span id="mmBackgroundBearHint">🐻 Chọn cá để cho gấu ăn</span><div class="mm-bg-bear-actions"><select id="mmBearSeaLife" aria-label="Chọn sinh vật biển"><option value="salmon">Cá hồi</option><option value="clown">Cá hề</option><option value="blue">Cá xanh</option><option value="puffer">Cá nóc</option><option value="turtle">Rùa biển</option><option value="jelly">Sứa</option><option value="crab">Cua</option><option value="star">Sao biển</option></select><button type="button" id="mmBackgroundFishDrop">＋ Thả sinh vật</button></div></div>
 </div>
 <style id="mm-background-bear-css">
-#mmBackgroundBear{position:fixed;right:14px;bottom:12px;z-index:1200;width:min(320px,46vw);pointer-events:none;display:flex;flex-direction:column;align-items:stretch;gap:3px;opacity:.97}
-#mmBackgroundBear canvas{display:block;width:100%;height:auto;max-height:190px;object-fit:contain;pointer-events:none}
-#mmBackgroundBear .mm-bg-bear-controls{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:5px 7px;border:1px solid #c9e0d2;border-radius:12px;background:color-mix(in srgb,var(--panel,#fff) 88%,transparent);box-shadow:0 3px 14px #193d2b1c;pointer-events:auto;backdrop-filter:blur(6px)}
-#mmBackgroundBearHint{font-size:11px;color:var(--text,#31483a);font-weight:700;min-width:0}
-#mmBackgroundBear .mm-bg-bear-actions{display:flex;gap:5px;align-items:center}#mmBackgroundFishDrop,#mmBackgroundFishToggle{border:1px solid #6eae83;background:#e2f5e7;color:#235b35;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}
-#mmBackgroundFishToggle[aria-pressed="true"]{background:#2c8050;color:#fff;border-color:#2c8050}#mmBackgroundFishDrop:disabled{opacity:.45;cursor:not-allowed}
-@media(max-width:600px){#mmBackgroundBear{right:6px;bottom:6px;width:min(225px,54vw)}#mmBackgroundBear canvas{max-height:125px}#mmBackgroundBear .mm-bg-bear-controls{padding:4px 5px}#mmBackgroundBearHint{font-size:10px}#mmBackgroundFishToggle{padding:6px 7px;font-size:10px}}
-@media(prefers-reduced-motion:reduce){#mmBackgroundBear canvas{animation:none}}
+#mmBackgroundBear{position:fixed;right:14px;bottom:12px;z-index:1200;width:min(350px,48vw);pointer-events:auto;display:flex;flex-direction:column;gap:5px;opacity:.98;border:1px solid #b9dfd4;border-radius:15px;padding:7px;background:color-mix(in srgb,var(--panel,#fff) 88%,transparent);box-shadow:0 8px 30px #193d2b22;backdrop-filter:blur(7px)}
+#mmBackgroundBear[hidden],#mmBackgroundBear.mm-bg-hidden{display:none!important}
+#mmBackgroundBear .mm-bg-bear-head,#mmBackgroundBear .mm-bg-bear-controls{display:flex;align-items:center;justify-content:space-between;gap:6px;color:var(--text,#31483a);font-size:11px}
+#mmBackgroundBear .mm-bg-bear-head-actions,#mmBackgroundBear .mm-bg-bear-actions{display:flex;align-items:center;gap:4px}
+#mmBackgroundBear button,#mmBackgroundBear select{border:1px solid #a7d0bb;background:#edf9f0;color:#235b35;border-radius:8px;padding:6px 8px;font-size:11px;font-weight:750;cursor:pointer;max-width:100%}
+#mmBackgroundBear canvas{display:block;width:100%;height:auto;max-height:220px;object-fit:contain;cursor:crosshair;touch-action:manipulation}
+#mmBackgroundBear #mmBackgroundBearHint{font-size:10px;font-weight:700}
+@media(max-width:600px){#mmBackgroundBear{right:5px;bottom:5px;width:min(310px,78vw);padding:5px}#mmBackgroundBear canvas{max-height:175px}#mmBackgroundBear button,#mmBackgroundBear select{font-size:10px;padding:5px}#mmBackgroundBear .mm-bg-bear-controls{align-items:flex-start;flex-direction:column}}
 </style>
 <script id="mm-background-bear-js">
 (()=>{'use strict';
-const canvas=document.getElementById('mmBackgroundBearCanvas'),toggle=document.getElementById('mmBackgroundFishToggle'),hint=document.getElementById('mmBackgroundBearHint');if(!canvas||!toggle||!hint)return;
-const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height,drop=document.getElementById('mmBackgroundFishDrop');let active=false,frame=0,growth=0,t=0,fish=[],last=0;
-function fishShape(x,y,s){ctx.save();ctx.translate(x,y);ctx.scale(s,s);ctx.fillStyle='#f18c47';ctx.beginPath();ctx.ellipse(0,0,10,6,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.moveTo(-8,0);ctx.lineTo(-15,-6);ctx.lineTo(-15,6);ctx.closePath();ctx.fillStyle='#e36b38';ctx.fill();ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(5,-2,2,0,Math.PI*2);ctx.fill();ctx.fillStyle='#263d45';ctx.beginPath();ctx.arc(5,-2,1,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#fff5';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(-1,0);ctx.lineTo(2,0);ctx.stroke();ctx.restore()}
-function bear(){const z=1+Math.min(growth,14)*.035,x=158,y=153;ctx.save();ctx.translate(x,y);ctx.scale(z,z);
-ctx.fillStyle='#6e4933';ctx.beginPath();ctx.ellipse(0,0,51,37,0,0,Math.PI*2);ctx.fill();
-ctx.beginPath();ctx.ellipse(-29,-42,16,17,0,0,Math.PI*2);ctx.ellipse(29,-42,16,17,0,0,Math.PI*2);ctx.fill();
-ctx.fillStyle='#bd8960';ctx.beginPath();ctx.ellipse(-29,-42,8,9,0,0,Math.PI*2);ctx.ellipse(29,-42,8,9,0,0,Math.PI*2);ctx.fill();
-ctx.fillStyle='#8a5b3d';ctx.beginPath();ctx.ellipse(0,-34,37,35,0,0,Math.PI*2);ctx.fill();
-ctx.fillStyle='#f0d2ac';ctx.beginPath();ctx.ellipse(0,-20,21,15,0,0,Math.PI*2);ctx.fill();
-ctx.fillStyle='#241b17';ctx.beginPath();ctx.arc(-13,-39,3,0,Math.PI*2);ctx.arc(13,-39,3,0,Math.PI*2);ctx.ellipse(0,-25,6,4,0,0,Math.PI*2);ctx.fill();
-ctx.strokeStyle='#4a2b20';ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(0,-21);ctx.quadraticCurveTo(-2,-16,-7,-17);ctx.moveTo(0,-21);ctx.quadraticCurveTo(2,-16,7,-17);ctx.stroke();
+const root=document.getElementById('mmBackgroundBear'),canvas=document.getElementById('mmBackgroundBearCanvas'),hint=document.getElementById('mmBackgroundBearHint'),drop=document.getElementById('mmBackgroundFishDrop'),kind=document.getElementById('mmBearSeaLife'),vis=document.getElementById('mmBearVisibility'),zin=document.getElementById('mmBearZoomIn'),zout=document.getElementById('mmBearZoomOut'),open=document.getElementById('mmOpenBearCorner');
+if(!root||!canvas||!hint||!drop||!kind||!vis||!zin||!zout)return;
+const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;let scale=1,growth=0,eaten=0,t=0,items=[],shown=true,raf=0;
+function ellipse(x,y,rx,ry,color){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill()}
+function fishShape(f){ctx.save();ctx.translate(f.x,f.y);ctx.scale(f.s,f.s);let body='#f18c47',tail='#df6b38';
+if(f.kind==='clown'){body='#ff8b36';tail='#ef7131'}if(f.kind==='blue'){body='#44b9e8';tail='#238cc6'}if(f.kind==='puffer'){body='#f2d46b';tail='#dcae43'}
+if(f.kind==='salmon'||f.kind==='clown'||f.kind==='blue'){ellipse(0,0,14,8,body);ctx.fillStyle=tail;ctx.beginPath();ctx.moveTo(-11,0);ctx.lineTo(-21,-8);ctx.lineTo(-21,8);ctx.closePath();ctx.fill();
+if(f.kind==='clown'){ctx.strokeStyle='#fff4df';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-3,-7);ctx.lineTo(-3,7);ctx.moveTo(5,-6);ctx.lineTo(5,6);ctx.stroke()}
+if(f.kind==='blue'){ctx.fillStyle='#b7efff';ctx.beginPath();ctx.moveTo(-1,-6);ctx.lineTo(5,-14);ctx.lineTo(9,-5);ctx.fill()}}
+else{ellipse(0,0,12,10,body);for(let a=0;a<8;a++){let q=a*Math.PI/4;ellipse(Math.cos(q)*12,Math.sin(q)*10,2.5,2.5,tail)}ctx.fillStyle=tail;ctx.beginPath();ctx.moveTo(-10,0);ctx.lineTo(-18,-6);ctx.lineTo(-18,6);ctx.fill()}
+ellipse(6,-2,2,2,'#fff');ellipse(6,-2,1,1,'#20323a');ctx.restore()}
+function seaCreature(f){ctx.save();ctx.translate(f.x,f.y);ctx.scale(f.s,f.s);
+if(f.kind==='turtle'){ellipse(0,0,15,10,'#3d956a');ellipse(0,0,10,7,'#8acb77');ellipse(16,-2,5,5,'#6cbf85');ellipse(17,-3,1.3,1.3,'#183b34');[-1,1].forEach(a=>{ellipse(a*9,-10,4,3,'#5bad7d');ellipse(a*9,10,4,3,'#5bad7d')})}
+if(f.kind==='jelly'){ellipse(0,-3,12,10,'#b38be8');ctx.strokeStyle='#9870cf';ctx.lineWidth=2;for(let a=-8;a<=8;a+=5){ctx.beginPath();ctx.moveTo(a,2);ctx.quadraticCurveTo(a+3,9,a,15);ctx.stroke()}ellipse(-4,-5,2,2,'#fff9')}
+if(f.kind==='crab'){ellipse(0,3,12,8,'#f07870');[-1,1].forEach(a=>{ctx.strokeStyle='#bd4d4d';ctx.lineWidth=2;for(let j=0;j<3;j++){ctx.beginPath();ctx.moveTo(a*8,j*2+2);ctx.lineTo(a*(14+j*2),j*3+8);ctx.stroke()}ellipse(a*12,-7,5,4,'#f07870');ellipse(a*12,-8,1.3,1.3,'#fff')})}
+if(f.kind==='star'){ctx.fillStyle='#f3b95d';ctx.beginPath();for(let i=0;i<10;i++){let a=-Math.PI/2+i*Math.PI/5,r=i%2?6:13;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();ctx.fill()}
 ctx.restore()}
-function draw(){ctx.clearRect(0,0,W,H);ctx.fillStyle='#dff4e4';ctx.globalAlpha=.7;ctx.beginPath();ctx.ellipse(158,184,88,11,0,0,Math.PI*2);ctx.fill();ctx.globalAlpha=1;
-fish.forEach(f=>fishShape(f.x,f.y,1));bear();
-if(active){ctx.fillStyle='#2d7045';ctx.font='bold 11px system-ui';ctx.fillText('THẢ CÁ HỒI',10,18)}}
-function tick(now){if(!active){frame=0;draw();return}if(now-last>24){last=now;t++;fish.forEach(f=>{f.y+=f.v;f.x+=Math.sin(t*.08+f.phase)*.5});for(let i=fish.length-1;i>=0;i--){if(fish[i].y>132&&fish[i].y<176&&fish[i].x>105&&fish[i].x<210){fish.splice(i,1);growth=Math.min(18,growth+1);hint.textContent='🐻 Gấu no bụng · '+growth+' cá';}else if(fish[i].y>H+10)fish.splice(i,1)}draw()}frame=requestAnimationFrame(tick)}
-toggle.addEventListener('click',()=>{active=!active;toggle.setAttribute('aria-pressed',String(active));toggle.textContent=active?'⏸ Tắt chế độ':'▶ Bật chế độ';drop.disabled=!active;hint.textContent=active?'🐟 Chế độ thả cá đang bật':'🐻 Gấu đang nghỉ';if(active){if(!frame)frame=requestAnimationFrame(tick)}else{if(frame)cancelAnimationFrame(frame);frame=0;draw()}});drop.addEventListener('click',()=>{if(!active)return;fish.push({x:110+Math.random()*95,y:8,v:2+Math.random()*1.6,phase:Math.random()*6});hint.textContent='🐟 Cá hồi đang rơi xuống!'});
-canvas.addEventListener('click',()=>{if(!active)return;fish.push({x:110+Math.random()*95,y:8,v:2+Math.random()*1.6,phase:Math.random()*6});});
-function autoTick(){if(active&&!frame)frame=requestAnimationFrame(tick);else if(!active)draw()}
-draw();
+function bear(){let z=scale*(1+Math.min(growth,18)*.025),x=185,y=190;ctx.save();ctx.translate(x,y);ctx.scale(z,z);
+ellipse(0,0,50,35,'#6e4933');ellipse(-29,-40,16,17,'#6e4933');ellipse(29,-40,16,17,'#6e4933');ellipse(-29,-40,8,9,'#bd8960');ellipse(29,-40,8,9,'#bd8960');ellipse(0,-33,37,35,'#8a5b3d');ellipse(0,-19,22,15,'#f0d2ac');ellipse(-13,-39,3,3,'#241b17');ellipse(13,-39,3,3,'#241b17');ellipse(0,-25,6,4,'#241b17');ctx.strokeStyle='#4a2b20';ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(0,-21);ctx.quadraticCurveTo(-2,-16,-7,-17);ctx.moveTo(0,-21);ctx.quadraticCurveTo(2,-16,7,-17);ctx.stroke();ctx.restore()}
+function draw(){ctx.clearRect(0,0,W,H);let grd=ctx.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#dff7f5');grd.addColorStop(1,'#9bd9d4');ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);ctx.globalAlpha=.24;for(let i=0;i<5;i++){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse((i*83+t*.25)%W,35+i*29,27,5,0,0,Math.PI*2);ctx.stroke()}ctx.globalAlpha=1;
+ellipse(185,226,94,10,'#5da8a0');items.forEach(f=>f.kind==='turtle'||f.kind==='jelly'||f.kind==='crab'||f.kind==='star'?seaCreature(f):fishShape(f));bear();
+ctx.fillStyle='#266c70';ctx.font='bold 10px system-ui';ctx.fillText('ĐẠI DƯƠNG 2D · CHẠM CÁ ĐỂ CHO ĂN',8,14)}
+function animate(){t++;items.forEach(f=>{if(f.kind==='turtle'||f.kind==='jelly'||f.kind==='crab'||f.kind==='star'){f.x+=Math.sin(t*.025+f.phase)*.25;f.y+=Math.sin(t*.035+f.phase)*.12}else{f.y+=f.v;f.x+=Math.sin(t*.05+f.phase)*.5}});items=items.filter(f=>f.y<H+30);draw();raf=requestAnimationFrame(animate)}
+function start(){if(!raf)raf=requestAnimationFrame(animate)}
+function spawn(){let k=kind.value;let creature=['turtle','jelly','crab','star'].includes(k);items.push({kind:k,x:creature?35+Math.random()*285:40+Math.random()*275,y:creature?95+Math.random()*100:-8,s:creature?.8+Math.random()*.3:.8+Math.random()*.35,v:1.2+Math.random()*1.2,phase:Math.random()*6});hint.textContent='Chạm đúng sinh vật để tương tác; cá chỉ tính khi bạn bấm vào cá.';start()}
+canvas.addEventListener('click',e=>{if(!shown)return;const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;for(let i=items.length-1;i>=0;i--){const f=items[i];if(Math.hypot(x-f.x,y-f.y)<(f.kind==='turtle'?23: f.kind==='jelly'?21: f.kind==='crab'?20: f.kind==='star'?20:22)*f.s){if(['turtle','jelly','crab','star'].includes(f.kind)){hint.textContent=({turtle:'🐢 Bạn chạm rùa biển!',jelly:'🪼 Sứa phát sáng!',crab:'🦀 Cua vẫy càng!',star:'⭐ Sao biển lấp lánh!'})[f.kind];f.phase+=2;draw()}else{items.splice(i,1);eaten++;growth=Math.min(18,growth+1);hint.textContent='🐻 Gấu ăn được '+eaten+' cá! Gấu lớn dần';draw()}return}}});
+drop.addEventListener('click',spawn);
+zin.addEventListener('click',()=>{scale=Math.min(1.55,scale+.1);draw()});zout.addEventListener('click',()=>{scale=Math.max(.65,scale-.1);draw()});
+vis.addEventListener('click',()=>{shown=!shown;root.classList.toggle('mm-bg-hidden',!shown);vis.textContent=shown?'Ẩn gấu':'Hiện gấu';vis.setAttribute('aria-pressed',String(shown));if(open)open.setAttribute('aria-expanded',String(shown));if(shown)draw()});
+if(open)open.addEventListener('click',()=>{shown=!shown;root.classList.toggle('mm-bg-hidden',!shown);vis.textContent=shown?'Ẩn gấu':'Hiện gấu';vis.setAttribute('aria-pressed',String(shown));open.setAttribute('aria-expanded',String(shown));if(shown){draw();start()}});
+draw();start();
 })();
 </script>
 
