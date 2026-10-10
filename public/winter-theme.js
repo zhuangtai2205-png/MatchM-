@@ -63,3 +63,45 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
   else start();
 })();
+
+/* Per-theme background motifs and hand-drawn-feeling click feedback. */
+(() => {
+ const motifs={
+  bear:{bg:['❄','✳','🐟','❅'],click:['🐟','❄','🐾','✨','🐻']},
+  ocean:{bg:['〰','🐠','🫧','🐚','〰'],click:['🧜‍♀️','🐠','🐬','🫧','🐚','🐟']},
+  retro:{bg:['♪','♫','♬','𝄞'],click:['♪','♫','♬','♩','𝄞']},
+  pink:{bg:['✿','🌸','❀','🌷'],click:['🌸','🌺','🌷','🌼','🌹','❀']},
+  vampire:{bg:['☾','🦇','✦','🕸'],click:['🦇','🎃','🕷️','🕸️','🕯️','☠️']},
+  cat:{bg:['🐾','🐈','🐟','✦'],click:['🐈','🐈‍⬛','🐟','🦴','🐾','🧶']}
+ };
+ let scene;
+ function currentTheme(){return document.body.dataset.theme||'bear'}
+ function paintScene(){
+  const theme=currentTheme(),config=motifs[theme]||motifs.bear;
+  if(!scene){scene=document.createElement('div');scene.className='theme-scenery';scene.setAttribute('aria-hidden','true');document.body.appendChild(scene)}
+  scene.replaceChildren();
+  config.bg.forEach((symbol,i)=>{
+   const el=document.createElement('span');el.textContent=symbol;
+   el.style.left=(5+(i*23)%88)+'%';el.style.top=(12+(i*19)%72)+'%';
+   el.style.fontSize=(20+(i%3)*13)+'px';el.style.animationDelay=(-i*1.8)+'s';
+   if(theme==='ocean'&&symbol==='〰')el.className='scenery-wave';
+   scene.appendChild(el);
+  });
+ }
+ paintScene();
+ new MutationObserver(paintScene).observe(document.body,{attributes:true,attributeFilter:['data-theme']});
+ document.addEventListener('pointerdown',e=>{
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const config=motifs[currentTheme()]||motifs.bear;
+  for(let i=0;i<2;i++){
+   const el=document.createElement('span');el.className='theme-click-doodle';
+   el.textContent=config.click[Math.floor(Math.random()*config.click.length)];
+   el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';
+   el.style.setProperty('--tx',(Math.random()*90-45)+'px');
+   el.style.setProperty('--ty',(-28-Math.random()*58)+'px');
+   el.style.setProperty('--rot',(Math.random()*70-35)+'deg');
+   document.body.appendChild(el);el.addEventListener('animationend',()=>el.remove(),{once:true});
+   setTimeout(()=>el.remove(),1100);
+  }
+ },{passive:true});
+})();
