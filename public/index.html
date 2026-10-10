@@ -1132,6 +1132,19 @@ button:hover,.btn:hover,.navbtn:hover{transform:none!important;filter:none!impor
 body[data-theme="bear"]::before,body[data-theme="bear"]::after{pointer-events:none!important}
 @media(prefers-reduced-motion:reduce){#bear-snow .bear-snowflake{animation:none!important;top:var(--snow-static-top,25vh)!important}}
 
+
+/* Final hand-drawn bear styling based on the user's reference illustration. */
+#bear-container{width:clamp(280px,39vw,470px)!important;max-width:calc(100vw - 18px)!important;filter:none!important}
+#bear-sprite{filter:none!important;shape-rendering:geometricPrecision}
+#bear-sprite #bearTorso{stroke-linecap:round;stroke-linejoin:round}
+#bear-container.is-hibernating{transform:translateX(-50%) scale(var(--bear-scale,1)) translateY(7px)!important;filter:none!important}
+#bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.4s ease-in-out infinite!important}
+#bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .46s ease-in-out!important}
+#bear-snow{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important;overflow:hidden!important}
+#bear-snow .bear-snowflake{filter:none!important}
+@media(max-width:650px){#bear-container{width:clamp(220px,58vw,320px)!important;max-width:calc(100vw - 12px)!important}}
+@media(prefers-reduced-motion:reduce){#bear-sprite,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite{animation:none!important}}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
