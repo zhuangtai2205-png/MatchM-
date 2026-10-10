@@ -31,23 +31,34 @@
       document.body.appendChild(doodle);
     });
 
-    const bear = document.createElement('img');
-    bear.className = 'winter-bear-spot';
-    bear.src = '/winter-bear.svg';
-    bear.alt = 'Gấu nâu vẽ tay quàng khăn xanh, ôm cá giữa tuyết';
-    bear.decoding = 'async';
+    const makeBear = (className) => {
+      const img = document.createElement('img');
+      img.className = className;
+      img.src = '/winter-bear.svg?v=2';
+      img.alt = className === 'winter-bear-spot' ? 'Gấu nâu vẽ tay quàng khăn xanh, ôm cá giữa tuyết' : '';
+      img.decoding = 'async';
+      if (className !== 'winter-bear-spot') img.setAttribute('aria-hidden', 'true');
+      return img;
+    };
+    const heroBear = makeBear('winter-bear-spot');
+    const gameBear = makeBear('winter-bear-replacement');
+    const sprite = document.getElementById('bear-sprite');
+    const container = document.getElementById('bear-container');
+    if (container && sprite && !container.querySelector('.winter-bear-replacement')) {
+      container.appendChild(gameBear);
+    }
 
-    const placeBear = () => {
+    const placeHeroBear = () => {
       const activePage = document.querySelector('.page.active') || document;
       const hero = activePage.querySelector('.hero');
-      if (hero && bear.parentElement !== hero) hero.appendChild(bear);
-      else if (!hero && bear.parentElement) bear.remove();
+      if (hero && heroBear.parentElement !== hero) hero.appendChild(heroBear);
+      else if (!hero && heroBear.parentElement) heroBear.remove();
     };
-    placeBear();
-    const observer = new MutationObserver(() => placeBear());
+    placeHeroBear();
+    const observer = new MutationObserver(() => placeHeroBear());
     document.querySelectorAll('.page').forEach(page => observer.observe(page, {attributes:true, attributeFilter:['class']}));
-    document.querySelectorAll('.navbtn').forEach(btn => btn.addEventListener('click', () => setTimeout(placeBear, 80)));
-    window.addEventListener('resize', placeBear, {passive:true});
+    document.querySelectorAll('.navbtn').forEach(btn => btn.addEventListener('click', () => setTimeout(placeHeroBear, 80)));
+    window.addEventListener('resize', placeHeroBear, {passive:true});
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
   else start();
