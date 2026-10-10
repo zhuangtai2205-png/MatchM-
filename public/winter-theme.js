@@ -2,12 +2,11 @@
   'use strict';
   const $ = (selector, root=document) => root.querySelector(selector);
   const themeMotifs = {
-    bear: {background:['🍃','🌿','🌱','🐾','🌲','✿'], click:['🐟','🍃','🌿','🐾','✨','🐻'], nav:['🌿','🍃','🌱','🐾','🌲']},
-    ocean:{background:['〰','〰','🫧','🐠','🐚','🪸','🐟'],click:['🧜‍♀️','🧜‍♀️','🐠','🐬','🫧','🐚','🐟'],nav:['🐠','🐚','🪸','🐬','🫧']},
-    retro:{background:['♪','♫','♬','𝄞','♩'],click:['♪','♫','♬','♩','𝄞'],nav:['♫','♪','♬','𝄞','♩']},
-    pink:{background:['✿','🌸','❀','🌷','🌺'],click:['🌸','🌺','🌷','🌼','🌹','❀'],nav:['🌸','🌷','🌼','🌺','✿']},
-    vampire:{background:['☾','🦇','✦','🕸','🕯️'],click:['🦇','🎃','🕷️','🕸️','🕯️','☠️'],nav:['🦇','🕸️','🕯️','🎃','☾']},
-    cat:{background:['🐾','🐈','🐟','✦','🧶'],click:['🐈','🐈‍⬛','🐟','🦴','🐾','🧶'],nav:['🐈','🐟','🧶','🦴','🐾']}
+    ocean:{background:["〰","〰","🫧","🐠","🐚","🪸","🐟"],click:["🧜‍♀️","🐠","🐬","🫧","🐚","🐟"],nav:["🐠","🐚","🪸","🐬","🫧"]},
+    retro:{background:["♪","♫","♬","𝄞","♩"],click:["♪","♫","♬","♩","𝄞"],nav:["♫","♪","♬","𝄞","♩"]},
+    pink:{background:["✿","🌸","❀","🌷","🌺"],click:["🌸","🌺","🌷","🌼","🌹","❀"],nav:["🌸","🌷","🌼","🌺","✿"]},
+    vampire:{background:["☾","🦇","✦","🕸","🕯️"],click:["🦇","🎃","🕷️","🕸️","🕯️","☠️"],nav:["🦇","🕸️","🕯️","🎃","☾"]},
+    cat:{background:["🐾","🐈","🐟","✦","🧶"],click:["🐈","🐈‍⬛","🐟","🦴","🐾","🧶"],nav:["🐈","🐟","🧶","🦴","🐾"]}
   };
   const theme = () => document.body.dataset.theme || 'ocean';
   function renderScenery(){
@@ -43,31 +42,8 @@
     }
   }
   function initBear(){
-    const container=$('#bear-container');
-    if(container) {
-      const sprite=$('#bear-sprite',container);
-      if(sprite) sprite.style.display='none';
-    }
-    let mascot=$('.winter-bear-spot');
-    if(!mascot){
-      mascot=document.createElement('img');
-      mascot.className='winter-bear-spot';
-      mascot.src='/winter-bear.svg?v=5';
-      mascot.alt='Gấu con hoạt hình đang ôm cá';
-      mascot.decoding='async';
-    }
-    function placeMascot(){
-      const isBear=theme()==='bear';
-      const page=$('.page.active');
-      const hero=page && $('.hero',page);
-      if(!isBear || !hero){mascot.remove();return}
-      if(mascot.parentElement!==hero) hero.appendChild(mascot);
-    }
-    placeMascot();
-    const observer=new MutationObserver(placeMascot);
-    observer.observe(document.body,{attributes:true,attributeFilter:['data-theme']});
-    document.querySelectorAll('.page').forEach(page=>observer.observe(page,{attributes:true,attributeFilter:['class']}));
-    document.querySelectorAll('.navbtn').forEach(btn=>btn.addEventListener('click',()=>window.setTimeout(placeMascot,100)));
+    document.querySelectorAll(".winter-bear-spot,#fat-bear-overlay,#funWidget,#funToggleBtn").forEach(el=>el.remove());
+    const container=$("#bear-container"); if(container) container.remove();
   }
   function start(){
     renderScenery();
