@@ -1956,6 +1956,12 @@ header.app-header .headright{
  header.app-header .headright{align-items:center!important}
 }
 </style>
+<style id="matchma-font-visual-differences-v66">
+/* Make selected family cascade through all themes and provide CJK glyph coverage for Chinese/Japanese. */
+html{--matchma-font-family:"Be Vietnam Pro","Noto Sans","Noto Sans TC","Noto Sans SC","Noto Sans JP",Arial,sans-serif}
+html body,html body *:not(svg):not(svg *):not(.icon):not(.lucide){font-family:var(--matchma-font-family)!important}
+#siteFontFamily option{font-family:Arial,sans-serif}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -3341,11 +3347,11 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 </script><script src="/winter-theme.js?v=20"></script><script>
 /* Font picker v75: set font directly on every rendered element so theme-specific !important rules cannot override it. */
 (function(){
- const KEY='matchma-site-font-family-v2';
+ const KEY='matchma-site-font-family-v3';
  const FONTS=['Be Vietnam Pro','Nunito','Inter','Roboto','Open Sans','Lato','Montserrat','Poppins','Baloo 2','Merriweather'];
  function applyFont(value){
   const name=FONTS.includes(value)?value:'Be Vietnam Pro';
-  const stack='"'+name+'", Arial, sans-serif';
+  const stack='"'+name+'", "Noto Sans", "Noto Sans TC", "Noto Sans SC", "Noto Sans JP", Arial, sans-serif';
   // Load the actual font files before applying the family; a family name alone falls back silently.
   const fontFamilies={
    'Be Vietnam Pro':'Be+Vietnam+Pro:wght@400;500;600;700',
@@ -3361,7 +3367,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
   };
   let fontLink=document.getElementById('matchma-selected-font-resource');
   if(!fontLink){fontLink=document.createElement('link');fontLink.id='matchma-selected-font-resource';fontLink.rel='stylesheet';document.head.appendChild(fontLink)}
-  fontLink.href='https://fonts.googleapis.com/css2?family='+fontFamilies[name]+'&display=swap';
+  fontLink.href='https://fonts.googleapis.com/css2?family='+fontFamilies[name]+'&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap';
   document.documentElement.style.setProperty('--matchma-font-family',stack);
   document.documentElement.style.setProperty('--matchma-font-family',stack);
   document.documentElement.dataset.siteFont=name;
@@ -3377,7 +3383,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
  }
  function init(){
   let saved='Be Vietnam Pro';
-  try{saved=localStorage.getItem(KEY)||localStorage.getItem('matchma-site-font-family-v1')||saved}catch(e){}
+  try{saved=localStorage.getItem(KEY)||localStorage.getItem('matchma-site-font-family-v2')||localStorage.getItem('matchma-site-font-family-v1')||saved}catch(e){}
   applyFont(saved);
   document.addEventListener('change',function(event){
    if(event.target && event.target.id==='siteFontFamily') applyFont(event.target.value);
