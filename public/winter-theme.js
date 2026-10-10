@@ -7,7 +7,7 @@
     pink:{background:["petal","petal","flower","petal","sakura"],click:["🌸","🌺","🌷","❀"],nav:[]},
     vampire:{background:["web","bat","moon","web","candle"],click:["🦇","🕸","✦","🕯"],nav:[]},
     cat:{background:["cat","yarn","paw","yarn","cat"],click:["🐈","🧶","🐾","🧵"],nav:[]},
-    forest:{background:["bear","pine","honey","pine","bee","bear","honey"],click:["bear","bee","honey"],nav:[]},
+    forest:{background:[],click:["bear"],nav:[]},
     minimal:{background:[],click:[],nav:[]}
   };
   const forestArt = {
