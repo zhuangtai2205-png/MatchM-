@@ -2855,3 +2855,24 @@ body[data-theme="minimal"] .sidebar {border-radius:12px!important}
  body[data-theme="minimal"] .page {padding:10px!important}
 }
 </style>
+
+
+<style id="matchma-logo-extra-large-v40">
+/* Make the logo visually lead the MatchMã wordmark */
+.app-header .brand-mark,
+body .app-header .brand-mark,
+body[data-theme] .app-header .brand-mark {
+  width:136px!important;height:136px!important;flex:0 0 136px!important;min-width:136px!important;
+}
+.app-header .brand .matchma-logo-image {width:100%!important;height:100%!important;object-fit:contain!important}
+.app-header .brand {gap:18px!important}
+.app-header .brand-copy h1 {font-size:clamp(30px,3.2vw,46px)!important;line-height:1.02!important;letter-spacing:-.035em!important}
+.app-header .subbrand {font-size:clamp(12px,1.1vw,15px)!important}
+@media(max-width:650px){
+ .app-header .brand-mark,body .app-header .brand-mark,body[data-theme] .app-header .brand-mark {
+   width:96px!important;height:96px!important;flex-basis:96px!important;min-width:96px!important;
+ }
+ .app-header .brand {gap:12px!important}
+ .app-header .brand-copy h1 {font-size:clamp(25px,7vw,34px)!important}
+}
+</style>
