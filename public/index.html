@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&family=Nunito:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#302b48;--muted:#77738b;--line:#e8e0f1;--lav:#ebe6ff;--pink:#f7e2ed;--mint:#dff4eb;--purple:#7865c5;--paper:#fffdfd;--green:#287653;--amber:#966514;--red:#9d4d66}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7fa,#f4f1ff 55%,#f1fbf7);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,sans-serif}button,input,select{font:inherit}button{cursor:pointer}header{max-width:1500px;margin:auto;padding:22px 26px 14px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#dfd7ff,#f7dce8);display:grid;place-items:center;font-size:calc(24px * var(--font-scale, 1));box-shadow:0 8px 25px #7565af20}h1{font-size:calc(clamp(24px,3vw,34px) * var(--font-scale, 1));letter-spacing:-1.1px;margin:0}h1 span{color:#a66a9a}.subbrand{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.headright{display:flex;align-items:center;gap:10px}.pill{background:#ffffffbd;border:1px solid #fff;border-radius:99px;padding:9px 14px;color:#726a8b}.shell{max-width:1500px;margin:auto;padding:0 26px 44px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px}.sidebar{align-self:start;background:#ffffffac;border:1px solid #fff;border-radius:22px;padding:12px;position:sticky;top:12px}.navtitle{font-size:calc(11px * var(--font-scale, 1));letter-spacing:1.1px;color:#9890a8;padding:10px 12px}.navbtn{width:100%;border:0;background:transparent;color:#716984;border-radius:13px;text-align:left;padding:12px;display:flex;align-items:center;gap:12px;margin:2px 0}.navbtn:hover{background:#f4f0fc}.navbtn.active{background:#eae5fb;color:#574b91;font-weight:750}.navicon{width:25px;text-align:center;font-size:17px}.sidefoot{margin:14px 5px 5px;padding:13px;border-radius:14px;background:#f7f3ff;color:#77708e;font-size:12px}.main{min-width:0}.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:none}}.hero,.panel{background:#ffffffc9;border:1px solid #fff;border-radius:23px;padding:23px;box-shadow:0 12px 38px #8c7ca10b;margin-bottom:16px}.hero{background:linear-gradient(120deg,#fffdfdce,#f2edffdc);padding:27px}.eyebrow{text-transform:uppercase;letter-spacing:1.3px;color:#8a7caa;font-size:calc(11px * var(--font-scale, 1));font-weight:800}.hero h2{font-size:calc(clamp(24px,3vw,33px) * var(--font-scale, 1));line-height:1.2;letter-spacing:-.8px;margin:9px 0}.hero p,.muted,.hint{color:var(--muted);font-size:13px}.hero p{max-width:760px}.sectionhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:15px}.sectionhead h2,.panel h2{margin:0 0 6px;font-size:19px}.sectionhead p,.panel p{margin:0;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.upload{display:block;border:1.5px dashed #c5b8dc;border-radius:17px;padding:22px;text-align:center;background:#faf8ff;cursor:pointer;margin:15px 0}.upload:hover{background:#f4efff;border-color:#aa9cdb}.upload .bigicon{font-size:calc(27px * var(--font-scale, 1));display:block;margin-bottom:7px}.upload input{display:block;width:100%;margin-top:12px;font-size:12px}.btn{border:0;background:var(--purple);color:white;padding:11px 17px;border-radius:12px;font-weight:750;box-shadow:0 5px 14px #7968c62b}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.btn.alt{background:#eee9fb;color:#574b89;box-shadow:none}.btn.soft{background:#e4f5ed;color:#286c4d;box-shadow:none}.field{margin:12px 0}.field label{display:block;font-size:calc(12px * var(--font-scale, 1));font-weight:750;color:#6c6580;margin-bottom:5px}.field input[type=text],.field select,.field input[type=number],.field input[type=range],.search{width:100%}.field input[type=text],.field select,.field input[type=number],.search{padding:10px 12px;border:1px solid #e4ddec;border-radius:11px;background:#fff;color:var(--ink);outline-color:#aa9ddd}.field input[type=range]{accent-color:var(--purple)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0}.stat{background:#fff;border:1px solid #fff;border-radius:18px;padding:16px;min-width:0}.stat b{display:block;font-size:calc(29px * var(--font-scale, 1));letter-spacing:-.6px}.stat small{color:var(--muted);font-size:12px}.stat.good b{color:var(--green)}.stat.review b{color:var(--amber)}.stat.none b{color:var(--red)}.twostat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{background:#fff;border:1px solid #eee8f5;border-radius:15px;padding:13px}.mini b{font-size:calc(19px * var(--font-scale, 1));display:block}.mini span{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.tablewrap{overflow:auto;border-radius:15px;border:1px solid #eee8f5;background:#fff}table{border-collapse:collapse;width:100%;min-width:770px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #f0ecf5;font-size:calc(12px * var(--font-scale, 1));vertical-align:top}th{background:#faf7ff;color:#71668e;position:sticky;top:0;z-index:1}td select{margin:0;min-width:115px;border:1px solid #e4ddec;border-radius:9px;padding:7px;background:#fff;color:var(--ink);font-size:12px}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:calc(11px * var(--font-scale, 1));font-weight:750;white-space:nowrap}.badge.good{background:#ddf5e8;color:#2c7c58}.badge.review{background:#fff0cf;color:#946a19}.badge.none{background:#f9e1e8;color:#9a4b64}.badge.rejected{background:#eee9fb;color:#635588}.empty{text-align:center;padding:34px 16px;color:var(--muted)}.progressbox{display:none;background:#f5f1ff;border:1px solid #e8e0fc;border-radius:14px;padding:13px;margin-top:14px}.progressbox.show{display:block}.bar{height:8px;background:#ded6f5;border-radius:99px;overflow:hidden;margin-top:8px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#9e8bde,#6bba9b);transition:width .12s}.resulttools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}.search{max-width:340px}.pager{display:flex;gap:9px;align-items:center;justify-content:flex-end;padding:12px}.pager span{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.thresholdvalue{font-size:calc(30px * var(--font-scale, 1));font-weight:850;color:#6554ad}.rule{padding:12px;border-radius:13px;background:#f5f0ff;color:#6e628e;font-size:calc(13px * var(--font-scale, 1));margin-top:12px}.okmsg{padding:12px;border-radius:13px;background:#eaf8f0;color:#367554;font-size:13px}.foot{text-align:center;color:#8a8499;font-size:calc(12px * var(--font-scale, 1));padding:16px}@media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow-x:auto;gap:3px;padding:8px}.navtitle,.sidefoot{display:none}.navbtn{width:auto;flex:0 0 auto;padding:10px 13px}.navicon{width:auto}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:650px){header{padding:15px 14px;align-items:flex-start;flex-direction:column}.headright{width:100%;justify-content:space-between}.shell{padding:0 12px 25px;gap:12px}.hero,.panel{padding:17px;border-radius:18px}.grid,.grid3,.twostat{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:12px}.stat b{font-size:25px}.sectionhead{flex-direction:column}.search{max-width:none}.navbtn{font-size:calc(12px * var(--font-scale, 1));gap:7px}.navicon{font-size:15px}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7fa,#f4f1ff 55%,#f1fbf7);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,sans-serif}button,input,select{font:inherit}button{cursor:pointer}header{max-width:1500px;margin:auto;padding:22px 26px 14px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#dfd7ff,#f7dce8);display:grid;place-items:center;font-size:calc(24px * var(--font-scale, 1));box-shadow:0 8px 25px #7565af20}h1{font-size:calc(clamp(24px,3vw,34px) * var(--font-scale, 1));letter-spacing:-1.1px;margin:0}h1 span{color:#a66a9a}.subbrand{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.headright{display:flex;align-items:center;gap:10px}.pill{background:#ffffffbd;border:1px solid #fff;border-radius:99px;padding:9px 14px;color:#726a8b}.shell{max-width:1500px;margin:auto;padding:0 26px 44px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px}.sidebar{align-self:start;background:#ffffffac;border:1px solid #fff;border-radius:22px;padding:12px;position:sticky;top:12px}.navtitle{font-size:calc(11px * var(--font-scale, 1));letter-spacing:1.1px;color:#9890a8;padding:10px 12px}.navbtn{width:100%;border:0;background:transparent;color:#716984;border-radius:13px;text-align:left;padding:12px;display:flex;align-items:center;gap:12px;margin:2px 0}.navbtn:hover{background:#f4f0fc}.navbtn.active{background:#eae5fb;color:#574b91;font-weight:750}.navicon{width:25px;text-align:center;font-size:calc(17px * var(--font-scale,1))}.sidefoot{margin:14px 5px 5px;padding:13px;border-radius:14px;background:#f7f3ff;color:#77708e;font-size:calc(12px * var(--font-scale,1))}.main{min-width:0}.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:none}}.hero,.panel{background:#ffffffc9;border:1px solid #fff;border-radius:23px;padding:23px;box-shadow:0 12px 38px #8c7ca10b;margin-bottom:16px}.hero{background:linear-gradient(120deg,#fffdfdce,#f2edffdc);padding:27px}.eyebrow{text-transform:uppercase;letter-spacing:1.3px;color:#8a7caa;font-size:calc(11px * var(--font-scale, 1));font-weight:800}.hero h2{font-size:calc(clamp(24px,3vw,33px) * var(--font-scale, 1));line-height:1.2;letter-spacing:-.8px;margin:9px 0}.hero p,.muted,.hint{color:var(--muted);font-size:calc(13px * var(--font-scale,1))}.hero p{max-width:760px}.sectionhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:15px}.sectionhead h2,.panel h2{margin:0 0 6px;font-size:calc(19px * var(--font-scale,1))}.sectionhead p,.panel p{margin:0;color:var(--muted);font-size:calc(13px * var(--font-scale,1))}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.upload{display:block;border:1.5px dashed #c5b8dc;border-radius:17px;padding:22px;text-align:center;background:#faf8ff;cursor:pointer;margin:15px 0}.upload:hover{background:#f4efff;border-color:#aa9cdb}.upload .bigicon{font-size:calc(27px * var(--font-scale, 1));display:block;margin-bottom:7px}.upload input{display:block;width:100%;margin-top:12px;font-size:calc(12px * var(--font-scale,1))}.btn{border:0;background:var(--purple);color:white;padding:11px 17px;border-radius:12px;font-weight:750;box-shadow:0 5px 14px #7968c62b}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.btn.alt{background:#eee9fb;color:#574b89;box-shadow:none}.btn.soft{background:#e4f5ed;color:#286c4d;box-shadow:none}.field{margin:12px 0}.field label{display:block;font-size:calc(12px * var(--font-scale, 1));font-weight:750;color:#6c6580;margin-bottom:5px}.field input[type=text],.field select,.field input[type=number],.field input[type=range],.search{width:100%}.field input[type=text],.field select,.field input[type=number],.search{padding:10px 12px;border:1px solid #e4ddec;border-radius:11px;background:#fff;color:var(--ink);outline-color:#aa9ddd}.field input[type=range]{accent-color:var(--purple)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0}.stat{background:#fff;border:1px solid #fff;border-radius:18px;padding:16px;min-width:0}.stat b{display:block;font-size:calc(29px * var(--font-scale, 1));letter-spacing:-.6px}.stat small{color:var(--muted);font-size:calc(12px * var(--font-scale,1))}.stat.good b{color:var(--green)}.stat.review b{color:var(--amber)}.stat.none b{color:var(--red)}.twostat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{background:#fff;border:1px solid #eee8f5;border-radius:15px;padding:13px}.mini b{font-size:calc(19px * var(--font-scale, 1));display:block}.mini span{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.tablewrap{overflow:auto;border-radius:15px;border:1px solid #eee8f5;background:#fff}table{border-collapse:collapse;width:100%;min-width:770px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #f0ecf5;font-size:calc(12px * var(--font-scale, 1));vertical-align:top}th{background:#faf7ff;color:#71668e;position:sticky;top:0;z-index:1}td select{margin:0;min-width:115px;border:1px solid #e4ddec;border-radius:9px;padding:7px;background:#fff;color:var(--ink);font-size:calc(12px * var(--font-scale,1))}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:calc(11px * var(--font-scale, 1));font-weight:750;white-space:nowrap}.badge.good{background:#ddf5e8;color:#2c7c58}.badge.review{background:#fff0cf;color:#946a19}.badge.none{background:#f9e1e8;color:#9a4b64}.badge.rejected{background:#eee9fb;color:#635588}.empty{text-align:center;padding:34px 16px;color:var(--muted)}.progressbox{display:none;background:#f5f1ff;border:1px solid #e8e0fc;border-radius:14px;padding:13px;margin-top:14px}.progressbox.show{display:block}.bar{height:8px;background:#ded6f5;border-radius:99px;overflow:hidden;margin-top:8px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#9e8bde,#6bba9b);transition:width .12s}.resulttools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}.search{max-width:340px}.pager{display:flex;gap:9px;align-items:center;justify-content:flex-end;padding:12px}.pager span{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.thresholdvalue{font-size:calc(30px * var(--font-scale, 1));font-weight:850;color:#6554ad}.rule{padding:12px;border-radius:13px;background:#f5f0ff;color:#6e628e;font-size:calc(13px * var(--font-scale, 1));margin-top:12px}.okmsg{padding:12px;border-radius:13px;background:#eaf8f0;color:#367554;font-size:calc(13px * var(--font-scale,1))}.foot{text-align:center;color:#8a8499;font-size:calc(12px * var(--font-scale, 1));padding:16px}@media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow-x:auto;gap:3px;padding:8px}.navtitle,.sidefoot{display:none}.navbtn{width:auto;flex:0 0 auto;padding:10px 13px}.navicon{width:auto}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:650px){header{padding:15px 14px;align-items:flex-start;flex-direction:column}.headright{width:100%;justify-content:space-between}.shell{padding:0 12px 25px;gap:12px}.hero,.panel{padding:17px;border-radius:18px}.grid,.grid3,.twostat{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:12px}.stat b{font-size:calc(25px * var(--font-scale,1))}.sectionhead{flex-direction:column}.search{max-width:none}.navbtn{font-size:calc(12px * var(--font-scale, 1));gap:7px}.navicon{font-size:calc(15px * var(--font-scale,1))}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 
 /* Cute cat + flower theme and cursor */
 body{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath d='M6 12 L5 3 L13 8 Q16 7 19 8 L27 3 L26 13 Q30 18 25 25 Q16 32 7 25 Q2 19 6 12Z' fill='%23f7dce8' stroke='%237865c5' stroke-width='1.6'/%3E%3Ccircle cx='11' cy='17' r='2' fill='%23302b48'/%3E%3Ccircle cx='21' cy='17' r='2' fill='%23302b48'/%3E%3Cpath d='M14 21 Q16 23 18 21' fill='none' stroke='%23302b48' stroke-width='1.6'/%3E%3C/svg%3E") 5 4,auto}
@@ -145,7 +145,7 @@ body,button,input,select,textarea,table,th,td{font-family:'Courier Prime','Couri
 .platform-link{display:inline-flex;align-items:center;gap:14px;border:1px solid rgba(130,199,220,.7);background:rgba(232,248,253,.85);color:#225f7d;padding:12px 15px;border-radius:12px;text-decoration:none;font-weight:700}
 .platform-link:hover{background:rgba(210,241,250,.96);transform:translateY(-1px)}
 #page-memory .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-#page-memory .stat b{font-size:22px}
+#page-memory .stat b{font-size:calc(22px * var(--font-scale,1))}
 #page-platforms .field input{width:100%;padding:12px;border:1px solid #b9deeb;border-radius:12px;background:rgba(255,255,255,.82);color:var(--ink)}
 @media(max-width:800px){.resulttools select{flex:1 1 160px;max-width:none}.row-actions{min-width:120px}}
 @media(max-width:650px){#page-memory .stats{grid-template-columns:1fr 1fr}.resulttools select{min-width:0;flex:1 1 45%}.row-actions{min-width:115px}}
@@ -164,7 +164,7 @@ body,button,input,select,textarea,table,th,td{font-family:'Courier Prime','Couri
 .market-row-links{display:flex;gap:5px;flex-wrap:wrap;min-width:260px;max-width:620px}
 .platform-link.compact{font-size:calc(10px * var(--font-scale, 1));padding:5px 7px;gap:4px;border-radius:8px}
 #page-autofill .field select,#page-platforms .field select{width:100%;padding:10px 12px;border:1px solid #b9deeb;border-radius:11px;background:rgba(255,255,255,.82);color:var(--ink)}
-.checkline{display:flex;align-items:center;gap:9px;padding:10px 0;color:var(--ink);font-size:13px}
+.checkline{display:flex;align-items:center;gap:9px;padding:10px 0;color:var(--ink);font-size:calc(13px * var(--font-scale,1))}
 .checkline input{width:17px;height:17px;accent-color:var(--purple)}
 #page-autofill .upload input,#page-platforms .upload input{display:block;width:100%;margin-top:12px}
 body[data-theme="retro"]{--ink:#191919;--muted:#555;--purple:#333;--frame:#555;--green:#202020;--amber:#4f4f4f;--red:#111;background:#efefeb!important;color:#111!important}
@@ -335,7 +335,7 @@ body[data-theme="cat"] .panel::after{content:"🐟  🦴";position:absolute;righ
 .overview-avatar{width:46px;height:46px;flex:0 0 46px;border-radius:14px;display:grid;place-items:center;font-size:calc(25px * var(--font-scale, 1));background:var(--ui-soft,#eaf8fd);border:1px solid var(--ui-border,#cce8f2)}
 .overview-account-identity strong{display:block;overflow-wrap:anywhere;font-size:calc(14px * var(--font-scale, 1));font-weight:900}
 .overview-account-identity p{margin:4px 0 0!important}
-.overview-memory-count b{font-size:16px}
+.overview-memory-count b{font-size:calc(16px * var(--font-scale,1))}
 .overview-memory-preview{display:grid;gap:7px;margin-top:9px}
 .overview-memory-row{padding:8px 10px;border:1px solid var(--ui-border,#cce8f2);background:var(--ui-surface,#fff);border-radius:11px;display:grid;gap:3px}
 .overview-memory-row strong{font-size:calc(12px * var(--font-scale, 1));line-height:1.35;overflow-wrap:anywhere}
@@ -354,12 +354,12 @@ body[data-theme="vampire"] .overview-account-pill.is-online{background:#243a31;c
 /* Dashboard analytics, section identity, clear 2D file-folder icons */
 .overview-analytics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 16px}
 .chart-card{min-width:0;overflow:hidden}
-.chart-heading{margin-bottom:8px}.chart-heading h2{font-size:calc(17px * var(--font-scale, 1))!important;font-weight:900!important;text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--ui-accent,#3c9bc0);text-underline-offset:5px}.chart-heading p{font-size:12px!important}
+.chart-heading{margin-bottom:8px}.chart-heading h2{font-size:calc(17px * var(--font-scale, 1))!important;font-weight:900!important;text-decoration:underline;text-decoration-thickness:2px;text-decoration-color:var(--ui-accent,#3c9bc0);text-underline-offset:5px}.chart-heading p{font-size:calc(12px * var(--font-scale,1))!important}
 .chart-view{min-height:190px;display:flex;align-items:center;justify-content:center;overflow:hidden}.chart-view svg{width:100%;max-height:240px;display:block;overflow:visible}
 .chart-legend{display:grid;gap:6px;margin-top:4px}.chart-legend-item{display:flex;align-items:center;gap:7px;font-size:calc(12px * var(--font-scale, 1));color:var(--ink)}.chart-legend-item i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 9px}.chart-legend-item b{margin-left:auto;font-variant-numeric:tabular-nums}
 .chart-empty{padding:24px 12px;color:var(--muted);font-size:calc(12px * var(--font-scale, 1));text-align:center}
 .sidebar-account-shortcut{width:100%;display:flex;align-items:center;gap:9px;padding:9px 8px;margin:2px 0 10px;border:1px solid var(--ui-border,#cce8f2);border-radius:17px;background:var(--ui-surface,#fff);color:var(--ink);text-align:left;cursor:pointer}
-.sidebar-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ui-accent,#3c9bc0);background:var(--ui-soft,#eaf8fd);color:var(--ui-accent,#3c9bc0);font-weight:900;font-size:17px}
+.sidebar-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ui-accent,#3c9bc0);background:var(--ui-soft,#eaf8fd);color:var(--ui-accent,#3c9bc0);font-weight:900;font-size:calc(17px * var(--font-scale,1))}
 .sidebar-account-copy{display:grid;gap:2px;min-width:0;flex:1}.sidebar-account-copy strong{font-size:calc(13px * var(--font-scale, 1));font-weight:900}.sidebar-account-copy small{font-size:calc(10px * var(--font-scale, 1));overflow-wrap:anywhere;color:var(--muted)}.sidebar-account-arrow{font-weight:900}
 body[data-theme] .sectionhead h2,body[data-theme] .hero h2{font-weight:900!important;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--ui-accent,#3c9bc0);text-shadow:0 1px 0 var(--ui-surface,#fff)}
 body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=7");filter:none}
@@ -389,7 +389,7 @@ header{background:#ffffffd9;border:1px solid #ffffffed;border-radius:20px;margin
 .quick-settings>summary{list-style:none;display:flex;align-items:center;gap:9px;cursor:pointer;padding:11px 14px;border:1px solid #cbd5e1;border-radius:13px;background:#fff;color:#1e2b40;font-size:calc(13px * var(--font-scale, 1));font-weight:900;box-shadow:0 3px 10px #26374a0d;white-space:nowrap}
 .quick-settings>summary::-webkit-details-marker{display:none}
 .quick-settings[open]>summary{border-color:#7898bc;background:#f7faff}
-.quick-settings-wheel{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#e7eef7;color:#233c59;font-size:17px}
+.quick-settings-wheel{display:grid;place-items:center;width:22px;height:22px;border-radius:7px;background:#e7eef7;color:#233c59;font-size:calc(17px * var(--font-scale,1))}
 .quick-settings-chevron{margin-left:3px;color:#47576d}
 .quick-settings-menu{position:absolute;right:0;top:calc(100% + 8px);width:min(340px,calc(100vw - 28px));padding:14px;border:1px solid #d5deea;border-radius:17px;background:#fff;box-shadow:0 18px 48px #17243b26;color:#1d293d;display:grid;gap:12px}
 .quick-setting-row{display:grid;grid-template-columns:100px minmax(0,1fr);align-items:center;gap:9px}
@@ -446,7 +446,7 @@ body[data-theme="vampire"] .quick-settings-wheel{background:#4b2d58;color:#ffe4f
 body[data-theme="vampire"] .nav-folder{background:linear-gradient(180deg,#f9f4fb,#fff);border-color:#d1c2d9}
 @media(max-width:1120px){.shell{grid-template-columns:220px minmax(0,1fr)}}
 @media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:block;max-height:none;overflow:visible}.navtitle{display:block}.nav-folder{display:block}.navbtn{width:100%;flex:initial;padding:9px}.sidefoot{display:none}.grid3{grid-template-columns:1fr 1fr}}
-@media(max-width:650px){header{flex-direction:row;align-items:center;gap:8px;margin:8px 10px 12px;padding:10px 11px}.brand{gap:8px}.logo{width:44px!important;height:55px!important;flex-basis:44px!important}.brand-copy .subbrand{display:grid;grid-template-columns:auto auto;justify-content:start;gap:2px 6px;font-size:11px}.crumb-sep{display:none}.brand-copy .subbrand #currentPageLabel{grid-column:1/-1;font-size:12px}.headright{width:auto;flex:0 0 auto}.quick-settings>summary{padding:9px 10px;font-size:0;gap:5px}.quick-settings-wheel{font-size:16px}.quick-settings-chevron{font-size:13px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr}.quick-setting-row{grid-template-columns:88px minmax(0,1fr)}}
+@media(max-width:650px){header{flex-direction:row;align-items:center;gap:8px;margin:8px 10px 12px;padding:10px 11px}.brand{gap:8px}.logo{width:44px!important;height:55px!important;flex-basis:44px!important}.brand-copy .subbrand{display:grid;grid-template-columns:auto auto;justify-content:start;gap:2px 6px;font-size:calc(11px * var(--font-scale,1))}.crumb-sep{display:none}.brand-copy .subbrand #currentPageLabel{grid-column:1/-1;font-size:calc(12px * var(--font-scale,1))}.headright{width:auto;flex:0 0 auto}.quick-settings>summary{padding:9px 10px;font-size:0;gap:5px}.quick-settings-wheel{font-size:calc(16px * var(--font-scale,1))}.quick-settings-chevron{font-size:calc(13px * var(--font-scale,1))}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr}.quick-setting-row{grid-template-columns:88px minmax(0,1fr)}}
 /* Folder sections expand/collapse to keep the sidebar compact */
 .nav-folder>summary.navfolder-title{list-style:none;cursor:pointer;user-select:none;padding:4px 7px 6px;display:flex;align-items:center;gap:7px}
 .nav-folder>summary.navfolder-title::-webkit-details-marker{display:none}
@@ -522,7 +522,7 @@ body[data-theme="cat"] .hero{background:linear-gradient(120deg,#fff,#fff2e5);bor
 body[data-theme="vampire"] .hero h2{color:#fff5fb!important;text-decoration-color:#e28aa9}
 .sectionhead{margin-bottom:18px}
 .sectionhead h2,.panel h2,.chart-heading h2{color:#1a2a40;font-weight:900!important;letter-spacing:-.15px}
-.sectionhead h2,.chart-heading h2{font-size:18px!important}
+.sectionhead h2,.chart-heading h2{font-size:calc(18px * var(--font-scale,1))!important}
 body[data-theme="vampire"] .sectionhead h2,body[data-theme="vampire"] .panel h2,body[data-theme="vampire"] .chart-heading h2{color:#281b31}
 body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:none!important;display:none!important}
 .hero p,.sectionhead p,.panel p,.hint,.muted{color:#41526a}
@@ -560,7 +560,7 @@ body[data-theme="ocean"] .panel::after,body[data-theme="retro"] .panel::after,bo
 .navbtn:focus-visible,.quick-settings>summary:focus-visible,.sidebar-account-shortcut:focus-visible,.btn:focus-visible{outline:3px solid #5b91c4!important;outline-offset:2px}
 @media(max-width:1120px){.shell{grid-template-columns:218px minmax(0,1fr);gap:14px}.overview-analytics{grid-template-columns:1fr 1fr}.chart-card:last-child{grid-column:1/-1}}
 @media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{max-height:none;overflow:visible;display:block;padding:10px}.nav-folder{display:block}.nav-folder-items{display:grid}.navbtn{width:100%;padding:9px!important}.shell{padding-left:14px;padding-right:14px}}
-@media(max-width:700px){header{margin:8px 8px 12px;padding:10px 11px}.logo{width:42px!important;height:53px!important;flex-basis:42px!important}.brand-copy .subbrand{font-size:11px}.brand-copy .subbrand #currentPageLabel{font-size:12px}.shell{padding:0 10px 25px}.hero,.panel{padding:16px;border-radius:15px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr!important}.quick-settings-menu{right:-4px}.stat b{font-size:24px}}
+@media(max-width:700px){header{margin:8px 8px 12px;padding:10px 11px}.logo{width:42px!important;height:53px!important;flex-basis:42px!important}.brand-copy .subbrand{font-size:calc(11px * var(--font-scale,1))}.brand-copy .subbrand #currentPageLabel{font-size:calc(12px * var(--font-scale,1))}.shell{padding:0 10px 25px}.hero,.panel{padding:16px;border-radius:15px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr!important}.quick-settings-menu{right:-4px}.stat b{font-size:calc(24px * var(--font-scale,1))}}
 @media(prefers-reduced-motion:reduce){#themeScene .theme-drift,.cat-flower-particle{animation:none!important;transition:none!important}}
 /* MatchMã balanced redesign: original pastel warmth + cleaner layout and reliable dropdown */
 :root{--ink:#302b48;--muted:#5e5a70;--line:#e4deed;--purple:#7865c5}
@@ -591,7 +591,7 @@ header{position:relative!important;z-index:100!important;isolation:isolate;max-w
 .nav-folder>summary.navfolder-title:hover{background:#f0eafb}
 .nav-folder-items{display:grid;gap:2px}
 .nav-folder:not([open]){padding-bottom:4px}
-.folder-chevron{color:#80759e;font-size:14px}
+.folder-chevron{color:#80759e;font-size:calc(14px * var(--font-scale,1))}
 .navbtn{display:flex;align-items:center;gap:9px;width:100%;margin:2px 0!important;padding:9px 8px!important;border:1px solid transparent!important;border-radius:10px!important;background:transparent!important;color:#403854!important;font-size:calc(13px * var(--font-scale, 1))!important;font-weight:800!important;line-height:1.32;text-shadow:none!important}
 .navbtn:hover{background:#f5f0fc!important;border-color:#e6ddf4!important}
 .navbtn.active{background:#ece5fb!important;border-color:#d4c8f0!important;color:#473879!important;box-shadow:inset 3px 0 #8a77cf!important}
@@ -642,7 +642,7 @@ body[data-theme="ocean"] .panel::after,body[data-theme="retro"] .panel::after,bo
 body[data-theme="vampire"] .sidebar{background:#f8f0fa!important;border-color:#65456d}
 @media(max-width:1120px){.shell{grid-template-columns:210px minmax(0,1fr);gap:13px}.overview-analytics{grid-template-columns:1fr 1fr}.chart-card:last-child{grid-column:1/-1}}
 @media(max-width:950px){header{z-index:100!important}.shell{grid-template-columns:1fr}.sidebar{position:relative;top:auto;max-height:none;overflow:visible;display:block;padding:9px}.nav-folder{margin:6px 0}.nav-folder-items{display:grid}.navbtn{width:100%;padding:8px!important}.shell{padding-left:14px;padding-right:14px}}
-@media(max-width:700px){header{margin:8px 8px 11px;padding:10px 12px;gap:8px}.logo{width:43px!important;height:54px!important;flex-basis:43px!important}.brand-copy .subbrand{font-size:11px}.brand-copy .subbrand #currentPageLabel{font-size:12px}.quick-settings>summary{width:42px;height:42px;padding:8px;gap:0;font-size:0}.quick-settings-wheel{font-size:16px}.quick-settings-chevron{font-size:12px}.quick-settings-menu{right:0!important;width:min(330px,calc(100vw - 22px))!important;max-height:calc(100dvh - 88px)}.shell{padding:0 10px 25px}.hero,.panel{padding:17px;border-radius:17px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr 1fr!important}.quick-setting-row{grid-template-columns:83px minmax(0,1fr)!important}.stat b{font-size:25px}}
+@media(max-width:700px){header{margin:8px 8px 11px;padding:10px 12px;gap:8px}.logo{width:43px!important;height:54px!important;flex-basis:43px!important}.brand-copy .subbrand{font-size:calc(11px * var(--font-scale,1))}.brand-copy .subbrand #currentPageLabel{font-size:calc(12px * var(--font-scale,1))}.quick-settings>summary{width:42px;height:42px;padding:8px;gap:0;font-size:0}.quick-settings-wheel{font-size:calc(16px * var(--font-scale,1))}.quick-settings-chevron{font-size:calc(12px * var(--font-scale,1))}.quick-settings-menu{right:0!important;width:min(330px,calc(100vw - 22px))!important;max-height:calc(100dvh - 88px)}.shell{padding:0 10px 25px}.hero,.panel{padding:17px;border-radius:17px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr 1fr!important}.quick-setting-row{grid-template-columns:83px minmax(0,1fr)!important}.stat b{font-size:calc(25px * var(--font-scale,1))}}
 @media(max-width:480px){.brand-copy .subbrand [data-i18n="tagline"]{display:none}.overview-account-grid{grid-template-columns:1fr!important}.overview-analytics{grid-template-columns:1fr}.headright{margin-left:auto}}
 @media(prefers-reduced-motion:reduce){.theme-drift,.cat-flower-particle{animation:none!important;transition:none!important}}
 /* Balanced pastel redesign, based on the original MatchMã dashboard reference */
@@ -664,13 +664,13 @@ header.app-header{max-width:1460px;margin:10px auto 11px;padding:7px 20px;min-he
 .brand-copy h1{display:none!important}
 .brand-copy .subbrand{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#7f6456!important;font-size:calc(12px * var(--font-scale, 1));font-weight:800;line-height:1.35}
 .brand-copy .subbrand [data-i18n="tagline"]{color:#987d6d!important;font-size:calc(12px * var(--font-scale, 1));font-weight:800}
-.crumb-sep{color:#c8ac98;font-size:16px}
+.crumb-sep{color:#c8ac98;font-size:calc(16px * var(--font-scale,1))}
 #currentPageLabel{color:#5a4135!important;font-size:calc(13px * var(--font-scale, 1));font-weight:950}
 .headright{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;min-width:0;margin-left:auto;position:relative;z-index:41}
 .local-pill{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;border:1px solid #f0ddcc;border-radius:99px;padding:8px 11px;color:#8c6c58;background:#fff9f0b8;font-size:calc(10px * var(--font-scale, 1));font-weight:750}
 .local-pill i{width:6px;height:6px;border-radius:50%;background:#70a88d;box-shadow:0 0 0 3px #dcefe4;display:inline-block}
 .toolbar-select{display:inline-flex;align-items:center;gap:5px;min-width:0;padding:5px 8px;border:1px solid #f0d9c8;border-radius:10px;background:#fffaf3d9;color:#8a6857;font-size:calc(11px * var(--font-scale, 1));font-weight:850}
-.toolbar-select>span{font-size:12px}
+.toolbar-select>span{font-size:calc(12px * var(--font-scale,1))}
 .toolbar-select select{min-width:0;max-width:150px;border:0;outline:0;background:transparent;color:#6b5144;font-size:calc(11px * var(--font-scale, 1));font-weight:850;padding:3px 1px;cursor:pointer}
 .toolbar-font{display:flex;align-items:center;gap:3px;padding:4px;border:1px solid #efdcc9;border-radius:11px;background:#fff8efdc}
 .toolbar-font button{min-width:24px;padding:5px 6px;border:0;border-radius:7px;background:transparent;color:#8b6a56;font-size:calc(11px * var(--font-scale, 1));font-weight:900}
@@ -740,10 +740,10 @@ body[data-theme="vampire"] .hero h2{color:#fff1fa!important}
 .overview-account-pill,.overview-memory-count{padding:4px 8px;border-radius:99px;background:#f9e9d8;color:#97795f;font-size:calc(9px * var(--font-scale, 1));font-weight:900}
 .overview-account-pill.is-online{background:#dceee2;color:#3c7d61}
 .overview-account-identity{display:flex;align-items:center;gap:10px;min-width:0}
-.overview-avatar{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:11px;background:#f5e6d4;color:#8b6b52;font-size:17px}
+.overview-avatar{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:11px;background:#f5e6d4;color:#8b6b52;font-size:calc(17px * var(--font-scale,1))}
 .overview-account-identity strong{font-size:calc(11px * var(--font-scale, 1));color:#614b3f;font-weight:950}
 .overview-account-identity p{font-size:calc(10px * var(--font-scale, 1))!important;color:#9a8476!important;line-height:1.4;margin:2px 0 0!important}
-.overview-memory-count b{font-size:13px}
+.overview-memory-count b{font-size:calc(13px * var(--font-scale,1))}
 .overview-memory-preview{display:grid;gap:6px;margin-top:7px}
 .overview-memory-preview.empty{font-size:calc(10px * var(--font-scale, 1));color:#a08c7c;text-align:center;padding:10px 0}
 .overview-memory-row{padding:7px 8px;border:1px solid #f0e3d6;border-radius:9px;background:#fffaf3;display:grid;gap:2px}
@@ -752,24 +752,24 @@ body[data-theme="vampire"] .hero h2{color:#fff1fa!important}
 .overview-analytics-wrap{margin:11px 0}
 .overview-analytics-wrap>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 12px;background:#fff4e6;border:1px solid #f0ddca;border-radius:12px;color:#7d5c49;font-size:calc(11px * var(--font-scale, 1));font-weight:900}
 .overview-analytics-wrap>summary::-webkit-details-marker{display:none}
-.analytics-summary-icon{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;background:#f1dec9;color:#976b4f;font-size:16px}
+.analytics-summary-icon{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;background:#f1dec9;color:#976b4f;font-size:calc(16px * var(--font-scale,1))}
 .analytics-summary-note{margin-left:auto;color:#af9581;font-size:calc(9px * var(--font-scale, 1));font-weight:700}
 .analytics-chevron{color:#a58269;transition:transform .16s}
 .overview-analytics-wrap[open] .analytics-chevron{transform:rotate(180deg)}
 .overview-analytics{margin:10px 0 0;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .chart-card{padding:14px;border-radius:14px}
-.chart-heading h2{font-size:12px!important}
+.chart-heading h2{font-size:calc(12px * var(--font-scale,1))!important}
 .chart-heading p{font-size:calc(10px * var(--font-scale, 1))!important;color:#907c6f}
 .chart-view{min-height:160px}
 .chart-view svg{max-width:100%}
-.chart-legend-item{font-size:10px}
+.chart-legend-item{font-size:calc(10px * var(--font-scale,1))}
 .upload{border-color:#ecd8c3;background:#fffaf3;color:#6e5242}
 .upload:hover{border-color:#d7b18e;background:#fff3e4}
 .field label{color:#755a49;font-size:calc(11px * var(--font-scale, 1));font-weight:850}
 input,select,textarea{color:#5c463a}
 .search{border:1px solid #eadbcd;background:#fffdf8;color:#5c463a}
 th{background:#f8ebdc;color:#775943;font-size:calc(11px * var(--font-scale, 1));font-weight:900}
-td{color:#634f42;font-size:11px}
+td{color:#634f42;font-size:calc(11px * var(--font-scale,1))}
 .btn{font-weight:850;border-radius:9px}
 .btn.alt{background:#f4e3d0;color:#77543e}
 .template-row{color:#8c7465;border-color:#eedcc9;background:#fff6ea;border-radius:10px}
@@ -782,9 +782,9 @@ body[data-theme="retro"] .main{background:#fffdf5c4;border-color:#e4dfd3}
 body[data-theme="pink"] .main{background:#fff6facc;border-color:#f2dce6}
 body[data-theme="cat"] .main{background:#fff9efc4;border-color:#f0ddc7}
 @media(min-width:1250px){.shell.app-shell{grid-template-columns:205px minmax(0,1fr);gap:16px;padding-left:24px;padding-right:24px}}
-@media(min-width:951px) and (max-width:1120px){.shell.app-shell{grid-template-columns:163px minmax(0,1fr);gap:12px;padding-left:16px;padding-right:16px}.sidebar{padding:7px}.navbtn{padding:7px 5px!important;font-size:10px!important}.sidebar-account-copy small{max-width:87px}.local-pill{font-size:calc(9px * var(--font-scale, 1));padding:7px 9px}}
+@media(min-width:951px) and (max-width:1120px){.shell.app-shell{grid-template-columns:163px minmax(0,1fr);gap:12px;padding-left:16px;padding-right:16px}.sidebar{padding:7px}.navbtn{padding:7px 5px!important;font-size:calc(10px * var(--font-scale,1))!important}.sidebar-account-copy small{max-width:87px}.local-pill{font-size:calc(9px * var(--font-scale, 1));padding:7px 9px}}
 @media(max-width:950px){header.app-header{margin:8px 11px;padding:8px;gap:8px;flex-wrap:wrap}.headright{flex:1 1 100%;justify-content:flex-end}.local-pill{margin-right:auto}.shell.app-shell{grid-template-columns:1fr;padding:0 11px 25px;gap:10px}.sidebar{position:relative;top:auto;max-height:none;overflow:visible}.main{padding:6px}.sidebar-bottom{margin-top:6px}.nav-folder-items{display:grid}}
-@media(max-width:650px){header.app-header{padding:8px 7px}.brand{gap:7px}.logo{width:42px!important;height:53px!important;flex-basis:42px!important}.brand-copy .subbrand{font-size:10px}.brand-copy .subbrand [data-i18n="tagline"]{display:none}.headright{justify-content:flex-start;gap:5px}.local-pill{font-size:calc(9px * var(--font-scale, 1));padding:7px 8px;white-space:normal}.toolbar-select{padding:5px 6px}.toolbar-select select{max-width:118px;font-size:10px}.toolbar-font button{min-width:22px;padding:5px}.shell.app-shell{padding:0 8px 22px}.hero{padding:16px}.overview-account-grid{grid-template-columns:1fr!important}.stats{gap:5px}.stat{padding:9px 8px}.stat small{font-size:8px!important}.stat b{font-size:17px}.analytics-summary-note{display:none}}
+@media(max-width:650px){header.app-header{padding:8px 7px}.brand{gap:7px}.logo{width:42px!important;height:53px!important;flex-basis:42px!important}.brand-copy .subbrand{font-size:calc(10px * var(--font-scale,1))}.brand-copy .subbrand [data-i18n="tagline"]{display:none}.headright{justify-content:flex-start;gap:5px}.local-pill{font-size:calc(9px * var(--font-scale, 1));padding:7px 8px;white-space:normal}.toolbar-select{padding:5px 6px}.toolbar-select select{max-width:118px;font-size:calc(10px * var(--font-scale,1))}.toolbar-font button{min-width:22px;padding:5px}.shell.app-shell{padding:0 8px 22px}.hero{padding:16px}.overview-account-grid{grid-template-columns:1fr!important}.stats{gap:5px}.stat{padding:9px 8px}.stat small{font-size:calc(8px * var(--font-scale,1))!important}.stat b{font-size:calc(17px * var(--font-scale,1))}.analytics-summary-note{display:none}}
 @media(min-width:951px){.shell.sidebar-collapsed{grid-template-columns:62px minmax(0,1fr)!important}.shell.sidebar-collapsed .sidebar{padding:7px}.shell.sidebar-collapsed .sidebar-section-heading,.shell.sidebar-collapsed .sidebar-account-copy,.shell.sidebar-collapsed .sidebar-account-arrow,.shell.sidebar-collapsed .navbtn>span:not(.navicon),.shell.sidebar-collapsed .navfolder-title>span:not(.navicon),.shell.sidebar-collapsed .sidebar-help,.shell.sidebar-collapsed .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}.shell.sidebar-collapsed .sidebar-account-shortcut{justify-content:center;padding:6px 2px}.shell.sidebar-collapsed .sidebar-avatar{width:32px;height:32px;flex-basis:32px}.shell.sidebar-collapsed .sidebar-topline{justify-content:center}.shell.sidebar-collapsed .sidebar-toggle{transform:rotate(180deg)}.shell.sidebar-collapsed .navbtn{justify-content:center;padding:9px 3px!important}.shell.sidebar-collapsed .nav-folder{padding:1px}.shell.sidebar-collapsed .navfolder-title{justify-content:center}.shell.sidebar-collapsed .folder-chevron{display:none!important}.shell.sidebar-collapsed .nav-folder-items{padding-left:0}.shell.sidebar-collapsed .navicon{width:26px!important;flex-basis:26px!important}.shell.sidebar-collapsed .navtitle{display:none}}
 @media(max-width:950px){.sidebar-toggle{display:none}}
 @media(prefers-reduced-motion:reduce){.theme-drift,.cat-flower-particle{animation:none!important;transition:none!important}}
@@ -824,7 +824,7 @@ body[data-theme="vampire"] .navbtn.active{background:#4e3559!important;border-co
 body[data-theme="vampire"] .sidebar-toggle{background:#4e3559;border-color:#775d80;color:#fff}
 .sidebar-account-shortcut{min-height:44px}
 .sidebar-avatar{border-radius:50%}
-.sidebar-account-copy strong{font-size:11px}
+.sidebar-account-copy strong{font-size:calc(11px * var(--font-scale,1))}
 #currentPageLabel{font-weight:950!important}
 .hero{box-shadow:0 6px 18px #a97e5b0b}
 @media(max-width:950px){
@@ -879,7 +879,7 @@ body[data-theme="bear"] .theme-drift{opacity:.22!important}
 .fun-toggle-button:hover{background:#f8e9fc;border-color:#d9c5ec}
 .fun-widget{position:fixed;z-index:100000;top:86px;right:15px;width:365px;height:455px;min-width:300px;min-height:295px;max-width:calc(100vw - 20px);max-height:calc(100dvh - 100px);resize:both;overflow:auto;overscroll-behavior:contain;background:#fffaf3;border:1px solid #ead5c1;border-radius:18px;box-shadow:0 24px 70px #5e463744;color:#584136}
 .fun-widget-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:linear-gradient(110deg,#fff0db,#f4e9ff);border-bottom:1px solid #ead9c9;border-radius:17px 17px 0 0;cursor:move;touch-action:none;user-select:none}
-.fun-widget-brand{display:flex;align-items:center;gap:9px;min-width:0}.fun-widget-mascot{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:#fff9ed;font-size:24px}
+.fun-widget-brand{display:flex;align-items:center;gap:9px;min-width:0}.fun-widget-mascot{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:#fff9ed;font-size:calc(24px * var(--font-scale,1))}
 .fun-widget-brand strong{display:block;font-size:calc(13px * var(--font-scale, 1));font-weight:950;color:#604738}.fun-widget-brand small{display:block;font-size:calc(10px * var(--font-scale, 1));margin-top:2px;color:#a0826d}
 .fun-widget-actions{display:flex;align-items:center;gap:4px}.fun-widget-actions button{width:28px;height:28px;display:grid;place-items:center;border:1px solid #e6d4c5;border-radius:8px;background:#fffaf5;color:#705646;font-size:calc(16px * var(--font-scale, 1));font-weight:900;cursor:pointer}
 .fun-widget-content{padding:13px}.fun-widget-intro{margin:0 0 10px;color:#907768;font-size:calc(11px * var(--font-scale, 1));line-height:1.55}
@@ -892,10 +892,10 @@ body[data-theme="bear"] .theme-drift{opacity:.22!important}
 .fun-local-note{font-size:calc(9px * var(--font-scale, 1));line-height:1.45;color:#ae9583;margin:9px 0 0}
 .fun-widget.is-minimized{height:auto!important;min-height:0!important;resize:none!important;overflow:hidden}.fun-widget.is-minimized .fun-widget-content{display:none}
 .fun-widget.is-maximized{left:12px!important;right:12px!important;top:84px!important;bottom:12px!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;resize:none!important}
-.fun-widget.is-maximized .bear-panel-preview{min-height:32vh}.fun-widget.is-maximized .bear-panel-sprite{font-size:clamp(88px,13vw,190px)}.fun-widget.is-maximized .fun-widget-content{max-width:860px;margin:0 auto;padding:20px}.fun-widget.is-maximized .fun-widget-intro,.fun-widget.is-maximized .bear-panel-preview p{font-size:15px}
+.fun-widget.is-maximized .bear-panel-preview{min-height:32vh}.fun-widget.is-maximized .bear-panel-sprite{font-size:clamp(88px,13vw,190px)}.fun-widget.is-maximized .fun-widget-content{max-width:860px;margin:0 auto;padding:20px}.fun-widget.is-maximized .fun-widget-intro,.fun-widget.is-maximized .bear-panel-preview p{font-size:calc(15px * var(--font-scale,1))}
 body[data-theme="bear"] .fun-widget{background:#fffaf0;border-color:#d4dfb9}body[data-theme="bear"] .fun-widget-bar{background:linear-gradient(120deg,#dfe9cd,#f7e9cb);border-color:#d4dfb9}
-.intro-purpose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.intro-purpose-card{padding:18px;min-width:0}.intro-purpose-card h2{font-size:calc(17px * var(--font-scale, 1));margin:8px 0 7px}.intro-purpose-card p{font-size:calc(13px * var(--font-scale, 1));line-height:1.65;color:#79685f}.intro-step-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#f7e8d8;font-size:22px}.intro-workflow{padding:20px;margin:12px 0}.intro-steps{list-style:none;margin:0;padding:0;display:grid;gap:0}.intro-steps li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;align-items:center;padding:14px 0;border-bottom:1px solid #f0e2d5}.intro-steps li:last-child{border-bottom:0}.intro-step-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f4e0cb;color:#8d6249;font-size:calc(13px * var(--font-scale, 1));font-weight:950}.intro-steps strong{font-size:calc(13px * var(--font-scale, 1));color:#624a3e}.intro-steps p{margin:3px 0 0;font-size:calc(12px * var(--font-scale, 1));color:#89776b;line-height:1.5}.intro-steps .btn{white-space:nowrap;font-size:calc(11px * var(--font-scale, 1));padding:8px 10px}.intro-notice{display:flex;align-items:flex-start;gap:11px;padding:15px 17px;margin:12px 0;background:#fff7e9;border-color:#f0dfc8}.intro-notice>span{font-size:20px}.intro-notice p{margin:0;font-size:calc(12px * var(--font-scale, 1));color:#7f6859;line-height:1.6}
-@media(max-width:650px){.fun-toggle-button{font-size:0;gap:0;width:36px;height:32px;justify-content:center;padding:5px}.fun-toggle-icon{font-size:18px}.fun-widget{top:auto;right:9px;bottom:9px;width:calc(100vw - 18px);height:min(70dvh,520px);min-width:0;min-height:280px;max-height:calc(100dvh - 18px)}.fun-widget.is-maximized{left:8px!important;right:8px!important;top:8px!important;bottom:8px!important}.intro-purpose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-steps li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps li>.btn{grid-column:2;justify-self:start}}
+.intro-purpose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.intro-purpose-card{padding:18px;min-width:0}.intro-purpose-card h2{font-size:calc(17px * var(--font-scale, 1));margin:8px 0 7px}.intro-purpose-card p{font-size:calc(13px * var(--font-scale, 1));line-height:1.65;color:#79685f}.intro-step-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#f7e8d8;font-size:calc(22px * var(--font-scale,1))}.intro-workflow{padding:20px;margin:12px 0}.intro-steps{list-style:none;margin:0;padding:0;display:grid;gap:0}.intro-steps li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;align-items:center;padding:14px 0;border-bottom:1px solid #f0e2d5}.intro-steps li:last-child{border-bottom:0}.intro-step-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f4e0cb;color:#8d6249;font-size:calc(13px * var(--font-scale, 1));font-weight:950}.intro-steps strong{font-size:calc(13px * var(--font-scale, 1));color:#624a3e}.intro-steps p{margin:3px 0 0;font-size:calc(12px * var(--font-scale, 1));color:#89776b;line-height:1.5}.intro-steps .btn{white-space:nowrap;font-size:calc(11px * var(--font-scale, 1));padding:8px 10px}.intro-notice{display:flex;align-items:flex-start;gap:11px;padding:15px 17px;margin:12px 0;background:#fff7e9;border-color:#f0dfc8}.intro-notice>span{font-size:calc(20px * var(--font-scale,1))}.intro-notice p{margin:0;font-size:calc(12px * var(--font-scale, 1));color:#7f6859;line-height:1.6}
+@media(max-width:650px){.fun-toggle-button{font-size:0;gap:0;width:36px;height:32px;justify-content:center;padding:5px}.fun-toggle-icon{font-size:calc(18px * var(--font-scale,1))}.fun-widget{top:auto;right:9px;bottom:9px;width:calc(100vw - 18px);height:min(70dvh,520px);min-width:0;min-height:280px;max-height:calc(100dvh - 18px)}.fun-widget.is-maximized{left:8px!important;right:8px!important;top:8px!important;bottom:8px!important}.intro-purpose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-steps li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps li>.btn{grid-column:2;justify-self:start}}
 
 /* Hand-drawn paper-and-pencil theme art */
 html,body{margin:0!important;width:100%;max-width:100%;min-height:100%;overflow-x:clip!important}
@@ -919,7 +919,7 @@ body[data-theme="bear"] .cat-flower-particle svg{--doodle-ink:#783f20}
 #bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .42s ease-in-out}
 @keyframes bearHandDrawnChomp{0%,100%{translate:0 0}24%{translate:0 3px}52%{translate:0 -5px}76%{translate:0 1px}}
 .bear-caption{left:50%!important;bottom:7px!important;transform:translateX(-50%)!important;min-width:0!important;width:max-content;max-width:calc(100vw - 24px);padding:4px 8px!important;background:#fff9edee!important;border:1px dashed #caa17c!important;border-radius:10px!important;box-shadow:0 3px 9px #6f4a2812!important;pointer-events:none!important}
-.bear-caption b{font-size:10px!important}.bear-caption small{font-size:9px!important}
+.bear-caption b{font-size:calc(10px * var(--font-scale,1))!important}.bear-caption small{font-size:calc(9px * var(--font-scale,1))!important}
 #fish-pool{inset:0!important;pointer-events:none!important;overflow:hidden}
 .bear-fish{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:drop-shadow(0 2px 2px #68452b1a)!important;width:54px!important;height:38px!important;padding:0!important;animation:bearFishSwim var(--fish-speed,3.2s) ease-in-out infinite alternate!important}
 .bear-fish svg{display:block;width:100%;height:100%;overflow:visible}
@@ -995,6 +995,121 @@ body[data-theme="ocean"] .theme-drift svg,body[data-theme="retro"] .theme-drift 
 .bear-confetti-doodle{width:30px;height:30px;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;color:transparent!important;filter:none!important}
 .bear-confetti-doodle svg{display:block;width:100%;height:100%;overflow:visible}
 .bear-panel-sprite{transform:scale(.9)!important}
+
+
+/* MatchMã visual refresh: consistent Vietnamese glyphs and controlled font scale */
+:root{--font-scale:1;--matchma-ink:#31484e}
+html{ text-size-adjust:100%;-webkit-text-size-adjust:100% }
+html,body,button,input,select,textarea,table,h1,h2,h3,h4,h5,h6,.navbtn,.btn,.panel,.hero,.stat,.mini,.badge,.field,.subbrand,.sidefoot,.pill,.sectionhead,.resulttools,.foot,.intro-menu-card,.fun-widget,.calculator-widget{
+ font-family:'Be Vietnam Pro','Segoe UI',Tahoma,Arial,sans-serif!important;
+ font-optical-sizing:auto
+}
+body{font-size:calc(15px * var(--font-scale,1))!important;line-height:1.55}
+h1,.hero h2,.sectionhead h2,.panel h2,.stat b,.thresholdvalue{font-family:'Be Vietnam Pro','Segoe UI',Tahoma,Arial,sans-serif!important;font-weight:800;line-height:1.28}
+button,input,select,textarea{font-weight:600}
+p,li,label,td,th,.hint,.muted{line-height:1.55}
+body::before,body::after{content:none!important;display:none!important}
+#themeScene,#catClickFX{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important}
+.theme-drift{display:grid;place-items:center;overflow:visible;filter:none!important;pointer-events:none}
+.theme-drift svg{display:block;width:var(--size);height:var(--size);overflow:visible;filter:drop-shadow(0 1px 1px #44311a17)}
+.navicon{display:inline-grid!important;place-items:center;flex:0 0 24px}
+.navicon svg{width:22px;height:22px;display:block;overflow:visible}
+.intro-step-icon,.intro-guide-illustration,.intro-notice-art,.upload .bigicon,.tile-icon,.folder-icon,.summary-icon,.result-icon{display:inline-grid;place-items:center;overflow:visible}
+.intro-step-icon svg,.intro-guide-illustration svg,.intro-notice-art svg,.upload .bigicon svg,.tile-icon svg,.folder-icon svg,.summary-icon svg,.result-icon svg{display:block;width:100%;height:100%;max-width:48px;max-height:48px;overflow:visible;filter:drop-shadow(0 1px 1px #65533b14)}
+.intro-guide-illustration{width:54px;height:54px;flex:0 0 54px}.intro-notice-art{width:28px;height:28px;flex:0 0 28px}.intro-step-icon{width:42px;height:42px}
+.upload .bigicon{width:46px;height:46px;margin:0 auto 7px;font-size:0!important}
+.intro-beginner-strip{display:flex;align-items:center;gap:14px;margin:17px 0 5px;padding:14px 16px;border:1px dashed #b7d8d9;border-radius:16px;background:#f5fbf7d9}
+.intro-beginner-strip strong{display:block;font-size:calc(14px * var(--font-scale,1));font-weight:800;color:#375d63}
+.intro-beginner-strip p{margin:3px 0 0;color:#647d7b;font-size:calc(12px * var(--font-scale,1))}
+.intro-learning-path,.intro-menu-map{padding:20px;margin:12px 0}
+.intro-level-pill{display:inline-flex;align-items:center;white-space:nowrap;padding:7px 10px;border-radius:99px;background:#e2f3e9;color:#397355;font-size:calc(11px * var(--font-scale,1));font-weight:800}
+.intro-steps-detailed li{grid-template-columns:34px minmax(0,1fr) auto;gap:12px;align-items:center;padding:15px 0;border-bottom:1px solid #dfece9}
+.intro-steps-detailed li:last-child{border-bottom:0}
+.intro-steps-detailed strong{font-size:calc(14px * var(--font-scale,1));color:#315963;font-weight:800}
+.intro-steps-detailed p{font-size:calc(12px * var(--font-scale,1));line-height:1.65;color:#637d7c}
+.intro-menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.intro-menu-card{display:flex;align-items:flex-start;flex-direction:column;gap:7px;width:100%;min-width:0;text-align:left;padding:15px;border:1px solid #dcebe8;border-radius:16px;background:linear-gradient(145deg,#fff,#f5fbf8);color:#37565c;cursor:pointer;transition:transform .17s,border-color .17s,box-shadow .17s}
+.intro-menu-card:hover{transform:translateY(-2px);border-color:#a9d5d4;box-shadow:0 8px 20px #315f5c10}
+.intro-menu-card .intro-step-icon{width:40px;height:40px}
+.intro-menu-card strong{font-size:calc(13px * var(--font-scale,1));font-weight:800;color:#315863;line-height:1.4}
+.intro-menu-card>span:not(.intro-step-icon):not(.intro-card-arrow){font-size:calc(11.5px * var(--font-scale,1));font-weight:500;color:#697d7c;line-height:1.55}
+.intro-card-arrow{font-size:calc(11px * var(--font-scale,1));font-weight:800;color:#3a8c92;margin-top:auto;padding-top:3px}
+.intro-help-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:12px 0}
+.intro-help-card{min-width:0;padding:17px}
+.intro-help-card .intro-step-icon{margin-bottom:10px}
+.intro-help-card h2{font-size:calc(14px * var(--font-scale,1))!important;margin:0 0 8px!important;color:#315963}
+.intro-help-card p{font-size:calc(12px * var(--font-scale,1));line-height:1.65;margin:0 0 13px!important;color:#687e7c}
+.intro-help-card .btn{font-size:calc(11px * var(--font-scale,1));padding:8px 10px;margin-top:auto}
+/* A full pencil/crayon bear that stays at the lower edge and grows without covering the whole page */
+#fat-bear-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
+#bear-container{width:clamp(245px,34vw,430px)!important;height:auto!important;aspect-ratio:600/350;left:50%!important;bottom:-3px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;display:block!important;max-width:calc(100vw - 22px)!important;overflow:visible!important;pointer-events:auto!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;z-index:3!important}
+#bear-sprite{width:100%!important;height:auto!important;display:block;overflow:visible;transform-origin:50% 100%;animation:bearIdleBreathe 3.7s ease-in-out infinite;filter:none!important}
+#bearHead{transform-box:fill-box;transform-origin:50% 90%;animation:bearHeadTilt 6s ease-in-out infinite}
+#bearBackLeg,#bearFrontLeg,#bearFrontPaw{transform-box:fill-box;transform-origin:center 86%}
+#bearBackLeg{animation:bearStepBack 3.2s ease-in-out infinite}
+#bearFrontLeg{animation:bearStepFront 3.2s ease-in-out infinite}
+#bearTail{transform-box:fill-box;transform-origin:20% 50%;animation:bearTailWag 2.6s ease-in-out infinite}
+@keyframes bearIdleBreathe{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-3px) scaleY(1.012)}}
+@keyframes bearHeadTilt{0%,100%{transform:rotate(0)}42%{transform:rotate(-1.4deg)}65%{transform:rotate(1deg)}}
+@keyframes bearStepBack{0%,100%{transform:rotate(0)}35%{transform:rotate(-2deg)}65%{transform:rotate(1deg)}}
+@keyframes bearStepFront{0%,100%{transform:rotate(0)}35%{transform:rotate(2.4deg)}65%{transform:rotate(-1.3deg)}}
+@keyframes bearTailWag{0%,100%{transform:rotate(0)}45%{transform:rotate(-13deg)}70%{transform:rotate(9deg)}}
+#bear-container.is-munching #bear-sprite{animation:bearChomp .46s cubic-bezier(.2,.8,.2,1)!important}
+#bear-container.is-munching #bearHead{animation:bearMunchHead .46s ease-in-out!important}
+@keyframes bearMunchHead{0%,100%{transform:translateY(0) rotate(0)}28%{transform:translateY(5px) rotate(-2deg)}62%{transform:translateY(-3px) rotate(1deg)}}
+#bear-container.is-munching #bearMouthOpen{animation:bearMouthChomp .45s ease-in-out infinite alternate}
+@keyframes bearMouthChomp{from{opacity:.22}to{opacity:.95}}
+#bear-container.is-hibernating{transform:translateX(-50%) scale(var(--bear-scale,1)) translateY(5px)!important;filter:drop-shadow(0 -3px 8px #33473320)!important}
+#bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.2s ease-in-out infinite!important;transform-origin:50% 100%}
+#bear-container.is-hibernating #bearHead{animation:bearSleepNod 5s ease-in-out infinite!important}
+#bear-container.is-hibernating #bearBackLeg,#bear-container.is-hibernating #bearFrontLeg,#bear-container.is-hibernating #bearFrontPaw,#bear-container.is-hibernating #bearTail{animation:none!important}
+@keyframes bearSleepBreathe{0%,100%{transform:translateY(2px) scaleY(.985)}50%{transform:translateY(-1px) scaleY(1.008)}}
+@keyframes bearSleepNod{0%,100%{transform:rotate(0)}50%{transform:rotate(3deg) translateY(2px)}}
+#bearSleepBlanket,#bearSleepQuilt{display:none}
+#bear-container.is-hibernating #bearSleepBlanket,#bear-container.is-hibernating #bearSleepQuilt{display:block!important}
+#bear-sleep-z{display:none;position:absolute;right:8%;top:2%;width:19%;height:auto;overflow:visible;pointer-events:none;animation:bearZzzFloat 2.7s ease-in-out infinite}
+#bear-container.is-hibernating #bear-sleep-z{display:block!important}
+@keyframes bearZzzFloat{0%,100%{transform:translateY(3px) rotate(-6deg);opacity:.65}50%{transform:translateY(-9px) rotate(3deg);opacity:1}}
+.bear-caption{bottom:6px!important;z-index:4}
+#bear-snow{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .6s;z-index:0}
+#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.54}
+#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.92}
+body[data-fun-effects="off"] #bear-snow{display:none!important}
+.bear-snowflake{position:absolute;top:-8vh;display:block;width:var(--snow-size,13px);height:var(--snow-size,13px);opacity:var(--snow-opacity,.5);pointer-events:none;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite;will-change:transform}
+.bear-snowflake svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1px #688a9a12)}
+@keyframes bearSnowFall{0%{transform:translate3d(0,-10vh,0) rotate(0)}100%{transform:translate3d(var(--snow-drift,40px),112vh,0) rotate(320deg)}}
+.bear-confetti-doodle{width:30px;height:30px;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:transparent!important;filter:none!important}
+.bear-confetti-doodle svg{display:block;width:100%;height:100%;overflow:visible}
+/* Calculator is independent of the playful overlay and can be opened/closed at any time */
+.calculator-toggle-button{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border:1px solid #cae8f1;border-radius:11px;background:linear-gradient(135deg,#f4fcff,#e5f5f6);color:#326c7c;font-weight:800;white-space:nowrap}
+.calculator-toggle-icon{display:grid;place-items:center;width:21px;height:21px;border:1.5px solid currentColor;border-radius:5px;font-size:calc(15px * var(--font-scale,1));line-height:1;font-weight:900}
+.calculator-widget{position:fixed;z-index:100001;top:95px;right:17px;width:300px;max-width:calc(100vw - 16px);padding:0;border:1px solid #cde0e1;border-radius:18px;overflow:hidden;background:#fcfffe;color:#314f52;box-shadow:0 22px 60px #334e4e35}
+.calculator-widget[hidden]{display:none!important}
+.calculator-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;background:linear-gradient(120deg,#e1f6f4,#eff6ff);border-bottom:1px dashed #b9d7d5;cursor:move;touch-action:none;user-select:none}
+.calculator-brand{display:flex;align-items:center;gap:9px}.calculator-brand-icon{display:grid;place-items:center;width:34px;height:34px;flex:0 0 34px;border-radius:10px;background:#fff;color:#39848b;font-size:calc(22px * var(--font-scale,1));font-weight:900}
+.calculator-brand strong{display:block;font-size:calc(13px * var(--font-scale,1));font-weight:850;color:#345b60}.calculator-brand small{display:block;font-size:calc(10px * var(--font-scale,1));color:#6b888a}
+#calculatorCloseBtn{width:30px;height:30px;border:1px solid #d1e4e3;background:#ffffffd9;border-radius:9px;color:#507276;font-size:calc(19px * var(--font-scale,1));font-weight:800}
+.calculator-body{padding:12px}
+.calculator-display{min-height:81px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;gap:6px;margin-bottom:10px;padding:10px 12px;border:1px solid #d9e9e6;border-radius:12px;background:linear-gradient(130deg,#f8fcf8,#f3faff);overflow:hidden}
+.calculator-expression{max-width:100%;min-height:18px;font-size:calc(11px * var(--font-scale,1));color:#7e9696;text-align:right;overflow-wrap:anywhere}
+.calculator-result{max-width:100%;font-size:calc(27px * var(--font-scale,1));line-height:1.2;font-weight:850;color:#294d53;text-align:right;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.calculator-keypad{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.calc-key{min-height:44px;padding:8px 5px;border:1px solid #e1ece9;border-radius:11px;background:#fff;color:#3a5a5d;font-size:calc(16px * var(--font-scale,1));font-weight:750;box-shadow:0 2px 0 #dce8e5}
+.calc-key:hover{filter:brightness(.98);transform:translateY(-1px)}
+.calc-key.calc-func{background:#eaf5f2;color:#487476}.calc-key.calc-operator{background:#e5f1fb;color:#396c8d;border-color:#d2e6f1}.calc-key.calc-equals{background:#4e969a;color:#fff;border-color:#4e969a;box-shadow:0 2px 0 #377d81}
+.calculator-help{margin:10px 2px 0;font-size:calc(10px * var(--font-scale,1));line-height:1.5;color:#7c9090}
+@media(max-width:850px){.headright{flex-wrap:wrap;justify-content:flex-end}.calculator-widget{top:80px;right:8px}}
+@media(max-width:650px){
+ #bear-container{width:clamp(215px,48vw,280px)!important;bottom:-2px!important;max-width:calc(100vw - 14px)!important}
+ #bear-sleep-z{width:21%}
+ .intro-menu-grid{grid-template-columns:1fr}.intro-help-grid{grid-template-columns:1fr}.intro-steps-detailed li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps-detailed li>.btn{grid-column:2;justify-self:start}
+ .calculator-toggle-button{padding:7px 9px}.calculator-toggle-button span:last-child{font-size:calc(11px * var(--font-scale,1))}
+ .calculator-widget{top:auto;right:8px;bottom:8px;width:min(330px,calc(100vw - 16px));max-height:calc(100dvh - 16px);overflow:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ #bear-sprite,#bearHead,#bearBackLeg,#bearFrontLeg,#bearFrontPaw,#bearTail,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite,#bear-snow .bear-snowflake,.bear-snowflake{animation:none!important;transition:none!important}
+ .intro-menu-card{transition:none}.calc-key:hover{transform:none}
+}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -1010,39 +1125,65 @@ body[data-theme="ocean"] .theme-drift svg,body[data-theme="retro"] .theme-drift 
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
  <button type="button" id="funToggleBtn" class="fun-toggle-button" aria-controls="funWidget" aria-expanded="false" title="Mở Góc Gấu"><span class="fun-toggle-icon">🐻</span><span data-i18n="funOpen">Góc Gấu</span></button>
+  <button type="button" id="calculatorToggleBtn" class="calculator-toggle-button" aria-controls="calculatorWidget" aria-expanded="false" title="Mở máy tính" data-i18n-title="calculatorOpen"><span class="calculator-toggle-icon" aria-hidden="true">▦</span><span data-i18n="calculatorName">Máy tính</span></button>
  </div>
 </header>
+<aside id="calculatorWidget" class="calculator-widget" hidden aria-label="Máy tính MatchMã">
+ <div class="calculator-head" id="calculatorDragHandle"><div class="calculator-brand"><span class="calculator-brand-icon" aria-hidden="true">▦</span><div><strong data-i18n="calculatorName">Máy tính</strong><small data-i18n="calculatorSubtitle">Tính nhanh khi cần</small></div></div><button id="calculatorCloseBtn" type="button" aria-label="Đóng máy tính" title="Đóng máy tính">×</button></div>
+ <div class="calculator-body">
+  <div class="calculator-display" aria-live="polite" aria-atomic="true"><div id="calculatorExpression" class="calculator-expression"></div><output id="calculatorResult" class="calculator-result">0</output></div>
+  <div class="calculator-keypad" id="calculatorKeypad">
+   <button type="button" class="calc-key calc-func" data-calc="clear" data-i18n="calculatorClear">AC</button><button type="button" class="calc-key calc-func" data-calc="sign">±</button><button type="button" class="calc-key calc-func" data-calc="percent">%</button><button type="button" class="calc-key calc-operator" data-calc="operator" data-op="÷">÷</button>
+   <button type="button" class="calc-key" data-calc="digit" data-value="7">7</button><button type="button" class="calc-key" data-calc="digit" data-value="8">8</button><button type="button" class="calc-key" data-calc="digit" data-value="9">9</button><button type="button" class="calc-key calc-operator" data-calc="operator" data-op="×">×</button>
+   <button type="button" class="calc-key" data-calc="digit" data-value="4">4</button><button type="button" class="calc-key" data-calc="digit" data-value="5">5</button><button type="button" class="calc-key" data-calc="digit" data-value="6">6</button><button type="button" class="calc-key calc-operator" data-calc="operator" data-op="−">−</button>
+   <button type="button" class="calc-key" data-calc="digit" data-value="1">1</button><button type="button" class="calc-key" data-calc="digit" data-value="2">2</button><button type="button" class="calc-key" data-calc="digit" data-value="3">3</button><button type="button" class="calc-key calc-operator" data-calc="operator" data-op="+">+</button>
+   <button type="button" class="calc-key calc-func" data-calc="backspace" aria-label="Xóa một chữ số">⌫</button><button type="button" class="calc-key" data-calc="digit" data-value="0">0</button><button type="button" class="calc-key" data-calc="decimal">.</button><button type="button" class="calc-key calc-equals" data-calc="equals">=</button>
+  </div>
+  <p class="calculator-help" data-i18n="calculatorHint">Có thể bấm phím số, + − × ÷, Enter và Backspace trên bàn phím.</p>
+ </div>
+</aside>
 <div id="fat-bear-overlay" hidden aria-label="Góc tương tác Gấu" aria-hidden="true">
  <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu">
- <svg id="bear-sprite" viewBox="0 0 320 180" role="img" aria-label="Chú gấu nâu vẽ tay, nét chì xước">
-  <defs>
-   <pattern id="bearHatch" patternUnits="userSpaceOnUse" width="13" height="11"><path d="M-2 9 L8 1 M5 12 L15 3" stroke="#6f3519" stroke-width="1.1" stroke-dasharray="2.5 2.1" opacity=".34" fill="none"/></pattern>
-   <clipPath id="bearBodyClip"><path d="M35 159 C25 130 30 99 52 85 C66 74 82 79 96 84 C124 63 194 64 221 83 C258 84 288 109 286 143 L279 159 C263 166 237 162 217 161 L94 163 C69 165 48 165 35 159Z"/></clipPath>
-   <filter id="bearRoughEdge" x="-5%" y="-8%" width="110%" height="118%"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="2" seed="7" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale=".75" xChannelSelector="R" yChannelSelector="G"/></filter>
-  </defs>
-  <g filter="url(#bearRoughEdge)" stroke-linecap="round" stroke-linejoin="round">
-   <path id="bearBody" d="M35 159 C25 130 30 99 52 85 C66 74 82 79 96 84 C124 63 194 64 221 83 C258 84 288 109 286 143 L279 159 C263 166 237 162 217 161 L94 163 C69 165 48 165 35 159Z" fill="#b45309" stroke="#78350f" stroke-width="4" stroke-dasharray="3 1.5"/>
-   <rect x="31" y="69" width="260" height="100" fill="url(#bearHatch)" clip-path="url(#bearBodyClip)" opacity=".85"/>
-   <path d="M61 144 Q77 132 94 145 M228 145 Q244 130 261 143" fill="none" stroke="#78350f" stroke-width="2.4" stroke-dasharray="3 2"/>
-   <path d="M62 151 Q72 157 88 153 M236 153 Q250 158 265 151" fill="none" stroke="#f7c37c" stroke-width="2" opacity=".75"/>
-   <circle cx="113" cy="48" r="20" fill="#b45309" stroke="#78350f" stroke-width="4" stroke-dasharray="2.5 1.5"/>
-   <circle cx="207" cy="48" r="20" fill="#b45309" stroke="#78350f" stroke-width="4" stroke-dasharray="2.5 1.5"/>
-   <circle cx="114" cy="49" r="9" fill="#7c3d20" stroke="#78350f" stroke-width="2"/>
-   <circle cx="207" cy="49" r="9" fill="#7c3d20" stroke="#78350f" stroke-width="2"/>
-   <path id="bearHead" d="M85 77 C78 56 91 32 118 30 C137 27 148 37 159 43 C178 31 204 42 222 60 C239 80 220 103 194 108 L121 108 C99 104 88 94 85 77Z" fill="#c46a24" stroke="#78350f" stroke-width="4" stroke-dasharray="3 1.5"/>
-   <path d="M100 68 Q118 61 132 70 M185 69 Q202 60 216 71" fill="none" stroke="#e9a55d" stroke-width="2.4" stroke-dasharray="2 2"/>
-   <path id="bearEyeLeft" d="M125 70 Q133 62 141 70" fill="none" stroke="#422519" stroke-width="3.4"/>
-   <path id="bearEyeRight" d="M181 70 Q189 62 197 70" fill="none" stroke="#422519" stroke-width="3.4"/>
-   <ellipse cx="160" cy="84" rx="35" ry="24" fill="#f6d2a0" stroke="#78350f" stroke-width="3" stroke-dasharray="3 1.5"/>
-   <path d="M151 76 Q160 70 169 77 Q168 85 160 86 Q152 85 151 76Z" fill="#4a2c20" stroke="#462819" stroke-width="2"/>
-   <path id="bear-mouth" d="M145 88 Q160 100 176 88" fill="none" stroke="#542b20" stroke-width="3" stroke-linecap="round"/>
-   <path d="M160 86 L160 91" fill="none" stroke="#542b20" stroke-width="2.5"/>
-   <path d="M119 94 Q128 101 137 96 M182 96 Q192 101 201 94" fill="none" stroke="#b75d35" stroke-width="2" stroke-dasharray="2 2"/>
-   <path d="M44 112 Q56 118 58 127 M272 113 Q263 120 265 129 M105 117 Q114 122 118 129 M207 120 Q215 116 222 123" fill="none" stroke="#763a1b" stroke-width="1.5" stroke-dasharray="2 3" opacity=".75"/>
-   <path id="bearSleepBlanket" d="M39 128 Q61 109 94 126 Q126 145 159 127 Q195 108 226 127 Q255 117 281 136 L276 157 Q163 177 45 159Z" fill="#81996a" stroke="#4d6846" stroke-width="3" stroke-dasharray="4 2" style="display:none"/>
-   <path id="bearSleepQuilt" d="M64 137 Q88 133 109 146 M131 151 Q160 157 184 145 M210 145 Q233 133 257 142" fill="none" stroke="#d7e3b9" stroke-width="2" stroke-dasharray="3 3" style="display:none"/>
-  </g>
- </svg>
+ <svg id="bear-sprite" viewBox="0 0 600 350" role="img" aria-label="Gấu nâu bụ bẫm vẽ bằng nét chì và phấn">
+ <defs>
+  <pattern id="bearHatch" patternUnits="userSpaceOnUse" width="13" height="11"><path d="M-2 9 L8 1 M5 12 L15 3" stroke="#6c341b" stroke-width="1.1" stroke-dasharray="2.5 2" opacity=".34" fill="none"/></pattern>
+  <pattern id="bearFurLines" patternUnits="userSpaceOnUse" width="19" height="16"><path d="M1 4 Q6 1 11 5 M9 13 Q14 9 18 12" stroke="#7c411f" stroke-width="1.1" stroke-dasharray="2 2.6" opacity=".3" fill="none"/></pattern>
+  <clipPath id="bearBodyClip"><path d="M44 324 C19 290 25 237 44 194 C65 143 116 111 178 94 C236 77 298 88 343 114 C384 136 407 172 416 211 C426 261 408 303 376 328 C348 349 285 344 224 344 L91 344 C67 343 52 337 44 324Z"/></clipPath>
+  <filter id="bearRoughEdge" x="-5%" y="-7%" width="110%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="2" seed="13" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale=".9" xChannelSelector="R" yChannelSelector="G"/></filter>
+ </defs>
+ <g id="bearTorso" filter="url(#bearRoughEdge)" stroke-linecap="round" stroke-linejoin="round">
+  <path id="bearBackLeg" d="M66 245 C38 263 38 300 60 323 C82 344 128 342 158 326 C184 311 179 284 157 259 L122 226Z" fill="#99491b" stroke="#6f351b" stroke-width="4.5" stroke-dasharray="3 1.5"/>
+  <path id="bearBody" d="M44 324 C19 290 25 237 44 194 C65 143 116 111 178 94 C236 77 298 88 343 114 C384 136 407 172 416 211 C426 261 408 303 376 328 C348 349 285 344 224 344 L91 344 C67 343 52 337 44 324Z" fill="#b45313" stroke="#713719" stroke-width="5" stroke-dasharray="3 1.6"/>
+  <rect x="22" y="80" width="410" height="270" fill="url(#bearHatch)" clip-path="url(#bearBodyClip)" opacity=".74"/>
+  <rect x="22" y="80" width="410" height="270" fill="url(#bearFurLines)" clip-path="url(#bearBodyClip)" opacity=".88"/>
+  <path d="M69 207 Q98 160 142 149 M93 244 Q122 211 150 208 M128 292 Q163 271 196 286 M168 118 Q211 101 251 115 M234 151 Q268 139 295 154 M281 191 Q318 194 341 223 M260 245 Q298 244 322 265" fill="none" stroke="#efad5b" stroke-width="2.2" stroke-dasharray="3 3" opacity=".65"/>
+  <path d="M62 316 Q80 309 102 318 M103 326 Q123 316 146 323 M167 334 Q192 324 216 333" fill="none" stroke="#603119" stroke-width="2.3" stroke-dasharray="2 2"/>
+  <path id="bearFrontLeg" d="M348 186 C377 177 399 202 404 231 C412 267 392 304 388 326 C379 345 349 346 333 331 C320 314 331 283 320 257 C310 229 320 199 348 186Z" fill="#a75018" stroke="#703719" stroke-width="4.5" stroke-dasharray="3 1.5"/>
+  <path id="bearFrontPaw" d="M334 318 Q359 331 390 313 L387 334 Q367 350 341 339Z" fill="#8d451c" stroke="#703719" stroke-width="3" stroke-dasharray="2.5 1.5"/>
+  <path d="M350 337 L352 328 M363 340 L366 329 M376 335 L380 325" fill="none" stroke="#f0bd78" stroke-width="2.1"/>
+  <path id="bearTail" d="M53 267 Q25 251 20 274 Q20 296 43 299" fill="#a95318" stroke="#713719" stroke-width="4" stroke-dasharray="3 2"/>
+  <path d="M82 160 Q98 149 107 156 M135 133 Q147 125 159 130 M180 105 Q197 99 212 105 M220 329 Q246 338 269 331" fill="none" stroke="#f5bd73" stroke-width="2" stroke-dasharray="2.5 2.5" opacity=".55"/>
+  <path id="bearSleepBlanket" d="M40 202 Q72 176 114 199 Q157 225 210 198 Q270 177 312 205 Q363 195 410 224 L390 308 Q355 341 281 344 L91 344 Q56 340 43 321Z" fill="#80966b" stroke="#4e6846" stroke-width="4" stroke-dasharray="4 2" style="display:none"/>
+  <path id="bearSleepQuilt" d="M73 222 Q103 211 128 231 M149 241 Q177 251 207 232 M229 224 Q257 211 283 231 M303 241 Q335 224 363 239 M89 281 Q114 293 142 279 M166 299 Q196 309 225 293 M250 283 Q276 294 302 281 M320 302 Q343 311 369 297" fill="none" stroke="#d6e1b7" stroke-width="2.2" stroke-dasharray="3 3" style="display:none"/>
+ </g>
+ <g id="bearHead" filter="url(#bearRoughEdge)" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="396" cy="63" r="25" fill="#a7521b" stroke="#713719" stroke-width="4" stroke-dasharray="3 1.5"/>
+  <circle cx="453" cy="57" r="24" fill="#a7521b" stroke="#713719" stroke-width="4" stroke-dasharray="3 1.5"/>
+  <circle cx="397" cy="64" r="12" fill="#6f381f" stroke="#713719" stroke-width="2"/>
+  <circle cx="453" cy="58" r="11" fill="#6f381f" stroke="#713719" stroke-width="2"/>
+  <path id="bearHeadShape" d="M369 106 C358 83 368 56 391 42 C413 27 443 34 461 50 C486 62 505 79 509 101 C514 119 502 139 483 148 L442 154 C415 154 397 141 386 132 C376 124 372 116 369 106Z" fill="#c56824" stroke="#713719" stroke-width="4.5" stroke-dasharray="3 1.5"/>
+  <path d="M379 70 Q398 56 416 67 M432 63 Q450 55 469 68 M382 84 Q401 76 415 85 M437 81 Q454 75 471 86" fill="none" stroke="#f0ad62" stroke-width="2.5" stroke-dasharray="2 2.5"/>
+  <path id="bearEyeLeft" d="M395 76 Q404 67 413 77" fill="none" stroke="#40251b" stroke-width="4"/>
+  <path id="bearEyeRight" d="M435 76 Q444 67 453 77" fill="none" stroke="#40251b" stroke-width="4"/>
+  <ellipse cx="485" cy="109" rx="28" ry="19" fill="#f3ca91" stroke="#713719" stroke-width="3.2" stroke-dasharray="3 1.5"/>
+  <path d="M483 96 Q495 92 503 101 Q500 110 490 109 Q484 106 483 96Z" fill="#42281e" stroke="#42281e" stroke-width="2"/>
+  <path id="bear-mouth" d="M489 109 L489 116 Q481 124 473 116 M489 116 Q500 125 508 116" fill="none" stroke="#4a2b20" stroke-width="3.5" stroke-linecap="round"/>
+  <path id="bearMouthOpen" d="M476 112 Q490 135 507 112 Q504 135 491 136 Q480 134 476 112Z" fill="#68311f" stroke="#4a2b20" stroke-width="2.5" opacity="0"/>
+  <path d="M464 126 Q474 133 481 127 M507 128 Q516 133 522 125" fill="none" stroke="#b75d35" stroke-width="2" stroke-dasharray="2 2"/>
+  <path d="M375 99 Q384 104 388 112 M437 137 Q447 143 455 138" fill="none" stroke="#6f381f" stroke-width="1.8" stroke-dasharray="2 3" opacity=".7"/>
+ </g>
+ <path id="bearMotionStroke" d="M19 201 Q14 220 20 239 M404 181 Q420 198 419 214" fill="none" stroke="#c68a54" stroke-width="2.3" stroke-dasharray="2 5" opacity=".2"/>
+</svg>
  <svg id="bear-sleep-z" viewBox="0 0 68 30" aria-hidden="true"><path d="M3 5 H21 L4 24 H24 M29 3 H47 L30 21 H50 M52 5 H66 L53 21 H66" fill="none" stroke="#75563d" stroke-width="2.7" stroke-dasharray="3 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
 </button>
  <div id="bear-snow" aria-hidden="true"></div><div id="fish-pool" aria-label="Cá cho gấu ăn"></div><div id="bear-plus-layer" aria-hidden="true"></div>
@@ -1117,21 +1258,44 @@ body[data-theme="ocean"] .theme-drift svg,body[data-theme="retro"] .theme-drift 
 </div></details>
 <div class="grid"><div class="panel"><h2 data-i18n="flowTitle">Quy trình rà soát</h2><p data-i18n="flowDesc">Nạp danh mục chuẩn → nạp dữ liệu cần soát → chọn cột → chạy → xuất Excel.</p><div class="actions"><button class="btn alt" data-goto="run" data-i18n="goRun">Đi tới Chạy rà soát</button><button class="btn alt" data-goto="results" data-i18n="goResults">Xem kết quả</button></div></div><div class="panel"><h2 data-i18n="ruleTitle">Quy tắc ghép an toàn</h2><p data-i18n="ruleDesc">Dòng chuẩn thiếu SKU/mã hàng luôn bị loại. “Có đường” và “không đường” là thuộc tính mâu thuẫn, cần xem lại kể cả điểm tên cao.</p><div class="rule"><span data-i18n="currentThreshold">Ngưỡng OK hiện tại:</span> <strong id="thresholdSummary">80%</strong></div></div></div></section>
 <section class="page" id="page-intro">
- <div class="hero intro-hero"><div class="eyebrow" data-i18n="introEyebrow">MATCHMÃ · HƯỚNG DẪN NHANH</div><h2 data-i18n="introTitle">Giới thiệu MatchMã</h2>
- <p data-i18n="introLead">MatchMã giúp chuẩn hóa tên hàng và tìm ứng viên phù hợp giữa các file sản phẩm, để bạn rà soát nhanh hơn nhưng vẫn kiểm soát quyết định cuối cùng.</p>
- <div class="actions"><button class="btn" data-goto="catalog" data-i18n="introStart">Bắt đầu với danh mục →</button><button class="btn alt" data-goto="run" data-i18n="introTry">Thử rà soát →</button></div></div>
- <div class="intro-purpose-grid">
- <article class="panel intro-purpose-card"><div class="intro-step-icon">🎯</div><h2 data-i18n="introPurposeTitle">Mục đích</h2><p data-i18n="introPurposeText">Tìm mặt hàng có tên khác nhau nhưng có thể là cùng sản phẩm; hỗ trợ đối chiếu SKU, tên, quy cách và đơn vị trước khi xác nhận.</p></article>
- <article class="panel intro-purpose-card"><div class="intro-step-icon">🗂️</div><h2 data-i18n="introFilesTitle">Chuẩn bị dữ liệu</h2><p data-i18n="introFilesText">Bắt đầu bằng danh mục chuẩn có SKU. Dùng file mẫu tại từng khu vực nhập để giữ đúng tên cột và kiểu dữ liệu.</p></article>
- <article class="panel intro-purpose-card"><div class="intro-step-icon">🔎</div><h2 data-i18n="introMatchTitle">Rà soát và xác nhận</h2><p data-i18n="introMatchText">Tải file cần soát, ánh xạ cột và chạy đối chiếu. Kiểm tra điểm tương đồng và cảnh báo trước khi xác nhận.</p></article>
- <article class="panel intro-purpose-card"><div class="intro-step-icon">☁️</div><h2 data-i18n="introSaveTitle">Lưu trữ và bảo mật</h2><p data-i18n="introSaveText">Khi đăng nhập, có thể đồng bộ bộ nhớ xác nhận và danh mục riêng theo tài khoản. File đối chiếu được xử lý trong trình duyệt.</p></article></div>
- <div class="panel intro-workflow"><div class="sectionhead"><div><h2 data-i18n="introWorkflowTitle">Quy trình sử dụng gợi ý</h2><p data-i18n="introWorkflowText">Đi theo thứ tự để hạn chế sai cột hoặc xác nhận nhầm sản phẩm.</p></div></div>
- <ol class="intro-steps">
- <li><span class="intro-step-number">1</span><div><strong data-i18n="introStep1Title">Tải danh mục chuẩn</strong><p data-i18n="introStep1Text">Kiểm tra SKU, tên hàng, quy cách và đơn vị tính.</p></div><button class="btn alt" data-goto="catalog" data-i18n="introOpen">Mở mục →</button></li>
- <li><span class="intro-step-number">2</span><div><strong data-i18n="introStep2Title">Tải file cần rà soát</strong><p data-i18n="introStep2Text">Chọn cột tên hàng, mã hàng và thuộc tính có sẵn.</p></div><button class="btn alt" data-goto="run" data-i18n="introOpen">Mở mục →</button></li>
- <li><span class="intro-step-number">3</span><div><strong data-i18n="introStep3Title">Kiểm tra kết quả</strong><p data-i18n="introStep3Text">Lọc các dòng cần xem lại, kiểm tra ứng viên rồi xuất Excel.</p></div><button class="btn alt" data-goto="results" data-i18n="introOpen">Mở mục →</button></li>
- <li><span class="intro-step-number">4</span><div><strong data-i18n="introStep4Title">Lưu quy tắc cá nhân</strong><p data-i18n="introStep4Text">Đăng nhập để đồng bộ bộ nhớ xác nhận và danh mục riêng giữa thiết bị.</p></div><button class="btn alt" data-goto="account" data-i18n="introOpen">Mở mục →</button></li></ol></div>
- <div class="panel intro-notice"><span>💡</span><p data-i18n="introNotice">MatchMã đưa ra gợi ý, không thay thế kiểm tra nghiệp vụ. Tên giống nhau chưa chắc cùng quy cách; thiếu SKU hoặc thuộc tính mâu thuẫn cần rà soát thủ công.</p></div>
+ <div class="hero intro-hero">
+  <div class="eyebrow" data-i18n="introEyebrow">MATCHMÃ · NHẬP MÔN</div>
+  <h2 data-i18n="introTitle">Nhập môn MatchMã</h2>
+  <p data-i18n="introLead">Hướng dẫn từng bước cho người mới: chuẩn bị file, chạy đối chiếu, đọc kết quả và lưu dữ liệu cá nhân.</p>
+  <div class="intro-beginner-strip"><span class="intro-guide-illustration"></span><div><strong data-i18n="introAudienceTitle">Bạn mới dùng MatchMã?</strong><p data-i18n="introAudienceText">Hãy bắt đầu theo thứ tự bên dưới. Mỗi nút sẽ đưa bạn thẳng đến đúng mục trên thanh menu.</p></div></div>
+  <div class="actions"><button class="btn" data-goto="catalog" data-i18n="introStart">Bắt đầu với danh mục →</button><button class="btn alt" data-goto="run" data-i18n="introTry">Đến mục rà soát →</button></div>
+ </div>
+ <div class="panel intro-learning-path">
+  <div class="sectionhead"><div><h2 data-i18n="introLearnTitle">Lộ trình 5 bước đầu tiên</h2><p data-i18n="introLearnText">Đi theo thứ tự này để hạn chế lỗi sai cột và xác nhận nhầm hàng.</p></div><span class="intro-level-pill" data-i18n="introBeginnerBadge">Dành cho người mới</span></div>
+  <ol class="intro-steps intro-steps-detailed">
+   <li><span class="intro-step-number">1</span><div><strong data-i18n="introStep1Title">Nạp danh mục chuẩn</strong><p data-i18n="introStep1Text">Chọn file Excel/CSV có SKU hoặc mã hàng, tên sản phẩm, quy cách và đơn vị. Xem trước dữ liệu để xác nhận hàng tiêu đề đúng.</p></div><button class="btn alt" data-goto="catalog" data-i18n="introOpen">Mở mục →</button></li>
+   <li><span class="intro-step-number">2</span><div><strong data-i18n="introStep2Title">Tải file cần đối chiếu</strong><p data-i18n="introStep2Text">Dùng file mẫu tại khu vực nhập tương ứng. Giữ nguyên tên cột mẫu và tránh gộp nhiều thông tin vào một cột.</p></div><button class="btn alt" data-goto="run" data-i18n="introOpen">Mở mục →</button></li>
+   <li><span class="intro-step-number">3</span><div><strong data-i18n="introStep3Title">Ánh xạ và kiểm tra cột</strong><p data-i18n="introStep3Text">Chọn đúng cột tên hàng, mã hàng, quy cách và đơn vị. Mã nguồn đáng tin cậy giúp kiểm tra chính xác hơn.</p></div><button class="btn alt" data-goto="run" data-i18n="introOpen">Mở mục →</button></li>
+   <li><span class="intro-step-number">4</span><div><strong data-i18n="introStep4Title">Rà soát kết quả</strong><p data-i18n="introStep4Text">Đọc trạng thái, điểm tương đồng và cảnh báo. Kiểm tra SKU, quy cách, dung tích, đơn vị và thuộc tính mâu thuẫn trước khi xác nhận.</p></div><button class="btn alt" data-goto="results" data-i18n="introOpen">Mở mục →</button></li>
+   <li><span class="intro-step-number">5</span><div><strong data-i18n="introStep5Title">Lưu bộ nhớ cá nhân</strong><p data-i18n="introStep5Text">Sau khi xác nhận hàng phù hợp, đăng nhập nếu muốn đồng bộ bộ nhớ và danh mục riêng giữa các thiết bị.</p></div><button class="btn alt" data-goto="account" data-i18n="introOpen">Mở mục →</button></li>
+  </ol>
+ </div>
+ <div class="panel intro-menu-map">
+  <div class="sectionhead"><div><h2 data-i18n="guideMenuTitle">Bản đồ thanh menu</h2><p data-i18n="guideMenuText">Chọn một thẻ để đi thẳng đến trang tương ứng; mỗi công cụ được tách theo đúng chức năng.</p></div></div>
+  <div class="intro-menu-grid">
+   <button class="intro-menu-card" data-goto="overview"><span class="intro-step-icon" data-art-icon="overview"></span><strong data-i18n="guideOverviewTitle">Tổng quan</strong><span data-i18n="guideOverviewText">Xem nhanh thống kê, kết quả và lối tắt đến tài khoản, danh mục riêng.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="catalog"><span class="intro-step-icon" data-art-icon="catalog"></span><strong data-i18n="guideCatalogTitle">Danh mục</strong><span data-i18n="guideCatalogText">Nhập, xem trước và quản lý danh mục chuẩn; tải file mẫu trước khi nhập.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="run"><span class="intro-step-icon" data-art-icon="run"></span><strong data-i18n="guideRunTitle">Chạy rà soát</strong><span data-i18n="guideRunText">Tải file cần dò, ánh xạ cột, chọn ngưỡng rồi bắt đầu đối chiếu.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="results"><span class="intro-step-icon" data-art-icon="results"></span><strong data-i18n="guideResultsTitle">Kết quả</strong><span data-i18n="guideResultsText">Lọc các dòng cần xem lại, kiểm chứng ứng viên và xuất Excel.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="memory"><span class="intro-step-icon" data-art-icon="memory"></span><strong data-i18n="guideMemoryTitle">Bộ nhớ</strong><span data-i18n="guideMemoryText">Tra cứu các cặp hàng đã xác nhận, tìm kiếm hoặc sao lưu bộ nhớ.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="platforms"><span class="intro-step-icon" data-art-icon="lookup"></span><strong data-i18n="guideLookupTitle">Tra cứu sàn</strong><span data-i18n="guideLookupText">Rà soát tên sản phẩm theo danh sách và tham khảo liên kết marketplace.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="autofill"><span class="intro-step-icon" data-art-icon="autofill"></span><strong data-i18n="guideAutofillTitle">Điền mã từ file gốc</strong><span data-i18n="guideAutofillText">Gợi ý hoặc điền mã cho file đích và kiểm tra từng kết quả trước khi xuất.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="stockforecast"><span class="intro-step-icon" data-art-icon="stock"></span><strong data-i18n="guideStockTitle">Dự báo âm kho</strong><span data-i18n="guideStockText">Đối chiếu tồn đầu kỳ, nhập và xuất để tìm SKU có tồn cuối kỳ âm.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="account"><span class="intro-step-icon" data-art-icon="account"></span><strong data-i18n="guideAccountTitle">Tài khoản</strong><span data-i18n="guideAccountText">Đăng ký, đăng nhập, quản lý dữ liệu riêng và kiểm tra đồng bộ.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+   <button class="intro-menu-card" data-goto="settings"><span class="intro-step-icon" data-art-icon="settings"></span><strong data-i18n="guideSettingsTitle">Cài đặt</strong><span data-i18n="guideSettingsText">Chỉnh theme, ngưỡng đối chiếu, ngôn ngữ và tùy chọn hiển thị.</span><span class="intro-card-arrow" data-i18n="guideOpen">Mở trang ↗</span></button>
+  </div>
+ </div>
+ <div class="intro-help-grid">
+  <article class="panel intro-help-card"><span class="intro-step-icon" data-art-icon="import"></span><h2 data-i18n="guideImportTitle">Trước khi nhập file</h2><p data-i18n="guideImportText">Ưu tiên file mẫu được tải từ chính trang nhập. Không đổi tên cột hoặc gộp ô; lưu bản sao trước khi chỉnh sửa.</p><button class="btn alt" data-goto="catalog" data-i18n="guideOpenCatalog">Mở danh mục →</button></article>
+  <article class="panel intro-help-card"><span class="intro-step-icon" data-art-icon="review"></span><h2 data-i18n="guideReviewTitle">Cách đọc kết quả</h2><p data-i18n="guideReviewText">Điểm cao chỉ là gợi ý. So SKU, quy cách, dung tích và đơn vị; các dòng mâu thuẫn cần rà soát thủ công.</p><button class="btn alt" data-goto="results" data-i18n="guideReviewResults">Xem kết quả →</button></article>
+  <article class="panel intro-help-card"><span class="intro-step-icon" data-art-icon="privacy"></span><h2 data-i18n="guidePrivacyTitle">Dữ liệu được lưu ở đâu?</h2><p data-i18n="guidePrivacyText">Khi chưa đăng nhập, bộ nhớ nằm trên trình duyệt thiết bị này. Khi đăng nhập và đồng bộ thành công, dữ liệu cá nhân có thể dùng trên thiết bị khác.</p><button class="btn alt" data-goto="account" data-i18n="guideOpenAccount">Mở tài khoản →</button></article>
+ </div>
+ <div class="panel intro-notice"><span class="intro-notice-art" data-art-icon="tip"></span><p data-i18n="introNotice">MatchMã đưa ra gợi ý, không thay thế kiểm tra nghiệp vụ. Thiếu SKU hoặc thuộc tính mâu thuẫn cần rà soát thủ công.</p></div>
 </section><section class="page" id="page-catalog"><div class="panel personal-catalog-panel"><div class="overview-card-head"><h2>🗂 Danh mục cá nhân</h2><span id="personalCatalogStatus" class="overview-account-pill">Chưa đồng bộ</span></div><p class="hint">Lưu bản danh mục sản phẩm riêng vào tài khoản để dùng lại trên các thiết bị.</p><div class="actions"><button class="btn" id="savePersonalCatalog" type="button">Lưu danh mục vào tài khoản</button><button class="btn alt" id="loadPersonalCatalog" type="button">Tải danh mục từ tài khoản</button></div><div id="personalCatalogMessage" class="hint" role="status">Đăng nhập để bật lưu trữ danh mục cá nhân trên đám mây.</div><div id="personalCatalogSummary" class="mini"><b>0</b><span>Sản phẩm trong danh mục đang tải</span></div></div><div class="sectionhead"><div><h2 data-i18n="catalogTitle">Danh mục chuẩn</h2><p data-i18n="catalogDesc">Tải file sản phẩm chuẩn. Chỉ các dòng có SKU/mã hàng được sử dụng để ghép.</p></div><span class="pill" data-i18n="excelCsv">Excel .xlsx / .xls / CSV</span></div><div class="grid"><div class="panel"><h2 data-i18n="uploadMaster">1. Tải danh mục chuẩn</h2><p data-i18n="masterDesc">Chứa mã hàng, tên sản phẩm và nếu có, quy cách.</p><label class="upload"><span class="bigicon">📚</span><strong data-i18n="pickMaster">Chọn file danh mục chuẩn</strong><input id="master" type="file" accept=".csv,.xlsx,.xls"></label><div id="masterInfo" class="hint" data-i18n="notLoaded">Chưa tải file.</div><div class="twostat"><div class="mini"><b id="masterCount">0</b><span data-i18n="totalRows">Tổng dòng đọc được</span></div><div class="mini"><b id="masterNoSku">0</b><span data-i18n="blankSku">Dòng thiếu SKU — bị loại</span></div></div><div class="actions"><button class="btn alt" id="sample" data-i18n="sample">Tải Excel mẫu ↓</button></div></div><div class="panel"><h2 data-i18n="masterColumns">2. Xác nhận cột danh mục</h2><p data-i18n="masterColumnsDesc">Sau khi tải file, xác nhận cột mã và tên hàng đúng.</p><div class="field"><label data-i18n="skuLabel">SKU / mã hàng chuẩn (bắt buộc)</label><select id="skuCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="masterNameLabel">Tên hàng trong danh mục</label><select id="nameCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="specLabel">Cột quy cách (không bắt buộc)</label><select id="specCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="masterUomLabel">Đơn vị tính trong danh mục</label><select id="unitCol" disabled><option value="">—</option></select><p class="hint" data-i18n="unitColumnHelp">Ví dụ: chai, lon, hộp, thùng, gói, kg, g, lít, ml.</p></div><div id="masterNote" class="hint" data-i18n="masterWait">Tải file để cấu hình cột.</div></div></div><div class="panel"><div class="sectionhead"><div><h2 data-i18n="previewMaster">Xem trước danh mục</h2><p data-i18n="previewDesc">Chỉ xem nhanh 20 dòng đầu để giữ trang nhẹ khi file lớn.</p></div></div><div id="masterPreview" class="empty" data-i18n="previewWait">Chưa có dữ liệu danh mục.</div></div></section>
 <section class="page" id="page-run"><div class="sectionhead"><div><h2 data-i18n="runTitle">Chạy rà soát</h2><p data-i18n="runDesc">Tải file cần kiểm tra, chọn cột tên sản phẩm rồi chạy đối chiếu.</p></div><span class="pill" id="thresholdRun">Ngưỡng OK: 80%</span></div><div class="grid"><div class="panel"><h2 data-i18n="uploadCheck">1. Tải file cần soát</h2><p data-i18n="checkDesc">Có thể dùng tên viết tắt, không dấu hoặc dung tích khác định dạng.</p><label class="upload"><span class="bigicon">🔎</span><strong data-i18n="pickCheck">Chọn file cần rà soát</strong><input id="check" type="file" accept=".csv,.xlsx,.xls"></label><div class="template-row"><span>File mẫu: tên hàng, SKU (không bắt buộc), quy cách, ĐVT</span><button class="btn alt sample-download" data-sample="check">Tải file mẫu ↓</button></div><div id="checkInfo" class="hint" data-i18n="notLoaded">Chưa tải file.</div><div class="mini"><b id="checkCount">0</b><span data-i18n="rowsToCheck">Dòng cần đối chiếu</span></div></div><div class="panel"><h2 data-i18n="mapColumns">2. Ghép cột dữ liệu</h2><p data-i18n="mapDesc">Kiểm tra cột tên hàng của file cần soát trước khi chạy.</p><div class="field"><label data-i18n="queryLabel">Tên sản phẩm trong file cần soát</label><select id="queryCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="querySkuLabel">Mã hàng trong file cần soát (nếu có)</label><select id="querySkuCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="querySpecLabel">Quy cách trong file cần soát (nếu có)</label><select id="querySpecCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="queryUomLabel">Đơn vị tính trong file cần soát (nếu có)</label><select id="queryUomCol" disabled><option value="">—</option></select><p class="hint" data-i18n="unitMismatchHelp">Tên vẫn có thể ghép khi mã khác; hệ thống sẽ báo sai mã, đơn vị hoặc quy cách.</p></div><div class="field"><label data-i18n="thresholdLabel">Ngưỡng được tính OK</label><div class="thresholdvalue" id="thresholdInline">80%</div><p class="muted" data-i18n="thresholdHint">Có thể đổi trong Cài đặt. Kết quả dưới ngưỡng sẽ cần kiểm tra.</p></div><button class="btn" id="run" disabled data-i18n="runButton">▶ Chạy rà soát</button><div class="progressbox" id="progressBox"><span id="progressText">Đang chuẩn bị…</span><div class="bar"><div id="progressBar"></div></div></div></div></div><div class="panel"><h2 data-i18n="beforeRunTitle">Phân loại kết quả</h2><div class="grid3"><div class="mini"><b style="color:var(--green)" id="okRule">≥ 80%</b><span data-i18n="okRuleText">OK — đủ ngưỡng và không mâu thuẫn</span></div><div class="mini"><b style="color:var(--amber)" id="reviewRule">45–79%</b><span data-i18n="reviewRuleText">Rà soát — còn nghi ngờ hoặc thuộc tính xung đột</span></div><div class="mini"><b style="color:var(--red)" id="noneRule">&lt; 45%</b><span data-i18n="noneRuleText">Không khớp — không đủ tương đồng</span></div></div></div></section>
 <section class="page" id="page-results"><div class="sectionhead"><div><h2 data-i18n="resultsTitle">Kết quả đối chiếu</h2><p data-i18n="resultsDesc">Điểm phần trăm là độ giống nhau của tên sau chuẩn hóa, không phải xác nhận tuyệt đối.</p></div><button class="btn" id="export" disabled data-i18n="exportButton">Xuất Excel ↓</button></div><div class="stats"><div class="stat"><small data-i18n="statCheck">Dòng cần soát</small><b id="total">0</b></div><div class="stat good"><small data-i18n="statOk">Được tính là OK</small><b id="good">0</b></div><div class="stat review"><small data-i18n="statReview">Cần kiểm tra</small><b id="review">0</b></div><div class="stat none"><small data-i18n="statNone">Không khớp</small><b id="none">0</b></div></div><div class="filterbox">
@@ -1623,6 +1787,8 @@ function updateThemeDecorations(theme){
   cat:{overview:'🐈',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},bear:{overview:'🐻',intro:'🐾',catalog:'🐟',run:'🐻‍❄️',results:'🐾',memory:'🍯',platforms:'🐟',autofill:'🌲',stockforecast:'🐟',account:'🐻',settings:'🍃'}
  };
  document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&iconMaps[theme][page]){icon.innerHTML=themeDoodleSvg(theme,Math.max(0,Object.keys(iconMaps[theme]).indexOf(page)));icon.setAttribute('aria-hidden','true')}});
+ document.querySelectorAll('.intro-step-icon,.intro-guide-illustration,.intro-notice-art,.upload .bigicon,.tile-icon,.folder-icon,.summary-icon,.result-icon,[data-art-icon]').forEach((icon,i)=>{icon.innerHTML=themeDoodleSvg(theme,i+1);icon.setAttribute('aria-hidden','true')});
+
 }
 function updateThemeScene(theme){
  const root=$('themeScene');if(!root)return;root.textContent='';
@@ -1689,13 +1855,13 @@ function renderBearSnow(){
 function updateBearDisplay(){
  const scale=bearScale(),title=tr(bearStageKey()),count=tr('funFishCountLabel').replace('{count}',fishEaten);
  if(!bearReady){bearVisualScale=scale;document.documentElement.style.setProperty('--bear-scale',String(scale));bearReady=true}else animateBearScale(scale);
- const sprite=$('bear-sprite'),body=sprite&&sprite.querySelector('#bearBody'),head=sprite&&sprite.querySelector('#bearHead'),mouth=sprite&&sprite.querySelector('#bear-mouth');
+ const sprite=$('bear-sprite'),body=sprite&&sprite.querySelector('#bearBody'),headShape=sprite&&sprite.querySelector('#bearHeadShape'),mouth=sprite&&sprite.querySelector('#bear-mouth'),mouthOpen=sprite&&sprite.querySelector('#bearMouthOpen');
  if(body){body.setAttribute('fill',fishEaten>=4?'#9a3412':'#b45309');body.setAttribute('stroke-dasharray',fishEaten>=4?'3 .8':'3 1.5')}
- if(head)head.setAttribute('fill',fishEaten>=4?'#ae481b':'#c46a24');
- if(mouth)mouth.setAttribute('d',bearHibernating?'M145 88 Q160 92 176 88':fishEaten>=1?'M145 86 Q160 103 176 86':'M145 89 Q160 79 176 89');
+ if(headShape)headShape.setAttribute('fill',fishEaten>=4?'#ad4a17':'#c56824');
+ if(mouth)mouth.setAttribute('d',bearHibernating?'M489 115 Q497 118 505 115':fishEaten>=1?'M476 112 Q490 128 507 112':'M489 109 L489 116 Q481 124 473 116 M489 116 Q500 125 508 116');if(mouthOpen)mouthOpen.style.opacity=(!bearHibernating&&fishEaten>0)?'.82':'0';
  const leftEye=sprite&&sprite.querySelector('#bearEyeLeft'),rightEye=sprite&&sprite.querySelector('#bearEyeRight');
- if(leftEye)leftEye.setAttribute('d',bearHibernating?'M125 67 Q133 77 141 67':'M125 70 Q133 62 141 70');
- if(rightEye)rightEye.setAttribute('d',bearHibernating?'M181 67 Q189 77 197 67':'M181 70 Q189 62 197 70');
+ if(leftEye)leftEye.setAttribute('d',bearHibernating?'M395 72 Q404 82 413 72':'M395 76 Q404 67 413 77');
+ if(rightEye)rightEye.setAttribute('d',bearHibernating?'M435 72 Q444 82 453 72':'M435 76 Q444 67 453 77');
  const blanket=sprite&&sprite.querySelector('#bearSleepBlanket'),quilt=sprite&&sprite.querySelector('#bearSleepQuilt');
  if(blanket)blanket.style.display=bearHibernating?'block':'none';if(quilt)quilt.style.display=bearHibernating?'block':'none';
  const sleepZ=$('bear-sleep-z');if(sleepZ)sleepZ.style.display=bearHibernating?'block':'none';
@@ -1720,7 +1886,7 @@ function feedBear(fish,x,y){
  fishEaten++;try{localStorage.setItem(BEAR_EATEN_KEY,String(fishEaten))}catch(e){}
  fish.remove();updateBearDisplay();showBearPlus(px,py);
  const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}
- if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funChomp');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1000)}
+ if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funChomp');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;const mouthOpen=$('bear-sprite')&&$('bear-sprite').querySelector('#bearMouthOpen');if(mouthOpen)mouthOpen.style.opacity='0'},1000)}
  if(fishEaten>=BEAR_HIBERNATE_AT){if(bearHibernateTimer)clearTimeout(bearHibernateTimer);bearHibernateTimer=setTimeout(goBearHibernation,2600)}
  else if(!$('fat-bear-overlay').hidden&&$('fish-pool').children.length<6)setTimeout(()=>spawnBearFish(1),420);
  if(document.body.dataset.funEffects!=='off')spawnBearConfetti(px,py);
@@ -1735,13 +1901,65 @@ function goBearHibernation(){
 }
 function petBear(){
  if(bearHibernating){resetBear();if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funWakeText');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1600)}return}
- const mouth=$('bear-sprite')&&$('bear-sprite').querySelector('#bear-mouth');if(mouth)mouth.setAttribute('d','M143 85 Q160 106 178 85');
+ const mouth=$('bear-sprite')&&$('bear-sprite').querySelector('#bear-mouth'),mouthOpen=$('bear-sprite')&&$('bear-sprite').querySelector('#bearMouthOpen');if(mouth)mouth.setAttribute('d','M476 112 Q490 128 507 112');if(mouthOpen)mouthOpen.style.opacity='.85';
  if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funPet');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay()},1300)}
  const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}
 }
 function spawnBearConfetti(x,y){const layer=$('bear-plus-layer');if(!layer)return;const theme=document.body.dataset.theme||'ocean';for(let i=0;i<6;i++){const p=document.createElement('span');p.className='bear-plus-one bear-confetti-doodle';p.innerHTML=themeDoodleSvg(theme,i);p.style.left=(x+(Math.random()-.5)*100)+'px';p.style.top=(y+(Math.random()-.5)*40)+'px';p.style.animationDelay=(Math.random()*100)+'ms';layer.appendChild(p);setTimeout(()=>p.remove(),1050)}}
 function resetBear(){if(bearHibernateTimer){clearTimeout(bearHibernateTimer);bearHibernateTimer=null}bearHibernating=false;fishEaten=0;bearScaleVelocity=0;bearSnowLevel='';const bear=$('bear-container');if(bear)bear.classList.remove('is-hibernating');try{localStorage.setItem(BEAR_EATEN_KEY,'0')}catch(e){}const pool=$('fish-pool');if(pool)pool.textContent='';if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay();spawnBearFish(7)}
 function setFunWidgetOpen(open){const widget=$('funWidget'),btn=$('funToggleBtn'),overlay=$('fat-bear-overlay');if(!widget||!btn||!overlay)return;widget.hidden=!open;overlay.hidden=!open;overlay.setAttribute('aria-hidden',String(!open));btn.setAttribute('aria-expanded',String(!!open));btn.title=tr(open?'funClose':'funTitleButton');if(open){widget.classList.remove('is-minimized','is-maximized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent='□';updateBearDisplay();if(!$('fish-pool').children.length&&!bearHibernating)spawnBearFish(7)}}
+let calcCurrent='0',calcStored=null,calcOperator=null,calcWaitNext=false,calcExpression='';
+const calcOpLabel={'+':'+','−':'−','×':'×','÷':'÷'};
+function calcFmt(n){if(!Number.isFinite(n))return 'Lỗi';if(Math.abs(n)<1e-10)n=0;const rounded=Number(n.toPrecision(11));return String(rounded)}
+function calcRender(){const result=$('calculatorResult'),expression=$('calculatorExpression');if(result)result.textContent=calcCurrent;if(expression)expression.textContent=calcExpression}
+function calcReset(){calcCurrent='0';calcStored=null;calcOperator=null;calcWaitNext=false;calcExpression='';calcRender()}
+function calcDigit(d){if(calcCurrent==='Lỗi')calcReset();if(calcWaitNext){calcCurrent=d;calcWaitNext=false}else calcCurrent=calcCurrent==='0'?d:calcCurrent.length<17?calcCurrent+d:calcCurrent;calcRender()}
+function calcDecimal(){if(calcCurrent==='Lỗi')calcReset();if(calcWaitNext){calcCurrent='0.';calcWaitNext=false}else if(!calcCurrent.includes('.'))calcCurrent+='.';calcRender()}
+function calcApply(a,op,b){if(op==='+')return a+b;if(op==='−')return a-b;if(op==='×')return a*b;if(op==='÷')return b===0?NaN:a/b;return b}
+function calcChooseOperator(op){const current=Number(calcCurrent);if(!Number.isFinite(current)){calcReset();return}
+ if(calcOperator&&!calcWaitNext){const next=calcApply(Number(calcStored),calcOperator,current);calcCurrent=calcFmt(next);calcStored=Number(calcCurrent)}
+ else calcStored=current;
+ calcOperator=op;calcWaitNext=true;calcExpression=calcFmt(Number(calcStored))+' '+calcOpLabel[op];calcRender()}
+function calcEquals(){if(!calcOperator||calcStored===null)return;const before=Number(calcStored),after=Number(calcCurrent),op=calcOperator,result=calcApply(before,op,after);calcExpression=calcFmt(before)+' '+calcOpLabel[op]+' '+calcFmt(after)+' =';calcCurrent=calcFmt(result);calcStored=null;calcOperator=null;calcWaitNext=true;calcRender()}
+function calcSign(){if(calcCurrent==='0'||calcCurrent==='Lỗi')return;calcCurrent=calcCurrent.startsWith('-')?calcCurrent.slice(1):'-'+calcCurrent;calcRender()}
+function calcPercent(){const n=Number(calcCurrent);if(Number.isFinite(n))calcCurrent=calcFmt(n/100);calcRender()}
+function calcBackspace(){if(calcWaitNext||calcCurrent==='Lỗi'){calcCurrent='0';calcWaitNext=false}else calcCurrent=calcCurrent.length>1?calcCurrent.slice(0,-1):'0';calcRender()}
+function calcHandle(action,button){
+ if(action==='digit')calcDigit(button.dataset.value);
+ else if(action==='decimal')calcDecimal();
+ else if(action==='operator')calcChooseOperator(button.dataset.op);
+ else if(action==='equals')calcEquals();
+ else if(action==='clear')calcReset();
+ else if(action==='sign')calcSign();
+ else if(action==='percent')calcPercent();
+ else if(action==='backspace')calcBackspace();
+}
+function initCalculatorWidget(){
+ const widget=$('calculatorWidget'),toggle=$('calculatorToggleBtn'),keypad=$('calculatorKeypad'),drag=$('calculatorDragHandle');
+ if(!widget||!toggle||!keypad)return;
+ const setOpen=open=>{widget.hidden=!open;toggle.setAttribute('aria-expanded',String(open));toggle.title=tr(open?'calculatorClose':'calculatorOpen');if(open){calcRender();widget.classList.remove('is-maximized');const r=widget.getBoundingClientRect();if(r.right>innerWidth)widget.style.left=Math.max(8,innerWidth-widget.offsetWidth-8)+'px'}};
+ toggle.addEventListener('click',()=>setOpen(widget.hidden));$('calculatorCloseBtn').addEventListener('click',()=>setOpen(false));
+ keypad.addEventListener('click',e=>{const b=e.target.closest('button[data-calc]');if(b)calcHandle(b.dataset.calc,b)});
+ document.addEventListener('keydown',e=>{
+  if(widget.hidden||e.ctrlKey||e.metaKey||e.altKey)return;
+  const target=e.target;if(target&&/INPUT|TEXTAREA|SELECT/.test(target.tagName))return;
+  if(/^[0-9]$/.test(e.key)){e.preventDefault();calcDigit(e.key)}
+  else if(e.key==='.'||e.key===','){e.preventDefault();calcDecimal()}
+  else if(e.key==='+'){e.preventDefault();calcChooseOperator('+')}
+  else if(e.key==='-'){e.preventDefault();calcChooseOperator('−')}
+  else if(e.key==='*'){e.preventDefault();calcChooseOperator('×')}
+  else if(e.key==='/'){e.preventDefault();calcChooseOperator('÷')}
+  else if(e.key==='Enter'||e.key==='='){e.preventDefault();calcEquals()}
+  else if(e.key==='Backspace'){e.preventDefault();calcBackspace()}
+  else if(e.key==='Escape'){e.preventDefault();calcReset()}
+ });
+ let dragging=false,sx=0,sy=0,left=0,top=0;
+ drag.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragging=true;const r=widget.getBoundingClientRect();sx=e.clientX;sy=e.clientY;left=r.left;top=r.top;widget.style.left=left+'px';widget.style.top=top+'px';widget.style.right='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){}})
+ drag.addEventListener('pointermove',e=>{if(!dragging)return;widget.style.left=Math.max(6,Math.min(innerWidth-widget.offsetWidth-6,left+e.clientX-sx))+'px';widget.style.top=Math.max(6,Math.min(innerHeight-80,top+e.clientY-sy))+'px'});
+ const stop=()=>dragging=false;drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);
+ calcRender();
+}
+
 function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overlay=$('fat-bear-overlay'),drag=$('funWidgetDragBar');if(!btn||!widget||!overlay)return;btn.addEventListener('click',()=>setFunWidgetOpen(widget.hidden));$('funCloseBtn').addEventListener('click',()=>setFunWidgetOpen(false));$('funMinimizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-minimized');$('funMinimizeBtn').textContent=widget.classList.contains('is-minimized')?'+':'−';$('funMinimizeBtn').title=tr(widget.classList.contains('is-minimized')?'funExpand':'funMinimize')});$('funMaximizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-maximized');widget.classList.remove('is-minimized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent=widget.classList.contains('is-maximized')?'❐':'□';$('funMaximizeBtn').title=tr(widget.classList.contains('is-maximized')?'funRestore':'funMaximize')});$('funResetBear').addEventListener('click',resetBear);$('funSpawnFish').addEventListener('click',()=>{spawnBearFish(3);if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=lang==='vi'?'Đã thả thêm cá! Hãy bắt một con cho gấu.':'More fish added! Catch one for the bear.';setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1300)}});$('funEffectsToggle').addEventListener('click',()=>{const off=document.body.dataset.funEffects!=='off';document.body.dataset.funEffects=off?'off':'on';$('funEffectsToggle').textContent=tr(off?'funEffectsOn':'funEffectsOff');$('funEffectsToggle').setAttribute('aria-pressed',String(!off));try{localStorage.setItem(BEAR_EFFECT_KEY,off?'0':'1')}catch(e){}});$('bear-container').addEventListener('click',petBear);let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;drag.addEventListener('pointerdown',e=>{if(e.target.closest('button')||widget.classList.contains('is-maximized'))return;dragging=true;const r=widget.getBoundingClientRect();startX=e.clientX;startY=e.clientY;startLeft=r.left;startTop=r.top;widget.style.left=r.left+'px';widget.style.top=r.top+'px';widget.style.right='auto';widget.style.bottom='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){} });drag.addEventListener('pointermove',e=>{if(!dragging)return;const maxLeft=Math.max(0,window.innerWidth-widget.offsetWidth),maxTop=Math.max(0,window.innerHeight-65);widget.style.left=Math.min(maxLeft,Math.max(0,startLeft+e.clientX-startX))+'px';widget.style.top=Math.min(maxTop,Math.max(0,startTop+e.clientY-startY))+'px'});const stop=()=>{dragging=false};drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);let effects=true;try{effects=localStorage.getItem(BEAR_EFFECT_KEY)!=='0'}catch(e){}document.body.dataset.funEffects=effects?'on':'off';$('funEffectsToggle').textContent=tr(effects?'funEffectsOff':'funEffectsOn');$('funEffectsToggle').setAttribute('aria-pressed',String(effects));updateBearDisplay();if(fishEaten>=BEAR_HIBERNATE_AT)goBearHibernation();const mascot=$('funWidget').querySelector('.fun-widget-mascot');if(mascot)mascot.innerHTML=themeDoodleSvg('bear',0);const toggleIcon=$('funToggleBtn').querySelector('.fun-toggle-icon');if(toggleIcon)toggleIcon.innerHTML=themeDoodleSvg('bear',0)}
 
 const THEME_KEY='matchma-theme-v1';
@@ -1959,15 +2177,146 @@ Object.assign(I18N.en,{funSleeping:'Hibernating',funSleepText:'The bear is full 
 Object.assign(I18N.de,{funSleeping:'Winterschlaf',funSleepText:'Der Bär ist satt und schläft eingerollt. Tippe auf den Bären oder „Neu spielen“, um ihn zu wecken.',funWakeText:'Der Bär ist wach! Lass uns Fische fangen.',funPet:'Der Bär mag sanfte Streicheleinheiten!',funSnow:'Es schneit'});
 Object.assign(I18N['zh-TW'],{funSleeping:'冬眠中',funSleepText:'熊吃飽後蜷起來冬眠了。點熊或按「重新開始」喚醒牠。',funWakeText:'熊醒來了！一起抓魚吧。',funPet:'熊熊喜歡輕輕摸摸！',funSnow:'正在下雪'});
 Object.assign(I18N['zh-CN'],{funSleeping:'冬眠中',funSleepText:'熊吃饱后蜷起来冬眠了。点击熊或按“重新开始”唤醒它。',funWakeText:'熊醒来啦！一起抓鱼吧。',funPet:'熊熊喜欢轻轻摸摸！',funSnow:'正在下雪'});
+
+Object.assign(I18N.vi,{
+ calculatorName:'Máy tính',calculatorSubtitle:'Tính nhanh khi cần',calculatorOpen:'Mở máy tính',calculatorClose:'Đóng máy tính',calculatorHint:'Bấm nút hoặc dùng bàn phím: số, + − × ÷, Enter và Backspace.',calculatorClear:'AC',
+ introEyebrow:'MATCHMÃ · NHẬP MÔN',introTitle:'Nhập môn MatchMã',introLead:'Hướng dẫn từng bước cho người mới: chuẩn bị file, chạy đối chiếu, đọc kết quả và lưu dữ liệu cá nhân.',
+ introAudienceTitle:'Bạn mới dùng MatchMã?',introAudienceText:'Hãy bắt đầu theo thứ tự bên dưới. Mỗi nút sẽ đưa bạn thẳng đến đúng mục trên thanh menu.',
+ introLearnTitle:'Lộ trình 5 bước đầu tiên',introLearnText:'Đi theo thứ tự này để hạn chế lỗi sai cột và xác nhận nhầm hàng.',introBeginnerBadge:'Dành cho người mới',
+ introStep1Title:'Nạp danh mục chuẩn',introStep1Text:'Chọn file Excel/CSV có SKU hoặc mã hàng, tên sản phẩm, quy cách và đơn vị. Xem trước dữ liệu để xác nhận hàng tiêu đề đúng.',
+ introStep2Title:'Tải file cần đối chiếu',introStep2Text:'Dùng file mẫu tại khu vực nhập tương ứng. Giữ nguyên tên cột mẫu và tránh gộp nhiều thông tin vào một cột.',
+ introStep3Title:'Ánh xạ và kiểm tra cột',introStep3Text:'Chọn đúng cột tên hàng, mã hàng, quy cách và đơn vị. Mã nguồn đáng tin cậy giúp kiểm tra chính xác hơn.',
+ introStep4Title:'Rà soát kết quả',introStep4Text:'Đọc trạng thái, điểm tương đồng và cảnh báo. Kiểm tra SKU, quy cách, dung tích, đơn vị và thuộc tính mâu thuẫn trước khi xác nhận.',
+ introStep5Title:'Lưu bộ nhớ cá nhân',introStep5Text:'Sau khi xác nhận hàng phù hợp, đăng nhập nếu muốn đồng bộ bộ nhớ và danh mục riêng giữa các thiết bị.',
+ guideMenuTitle:'Bản đồ thanh menu',guideMenuText:'Chọn một thẻ để đi thẳng đến trang tương ứng; mỗi công cụ được tách theo đúng chức năng.',guideOpen:'Mở trang ↗',
+ guideOverviewTitle:'Tổng quan',guideOverviewText:'Xem nhanh thống kê, kết quả và lối tắt đến tài khoản, danh mục riêng.',
+ guideCatalogTitle:'Danh mục',guideCatalogText:'Nhập, xem trước và quản lý danh mục chuẩn; tải file mẫu trước khi nhập.',
+ guideRunTitle:'Chạy rà soát',guideRunText:'Tải file cần dò, ánh xạ cột, chọn ngưỡng rồi bắt đầu đối chiếu.',
+ guideResultsTitle:'Kết quả',guideResultsText:'Lọc các dòng cần xem lại, kiểm chứng ứng viên và xuất Excel.',
+ guideMemoryTitle:'Bộ nhớ',guideMemoryText:'Tra cứu các cặp hàng đã xác nhận, tìm kiếm hoặc sao lưu bộ nhớ.',
+ guideLookupTitle:'Tra cứu sàn',guideLookupText:'Rà soát tên sản phẩm theo danh sách và tham khảo liên kết marketplace.',
+ guideAutofillTitle:'Điền mã từ file gốc',guideAutofillText:'Gợi ý hoặc điền mã cho file đích và kiểm tra từng kết quả trước khi xuất.',
+ guideStockTitle:'Dự báo âm kho',guideStockText:'Đối chiếu tồn đầu kỳ, nhập và xuất để tìm SKU có tồn cuối kỳ âm.',
+ guideAccountTitle:'Tài khoản',guideAccountText:'Đăng ký, đăng nhập, quản lý dữ liệu riêng và kiểm tra đồng bộ.',
+ guideSettingsTitle:'Cài đặt',guideSettingsText:'Chỉnh theme, ngưỡng đối chiếu, ngôn ngữ và tùy chọn hiển thị.',
+ guideImportTitle:'Trước khi nhập file',guideImportText:'Ưu tiên file mẫu được tải từ chính trang nhập. Không đổi tên cột hoặc gộp ô; lưu bản sao trước khi chỉnh sửa.',
+ guideReviewTitle:'Cách đọc kết quả',guideReviewText:'Điểm cao chỉ là gợi ý. So SKU, quy cách, dung tích và đơn vị; các dòng mâu thuẫn cần rà soát thủ công.',
+ guidePrivacyTitle:'Dữ liệu được lưu ở đâu?',guidePrivacyText:'Khi chưa đăng nhập, bộ nhớ nằm trên trình duyệt thiết bị này. Khi đăng nhập và đồng bộ thành công, dữ liệu cá nhân có thể dùng trên thiết bị khác.',
+ guideOpenCatalog:'Mở danh mục →',guideReviewResults:'Xem kết quả →',guideOpenAccount:'Mở tài khoản →'
+});
+Object.assign(I18N.en,{
+ calculatorName:'Calculator',calculatorSubtitle:'Quick calculations',calculatorOpen:'Open calculator',calculatorClose:'Close calculator',calculatorHint:'Use the buttons or keyboard: digits, + − × ÷, Enter and Backspace.',calculatorClear:'AC',
+ introEyebrow:'MATCHMÃ · STARTER GUIDE',introTitle:'Getting started with MatchMã',introLead:'A step-by-step introduction for new users: prepare files, run matching, review results and save personal data.',
+ introAudienceTitle:'New to MatchMã?',introAudienceText:'Follow the steps below. Each button takes you directly to the relevant page in the menu.',
+ introLearnTitle:'Your first 5 steps',introLearnText:'This order helps reduce column mistakes and accidental confirmations.',introBeginnerBadge:'For beginners',
+ introStep1Title:'Load the master catalog',introStep1Text:'Choose an Excel/CSV file with SKU or item code, product name, specification and unit. Preview it to check the header row.',
+ introStep2Title:'Upload the file to compare',introStep2Text:'Use the template available in the import area. Keep its column names and avoid combining multiple attributes in one column.',
+ introStep3Title:'Map and verify columns',introStep3Text:'Map product name, item code, specification and unit. A reliable source code improves checking accuracy.',
+ introStep4Title:'Review results',introStep4Text:'Read status, similarity and warnings. Check SKU, specification, capacity, unit and conflicting attributes before confirming.',
+ introStep5Title:'Save personal memory',introStep5Text:'After confirming a match, sign in to sync confirmation memory and your own catalog across devices.',
+ guideMenuTitle:'Menu guide',guideMenuText:'Select a card to jump to that page. Each tool remains separate and focused on its own task.',guideOpen:'Open page ↗',
+ guideOverviewTitle:'Overview',guideOverviewText:'See statistics, results and shortcuts to your account and personal catalog.',
+ guideCatalogTitle:'Catalog',guideCatalogText:'Import, preview and manage the master catalog; download a template before importing.',
+ guideRunTitle:'Run matching',guideRunText:'Upload the file, map columns, choose a threshold and run the comparison.',
+ guideResultsTitle:'Results',guideResultsText:'Filter rows for review, check candidates and export Excel.',
+ guideMemoryTitle:'Memory',guideMemoryText:'Look up confirmed pairs, search or back up confirmation memory.',
+ guideLookupTitle:'Marketplace lookup',guideLookupText:'Review product names in a list and consult marketplace links.',
+ guideAutofillTitle:'Fill codes from source',guideAutofillText:'Suggest or fill codes in the target file and check each result before export.',
+ guideStockTitle:'Negative stock forecast',guideStockText:'Compare opening stock, purchases and sales to find negative closing stock.',
+ guideAccountTitle:'Account',guideAccountText:'Sign up, sign in, manage personal data and check sync status.',
+ guideSettingsTitle:'Settings',guideSettingsText:'Adjust theme, matching threshold, language and display options.',
+ guideImportTitle:'Before importing',guideImportText:'Prefer the template from the import page. Do not rename columns or merge cells; keep a backup before editing.',
+ guideReviewTitle:'Reading results',guideReviewText:'A high score is only a suggestion. Compare SKU, specification, capacity and unit; conflicting rows need manual review.',
+ guidePrivacyTitle:'Where is my data stored?',guidePrivacyText:'When signed out, memory stays in this browser on this device. After successful sign-in and sync, personal data can be used on other devices.',
+ guideOpenCatalog:'Open catalog →',guideReviewResults:'View results →',guideOpenAccount:'Open account →'
+});
+Object.assign(I18N.de,{
+ calculatorName:'Rechner',calculatorSubtitle:'Schnell rechnen',calculatorOpen:'Rechner öffnen',calculatorClose:'Rechner schließen',calculatorHint:'Tasten oder Tastatur verwenden: Zahlen, + − × ÷, Enter und Backspace.',calculatorClear:'AC',
+ introEyebrow:'MATCHMÃ · EINSTIEG',introTitle:'Erste Schritte mit MatchMã',introLead:'Eine Schritt-für-Schritt-Einführung: Dateien vorbereiten, Abgleich starten, Ergebnisse prüfen und persönliche Daten speichern.',
+ introAudienceTitle:'Neu bei MatchMã?',introAudienceText:'Folgen Sie den Schritten. Jeder Button öffnet die passende Seite im Menü.',
+ introLearnTitle:'Die ersten 5 Schritte',introLearnText:'Diese Reihenfolge reduziert Spaltenfehler und versehentliche Bestätigungen.',introBeginnerBadge:'Für Einsteiger',
+ introStep1Title:'Stammkatalog laden',introStep1Text:'Wählen Sie Excel/CSV mit SKU oder Artikelcode, Produktname, Spezifikation und Einheit. Prüfen Sie die Kopfzeile in der Vorschau.',
+ introStep2Title:'Datei zum Abgleich laden',introStep2Text:'Verwenden Sie die Vorlage im Importbereich. Spaltennamen beibehalten und Merkmale nicht in einer Spalte vermischen.',
+ introStep3Title:'Spalten zuordnen',introStep3Text:'Name, Code, Spezifikation und Einheit zuordnen. Zuverlässige Quellcodes verbessern die Genauigkeit.',
+ introStep4Title:'Ergebnisse prüfen',introStep4Text:'Status, Ähnlichkeit und Warnungen prüfen. SKU, Spezifikation, Kapazität und Einheit vor der Bestätigung prüfen.',
+ introStep5Title:'Persönlichen Speicher sichern',introStep5Text:'Melden Sie sich an, um Bestätigungsspeicher und persönlichen Katalog geräteübergreifend zu synchronisieren.',
+ guideMenuTitle:'Menüübersicht',guideMenuText:'Wählen Sie eine Karte, um direkt zur Seite zu wechseln. Jedes Werkzeug bleibt auf seine Aufgabe spezialisiert.',guideOpen:'Seite öffnen ↗',
+ guideOverviewTitle:'Übersicht',guideOverviewText:'Statistiken, Ergebnisse und Schnellzugriffe auf Konto und persönlichen Katalog.',
+ guideCatalogTitle:'Katalog',guideCatalogText:'Stammkatalog importieren, anzeigen und verwalten; vor dem Import eine Vorlage laden.',
+ guideRunTitle:'Abgleich starten',guideRunText:'Datei laden, Spalten zuordnen, Schwelle wählen und Vergleich starten.',
+ guideResultsTitle:'Ergebnisse',guideResultsText:'Zeilen filtern, Kandidaten prüfen und Excel exportieren.',
+ guideMemoryTitle:'Speicher',guideMemoryText:'Bestätigte Paare suchen, prüfen oder den Bestätigungsspeicher sichern.',
+ guideLookupTitle:'Marktplatzsuche',guideLookupText:'Produktnamen prüfen und Marktplatzlinks öffnen.',
+ guideAutofillTitle:'Codes aus Quelldatei',guideAutofillText:'Codes in der Zieldatei vorschlagen oder ergänzen und vor dem Export prüfen.',
+ guideStockTitle:'Negativbestandsprognose',guideStockText:'Anfangsbestand, Zugänge und Verkäufe vergleichen, um negative Endbestände zu finden.',
+ guideAccountTitle:'Konto',guideAccountText:'Registrieren, anmelden, persönliche Daten verwalten und Synchronisierung prüfen.',
+ guideSettingsTitle:'Einstellungen',guideSettingsText:'Theme, Abgleichschwelle, Sprache und Anzeigeoptionen ändern.',
+ guideImportTitle:'Vor dem Import',guideImportText:'Nutzen Sie möglichst die Vorlage im Importbereich. Spalten nicht umbenennen oder Zellen verbinden; vorher sichern.',
+ guideReviewTitle:'Ergebnisse verstehen',guideReviewText:'Ein hoher Wert ist nur ein Hinweis. SKU, Spezifikation, Kapazität und Einheit vergleichen; Widersprüche manuell prüfen.',
+ guidePrivacyTitle:'Wo werden Daten gespeichert?',guidePrivacyText:'Abgemeldet bleibt der Speicher in diesem Browser. Nach erfolgreicher Anmeldung und Synchronisierung ist der persönliche Speicher auch auf anderen Geräten verfügbar.',
+ guideOpenCatalog:'Katalog öffnen →',guideReviewResults:'Ergebnisse ansehen →',guideOpenAccount:'Konto öffnen →'
+});
+Object.assign(I18N['zh-TW'],{
+ calculatorName:'計算機',calculatorSubtitle:'快速計算',calculatorOpen:'開啟計算機',calculatorClose:'關閉計算機',calculatorHint:'可按畫面按鍵或鍵盤數字、+ − × ÷、Enter 與 Backspace。',calculatorClear:'AC',
+ introEyebrow:'MATCHMÃ · 新手入門',introTitle:'MatchMã 新手指南',introLead:'逐步介紹如何準備檔案、執行比對、檢查結果並儲存個人資料。',
+ introAudienceTitle:'第一次使用 MatchMã？',introAudienceText:'依照下方順序操作。每個按鈕都會直接開啟對應的選單頁面。',
+ introLearnTitle:'第一次使用的 5 個步驟',introLearnText:'依序操作可減少欄位錯誤與誤確認。',introBeginnerBadge:'新手適用',
+ introStep1Title:'載入標準目錄',introStep1Text:'選擇含 SKU、商品代碼、名稱、規格和單位的 Excel/CSV，並先確認標題列。',
+ introStep2Title:'載入待比對檔案',introStep2Text:'使用匯入區提供的範本，保留欄名，不要把多個屬性混在一欄。',
+ introStep3Title:'對應並確認欄位',introStep3Text:'對應名稱、代碼、規格和單位；可靠的來源代碼有助提高準確度。',
+ introStep4Title:'檢查比對結果',introStep4Text:'檢查狀態、相似度和警示。確認前核對 SKU、規格、容量、單位和衝突屬性。',
+ introStep5Title:'儲存個人記憶',introStep5Text:'確認配對後登入，即可跨裝置同步確認記憶與個人目錄。',
+ guideMenuTitle:'選單導覽',guideMenuText:'選擇卡片即可前往對應頁面。每個工具都有獨立用途。',guideOpen:'開啟頁面 ↗',
+ guideOverviewTitle:'總覽',guideOverviewText:'查看統計、結果，以及帳戶與個人目錄的捷徑。',
+ guideCatalogTitle:'目錄',guideCatalogText:'匯入、預覽及管理標準目錄；匯入前先下載範本。',
+ guideRunTitle:'執行比對',guideRunText:'上傳檔案、對應欄位、選擇門檻並開始比對。',
+ guideResultsTitle:'結果',guideResultsText:'篩選需複查的列、核對候選項，再匯出 Excel。',
+ guideMemoryTitle:'記憶',guideMemoryText:'查詢已確認配對、搜尋或備份確認記憶。',
+ guideLookupTitle:'平台查詢',guideLookupText:'依清單檢查商品名稱並開啟市場平台連結。',
+ guideAutofillTitle:'從來源檔填入代碼',guideAutofillText:'為目標檔提供代碼建議；匯出前請先檢查。',
+ guideStockTitle:'負庫存預測',guideStockText:'比較期初庫存、入庫與銷售，找出期末負庫存 SKU。',
+ guideAccountTitle:'帳戶',guideAccountText:'註冊、登入、管理個人資料並檢查同步狀態。',
+ guideSettingsTitle:'設定',guideSettingsText:'調整主題、比對門檻、語言及顯示選項。',
+ guideImportTitle:'匯入前先檢查',guideImportText:'優先使用匯入頁提供的範本；不要更改欄名或合併儲存格，編輯前先備份。',
+ guideReviewTitle:'理解比對結果',guideReviewText:'高分只代表建議。請核對 SKU、規格、容量和單位；衝突資料需人工檢查。',
+ guidePrivacyTitle:'資料儲存在哪裡？',guidePrivacyText:'未登入時，記憶存在此裝置的瀏覽器。登入並成功同步後，可在其他裝置使用個人資料。',
+ guideOpenCatalog:'開啟目錄 →',guideReviewResults:'查看結果 →',guideOpenAccount:'開啟帳戶 →'
+});
+Object.assign(I18N['zh-CN'],{
+ calculatorName:'计算器',calculatorSubtitle:'需要时快速计算',calculatorOpen:'打开计算器',calculatorClose:'关闭计算器',calculatorHint:'可点击按钮，也可使用键盘数字、+ − × ÷、Enter 和 Backspace。',calculatorClear:'AC',
+ introEyebrow:'MATCHMÃ · 新手入门',introTitle:'MatchMã 新手指南',introLead:'逐步介绍如何准备文件、执行比对、检查结果并保存个人数据。',
+ introAudienceTitle:'第一次使用 MatchMã？',introAudienceText:'按照下方顺序操作。每个按钮都会直接打开对应的菜单页面。',
+ introLearnTitle:'第一次使用的 5 个步骤',introLearnText:'按顺序操作可减少字段错误和误确认。',introBeginnerBadge:'新手适用',
+ introStep1Title:'加载标准目录',introStep1Text:'选择含 SKU、商品代码、名称、规格和单位的 Excel/CSV，并先确认标题行。',
+ introStep2Title:'加载待比对文件',introStep2Text:'使用导入区域提供的模板，保留列名，不要把多个属性混在一列。',
+ introStep3Title:'映射并确认字段',introStep3Text:'映射名称、代码、规格和单位；可靠的来源代码有助于提高准确度。',
+ introStep4Title:'检查比对结果',introStep4Text:'检查状态、相似度和警告。确认前核对 SKU、规格、容量、单位和冲突属性。',
+ introStep5Title:'保存个人记忆',introStep5Text:'确认配对后登录，即可跨设备同步确认记忆与个人目录。',
+ guideMenuTitle:'菜单导航',guideMenuText:'选择卡片即可前往对应页面。每个工具都有独立用途。',guideOpen:'打开页面 ↗',
+ guideOverviewTitle:'总览',guideOverviewText:'查看统计、结果，以及账户与个人目录的快捷入口。',
+ guideCatalogTitle:'目录',guideCatalogText:'导入、预览和管理标准目录；导入前先下载模板。',
+ guideRunTitle:'执行比对',guideRunText:'上传文件、映射字段、选择阈值并开始比对。',
+ guideResultsTitle:'结果',guideResultsText:'筛选需复查的行、核对候选项，再导出 Excel。',
+ guideMemoryTitle:'记忆',guideMemoryText:'查询已确认配对、搜索或备份确认记忆。',
+ guideLookupTitle:'平台查询',guideLookupText:'按清单检查商品名称并打开市场平台链接。',
+ guideAutofillTitle:'从源文件填写代码',guideAutofillText:'为目标文件提供代码建议；导出前请先检查。',
+ guideStockTitle:'负库存预测',guideStockText:'比较期初库存、入库和销售，找出期末负库存 SKU。',
+ guideAccountTitle:'账户',guideAccountText:'注册、登录、管理个人数据并检查同步状态。',
+ guideSettingsTitle:'设置',guideSettingsText:'调整主题、比对阈值、语言和显示选项。',
+ guideImportTitle:'导入前先检查',guideImportText:'优先使用导入页提供的模板；不要改列名或合并单元格，编辑前先备份。',
+ guideReviewTitle:'理解比对结果',guideReviewText:'高分只代表建议。请核对 SKU、规格、容量和单位；冲突数据需人工检查。',
+ guidePrivacyTitle:'数据保存在哪里？',guidePrivacyText:'未登录时，记忆保存在本设备的浏览器。登录并成功同步后，可在其他设备使用个人数据。',
+ guideOpenCatalog:'打开目录 →',guideReviewResults:'查看结果 →',guideOpenAccount:'打开账户 →'
+});
 function tr(k){return (I18N[lang]&&I18N[lang][k])||I18N.vi[k]||k}
 function updatePageBreadcrumb(){const active=document.querySelector('.page.active');const page=active?active.id.replace(/^page-/,''):'overview';const map={overview:'navOverview',catalog:'navCatalog',run:'navRun',results:'navResults',memory:'navMemory',platforms:'navPlatforms',autofill:'navAutoFill',stockforecast:'navStockForecast',account:'navAccount',settings:'navSettings',intro:'navIntro'};const el=$('currentPageLabel');if(el)el.textContent=tr(map[page]||'navOverview')}
 function translate(){document.documentElement.lang=lang;updatePageBreadcrumb();document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(tr(k))el.textContent=tr(k)});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.getAttribute('data-i18n-placeholder'))});updateThresholdLabels();updateStats();if(out.length)renderResults();if(masterRows.length)renderMasterPreview();if($('forecastRunInfo'))$('forecastRunInfo').textContent=stockForecastBuilt?tr('forecastRunDone').replace('{count}',stockForecastResults.length):tr('forecastRunHelp');if(typeof renderStockForecast==='function'&&stockForecastBuilt)renderStockForecast()}
 function setLanguage(value){lang=['vi','en','de','zh-TW','zh-CN'].includes(value)?value:'vi';$('language').value=lang;$('quickLang').value=lang;document.documentElement.lang=lang;try{localStorage.setItem('matchma-language',lang)}catch(e){}translate()}
 let fontScale=1;
-function setFontScale(value){fontScale=Math.min(1.25,Math.max(.85,Math.round(value*20)/20));document.documentElement.style.setProperty('--font-scale',String(fontScale));['fontDown','fontReset','fontUp'].forEach(id=>$(id).setAttribute('aria-pressed','false'));$('fontReset').setAttribute('aria-pressed',fontScale===1?'true':'false');$('fontDown').setAttribute('aria-pressed',fontScale<=.85?'true':'false');$('fontUp').setAttribute('aria-pressed',fontScale>=1.25?'true':'false');try{localStorage.setItem('matchma-font-scale',String(fontScale))}catch(e){}}
+function setFontScale(value){fontScale=Math.min(1.25,Math.max(.85,Math.round(value*20)/20));document.documentElement.style.setProperty('--font-scale',String(fontScale));document.body.dataset.fontScale=String(fontScale);['fontDown','fontReset','fontUp'].forEach(id=>$(id).setAttribute('aria-pressed','false'));$('fontReset').setAttribute('aria-pressed',fontScale===1?'true':'false');$('fontDown').setAttribute('aria-pressed',fontScale<=.85?'true':'false');$('fontUp').setAttribute('aria-pressed',fontScale>=1.25?'true':'false');try{localStorage.setItem('matchma-font-scale',String(fontScale))}catch(e){}}
 $('fontDown').onclick=()=>setFontScale(fontScale-.05);$('fontReset').onclick=()=>setFontScale(1);$('fontUp').onclick=()=>setFontScale(fontScale+.05);
 try{const savedScale=Number(localStorage.getItem('matchma-font-scale'));if(savedScale>=.85&&savedScale<=1.25)fontScale=savedScale}catch(e){}
-document.documentElement.style.setProperty('--font-scale',String(fontScale));
+document.documentElement.style.setProperty('--font-scale',String(fontScale));document.body.dataset.fontScale=String(fontScale);
 function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();const groups=[...document.querySelectorAll('.nav-folder')];const targetGroup=groups.find(g=>g.querySelector('.navbtn[data-page="'+page+'"]'));if(targetGroup&&!targetGroup.open)targetGroup.open=true;if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 document.querySelectorAll('.nav-folder[data-nav-group]').forEach(group=>{
@@ -2293,5 +2642,5 @@ $('useRememberedName').addEventListener('click',()=>{if(!savedMemory.length){ale
 updateThresholdLabels();let preferredLang='vi';try{preferredLang=localStorage.getItem('matchma-language')||'vi'}catch(e){}setLanguage(preferredLang);updateCanRun();updateStats();
 initAccount();renderMemoryPage();
 ['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
-document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initFunWidget();
+document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initFunWidget();initCalculatorWidget();
 </script></body></html>
