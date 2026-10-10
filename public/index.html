@@ -362,7 +362,7 @@ body[data-theme="vampire"] .overview-account-pill.is-online{background:#243a31;c
 .sidebar-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ui-accent,#3c9bc0);background:var(--ui-soft,#eaf8fd);color:var(--ui-accent,#3c9bc0);font-weight:900;font-size:17px}
 .sidebar-account-copy{display:grid;gap:2px;min-width:0;flex:1}.sidebar-account-copy strong{font-size:13px;font-weight:900}.sidebar-account-copy small{font-size:10px;overflow-wrap:anywhere;color:var(--muted)}.sidebar-account-arrow{font-weight:900}
 body[data-theme] .sectionhead h2,body[data-theme] .hero h2{font-weight:900!important;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--ui-accent,#3c9bc0);text-shadow:0 1px 0 var(--ui-surface,#fff)}
-body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=5");filter:none}
+body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=6");filter:none}
 body[data-theme] .upload .bigicon{font-size:0!important;display:grid!important;place-items:center;width:58px;height:46px;margin:0 auto 8px!important;line-height:1}
 body[data-theme] .upload .bigicon::before{content:"";display:block;width:56px;height:42px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 48'%3E%3Cpath fill='%232F9BC5' d='M4 8a3 3 0 0 1 3-3h16l6 6h28a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='%238DE0F4' d='M4 18h56v21a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='none' stroke='%231F6587' stroke-width='2' d='M24 25h16m-8-8v16m-5-5 5 5 5-5'/%3E%3C/svg%3E")}
 body[data-theme="pink"] .upload .bigicon::before{filter:hue-rotate(300deg) saturate(.8)}
@@ -645,70 +645,191 @@ body[data-theme="vampire"] .sidebar{background:#f8f0fa!important;border-color:#6
 @media(max-width:700px){header{margin:8px 8px 11px;padding:10px 12px;gap:8px}.logo{width:43px!important;height:54px!important;flex-basis:43px!important}.brand-copy .subbrand{font-size:11px}.brand-copy .subbrand #currentPageLabel{font-size:12px}.quick-settings>summary{width:42px;height:42px;padding:8px;gap:0;font-size:0}.quick-settings-wheel{font-size:16px}.quick-settings-chevron{font-size:12px}.quick-settings-menu{right:0!important;width:min(330px,calc(100vw - 22px))!important;max-height:calc(100dvh - 88px)}.shell{padding:0 10px 25px}.hero,.panel{padding:17px;border-radius:17px}.overview-analytics{grid-template-columns:1fr}.chart-card:last-child{grid-column:auto}.overview-account-grid{grid-template-columns:1fr 1fr!important}.quick-setting-row{grid-template-columns:83px minmax(0,1fr)!important}.stat b{font-size:25px}}
 @media(max-width:480px){.brand-copy .subbrand [data-i18n="tagline"]{display:none}.overview-account-grid{grid-template-columns:1fr!important}.overview-analytics{grid-template-columns:1fr}.headright{margin-left:auto}}
 @media(prefers-reduced-motion:reduce){.theme-drift,.cat-flower-particle{animation:none!important;transition:none!important}}
+/* Balanced pastel redesign, based on the original MatchMã dashboard reference */
+:root{--ink:#4b3c38;--muted:#8a7770;--line:#f0dfd2;--accent:#b7835d;--font-scale:1}
+body{color:#4b3c38;line-height:1.45;background:#fff5e8!important;font-size:calc(14px * var(--font-scale,1))}
+body[data-theme="ocean"]{background:radial-gradient(ellipse at 8% 0%,#d7f3f8 0,transparent 34%),radial-gradient(ellipse at 91% 10%,#d6e8fb 0,transparent 33%),linear-gradient(135deg,#f5fcf9,#fff5e8 55%,#eff6ff)!important}
+body[data-theme="retro"]{background:repeating-linear-gradient(0deg,#f6f2e9 0 35px,#eee8dd 36px),linear-gradient(110deg,#f8f4ec,#eee9e1)!important}
+body[data-theme="pink"]{background:radial-gradient(ellipse at 12% 0%,#ffe4ee 0,transparent 33%),radial-gradient(ellipse at 92% 4%,#ffdfce 0,transparent 33%),linear-gradient(135deg,#fff8f2,#fff0f6 57%,#fff7eb)!important}
+body[data-theme="vampire"]{background:radial-gradient(ellipse at 5% 0%,#4a203f 0,transparent 35%),radial-gradient(ellipse at 95% 10%,#392046 0,transparent 35%),linear-gradient(140deg,#160f1b,#241827 60%,#2b1220)!important}
+body[data-theme="cat"]{background:radial-gradient(ellipse at 8% 0%,#fff1d5 0,transparent 32%),radial-gradient(ellipse at 92% 9%,#ffe2cd 0,transparent 35%),linear-gradient(140deg,#fff8e8,#ffede2 57%,#fff5e9)!important}
+body:before{opacity:.045!important}
+#themeScene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;user-select:none}
+.theme-drift{filter:none!important;text-shadow:none!important}
+header,.shell,.foot{position:relative;z-index:1}
+header.app-header{max-width:1460px;margin:10px auto 11px;padding:7px 20px;min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:16px;overflow:visible;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;isolation:isolate;z-index:40!important}
+.brand{display:flex;align-items:center;gap:13px;min-width:0}
+.logo{width:54px!important;height:68px!important;flex:0 0 54px!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+.brand-logo-img{width:100%;height:100%;display:block;object-fit:contain;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none!important}
+.brand-copy h1{display:none!important}
+.brand-copy .subbrand{display:flex;align-items:center;gap:7px;flex-wrap:wrap;color:#7f6456!important;font-size:12px;font-weight:800;line-height:1.35}
+.brand-copy .subbrand [data-i18n="tagline"]{color:#987d6d!important;font-size:12px;font-weight:800}
+.crumb-sep{color:#c8ac98;font-size:16px}
+#currentPageLabel{color:#5a4135!important;font-size:13px;font-weight:950}
+.headright{display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap;min-width:0;margin-left:auto;position:relative;z-index:41}
+.local-pill{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;border:1px solid #f0ddcc;border-radius:99px;padding:8px 11px;color:#8c6c58;background:#fff9f0b8;font-size:10px;font-weight:750}
+.local-pill i{width:6px;height:6px;border-radius:50%;background:#70a88d;box-shadow:0 0 0 3px #dcefe4;display:inline-block}
+.toolbar-select{display:inline-flex;align-items:center;gap:5px;min-width:0;padding:5px 8px;border:1px solid #f0d9c8;border-radius:10px;background:#fffaf3d9;color:#8a6857;font-size:11px;font-weight:850}
+.toolbar-select>span{font-size:12px}
+.toolbar-select select{min-width:0;max-width:150px;border:0;outline:0;background:transparent;color:#6b5144;font-size:11px;font-weight:850;padding:3px 1px;cursor:pointer}
+.toolbar-font{display:flex;align-items:center;gap:3px;padding:4px;border:1px solid #efdcc9;border-radius:11px;background:#fff8efdc}
+.toolbar-font button{min-width:24px;padding:5px 6px;border:0;border-radius:7px;background:transparent;color:#8b6a56;font-size:11px;font-weight:900}
+.toolbar-font button[aria-pressed="true"]{background:#9fdde4;color:#346c75;box-shadow:0 1px 3px #3c859018}
+.shell.app-shell{max-width:1460px;grid-template-columns:178px minmax(0,1fr);gap:14px;padding:0 19px 36px}
+.sidebar{display:flex;flex-direction:column;align-self:start;position:sticky;top:10px;max-height:calc(100vh - 20px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:9px;background:#fff8eddd;border:1px solid #f4e4d3;border-radius:19px;box-shadow:0 7px 22px #a8785910;scrollbar-width:none}
+.sidebar::-webkit-scrollbar{display:none}
+.sidebar-topline{display:flex;align-items:center;justify-content:space-between;gap:5px;padding:2px 2px 8px}
+.sidebar-section-heading{font-size:9px;letter-spacing:.65px;font-weight:950;color:#b49a88;line-height:1.2}
+.sidebar-toggle{display:grid;place-items:center;width:24px;height:24px;flex:0 0 24px;border:1px solid #f0ddc9;border-radius:7px;background:#fff4e7;color:#9b785f;font-size:16px;font-weight:900;transition:transform .2s,background .2s}
+.sidebar-toggle:hover{background:#fbe6d2}
+.sidebar-account-shortcut{display:flex;align-items:center;gap:8px;width:100%;padding:7px 7px;margin:0 0 7px;background:#fff5e9;border:1px solid #f1decb;border-radius:12px;color:#694e40;box-shadow:none}
+.sidebar-avatar{display:grid;place-items:center;width:31px;height:31px;flex:0 0 31px;border-radius:50%;background:#f6e5d1;border:1px solid #e9d0b7;color:#8b6248;font-size:13px;font-weight:950}
+.sidebar-account-copy{display:grid;gap:1px;min-width:0;flex:1;text-align:left}
+.sidebar-account-copy strong{font-size:11px;font-weight:950;color:#6b4f40;white-space:nowrap}
+.sidebar-account-copy small{max-width:107px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#987f6e;font-size:9px;font-weight:700}
+.sidebar-account-arrow{font-size:11px;color:#ac8d76}
+.navbtn{display:flex;align-items:center;gap:8px;width:100%;min-width:0;padding:8px 7px!important;margin:2px 0!important;border:1px solid transparent!important;border-radius:10px!important;background:transparent!important;color:#6c5043!important;font-size:11px!important;font-weight:850!important;line-height:1.32;text-align:left;text-shadow:none!important;box-shadow:none!important;transition:background .16s,border-color .16s}
+.navbtn:hover{background:#fff1e2!important;border-color:#f3dfca!important}
+.navbtn.active{background:#f6e0cb!important;border-color:#ebcdb1!important;color:#68452f!important;box-shadow:inset 3px 0 #b7825e!important}
+.navicon{display:inline-flex!important;align-items:center;justify-content:center;width:23px!important;flex:0 0 23px!important;height:auto!important;color:inherit!important;font-size:15px!important;line-height:1!important;filter:none!important}
+.navicon::before{content:none!important;display:none!important}
+.navtitle{padding:7px 5px 4px;color:#b49a88;font-size:9px;letter-spacing:.8px;font-weight:950}
+.nav-folder{position:relative;margin:3px 0 5px;padding:3px 4px;background:transparent;border:0;border-radius:11px;box-shadow:none}
+.nav-folder::before{display:none!important}
+.navfolder-title,.nav-folder>summary.navfolder-title{display:flex;align-items:center;gap:7px;min-height:32px;padding:7px 6px;color:#795a49;font-size:10px;font-weight:950;letter-spacing:.1px;line-height:1.25;border-radius:9px;background:#fff0df80}
+.nav-folder>summary.navfolder-title{list-style:none;cursor:pointer;user-select:none}
+.nav-folder>summary.navfolder-title::-webkit-details-marker{display:none}
+.nav-folder>summary.navfolder-title::marker{display:none;content:""}
+.nav-folder>summary.navfolder-title:hover{background:#ffebd6}
+.nav-folder-items{display:grid;gap:1px;padding:3px 0 1px 7px}
+.nav-folder-items .navbtn{font-size:10.5px!important;padding:7px 6px!important}
+.folder-chevron{margin-left:auto;color:#b38d72;font-size:13px;font-weight:900;transition:transform .16s}
+.nav-folder[open]>.navfolder-title .folder-chevron{transform:rotate(180deg)}
+.sidebar-bottom{margin-top:auto;padding-top:9px;border-top:1px solid #efddca}
+.sidebar-bottom>.navbtn{margin-top:0!important}
+.sidebar-help{margin:7px 0 0;background:#fff3e4a8;border:1px solid #f1ddc8;border-radius:10px}
+.sidebar-help>summary{list-style:none;display:flex;align-items:center;gap:7px;padding:8px;cursor:pointer;color:#80614f;font-size:10px;font-weight:850}
+.sidebar-help>summary::-webkit-details-marker{display:none}
+.sidebar-help-content{padding:0 8px 8px}
+.sidebar-help-content p{color:#8b7466!important;font-size:10px!important;line-height:1.4}
+.main{min-width:0;padding:8px;background:#fffaf4b8;border:1px solid #f2e2d4;border-radius:21px;box-shadow:0 8px 25px #b3866820}
+.page{min-width:0}
+.hero,.panel{background:#fffdf8e8;border:1px solid #f2e2d3;border-radius:17px;box-shadow:0 5px 15px #a97e5b0a}
+.hero{padding:21px 23px;background:linear-gradient(115deg,#fffaf2,#fff8ee 72%,#fff4e8)!important;margin-bottom:10px}
+body[data-theme="ocean"] .hero{background:linear-gradient(115deg,#f8fffe,#edfafd 80%)!important;border-color:#d9edf0}
+body[data-theme="retro"] .hero{background:linear-gradient(115deg,#fffdf6,#f2efe7 80%)!important;border-color:#e4dfd2}
+body[data-theme="pink"] .hero{background:linear-gradient(115deg,#fffaf9,#fff0f5 80%)!important;border-color:#f3dce4}
+body[data-theme="vampire"] .hero{background:linear-gradient(115deg,#24162d,#332039 80%)!important;border-color:#5b4065}
+body[data-theme="cat"] .hero{background:linear-gradient(115deg,#fffcf3,#fff0df 80%)!important;border-color:#eedcc6}
+.hero h2{margin:0 0 8px;font-size:clamp(22px,2.5vw,30px)!important;line-height:1.2;font-weight:950!important;letter-spacing:-.4px!important;text-decoration:none!important;color:#654638!important}
+body[data-theme="vampire"] .hero h2{color:#fff1fa!important}
+.hero .eyebrow{font-size:9px;letter-spacing:.8px;color:#b28566;font-weight:950;margin-bottom:7px}
+.hero p,.sectionhead p{color:#8a7568;font-size:11px;line-height:1.45}
+.hero .actions{margin-top:12px}
+.hero .btn{font-size:11px;padding:8px 12px;border-radius:9px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:9px 0 11px}
+.stat{min-width:0;min-height:59px;padding:11px 12px;background:#fffdf8ed;border:1px solid #f0e1d2;border-radius:13px;box-shadow:0 3px 10px #a5795709}
+.stat small{display:block;color:#998477!important;font-size:9px!important;font-weight:750;margin-bottom:4px}
+.stat b{display:block;font-size:20px;font-weight:950;line-height:1.1;color:#5b463a}
+.stat.good b{color:#438a72}
+.stat.review b{color:#b08a4e}
+.overview-account-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch;gap:11px}
+.overview-account-card,.overview-memory-card{min-width:0;height:100%;padding:15px}
+.overview-card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.overview-card-head h2{font-size:13px!important;margin:0;color:#684e40;font-weight:950!important;text-decoration:none!important}
+.overview-account-pill,.overview-memory-count{padding:4px 8px;border-radius:99px;background:#f9e9d8;color:#97795f;font-size:9px;font-weight:900}
+.overview-account-pill.is-online{background:#dceee2;color:#3c7d61}
+.overview-account-identity{display:flex;align-items:center;gap:10px;min-width:0}
+.overview-avatar{display:grid;place-items:center;width:36px;height:36px;flex:0 0 36px;border-radius:11px;background:#f5e6d4;color:#8b6b52;font-size:17px}
+.overview-account-identity strong{font-size:11px;color:#614b3f;font-weight:950}
+.overview-account-identity p{font-size:10px!important;color:#9a8476!important;line-height:1.4;margin:2px 0 0!important}
+.overview-memory-count b{font-size:13px}
+.overview-memory-preview{display:grid;gap:6px;margin-top:7px}
+.overview-memory-preview.empty{font-size:10px;color:#a08c7c;text-align:center;padding:10px 0}
+.overview-memory-row{padding:7px 8px;border:1px solid #f0e3d6;border-radius:9px;background:#fffaf3;display:grid;gap:2px}
+.overview-memory-row strong{font-size:10px;line-height:1.3;overflow-wrap:anywhere}
+.overview-memory-row span{font-size:9px;color:#9a8575}
+.overview-analytics-wrap{margin:11px 0}
+.overview-analytics-wrap>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 12px;background:#fff4e6;border:1px solid #f0ddca;border-radius:12px;color:#7d5c49;font-size:11px;font-weight:900}
+.overview-analytics-wrap>summary::-webkit-details-marker{display:none}
+.analytics-summary-icon{width:23px;height:23px;border-radius:7px;display:grid;place-items:center;background:#f1dec9;color:#976b4f;font-size:16px}
+.analytics-summary-note{margin-left:auto;color:#af9581;font-size:9px;font-weight:700}
+.analytics-chevron{color:#a58269;transition:transform .16s}
+.overview-analytics-wrap[open] .analytics-chevron{transform:rotate(180deg)}
+.overview-analytics{margin:10px 0 0;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.chart-card{padding:14px;border-radius:14px}
+.chart-heading h2{font-size:12px!important}
+.chart-heading p{font-size:10px!important;color:#907c6f}
+.chart-view{min-height:160px}
+.chart-view svg{max-width:100%}
+.chart-legend-item{font-size:10px}
+.upload{border-color:#ecd8c3;background:#fffaf3;color:#6e5242}
+.upload:hover{border-color:#d7b18e;background:#fff3e4}
+.field label{color:#755a49;font-size:11px;font-weight:850}
+input,select,textarea{color:#5c463a}
+.search{border:1px solid #eadbcd;background:#fffdf8;color:#5c463a}
+th{background:#f8ebdc;color:#775943;font-size:11px;font-weight:900}
+td{color:#634f42;font-size:11px}
+.btn{font-weight:850;border-radius:9px}
+.btn.alt{background:#f4e3d0;color:#77543e}
+.template-row{color:#8c7465;border-color:#eedcc9;background:#fff6ea;border-radius:10px}
+.overview-analytics-wrap .chart-card{background:#fffdf9}
+body[data-theme="vampire"] .main{background:#26192fbc;border-color:#54375e}
+body[data-theme="vampire"] .panel{background:#fff8fd}
+body[data-theme="vampire"] .sidebar{background:#fbf3fa}
+body[data-theme="ocean"] .main{background:#f4fcfcbb;border-color:#d8edf1}
+body[data-theme="retro"] .main{background:#fffdf5c4;border-color:#e4dfd3}
+body[data-theme="pink"] .main{background:#fff6facc;border-color:#f2dce6}
+body[data-theme="cat"] .main{background:#fff9efc4;border-color:#f0ddc7}
+@media(min-width:1250px){.shell.app-shell{grid-template-columns:205px minmax(0,1fr);gap:16px;padding-left:24px;padding-right:24px}}
+@media(min-width:951px) and (max-width:1120px){.shell.app-shell{grid-template-columns:163px minmax(0,1fr);gap:12px;padding-left:16px;padding-right:16px}.sidebar{padding:7px}.navbtn{padding:7px 5px!important;font-size:10px!important}.sidebar-account-copy small{max-width:87px}.local-pill{font-size:9px;padding:7px 9px}}
+@media(max-width:950px){header.app-header{margin:8px 11px;padding:8px;gap:8px;flex-wrap:wrap}.headright{flex:1 1 100%;justify-content:flex-end}.local-pill{margin-right:auto}.shell.app-shell{grid-template-columns:1fr;padding:0 11px 25px;gap:10px}.sidebar{position:relative;top:auto;max-height:none;overflow:visible}.main{padding:6px}.sidebar-bottom{margin-top:6px}.nav-folder-items{display:grid}}
+@media(max-width:650px){header.app-header{padding:8px 7px}.brand{gap:7px}.logo{width:42px!important;height:53px!important;flex-basis:42px!important}.brand-copy .subbrand{font-size:10px}.brand-copy .subbrand [data-i18n="tagline"]{display:none}.headright{justify-content:flex-start;gap:5px}.local-pill{font-size:9px;padding:7px 8px;white-space:normal}.toolbar-select{padding:5px 6px}.toolbar-select select{max-width:118px;font-size:10px}.toolbar-font button{min-width:22px;padding:5px}.shell.app-shell{padding:0 8px 22px}.hero{padding:16px}.overview-account-grid{grid-template-columns:1fr!important}.stats{gap:5px}.stat{padding:9px 8px}.stat small{font-size:8px!important}.stat b{font-size:17px}.analytics-summary-note{display:none}}
+@media(min-width:951px){.shell.sidebar-collapsed{grid-template-columns:62px minmax(0,1fr)!important}.shell.sidebar-collapsed .sidebar{padding:7px}.shell.sidebar-collapsed .sidebar-section-heading,.shell.sidebar-collapsed .sidebar-account-copy,.shell.sidebar-collapsed .sidebar-account-arrow,.shell.sidebar-collapsed .navbtn>span:not(.navicon),.shell.sidebar-collapsed .navfolder-title>span:not(.navicon),.shell.sidebar-collapsed .sidebar-help,.shell.sidebar-collapsed .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}.shell.sidebar-collapsed .sidebar-account-shortcut{justify-content:center;padding:6px 2px}.shell.sidebar-collapsed .sidebar-avatar{width:32px;height:32px;flex-basis:32px}.shell.sidebar-collapsed .sidebar-topline{justify-content:center}.shell.sidebar-collapsed .sidebar-toggle{transform:rotate(180deg)}.shell.sidebar-collapsed .navbtn{justify-content:center;padding:9px 3px!important}.shell.sidebar-collapsed .nav-folder{padding:1px}.shell.sidebar-collapsed .navfolder-title{justify-content:center}.shell.sidebar-collapsed .folder-chevron{display:none!important}.shell.sidebar-collapsed .nav-folder-items{padding-left:0}.shell.sidebar-collapsed .navicon{width:26px!important;flex-basis:26px!important}.shell.sidebar-collapsed .navtitle{display:none}}
+@media(max-width:950px){.sidebar-toggle{display:none}}
+@media(prefers-reduced-motion:reduce){.theme-drift,.cat-flower-particle{animation:none!important;transition:none!important}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
-<header>
+<header class="app-header">
  <div class="brand">
-  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=5" alt="Logo MatchMã: mèo đội nón lá cầm kiếm"></div>
+  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=6" alt="Logo MatchMã mèo đội nón lá cầm kiếm"></div>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
    <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
   </div>
  </div>
  <div class="headright">
-  <details class="quick-settings" id="quickSettings">
-   <summary><span class="quick-settings-wheel">⚙</span><span data-i18n="quickSettings">Cài đặt nhanh</span><span class="quick-settings-chevron">⌄</span></summary>
-   <div class="quick-settings-menu">
-    <div class="quick-setting-row"><label for="themeSelect" data-i18n="themeLabel">Giao diện</label><select id="themeSelect" aria-label="Chọn chủ đề màu"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng pastel</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐈 Mèo</option></select></div>
-    <div class="quick-setting-row"><label data-i18n="fontSizeTitle">Cỡ chữ</label><div class="font-tools" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div></div>
-    <div class="quick-setting-row"><label for="quickLang" data-i18n="languageLabel">Ngôn ngữ</label><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></div>
-    <p class="quick-settings-note" data-i18n="privateNote">Xử lý file ngay trên trình duyệt</p>
-    <button type="button" class="btn alt quick-settings-full" data-goto="settings" data-i18n="quickSettingsFull">Tất cả cài đặt →</button>
-   </div>
-  </details>
+  <span class="local-pill"><i></i><span data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span></span>
+  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐈 Mèo</option></select></label>
+  <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
+  <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
  </div>
 </header>
-<div class="shell"><aside class="sidebar">
- <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản">
+<div class="shell"><aside class="sidebar" id="appSidebar">
+ <div class="sidebar-topline"><span class="sidebar-section-heading" data-i18n="navSectionTitle">KHÔNG GIAN LÀM VIỆC</span><button type="button" id="sidebarCollapseToggle" class="sidebar-toggle" title="Thu gọn thanh menu" aria-label="Thu gọn thanh menu" aria-expanded="true">‹</button></div>
+ <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản" title="Tài khoản">
   <span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span>
  </button>
- <div class="navtitle" data-i18n="navSectionTitle">ĐIỀU HƯỚNG</div>
- <details class="nav-folder" open>
-  <summary class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupMain">CHÍNH</span><span class="folder-chevron">⌄</span></summary>
+ <button class="navbtn" data-page="overview" title="Tổng quan"><span class="navicon">🏠</span><span data-i18n="navOverview">Tổng quan</span></button>
+ <details class="nav-folder" data-nav-group="matching" open>
+  <summary class="navfolder-title"><span class="navicon">🗂️</span><span data-i18n="navGroupMatch">ĐỐI CHIẾU SẢN PHẨM</span><span class="folder-chevron">⌄</span></summary>
   <div class="nav-folder-items">
-   <button class="navbtn active" data-page="overview"><span class="navicon">◫</span><span data-i18n="navOverview">Tổng quan</span></button>
-   <button class="navbtn" data-page="catalog"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục</span></button>
-   <button class="navbtn" data-page="run"><span class="navicon">⌁</span><span data-i18n="navRun">Chạy rà soát</span></button>
-   <button class="navbtn" data-page="results"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả</span></button>
+   <button class="navbtn" data-page="catalog" title="Danh mục chuẩn"><span class="navicon">📚</span><span data-i18n="navCatalog">Danh mục chuẩn</span></button>
+   <button class="navbtn" data-page="run" title="Rà soát dữ liệu"><span class="navicon">🔎</span><span data-i18n="navRun">Rà soát dữ liệu</span></button>
+   <button class="navbtn" data-page="results" title="Kết quả đối chiếu"><span class="navicon">📋</span><span data-i18n="navResults">Kết quả đối chiếu</span></button>
   </div>
  </details>
- <details class="nav-folder">
-  <summary class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupTools">CÔNG CỤ</span><span class="folder-chevron">⌄</span></summary>
-  <div class="nav-folder-items">
-   <button class="navbtn" data-page="memory"><span class="navicon">▣</span><span data-i18n="navMemory">Bộ nhớ</span></button>
-   <button class="navbtn" data-page="platforms"><span class="navicon">⌕</span><span data-i18n="navPlatforms">Tra cứu sàn</span></button>
-   <button class="navbtn" data-page="autofill"><span class="navicon">⇧</span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
-   <button class="navbtn" data-page="stockforecast"><span class="navicon">▥</span><span data-i18n="navStockForecast">Dự báo âm kho</span></button>
-  </div>
- </details>
- <details class="nav-folder nav-folder-system">
-  <summary class="navfolder-title"><span class="navfolder-tab-icon">▰</span><span data-i18n="navGroupSystem">CÁ NHÂN & HỆ THỐNG</span><span class="folder-chevron">⌄</span></summary>
-  <div class="nav-folder-items">
-   <button class="navbtn" data-page="settings"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button>
-  </div>
- </details>
- <details class="sidebar-help">
-  <summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary>
-  <div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div>
- </details>
+ <button class="navbtn" data-page="platforms" title="Kiểm tra trên sàn"><span class="navicon">🛍️</span><span data-i18n="navPlatforms">Kiểm tra trên sàn</span></button>
+ <button class="navbtn" data-page="autofill" title="Điền mã từ file gốc"><span class="navicon">🧩</span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
+ <button class="navbtn" data-page="stockforecast" title="Dự báo tồn kho"><span class="navicon">📦</span><span data-i18n="navStockForecast">Dự báo tồn kho</span></button>
+ <button class="navbtn" data-page="memory" title="Bộ nhớ xác nhận"><span class="navicon">🗃️</span><span data-i18n="navMemory">Bộ nhớ xác nhận</span></button>
+ <div class="sidebar-bottom">
+  <button class="navbtn" data-page="settings" title="Cài đặt"><span class="navicon">⚙️</span><span data-i18n="navSettings">Cài đặt</span></button>
+  <details class="sidebar-help"><summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary><div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div></details>
+ </div>
 </aside>
 <main class="main">
 <section class="page active" id="page-overview"><div class="hero"><div class="eyebrow" data-i18n="eyebrow">PRODUCT MATCHING WORKSPACE</div><h2 data-i18n="heroTitle">So khớp tên khác nhau — cùng một sản phẩm?</h2><p data-i18n="heroDesc">Ví dụ “sữa vinamil CO DUONG 1l” có thể gợi ý “SUA VNM 1L”. Hệ thống chuẩn hóa dấu, tên thương hiệu viết tắt và dung tích; bạn chọn ngưỡng phần trăm được xem là OK trong Cài đặt.</p><div class="actions"><button class="btn" data-goto="catalog" data-i18n="startCatalog">Bắt đầu với danh mục →</button><button class="btn alt" data-goto="settings" data-i18n="openSettings">Cài đặt ngưỡng OK</button></div></div>
 <div class="stats"><div class="stat"><small data-i18n="statCatalog">Dòng danh mục chuẩn</small><b id="overviewMaster">0</b></div><div class="stat"><small data-i18n="statCheck">Dòng cần soát</small><b id="overviewCheck">0</b></div><div class="stat good"><small data-i18n="statOk">Được tính là OK</small><b id="overviewGood">0</b></div><div class="stat review"><small data-i18n="statReview">Cần kiểm tra</small><b id="overviewReview">0</b></div></div>
-<div class="overview-analytics">
- <div class="panel chart-card"><div class="chart-heading"><h2 data-i18n="chartStatusTitle">Phân bố kết quả</h2><p data-i18n="chartStatusDesc">Tỷ lệ OK, cần rà soát và không khớp</p></div><div id="overviewDonutChart" class="chart-view"><div class="chart-empty">Chạy rà soát để xem thống kê.</div></div><div id="overviewDonutLegend" class="chart-legend"></div></div>
- <div class="panel chart-card"><div class="chart-heading"><h2 data-i18n="chartVolumeTitle">Số lượng theo trạng thái</h2><p data-i18n="chartVolumeDesc">So sánh số dòng kết quả trong từng nhóm</p></div><div id="overviewBarChart" class="chart-view"><div class="chart-empty">Chưa có dữ liệu.</div></div></div>
- <div class="panel chart-card"><div class="chart-heading"><h2 data-i18n="chartScoreTitle">Đường điểm tương đồng</h2><p data-i18n="chartScoreDesc">Điểm tên hàng theo thứ tự dòng trong file</p></div><div id="overviewLineChart" class="chart-view"><div class="chart-empty">Chưa có dữ liệu.</div></div></div>
-</div>
 <div class="grid overview-account-grid">
  <div class="panel overview-account-card">
   <div class="overview-card-head"><h2>♙ Tài khoản của tôi</h2><span id="overviewAccountPill" class="overview-account-pill">Chưa đăng nhập</span></div>
@@ -722,6 +843,11 @@ body[data-theme="vampire"] .sidebar{background:#f8f0fa!important;border-color:#6
   <div class="actions"><button class="btn alt" data-goto="memory">Quản lý danh mục đã lưu →</button></div>
  </div>
 </div>
+<details class="overview-analytics-wrap"><summary><span class="analytics-summary-icon">⌁</span><span data-i18n="analyticsAdvanced">Thống kê & biểu đồ chi tiết</span><span class="analytics-summary-note" data-i18n="analyticsOpenHint">Mở khi cần phân tích sâu</span><span class="analytics-chevron">⌄</span></summary><div class="overview-analytics">
+ <div class="panel chart-card"><div class="chart-heading"><h2 data-i18n="chartStatusTitle">Phân bố kết quả</h2><p data-i18n="chartStatusDesc">Tỷ lệ OK, cần rà soát và không khớp</p></div><div id="overviewDonutChart" class="chart-view"><div class="chart-empty">Chạy rà soát để xem thống kê.</div></div><div id="overviewDonutLegend" class="chart-legend"></div></div>
+ <div class="panel chart-card"><div class="chart-heading"><h2 data-i18n="chartVolumeTitle">Số lượng theo trạng thái</h2><p data-i18n="chartVolumeDesc">So sánh số dòng kết quả trong từng nhóm</p></div><div id="overviewBarChart" class="chart-view"><div class="chart-empty">Chưa có dữ liệu.</div></div></div>
+ <div class="panel chart-card"><div class="chart-heading"><h2 data-i18n="chartScoreTitle">Đường điểm tương đồng</h2><p data-i18n="chartScoreDesc">Điểm tên hàng theo thứ tự dòng trong file</p></div><div id="overviewLineChart" class="chart-view"><div class="chart-empty">Chưa có dữ liệu.</div></div></div>
+</div></details>
 <div class="grid"><div class="panel"><h2 data-i18n="flowTitle">Quy trình rà soát</h2><p data-i18n="flowDesc">Nạp danh mục chuẩn → nạp dữ liệu cần soát → chọn cột → chạy → xuất Excel.</p><div class="actions"><button class="btn alt" data-goto="run" data-i18n="goRun">Đi tới Chạy rà soát</button><button class="btn alt" data-goto="results" data-i18n="goResults">Xem kết quả</button></div></div><div class="panel"><h2 data-i18n="ruleTitle">Quy tắc ghép an toàn</h2><p data-i18n="ruleDesc">Dòng chuẩn thiếu SKU/mã hàng luôn bị loại. “Có đường” và “không đường” là thuộc tính mâu thuẫn, cần xem lại kể cả điểm tên cao.</p><div class="rule"><span data-i18n="currentThreshold">Ngưỡng OK hiện tại:</span> <strong id="thresholdSummary">80%</strong></div></div></div></section>
 <section class="page" id="page-catalog"><div class="panel personal-catalog-panel"><div class="overview-card-head"><h2>🗂 Danh mục cá nhân</h2><span id="personalCatalogStatus" class="overview-account-pill">Chưa đồng bộ</span></div><p class="hint">Lưu bản danh mục sản phẩm riêng vào tài khoản để dùng lại trên các thiết bị.</p><div class="actions"><button class="btn" id="savePersonalCatalog" type="button">Lưu danh mục vào tài khoản</button><button class="btn alt" id="loadPersonalCatalog" type="button">Tải danh mục từ tài khoản</button></div><div id="personalCatalogMessage" class="hint" role="status">Đăng nhập để bật lưu trữ danh mục cá nhân trên đám mây.</div><div id="personalCatalogSummary" class="mini"><b>0</b><span>Sản phẩm trong danh mục đang tải</span></div></div><div class="sectionhead"><div><h2 data-i18n="catalogTitle">Danh mục chuẩn</h2><p data-i18n="catalogDesc">Tải file sản phẩm chuẩn. Chỉ các dòng có SKU/mã hàng được sử dụng để ghép.</p></div><span class="pill" data-i18n="excelCsv">Excel .xlsx / .xls / CSV</span></div><div class="grid"><div class="panel"><h2 data-i18n="uploadMaster">1. Tải danh mục chuẩn</h2><p data-i18n="masterDesc">Chứa mã hàng, tên sản phẩm và nếu có, quy cách.</p><label class="upload"><span class="bigicon">📚</span><strong data-i18n="pickMaster">Chọn file danh mục chuẩn</strong><input id="master" type="file" accept=".csv,.xlsx,.xls"></label><div id="masterInfo" class="hint" data-i18n="notLoaded">Chưa tải file.</div><div class="twostat"><div class="mini"><b id="masterCount">0</b><span data-i18n="totalRows">Tổng dòng đọc được</span></div><div class="mini"><b id="masterNoSku">0</b><span data-i18n="blankSku">Dòng thiếu SKU — bị loại</span></div></div><div class="actions"><button class="btn alt" id="sample" data-i18n="sample">Tải Excel mẫu ↓</button></div></div><div class="panel"><h2 data-i18n="masterColumns">2. Xác nhận cột danh mục</h2><p data-i18n="masterColumnsDesc">Sau khi tải file, xác nhận cột mã và tên hàng đúng.</p><div class="field"><label data-i18n="skuLabel">SKU / mã hàng chuẩn (bắt buộc)</label><select id="skuCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="masterNameLabel">Tên hàng trong danh mục</label><select id="nameCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="specLabel">Cột quy cách (không bắt buộc)</label><select id="specCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="masterUomLabel">Đơn vị tính trong danh mục</label><select id="unitCol" disabled><option value="">—</option></select><p class="hint" data-i18n="unitColumnHelp">Ví dụ: chai, lon, hộp, thùng, gói, kg, g, lít, ml.</p></div><div id="masterNote" class="hint" data-i18n="masterWait">Tải file để cấu hình cột.</div></div></div><div class="panel"><div class="sectionhead"><div><h2 data-i18n="previewMaster">Xem trước danh mục</h2><p data-i18n="previewDesc">Chỉ xem nhanh 20 dòng đầu để giữ trang nhẹ khi file lớn.</p></div></div><div id="masterPreview" class="empty" data-i18n="previewWait">Chưa có dữ liệu danh mục.</div></div></section>
 <section class="page" id="page-run"><div class="sectionhead"><div><h2 data-i18n="runTitle">Chạy rà soát</h2><p data-i18n="runDesc">Tải file cần kiểm tra, chọn cột tên sản phẩm rồi chạy đối chiếu.</p></div><span class="pill" id="thresholdRun">Ngưỡng OK: 80%</span></div><div class="grid"><div class="panel"><h2 data-i18n="uploadCheck">1. Tải file cần soát</h2><p data-i18n="checkDesc">Có thể dùng tên viết tắt, không dấu hoặc dung tích khác định dạng.</p><label class="upload"><span class="bigicon">🔎</span><strong data-i18n="pickCheck">Chọn file cần rà soát</strong><input id="check" type="file" accept=".csv,.xlsx,.xls"></label><div class="template-row"><span>File mẫu: tên hàng, SKU (không bắt buộc), quy cách, ĐVT</span><button class="btn alt sample-download" data-sample="check">Tải file mẫu ↓</button></div><div id="checkInfo" class="hint" data-i18n="notLoaded">Chưa tải file.</div><div class="mini"><b id="checkCount">0</b><span data-i18n="rowsToCheck">Dòng cần đối chiếu</span></div></div><div class="panel"><h2 data-i18n="mapColumns">2. Ghép cột dữ liệu</h2><p data-i18n="mapDesc">Kiểm tra cột tên hàng của file cần soát trước khi chạy.</p><div class="field"><label data-i18n="queryLabel">Tên sản phẩm trong file cần soát</label><select id="queryCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="querySkuLabel">Mã hàng trong file cần soát (nếu có)</label><select id="querySkuCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="querySpecLabel">Quy cách trong file cần soát (nếu có)</label><select id="querySpecCol" disabled><option value="">—</option></select></div><div class="field"><label data-i18n="queryUomLabel">Đơn vị tính trong file cần soát (nếu có)</label><select id="queryUomCol" disabled><option value="">—</option></select><p class="hint" data-i18n="unitMismatchHelp">Tên vẫn có thể ghép khi mã khác; hệ thống sẽ báo sai mã, đơn vị hoặc quy cách.</p></div><div class="field"><label data-i18n="thresholdLabel">Ngưỡng được tính OK</label><div class="thresholdvalue" id="thresholdInline">80%</div><p class="muted" data-i18n="thresholdHint">Có thể đổi trong Cài đặt. Kết quả dưới ngưỡng sẽ cần kiểm tra.</p></div><button class="btn" id="run" disabled data-i18n="runButton">▶ Chạy rà soát</button><div class="progressbox" id="progressBox"><span id="progressText">Đang chuẩn bị…</span><div class="bar"><div id="progressBar"></div></div></div></div></div><div class="panel"><h2 data-i18n="beforeRunTitle">Phân loại kết quả</h2><div class="grid3"><div class="mini"><b style="color:var(--green)" id="okRule">≥ 80%</b><span data-i18n="okRuleText">OK — đủ ngưỡng và không mâu thuẫn</span></div><div class="mini"><b style="color:var(--amber)" id="reviewRule">45–79%</b><span data-i18n="reviewRuleText">Rà soát — còn nghi ngờ hoặc thuộc tính xung đột</span></div><div class="mini"><b style="color:var(--red)" id="noneRule">&lt; 45%</b><span data-i18n="noneRuleText">Không khớp — không đủ tương đồng</span></div></div></div></section>
@@ -1374,6 +1500,13 @@ Object.assign(I18N.de,{navSectionTitle:'NAVIGATION',navGroupMain:'HAUPTBEREICH',
 Object.assign(I18N['zh-TW'],{navSectionTitle:'導覽',navGroupMain:'主要',navGroupTools:'工具',navGroupSystem:'個人與系統',navAutoFill:'從來源檔填入 SKU',navStockForecast:'月底負庫存預測',helpTitle:'說明與比對規則',helpDesc:'確認前請檢查 SKU、商品名稱、規格與單位欄位。',helpOpenSettings:'開啟設定 →',quickSettings:'快速設定',themeLabel:'主題',fontSizeTitle:'字體大小',themeOcean:'🌊 海洋藍',themeRetro:'◼ 復古黑白',themePink:'🌸 櫻花粉',themeVampire:'🦇 吸血鬼',themeCat:'🐈 貓咪',quickSettingsFull:'所有設定 →'});
 Object.assign(I18N['zh-CN'],{navSectionTitle:'导航',navGroupMain:'主要',navGroupTools:'工具',navGroupSystem:'个人与系统',navAutoFill:'从源文件填入 SKU',navStockForecast:'月末负库存预测',helpTitle:'帮助与比对规则',helpDesc:'确认前请检查 SKU、商品名称、规格和单位字段。',helpOpenSettings:'打开设置 →',quickSettings:'快速设置',themeLabel:'主题',fontSizeTitle:'字体大小',themeOcean:'🌊 海洋蓝',themeRetro:'◼ 复古黑白',themePink:'🌸 樱花粉',themeVampire:'🦇 吸血鬼',themeCat:'🐈 猫咪',quickSettingsFull:'所有设置 →'});
 
+
+Object.assign(I18N.vi,{navSectionTitle:'KHÔNG GIAN LÀM VIỆC',navGroupMatch:'ĐỐI CHIẾU SẢN PHẨM',navCatalog:'Danh mục chuẩn',navRun:'Rà soát dữ liệu',navResults:'Kết quả đối chiếu',navPlatforms:'Kiểm tra trên sàn',navAutoFill:'Điền mã từ file gốc',navStockForecast:'Dự báo tồn kho',navMemory:'Bộ nhớ xác nhận',analyticsAdvanced:'Thống kê & biểu đồ chi tiết',analyticsOpenHint:'Mở khi cần phân tích sâu',themePink:'🌸 Hồng Sakura'});
+Object.assign(I18N.en,{navSectionTitle:'WORKSPACE',navGroupMatch:'PRODUCT MATCHING',navCatalog:'Master catalog',navRun:'Review data',navResults:'Matching results',navPlatforms:'Marketplace check',navAutoFill:'Fill codes from source file',navStockForecast:'Inventory forecast',navMemory:'Confirmation memory',analyticsAdvanced:'Detailed statistics & charts',analyticsOpenHint:'Open for deeper analysis',themePink:'🌸 Sakura pink'});
+Object.assign(I18N.de,{navSectionTitle:'ARBEITSBEREICH',navGroupMatch:'PRODUKTABGLEICH',navCatalog:'Stammkatalog',navRun:'Daten prüfen',navResults:'Abgleichergebnisse',navPlatforms:'Marktplatz prüfen',navAutoFill:'Codes aus Quelldatei füllen',navStockForecast:'Bestandsprognose',navMemory:'Bestätigungsspeicher',analyticsAdvanced:'Detaillierte Statistiken & Diagramme',analyticsOpenHint:'Für eine genauere Analyse öffnen',themePink:'🌸 Sakura-Rosa'});
+Object.assign(I18N['zh-TW'],{navSectionTitle:'工作區',navGroupMatch:'商品比對',navCatalog:'標準目錄',navRun:'檢查資料',navResults:'比對結果',navPlatforms:'平台商品檢查',navAutoFill:'從來源檔填入代碼',navStockForecast:'庫存預測',navMemory:'確認記憶',analyticsAdvanced:'詳細統計與圖表',analyticsOpenHint:'需要深入分析時再開啟',themePink:'🌸 櫻花粉'});
+Object.assign(I18N['zh-CN'],{navSectionTitle:'工作区',navGroupMatch:'商品比对',navCatalog:'标准目录',navRun:'检查数据',navResults:'比对结果',navPlatforms:'平台商品检查',navAutoFill:'从源文件填入代码',navStockForecast:'库存预测',navMemory:'确认记忆',analyticsAdvanced:'详细统计与图表',analyticsOpenHint:'需要深入分析时再打开',themePink:'🌸 樱花粉'});
+
 function tr(k){return (I18N[lang]&&I18N[lang][k])||I18N.vi[k]||k}
 function updatePageBreadcrumb(){const active=document.querySelector('.page.active');const page=active?active.id.replace(/^page-/,''):'overview';const map={overview:'navOverview',catalog:'navCatalog',run:'navRun',results:'navResults',memory:'navMemory',platforms:'navPlatforms',autofill:'navAutoFill',stockforecast:'navStockForecast',account:'navAccount',settings:'navSettings'};const el=$('currentPageLabel');if(el)el.textContent=tr(map[page]||'navOverview')}
 function translate(){document.documentElement.lang=lang;updatePageBreadcrumb();document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(tr(k))el.textContent=tr(k)});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.getAttribute('data-i18n-placeholder'))});updateThresholdLabels();updateStats();if(out.length)renderResults();if(masterRows.length)renderMasterPreview();if($('forecastRunInfo'))$('forecastRunInfo').textContent=stockForecastBuilt?tr('forecastRunDone').replace('{count}',stockForecastResults.length):tr('forecastRunHelp');if(typeof renderStockForecast==='function'&&stockForecastBuilt)renderStockForecast()}
@@ -1388,6 +1521,10 @@ document.documentElement.style.setProperty('--font-scale',fontScale);
 
 function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();const groups=[...document.querySelectorAll('.nav-folder')];const targetGroup=groups.find(g=>g.querySelector('.navbtn[data-page="'+page+'"]'));groups.forEach(g=>g.open=!!targetGroup&&g===targetGroup);if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+const appShell=document.querySelector('.shell'),sidebarToggle=$('sidebarCollapseToggle');
+function setSidebarCollapsed(collapsed){if(!appShell||!sidebarToggle)return;appShell.classList.toggle('sidebar-collapsed',!!collapsed);sidebarToggle.setAttribute('aria-expanded',String(!collapsed));sidebarToggle.setAttribute('aria-label',collapsed?'Mở rộng thanh menu':'Thu gọn thanh menu');sidebarToggle.title=collapsed?'Mở rộng thanh menu':'Thu gọn thanh menu';sidebarToggle.textContent=collapsed?'›':'‹';try{localStorage.setItem('matchma-sidebar-collapsed',collapsed?'1':'0')}catch(e){}}
+if(sidebarToggle){let collapsed=false;try{collapsed=localStorage.getItem('matchma-sidebar-collapsed')==='1'}catch(e){}setSidebarCollapsed(collapsed);sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!appShell.classList.contains('sidebar-collapsed')))}
+
 const quickSettingsPanel=$('quickSettings');
 if(quickSettingsPanel){
  quickSettingsPanel.addEventListener('toggle',()=>{if(quickSettingsPanel.open){const summary=quickSettingsPanel.querySelector('summary');if(summary)summary.setAttribute('aria-expanded','true')}else{const summary=quickSettingsPanel.querySelector('summary');if(summary)summary.setAttribute('aria-expanded','false')}});
