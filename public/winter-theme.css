@@ -1742,3 +1742,27 @@ html body #bear-plus-layer{
  pointer-events:none!important;
 }
 html body .app-header .brand{background:none!important;background-image:none!important}
+
+/* Logo is intentionally removed from the application header in this build. */
+html body header.app-header .logo,
+html body header.app-header .brand-logo-img,
+html body header.app-header .brand > img,
+html body header.app-header .brand > svg,
+html body header.app-header .brand::before,
+html body header.app-header .brand::after,
+html body header.app-header .brand-copy::before,
+html body header.app-header .brand-copy::after{
+ display:none!important;
+ visibility:hidden!important;
+ opacity:0!important;
+ content:none!important;
+ background:none!important;
+ background-image:none!important;
+ width:0!important;
+ height:0!important;
+ min-width:0!important;
+ min-height:0!important;
+ margin:0!important;
+ padding:0!important;
+}
+html body header.app-header .brand{gap:0!important}
