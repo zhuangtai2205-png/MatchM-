@@ -1388,41 +1388,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
-</style><link rel="stylesheet" href="/winter-theme.css?v=33"><style id="logo-bear-fix">
-/* Logo is brand artwork only. Never overlay mascots, emoji, pseudo-elements or theme effects. */
-html body header.app-header .brand>.logo{
- position:relative!important;display:flex!important;flex:0 0 48px!important;
- width:48px!important;height:58px!important;min-width:48px!important;min-height:58px!important;
- padding:0!important;margin:0!important;overflow:hidden!important;isolation:isolate!important;
- background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
-}
-html body header.app-header .brand>.logo::before,
-html body header.app-header .brand>.logo::after,
-html body header.app-header .brand>.logo:before,
-html body header.app-header .brand>.logo:after{
- content:none!important;display:none!important;visibility:hidden!important;
- background:none!important;background-image:none!important;mask:none!important;-webkit-mask:none!important;
-}
-html body header.app-header .brand>.logo>*{display:none!important;visibility:hidden!important}
-html body header.app-header .brand>.logo>img.brand-logo-img{
- display:block!important;visibility:visible!important;opacity:1!important;position:static!important;
- inset:auto!important;flex:none!important;width:48px!important;height:58px!important;
- max-width:48px!important;max-height:58px!important;object-fit:contain!important;
- background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
- filter:none!important;transform:none!important;mix-blend-mode:normal!important;z-index:1!important;
-}
-/* Prevent the optional mascot widget from ever drawing over the brand area. */
-html body #fat-bear-overlay,html body #bear-container,html body #bear-sprite{pointer-events:none}
-html body #fat-bear-overlay:not([hidden]){z-index:999!important}
-html body .app-header .fun-toggle-icon{display:none!important}
-/* Folder headings contain text and disclosure arrows only; no 3D decorations. */
-html body .nav-folder>summary .navicon,
-html body .nav-folder>summary .navfolder-tab-icon,
-html body .nav-folder>summary .theme-nav-doodle,
-html body .nav-folder>summary .icon3d,
-html body .nav-folder>summary .bear-icon{display:none!important}
-</style>
-<style id="fat-bear-motion-upgrade">
+</style><link rel="stylesheet" href="/winter-theme.css?v=33"><style id="fat-bear-motion-upgrade">
 /* Fat Bear Week-inspired growth and gentle living motion */
 #bear-container{will-change:transform}
 #bear-container:not(.is-hibernating) #bear-sprite{animation:fatBearIdle 2.8s ease-in-out infinite;transform-origin:50% 90%}
@@ -1438,10 +1404,111 @@ html body .nav-folder>summary .bear-icon{display:none!important}
 @media(prefers-reduced-motion:reduce){#bear-container #bear-sprite{animation:none!important}}
 
 /* Revert the emergency bear size overrides; preserve the site's original bear artwork/behavior. */
-</style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
+</style>
+<style id="layout-repair-final">
+/* Global layout normalization for every theme. Sidebar and content must remain in normal flow. */
+html,body{width:100%;min-height:100%;overflow-x:hidden}
+body{margin:0}
+.app-header{width:100%;max-width:none;min-width:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;padding:14px clamp(12px,2vw,28px)!important;box-sizing:border-box}
+.app-header .brand{display:flex;align-items:center;flex:1 1 260px;min-width:0;gap:12px}
+.app-header .brand-copy{display:block;min-width:0;max-width:100%}
+.app-header .brand h1{margin:0;line-height:1.12;overflow-wrap:anywhere}
+.app-header .subbrand{display:flex;flex-wrap:wrap;align-items:center;gap:7px;min-width:0}
+.app-header .headright{display:flex;flex:0 1 auto;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;min-width:0;max-width:100%}
+.app-shell.shell{
+ display:grid!important;grid-template-columns:minmax(230px,270px) minmax(0,1fr)!important;
+ align-items:start!important;gap:18px!important;
+ width:100%!important;max-width:1600px!important;min-width:0!important;
+ margin:0 auto!important;padding:0 clamp(12px,2vw,28px) 36px!important;
+ box-sizing:border-box!important;
+}
+#appSidebar.sidebar{
+ display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+ align-items:stretch!important;justify-content:flex-start!important;gap:8px!important;
+ position:sticky!important;top:12px!important;float:none!important;transform:none!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ height:auto!important;min-height:0!important;max-height:calc(100vh - 24px)!important;
+ margin:0!important;padding:12px!important;overflow-x:hidden!important;overflow-y:auto!important;
+ box-sizing:border-box!important;align-self:start!important;
+}
+#appSidebar>.sidebar-topline,#appSidebar>.sidebar-account-shortcut,
+#appSidebar>button.navbtn,#appSidebar>details.nav-folder,#appSidebar>.sidebar-bottom{
+ position:relative!important;inset:auto!important;float:none!important;clear:both!important;
+ flex:0 0 auto!important;align-self:stretch!important;order:initial!important;
+ width:100%!important;min-width:0!important;max-width:100%!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ margin:0!important;transform:none!important;translate:none!important;box-sizing:border-box!important;
+}
+#appSidebar>.sidebar-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;padding:4px 2px!important}
+#appSidebar>.sidebar-account-shortcut{display:flex!important;align-items:center!important;gap:10px!important;padding:10px!important;margin-bottom:4px!important}
+#appSidebar>.navbtn{
+ display:flex!important;align-items:center!important;gap:10px!important;
+ min-height:44px!important;height:auto!important;padding:10px 12px!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;text-align:left!important;
+}
+#appSidebar>details.nav-folder{
+ display:block!important;position:relative!important;flex:none!important;
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+ margin:3px 0!important;padding:7px!important;overflow:visible!important;contain:none!important;
+}
+#appSidebar>details.nav-folder>summary.navfolder-title{
+ display:flex!important;position:relative!important;inset:auto!important;
+ align-items:center!important;justify-content:space-between!important;gap:8px!important;
+ width:100%!important;height:auto!important;min-height:44px!important;
+ margin:0!important;padding:10px!important;box-sizing:border-box!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;line-height:1.35!important;
+ cursor:pointer!important;
+}
+#appSidebar>details.nav-folder>.nav-folder-items{
+ display:none!important;position:static!important;inset:auto!important;float:none!important;
+ width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+ margin:0!important;padding:8px 2px 2px!important;overflow:visible!important;
+ box-sizing:border-box!important;transform:none!important;visibility:visible!important;opacity:1!important;
+}
+#appSidebar>details.nav-folder[open]>.nav-folder-items{
+ display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+ align-items:stretch!important;justify-content:flex-start!important;gap:6px!important;
+}
+#appSidebar .nav-folder-items>.navbtn{
+ display:flex!important;position:relative!important;inset:auto!important;float:none!important;
+ flex:0 0 auto!important;width:100%!important;min-width:0!important;max-width:100%!important;
+ height:auto!important;min-height:42px!important;max-height:none!important;
+ margin:0!important;padding:9px 10px!important;box-sizing:border-box!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;transform:none!important;
+}
+#appSidebar .navicon{flex:0 0 24px!important;width:24px!important}
+#appSidebar>.sidebar-bottom{display:flex!important;flex-direction:column!important;gap:8px!important;margin-top:4px!important}
+#appSidebar .sidebar-help{position:relative!important;flex:0 0 auto!important;width:100%!important;max-width:100%!important}
+#appSidebar .nav-folder::before,#appSidebar .nav-folder::after{pointer-events:none!important}
+.main{display:block!important;position:relative!important;min-width:0!important;width:100%!important;max-width:100%!important;overflow:visible!important;transform:none!important}
+.main>.page{position:relative!important;width:100%!important;min-width:0!important;max-width:100%!important;height:auto!important;min-height:0!important;overflow:visible!important;box-sizing:border-box!important}
+.main>.page:not(.active){display:none!important}
+.main>.page.active{display:block!important}
+.main .hero,.main .panel,.main .grid,.main .grid3,.main .stats,.main .twostat,.main .tablewrap{min-width:0;max-width:100%}
+.main .grid,.main .grid3,.main .stats,.main .twostat{grid-template-columns:repeat(2,minmax(0,1fr))}
+.main input,.main select,.main textarea,.main button{max-width:100%}
+@media(max-width:1050px){
+ .app-header{align-items:flex-start!important}
+ .app-header .headright{justify-content:flex-start!important;flex:1 1 100%!important}
+ .app-shell.shell{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+ #appSidebar.sidebar{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important}
+ #appSidebar>.sidebar-topline{width:100%!important}
+ #appSidebar>details.nav-folder{flex:0 0 auto!important}
+}
+@media(max-width:650px){
+ .app-header{padding:12px!important}
+ .app-header .brand{flex-basis:100%!important}
+ .app-header .headright{gap:6px!important}
+ .app-shell.shell{padding:0 10px 24px!important}
+ #appSidebar.sidebar{padding:9px!important;gap:6px!important}
+ #appSidebar>.navbtn,#appSidebar>details.nav-folder{margin:0!important}
+ .main .grid,.main .grid3,.main .stats,.main .twostat{grid-template-columns:minmax(0,1fr)!important}
+ .main .hero,.main .panel{padding:14px!important}
+}
+</style>
+</head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
-  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=25" alt="Logo MatchMã"></div>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
    <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
