@@ -42,8 +42,8 @@
     }
   }
   function initBear(){
-    document.querySelectorAll('.navbtn .theme-nav-doodle,.navbtn .icon3d,.navbtn .bear-icon').forEach(el=>el.remove());
-    document.querySelectorAll('.app-header .logo::before,.app-header .logo::after').forEach(()=>{});
+    document.querySelectorAll('.app-header .logo .bear-icon,.app-header .logo .icon3d,.app-header .logo .theme-nav-doodle').forEach(el=>el.remove());
+    document.querySelectorAll('.navbtn .icon3d,.navbtn .bear-icon').forEach(el=>el.remove());
   }
   function start(){
     renderScenery();
