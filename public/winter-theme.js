@@ -42,13 +42,10 @@
     }
   }
   function initBear(){
-    const logo=document.querySelector('.app-header .logo');
-    if(logo){
-      logo.querySelectorAll(':scope > :not(.brand-logo-img)').forEach(el=>el.remove());
-      logo.querySelectorAll('img').forEach(img=>{if(!img.classList.contains('brand-logo-img'))img.remove();});
-    }
-    document.querySelectorAll('.nav-folder>summary .navicon,.nav-folder>summary .navfolder-tab-icon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(el=>el.remove());
-    document.querySelectorAll('.app-header .logo::before,.app-header .logo::after').forEach(()=>{});
+    document.querySelectorAll('.app-header .logo > :not(.brand-logo-img)').forEach(el=>el.remove());
+    document.querySelectorAll('.navbtn .navicon,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(el=>el.remove());
+    document.querySelectorAll('#funToggleBtn,#funWidget,#fat-bear-overlay,.fun-widget-mascot,.winter-bear-spot').forEach(el=>el.remove());
+    if(document.body.dataset.theme==='bear')document.body.dataset.theme='ocean';
   }
   function start(){
     renderScenery();
