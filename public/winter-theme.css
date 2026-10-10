@@ -230,3 +230,59 @@ body[data-theme="bear"] .hero:has(.winter-bear-spot){padding-right:clamp(150px,1
 @media(max-width:650px){body[data-theme="bear"] .winter-bear-spot{width:132px;max-height:125px;right:5px;bottom:-5px}body[data-theme="bear"] .hero:has(.winter-bear-spot){padding-right:14px!important;padding-bottom:132px!important}}
 /* Keep other themes free of the bear corner illustration. */
 body[data-theme="ocean"] .hero,body[data-theme="retro"] .hero,body[data-theme="pink"] .hero,body[data-theme="vampire"] .hero,body[data-theme="cat"] .hero{padding-right:25px!important}
+
+/* MatchMã theme polish v5: protect the brand, keep mascots in the hero, and give every theme its own illustrated atmosphere. */
+.app-header{position:relative!important;z-index:20!important;isolation:isolate}
+.app-header .brand{position:relative;z-index:2;flex:0 0 auto;min-width:0}
+.app-header .logo{position:relative!important;z-index:3!important;flex:0 0 48px;width:48px;height:48px;overflow:hidden;border-radius:15px}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;position:relative!important;inset:auto!important;z-index:1!important;transform:none!important}
+.app-header .brand-copy{position:relative;z-index:2;min-width:0}
+.app-header .headright{position:relative;z-index:2;flex-wrap:wrap;justify-content:flex-end;min-width:0}
+.winter-bear-spot{position:absolute!important;z-index:1!important;pointer-events:none!important;max-width:32%!important;object-fit:contain!important}
+body[data-theme="bear"] .hero{position:relative!important;isolation:isolate;min-height:178px;padding-right:clamp(150px,20vw,245px)!important;overflow:hidden}
+body[data-theme="bear"] .winter-bear-spot{display:block!important;right:8px!important;bottom:0!important;width:clamp(128px,16vw,190px)!important;max-height:170px!important;max-width:31%!important}
+body:not([data-theme="bear"]) .winter-bear-spot{display:none!important}
+body[data-theme="bear"] .hero h2,body[data-theme="bear"] .hero p,body[data-theme="bear"] .hero .eyebrow{position:relative;z-index:2}
+@media(max-width:720px){
+ .app-header{align-items:flex-start!important;flex-wrap:wrap!important}
+ .app-header .headright{width:100%;justify-content:flex-start}
+ body[data-theme="bear"] .hero{padding:18px 16px 128px!important;min-height:250px}
+ body[data-theme="bear"] .winter-bear-spot{width:122px!important;max-width:42%!important;max-height:124px!important;right:7px!important;bottom:0!important}
+}
+#themeScene{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+#themeScene .scene-doodle{position:absolute;display:block;font-size:var(--doodle-size,26px);opacity:.14;filter:drop-shadow(0 2px 2px #29465712);animation:themeSceneFloat 8s ease-in-out infinite;animation-delay:var(--doodle-delay,0s);user-select:none}
+#themeScene .scene-wave{font-size:clamp(58px,9vw,135px);font-weight:800;opacity:.09;transform:scaleX(1.8);animation:themeWaveDrift 12s ease-in-out infinite}
+@keyframes themeSceneFloat{0%,100%{translate:0 0;rotate:-5deg}50%{translate:0 -12px;rotate:5deg}}
+@keyframes themeWaveDrift{0%,100%{translate:-10px 0;scale:1 1}50%{translate:18px 8px;scale:1.12 1}}
+.theme-nav-doodle{display:inline-flex;align-items:center;justify-content:center;flex:0 0 24px;width:24px;height:24px;margin-right:7px;font-size:17px;line-height:1;filter:drop-shadow(0 1px 1px #342b3310)}
+.navbtn .navicon{display:none!important}
+.theme-click-doodle{position:fixed;z-index:99999;pointer-events:none;font-size:26px;line-height:1;filter:drop-shadow(0 2px 2px #27374722);animation:themeClickPop .95s cubic-bezier(.15,.7,.25,1) forwards}
+@keyframes themeClickPop{0%{opacity:0;transform:translate(-50%,-40%) scale(.35) rotate(-15deg)}20%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-100% + var(--ty))) scale(1.25) rotate(var(--rot))}}
+/* Ocean: quiet rolling waves and underwater cards */
+body[data-theme="ocean"]{background:linear-gradient(180deg,#e9fbff 0%,#c9eff6 48%,#e7faf4 100%)!important;color:#174e64!important}
+body[data-theme="ocean"] .page{border-color:#a9dce8!important;background:linear-gradient(145deg,#f2fdffdf,#e2f7f5d9)!important}
+body[data-theme="ocean"] .hero,body[data-theme="ocean"] .panel,body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .mini{border-color:#b8e0e9!important}
+body[data-theme="ocean"] .theme-nav-doodle{filter:drop-shadow(0 2px 1px #309bb41f)}
+/* Retro: monochrome paper, music notes, print-like borders */
+body[data-theme="retro"]{background:linear-gradient(135deg,#f5f3ec,#dcdad2)!important;color:#242424!important;filter:none}
+body[data-theme="retro"] .page,body[data-theme="retro"] .sidebar,body[data-theme="retro"] .hero,body[data-theme="retro"] .panel,body[data-theme="retro"] .stat,body[data-theme="retro"] .mini{background:#f5f3ebf2!important;color:#222!important;border:1px solid #555!important;border-radius:4px!important;box-shadow:3px 3px 0 #aaa!important}
+body[data-theme="retro"] .theme-nav-doodle{filter:grayscale(1);font-family:Georgia,serif}
+body[data-theme="retro"] #themeScene .scene-doodle{filter:grayscale(1);opacity:.11;font-family:Georgia,serif}
+/* Sakura: airy pink wash and hand-painted blossoms */
+body[data-theme="pink"]{background:radial-gradient(ellipse at 15% 0%,#fff 0,transparent 33%),linear-gradient(145deg,#fff5f9,#f6dce9 60%,#fff7f8)!important;color:#7d3f61!important}
+body[data-theme="pink"] .page,body[data-theme="pink"] .sidebar,body[data-theme="pink"] .hero,body[data-theme="pink"] .panel,body[data-theme="pink"] .stat,body[data-theme="pink"] .mini{border-color:#efc5d9!important}
+body[data-theme="pink"] #themeScene .scene-doodle{opacity:.17;color:#d77da5}
+/* Vampire Halloween: night-purple canvas, blood-red accents, haunted silhouettes */
+body[data-theme="vampire"]{background:radial-gradient(ellipse at 50% -10%,#50365c 0,#24182f 52%,#100e1a 100%)!important;color:#f7e7ef!important}
+body[data-theme="vampire"] .page{background:linear-gradient(145deg,#24192beF,#1b1423f5)!important;border-color:#6d476f!important;box-shadow:0 12px 36px #09070f55!important}
+body[data-theme="vampire"] .app-header,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .chart-card,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini{background:#2c2034f5!important;color:#f7e7ef!important;border-color:#68466d!important}
+body[data-theme="vampire"] .navbtn,body[data-theme="vampire"] .hero p,body[data-theme="vampire"] .panel p,body[data-theme="vampire"] .muted,body[data-theme="vampire"] .hint{color:#d9c2dc!important}
+body[data-theme="vampire"] .navbtn.active{background:#512a46!important;color:#fff0f4!important}
+body[data-theme="vampire"] .btn{background:linear-gradient(135deg,#8b294b,#57233e)!important;color:#fff!important}
+body[data-theme="vampire"] input,body[data-theme="vampire"] select,body[data-theme="vampire"] textarea{background:#1b1423!important;color:#f7e7ef!important;border-color:#6d476f!important}
+body[data-theme="vampire"] #themeScene .scene-doodle{opacity:.2;filter:drop-shadow(0 0 5px #c15c9a33)}
+/* Cat: warm oat-paper, paw prints, fish and yarn */
+body[data-theme="cat"]{background:radial-gradient(ellipse at 12% 8%,#fffaf4 0,transparent 35%),linear-gradient(145deg,#f9eee5,#e9d9cd 58%,#fff7f0)!important;color:#60453d!important}
+body[data-theme="cat"] .page,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{border-color:#dfc2b4!important}
+body[data-theme="cat"] #themeScene .scene-doodle{opacity:.17}
+@media(prefers-reduced-motion:reduce){#themeScene .scene-doodle,.theme-click-doodle{animation:none!important}.theme-click-doodle{display:none!important}}
