@@ -1389,7 +1389,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
 </style><link rel="stylesheet" href="/winter-theme.css?v=36">
-<link rel="stylesheet" href="/desktop-layout-fix.css?v=2"><style id="fat-bear-motion-upgrade">
+<link rel="stylesheet" href="/desktop-layout-fix.css?v=3"><style id="fat-bear-motion-upgrade">
 /* Fat Bear Week-inspired growth and gentle living motion */
 #bear-container{will-change:transform}
 #bear-container:not(.is-hibernating) #bear-sprite{animation:fatBearIdle 2.8s ease-in-out infinite;transform-origin:50% 90%}
@@ -1510,6 +1510,19 @@ body{margin:0}
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
+  <span class="brand-mark" aria-label="Logo MatchMã: mèo và kiếm" role="img">
+   <svg viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="43" cy="49" r="39" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".45"/>
+    <path d="M18 37 16 16 34 27Q46 21 58 28L76 13 73 42Q81 56 69 72 57 84 41 81 19 78 14 59Z" fill="#fff" stroke="#24465f" stroke-width="3.5" stroke-linejoin="round"/>
+    <path d="M20 34 20 22 31 30M61 30 72 20 70 37" fill="#f4c7d8" stroke="#24465f" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M28 48q5-6 10 0M50 48q5-6 10 0" fill="none" stroke="#24465f" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M42 56 47 60 52 56Z" fill="#db8cae" stroke="#24465f" stroke-width="1.7" stroke-linejoin="round"/>
+    <path d="M47 60q-1 8-9 5m9-5q1 8 9 5" fill="none" stroke="#24465f" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M65 68 85 29 90 15 79 25 58 63Z" fill="#dcecf7" stroke="#24465f" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="m58 63 8 5m-12 1 9 5m-4-12 8 5" stroke="#24465f" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M28 70q-8 5-12 0" fill="none" stroke="#24465f" stroke-width="3" stroke-linecap="round"/>
+   </svg>
+  </span>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
    <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
@@ -1517,7 +1530,7 @@ body{margin:0}
  </div>
  <div class="headright">
   <span class="local-pill"><i></i><span data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span></span>
-  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">Mèo</option><option value="bear" data-i18n="themeBear">Rừng Gấu</option></select></label>
+  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">Mèo</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
@@ -2309,20 +2322,10 @@ function initCalculatorWidget(){
  calcRender();
 }
 
-function initFunWidget(){
- const btn=$('funToggleBtn'),widget=$('funWidget'),drag=$('funWidgetDragBar');
- if(!btn||!widget)return;
- let overlay=$('fat-bear-overlay');
- // Recover gracefully if the bear-scene markup is missing from the page.
- if(!overlay){
-  overlay=document.createElement('div');overlay.id='fat-bear-overlay';overlay.hidden=true;overlay.setAttribute('aria-hidden','true');
-  overlay.innerHTML='<div id="bear-snow"></div><div id="fish-pool"></div><div id="bear-plus-layer"></div><button id="bear-container" type="button" aria-label="Chạm để vuốt ve gấu"><span id="bear-sprite" aria-hidden="true" style="display:block;width:100%;height:100%;font-size:0;line-height:1"><span style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;font-family:system-ui,sans-serif;font-size:clamp(100px,28vw,190px);line-height:1;filter:drop-shadow(0 5px 5px #69452f24)">🐻</span></span></button>';
-  document.body.appendChild(overlay);
- }
-btn.addEventListener('click',()=>setFunWidgetOpen(widget.hidden));$('funCloseBtn').addEventListener('click',()=>setFunWidgetOpen(false));$('funMinimizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-minimized');$('funMinimizeBtn').textContent=widget.classList.contains('is-minimized')?'+':'−';$('funMinimizeBtn').title=tr(widget.classList.contains('is-minimized')?'funExpand':'funMinimize')});$('funMaximizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-maximized');widget.classList.remove('is-minimized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent=widget.classList.contains('is-maximized')?'❐':'□';$('funMaximizeBtn').title=tr(widget.classList.contains('is-maximized')?'funRestore':'funMaximize')});$('funResetBear').addEventListener('click',resetBear);$('funSpawnFish').addEventListener('click',()=>{spawnBearFish(3);if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=lang==='vi'?'Đã thả thêm cá! Hãy bắt một con cho gấu.':'More fish added! Catch one for the bear.';setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1300)}});$('funEffectsToggle').addEventListener('click',()=>{const off=document.body.dataset.funEffects!=='off';document.body.dataset.funEffects=off?'off':'on';$('funEffectsToggle').textContent=tr(off?'funEffectsOn':'funEffectsOff');$('funEffectsToggle').setAttribute('aria-pressed',String(!off));try{localStorage.setItem(BEAR_EFFECT_KEY,off?'0':'1')}catch(e){}});$('bear-container').addEventListener('click',petBear);let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;drag.addEventListener('pointerdown',e=>{if(e.target.closest('button')||widget.classList.contains('is-maximized'))return;dragging=true;const r=widget.getBoundingClientRect();startX=e.clientX;startY=e.clientY;startLeft=r.left;startTop=r.top;widget.style.left=r.left+'px';widget.style.top=r.top+'px';widget.style.right='auto';widget.style.bottom='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){} });drag.addEventListener('pointermove',e=>{if(!dragging)return;const maxLeft=Math.max(0,window.innerWidth-widget.offsetWidth),maxTop=Math.max(0,window.innerHeight-65);widget.style.left=Math.min(maxLeft,Math.max(0,startLeft+e.clientX-startX))+'px';widget.style.top=Math.min(maxTop,Math.max(0,startTop+e.clientY-startY))+'px'});const stop=()=>{dragging=false};drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);let effects=true;try{effects=localStorage.getItem(BEAR_EFFECT_KEY)!=='0'}catch(e){}document.body.dataset.funEffects=effects?'on':'off';$('funEffectsToggle').textContent=tr(effects?'funEffectsOff':'funEffectsOn');$('funEffectsToggle').setAttribute('aria-pressed',String(effects));updateBearDisplay();if(fishEaten>=BEAR_HIBERNATE_AT)goBearHibernation();const mascot=$('funWidget').querySelector('.fun-widget-mascot');if(mascot)mascot.innerHTML=themeDoodleSvg('bear',0);const toggleIcon=$('funToggleBtn').querySelector('.fun-toggle-icon');if(toggleIcon)toggleIcon.innerHTML=themeDoodleSvg('bear',0)}
+/* Entertainment feature removed: no bear widget initializer. */
 
 const THEME_KEY='matchma-theme-v2';
-function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
+function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
 function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
@@ -3031,8 +3034,23 @@ renderBearSnow=function(){
  }
  overlay.dataset.snowLevel=level;
 };
-/* Repaint snow after startup without changing the user's saved bear progress. */
-renderBearSnow();
-
-</script><!-- Removed duplicate static bear mascot; the interactive SVG bear belongs to the entertainment scene only. --><script src="/winter-theme.js?v=12"></script>
+/* Bear entertainment startup removed. */
+</script><!-- Removed duplicate static bear mascot; the interactive SVG bear belongs to the entertainment scene only. --><script>
+/* MatchMã: remove the entertainment/bear program UI and its navigation entry. */
+(function(){
+ const removeEntertainment=()=>{
+  document.querySelectorAll('#funToggleBtn,#funWidget,#fat-bear-overlay,#bear-container,#bear-snow,#fish-pool,#bear-plus-layer,.fun-widget,.fun-toggle,.entertainment-widget,[data-feature="entertainment"],[data-feature="bear-entertainment"]').forEach(el=>el.remove());
+  document.querySelectorAll('button,a,[role="button"],summary,li').forEach(el=>{
+   if(el.closest('.brand-mark')) return;
+   const label=(el.innerText||el.getAttribute('aria-label')||el.title||'').trim();
+   if(/^(giải trí|góc gấu|entertainment|bear corner)$/i.test(label)) el.remove();
+  });
+ };
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',removeEntertainment,{once:true}); else removeEntertainment();
+ const observer=new MutationObserver(removeEntertainment);
+ observer.observe(document.documentElement,{childList:true,subtree:true});
+ setTimeout(()=>observer.disconnect(),12000);
+})();
+</script>
+<script src="/winter-theme.js?v=12"></script>
 </body></html>
