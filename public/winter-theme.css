@@ -423,3 +423,60 @@ body[data-theme] .nav-folder::before{
 body[data-theme] .navfolder-tab-icon{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M2 4Q2 2 4 2H10L12 5H20Q22 5 22 7V15Q22 16 20 16H4Q2 16 2 14Z' fill='%23d9e5ee' stroke='%235d748a' stroke-width='1.5'/%3E%3C/svg%3E")!important;
 }
+
+
+/* Screenshot fix: no decorative 3D icons over the brand or mixed into navigation. */
+.app-header .logo,.brand .logo{
+  position:relative!important;display:grid!important;place-items:center!important;
+  width:48px!important;height:58px!important;min-width:48px!important;
+  border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  overflow:visible!important;
+}
+.app-header .logo::before,.app-header .logo::after,.brand .logo::before,.brand .logo::after{
+  content:none!important;display:none!important;background:none!important;
+}
+.app-header .logo .brand-logo-img{
+  display:block!important;width:100%!important;height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  position:relative!important;z-index:1!important;filter:none!important;
+}
+.navbtn .theme-nav-doodle,.navbtn .navicon::before,.navbtn .navicon::after,
+.nav-folder .navfolder-tab-icon::before,.nav-folder .navfolder-tab-icon::after{
+  display:none!important;content:none!important;background:none!important;
+}
+.navbtn .theme-nav-doodle{display:none!important}
+.navbtn .navicon{display:none!important}
+.nav-folder,.nav-folder[open],.nav-folder>summary.navfolder-title{
+  border-color:var(--theme-line)!important;
+  background:color-mix(in srgb,var(--theme-panel) 88%,var(--theme-soft))!important;
+  color:var(--theme-ink)!important;
+  box-shadow:none!important;
+}
+.nav-folder::before,.nav-folder::after{content:none!important;display:none!important}
+.nav-folder>summary.navfolder-title{
+  border:1px dashed var(--theme-accent)!important;border-radius:10px!important;
+}
+.navbtn{
+  border:1px solid transparent!important;
+  background:transparent!important;color:var(--theme-ink)!important;
+}
+.navbtn:hover,.navbtn.active{
+  border:1px dashed var(--theme-accent)!important;
+  background:var(--theme-soft)!important;color:var(--theme-ink)!important;
+}
+.sidebar,.sidefoot,.navtitle,.local-pill,.toolbar-select,.toolbar-font,.fun-toggle-button,.calculator-toggle-button{
+  border-color:var(--theme-line)!important;
+}
+.sidebar{
+  background:var(--theme-panel)!important;border-style:solid!important;
+}
+.navtitle,.sidefoot{background:var(--theme-soft)!important;color:var(--theme-muted)!important}
+.toolbar-select,.toolbar-font,.local-pill,.fun-toggle-button,.calculator-toggle-button{
+  background:var(--theme-panel)!important;color:var(--theme-ink)!important;
+}
+body[data-theme="bear"] .sidebar,body[data-theme="bear"] .nav-folder{border-color:#c9dfc8!important}
+body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .nav-folder{border-color:#b9dfe9!important}
+body[data-theme="retro"] .sidebar,body[data-theme="retro"] .nav-folder{border-color:#bdbdb9!important}
+body[data-theme="pink"] .sidebar,body[data-theme="pink"] .nav-folder{border-color:#efc8d9!important}
+body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .nav-folder{border-color:#5e426c!important}
+body[data-theme="cat"] .sidebar,body[data-theme="cat"] .nav-folder{border-color:#e4cfc4!important}
