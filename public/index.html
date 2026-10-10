@@ -3439,14 +3439,14 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
  <div class="mm-bg-bear-controls"><span id="mmBackgroundBearHint">🐻 Chọn cá để cho gấu ăn</span><div class="mm-bg-bear-actions"><select id="mmBearSeaLife" aria-label="Chọn sinh vật biển"><option value="salmon">Cá hồi</option><option value="clown">Cá hề</option><option value="blue">Cá xanh</option><option value="puffer">Cá nóc</option><option value="turtle">Rùa biển</option><option value="jelly">Sứa</option><option value="crab">Cua</option><option value="star">Sao biển</option></select><button type="button" id="mmBackgroundFishDrop">＋ Thả sinh vật</button></div></div>
 </div>
 <style id="mm-background-bear-css">
-#mmBackgroundBear{position:fixed;right:14px;bottom:12px;z-index:1200;width:min(350px,48vw);pointer-events:auto;display:flex;flex-direction:column;gap:5px;opacity:.98;border:1px solid #b9dfd4;border-radius:15px;padding:7px;background:color-mix(in srgb,var(--panel,#fff) 88%,transparent);box-shadow:0 8px 30px #193d2b22;backdrop-filter:blur(7px)}
+#mmBackgroundBear{position:fixed;right:14px;bottom:12px;z-index:1200;width:min(560px,68vw);pointer-events:auto;display:flex;flex-direction:column;gap:4px;opacity:.98;border:0;border-radius:0;padding:4px;background:transparent;box-shadow:none;backdrop-filter:none}
 #mmBackgroundBear[hidden],#mmBackgroundBear.mm-bg-hidden{display:none!important}
 #mmBackgroundBear .mm-bg-bear-head,#mmBackgroundBear .mm-bg-bear-controls{display:flex;align-items:center;justify-content:space-between;gap:6px;color:var(--text,#31483a);font-size:11px}
 #mmBackgroundBear .mm-bg-bear-head-actions,#mmBackgroundBear .mm-bg-bear-actions{display:flex;align-items:center;gap:4px}
 #mmBackgroundBear button,#mmBackgroundBear select{border:1px solid #a7d0bb;background:#edf9f0;color:#235b35;border-radius:8px;padding:6px 8px;font-size:11px;font-weight:750;cursor:pointer;max-width:100%}
-#mmBackgroundBear canvas{display:block;width:100%;height:auto;max-height:220px;object-fit:contain;cursor:crosshair;touch-action:manipulation}
+#mmBackgroundBear canvas{display:block;width:100%;height:auto;max-height:300px;object-fit:contain;cursor:crosshair;touch-action:manipulation}
 #mmBackgroundBear #mmBackgroundBearHint{font-size:10px;font-weight:700}
-@media(max-width:600px){#mmBackgroundBear{right:5px;bottom:5px;width:min(310px,78vw);padding:5px}#mmBackgroundBear canvas{max-height:175px}#mmBackgroundBear button,#mmBackgroundBear select{font-size:10px;padding:5px}#mmBackgroundBear .mm-bg-bear-controls{align-items:flex-start;flex-direction:column}}
+@media(max-width:600px){#mmBackgroundBear{right:5px;bottom:5px;width:min(390px,90vw);padding:3px}#mmBackgroundBear canvas{max-height:220px}#mmBackgroundBear button,#mmBackgroundBear select{font-size:10px;padding:5px}#mmBackgroundBear .mm-bg-bear-controls{align-items:flex-start;flex-direction:column}}
 </style>
 <script id="mm-background-bear-js">
 (()=>{'use strict';
@@ -3467,11 +3467,15 @@ if(f.kind==='jelly'){ellipse(0,-3,12,10,'#b38be8');ctx.strokeStyle='#9870cf';ctx
 if(f.kind==='crab'){ellipse(0,3,12,8,'#f07870');[-1,1].forEach(a=>{ctx.strokeStyle='#bd4d4d';ctx.lineWidth=2;for(let j=0;j<3;j++){ctx.beginPath();ctx.moveTo(a*8,j*2+2);ctx.lineTo(a*(14+j*2),j*3+8);ctx.stroke()}ellipse(a*12,-7,5,4,'#f07870');ellipse(a*12,-8,1.3,1.3,'#fff')})}
 if(f.kind==='star'){ctx.fillStyle='#f3b95d';ctx.beginPath();for(let i=0;i<10;i++){let a=-Math.PI/2+i*Math.PI/5,r=i%2?6:13;ctx.lineTo(Math.cos(a)*r,Math.sin(a)*r)}ctx.closePath();ctx.fill()}
 ctx.restore()}
-function bear(){let z=scale*(1+Math.min(growth,18)*.025),x=185,y=190;ctx.save();ctx.translate(x,y);ctx.scale(z,z);
-ellipse(0,0,50,35,'#6e4933');ellipse(-29,-40,16,17,'#6e4933');ellipse(29,-40,16,17,'#6e4933');ellipse(-29,-40,8,9,'#bd8960');ellipse(29,-40,8,9,'#bd8960');ellipse(0,-33,37,35,'#8a5b3d');ellipse(0,-19,22,15,'#f0d2ac');ellipse(-13,-39,3,3,'#241b17');ellipse(13,-39,3,3,'#241b17');ellipse(0,-25,6,4,'#241b17');ctx.strokeStyle='#4a2b20';ctx.lineWidth=1.7;ctx.beginPath();ctx.moveTo(0,-21);ctx.quadraticCurveTo(-2,-16,-7,-17);ctx.moveTo(0,-21);ctx.quadraticCurveTo(2,-16,7,-17);ctx.stroke();ctx.restore()}
-function draw(){ctx.clearRect(0,0,W,H);let grd=ctx.createLinearGradient(0,0,0,H);grd.addColorStop(0,'#dff7f5');grd.addColorStop(1,'#9bd9d4');ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);ctx.globalAlpha=.24;for(let i=0;i<5;i++){ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.beginPath();ctx.ellipse((i*83+t*.25)%W,35+i*29,27,5,0,0,Math.PI*2);ctx.stroke()}ctx.globalAlpha=1;
-ellipse(185,226,94,10,'#5da8a0');items.forEach(f=>f.kind==='turtle'||f.kind==='jelly'||f.kind==='crab'||f.kind==='star'?seaCreature(f):fishShape(f));bear();
-ctx.fillStyle='#266c70';ctx.font='bold 10px system-ui';ctx.fillText('ĐẠI DƯƠNG 2D · CHẠM CÁ ĐỂ CHO ĂN',8,14)}
+function bear(){let z=scale*(1+Math.min(growth,18)*.055),x=W*.53,y=H+30;ctx.save();ctx.translate(x,y);ctx.scale(z,z);
+const fur='#a95720',shade='#78391f',light='#d88a43';
+/* Lying-down, oversized Fat Bear Week silhouette; transparent page background. */
+ellipse(0,-57,190,91,fur);ellipse(-130,-76,67,67,fur);ellipse(-151,-119,28,31,fur);ellipse(-104,-126,27,29,fur);ellipse(-151,-119,13,15,light);ellipse(-104,-126,12,14,light);
+ellipse(-130,-65,47,42,shade);ellipse(-124,-50,33,23,light);ellipse(-136,-72,5,6,'#21160f');ellipse(-111,-72,5,6,'#21160f');ellipse(-123,-55,10,7,'#2b1a12');
+ctx.strokeStyle=shade;ctx.lineWidth=6;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-123,-48);ctx.quadraticCurveTo(-118,-37,-108,-44);ctx.moveTo(-123,-48);ctx.quadraticCurveTo(-130,-37,-139,-44);ctx.stroke();
+/* rounded shoulder and haunch contours */ctx.strokeStyle='#63331f';ctx.lineWidth=8;ctx.beginPath();ctx.moveTo(-54,-18);ctx.quadraticCurveTo(-15,-72,23,-28);ctx.quadraticCurveTo(65,1,115,-28);ctx.stroke();
+ellipse(108,-26,38,22,shade);ellipse(122,-28,22,13,fur);ctx.restore()}
+function draw(){ctx.clearRect(0,0,W,H);items.forEach(f=>f.kind==='turtle'||f.kind==='jelly'||f.kind==='crab'||f.kind==='star'?seaCreature(f):fishShape(f));bear()}
 function animate(){t++;items.forEach(f=>{if(f.kind==='turtle'||f.kind==='jelly'||f.kind==='crab'||f.kind==='star'){f.x+=Math.sin(t*.025+f.phase)*.25;f.y+=Math.sin(t*.035+f.phase)*.12}else{f.y+=f.v;f.x+=Math.sin(t*.05+f.phase)*.5}});items=items.filter(f=>f.y<H+30);draw();raf=requestAnimationFrame(animate)}
 function start(){if(!raf)raf=requestAnimationFrame(animate)}
 function spawn(){let k=kind.value;let creature=['turtle','jelly','crab','star'].includes(k);items.push({kind:k,x:creature?35+Math.random()*285:40+Math.random()*275,y:creature?95+Math.random()*100:-8,s:creature ? 0.8+Math.random()*.3 : 0.8+Math.random()*.35,v:1.2+Math.random()*1.2,phase:Math.random()*6});hint.textContent='Chạm đúng sinh vật để tương tác; cá chỉ tính khi bạn bấm vào cá.';start()}
