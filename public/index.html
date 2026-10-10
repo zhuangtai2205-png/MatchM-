@@ -1290,6 +1290,29 @@ html,body{width:100%;min-height:100%;margin:0;overflow-x:hidden}
 #sidebarCollapseToggle{display:none!important}
 .app-header .brand-mark{display:inline-flex!important;flex:0 0 54px!important;width:54px!important;height:54px!important;align-items:center!important;justify-content:center!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;overflow:visible!important}
 .app-header .brand-mark svg{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important}
+</style><style id="forest-minimal-theme-and-readable-logo">
+/* Added Forest Bear and Minimal themes */
+body[data-theme="forest"]{--ink:#314b35;--muted:#71866e;--purple:#668b55;--frame:#c7d9b7;--green:#477b4d;--amber:#9c7940;--red:#a65f5c;background:radial-gradient(ellipse at 10% 5%,#f6f8dc 0,transparent 32%),linear-gradient(145deg,#edf4df,#e3eedb 48%,#f6f0df)!important;color:#314b35!important}
+body[data-theme="forest"]::before{content:"🌲　🍃　🐾　🍄　🌿　🌲\A　🌿　🐻　🍃　🌲　🐾\A🍄　🌲　🍃　🦋　🌿　🐻";white-space:pre;opacity:.16;color:#50724a;transform:rotate(-2deg)}
+body[data-theme="forest"]::after{opacity:.3!important;background:radial-gradient(ellipse at 8% 100%,#9dbb87 0 13%,transparent 13.5%),radial-gradient(ellipse at 30% 100%,#b6cb9e 0 17%,transparent 17.5%),radial-gradient(ellipse at 65% 100%,#9dbb87 0 15%,transparent 15.5%),radial-gradient(ellipse at 90% 100%,#b6cb9e 0 18%,transparent 18.5%)!important}
+body[data-theme="forest"] .page,body[data-theme="forest"] .sidebar,body[data-theme="forest"] .hero,body[data-theme="forest"] .panel,body[data-theme="forest"] .stat,body[data-theme="forest"] .mini{background:rgba(250,252,240,.82)!important;border-color:#cadbb9!important;box-shadow:0 10px 28px #486c3b12!important}
+body[data-theme="forest"] .navbtn.active{background:#e0edcf!important;color:#3b653a!important}
+body[data-theme="forest"] .btn{background:linear-gradient(135deg,#759b60,#4e7d4d)!important}
+body[data-theme="forest"] .theme-drift{filter:drop-shadow(0 3px 3px #47613a22)}
+body[data-theme="minimal"]{--ink:#343b40;--muted:#727b81;--purple:#596b75;--frame:#dce2e5;--green:#427a63;--amber:#977443;--red:#a45b65;background:#f5f6f4!important;color:#343b40!important}
+body[data-theme="minimal"]::before{content:"";opacity:0!important}
+body[data-theme="minimal"]::after{opacity:0!important}
+body[data-theme="minimal"] .page,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini{background:#fff!important;border:1px solid #e2e6e8!important;box-shadow:0 3px 12px #202a3010!important;border-radius:12px!important;backdrop-filter:none!important}
+body[data-theme="minimal"] .page{padding:10px!important}
+body[data-theme="minimal"] .navbtn.active{background:#e9eef0!important;color:#263940!important;box-shadow:none!important}
+body[data-theme="minimal"] .btn{background:#3e515a!important;box-shadow:none!important}
+body[data-theme="minimal"] .theme-drift{opacity:.08!important;filter:none!important}
+.theme-forest{animation:forestLeafDrift 1.25s ease-in-out infinite}
+.theme-minimal{animation:minimalPulse 1.2s ease-in-out infinite}
+@keyframes forestLeafDrift{0%,100%{transform:translate(-50%,-50%) rotate(-9deg) scale(.85)}50%{transform:translate(calc(-50% + 10px),calc(-50% - 20px)) rotate(15deg) scale(1.15)}}
+@keyframes minimalPulse{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.45}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.85}}
+.app-header .brand-mark{width:72px!important;height:72px!important;flex-basis:72px!important;padding:3px!important;background:#fff!important;border:2px solid #d7e8ed!important;border-radius:18px!important;box-shadow:0 4px 14px #234b5b1c!important}
+.app-header .brand-mark svg{width:100%!important;height:100%!important}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -1321,7 +1344,7 @@ html,body{width:100%;min-height:100%;margin:0;overflow-x:hidden}
  </div>
  <div class="headright">
   <span class="local-pill"><i></i><span data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span></span>
-  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">Mèo</option></select></label>
+  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐱 Mèo</option><option value="forest">🌲 Gấu rừng</option><option value="minimal">◻ Tối giản</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
@@ -1934,7 +1957,7 @@ function updateThemeDecorations(theme){
   retro:{overview:'♫',intro:'♪',catalog:'♪',run:'♬',results:'♩',memory:'♫',platforms:'𝄞',autofill:'♭',stockforecast:'♬',account:'♪',settings:'𝄢'},
   pink:{overview:'🌸',intro:'🌷',catalog:'🌺',run:'🌷',results:'💐',memory:'🌼',platforms:'🌸',autofill:'🌹',stockforecast:'🌺',account:'🌸',settings:'🌷'},
   vampire:{overview:'🦇',intro:'🕸️',catalog:'🕸️',run:'🗡️',results:'🕯️',memory:'🦇',platforms:'🎃',autofill:'☠️',stockforecast:'🩸',account:'🦇',settings:'🕷️'},
-  cat:{overview:'🐈',intro:'🐾',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},bear:{overview:'',intro:'🐾',catalog:'🐟',run:'',results:'🐾',memory:'🍯',platforms:'🐟',autofill:'🌲',stockforecast:'🐟',account:'',settings:'🍃'}
+  cat:{overview:'🐈',intro:'🐾',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},forest:{overview:'🌲',intro:'🍃',catalog:'🐻',run:'🐾',results:'🍄',memory:'🍯',platforms:'🌿',autofill:'🌲',stockforecast:'🪵',account:'🐻',settings:'🍃'},minimal:{overview:'○',intro:'◌',catalog:'□',run:'↗',results:'✓',memory:'◇',platforms:'⌕',autofill:'↔',stockforecast:'▥',account:'○',settings:'⚙'},bear:{overview:'',intro:'🐾',catalog:'🐟',run:'',results:'🐾',memory:'🍯',platforms:'🐟',autofill:'🌲',stockforecast:'🐟',account:'',settings:'🍃'}
  };
  document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&iconMaps[theme][page]){icon.innerHTML=themeDoodleSvg(theme,Math.max(0,Object.keys(iconMaps[theme]).indexOf(page)));icon.setAttribute('aria-hidden','true')}});
  document.querySelectorAll('.intro-step-icon,.intro-guide-illustration,.intro-notice-art,.upload .bigicon,.tile-icon,.folder-icon,.summary-icon,.result-icon,[data-art-icon]').forEach((icon,i)=>{icon.innerHTML=themeDoodleSvg(theme,i+1);icon.setAttribute('aria-hidden','true')});
@@ -1947,7 +1970,7 @@ function updateThemeScene(theme){
   retro:['♪','♫','♬','♩','𝄞','♭','♫','♪'],
   pink:['🌸','🌺','🌷','🌼','🌹','🌸','❀','🌸'],
   vampire:['🦇','🎃','🕸️','🕯️','🦇','💀','🕷️','☠️'],
-  cat:['🐈','🐈‍⬛','🐟','🦴','🧶','🐾','🐱','🐠'],bear:['','🐟','🌲','🍯','🐾','🌿','🐟','']
+  cat:['🐈','🐈‍⬛','🐟','🦴','🧶','🐾','🐱','🐠'],forest:['🐻','🌲','🍃','🍄','🦋','🌿','🐾','🍯'],minimal:['○','◌','◇','□','△','—','＋','✓'],bear:['','🐟','🌲','🍯','🐾','🌿','🐟','']
  };
  const spots=[[3,19,23],[15,37,18],[29,14,25],[43,33,19],[56,12,21],[67,41,23],[78,20,17],[91,36,24],[8,69,20],[26,83,18],[74,76,22],[94,68,18]];
  spots.forEach((p,i)=>{const el=document.createElement('span');el.className='theme-drift';el.innerHTML=themeDoodleSvg(theme,i);el.style.setProperty('--x',p[0]+'%');el.style.setProperty('--y',p[1]+'%');el.style.setProperty('--size',p[2]+'px');el.style.setProperty('--opacity',theme==='retro'?'0.17':theme==='vampire'?'0.23':'0.19');el.style.setProperty('--dur',(4.2+(i%5)*.7)+'s');el.style.setProperty('--delay',(-i*.63)+'s');el.style.setProperty('--dx',((i%2?1:-1)*(7+i%4*4))+'px');el.style.setProperty('--dy',(-9-i%3*5)+'px');el.style.setProperty('--turn',((i%2?1:-1)*8)+'deg');root.appendChild(el)});
@@ -2009,7 +2032,7 @@ function initCalculatorWidget(){
 /* Entertainment feature removed: no bear widget initializer. */
 
 const THEME_KEY='matchma-theme-v2';
-function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
+function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','forest','minimal'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
 function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
@@ -2660,8 +2683,8 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
    const theme=document.body.dataset.theme||'ocean';
    if(live>28)return;
    const icons=iconsByTheme[theme]||iconsByTheme.ocean;
-   const count=theme==='bear'?3+(Math.random()>.6?1:0):theme==='cat'?3+(Math.random()>.58?1:0):theme==='vampire'?2+(Math.random()>.5?1:0):theme==='ocean'?3:2;
-   const motion=theme==='bear'?'theme-bear':theme==='cat'?'theme-cat':theme==='vampire'?'theme-bat':theme==='pink'?'theme-flower':theme==='retro'?'theme-note':'theme-fish';
+   const count=theme==='forest'?3+(Math.random()>.6?1:0):theme==='minimal'?1:theme==='bear'?3+(Math.random()>.6?1:0):theme==='cat'?3+(Math.random()>.58?1:0):theme==='vampire'?2+(Math.random()>.5?1:0):theme==='ocean'?3:2;
+   const motion=theme==='forest'?'theme-forest':theme==='minimal'?'theme-minimal':theme==='bear'?'theme-bear':theme==='cat'?'theme-cat':theme==='vampire'?'theme-bat':theme==='pink'?'theme-flower':theme==='retro'?'theme-note':'theme-fish';
    for(let i=0;i<count;i++){
      const particle=document.createElement('span');particle.className='cat-flower-particle '+motion;
      particle.innerHTML=themeDoodleSvg(theme,Math.floor(Math.random()*9));particle.setAttribute('aria-hidden','true');
