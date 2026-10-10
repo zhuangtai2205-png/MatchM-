@@ -683,3 +683,42 @@ html body[data-theme="bear"] .hero,html body[data-theme="bear"] .panel,html body
 html body[data-theme] .hero,html body[data-theme] .panel,html body[data-theme] .sidebar,html body[data-theme] .stat,html body[data-theme] .mini,html body[data-theme] .chart-card,html body[data-theme] .tablewrap{border-style:dashed!important;box-shadow:none!important}
 html body[data-theme] .navbtn,html body[data-theme] .btn,html body[data-theme] input[type=text],html body[data-theme] input[type=number],html body[data-theme] select,html body[data-theme] textarea,html body[data-theme] .search{border-style:dashed!important}
 html body[data-theme="vampire"] header.app-header .brand .logo>img.brand-logo-img{filter:none!important;-webkit-filter:none!important}
+
+
+/* Transparent master brand mark + hand-drawn theme-specific menu illustrations */
+html body[data-theme] header.app-header .brand .logo{
+  width:58px!important;height:70px!important;min-width:58px!important;min-height:70px!important;
+  padding:0!important;overflow:visible!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;isolation:isolate!important;
+}
+html body[data-theme] header.app-header .brand .logo>img.brand-logo-img{
+  display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;
+  background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+html body[data-theme] .navbtn:before{
+  content:""!important;display:inline-block!important;flex:0 0 25px!important;width:25px!important;height:25px!important;
+  margin:0 7px 0 0!important;background-repeat:no-repeat!important;background-position:center!important;
+  background-size:contain!important;vertical-align:middle!important;filter:none!important;
+}
+html body[data-theme="ocean"] .navbtn:before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%233a8da4' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11q4-5 8 0t8 0t10 0M3 18q4-5 8 0t8 0t10 0M3 25q4-5 8 0t8 0t10 0'/%3E%3C/g%3E%3C/svg%3E")!important;
+}
+html body[data-theme="retro"] .navbtn:before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%234b4b4b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 5v18a4 4 0 1 1-3-4V9l12-3v14a4 4 0 1 1-3-4V4z'/%3E%3C/g%3E%3C/svg%3E")!important;
+}
+html body[data-theme="pink"] .navbtn:before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23c16c99' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 15C6 15 7 4 13 7q3 2 3 8C16 5 26 5 25 12q-1 4-9 4c10-1 12 9 5 11q-4 1-5-8c1 9-9 12-11 5q-1-5 8-8c-9 3-14-6-7-10q5-2 10 9z'/%3E%3Cpath d='M16 17q-1 8-6 12m6-7 5 2'/%3E%3C/g%3E%3C/svg%3E")!important;
+}
+html body[data-theme="vampire"] .navbtn:before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23d66b88' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 4l13 12L29 4 24 18 16 28 8 18zM3 4l21 14M29 4 8 18M3 4l26 0M8 18l16 0M16 16v12'/%3E%3C/g%3E%3C/svg%3E")!important;
+}
+html body[data-theme="cat"] .navbtn:before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%23a87970' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 12 6 4l7 5q3-1 6 0l7-5-1 9q4 9-9 15Q4 24 7 12zM11 16h.1M21 16h.1M13 21q3 3 6 0M3 28q4-3 8 0t8 0t10 0'/%3E%3C/g%3E%3C/svg%3E")!important;
+}
+html body[data-theme="bear"] .navbtn:before{
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cg fill='none' stroke='%235b8053' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M16 3 5 14h5L4 21h9v8h6v-8h9l-6-7h5z'/%3E%3Cpath d='M16 8v18M13 14l3 3 3-3'/%3E%3C/g%3E%3C/svg%3E")!important;
+}
+@media(max-width:650px){
+ html body[data-theme] header.app-header .brand .logo{width:48px!important;height:58px!important;min-width:48px!important;min-height:58px!important}
+ html body[data-theme] .navbtn:before{width:22px!important;height:22px!important;flex-basis:22px!important;margin-right:5px!important}
+}
