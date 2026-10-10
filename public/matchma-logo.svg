@@ -1,31 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 492" role="img" aria-label="Match Mã — samurai and sword" preserveAspectRatio="xMidYMid meet">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 492" role="img" aria-label="Match Mã — mèo samurai cầm kiếm" preserveAspectRatio="xMidYMid meet">
 <title>Match Mã</title>
-<rect width="660" height="492" fill="none"/>
-<g fill="none" stroke="#050505" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
-<path d="M291 253 C247 234 229 193 236 150 C245 96 293 61 347 69 C395 76 428 108 439 151"/>
-<path d="M238 151 C240 208 265 236 291 253"/>
-<path d="M291 253 C329 274 378 265 406 234"/>
-<path d="M285 144 L334 99 L391 146 L373 151 L364 174 L337 183 L313 172 L298 159 Z" fill="#fff"/>
-<path d="M334 99 L344 130 L391 146"/>
-<path d="M285 144 L313 150 L337 183"/>
-<path d="M299 158 L362 174"/>
-<path d="M311 126 L326 103 L337 135 L353 148"/>
-<path d="M352 105 L365 132 L358 148"/>
-<path d="M314 171 C306 188 312 204 329 212 C341 218 354 211 363 201 L369 188 L360 176"/>
-<path d="M346 183 L355 187"/>
-<path d="M343 205 L352 207"/>
-<path d="M369 193 L421 132 L442 113 L435 139 L380 208"/>
-<path d="M366 208 L383 223"/>
-<path d="M363 213 L379 228"/>
-<path d="M381 222 L357 250 Q352 256 347 251 Q344 247 349 241 L367 218"/>
-<path d="M375 219 L428 155"/>
+<rect width="660" height="492" fill="#fff"/>
+<g fill="none" stroke="#080808" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="330" cy="171" r="104"/>
+<path d="M267 235 Q278 203 303 187 L316 158 Q326 143 350 151 L377 169 L395 186 L378 190 Q389 199 380 210 Q375 219 363 219 L354 234 L348 250"/>
+<path d="M302 185 L284 179 L296 160 L322 165 L328 181 Z" fill="#fff"/>
+<path d="M296 160 L303 144 L326 151 L322 165"/>
+<path d="M285 180 L275 194 L329 208 L332 190 Z" fill="#fff"/>
+<path d="M275 194 L265 209 L329 224 L329 208 Z" fill="#fff"/>
+<path d="M265 209 L256 225 L325 240 L329 224 Z" fill="#fff"/>
+<path d="M312 150 L297 117 L322 128 L340 161 Q347 171 354 164 L339 126 L350 119 L366 163"/>
+<path d="M368 194 L380 198"/>
+<path d="M365 216 Q373 219 378 213"/>
+<path d="M344 237 L396 177 L440 125 Q446 145 428 166 L384 220"/>
+<path d="M340 241 L357 256 L370 243 L353 228 Z" fill="#fff"/>
+<path d="M354 252 L329 281 Q323 288 317 282 Q313 278 320 271 L342 246" fill="#fff"/>
+<path d="M360 246 L411 185"/>
 </g>
-<g fill="#050505">
-<path d="M341 182 l10 3 -7 5z"/>
-<path d="M345 204 q7 2 10 -2 q-4 8 -10 2z"/>
-</g>
-<g fill="#050505" font-family="Georgia, 'Times New Roman', serif" font-weight="700" text-anchor="middle">
-<text x="332" y="331" font-size="70" letter-spacing="-2">match</text>
-<text x="333" y="392" font-size="70" letter-spacing="-2">mã</text>
-</g>
-</svg>
+<g fill="#080808" font-family="Arial, Helvetica, sans-serif" font-weight="800" text-anchor="middle">
+<text x="330" y="350" font-size="67" letter-spacing="-2">match</text>
+<text x="330" y="407" font-size="67" letter-spacing="-2">mã</text>
+</g></svg>
