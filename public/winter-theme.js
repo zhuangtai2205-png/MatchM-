@@ -6,12 +6,14 @@
     retro:{background:["♪","♫","♬","𝄞","♩"],click:["♪","♫","♬","♩","𝄞"],nav:[]},
     pink:{background:["petal","petal","flower","petal","sakura"],click:["🌸","🌺","🌷","❀"],nav:[]},
     vampire:{background:["web","bat","moon","web","candle"],click:["🦇","🕸","✦","🕯"],nav:[]},
-    cat:{background:["cat","yarn","paw","yarn","cat"],click:["🐈","🧶","🐾","🧵"],nav:[]}
+    cat:{background:["cat","yarn","paw","yarn","cat"],click:["🐈","🧶","🐾","🧵"],nav:[]},
+    forest:{background:["bear","pine","honey","pine","bear","honey"],click:["🐻","🌲","🍯","🐝"],nav:[]},
+    minimal:{background:[],click:[],nav:[]}
   };
   const theme = () => document.body.dataset.theme || 'ocean';
   function renderScenery(){
     const root=$('#themeScene'); if(!root)return;
-    const t=theme(),cfg=themeMotifs[t]||themeMotifs.ocean; root.replaceChildren();
+    const t=theme(),cfg=themeMotifs[t]||themeMotifs.ocean; root.replaceChildren(); if(t==="minimal")return;
     cfg.background.forEach((kind,i)=>{
       const el=document.createElement('span'); el.className='scene-doodle scene-'+kind;
       el.setAttribute('aria-hidden','true');
@@ -24,6 +26,7 @@
   function showClick(e){
     if(e.button!==0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const cfg=themeMotifs[theme()]||themeMotifs.ocean;
+    if(theme()==="minimal")return;
     for(let i=0;i<3;i++){
       const el=document.createElement('span');el.className='theme-click-doodle';
       el.textContent=cfg.click[Math.floor(Math.random()*cfg.click.length)];
