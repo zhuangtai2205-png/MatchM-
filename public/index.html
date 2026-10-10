@@ -1175,6 +1175,136 @@ td{border-bottom:1px dashed #ead8c3!important;color:#624833!important}
 .bear-panel-preview{background:#fff6e6!important;border:1.5px dashed #d9b998!important;border-radius:15px!important;box-shadow:none!important}
 .bear-snowflake{opacity:.8}
 @media(max-width:650px){#bear-container{width:190px!important;height:105px!important;left:2px!important;bottom:2px!important}.nav-folder{padding:7px!important}}
+
+/* MatchMã — Bear storybook theme, inspired by the supplied paper-and-crayon reference */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Baloo+2:wght@400;500;600;700;800&display=swap');
+body[data-theme="bear"]{
+ --ink:#75402b;--muted:#956e58;--line:#d9b18d;--lav:#f7e7c6;--pink:#f8d9cf;--mint:#dfe9cc;--purple:#a95f35;--paper:#fff8e9;--frame:#c9956f;--green:#6c8b58;--amber:#b47b36;--red:#a95a4d;
+ background-color:#fbf4e5!important;
+ background-image:radial-gradient(ellipse at 15% 12%,#fffdf4 0,transparent 48%),radial-gradient(#b88b5b15 .65px,transparent .9px),radial-gradient(#9b704715 .7px,transparent 1px)!important;
+ background-size:auto,7px 7px,11px 11px!important;background-position:center,0 0,3px 4px!important;
+ color:#75402b!important;font-family:'Patrick Hand','Baloo 2','Trebuchet MS',sans-serif!important;
+}
+body[data-theme="bear"] h1,body[data-theme="bear"] h2,body[data-theme="bear"] h3,
+body[data-theme="bear"] .navbtn,body[data-theme="bear"] button,body[data-theme="bear"] label,
+body[data-theme="bear"] .subbrand,body[data-theme="bear"] .hero p,body[data-theme="bear"] .panel p,
+body[data-theme="bear"] .stat small,body[data-theme="bear"] .field label{
+ font-family:'Patrick Hand','Baloo 2',sans-serif!important;letter-spacing:.15px!important;
+}
+body[data-theme="bear"] .app-header{
+ max-width:1500px!important;padding:15px 24px 12px!important;
+ border-bottom:2px solid #dfc5a8!important;background:#fbf4e5e8!important;
+}
+body[data-theme="bear"] .logo{background:#f7d98c!important;border:2px solid #b77749!important;border-radius:50% 45% 48% 44%!important;box-shadow:none!important}
+body[data-theme="bear"] .brand-logo-img{display:none!important}
+body[data-theme="bear"] .logo:after{content:"🐻";font-size:27px;line-height:1}
+body[data-theme="bear"] .brand-copy h1{color:#75402b!important;font-size:clamp(25px,2.7vw,35px)!important;letter-spacing:.2px!important}
+body[data-theme="bear"] h1 span{color:#a85d37!important}
+body[data-theme="bear"] .subbrand{color:#986b4e!important}
+body[data-theme="bear"] .headright{gap:7px!important}
+body[data-theme="bear"] .local-pill,body[data-theme="bear"] .toolbar-select,body[data-theme="bear"] .toolbar-font,
+body[data-theme="bear"] .fun-toggle-button,body[data-theme="bear"] .calculator-toggle-button{
+ background:#fff8e9!important;border:1.5px dashed #c9956f!important;border-radius:999px!important;
+ box-shadow:none!important;color:#75402b!important;
+}
+body[data-theme="bear"] .app-shell{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;max-width:1500px!important}
+body[data-theme="bear"] .sidebar{
+ position:relative!important;top:auto!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:5px!important;
+ padding:8px 10px!important;background:#fbf4e5e8!important;border:0!important;border-bottom:1.5px dashed #d4ad8c!important;
+ border-radius:0!important;box-shadow:none!important;overflow:visible!important;
+}
+body[data-theme="bear"] .sidebar-topline{display:none!important}
+body[data-theme="bear"] .nav-folder{
+ flex:0 1 auto!important;min-width:0!important;margin:0 2px!important;padding:0!important;
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+body[data-theme="bear"] .nav-folder>.navfolder-title{
+ padding:8px 13px!important;border:1.5px dashed #c9956f!important;border-radius:999px!important;
+ background:#fff9ed!important;color:#75402b!important;box-shadow:none!important;
+}
+body[data-theme="bear"] .nav-folder[open]>.navfolder-title{background:#f8d995!important;border-style:solid!important}
+body[data-theme="bear"] .nav-folder .navbtn{border:1px dashed #d7b393!important;border-radius:13px!important;background:#fff9ed!important}
+body[data-theme="bear"] .nav-folder .navbtn.active{background:#f8d995!important;border:1.5px solid #d6a14e!important;color:#75402b!important;box-shadow:none!important}
+body[data-theme="bear"] .sidebar-bottom,body[data-theme="bear"] .sidefoot{display:none!important}
+body[data-theme="bear"] .main{min-width:0!important}
+body[data-theme="bear"] .page{
+ padding:12px!important;border:1.5px dashed #d3a47e!important;border-radius:23px!important;
+ background:#fff9edc9!important;box-shadow:none!important;backdrop-filter:none!important;
+}
+body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini,
+body[data-theme="bear"] .overview-card,body[data-theme="bear"] .folder-card,body[data-theme="bear"] .nav-folder,
+body[data-theme="bear"] .upload,body[data-theme="bear"] .tablewrap,body[data-theme="bear"] .result-card{
+ border:1.5px dashed #d1a17a!important;border-radius:19px!important;box-shadow:none!important;backdrop-filter:none!important;
+}
+body[data-theme="bear"] .hero{background:#fff8e9e8!important}
+body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini{background:#fffaf0e8!important}
+body[data-theme="bear"] .hero h2,body[data-theme="bear"] .sectionhead h2,body[data-theme="bear"] .panel h2{color:#75402b!important}
+body[data-theme="bear"] .eyebrow{color:#a66b45!important}
+body[data-theme="bear"] .btn,body[data-theme="bear"] .btn:not(.alt),body[data-theme="bear"] .btn.alt,body[data-theme="bear"] .btn.soft{
+ color:#75402b!important;background:#f8d995!important;border:1.5px dashed #c68a4f!important;border-radius:999px!important;
+ box-shadow:none!important;transform:none!important;
+}
+body[data-theme="bear"] .btn:hover,body[data-theme="bear"] .navbtn:hover{background:#f5e4b8!important}
+body[data-theme="bear"] .upload{background:#fff8e9!important;border:2px dashed #c9956f!important}
+body[data-theme="bear"] .field input[type=text],body[data-theme="bear"] .field select,body[data-theme="bear"] .field input[type=number],
+body[data-theme="bear"] .search,body[data-theme="bear"] input,body[data-theme="bear"] select,body[data-theme="bear"] textarea{
+ background:#fffdf6!important;border:1.5px dashed #d3ad8d!important;border-radius:12px!important;color:#75402b!important;
+}
+body[data-theme="bear"] .tablewrap{background:#fffaf0!important;overflow:auto}
+body[data-theme="bear"] th{background:#f7e7c9!important;color:#75402b!important;border-bottom:1.5px dashed #d3ad8d!important}
+body[data-theme="bear"] td{border-bottom:1px dashed #ead8c3!important}
+body[data-theme="bear"] .rule,body[data-theme="bear"] .progressbox,body[data-theme="bear"] .okmsg{
+ background:#f4edda!important;border:1.5px dashed #d3ad8d!important;border-radius:14px!important;color:#79533b!important;
+}
+body[data-theme="bear"] .badge{border:1px dashed #d3ad8d!important;border-radius:999px!important}
+body[data-theme="bear"] #themeScene{z-index:0!important;pointer-events:none!important}
+body[data-theme="bear"] #themeScene .theme-drift{opacity:.52!important;filter:none!important}
+body[data-theme="bear"] #themeScene:before{
+ content:"";position:absolute;left:0;right:0;bottom:0;height:clamp(100px,19vh,205px);
+ background-repeat:no-repeat;background-position:left bottom;background-size:100% 100%;opacity:.92;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 230' preserveAspectRatio='none'%3E%3Cpath d='M0 164L62 128 92 145 145 70 185 127 230 101 286 155 360 136 421 164 500 142 565 163 650 139 720 166 802 139 866 166 930 140 1005 164 1080 121 1145 150 1212 68 1260 121 1310 43 1370 128 1440 100V230H0Z' fill='%23e6eaf0'/%3E%3Cpath d='M0 190Q130 167 245 190T490 188T730 190T970 187T1210 189T1440 184V230H0Z' fill='%23dce8e7'/%3E%3Cpath d='M0 211Q130 198 270 210T550 210T830 209T1100 210T1440 205' fill='none' stroke='%23b4cfe0' stroke-width='4' stroke-dasharray='7 7'/%3E%3C/svg%3E");
+}
+body[data-theme="bear"] #themeScene:after{
+ content:"❄　　❄　　　 ❄　　　❄　　　❄　　❄　　　 ❄　　 ❄";
+ position:absolute;inset:-50px 0 0;display:block;pointer-events:none;color:#83b9d4;
+ font:24px/130px 'Patrick Hand',sans-serif;letter-spacing:7px;white-space:pre-wrap;overflow:hidden;
+ text-shadow:0 0 1px #fff;opacity:.6;animation:bearSnowDrift 11s linear infinite;
+ background-image:radial-gradient(circle,#8fc7df 1.5px,transparent 2.5px),radial-gradient(circle,#c2deea 2px,transparent 3px);
+ background-size:83px 96px,137px 121px;background-position:0 0,40px 33px;
+}
+@keyframes bearSnowDrift{from{transform:translateY(-35px)}to{transform:translateY(75px)}}
+body[data-theme="bear"] #fat-bear-overlay[hidden]{display:block!important}
+body[data-theme="bear"] #fat-bear-overlay{z-index:2!important;pointer-events:none!important}
+body[data-theme="bear"] #bear-container{
+ left:clamp(8px,7vw,115px)!important;bottom:4px!important;
+ width:clamp(245px,39vw,560px)!important;height:auto!important;aspect-ratio:auto!important;
+ max-width:calc(100vw - 16px)!important;transform:scale(var(--bear-scale,1))!important;
+ transform-origin:bottom left!important;overflow:visible!important;pointer-events:auto!important;
+}
+body[data-theme="bear"] #bear-sprite{display:block!important;width:100%!important;height:auto!important;max-height:42vh!important;overflow:visible!important}
+body[data-theme="bear"] .bear-caption{left:50%!important;bottom:4px!important;transform:translateX(-50%)!important;border:1px dashed #c9956f!important;background:#fff8e9ed!important;color:#75402b!important;box-shadow:none!important}
+body[data-theme="bear"] #bear-snow{position:absolute!important;inset:0!important;overflow:hidden!important;pointer-events:none!important}
+body[data-theme="bear"] .bear-snowflake{opacity:.8!important}
+body[data-theme="bear"] .bear-fish{filter:none!important}
+body[data-theme="bear"] .fun-widget{background:#fff8e9!important;border:1.5px dashed #c9956f!important;border-radius:18px!important;box-shadow:none!important;color:#75402b!important}
+body[data-theme="bear"] .fun-widget-bar{background:#f7e5c5!important;border-bottom:1.5px dashed #c9956f!important}
+body[data-theme="bear"] .calculator-widget{background:#fff8e9!important;border:1.5px dashed #c9956f!important;box-shadow:none!important}
+body[data-theme="bear"] .foot{color:#956e58!important}
+@media(max-width:950px){
+ body[data-theme="bear"] .sidebar{display:flex!important;overflow-x:auto!important;flex-wrap:nowrap!important;align-items:flex-start!important}
+ body[data-theme="bear"] .nav-folder{flex:0 0 auto!important}
+ body[data-theme="bear"] .nav-folder[open]{max-width:85vw!important}
+}
+@media(max-width:650px){
+ body[data-theme="bear"] .app-header{padding:10px 12px!important}
+ body[data-theme="bear"] .brand-logo-img{display:none!important}
+ body[data-theme="bear"] .headright{flex-wrap:wrap!important}
+ body[data-theme="bear"] .page{padding:7px!important}
+ body[data-theme="bear"] #bear-container{width:clamp(205px,57vw,330px)!important;left:3px!important;bottom:0!important}
+ body[data-theme="bear"] #bear-sprite{max-height:30vh!important}
+ body[data-theme="bear"] #themeScene:before{height:115px}
+}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2023,9 +2153,9 @@ function initCalculatorWidget(){
 
 function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overlay=$('fat-bear-overlay'),drag=$('funWidgetDragBar');if(!btn||!widget||!overlay)return;btn.addEventListener('click',()=>setFunWidgetOpen(widget.hidden));$('funCloseBtn').addEventListener('click',()=>setFunWidgetOpen(false));$('funMinimizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-minimized');$('funMinimizeBtn').textContent=widget.classList.contains('is-minimized')?'+':'−';$('funMinimizeBtn').title=tr(widget.classList.contains('is-minimized')?'funExpand':'funMinimize')});$('funMaximizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-maximized');widget.classList.remove('is-minimized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent=widget.classList.contains('is-maximized')?'❐':'□';$('funMaximizeBtn').title=tr(widget.classList.contains('is-maximized')?'funRestore':'funMaximize')});$('funResetBear').addEventListener('click',resetBear);$('funSpawnFish').addEventListener('click',()=>{spawnBearFish(3);if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=lang==='vi'?'Đã thả thêm cá! Hãy bắt một con cho gấu.':'More fish added! Catch one for the bear.';setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1300)}});$('funEffectsToggle').addEventListener('click',()=>{const off=document.body.dataset.funEffects!=='off';document.body.dataset.funEffects=off?'off':'on';$('funEffectsToggle').textContent=tr(off?'funEffectsOn':'funEffectsOff');$('funEffectsToggle').setAttribute('aria-pressed',String(!off));try{localStorage.setItem(BEAR_EFFECT_KEY,off?'0':'1')}catch(e){}});$('bear-container').addEventListener('click',petBear);let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;drag.addEventListener('pointerdown',e=>{if(e.target.closest('button')||widget.classList.contains('is-maximized'))return;dragging=true;const r=widget.getBoundingClientRect();startX=e.clientX;startY=e.clientY;startLeft=r.left;startTop=r.top;widget.style.left=r.left+'px';widget.style.top=r.top+'px';widget.style.right='auto';widget.style.bottom='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){} });drag.addEventListener('pointermove',e=>{if(!dragging)return;const maxLeft=Math.max(0,window.innerWidth-widget.offsetWidth),maxTop=Math.max(0,window.innerHeight-65);widget.style.left=Math.min(maxLeft,Math.max(0,startLeft+e.clientX-startX))+'px';widget.style.top=Math.min(maxTop,Math.max(0,startTop+e.clientY-startY))+'px'});const stop=()=>{dragging=false};drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);let effects=true;try{effects=localStorage.getItem(BEAR_EFFECT_KEY)!=='0'}catch(e){}document.body.dataset.funEffects=effects?'on':'off';$('funEffectsToggle').textContent=tr(effects?'funEffectsOff':'funEffectsOn');$('funEffectsToggle').setAttribute('aria-pressed',String(effects));updateBearDisplay();if(fishEaten>=BEAR_HIBERNATE_AT)goBearHibernation();const mascot=$('funWidget').querySelector('.fun-widget-mascot');if(mascot)mascot.innerHTML=themeDoodleSvg('bear',0);const toggleIcon=$('funToggleBtn').querySelector('.fun-toggle-icon');if(toggleIcon)toggleIcon.innerHTML=themeDoodleSvg('bear',0)}
 
-const THEME_KEY='matchma-theme-v1';
+const THEME_KEY='matchma-theme-v2';
 function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
-function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
+function initTheme(){let saved='bear';try{saved=localStorage.getItem(THEME_KEY)||'bear'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
  $('platformFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);platformSourceHeaders=d.headers;platformSourceRows=d.rows.map((row,i)=>({row:{...row},sourceIndex:i+1,status:'todo'}));platformPage=1;fillSelect('platformNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('platformIdCol',d.headers,guessStt(d.headers),true);$('platformFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng. STT/ID nguồn sẽ không bị chỉnh sửa.';$('buildPlatformAudit').disabled=!d.headers.length;$('exportPlatformAudit').disabled=true;platformBuilt=false;renderPlatformAudit()}catch(err){alert(err.message||'Không đọc được file');}});
