@@ -2004,7 +2004,7 @@ header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inhe
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
   <button type="button" id="calculatorToggleBtn" class="calculator-toggle-button" aria-controls="calculatorWidget" aria-expanded="false" title="Mở máy tính" data-i18n-title="calculatorOpen"><span class="calculator-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.3 1"><rect x="4" y="2.5" width="16" height="19" rx="2.2"/><path d="M7.5 6.5 H16.5 M7.5 10 H16.5"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="12" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/></g></svg></span><span data-i18n="calculatorName">Máy tính</span></button>
-  <button type="button" id="mmOpenBearCorner" class="calculator-toggle-button" title="Mở Góc gấu" aria-expanded="false"><span class="calculator-toggle-icon" aria-hidden="true">🐻</span><span>Góc gấu</span></button>
+  
   
  </div>
 </header>
@@ -3433,100 +3433,5 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 
 
 
-<div id="mmBackgroundBear" aria-label="Góc gấu và đại dương 2D">
- <div class="mm-bg-bear-head"><strong>🐻 Góc gấu</strong><div class="mm-bg-bear-head-actions"><button type="button" id="mmBearVisibility" aria-pressed="true">Ẩn gấu</button></div></div>
- <canvas id="mmBackgroundBearCanvas" width="360" height="250" aria-label="Cho gấu ăn cá bằng cách nhấn vào cá"></canvas>
- <div class="mm-bg-bear-controls"><span id="mmBackgroundBearHint">🐟 Nhấn “Thả cá ngẫu nhiên” rồi bấm cá để cho gấu ăn</span><div class="mm-bg-bear-actions"><button type="button" id="mmBackgroundFishDrop">🎣 Thả cá ngẫu nhiên</button></div></div>
-</div>
-<canvas id="mmBearSnow" aria-hidden="true" style="position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:1199;display:none"></canvas>
-<style id="mm-background-bear-css">
-#mmBearSnow{display:none}body:has(#mmBackgroundBear.mm-bear-hibernating) #mmBearSnow{display:block}#mmBackgroundBear{position:fixed;left:50%;bottom:14px;right:auto;transform:translateX(-50%);z-index:2147482000;width:min(390px,94vw);pointer-events:auto;display:flex;flex-direction:column;gap:7px;opacity:1;border:1px solid #d8c4ae;border-radius:16px;padding:9px;background:rgba(255,250,244,.97);box-shadow:0 8px 28px rgba(57,36,20,.22);backdrop-filter:blur(8px);color:#49301f}
-#mmBackgroundBear[hidden],#mmBackgroundBear.mm-bg-hidden{display:none!important}
-#mmBackgroundBear .mm-bg-bear-head,#mmBackgroundBear .mm-bg-bear-controls{display:flex;align-items:center;justify-content:space-between;gap:6px;color:#49301f;font-size:12px}
-#mmBackgroundBear .mm-bg-bear-head-actions,#mmBackgroundBear .mm-bg-bear-actions{display:flex;align-items:center;gap:4px}
-#mmBackgroundBear button,#mmBackgroundBear select{border:1px solid #a7d0bb;background:#edf9f0;color:#235b35;border-radius:8px;padding:6px 8px;font-size:11px;font-weight:750;cursor:pointer;max-width:100%}
-#mmBackgroundBear canvas{display:block;width:100%;height:auto;max-height:300px;object-fit:contain;cursor:crosshair;touch-action:manipulation}
-#mmBackgroundBear #mmBackgroundBearHint{font-size:10px;font-weight:700}
-@media(max-width:600px){#mmBackgroundBear{right:5px;bottom:5px;width:min(390px,90vw);padding:3px}#mmBackgroundBear canvas{max-height:220px}#mmBackgroundBear button,#mmBackgroundBear select{font-size:10px;padding:5px}#mmBackgroundBear .mm-bg-bear-controls{align-items:flex-start;flex-direction:column}}
-</style>
-<script id="mm-background-bear-js">
-(()=>{'use strict';
-const root=document.getElementById('mmBackgroundBear'),canvas=document.getElementById('mmBackgroundBearCanvas'),hint=document.getElementById('mmBackgroundBearHint'),drop=document.getElementById('mmBackgroundFishDrop'),vis=document.getElementById('mmBearVisibility'),open=document.getElementById('mmOpenBearCorner'),snowCanvas=document.getElementById('mmBearSnow');
-if(!root||!canvas||!hint||!drop||!vis)return;
-const ctx=canvas.getContext('2d'),W=canvas.width,H=canvas.height;let items=[],t=0,raf=0,shown=true,scale=.72,growth=0,eaten=0,sleeping=false,snow=[];
-function ellipse(x,y,rx,ry,color){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill()}
-function fish(f){ctx.save();ctx.translate(f.x,f.y);ctx.scale(f.s,f.s);let col=['#ff9b45','#ffcc59','#50bde8','#f2d56b'][f.kind];ellipse(0,0,15,9,col);ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(-12,0);ctx.lineTo(-23,-9);ctx.lineTo(-23,9);ctx.fill();if(f.kind===1){ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-3,-8);ctx.lineTo(-3,8);ctx.moveTo(5,-7);ctx.lineTo(5,7);ctx.stroke()}ellipse(7,-2,2.5,2.5,'white');ellipse(8,-2,1.2,1.2,'#233')}
-function bear(){const z=scale*(1+Math.min(growth,12)*.055),pose=Math.floor(t/180)%3;ctx.save();ctx.translate(W/2,H*.68);ctx.scale(z,z);const fur='#b9753e',cream='#f4d9b2',dark='#75452c',pink='#d88d83';
-if(pose===0){ellipse(0,4,25,31,fur);ellipse(0,-35,25,24,fur);ellipse(-18,-55,9,10,fur);ellipse(18,-55,9,10,fur);ellipse(-18,-55,4,5,pink);ellipse(18,-55,4,5,pink);ellipse(0,-28,14,11,cream);ellipse(-8,-39,2.5,3,'#29201b');ellipse(8,-39,2.5,3,'#29201b');ellipse(0,-31,4,3,dark);ellipse(-13,27,11,8,dark);ellipse(13,27,11,8,dark);ellipse(-27,-1,9,18,fur);ellipse(27,-1,9,18,fur)}
-else if(pose===1){ellipse(0,9,31,27,fur);ellipse(0,-29,25,24,fur);ellipse(-18,-49,9,10,fur);ellipse(18,-49,9,10,fur);ellipse(-18,-49,4,5,pink);ellipse(18,-49,4,5,pink);ellipse(0,-22,14,11,cream);ellipse(-8,-33,2.5,3,'#29201b');ellipse(8,-33,2.5,3,'#29201b');ellipse(0,-25,4,3,dark);ellipse(-17,23,12,8,dark);ellipse(17,23,12,8,dark);ellipse(-24,4,9,14,fur);ellipse(24,4,9,14,fur)}
-else{ellipse(0,7,39,23,fur);ellipse(-28,-7,19,19,fur);ellipse(-40,-22,8,9,fur);ellipse(-20,-23,8,9,fur);ellipse(-40,-22,4,4,pink);ellipse(-20,-23,4,4,pink);ellipse(-33,-8,3,3,'#29201b');ellipse(-24,-8,3,3,'#29201b');ellipse(-28,-1,5,3,dark);ellipse(18,23,13,7,dark);ellipse(-1,25,13,7,dark)}ctx.restore()}
-function draw(){ctx.clearRect(0,0,W,H);items.forEach(fish);bear();if(sleeping){ctx.fillStyle='#506d88';ctx.font='bold 12px system-ui';ctx.fillText('💤 Ngủ đông',8,17)}}
-function snowDraw(){if(!snowCanvas)return;const q=snowCanvas.getContext('2d');snowCanvas.width=innerWidth;snowCanvas.height=innerHeight;q.clearRect(0,0,snowCanvas.width,snowCanvas.height);q.fillStyle='rgba(255,255,255,.9)';snow.forEach(s=>{q.beginPath();q.arc(s.x,s.y,s.r,0,Math.PI*2);q.fill()})}
-function animate(){t++;items.forEach(f=>{f.y+=f.v;f.x+=Math.sin(t*.04+f.phase)*.5});items=items.filter(f=>f.y<H+20);if(sleeping){if(t%3===0)snow.push({x:Math.random()*innerWidth,y:-3,v:1+Math.random()*2,r:1+Math.random()*2});snow=snow.filter(s=>s.y<innerHeight+4);snow.forEach(s=>s.y+=s.v);snowDraw()}else if(snowCanvas){snow=[];snowCanvas.getContext('2d').clearRect(0,0,snowCanvas.width,snowCanvas.height)}draw();raf=requestAnimationFrame(animate)}
-function spawn(){if(sleeping){hint.textContent='❄️ Gấu đang ngủ đông!';return}items.push({kind:Math.floor(Math.random()*4),x:30+Math.random()*(W-60),y:35+Math.random()*35,s:.8+Math.random()*.35,v:.65+Math.random()*.7,phase:Math.random()*6});hint.textContent='Cá đã thả! Bấm trực tiếp vào cá để gấu ăn.'}
-canvas.addEventListener('click',e=>{const r=canvas.getBoundingClientRect(),x=(e.clientX-r.left)*W/r.width,y=(e.clientY-r.top)*H/r.height;for(let i=items.length-1;i>=0;i--){const f=items[i];if(Math.hypot(x-f.x,y-f.y)<25*f.s){items.splice(i,1);eaten++;growth=Math.min(12,growth+1);if(eaten%5===0){sleeping=true;root.classList.add('mm-bear-hibernating');hint.textContent='❄️ Gấu no bụng, ngủ đông và tuyết đang rơi!';setTimeout(()=>{sleeping=false;root.classList.remove('mm-bear-hibernating');hint.textContent='🐻 Gấu thức dậy! Thả cá ngẫu nhiên để chơi tiếp.'},12000)}else hint.textContent='🐻 Ăn được '+eaten+' cá! Gấu lớn thêm rồi.';draw();return}}});
-drop.addEventListener('click',spawn);vis.addEventListener('click',()=>{shown=!shown;canvas.style.visibility=shown?'visible':'hidden';vis.textContent=shown?'Ẩn gấu':'Hiện gấu';vis.setAttribute('aria-pressed',String(shown));if(open)open.setAttribute('aria-expanded',String(shown))});if(open)open.addEventListener('click',()=>{shown=!shown;canvas.style.visibility=shown?'visible':'hidden';vis.textContent=shown?'Ẩn gấu':'Hiện gấu';vis.setAttribute('aria-pressed',String(shown));open.setAttribute('aria-expanded',String(shown))});draw();animate();
-})();
-</script>
 
-<div id="matchmaEntertainmentOverlay" hidden style="display:none!important" aria-hidden="true">
- <div class="mm-ent-shell">
-  <div class="mm-ent-top"><div><div class="mm-ent-kicker">MATCHMÃ · EASTER EGG</div><h2>🎮 Góc giải trí</h2><p>Chơi ngay tại đây, không mở trang mới. Cho gấu ăn cá để xem gấu lớn dần như Easter egg Fat Bear Week của Google.</p></div><button type="button" id="mmEntClose" aria-label="Đóng trò chơi">✕</button></div>
-  <div class="mm-ent-tabs"><button type="button" class="mm-ent-tab active" data-game="bear">🐻 Gấu ăn cá</button><button type="button" class="mm-ent-tab" data-game="boat">🚤 Thuyền vớt rác</button></div>
-  <section class="mm-ent-game active" id="mmEntBear"><div class="mm-ent-info"><div><h3>🐻 Gấu ăn cá</h3><p>Bấm nút cho cá rơi xuống — mỗi lần ăn, gấu sẽ mập và to hơn.</p></div><strong id="mmBearScore">Cá: 0 · Gấu nhỏ</strong></div><canvas id="mmBearCanvas" width="760" height="360" aria-label="Easter egg gấu ăn cá, cho gấu lớn dần"></canvas><div class="mm-ent-controls"><button type="button" class="mm-ent-primary" id="mmBearFeed">🐟 Thả cá hồi</button><button type="button" id="mmBearStart">▶ Bắt đầu hiệu ứng</button><button type="button" id="mmBearPause">↺ Đặt lại</button><span>Nhấn nhiều lần để gấu lớn dần 🐻</span></div></section>
-  <section class="mm-ent-game" id="mmEntBoat"><div class="mm-ent-info"><div><h3>Thuyền vớt rác</h3><p>Thu gom rác, tránh đá ngầm và những đợt sóng bất ngờ.</p></div><strong id="mmBoatScore">Rác: 0 · Thuyền: 3</strong></div><canvas id="mmBoatCanvas" width="760" height="360" aria-label="Game thuyền vớt rác"></canvas><div class="mm-ent-controls"><button type="button" class="mm-ent-primary" id="mmBoatStart">▶ Ra khơi / tiếp tục</button><button type="button" id="mmBoatPause">Ⅱ Tạm dừng</button><span>← → hoặc A/D · Chạm trái/phải màn hình</span></div></section>
- </div>
-</div>
-<style id="matchma-entertainment-overlay-css">
-#matchmaEntertainmentOverlay[hidden]{display:none!important}
-#matchmaEntertainmentOverlay{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:clamp(8px,2vw,24px);background:rgba(7,24,31,.68);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
-#matchmaEntertainmentOverlay *{box-sizing:border-box}
-#matchmaEntertainmentOverlay .mm-ent-shell{width:min(100%,1000px);max-height:94dvh;overflow:auto;background:var(--panel,#fff);color:var(--text,#1d3038);border:1px solid var(--border,#dce8eb);border-radius:22px;box-shadow:0 24px 90px #0005;padding:clamp(12px,2vw,24px)}
-#matchmaEntertainmentOverlay .mm-ent-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-#matchmaEntertainmentOverlay .mm-ent-top h2{font-size:clamp(23px,4vw,32px);margin:2px 0}
-#matchmaEntertainmentOverlay .mm-ent-top p,#matchmaEntertainmentOverlay .mm-ent-info p{margin:4px 0;color:var(--muted,#687b83);font-size:14px}
-#matchmaEntertainmentOverlay .mm-ent-kicker{font-size:11px;letter-spacing:.15em;font-weight:800;color:#2487a6}
-#matchmaEntertainmentOverlay #mmEntClose{width:40px;height:40px;border:0;border-radius:12px;background:var(--surface,#edf4f6);font-size:20px;cursor:pointer;flex-shrink:0}
-#matchmaEntertainmentOverlay .mm-ent-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 12px}
-#matchmaEntertainmentOverlay .mm-ent-tab,#matchmaEntertainmentOverlay .mm-ent-controls button{border:1px solid var(--border,#dce8eb);border-radius:11px;padding:10px 14px;background:var(--surface,#f3f8f9);color:var(--text,#1d3038);font-weight:750;cursor:pointer}
-#matchmaEntertainmentOverlay .mm-ent-tab.active{background:#d9f4fb;border-color:#72cce2;color:#125d77}
-#matchmaEntertainmentOverlay .mm-ent-game{display:none}
-#matchmaEntertainmentOverlay .mm-ent-game.active{display:block}
-#matchmaEntertainmentOverlay .mm-ent-info{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:5px 0 10px}
-#matchmaEntertainmentOverlay .mm-ent-info h3{margin:0;font-size:20px}
-#matchmaEntertainmentOverlay .mm-ent-info strong{font-size:13px;color:#207b98}
-#matchmaEntertainmentOverlay canvas{display:block;width:100%;height:auto;aspect-ratio:19/9;max-height:46dvh;border-radius:15px;border:1px solid #9bd7e5;background:#dff7ff;touch-action:pan-y}
-#matchmaEntertainmentOverlay .mm-ent-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px}
-#matchmaEntertainmentOverlay .mm-ent-controls .mm-ent-primary{background:#1686a9;border-color:#1686a9;color:#fff}
-#matchmaEntertainmentOverlay #mmBearCanvas{background:#dff7ff;aspect-ratio:19/10;max-height:58dvh}#matchmaEntertainmentOverlay .mm-ent-controls span{font-size:12px;color:var(--muted,#687b83);margin-left:auto}
-@media(max-width:620px){#matchmaEntertainmentOverlay{padding:6px}#matchmaEntertainmentOverlay .mm-ent-shell{padding:12px;border-radius:17px;max-height:96dvh}#matchmaEntertainmentOverlay canvas{aspect-ratio:5/3;max-height:40dvh}#matchmaEntertainmentOverlay .mm-ent-controls span{width:100%;margin-left:0}}
-</style>
-<script id="matchma-entertainment-overlay-js">
-(()=>{'use strict';
-const overlay=document.getElementById('matchmaEntertainmentOverlay');if(!overlay)return;
-const $=id=>document.getElementById(id);
-const state={
- bear:{c:$('mmBearCanvas'),score:$('mmBearScore'),run:false,raf:0,pts:0,x:380,y:288,items:[],t:0},
- boat:{c:$('mmBoatCanvas'),score:$('mmBoatScore'),run:false,raf:0,pts:0,lives:3,x:380,items:[],t:0,flash:0}
-};
-function background(g,sea){const c=g.c,ctx=c.getContext('2d'),w=c.width,h=c.height;const grad=ctx.createLinearGradient(0,0,0,h);grad.addColorStop(0,sea?'#86d8ec':'#b9edfc');grad.addColorStop(1,sea?'#08779f':'#eafcff');ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);ctx.strokeStyle=sea?'#dffbff99':'#64c5df99';ctx.lineWidth=2;for(let j=0;j<5;j++){ctx.beginPath();for(let x=0;x<=w;x+=8){const y=h*(.23+j*.15)+Math.sin(x*.025+j*1.5+g.t*.04)*5;x?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.stroke()}if(sea){ctx.fillStyle='#d8c38e';ctx.fillRect(0,h-11,w,11)}return ctx}
-function label(ctx,s,x,y,size=15){ctx.font='bold '+size+'px system-ui,sans-serif';ctx.fillStyle='#145773';ctx.fillText(s,x,y)}
-function drawBear(g){const ctx=background(g,false),w=g.c.width,h=g.c.height;const mass=Math.min(g.pts,30),z=1+mass*.045;ctx.fillStyle='#dff4ce';ctx.fillRect(0,h-42,w,42);ctx.fillStyle='#7eb66c';for(let i=0;i<12;i++){ctx.beginPath();ctx.arc(i*74+18,h-38,27,Math.PI,0);ctx.fill()}g.items.forEach(o=>{ctx.save();ctx.translate(o.x,o.y);ctx.rotate(Math.sin(g.t*.15+o.x)*.12);ctx.font='32px sans-serif';ctx.textAlign='center';ctx.fillText(o.kind==='fish'?'🐟':'🪼',0,0);ctx.restore()});const bx=w/2,by=h-72;ctx.save();ctx.translate(bx,by);ctx.scale(z,z);ctx.fillStyle='#67402d';ctx.beginPath();ctx.ellipse(0,0,62,46,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.ellipse(-36,-40,18,20,0,0,Math.PI*2);ctx.ellipse(36,-40,18,20,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#a97651';ctx.beginPath();ctx.ellipse(0,-30,43,39,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#2b201a';ctx.beginPath();ctx.ellipse(-15,-35,4,5,0,0,Math.PI*2);ctx.ellipse(15,-35,4,5,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#d5ad88';ctx.beginPath();ctx.ellipse(0,-17,21,15,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#2b201a';ctx.beginPath();ctx.ellipse(0,-23,7,5,0,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#2b201a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(0,-18);ctx.lineTo(0,-12);ctx.stroke();ctx.restore();ctx.textAlign='left';label(ctx,'🐟 Bấm “Cho gấu ăn cá hồi” — gấu lớn dần sau mỗi bữa',15,25,15);if(g.pts>=12){ctx.fillStyle='#fff9';ctx.fillRect(0,42,w,32);label(ctx,'GẤU ĐANG TÍCH MỠ CHO MÙA ĐÔNG · '+g.pts+' CÁ HỒI',w/2-190,63,15)}}
-function drawBoat(g){const ctx=background(g,true),w=g.c.width,h=g.c.height;g.items.forEach(o=>{ctx.font='29px sans-serif';ctx.fillText(o.kind==='trash'?'🧴':o.kind==='rock'?'🪨':'🌊',o.x,o.y)});ctx.font='58px sans-serif';ctx.textAlign='center';ctx.fillText('🚤',g.x,254);ctx.textAlign='left';label(ctx,'← → / A D',15,25);if(g.flash){ctx.fillStyle='#fff0a855';ctx.fillRect(0,0,w,h);g.flash--}if(!g.run){ctx.fillStyle='#ffffffb8';ctx.fillRect(0,0,w,h);label(ctx,g.lives<=0?'Thuyền gặp nạn — bấm Ra khơi để chơi lại':'Bấm “Ra khơi / tiếp tục” để bắt đầu',w/2-185,h/2,19)}}
-function score(k){const g=state[k];g.score.textContent=k==='bear'?'Cá: '+g.pts+' · Gấu '+(g.pts>18?'siêu khổng lồ':g.pts>10?'rất lớn':g.pts>5?'lớn':g.pts>1?'vừa':'nhỏ'):'Rác: '+g.pts+' · Thuyền: '+g.lives}
-function frame(k){const g=state[k];if(!g.run){g.raf=0;k==='bear'?drawBear(g):drawBoat(g);return}const w=g.c.width,h=g.c.height;g.t++;if(k==='bear'){g.items.forEach(o=>o.y+=o.v);for(let i=g.items.length-1;i>=0;i--){const o=g.items[i];if(o.kind==='fish'&&o.y>=h-135&&o.y<h-55&&Math.abs(o.x-w/2)<100){g.pts++;g.items.splice(i,1);score(k)}else if(o.y>h+40)g.items.splice(i,1)}drawBear(g);if(!g.items.length){g.run=false;g.raf=0;return}}else{if(g.t%42===0)g.items.push({kind:'trash',x:20+Math.random()*(w-40),y:-20,v:1.7+Math.random()*1.7});if(g.t%115===0)g.items.push({kind:Math.random()>.5?'rock':'wave',x:20+Math.random()*(w-40),y:-20,v:2+Math.random()*1.8});g.items.forEach(o=>o.y+=o.v);for(let i=g.items.length-1;i>=0;i--){const o=g.items[i];if(o.y>220&&o.y<285&&Math.abs(o.x-g.x)<48){if(o.kind==='trash')g.pts++;else{g.lives--;g.flash=10}g.items.splice(i,1);score(k);if(g.lives<=0){g.run=false;break}}else if(o.y>h+20)g.items.splice(i,1)}drawBoat(g)}g.raf=requestAnimationFrame(()=>frame(k))}
-function start(k){const g=state[k];if(g.run)return;if(k==='boat'&&g.lives<=0){g.pts=0;g.lives=3;g.items=[];g.t=0;g.x=380}if(k==='bear'&&g.t===0){g.pts=0;g.items=[];g.x=115}g.run=true;score(k);if(!g.raf)g.raf=requestAnimationFrame(()=>frame(k))}
-function pause(k){const g=state[k];g.run=false;if(g.raf)cancelAnimationFrame(g.raf);g.raf=0;k==='bear'?drawBear(g):drawBoat(g)}
-function move(k,d){const g=state[k];g.x=Math.max(38,Math.min(g.c.width-38,g.x+d*35));if(!g.run)(k==='bear'?drawBear(g):drawBoat(g))}
-function close(){pause('bear');pause('boat');overlay.hidden=true;document.body.style.overflow=''}
-$('openEntertainment').addEventListener('click',()=>{overlay.hidden=false;document.body.style.overflow='hidden';drawBear(state.bear);drawBoat(state.boat)});
-$('mmEntClose').addEventListener('click',close);
-overlay.addEventListener('click',e=>{if(e.target===overlay)close()});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!overlay.hidden)close();if(overlay.hidden)return;const tag=e.target&&e.target.tagName;if(['INPUT','TEXTAREA','SELECT','BUTTON'].includes(tag))return;if(e.key==='ArrowLeft'||e.key.toLowerCase()==='a'){e.preventDefault();move('bear',-1);move('boat',-1)}else if(e.key==='ArrowRight'||e.key.toLowerCase()==='d'){e.preventDefault();move('bear',1);move('boat',1)}});
-[['bear','mmBearCanvas'],['boat','mmBoatCanvas']].forEach(([k,id])=>$(id).addEventListener('pointerdown',e=>{if(overlay.hidden)return;const r=$(id).getBoundingClientRect();move(k,e.clientX<r.left+r.width/2?-1:1);if(!state[k].run)start(k)}));
-$('mmBearFeed').addEventListener('click',()=>{const g=state.bear;g.items.push({kind:'fish',x:150+Math.random()*(g.c.width-300),y:-24,v:3.2+Math.random()*2});g.run=true;score('bear');if(!g.raf)g.raf=requestAnimationFrame(()=>frame('bear'))});$('mmBearStart').addEventListener('click',()=>{const g=state.bear;if(!g.run){g.items.push({kind:'fish',x:g.c.width/2,y:-24,v:3.5});g.run=true;if(!g.raf)g.raf=requestAnimationFrame(()=>frame('bear'))}});$('mmBoatStart').addEventListener('click',()=>start('boat'));$('mmBearPause').addEventListener('click',()=>{const g=state.bear;g.pts=0;g.items=[];g.t=0;g.run=false;if(g.raf)cancelAnimationFrame(g.raf);g.raf=0;score('bear');drawBear(g)});$('mmBoatPause').addEventListener('click',()=>pause('boat'));
-document.querySelectorAll('#matchmaEntertainmentOverlay .mm-ent-tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#matchmaEntertainmentOverlay .mm-ent-tab').forEach(x=>x.classList.toggle('active',x===b));$('mmEntBear').classList.toggle('active',b.dataset.game==='bear');$('mmEntBoat').classList.toggle('active',b.dataset.game==='boat')}));
-drawBear(state.bear);drawBoat(state.boat);
-})();
-</script>
 </body></html>
