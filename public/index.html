@@ -1775,8 +1775,8 @@ header.app-header .brand{display:flex!important;align-items:center!important;gap
 header.app-header .brand-mark{display:block!important;position:relative!important;overflow:hidden!important;width:68px!important;height:68px!important;min-width:68px!important;flex:0 0 68px!important}
 header.app-header .brand-mark img.brand-logo-img{position:absolute!important;inset:0 auto auto 0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:top center!important;transform:none!important}
 header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
-header.app-header .brand-copy h1{margin:0!important;font-family:var(--matchma-font-family),Arial,sans-serif!important;font-size:clamp(24px,2.8vw,34px)!important;line-height:1.12!important;letter-spacing:0!important;white-space:nowrap!important}
-@media(max-width:700px){header.app-header .brand{gap:8px!important}header.app-header .brand-mark{width:52px!important;height:52px!important;min-width:52px!important;flex-basis:52px!important}header.app-header .brand-copy h1{font-size:clamp(18px,4.5vw,24px)!important;white-space:normal!important}}
+header.app-header .brand-copy h1{margin:0!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(28px,3.2vw,40px)!important;font-weight:800!important;line-height:1.05!important;letter-spacing:-.035em!important;white-space:nowrap!important;color:inherit!important}
+@media(max-width:700px){header.app-header .brand{gap:8px!important}header.app-header .brand-mark{width:52px!important;height:52px!important;min-width:52px!important;flex-basis:52px!important}header.app-header .brand-copy h1{font-size:clamp(23px,5.2vw,30px)!important;white-space:normal!important}}
 </style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
@@ -3161,22 +3161,28 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 /* Entertainment and bear snow startup removed. */
 
 </script><script src="/winter-theme.js?v=20">
-/* Reliable site-wide font selector: wait for DOM, update CSS variable and persist selection. */
+/* Font picker v75: set font directly on every rendered element so theme-specific !important rules cannot override it. */
 (function(){
- const KEY='matchma-site-font-family-v1';
+ const KEY='matchma-site-font-family-v2';
  const FONTS=['Be Vietnam Pro','Nunito','Inter','Roboto','Open Sans','Lato','Montserrat','Poppins','Baloo 2','Merriweather'];
  function applyFont(value){
   const name=FONTS.includes(value)?value:'Be Vietnam Pro';
-  document.documentElement.style.setProperty('--matchma-font-family','"'+name+'", Arial, sans-serif');
+  const stack='"'+name+'", Arial, sans-serif';
+  document.documentElement.style.setProperty('--matchma-font-family',stack);
   document.documentElement.dataset.siteFont=name;
+  document.querySelectorAll('body, body *').forEach(function(el){
+   if(el.matches('svg, svg *, .icon, .lucide')) return;
+   el.style.setProperty('font-family',stack,'important');
+  });
   const select=document.getElementById('siteFontFamily');
   if(select && select.value!==name) select.value=name;
   const preview=document.getElementById('siteFontPreview');
-  if(preview) preview.style.setProperty('font-family','"'+name+'", Arial, sans-serif','important');
+  if(preview) preview.style.setProperty('font-family',stack,'important');
   try{localStorage.setItem(KEY,name)}catch(e){}
  }
  function init(){
-  let saved='Be Vietnam Pro';try{saved=localStorage.getItem(KEY)||saved}catch(e){}
+  let saved='Be Vietnam Pro';
+  try{saved=localStorage.getItem(KEY)||localStorage.getItem('matchma-site-font-family-v1')||saved}catch(e){}
   applyFont(saved);
   document.addEventListener('change',function(event){
    if(event.target && event.target.id==='siteFontFamily') applyFont(event.target.value);
@@ -3185,6 +3191,10 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
    const target=event.target && event.target.closest ? event.target.closest('#resetSiteFont') : null;
    if(target){event.preventDefault();applyFont('Be Vietnam Pro')}
   });
+  // Reapply after theme scripts update styles; direct inline !important wins over theme CSS.
+  const observer=new MutationObserver(function(){applyFontFromSaved()});
+  observer.observe(document.body,{attributes:true,attributeFilter:['data-theme']});
+  function applyFontFromSaved(){let n='Be Vietnam Pro';try{n=localStorage.getItem(KEY)||n}catch(e){};document.documentElement.style.setProperty('--matchma-font-family','"'+n+'", Arial, sans-serif')}
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
 })();</script>
