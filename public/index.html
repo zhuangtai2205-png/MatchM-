@@ -363,7 +363,7 @@ body[data-theme="vampire"] .overview-account-pill.is-online{background:#243a31;c
 .sidebar-avatar{width:43px;height:43px;flex:0 0 43px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--ui-accent,#3c9bc0);background:var(--ui-soft,#eaf8fd);color:var(--ui-accent,#3c9bc0);font-weight:900;font-size:calc(17px * var(--font-scale,1))}
 .sidebar-account-copy{display:grid;gap:2px;min-width:0;flex:1}.sidebar-account-copy strong{font-size:calc(13px * var(--font-scale, 1));font-weight:900}.sidebar-account-copy small{font-size:calc(10px * var(--font-scale, 1));overflow-wrap:anywhere;color:var(--muted)}.sidebar-account-arrow{font-weight:900}
 body[data-theme] .sectionhead h2,body[data-theme] .hero h2{font-weight:900!important;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px;text-decoration-color:var(--ui-accent,#3c9bc0);text-shadow:0 1px 0 var(--ui-surface,#fff)}
-body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=15");filter:none}
+body[data-theme] .sectionhead h2::before,body[data-theme] .hero h2::before{content:"";display:inline-block;width:25px;height:31px;vertical-align:-7px;margin-right:9px;background:center/contain no-repeat url("/matchma-logo.svg?v=16");filter:none}
 body[data-theme] .upload .bigicon{font-size:0!important;display:grid!important;place-items:center;width:58px;height:46px;margin:0 auto 8px!important;line-height:1}
 body[data-theme] .upload .bigicon::before{content:"";display:block;width:56px;height:42px;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 48'%3E%3Cpath fill='%232F9BC5' d='M4 8a3 3 0 0 1 3-3h16l6 6h28a4 4 0 0 1 4 4v24a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='%238DE0F4' d='M4 18h56v21a4 4 0 0 1-4 4H7a3 3 0 0 1-3-3z'/%3E%3Cpath fill='none' stroke='%231F6587' stroke-width='2' d='M24 25h16m-8-8v16m-5-5 5 5 5-5'/%3E%3C/svg%3E")}
 body[data-theme="pink"] .upload .bigicon::before{filter:hue-rotate(300deg) saturate(.8)}
@@ -1396,7 +1396,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
-  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=15" alt="Logo MatchMã"></div>
+  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=16" alt="Logo MatchMã"></div>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
    <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
@@ -1407,6 +1407,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
   <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐈 Mèo</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
+<button type="button" id="funToggleBtn" class="fun-toggle-button" aria-controls="funWidget" aria-expanded="false" title="Mở Góc Gấu"><span class="fun-toggle-icon">🐻</span><span data-i18n="funOpen">Góc Gấu</span></button>
   <button type="button" id="calculatorToggleBtn" class="calculator-toggle-button" aria-controls="calculatorWidget" aria-expanded="false" title="Mở máy tính" data-i18n-title="calculatorOpen"><span class="calculator-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.3 1"><rect x="4" y="2.5" width="16" height="19" rx="2.2"/><path d="M7.5 6.5 H16.5 M7.5 10 H16.5"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="12" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/></g></svg></span><span data-i18n="calculatorName">Máy tính</span></button>
  </div>
 </header>
@@ -1637,6 +1638,59 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 <section class="page" id="page-settings"><div class="sectionhead"><div><h2 data-i18n="settingsTitle">Cài đặt</h2><p data-i18n="settingsDesc">Chọn ngôn ngữ giao diện và ngưỡng phần trăm để phân loại kết quả OK.</p></div></div><div class="grid"><div class="panel"><h2 data-i18n="languageTitle">Ngôn ngữ giao diện</h2><p data-i18n="languageDesc">Thay đổi ngôn ngữ menu, hướng dẫn và nhãn trạng thái.</p><div class="field"><label data-i18n="languageLabel">Ngôn ngữ</label><select id="language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></div><div class="okmsg" data-i18n="langLocal">Lựa chọn áp dụng ngay cho giao diện này.</div></div><div class="panel"><h2 data-i18n="thresholdTitle">Ngưỡng phần trăm được tính OK</h2><p data-i18n="thresholdDesc">Ví dụ: đặt 80% thì điểm từ 80% trở lên mới được xem là OK nếu không có thuộc tính mâu thuẫn.</p><div class="field"><label data-i18n="thresholdOkLabel">Điểm tối thiểu để tự xếp OK</label><div class="thresholdvalue"><span id="thresholdValue">80</span>%</div><input id="threshold" type="range" min="50" max="100" step="5" value="80"><div style="display:flex;justify-content:space-between" class="muted"><span>50%</span><span>75%</span><span>100%</span></div></div><div class="rule"><strong data-i18n="exampleTitle">Cách phân loại mặc định</strong><div id="thresholdExplanation">≥ 80% = OK · 45–79% = rà soát · dưới 45% = không khớp. Có thuộc tính xung đột luôn cần rà soát.</div></div><div class="actions"><button class="btn" id="applySettings" data-i18n="applySettings">Áp dụng cài đặt</button></div></div></div><div class="panel"><h2 data-i18n="matchingRules">Quy tắc đối chiếu</h2><div class="grid"><div><p data-i18n="ruleNoSku">1. Dòng danh mục chuẩn thiếu mã/SKU sẽ không bao giờ được dùng làm ứng viên ghép.</p><p data-i18n="ruleName">2. Tên được chuẩn hóa dấu tiếng Việt, một số tên thương hiệu viết tắt và dung tích/trọng lượng chuẩn.</p></div><div><p data-i18n="ruleConflict">3. Các thuộc tính đối lập như có đường/không đường, có gas/không gas, nguyên kem/tách béo buộc phải rà soát.</p><p data-i18n="rulePrivacy">4. File được đọc ngay trong trình duyệt, không tải nội dung file lên máy chủ ứng dụng.</p></div></div></div></section>
 <div class="foot">MatchMã · <span data-i18n="footText">So khớp có kiểm soát · Kiểm tra trước khi xác nhận</span></div>
 </main></div>
+<div id="fat-bear-overlay" hidden aria-label="Góc tương tác Gấu" aria-hidden="true">
+ <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu">
+ <svg id="bear-sprite" viewBox="0 0 620 390" role="img" aria-label="Gấu nâu tròn mập nằm nghỉ, vẽ tay bằng bút sáp" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <linearGradient id="bearCoat" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#d88942"/><stop offset=".58" stop-color="#bd6b30"/><stop offset="1" stop-color="#a65328"/></linearGradient>
+ <linearGradient id="bearMuzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffd98a"/><stop offset="1" stop-color="#e8ae58"/></linearGradient>
+ <pattern id="bearFurLines" width="18" height="17" patternUnits="userSpaceOnUse"><path d="M2 5l5-3m5 10 4-2m-4-7 2 1" stroke="#773f28" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="1 4" fill="none" opacity=".38"/></pattern>
+ <pattern id="bearWarmHatch" width="24" height="22" patternUnits="userSpaceOnUse"><path d="M3 17l5-6m8 7 5-6M4 4l2-2" stroke="#f4c27a" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" fill="none" opacity=".55"/></pattern>
+ <clipPath id="bearClip"><path d="M40 317C48 253 83 177 152 136 211 101 293 99 355 126 391 142 416 167 431 194 451 179 480 180 504 198 535 220 549 254 535 282 524 305 498 319 465 324L111 345C72 345 44 337 40 317Z"/></clipPath>
+</defs>
+<g id="bearBody">
+ <!-- One continuous, low, rounded body silhouette: no floating or cut-off head -->
+ <path d="M38 316C42 271 61 223 94 187C131 145 180 119 235 111C289 101 342 114 383 143C407 160 424 184 436 208C456 189 480 186 501 201C526 219 541 247 536 273C531 300 505 319 470 326L112 346C75 345 45 336 38 316Z" fill="url(#bearCoat)" stroke="#713c26" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M38 316C42 271 61 223 94 187C131 145 180 119 235 111C289 101 342 114 383 143C407 160 424 184 436 208C456 189 480 186 501 201C526 219 541 247 536 273C531 300 505 319 470 326L112 346C75 345 45 336 38 316Z" fill="url(#bearFurLines)" clip-path="url(#bearClip)"/>
+ <path d="M38 316C42 271 61 223 94 187C131 145 180 119 235 111C289 101 342 114 383 143C407 160 424 184 436 208C456 189 480 186 501 201C526 219 541 247 536 273C531 300 505 319 470 326L112 346C75 345 45 336 38 316Z" fill="url(#bearWarmHatch)" clip-path="url(#bearClip)"/>
+ <path d="M83 252Q111 203 148 181M117 224q18-17 37-20M161 168q23-14 43-15M210 140q24-10 46-6M267 133q22-5 43 4M324 151q19 4 34 17M91 291q21-12 39-7M153 316q18-6 32 2M205 330q17-6 32 1M272 332q17-7 34 0" fill="none" stroke="#f6c17a" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="2 6" opacity=".8"/>
+ <!-- Front paws resting naturally along the same baseline -->
+ <path d="M355 285C373 267 399 270 416 287C430 300 432 321 418 333Q395 345 368 336L342 323Z" fill="#b96630" stroke="#713c26" stroke-width="6" stroke-linejoin="round"/>
+ <path d="M379 320q7 9 4 17m17-18q7 8 4 16" fill="none" stroke="#713c26" stroke-width="4" stroke-linecap="round"/>
+ <path d="M445 286C461 268 486 273 500 290C512 304 510 323 495 334Q474 342 451 332L432 316Z" fill="#c27337" stroke="#713c26" stroke-width="6" stroke-linejoin="round"/>
+ <path d="M463 319q6 9 3 15m17-16q6 8 3 14" fill="none" stroke="#713c26" stroke-width="4" stroke-linecap="round"/>
+ <path d="M42 302q-17-4-18 10q4 17 22 16" fill="#bd6b30" stroke="#713c26" stroke-width="6" stroke-linecap="round"/>
+ <path id="bearSleepBlanket" d="M64 266Q150 237 226 270T386 278Q454 254 522 290L526 314Q490 340 438 339L116 344Q73 338 64 310Z" fill="#8a9a73" stroke="#536746" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
+ <path id="bearSleepQuilt" d="M91 305q23 13 46-1m22 18q24 13 48-1m28-26q24 13 48 0m24 24q25 13 48-1m31-18q22 12 43 0m-354 36q22 10 44 0m51 12q23 10 44 0m51 0q23 10 44 0" fill="none" stroke="#f4e4b9" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
+</g>
+<g id="bearHead">
+ <!-- Head overlaps deeply into the shoulder so it is visibly attached -->
+ <path d="M358 211C346 193 350 169 367 158C384 146 403 156 408 177C421 159 444 157 458 174C469 187 467 204 456 216C477 222 491 239 492 259C494 283 475 302 449 307C421 314 391 302 373 285C356 269 350 239 358 211Z" fill="url(#bearCoat)" stroke="#713c26" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M365 194q14-14 29-10m22-14q16-5 28 5m-69 42q9-4 16-1" fill="none" stroke="#f5c17b" stroke-width="3.3" stroke-linecap="round" stroke-dasharray="2 5" opacity=".8"/>
+ <path d="M397 247C400 230 418 222 435 227C454 232 465 248 458 263C451 279 430 284 412 274C400 268 394 258 397 247Z" fill="url(#bearMuzzle)" stroke="#713c26" stroke-width="4.5"/>
+ <path id="bearEyeLeft" d="M380 229q7-8 15 0" fill="none" stroke="#4b2b20" stroke-width="6" stroke-linecap="round"/>
+ <path id="bearEyeRight" d="M427 224q7-7 14 0" fill="none" stroke="#4b2b20" stroke-width="6" stroke-linecap="round"/>
+ <path d="M414 244q-1-7 7-8l13 1q7 2 3 9l-6 6q-8 3-14-2Z" fill="#4b2b20"/>
+ <path id="bear-mouth" d="M421 252q-1 11-11 12m11-12q9 10 19 4" fill="none" stroke="#4b2b20" stroke-width="5" stroke-linecap="round"/>
+ <path id="bearMouthOpen" d="M410 248q11 22 27 0l-4 13q-10 8-19 0Z" fill="#572b25" stroke="#482b23" stroke-width="2.5" opacity="0"/>
+ <path d="M401 275q-5 3-9 0m43 2q6 3 10-1" fill="none" stroke="#b87542" stroke-width="2.5" stroke-dasharray="2 4"/>
+</g>
+</svg>
+ <svg id="bear-sleep-z" viewBox="0 0 68 30" aria-hidden="true"><path d="M3 5 H21 L4 24 H24 M29 3 H47 L30 21 H50 M52 5 H66 L53 21 H66" fill="none" stroke="#75563d" stroke-width="2.7" stroke-dasharray="3 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
+</button>
+ <div id="bear-snow" aria-hidden="true"></div><div id="fish-pool" aria-label="Cá cho gấu ăn"></div><div id="bear-plus-layer" aria-hidden="true"></div>
+</div>
+<aside id="funWidget" class="fun-widget" hidden aria-label="Góc Gấu MatchMã">
+ <div class="fun-widget-bar" id="funWidgetDragBar"><div class="fun-widget-brand"><span class="fun-widget-mascot">🐻</span><div><strong data-i18n="funTitle">Góc Gấu MatchMã</strong><small data-i18n="funSubTitle">Cho gấu ăn cá · hiệu ứng vui</small></div></div>
+ <div class="fun-widget-actions"><button type="button" id="funMinimizeBtn" title="Thu gọn" aria-label="Thu gọn">−</button><button type="button" id="funMaximizeBtn" title="Phóng to" aria-label="Phóng to">□</button><button type="button" id="funCloseBtn" title="Tắt góc gấu" aria-label="Tắt">×</button></div></div>
+ <div class="fun-widget-content"><p class="fun-widget-intro" data-i18n="funIntro">Bấm cá đang bơi trên trang để cho gấu ăn. Mỗi con cá làm gấu lớn thêm một chút.</p>
+ <div class="bear-stats"><div><small data-i18n="funFishEaten">Cá đã ăn</small><b id="funFishCount">0</b></div><div><small data-i18n="funBearStage">Trạng thái gấu</small><b id="funBearStage">Gấu đói bụng</b></div><div><small data-i18n="funGrowth">Kích thước</small><b id="funBearGrowth">100%</b></div></div>
+ <div class="bear-panel-preview"><span class="bear-panel-sprite" id="funBearPreview" aria-hidden="true"></span><span class="bear-panel-expression" id="funBearFace" aria-hidden="true">🥺</span><p id="funBearMessage" aria-live="polite" data-i18n="funWelcome">Gấu đang đợi cá. Bấm vào một con cá để bắt đầu!</p></div>
+ <div class="fun-footer-actions"><button type="button" class="btn" id="funSpawnFish" data-i18n="funMoreFish">Thả thêm cá 🐟</button><button type="button" class="btn alt" id="funResetBear" data-i18n="funReset">Cho chơi lại</button></div>
+ <div class="fun-effects-row"><span data-i18n="funEffectsLabel">Hiệu ứng nền</span><button type="button" id="funEffectsToggle" aria-pressed="true" data-i18n="funEffectsOff">Tắt hiệu ứng</button></div>
+ <p class="fun-local-note" data-i18n="funLocalNote">Góc giải trí không ảnh hưởng dữ liệu đối chiếu. Bộ đếm chỉ lưu trên thiết bị này.</p>
+ </div>
+</aside>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script>
@@ -2189,7 +2243,7 @@ function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overl
 
 const THEME_KEY='matchma-theme-v2';
 function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
-function initTheme(){let saved='bear';try{saved=localStorage.getItem(THEME_KEY)||'bear'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
+function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}if(saved==='bear')saved='ocean';applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
  $('platformFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);platformSourceHeaders=d.headers;platformSourceRows=d.rows.map((row,i)=>({row:{...row},sourceIndex:i+1,status:'todo'}));platformPage=1;fillSelect('platformNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('platformIdCol',d.headers,guessStt(d.headers),true);$('platformFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng. STT/ID nguồn sẽ không bị chỉnh sửa.';$('buildPlatformAudit').disabled=!d.headers.length;$('exportPlatformAudit').disabled=true;platformBuilt=false;renderPlatformAudit()}catch(err){alert(err.message||'Không đọc được file');}});
