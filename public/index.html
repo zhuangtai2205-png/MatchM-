@@ -860,30 +860,14 @@ body[data-theme="bear"] .stat,body[data-theme="bear"] .panel{border-color:#e1e4d
 body[data-theme="bear"] .btn:not(.alt){background:#718c5d;color:#fffdf6}
 body[data-theme="bear"] .btn.alt{background:#e7ecd8;color:#425738}
 body[data-theme="bear"] .theme-drift{opacity:.22!important}
-#fat-bear-overlay{position:fixed;inset:0;width:100vw;height:100dvh;pointer-events:none;z-index:99998;overflow:hidden;user-select:none}
-#fat-bear-overlay[hidden],#funWidget[hidden]{display:none!important}
-#bear-container{position:absolute;left:24px;bottom:18px;width:132px;height:142px;display:flex;align-items:center;justify-content:center;background:transparent;border:0;padding:0;pointer-events:auto;cursor:pointer;transform:scale(var(--bear-scale,1));transform-origin:bottom left;transition:transform .42s cubic-bezier(.175,.885,.32,1.275);filter:drop-shadow(0 7px 6px #493b2420)}
-#bear-sprite{font-size:calc(94px * var(--font-scale, 1));line-height:1;transition:filter .25s,transform .35s;transform-origin:bottom center}
 #bear-expression{position:absolute;top:30px;left:78px;font-size:calc(27px * var(--font-scale, 1));line-height:1;background:#fff9e8;border-radius:50%;padding:3px;box-shadow:0 2px 6px #48351d22}
 .bear-caption{position:absolute;bottom:0;left:5px;display:flex;flex-direction:column;gap:1px;padding:5px 9px;min-width:104px;border:1px solid #e4d3b9;border-radius:10px;background:#fffaf0ed;color:#5b4434;box-shadow:0 4px 15px #46351b18;white-space:nowrap}
 .bear-caption b{font-size:calc(10px * var(--font-scale, 1));font-weight:950}.bear-caption small{font-size:calc(9px * var(--font-scale, 1));color:#94765b;font-weight:800}
-#fish-pool{position:absolute;inset:0;pointer-events:none}
-.bear-fish{position:absolute;display:grid;place-items:center;width:48px;height:44px;padding:0;border:0;border-radius:50%;background:#fff9ecb8;box-shadow:0 2px 10px #375c5a1b;font-size:calc(31px * var(--font-scale, 1));cursor:pointer;pointer-events:auto;animation:bearFishSwim var(--fish-speed,3.2s) ease-in-out infinite alternate;transition:filter .2s,background .2s;filter:drop-shadow(0 3px 3px #234b4426)}
-.bear-fish:hover{background:#e3f6fb;filter:drop-shadow(0 7px 6px #234b4440) brightness(1.08)}
 @keyframes bearFishSwim{from{transform:translate(0,0) rotate(-7deg)}to{transform:translate(var(--fish-dx,12px),var(--fish-dy,-13px)) rotate(8deg)}}
 .bear-plus-one{position:fixed;font-size:calc(15px * var(--font-scale, 1));font-weight:950;color:#468a63;text-shadow:0 1px 0 #fff;white-space:nowrap;animation:bearPlusFloat .9s ease-out forwards;pointer-events:none}
 @keyframes bearPlusFloat{from{opacity:0;transform:translateY(12px) scale(.7)}15%{opacity:1}to{opacity:0;transform:translateY(-48px) scale(1.2)}}
-#bear-container.is-munching #bear-sprite{animation:bearChomp .4s ease-in-out}
 @keyframes bearChomp{0%,100%{transform:scale(1)}35%{transform:scale(1.14,.9)}70%{transform:scale(.96,1.06)}}
 .cat-flower-particle.theme-bear{filter:drop-shadow(0 2px 3px #567c4430)}
-.fun-toggle-button{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid #ead8c4;border-radius:11px;background:linear-gradient(130deg,#fff7eb,#f8e8da);color:#80593e;font-weight:900;white-space:nowrap;cursor:pointer}
-.fun-toggle-button:hover{background:#f8e9fc;border-color:#d9c5ec}
-.fun-widget{position:fixed;z-index:100000;top:86px;right:15px;width:365px;height:455px;min-width:300px;min-height:295px;max-width:calc(100vw - 20px);max-height:calc(100dvh - 100px);resize:both;overflow:auto;overscroll-behavior:contain;background:#fffaf3;border:1px solid #ead5c1;border-radius:18px;box-shadow:0 24px 70px #5e463744;color:#584136}
-.fun-widget-bar{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:linear-gradient(110deg,#fff0db,#f4e9ff);border-bottom:1px solid #ead9c9;border-radius:17px 17px 0 0;cursor:move;touch-action:none;user-select:none}
-.fun-widget-brand{display:flex;align-items:center;gap:9px;min-width:0}.fun-widget-mascot{display:grid;place-items:center;width:38px;height:38px;flex:0 0 38px;border-radius:12px;background:#fff9ed;font-size:calc(24px * var(--font-scale,1))}
-.fun-widget-brand strong{display:block;font-size:calc(13px * var(--font-scale, 1));font-weight:950;color:#604738}.fun-widget-brand small{display:block;font-size:calc(10px * var(--font-scale, 1));margin-top:2px;color:#a0826d}
-.fun-widget-actions{display:flex;align-items:center;gap:4px}.fun-widget-actions button{width:28px;height:28px;display:grid;place-items:center;border:1px solid #e6d4c5;border-radius:8px;background:#fffaf5;color:#705646;font-size:calc(16px * var(--font-scale, 1));font-weight:900;cursor:pointer}
-.fun-widget-content{padding:13px}.fun-widget-intro{margin:0 0 10px;color:#907768;font-size:calc(11px * var(--font-scale, 1));line-height:1.55}
 .bear-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.bear-stats>div{display:flex;flex-direction:column;gap:4px;padding:8px 7px;border:1px solid #eadfcd;border-radius:11px;background:#fffdf8;min-width:0}.bear-stats small{font-size:calc(9px * var(--font-scale, 1));color:#9c826e;font-weight:800}.bear-stats b{font-size:calc(14px * var(--font-scale, 1));color:#5a4838;font-weight:950;overflow-wrap:anywhere}
 .bear-panel-preview{position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px;margin:10px 0;padding:9px 10px 11px;min-height:140px;overflow:hidden;border:1px solid #e7dec7;border-radius:14px;background:radial-gradient(ellipse at center,#f4f5dc,#fff5e6 66%,#fffdf7)}
 .bear-panel-sprite{font-size:calc(76px * var(--font-scale, 1));line-height:1;transform:scale(var(--bear-scale,1));transform-origin:center bottom;transition:transform .35s cubic-bezier(.175,.885,.32,1.275);filter:drop-shadow(0 6px 4px #8b684122)}
@@ -891,12 +875,8 @@ body[data-theme="bear"] .theme-drift{opacity:.22!important}
 .fun-footer-actions{display:flex;gap:7px}.fun-footer-actions .btn{flex:1;font-size:calc(10px * var(--font-scale, 1));padding:8px 5px}
 .fun-effects-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px;padding-top:10px;border-top:1px solid #eddfd1;font-size:calc(10px * var(--font-scale, 1));font-weight:850;color:#92745f}#funEffectsToggle{padding:6px 8px;border:1px solid #e8d7c5;border-radius:8px;background:#fffdf7;color:#825e47;font-size:calc(10px * var(--font-scale, 1));font-weight:900;cursor:pointer}
 .fun-local-note{font-size:calc(9px * var(--font-scale, 1));line-height:1.45;color:#ae9583;margin:9px 0 0}
-.fun-widget.is-minimized{height:auto!important;min-height:0!important;resize:none!important;overflow:hidden}.fun-widget.is-minimized .fun-widget-content{display:none}
-.fun-widget.is-maximized{left:12px!important;right:12px!important;top:84px!important;bottom:12px!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;min-width:0!important;min-height:0!important;resize:none!important}
-.fun-widget.is-maximized .bear-panel-preview{min-height:32vh}.fun-widget.is-maximized .bear-panel-sprite{font-size:clamp(88px,13vw,190px)}.fun-widget.is-maximized .fun-widget-content{max-width:860px;margin:0 auto;padding:20px}.fun-widget.is-maximized .fun-widget-intro,.fun-widget.is-maximized .bear-panel-preview p{font-size:calc(15px * var(--font-scale,1))}
-body[data-theme="bear"] .fun-widget{background:#fffaf0;border-color:#d4dfb9}body[data-theme="bear"] .fun-widget-bar{background:linear-gradient(120deg,#dfe9cd,#f7e9cb);border-color:#d4dfb9}
 .intro-purpose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.intro-purpose-card{padding:18px;min-width:0}.intro-purpose-card h2{font-size:calc(17px * var(--font-scale, 1));margin:8px 0 7px}.intro-purpose-card p{font-size:calc(13px * var(--font-scale, 1));line-height:1.65;color:#79685f}.intro-step-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#f7e8d8;font-size:calc(22px * var(--font-scale,1))}.intro-workflow{padding:20px;margin:12px 0}.intro-steps{list-style:none;margin:0;padding:0;display:grid;gap:0}.intro-steps li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;align-items:center;padding:14px 0;border-bottom:1px solid #f0e2d5}.intro-steps li:last-child{border-bottom:0}.intro-step-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f4e0cb;color:#8d6249;font-size:calc(13px * var(--font-scale, 1));font-weight:950}.intro-steps strong{font-size:calc(13px * var(--font-scale, 1));color:#624a3e}.intro-steps p{margin:3px 0 0;font-size:calc(12px * var(--font-scale, 1));color:#89776b;line-height:1.5}.intro-steps .btn{white-space:nowrap;font-size:calc(11px * var(--font-scale, 1));padding:8px 10px}.intro-notice{display:flex;align-items:flex-start;gap:11px;padding:15px 17px;margin:12px 0;background:#fff7e9;border-color:#f0dfc8}.intro-notice>span{font-size:calc(20px * var(--font-scale,1))}.intro-notice p{margin:0;font-size:calc(12px * var(--font-scale, 1));color:#7f6859;line-height:1.6}
-@media(max-width:650px){.fun-toggle-button{font-size:0;gap:0;width:36px;height:32px;justify-content:center;padding:5px}.fun-toggle-icon{font-size:calc(18px * var(--font-scale,1))}.fun-widget{top:auto;right:9px;bottom:9px;width:calc(100vw - 18px);height:min(70dvh,520px);min-width:0;min-height:280px;max-height:calc(100dvh - 18px)}.fun-widget.is-maximized{left:8px!important;right:8px!important;top:8px!important;bottom:8px!important}.intro-purpose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-steps li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps li>.btn{grid-column:2;justify-self:start}}
+@media(max-width:650px){.intro-purpose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-steps li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps li>.btn{grid-column:2;justify-self:start}}
 
 /* Hand-drawn paper-and-pencil theme art */
 html,body{margin:0!important;width:100%;max-width:100%;min-height:100%;overflow-x:clip!important}
@@ -912,78 +892,37 @@ body[data-theme="pink"] .cat-flower-particle svg{--doodle-ink:#a95f84}
 body[data-theme="vampire"] .cat-flower-particle svg{--doodle-ink:#693d6d}
 body[data-theme="cat"] .cat-flower-particle svg{--doodle-ink:#8d6246}
 body[data-theme="bear"] .cat-flower-particle svg{--doodle-ink:#783f20}
-#fat-bear-overlay{inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
-#bear-container{position:absolute!important;left:50%!important;bottom:-3px!important;width:clamp(170px,32vw,320px)!important;height:auto!important;aspect-ratio:1/1!important;height:auto!important;max-height:220px!important;display:block!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:none!important;overflow:visible!important;pointer-events:auto!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;filter:drop-shadow(0 -4px 8px #3f2c1c12)!important;z-index:1}
-#bear-container:focus-visible{outline:3px dashed #a97143!important;outline-offset:4px!important;border-radius:12px!important}
-#bear-sprite{display:flex;width:100%;height:100%;align-items:center;justify-content:center;overflow:visible;filter:none!important}
 #bear-expression{display:none!important}
-#bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .42s ease-in-out}
 @keyframes bearHandDrawnChomp{0%,100%{translate:0 0}24%{translate:0 3px}52%{translate:0 -5px}76%{translate:0 1px}}
 .bear-caption{left:50%!important;bottom:7px!important;transform:translateX(-50%)!important;min-width:0!important;width:max-content;max-width:calc(100vw - 24px);padding:4px 8px!important;background:#fff9edee!important;border:1px dashed #caa17c!important;border-radius:10px!important;box-shadow:0 3px 9px #6f4a2812!important;pointer-events:none!important}
 .bear-caption b{font-size:calc(10px * var(--font-scale,1))!important}.bear-caption small{font-size:calc(9px * var(--font-scale,1))!important}
-#fish-pool{inset:0!important;pointer-events:none!important;overflow:hidden}
-.bear-fish{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:drop-shadow(0 2px 2px #68452b1a)!important;width:54px!important;height:38px!important;padding:0!important;animation:bearFishSwim var(--fish-speed,3.2s) ease-in-out infinite alternate!important}
-.bear-fish svg{display:block;width:100%;height:100%;overflow:visible}
-.bear-fish:hover{background:transparent!important;filter:drop-shadow(0 4px 3px #68452b30) brightness(1.05)!important}
 .bear-plus-one{border:1px dashed #d08a43;border-radius:999px;padding:4px 8px;background:#fff8e8e8;color:#a65e12!important;box-shadow:0 2px 7px #5b39120e}
-.fun-widget{border:1px solid #e5d2be!important;box-shadow:0 17px 40px #58422b29!important}
-.fun-widget-bar{border-bottom:1px dashed #ddc7b0!important}
-.fun-widget-actions button{box-shadow:none!important}
 body[data-theme] .logo{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
 body[data-theme] .page.active{outline:none!important}
 body[data-theme] .hero,body[data-theme] .panel,body[data-theme] .sidebar,body[data-theme] .stat{outline:none}
 body[data-theme="bear"]::before{content:none!important}
 body[data-theme="bear"]::after{content:"";position:fixed;left:0;right:0;bottom:0;height:140px;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent,#d6e4bc55 55%,#cbd9af80)!important}
 @media(max-width:650px){
- #bear-container{width:clamp(150px,45vw,210px)!important;bottom:-2px!important}
  .bear-caption{bottom:5px!important}
- .bear-fish{width:46px!important;height:33px!important}
 }
 @media(prefers-reduced-motion:reduce){
- #bear-container,#bear-sprite,.bear-fish{animation:none!important;transition:none!important}
  .theme-drift{animation:none!important}
 }/* Edge cleanup: remove the old emoji wallpaper layer and stop pseudo-bands bleeding past viewport */
 html,body{margin:0!important;padding:0;max-width:100vw;overflow-x:clip!important}
 body::before{content:none!important;display:none!important}
 body::after{left:0!important;right:0!important;bottom:0!important;width:100%!important;max-width:100vw!important}
 #themeScene{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important}
-#fat-bear-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important}
-#bear-container{outline:none!important;border:0!important;box-shadow:none!important;background:transparent!important}
-#bear-container:hover{filter:drop-shadow(0 -4px 8px #3f2c1c18)!important}
 @media(max-width:650px){body::after{height:76px!important;bottom:0!important}}
-/* Controlled scale + illustrated life-cycle: breathe, feed, snow, hibernate */
-#fat-bear-overlay{z-index:99998!important}
-#bear-container{width:clamp(215px,27vw,310px)!important;height:auto!important;aspect-ratio:320/180;bottom:-2px!important;left:50%!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;max-width:calc(100vw - 24px)!important;overflow:visible!important;z-index:3!important}
-#bear-sprite{width:100%!important;height:auto!important;display:block;overflow:visible;animation:bearIdleBreathe 3.6s ease-in-out infinite;transform-origin:50% 100%;filter:none!important}
-#bear-sprite #bearHead{transform-box:fill-box;transform-origin:center 100%;animation:bearHeadTilt 5.4s ease-in-out infinite}
 @keyframes bearIdleBreathe{0%,100%{transform:translateY(0) scaleY(1)}50%{transform:translateY(-3px) scaleY(1.012)}}
 @keyframes bearHeadTilt{0%,100%{transform:rotate(0deg)}45%{transform:rotate(-1.7deg)}65%{transform:rotate(1deg)}}
-#bear-container.is-munching #bear-sprite{animation:bearChomp .42s cubic-bezier(.2,.8,.2,1)!important}
-#bear-container.is-munching #bearHead{animation:bearMunchHead .42s ease-in-out!important}
 @keyframes bearMunchHead{0%,100%{transform:translateY(0) rotate(0)}30%{transform:translateY(4px) rotate(-2deg)}65%{transform:translateY(-3px) rotate(1deg)}}
-#bear-container.is-hibernating{transform:translateX(-50%) scale(var(--bear-scale,1)) translateY(6px)!important;filter:drop-shadow(0 -3px 7px #33473320)!important}
-#bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.1s ease-in-out infinite!important;transform-origin:50% 100%}
-#bear-container.is-hibernating #bearHead{animation:bearSleepNod 5s ease-in-out infinite!important}
 @keyframes bearSleepBreathe{0%,100%{transform:translateY(2px) scaleY(.985)}50%{transform:translateY(-1px) scaleY(1.008)}}
 @keyframes bearSleepNod{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2.2deg) translateY(1px)}}
 #bearSleepBlanket{display:none}
-#bear-container.is-hibernating #bearSleepBlanket,#bear-container.is-hibernating #bearSleepQuilt{display:block!important}
 #bear-sleep-z{display:none;position:absolute;right:8%;top:0;width:22%;height:auto;overflow:visible;pointer-events:none;animation:bearZzzFloat 2.6s ease-in-out infinite}
-#bear-container.is-hibernating #bear-sleep-z{display:block!important}
 @keyframes bearZzzFloat{0%,100%{transform:translateY(3px) rotate(-6deg);opacity:.65}50%{transform:translateY(-9px) rotate(3deg);opacity:1}}
 .bear-caption{bottom:6px!important;z-index:3}
-#bear-snow{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .6s;z-index:0}
-#fish-pool{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden}
-.bear-fish{z-index:5}
-#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.48}
-#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.88}
-body[data-fun-effects="off"] #bear-snow{display:none!important}
-.bear-snowflake{position:absolute;top:-8vh;display:block;width:var(--snow-size,13px);height:var(--snow-size,13px);opacity:var(--snow-opacity,.5);pointer-events:none;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite;will-change:transform}
-.bear-snowflake svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1px #688a9a12)}
 @keyframes bearSnowFall{0%{transform:translate3d(0,-10vh,0) rotate(0deg)}100%{transform:translate3d(var(--snow-drift,40px),112vh,0) rotate(320deg)}}
-#funWidget .fun-widget-mascot{width:38px;height:38px;flex:0 0 38px}
-.fun-widget-mascot svg,.fun-toggle-icon svg{display:block;width:100%;height:100%;overflow:visible}
-.fun-toggle-icon{display:inline-grid;place-items:center;width:22px;height:22px}
 .navicon{display:inline-grid!important;place-items:center;flex:0 0 24px}
 .navicon svg{width:21px;height:21px;display:block;overflow:visible}
 .bear-panel-sprite{display:grid;place-items:center;width:92px;height:82px;font-size:0;transform:scale(var(--bear-scale,1));transition:transform .35s}
@@ -993,8 +932,8 @@ body[data-fun-effects="off"] #bear-snow{display:none!important}
 body[data-theme="ocean"] .theme-drift svg,body[data-theme="retro"] .theme-drift svg,body[data-theme="pink"] .theme-drift svg,body[data-theme="vampire"] .theme-drift svg,body[data-theme="cat"] .theme-drift svg,body[data-theme="bear"] .theme-drift svg{filter:drop-shadow(0 1px 1px #5a483512)}
 .cat-flower-particle{width:32px!important;height:32px!important;overflow:visible!important}
 .cat-flower-particle svg{width:100%;height:100%;overflow:visible}
-@media(max-width:650px){#bear-container{width:clamp(190px,43vw,245px)!important;bottom:-2px!important;max-width:calc(100vw - 16px)!important}#bear-sleep-z{width:21%}}
-@media(prefers-reduced-motion:reduce){#bear-sprite,#bear-sprite #bearHead,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite,#bear-snow .bear-snowflake,.bear-snowflake{animation:none!important;transition:none!important}}
+@media(max-width:650px){#bear-sleep-z{width:21%}}
+@media(prefers-reduced-motion:reduce){}
 .bear-confetti-doodle{width:30px;height:30px;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;text-shadow:none!important;color:transparent!important;filter:none!important}
 .bear-confetti-doodle svg{display:block;width:100%;height:100%;overflow:visible}
 .bear-panel-sprite{transform:scale(.9)!important}
@@ -1003,10 +942,6 @@ body[data-theme="ocean"] .theme-drift svg,body[data-theme="retro"] .theme-drift 
 /* MatchMã visual refresh: consistent Vietnamese glyphs and controlled font scale */
 :root{--font-scale:1;--matchma-ink:#31484e}
 html{ text-size-adjust:100%;-webkit-text-size-adjust:100% }
-html,body,button,input,select,textarea,table,h1,h2,h3,h4,h5,h6,.navbtn,.btn,.panel,.hero,.stat,.mini,.badge,.field,.subbrand,.sidefoot,.pill,.sectionhead,.resulttools,.foot,.intro-menu-card,.fun-widget,.calculator-widget{
- font-family:'Be Vietnam Pro','Segoe UI',Tahoma,Arial,sans-serif!important;
- font-optical-sizing:auto
-}
 body{font-size:calc(15px * var(--font-scale,1))!important;line-height:1.55}
 h1,.hero h2,.sectionhead h2,.panel h2,.stat b,.thresholdvalue{font-family:'Be Vietnam Pro','Segoe UI',Tahoma,Arial,sans-serif!important;font-weight:800;line-height:1.28}
 button,input,select,textarea{font-weight:600}
@@ -1043,10 +978,6 @@ body::before,body::after{content:none!important;display:none!important}
 .intro-help-card h2{font-size:calc(14px * var(--font-scale,1))!important;margin:0 0 8px!important;color:#315963}
 .intro-help-card p{font-size:calc(12px * var(--font-scale,1));line-height:1.65;margin:0 0 13px!important;color:#687e7c}
 .intro-help-card .btn{font-size:calc(11px * var(--font-scale,1));padding:8px 10px;margin-top:auto}
-/* A full pencil/crayon bear that stays at the lower edge and grows without covering the whole page */
-#fat-bear-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
-#bear-container{width:clamp(245px,34vw,430px)!important;height:auto!important;aspect-ratio:600/350;left:50%!important;bottom:-3px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;display:block!important;max-width:calc(100vw - 22px)!important;overflow:visible!important;pointer-events:auto!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;z-index:3!important}
-#bear-sprite{width:100%!important;height:auto!important;display:block;overflow:visible;transform-origin:50% 100%;animation:bearIdleBreathe 3.7s ease-in-out infinite;filter:none!important}
 #bearHead{transform-box:fill-box;transform-origin:50% 90%;animation:bearHeadTilt 6s ease-in-out infinite}
 #bearBackLeg,#bearFrontLeg,#bearFrontPaw{transform-box:fill-box;transform-origin:center 86%}
 #bearBackLeg{animation:bearStepBack 3.2s ease-in-out infinite}
@@ -1057,29 +988,14 @@ body::before,body::after{content:none!important;display:none!important}
 @keyframes bearStepBack{0%,100%{transform:rotate(0)}35%{transform:rotate(-2deg)}65%{transform:rotate(1deg)}}
 @keyframes bearStepFront{0%,100%{transform:rotate(0)}35%{transform:rotate(2.4deg)}65%{transform:rotate(-1.3deg)}}
 @keyframes bearTailWag{0%,100%{transform:rotate(0)}45%{transform:rotate(-13deg)}70%{transform:rotate(9deg)}}
-#bear-container.is-munching #bear-sprite{animation:bearChomp .46s cubic-bezier(.2,.8,.2,1)!important}
-#bear-container.is-munching #bearHead{animation:bearMunchHead .46s ease-in-out!important}
 @keyframes bearMunchHead{0%,100%{transform:translateY(0) rotate(0)}28%{transform:translateY(5px) rotate(-2deg)}62%{transform:translateY(-3px) rotate(1deg)}}
-#bear-container.is-munching #bearMouthOpen{animation:bearMouthChomp .45s ease-in-out infinite alternate}
 @keyframes bearMouthChomp{from{opacity:.22}to{opacity:.95}}
-#bear-container.is-hibernating{transform:translateX(-50%) scale(var(--bear-scale,1)) translateY(5px)!important;filter:drop-shadow(0 -3px 8px #33473320)!important}
-#bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.2s ease-in-out infinite!important;transform-origin:50% 100%}
-#bear-container.is-hibernating #bearHead{animation:bearSleepNod 5s ease-in-out infinite!important}
-#bear-container.is-hibernating #bearBackLeg,#bear-container.is-hibernating #bearFrontLeg,#bear-container.is-hibernating #bearFrontPaw,#bear-container.is-hibernating #bearTail{animation:none!important}
 @keyframes bearSleepBreathe{0%,100%{transform:translateY(2px) scaleY(.985)}50%{transform:translateY(-1px) scaleY(1.008)}}
 @keyframes bearSleepNod{0%,100%{transform:rotate(0)}50%{transform:rotate(3deg) translateY(2px)}}
 #bearSleepBlanket,#bearSleepQuilt{display:none}
-#bear-container.is-hibernating #bearSleepBlanket,#bear-container.is-hibernating #bearSleepQuilt{display:block!important}
 #bear-sleep-z{display:none;position:absolute;right:8%;top:2%;width:19%;height:auto;overflow:visible;pointer-events:none;animation:bearZzzFloat 2.7s ease-in-out infinite}
-#bear-container.is-hibernating #bear-sleep-z{display:block!important}
 @keyframes bearZzzFloat{0%,100%{transform:translateY(3px) rotate(-6deg);opacity:.65}50%{transform:translateY(-9px) rotate(3deg);opacity:1}}
 .bear-caption{bottom:6px!important;z-index:4}
-#bear-snow{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:0;transition:opacity .6s;z-index:0}
-#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.54}
-#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.92}
-body[data-fun-effects="off"] #bear-snow{display:none!important}
-.bear-snowflake{position:absolute;top:-8vh;display:block;width:var(--snow-size,13px);height:var(--snow-size,13px);opacity:var(--snow-opacity,.5);pointer-events:none;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite;will-change:transform}
-.bear-snowflake svg{display:block;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 1px 1px #688a9a12)}
 @keyframes bearSnowFall{0%{transform:translate3d(0,-10vh,0) rotate(0)}100%{transform:translate3d(var(--snow-drift,40px),112vh,0) rotate(320deg)}}
 .bear-confetti-doodle{width:30px;height:30px;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:transparent!important;filter:none!important}
 .bear-confetti-doodle svg{display:block;width:100%;height:100%;overflow:visible}
@@ -1103,24 +1019,14 @@ body[data-fun-effects="off"] #bear-snow{display:none!important}
 .calculator-help{margin:10px 2px 0;font-size:calc(10px * var(--font-scale,1));line-height:1.5;color:#7c9090}
 @media(max-width:850px){.headright{flex-wrap:wrap;justify-content:flex-end}.calculator-widget{top:80px;right:8px}}
 @media(max-width:650px){
- #bear-container{width:clamp(215px,48vw,280px)!important;bottom:-2px!important;max-width:calc(100vw - 14px)!important}
  #bear-sleep-z{width:21%}
  .intro-menu-grid{grid-template-columns:1fr}.intro-help-grid{grid-template-columns:1fr}.intro-steps-detailed li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps-detailed li>.btn{grid-column:2;justify-self:start}
  .calculator-toggle-button{padding:7px 9px}.calculator-toggle-button span:last-child{font-size:calc(11px * var(--font-scale,1))}
  .calculator-widget{top:auto;right:8px;bottom:8px;width:min(330px,calc(100vw - 16px));max-height:calc(100dvh - 16px);overflow:auto}
 }
 @media(prefers-reduced-motion:reduce){
- #bear-sprite,#bearHead,#bearBackLeg,#bearFrontLeg,#bearFrontPaw,#bearTail,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite,#bear-snow .bear-snowflake,.bear-snowflake{animation:none!important;transition:none!important}
  .intro-menu-card{transition:none}.calc-key:hover{transform:none}
 }
-
-/* Complete, responsive hand-drawn mascot and sketchbook-style navigation. */
-#fat-bear-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
-#bear-container{position:absolute!important;left:clamp(8px,2vw,24px)!important;bottom:8px!important;width:clamp(300px,43vw,520px)!important;height:clamp(215px,32vw,365px)!important;max-width:calc(100vw - 16px)!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;overflow:visible!important;background:transparent!important;border:0!important;padding:0!important;pointer-events:auto!important;cursor:pointer!important;transform:scale(var(--bear-scale,1))!important;transform-origin:bottom left!important;filter:none!important;box-shadow:none!important}
-#bear-sprite{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;object-fit:contain!important;filter:none!important;transform-origin:50% 100%!important}
-#bear-container.is-hibernating{transform:scale(var(--bear-scale,1))!important}
-#bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.4s ease-in-out infinite!important}
-#bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .46s ease-in-out!important}
 #catClickFX{display:block!important;position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99999!important}
 .cat-flower-particle{display:block!important;width:32px!important;height:32px!important;opacity:1!important}
 .cat-flower-particle svg{display:block!important;width:100%!important;height:100%!important;overflow:visible!important}
@@ -1128,32 +1034,25 @@ body[data-fun-effects="off"] #bear-snow{display:none!important}
 .navbtn{position:relative!important;border:1.5px dashed #b9a18a!important;border-radius:12px!important;background:transparent!important;box-shadow:none!important}
 .navbtn.active{border:1.5px dashed #9d7d61!important;background:#f7ecdc!important;color:#67452f!important;box-shadow:none!important}
 .navicon{display:inline-grid!important;place-items:center!important;width:25px!important;flex:0 0 25px!important;color:#866044!important}
-.hero,.panel,.stat,.sidefoot,.upload,.fun-widget,.calc-key,.toolbar-select,.result-card,.table-wrap,.dropzone,.import-card,.compare-card{border:1.5px dashed #c2a990!important;border-radius:16px!important;box-shadow:none!important;background-color:#fffaf0!important}
 .hero{background:#fbf1df!important}
 button,input,select,textarea{box-shadow:none!important}
 button{border-radius:10px!important}
 button:hover,.navbtn:hover,.btn:hover{filter:none!important;transform:none!important}
-#bear-snow{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important;pointer-events:none!important;z-index:1!important}
-#bear-container{z-index:3!important}
-#fish-pool{z-index:4!important}
-@media(max-width:650px){#bear-container{width:clamp(245px,72vw,355px)!important;height:clamp(180px,52vw,250px)!important;left:5px!important;bottom:6px!important}}
-@media(prefers-reduced-motion:reduce){#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite{animation:none!important}}
+@media(max-width:650px){}
+@media(prefers-reduced-motion:reduce){}
 
  
 /* 2026 hand-drawn paper refresh: warm paper, pencil outlines, flat 2D controls */
 :root{--ink:#593b2b;--muted:#927763;--line:#d9b998;--surface:#fff9ed;--accent:#c27a39;--ui-surface:#fffaf0;--ui-border:#d8b795;--ui-soft:#f8ecd9}
 body{background-color:#fbf5e8!important;background-image:radial-gradient(ellipse at 12% 10%,#fffdf6 0,transparent 52%),repeating-linear-gradient(0deg,#f7efdf 0 1px,#fbf5e8 1px 5px)!important;color:#593b2b!important;font-family:'Be Vietnam Pro','Nunito',sans-serif!important}
 header,.shell,.foot{z-index:1}
-header,.sidebar,.hero,.panel,.stat,.mini,.upload,.filterbox,.tablewrap,.progressbox,.sidebar-help,.nav-folder,.quick-settings-menu,.fun-widget,.calculator-widget{background-color:#fffaf0!important;background-image:none!important;border:1.7px solid #d9b998!important;border-radius:17px!important;box-shadow:2px 3px 0 #d9b99842!important}
 header{border-radius:19px!important}
 .nav-folder{position:relative!important;border-style:dashed!important;border-width:1.7px!important;padding:9px 8px!important;margin:10px 0 12px!important;box-shadow:none!important}
 .nav-folder::before{height:7px!important;top:-6px!important;left:13px!important;width:38px!important;background:#f3d5a8!important;border:1.5px dashed #bd8254!important;border-bottom:0!important;border-radius:7px 7px 0 0!important}
 .navfolder-title{font-family:'Be Vietnam Pro','Nunito',sans-serif!important;color:#7c5337!important;font-weight:850!important}
 .nav-folder>summary.navfolder-title:hover{background:#fff0d5!important;border-radius:10px!important}
 .nav-folder[open]>.navfolder-title{background:transparent!important}
-.navbtn,.btn,.fun-toggle-button,.quick-settings>summary,.fun-widget-actions button,.calculator-widget button{border:1.7px dashed #bf8d67!important;border-radius:13px!important;background:#fff9ed!important;color:#68462f!important;box-shadow:none!important;text-shadow:none!important;transition:background .18s,transform .18s!important}
 .navbtn{margin:3px 0!important;padding:9px 10px!important;font-weight:750!important}
-.navbtn:hover,.btn:hover,.fun-toggle-button:hover{background:#fff0d5!important;transform:translateY(-1px) rotate(-.3deg)!important;border-color:#c27a39!important}
 .navbtn.active{background:#f8dfad!important;border:2px solid #c58a4f!important;color:#633d26!important;box-shadow:2px 2px 0 #d7b18366!important}
 .navbtn.active::after{content:"✦";color:#c27a39;margin-left:auto}
 .navicon{width:25px!important;height:24px!important;flex:0 0 25px!important;filter:sepia(.35) saturate(.8)!important}
@@ -1167,14 +1066,9 @@ th{background:#f7e4c4!important;color:#754a30!important;border-bottom:1.5px dash
 td{border-bottom:1px dashed #ead8c3!important;color:#624833!important}
 .badge,.pill{border:1.3px dashed #cda47d!important;border-radius:999px!important;background:#fff1d9!important;color:#805739!important;box-shadow:none!important}
 .upload{border-style:dashed!important;border-width:2px!important;background:#fff9ed!important}
-#bear-container{width:clamp(205px,27vw,310px)!important;height:clamp(112px,15vw,160px)!important;left:10px!important;bottom:8px!important;filter:none!important}
-#bear-sprite{display:block!important;width:100%!important;height:100%!important;overflow:visible!important;filter:drop-shadow(0 3px 1px #734a3020)!important}
 #bear-expression{left:70%!important;top:7%!important;background:#fff8e9!important;border:1.3px dashed #d8b795!important;box-shadow:none!important}
-#bear-container.is-munching #bear-sprite{animation:bearChomp .4s ease-in-out}
-#bear-sprite #bearBody,#bear-sprite #bearHeadShape{transition:fill .25s}
 .bear-panel-preview{background:#fff6e6!important;border:1.5px dashed #d9b998!important;border-radius:15px!important;box-shadow:none!important}
-.bear-snowflake{opacity:.8}
-@media(max-width:650px){#bear-container{width:190px!important;height:105px!important;left:2px!important;bottom:2px!important}.nav-folder{padding:7px!important}}
+@media(max-width:650px){.nav-folder{padding:7px!important}}
 
 /* MatchMã — Bear storybook theme, inspired by the supplied paper-and-crayon reference */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Baloo+2:wght@400;500;600;700;800&display=swap');
@@ -1199,11 +1093,6 @@ body[data-theme="bear"] .brand-copy h1{color:#75402b!important;font-size:clamp(2
 body[data-theme="bear"] h1 span{color:#a85d37!important}
 body[data-theme="bear"] .subbrand{color:#986b4e!important}
 body[data-theme="bear"] .headright{gap:7px!important}
-body[data-theme="bear"] .local-pill,body[data-theme="bear"] .toolbar-select,body[data-theme="bear"] .toolbar-font,
-body[data-theme="bear"] .fun-toggle-button,body[data-theme="bear"] .calculator-toggle-button{
- background:#fff8e9!important;border:1.5px dashed #c9956f!important;border-radius:999px!important;
- box-shadow:none!important;color:#75402b!important;
-}
 body[data-theme="bear"] .app-shell{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;max-width:1500px!important}
 body[data-theme="bear"] .sidebar{
  position:relative!important;top:auto!important;display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:5px!important;
@@ -1270,21 +1159,7 @@ body[data-theme="bear"] #themeScene:after{
  background-size:83px 96px,137px 121px;background-position:0 0,40px 33px;
 }
 @keyframes bearSnowDrift{from{transform:translateY(-35px)}to{transform:translateY(75px)}}
-body[data-theme="bear"] #fat-bear-overlay[hidden]{display:block!important}
-body[data-theme="bear"] #fat-bear-overlay{z-index:2!important;pointer-events:none!important}
-body[data-theme="bear"] #bear-container{
- left:clamp(8px,7vw,115px)!important;bottom:4px!important;
- width:clamp(245px,39vw,560px)!important;height:auto!important;aspect-ratio:auto!important;
- max-width:calc(100vw - 16px)!important;transform:scale(var(--bear-scale,1))!important;
- transform-origin:bottom left!important;overflow:visible!important;pointer-events:auto!important;
-}
-body[data-theme="bear"] #bear-sprite{display:block!important;width:100%!important;height:auto!important;max-height:42vh!important;overflow:visible!important}
 body[data-theme="bear"] .bear-caption{left:50%!important;bottom:4px!important;transform:translateX(-50%)!important;border:1px dashed #c9956f!important;background:#fff8e9ed!important;color:#75402b!important;box-shadow:none!important}
-body[data-theme="bear"] #bear-snow{position:absolute!important;inset:0!important;overflow:hidden!important;pointer-events:none!important}
-body[data-theme="bear"] .bear-snowflake{opacity:.8!important}
-body[data-theme="bear"] .bear-fish{filter:none!important}
-body[data-theme="bear"] .fun-widget{background:#fff8e9!important;border:1.5px dashed #c9956f!important;border-radius:18px!important;box-shadow:none!important;color:#75402b!important}
-body[data-theme="bear"] .fun-widget-bar{background:#f7e5c5!important;border-bottom:1.5px dashed #c9956f!important}
 body[data-theme="bear"] .calculator-widget{background:#fff8e9!important;border:1.5px dashed #c9956f!important;box-shadow:none!important}
 body[data-theme="bear"] .foot{color:#956e58!important}
 @media(max-width:950px){
@@ -1297,8 +1172,6 @@ body[data-theme="bear"] .foot{color:#956e58!important}
  body[data-theme="bear"] .brand-logo-img{display:block!important;visibility:visible!important;opacity:1!important}
  body[data-theme="bear"] .headright{flex-wrap:wrap!important}
  body[data-theme="bear"] .page{padding:7px!important}
- body[data-theme="bear"] #bear-container{width:clamp(205px,57vw,330px)!important;left:3px!important;bottom:0!important}
- body[data-theme="bear"] #bear-sprite{max-height:30vh!important}
  body[data-theme="bear"] #themeScene:before{height:115px}
 }
 
@@ -1365,44 +1238,15 @@ body[data-theme="bear"] :is(input,select,textarea,.search,.field input[type=text
 body[data-theme="bear"] th{background:#f8e8cb!important;color:#75402b!important;border-bottom:1.5px dashed #d3ad8d!important}
 body[data-theme="bear"] td{border-bottom:1px dashed #ead8c3!important}
 body[data-theme="bear"] #themeScene{z-index:0!important;pointer-events:none!important}
-body[data-theme="bear"] #fat-bear-overlay{z-index:8!important;overflow:visible!important;pointer-events:none!important}
-body[data-theme="bear"] #bear-container{
- position:absolute!important;left:clamp(8px,5vw,68px)!important;bottom:4px!important;
- width:clamp(235px,35vw,450px)!important;height:auto!important;aspect-ratio:620/390!important;
- max-width:calc(100vw - 16px)!important;min-width:0!important;padding:0!important;margin:0!important;
- display:block!important;overflow:visible!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
- transform:scale(var(--bear-scale,1))!important;transform-origin:bottom left!important;filter:none!important;
-}
-body[data-theme="bear"] #bear-sprite{
- display:block!important;width:100%!important;height:auto!important;max-height:36vh!important;min-width:0!important;
- overflow:visible!important;object-fit:contain!important;transform:none!important;filter:drop-shadow(0 2px 1px #7d48241a)!important;
-}
 body[data-theme="bear"] .bear-caption{left:50%!important;bottom:3px!important;transform:translateX(-50%)!important;background:#fff8e9ed!important;color:#75402b!important;border:1.5px dashed #c9956f!important;border-radius:12px!important;box-shadow:none!important}
 body[data-theme="bear"] .bear-caption b{font-size:12px!important}
 body[data-theme="bear"] .bear-caption small{font-size:11px!important}
-body[data-theme="bear"] #bear-snow{position:absolute!important;inset:0!important;overflow:hidden!important;pointer-events:none!important}
-body[data-theme="bear"] .bear-snowflake{filter:none!important;opacity:.75!important}
-body[data-theme="bear"] .bear-fish{background:#fff8e9!important;border:1px dashed #c9956f!important;box-shadow:none!important}
-body[data-theme="bear"] .fun-widget,body[data-theme="bear"] .calculator-widget{background:#fff8e9!important;border:1.5px dashed #c9956f!important;border-radius:18px!important;box-shadow:none!important;color:#75402b!important}
-body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bottom:1.5px dashed #c9956f!important}
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
-@media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
-
-</style><link rel="stylesheet" href="/winter-theme.css?v=36">
-<link rel="stylesheet" href="/desktop-layout-fix.css?v=4"><style id="fat-bear-motion-upgrade">
-/* Fat Bear Week-inspired growth and gentle living motion */
-#bear-container{will-change:transform}
-#bear-container:not(.is-hibernating) #bear-sprite{animation:fatBearIdle 2.8s ease-in-out infinite;transform-origin:50% 90%}
-#bear-container.is-munching #bear-sprite{animation:fatBearChomp .42s ease-in-out 2}
-#bear-container.is-hibernating #bear-sprite{animation:fatBearSleep 3.8s ease-in-out infinite;transform-origin:50% 90%}
-#bear-container.is-hibernating{filter:drop-shadow(0 7px 7px #493b2430)}
-#bear-container.is-hibernating .bear-caption{opacity:.92}
-#bear-sprite #bearBody,#bear-sprite #bearHeadShape{transition:fill .45s,stroke-width .45s}
-#bear-snow{pointer-events:none}
+@media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}}
 @keyframes fatBearIdle{0%,100%{transform:translateY(0) rotate(-1deg) scaleX(1)}50%{transform:translateY(-3px) rotate(1deg) scaleX(1.015)}}
 @keyframes fatBearChomp{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-5px) scale(1.06,1.03)}70%{transform:translateY(1px) scale(1.025,.98)}}
 @keyframes fatBearSleep{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(2px) scale(1.018,.985)}}
-@media(prefers-reduced-motion:reduce){#bear-container #bear-sprite{animation:none!important}}
+@media(prefers-reduced-motion:reduce){}
 
 /* Revert the emergency bear size overrides; preserve the site's original bear artwork/behavior. */
 </style>
@@ -1507,28 +1351,7 @@ body{margin:0}
  .main .hero,.main .panel{padding:14px!important}
 }
 </style>
-
-<style id="matchma-final-laptop-layout">
-/* Last-in-cascade overrides for laptop layout and readable navigation groups. */
-html body .shell.app-shell{display:grid!important;grid-template-columns:minmax(250px,285px) minmax(0,1fr)!important;align-items:start!important;gap:18px!important;width:100%!important;max-width:none!important;height:auto!important;overflow:visible!important}
-html body .shell.app-shell>#appSidebar.sidebar{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:9px!important;position:sticky!important;top:10px!important;width:100%!important;height:auto!important;max-height:calc(100vh - 20px)!important;overflow-x:hidden!important;overflow-y:auto!important;z-index:30!important}
-html body .shell.app-shell>#appSidebar.sidebar>*{position:relative!important;inset:auto!important;float:none!important;clear:both!important;transform:none!important;flex:0 0 auto!important;width:100%!important;min-width:0!important;height:auto!important;max-height:none!important;margin:0!important;box-sizing:border-box!important}
-html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder{display:block!important;position:relative!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:7px!important;margin:0!important}
-html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder>summary.navfolder-title{display:flex!important;position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:46px!important;max-height:none!important;margin:0!important;padding:10px!important;align-items:center!important;justify-content:space-between!important;white-space:normal!important;line-height:1.4!important;box-sizing:border-box!important}
-html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder>.nav-folder-items{display:none!important;position:static!important;inset:auto!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin:0!important;padding:8px 2px 2px!important;transform:none!important;box-sizing:border-box!important}
-html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder[open]>.nav-folder-items{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important}
-html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder>.nav-folder-items>.navbtn{display:flex!important;position:relative!important;inset:auto!important;flex:0 0 auto!important;width:100%!important;height:auto!important;min-height:44px!important;max-height:none!important;margin:0!important;padding:10px!important;white-space:normal!important;line-height:1.35!important;box-sizing:border-box!important}
-html body .shell.app-shell>main.main{display:block!important;position:relative!important;inset:auto!important;float:none!important;width:100%!important;min-width:0!important;height:auto!important;overflow:visible!important}
-html body .main .page{display:none} html body .main .page.active{display:block!important}
-html body .main .hero,html body .main .panel{max-width:100%!important;min-width:0!important;overflow-wrap:anywhere!important}
-.app-header{display:flex!important;flex-flow:row wrap!important;align-items:center!important;gap:12px!important;min-height:86px!important;height:auto!important;max-width:none!important;width:100%!important;box-sizing:border-box!important}
-.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
-.app-header .brand-mark{display:inline-flex!important;width:56px!important;height:56px!important;flex:0 0 56px!important;background:transparent!important;border:0!important;box-shadow:none!important}
-.app-header .brand-mark svg{width:100%!important;height:100%!important;display:block!important;object-fit:contain!important}
-#fat-bear-overlay,#funWidget,#funToggleBtn,#bear-container,#bear-sprite,#bear-snow,#fish-pool,#bear-plus-layer,[id*="bear-caption"],[class*="fun-widget"],[class*="bear-fish"]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;animation:none!important}
-@media(max-width:900px){html body .shell.app-shell{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}html body .shell.app-shell>#appSidebar.sidebar{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important}}
-@media(max-width:650px){.app-header .brand-mark{width:46px!important;height:46px!important;flex-basis:46px!important}.app-header .headright{flex:1 1 100%!important;justify-content:flex-start!important}}
-</style>
+<style id="matchma-cat-logo-size">.app-header .brand-mark{display:inline-flex;flex:0 0 58px;width:58px;height:58px;align-items:center;justify-content:center;background:transparent;border:0;border-radius:0;box-shadow:none;padding:0}.app-header .brand-mark svg{display:block;width:100%;height:100%;object-fit:contain}@media(max-width:650px){.app-header .brand-mark{flex-basis:48px;width:48px;height:48px}}</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2447,18 +2270,18 @@ Object.assign(I18N['zh-TW'],{navSectionTitle:'工作區',navGroupCatalog:'商品
 Object.assign(I18N['zh-CN'],{navSectionTitle:'工作区',navGroupCatalog:'商品目录与记忆',navGroupMatch:'商品比对',navGroupTools:'查询与 SKU 工具',navOverview:'总览',navCatalog:'标准目录',navMemory:'确认记忆',navRun:'检查数据',navResults:'比对结果',navPlatforms:'平台检查',navAutoFill:'从源文件填入 SKU',navStockForecast:'库存预测',navSettings:'设置'});
 
 
-Object.assign(I18N.vi,{navIntro:'Giới thiệu',introEyebrow:'MATCHMÃ · HƯỚNG DẪN NHANH',introTitle:'Giới thiệu MatchMã',introLead:'MatchMã giúp chuẩn hóa tên hàng và tìm ứng viên phù hợp giữa các file sản phẩm, để bạn rà soát nhanh hơn nhưng vẫn kiểm soát quyết định cuối cùng.',introStart:'Bắt đầu với danh mục →',introTry:'Thử rà soát →',introPurposeTitle:'Mục đích',introPurposeText:'Tìm mặt hàng có tên khác nhau nhưng có thể là cùng sản phẩm; hỗ trợ đối chiếu SKU, tên, quy cách và đơn vị trước khi xác nhận.',introFilesTitle:'Chuẩn bị dữ liệu',introFilesText:'Bắt đầu bằng danh mục chuẩn có SKU. Dùng file mẫu tại từng khu vực nhập để giữ đúng tên cột và kiểu dữ liệu.',introMatchTitle:'Rà soát và xác nhận',introMatchText:'Tải file cần soát, ánh xạ cột và chạy đối chiếu. Kiểm tra điểm tương đồng và cảnh báo trước khi xác nhận.',introSaveTitle:'Lưu trữ và bảo mật',introSaveText:'Khi đăng nhập, có thể đồng bộ bộ nhớ xác nhận và danh mục riêng theo tài khoản. File đối chiếu được xử lý trong trình duyệt.',introWorkflowTitle:'Quy trình sử dụng gợi ý',introWorkflowText:'Đi theo thứ tự để hạn chế sai cột hoặc xác nhận nhầm sản phẩm.',introStep1Title:'Tải danh mục chuẩn',introStep1Text:'Kiểm tra SKU, tên hàng, quy cách và đơn vị tính.',introStep2Title:'Tải file cần rà soát',introStep2Text:'Chọn cột tên hàng, mã hàng và thuộc tính có sẵn.',introStep3Title:'Kiểm tra kết quả',introStep3Text:'Lọc các dòng cần xem lại, kiểm tra ứng viên rồi xuất Excel.',introStep4Title:'Lưu quy tắc cá nhân',introStep4Text:'Đăng nhập để đồng bộ bộ nhớ xác nhận và danh mục riêng giữa thiết bị.',introOpen:'Mở mục →',introNotice:'MatchMã đưa ra gợi ý, không thay thế kiểm tra nghiệp vụ. Tên giống nhau chưa chắc cùng quy cách; thiếu SKU hoặc thuộc tính mâu thuẫn cần rà soát thủ công.',funOpen:'Góc Gấu',funTitle:'Góc Gấu MatchMã',funSubTitle:'Cho gấu ăn cá · hiệu ứng vui',funIntro:'Bấm cá đang bơi trên trang để cho gấu ăn. Mỗi con cá làm gấu lớn thêm một chút.',funFishEaten:'Cá đã ăn',funBearStage:'Trạng thái gấu',funGrowth:'Kích thước',funWelcome:'Gấu đang đợi cá. Bấm vào một con cá để bắt đầu!',funMoreFish:'Thả thêm cá 🐟',funReset:'Cho chơi lại',funEffectsLabel:'Hiệu ứng nền',funEffectsOff:'Tắt hiệu ứng',funEffectsOn:'Bật hiệu ứng',funLocalNote:'Góc giải trí không ảnh hưởng dữ liệu đối chiếu. Bộ đếm chỉ lưu trên thiết bị này.',funHungry:'Gấu đói bụng',funHappy:'Gấu vui vẻ',funChubby:'Gấu tròn trịa',funFull:'Gấu no căng',funKing:'Vua Cá Hồi',funFishCountLabel:'Đã ăn {count} cá',funChomp:'Chomp! +1 cá 🐟',funPet:'Gấu thích được vuốt ve!',funClose:'Đóng Góc Gấu',funMinimize:'Thu gọn',funExpand:'Mở lại',funMaximize:'Phóng to',funRestore:'Thu về',funTitleButton:'Mở Góc Gấu'});
-Object.assign(I18N.en,{navIntro:'About & guide',introEyebrow:'MATCHMÃ · QUICK GUIDE',introTitle:'About MatchMã',introLead:'MatchMã normalizes product names and finds possible matches across product files, helping you review faster while keeping the final decision in your hands.',introStart:'Start with catalog →',introTry:'Try a review →',introPurposeTitle:'Purpose',introPurposeText:'Find differently named items that may be the same product and compare SKU, name, specification and unit before confirming.',introFilesTitle:'Prepare your data',introFilesText:'Start with a master catalog containing SKU. Use sample templates in import areas to keep column names and data types consistent.',introMatchTitle:'Review and confirm',introMatchText:'Upload the file, map columns and run matching. Check similarity scores and warnings before confirming.',introSaveTitle:'Storage and privacy',introSaveText:'Sign in to sync confirmation memory and a personal catalog by account. Files are processed in the application browser.',introWorkflowTitle:'Suggested workflow',introWorkflowText:'Follow these steps to reduce column mistakes and false confirmations.',introStep1Title:'Load the master catalog',introStep1Text:'Verify SKU, product name, specification and unit.',introStep2Title:'Load the file to review',introStep2Text:'Select product-name, item-code and available attribute columns.',introStep3Title:'Review the results',introStep3Text:'Filter rows, verify candidates, then export Excel.',introStep4Title:'Save your personal memory',introStep4Text:'Sign in to sync memory and your personal catalog across devices.',introOpen:'Open →',introNotice:'MatchMã provides suggestions, not a substitute for business review. Same names can have different specifications; missing SKU or conflicts need manual review.',funOpen:'Bear corner',funTitle:'MatchMã Bear Corner',funSubTitle:'Feed the bear · playful effects',funIntro:'Click a fish swimming around the page to feed the bear. Each fish makes the bear a little bigger.',funFishEaten:'Fish eaten',funBearStage:'Bear mood',funGrowth:'Size',funWelcome:'The bear is waiting for fish. Click one to begin!',funMoreFish:'Add more fish 🐟',funReset:'Play again',funEffectsLabel:'Ambient effects',funEffectsOff:'Turn effects off',funEffectsOn:'Turn effects on',funLocalNote:'The fun corner does not affect matching data. The counter is stored only on this device.',funHungry:'Hungry bear',funHappy:'Happy bear',funChubby:'Chubby bear',funFull:'Very full bear',funKing:'Salmon king',funFishCountLabel:'{count} fish eaten',funChomp:'Chomp! +1 fish 🐟',funPet:'The bear loves a pat!',funClose:'Close bear corner',funMinimize:'Minimize',funExpand:'Expand',funMaximize:'Maximize',funRestore:'Restore',funTitleButton:'Open bear corner'});
-Object.assign(I18N.de,{navIntro:'Überblick & Anleitung',introEyebrow:'MATCHMÃ · KURZANLEITUNG',introTitle:'Über MatchMã',introLead:'MatchMã vereinheitlicht Produktnamen und findet mögliche Treffer zwischen Dateien. Sie prüfen schneller und behalten die endgültige Entscheidung.',introStart:'Mit Katalog beginnen →',introTry:'Prüfung ausprobieren →',introPurposeTitle:'Zweck',introPurposeText:'Artikel mit unterschiedlichen Namen finden, die dasselbe Produkt sein könnten; SKU, Spezifikation und Einheit vor der Bestätigung prüfen.',introFilesTitle:'Daten vorbereiten',introFilesText:'Beginnen Sie mit einem Stammdatenkatalog mit SKU. Verwenden Sie Importvorlagen für einheitliche Spaltennamen und Datentypen.',introMatchTitle:'Prüfen und bestätigen',introMatchText:'Datei laden, Spalten zuordnen und Abgleich starten. Ähnlichkeitswerte und Warnungen vor der Bestätigung prüfen.',introSaveTitle:'Speicherung und Datenschutz',introSaveText:'Nach der Anmeldung können Bestätigungsspeicher und persönlicher Katalog synchronisiert werden. Dateien werden im Browser verarbeitet.',introWorkflowTitle:'Empfohlener Ablauf',introWorkflowText:'Diese Schritte helfen, Spaltenfehler und falsche Bestätigungen zu vermeiden.',introStep1Title:'Stammkatalog laden',introStep1Text:'SKU, Produktname, Spezifikation und Einheit prüfen.',introStep2Title:'Prüfdatei laden',introStep2Text:'Produktname, Artikelcode und Attribute zuordnen.',introStep3Title:'Ergebnisse prüfen',introStep3Text:'Zeilen filtern, Kandidaten prüfen und Excel exportieren.',introStep4Title:'Persönlichen Speicher sichern',introStep4Text:'Anmelden, um Speicher und persönlichen Katalog geräteübergreifend zu synchronisieren.',introOpen:'Öffnen →',introNotice:'MatchMã liefert Vorschläge und ersetzt keine fachliche Prüfung. Gleiche Namen können unterschiedliche Spezifikationen haben.',funOpen:'Bärenecke',funTitle:'MatchMã Bärenecke',funSubTitle:'Füttere den Bären · Spieleffekte',funIntro:'Klicke auf einen Fisch auf der Seite, um den Bären zu füttern. Jeder Fisch lässt ihn etwas wachsen.',funFishEaten:'Gefressene Fische',funBearStage:'Bärenstimmung',funGrowth:'Größe',funWelcome:'Der Bär wartet auf Fische. Klicke einen Fisch!',funMoreFish:'Mehr Fische 🐟',funReset:'Neu spielen',funEffectsLabel:'Hintergrundeffekte',funEffectsOff:'Effekte ausschalten',funEffectsOn:'Effekte einschalten',funLocalNote:'Das Minispiel ändert keine Abgleichdaten. Der Zähler bleibt auf diesem Gerät.',funHungry:'Hungriger Bär',funHappy:'Fröhlicher Bär',funChubby:'Runder Bär',funFull:'Satter Bär',funKing:'Lachskönig',funFishCountLabel:'{count} Fische gefressen',funChomp:'Mampf! +1 Fisch 🐟',funPet:'Der Bär mag Streicheleinheiten!',funClose:'Bärenecke schließen',funMinimize:'Minimieren',funExpand:'Erweitern',funMaximize:'Vergrößern',funRestore:'Wiederherstellen',funTitleButton:'Bärenecke öffnen'});
-Object.assign(I18N['zh-TW'],{navIntro:'介紹與指南',introEyebrow:'MATCHMÃ · 快速指南',introTitle:'關於 MatchMã',introLead:'MatchMã 統一商品名稱並找出不同檔案中的可能相符項目，協助您加快檢查，同時保留最終判斷權。',introStart:'從標準目錄開始 →',introTry:'試著檢查 →',introPurposeTitle:'用途',introPurposeText:'找出名稱不同但可能是同一商品的項目，確認前比對 SKU、名稱、規格與單位。',introFilesTitle:'準備資料',introFilesText:'先載入含 SKU 的標準目錄。匯入時使用範本以保持欄名與資料型態一致。',introMatchTitle:'檢查並確認',introMatchText:'載入檔案、對應欄位並執行比對。確認前請檢查相似度與警示。',introSaveTitle:'儲存與隱私',introSaveText:'登入後可同步確認記憶與個人目錄。檔案會在瀏覽器中處理。',introWorkflowTitle:'建議流程',introWorkflowText:'依序操作可減少欄位錯誤與誤確認。',introStep1Title:'載入標準目錄',introStep1Text:'確認 SKU、商品名稱、規格與單位。',introStep2Title:'載入待檢查檔案',introStep2Text:'選擇商品名稱、代碼與可用屬性欄。',introStep3Title:'檢查結果',introStep3Text:'篩選需複查的列，核對候選項後匯出 Excel。',introStep4Title:'儲存個人記憶',introStep4Text:'登入以跨裝置同步確認記憶與個人目錄。',introOpen:'開啟 →',introNotice:'MatchMã 只提供建議，不能取代業務檢查。名稱相同不代表規格相同；缺少 SKU 或屬性衝突時需人工複查。',funOpen:'熊熊角落',funTitle:'MatchMã 熊熊角落',funSubTitle:'餵熊吃魚 · 趣味效果',funIntro:'點擊頁面上游動的魚來餵熊。每吃一條魚，熊就會長大一點。',funFishEaten:'吃掉的魚',funBearStage:'熊的狀態',funGrowth:'體型',funWelcome:'熊正在等魚，點一條魚開始吧！',funMoreFish:'再放一些魚 🐟',funReset:'重新開始',funEffectsLabel:'背景效果',funEffectsOff:'關閉效果',funEffectsOn:'開啟效果',funLocalNote:'趣味遊戲不影響比對資料。計數只保存在這台裝置。',funHungry:'肚子餓的熊',funHappy:'開心的熊',funChubby:'圓滾滾的熊',funFull:'吃飽的熊',funKing:'鮭魚之王',funFishCountLabel:'吃了 {count} 條魚',funChomp:'咔嚓！+1 條魚 🐟',funPet:'熊熊喜歡被摸摸！',funClose:'關閉熊熊角落',funMinimize:'收合',funExpand:'展開',funMaximize:'放大',funRestore:'還原',funTitleButton:'開啟熊熊角落'});
-Object.assign(I18N['zh-CN'],{navIntro:'介绍与指南',introEyebrow:'MATCHMÃ · 快速指南',introTitle:'关于 MatchMã',introLead:'MatchMã 统一商品名称并找出不同文件中的可能匹配项，帮助您更快检查，同时保留最终判断权。',introStart:'从标准目录开始 →',introTry:'试着检查 →',introPurposeTitle:'用途',introPurposeText:'找出名称不同但可能是同一商品的项目，确认前比对 SKU、名称、规格和单位。',introFilesTitle:'准备数据',introFilesText:'先加载含 SKU 的标准目录。导入时使用模板以保持列名与数据类型一致。',introMatchTitle:'检查并确认',introMatchText:'加载文件、映射字段并运行比对。确认前请检查相似度和警告。',introSaveTitle:'存储与隐私',introSaveText:'登录后可同步确认记忆与个人目录。文件会在浏览器中处理。',introWorkflowTitle:'建议流程',introWorkflowText:'按步骤操作可减少字段错误和误确认。',introStep1Title:'加载标准目录',introStep1Text:'确认 SKU、商品名称、规格和单位。',introStep2Title:'加载待检查文件',introStep2Text:'选择商品名称、商品代码及可用属性列。',introStep3Title:'检查结果',introStep3Text:'筛选需复查的行，核对候选项后导出 Excel。',introStep4Title:'保存个人记忆',introStep4Text:'登录以跨设备同步确认记忆与个人目录。',introOpen:'打开 →',introNotice:'MatchMã 只提供建议，不能取代业务检查。名称相同不代表规格相同；缺少 SKU 或属性冲突时需人工复查。',funOpen:'熊熊角落',funTitle:'MatchMã 熊熊角落',funSubTitle:'喂熊吃鱼 · 趣味效果',funIntro:'点击页面上游动的鱼来喂熊。每吃一条鱼，熊就会长大一点。',funFishEaten:'吃掉的鱼',funBearStage:'熊的状态',funGrowth:'体型',funWelcome:'熊正在等鱼，点击一条鱼开始吧！',funMoreFish:'再放一些鱼 🐟',funReset:'重新开始',funEffectsLabel:'背景效果',funEffectsOff:'关闭效果',funEffectsOn:'开启效果',funLocalNote:'趣味游戏不会影响比对数据。计数只保存在这台设备。',funHungry:'肚子饿的熊',funHappy:'开心的熊',funChubby:'圆滚滚的熊',funFull:'吃饱的熊',funKing:'鲑鱼之王',funFishCountLabel:'吃了 {count} 条鱼',funChomp:'咔嚓！+1 条鱼 🐟',funPet:'熊熊喜欢被摸摸！',funClose:'关闭熊熊角落',funMinimize:'收起',funExpand:'展开',funMaximize:'放大',funRestore:'还原',funTitleButton:'打开熊熊角落'});
+Object.assign(I18N.vi,{navIntro:'Giới thiệu',introEyebrow:'MATCHMÃ · HƯỚNG DẪN NHANH',introTitle:'Giới thiệu MatchMã',introLead:'MatchMã giúp chuẩn hóa tên hàng và tìm ứng viên phù hợp giữa các file sản phẩm, để bạn rà soát nhanh hơn nhưng vẫn kiểm soát quyết định cuối cùng.',introStart:'Bắt đầu với danh mục →',introTry:'Thử rà soát →',introPurposeTitle:'Mục đích',introPurposeText:'Tìm mặt hàng có tên khác nhau nhưng có thể là cùng sản phẩm; hỗ trợ đối chiếu SKU, tên, quy cách và đơn vị trước khi xác nhận.',introFilesTitle:'Chuẩn bị dữ liệu',introFilesText:'Bắt đầu bằng danh mục chuẩn có SKU. Dùng file mẫu tại từng khu vực nhập để giữ đúng tên cột và kiểu dữ liệu.',introMatchTitle:'Rà soát và xác nhận',introMatchText:'Tải file cần soát, ánh xạ cột và chạy đối chiếu. Kiểm tra điểm tương đồng và cảnh báo trước khi xác nhận.',introSaveTitle:'Lưu trữ và bảo mật',introSaveText:'Khi đăng nhập, có thể đồng bộ bộ nhớ xác nhận và danh mục riêng theo tài khoản. File đối chiếu được xử lý trong trình duyệt.',introWorkflowTitle:'Quy trình sử dụng gợi ý',introWorkflowText:'Đi theo thứ tự để hạn chế sai cột hoặc xác nhận nhầm sản phẩm.',introStep1Title:'Tải danh mục chuẩn',introStep1Text:'Kiểm tra SKU, tên hàng, quy cách và đơn vị tính.',introStep2Title:'Tải file cần rà soát',introStep2Text:'Chọn cột tên hàng, mã hàng và thuộc tính có sẵn.',introStep3Title:'Kiểm tra kết quả',introStep3Text:'Lọc các dòng cần xem lại, kiểm tra ứng viên rồi xuất Excel.',introStep4Title:'Lưu quy tắc cá nhân',introStep4Text:'Đăng nhập để đồng bộ bộ nhớ xác nhận và danh mục riêng giữa thiết bị.',introOpen:'Mở mục →',introNotice:'MatchMã đưa ra gợi ý, không thay thế kiểm tra nghiệp vụ. Tên giống nhau chưa chắc cùng quy cách; thiếu SKU hoặc thuộc tính mâu thuẫn cần rà soát thủ công.',});
+Object.assign(I18N.en,{navIntro:'About & guide',introEyebrow:'MATCHMÃ · QUICK GUIDE',introTitle:'About MatchMã',introLead:'MatchMã normalizes product names and finds possible matches across product files, helping you review faster while keeping the final decision in your hands.',introStart:'Start with catalog →',introTry:'Try a review →',introPurposeTitle:'Purpose',introPurposeText:'Find differently named items that may be the same product and compare SKU, name, specification and unit before confirming.',introFilesTitle:'Prepare your data',introFilesText:'Start with a master catalog containing SKU. Use sample templates in import areas to keep column names and data types consistent.',introMatchTitle:'Review and confirm',introMatchText:'Upload the file, map columns and run matching. Check similarity scores and warnings before confirming.',introSaveTitle:'Storage and privacy',introSaveText:'Sign in to sync confirmation memory and a personal catalog by account. Files are processed in the application browser.',introWorkflowTitle:'Suggested workflow',introWorkflowText:'Follow these steps to reduce column mistakes and false confirmations.',introStep1Title:'Load the master catalog',introStep1Text:'Verify SKU, product name, specification and unit.',introStep2Title:'Load the file to review',introStep2Text:'Select product-name, item-code and available attribute columns.',introStep3Title:'Review the results',introStep3Text:'Filter rows, verify candidates, then export Excel.',introStep4Title:'Save your personal memory',introStep4Text:'Sign in to sync memory and your personal catalog across devices.',introOpen:'Open →',introNotice:'MatchMã provides suggestions, not a substitute for business review. Same names can have different specifications; missing SKU or conflicts need manual review.',});
+Object.assign(I18N.de,{navIntro:'Überblick & Anleitung',introEyebrow:'MATCHMÃ · KURZANLEITUNG',introTitle:'Über MatchMã',introLead:'MatchMã vereinheitlicht Produktnamen und findet mögliche Treffer zwischen Dateien. Sie prüfen schneller und behalten die endgültige Entscheidung.',introStart:'Mit Katalog beginnen →',introTry:'Prüfung ausprobieren →',introPurposeTitle:'Zweck',introPurposeText:'Artikel mit unterschiedlichen Namen finden, die dasselbe Produkt sein könnten; SKU, Spezifikation und Einheit vor der Bestätigung prüfen.',introFilesTitle:'Daten vorbereiten',introFilesText:'Beginnen Sie mit einem Stammdatenkatalog mit SKU. Verwenden Sie Importvorlagen für einheitliche Spaltennamen und Datentypen.',introMatchTitle:'Prüfen und bestätigen',introMatchText:'Datei laden, Spalten zuordnen und Abgleich starten. Ähnlichkeitswerte und Warnungen vor der Bestätigung prüfen.',introSaveTitle:'Speicherung und Datenschutz',introSaveText:'Nach der Anmeldung können Bestätigungsspeicher und persönlicher Katalog synchronisiert werden. Dateien werden im Browser verarbeitet.',introWorkflowTitle:'Empfohlener Ablauf',introWorkflowText:'Diese Schritte helfen, Spaltenfehler und falsche Bestätigungen zu vermeiden.',introStep1Title:'Stammkatalog laden',introStep1Text:'SKU, Produktname, Spezifikation und Einheit prüfen.',introStep2Title:'Prüfdatei laden',introStep2Text:'Produktname, Artikelcode und Attribute zuordnen.',introStep3Title:'Ergebnisse prüfen',introStep3Text:'Zeilen filtern, Kandidaten prüfen und Excel exportieren.',introStep4Title:'Persönlichen Speicher sichern',introStep4Text:'Anmelden, um Speicher und persönlichen Katalog geräteübergreifend zu synchronisieren.',introOpen:'Öffnen →',introNotice:'MatchMã liefert Vorschläge und ersetzt keine fachliche Prüfung. Gleiche Namen können unterschiedliche Spezifikationen haben.',});
+Object.assign(I18N['zh-TW'],{navIntro:'介紹與指南',introEyebrow:'MATCHMÃ · 快速指南',introTitle:'關於 MatchMã',introLead:'MatchMã 統一商品名稱並找出不同檔案中的可能相符項目，協助您加快檢查，同時保留最終判斷權。',introStart:'從標準目錄開始 →',introTry:'試著檢查 →',introPurposeTitle:'用途',introPurposeText:'找出名稱不同但可能是同一商品的項目，確認前比對 SKU、名稱、規格與單位。',introFilesTitle:'準備資料',introFilesText:'先載入含 SKU 的標準目錄。匯入時使用範本以保持欄名與資料型態一致。',introMatchTitle:'檢查並確認',introMatchText:'載入檔案、對應欄位並執行比對。確認前請檢查相似度與警示。',introSaveTitle:'儲存與隱私',introSaveText:'登入後可同步確認記憶與個人目錄。檔案會在瀏覽器中處理。',introWorkflowTitle:'建議流程',introWorkflowText:'依序操作可減少欄位錯誤與誤確認。',introStep1Title:'載入標準目錄',introStep1Text:'確認 SKU、商品名稱、規格與單位。',introStep2Title:'載入待檢查檔案',introStep2Text:'選擇商品名稱、代碼與可用屬性欄。',introStep3Title:'檢查結果',introStep3Text:'篩選需複查的列，核對候選項後匯出 Excel。',introStep4Title:'儲存個人記憶',introStep4Text:'登入以跨裝置同步確認記憶與個人目錄。',introOpen:'開啟 →',introNotice:'MatchMã 只提供建議，不能取代業務檢查。名稱相同不代表規格相同；缺少 SKU 或屬性衝突時需人工複查。',});
+Object.assign(I18N['zh-CN'],{navIntro:'介绍与指南',introEyebrow:'MATCHMÃ · 快速指南',introTitle:'关于 MatchMã',introLead:'MatchMã 统一商品名称并找出不同文件中的可能匹配项，帮助您更快检查，同时保留最终判断权。',introStart:'从标准目录开始 →',introTry:'试着检查 →',introPurposeTitle:'用途',introPurposeText:'找出名称不同但可能是同一商品的项目，确认前比对 SKU、名称、规格和单位。',introFilesTitle:'准备数据',introFilesText:'先加载含 SKU 的标准目录。导入时使用模板以保持列名与数据类型一致。',introMatchTitle:'检查并确认',introMatchText:'加载文件、映射字段并运行比对。确认前请检查相似度和警告。',introSaveTitle:'存储与隐私',introSaveText:'登录后可同步确认记忆与个人目录。文件会在浏览器中处理。',introWorkflowTitle:'建议流程',introWorkflowText:'按步骤操作可减少字段错误和误确认。',introStep1Title:'加载标准目录',introStep1Text:'确认 SKU、商品名称、规格和单位。',introStep2Title:'加载待检查文件',introStep2Text:'选择商品名称、商品代码及可用属性列。',introStep3Title:'检查结果',introStep3Text:'筛选需复查的行，核对候选项后导出 Excel。',introStep4Title:'保存个人记忆',introStep4Text:'登录以跨设备同步确认记忆与个人目录。',introOpen:'打开 →',introNotice:'MatchMã 只提供建议，不能取代业务检查。名称相同不代表规格相同；缺少 SKU 或属性冲突时需人工复查。',});
 
 
-Object.assign(I18N.vi,{funSleeping:'Đang ngủ đông',funSleepText:'Gấu đã ăn no, cuộn mình ngủ đông. Bấm gấu hoặc “Cho chơi lại” để thức dậy.',funWakeText:'Gấu vừa thức dậy! Cùng bắt cá nhé.',funPet:'Gấu thích được vuốt ve!',funSnow:'Tuyết đang rơi'});
-Object.assign(I18N.en,{funSleeping:'Hibernating',funSleepText:'The bear is full and curled up for winter sleep. Tap the bear or “Play again” to wake it.',funWakeText:'The bear woke up! Let’s catch some fish.',funPet:'The bear loves a gentle pat!',funSnow:'Snow is falling'});
-Object.assign(I18N.de,{funSleeping:'Winterschlaf',funSleepText:'Der Bär ist satt und schläft eingerollt. Tippe auf den Bären oder „Neu spielen“, um ihn zu wecken.',funWakeText:'Der Bär ist wach! Lass uns Fische fangen.',funPet:'Der Bär mag sanfte Streicheleinheiten!',funSnow:'Es schneit'});
-Object.assign(I18N['zh-TW'],{funSleeping:'冬眠中',funSleepText:'熊吃飽後蜷起來冬眠了。點熊或按「重新開始」喚醒牠。',funWakeText:'熊醒來了！一起抓魚吧。',funPet:'熊熊喜歡輕輕摸摸！',funSnow:'正在下雪'});
-Object.assign(I18N['zh-CN'],{funSleeping:'冬眠中',funSleepText:'熊吃饱后蜷起来冬眠了。点击熊或按“重新开始”唤醒它。',funWakeText:'熊醒来啦！一起抓鱼吧。',funPet:'熊熊喜欢轻轻摸摸！',funSnow:'正在下雪'});
+Object.assign(I18N.vi,{});
+Object.assign(I18N.en,{});
+Object.assign(I18N.de,{});
+Object.assign(I18N['zh-TW'],{});
+Object.assign(I18N['zh-CN'],{});
 
 Object.assign(I18N.vi,{
  calculatorName:'Máy tính',calculatorSubtitle:'Tính nhanh khi cần',calculatorOpen:'Mở máy tính',calculatorClose:'Đóng máy tính',calculatorHint:'Bấm nút hoặc dùng bàn phím: số, + − × ÷, Enter và Backspace.',calculatorClear:'AC',
