@@ -2091,3 +2091,28 @@ html body header.app-header .brand-mark .matchma-logo{display:block!important;wi
 html body header.app-header .brand-copy h1{font-family:Georgia,'Times New Roman',serif!important;font-weight:700!important;letter-spacing:-.8px!important}
 html body header.app-header .brand-copy h1 span{color:inherit!important}
 @media(max-width:600px){html body header.app-header .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important;margin-right:7px!important}}
+
+/* Forest theme: unmistakable leafy green base, understated forest details. */
+html body[data-theme="forest"]{
+ background-color:#d9edc8!important;
+ background-image:
+  radial-gradient(ellipse at 12% 12%,rgba(118,166,82,.22) 0 2%,transparent 28%),
+  radial-gradient(ellipse at 88% 78%,rgba(82,139,69,.18) 0 2%,transparent 30%),
+  linear-gradient(135deg,#d8edc7 0%,#c5e1b3 48%,#e3f0d4 100%)!important;
+ color:#29482e!important;
+}
+html body[data-theme="forest"] header.app-header{background:rgba(239,248,229,.96)!important}
+html body[data-theme="forest"] .sidebar{background:rgba(235,246,224,.96)!important}
+html body[data-theme="forest"] .main{background:transparent!important}
+html body[data-theme="forest"] .hero,
+html body[data-theme="forest"] .panel,
+html body[data-theme="forest"] .stat,
+html body[data-theme="forest"] .mini,
+html body[data-theme="forest"] .tablewrap{background:rgba(248,252,241,.92)!important}
+html body[data-theme="forest"] .nav-folder{position:relative!important;background:#e5f2d9!important;border:1px dashed #a2c38d!important}
+html body[data-theme="forest"] .navfolder-title:after{font-size:17px!important;filter:none!important}
+html body[data-theme="forest"] #themeScene .scene-doodle{width:25px!important;height:25px!important;font-size:20px!important;opacity:.13!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art{width:32px!important;height:32px!important}
+html body header.app-header .brand-mark{width:58px!important;height:58px!important;min-width:58px!important;flex:0 0 58px!important;margin-right:9px!important}
+html body header.app-header .brand-mark .matchma-logo{width:100%!important;height:100%!important;display:block!important}
+@media(max-width:600px){html body header.app-header .brand-mark{width:46px!important;height:46px!important;min-width:46px!important;flex-basis:46px!important}}
