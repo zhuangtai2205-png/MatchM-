@@ -1941,7 +1941,7 @@ function updateThemeDecorations(theme){
   retro:{overview:'♫',intro:'♪',catalog:'♪',run:'♬',results:'♩',memory:'♫',platforms:'𝄞',autofill:'♭',stockforecast:'♬',account:'♪',settings:'𝄢'},
   pink:{overview:'🌸',intro:'🌷',catalog:'🌺',run:'🌷',results:'💐',memory:'🌼',platforms:'🌸',autofill:'🌹',stockforecast:'🌺',account:'🌸',settings:'🌷'},
   vampire:{overview:'🦇',intro:'🕸️',catalog:'🕸️',run:'🗡️',results:'🕯️',memory:'🦇',platforms:'🎃',autofill:'☠️',stockforecast:'🩸',account:'🦇',settings:'🕷️'},
-  cat:{overview:'🐈',intro:'🐾',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},forest:{overview:'🌲',intro:'🍃',catalog:'🐻',run:'🐾',results:'🍄',memory:'🍯',platforms:'🌿',autofill:'🌲',stockforecast:'🪵',account:'🐻',settings:'🍃'},minimal:{overview:'○',intro:'◌',catalog:'□',run:'↗',results:'✓',memory:'◇',platforms:'⌕',autofill:'↔',stockforecast:'▥',account:'○',settings:'⚙'},bear:{overview:'',intro:'🐾',catalog:'🐟',run:'',results:'🐾',memory:'🍯',platforms:'🐟',autofill:'🌲',stockforecast:'🐟',account:'',settings:'🍃'}
+  cat:{overview:'🐈',intro:'🐾',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},forest:{overview:'🌲',intro:'🍃',catalog:'🐻',run:'🐾',results:'🍄',memory:'🍯',platforms:'🌿',autofill:'🌲',stockforecast:'🪵',account:'🐻',settings:'🍃'},minimal:{overview:'○',intro:'◌',catalog:'□',run:'↗',results:'✓',memory:'◇',platforms:'⌕',autofill:'↔',stockforecast:'▥',account:'○',settings:'⚙'},bear:{overview:'🐻',intro:'🐾',catalog:'🐻',run:'🐾',results:'🍄',memory:'🍯',platforms:'🌿',autofill:'🌲',stockforecast:'🪵',account:'🐻',settings:'🍃'}
  };
  document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&iconMaps[theme][page]){icon.innerHTML=themeDoodleSvg(theme,Math.max(0,Object.keys(iconMaps[theme]).indexOf(page)));icon.setAttribute('aria-hidden','true')}});
  document.querySelectorAll('.intro-step-icon,.intro-guide-illustration,.intro-notice-art,.upload .bigicon,.tile-icon,.folder-icon,.summary-icon,.result-icon,[data-art-icon]').forEach((icon,i)=>{icon.innerHTML=themeDoodleSvg(theme,i+1);icon.setAttribute('aria-hidden','true')});
@@ -3261,3 +3261,17 @@ body[data-theme="minimal"] .cat-flower-particle {display:none!important}
  .app-header .brand-copy .subbrand{max-width:220px!important}
 }
 </style>
+
+
+<style id="matchma-remove-ocean-fish-theme-leak-v48">
+/* Ocean fish are exclusive to the ocean theme. Clear old decorative fish when switching themes. */
+body[data-theme="forest"] .theme-drift,
+body[data-theme="minimal"] .theme-drift {display:none!important}
+body[data-theme="forest"] .cat-flower-particle,
+body[data-theme="minimal"] .cat-flower-particle {display:none!important}
+body[data-theme="forest"] .navicon,
+body[data-theme="minimal"] .navicon {background-image:none!important}
+body[data-theme="forest"] .navicon img,
+body[data-theme="minimal"] .navicon img {display:none!important}
+</style>
+
