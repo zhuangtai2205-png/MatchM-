@@ -913,9 +913,9 @@ body[data-theme="vampire"] .cat-flower-particle svg{--doodle-ink:#693d6d}
 body[data-theme="cat"] .cat-flower-particle svg{--doodle-ink:#8d6246}
 body[data-theme="bear"] .cat-flower-particle svg{--doodle-ink:#783f20}
 #fat-bear-overlay{inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
-#bear-container{position:absolute!important;left:50%!important;bottom:-3px!important;width:clamp(170px,32vw,320px)!important;height:auto!important;aspect-ratio:320/180;display:block!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:none!important;overflow:visible!important;pointer-events:auto!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;filter:drop-shadow(0 -4px 8px #3f2c1c12)!important;z-index:1}
+#bear-container{position:absolute!important;left:50%!important;bottom:-3px!important;width:clamp(170px,32vw,320px)!important;height:auto!important;aspect-ratio:220/260!important;height:auto!important;max-height:260px!important;display:block!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:none!important;overflow:visible!important;pointer-events:auto!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:none!important;filter:drop-shadow(0 -4px 8px #3f2c1c12)!important;z-index:1}
 #bear-container:focus-visible{outline:3px dashed #a97143!important;outline-offset:4px!important;border-radius:12px!important}
-#bear-sprite{display:block;width:100%;height:auto;overflow:visible;filter:none!important}
+#bear-sprite{display:block;width:100%;height:100%;overflow:visible;filter:none!important}
 #bear-expression{display:none!important}
 #bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .42s ease-in-out}
 @keyframes bearHandDrawnChomp{0%,100%{translate:0 0}24%{translate:0 3px}52%{translate:0 -5px}76%{translate:0 1px}}
@@ -2259,7 +2259,7 @@ function initFunWidget(){
  // Recover gracefully if the bear-scene markup is missing from the page.
  if(!overlay){
   overlay=document.createElement('div');overlay.id='fat-bear-overlay';overlay.hidden=true;overlay.setAttribute('aria-hidden','true');
-  overlay.innerHTML='<div id="bear-snow"></div><div id="fish-pool"></div><div id="bear-plus-layer"></div><button id="bear-container" type="button" aria-label="Chạm để vuốt ve gấu"><span id="bear-sprite" aria-hidden="true" style="display:block;width:100%;height:100%;font-size:0;line-height:1"><svg viewBox="0 0 220 260" width="100%" height="100%" role="img" aria-label="Gấu nâu dễ thương toàn thân">
+  overlay.innerHTML='<div id="bear-snow"></div><div id="fish-pool"></div><div id="bear-plus-layer"></div><button id="bear-container" type="button" aria-label="Chạm để vuốt ve gấu"><span id="bear-sprite" aria-hidden="true" style="display:block;width:100%;height:100%;font-size:0;line-height:1"><svg viewBox="0 0 220 260" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Gấu nâu dễ thương toàn thân">
 <g stroke="#69452f" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
 <!-- round ears -->
 <circle cx="55" cy="49" r="25" fill="#a96b40"/><circle cx="55" cy="50" r="13" fill="#efbd91" stroke="none"/>
