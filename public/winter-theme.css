@@ -2032,3 +2032,55 @@ html body[data-theme="minimal"] .nav-folder,
 html body[data-theme="minimal"] .nav-folder-items,
 html body[data-theme="minimal"] .navbtn{background:transparent!important;box-shadow:none!important}
 @keyframes forestBearHoneyFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+
+/* Corrected Forest theme: green forest background, small bear stickers on folders, no giant bear illustration. */
+html body[data-theme="forest"]{
+ color:#294b35!important;
+ background:
+   radial-gradient(ellipse at 8% 0%,rgba(200,232,164,.78),transparent 34%),
+   radial-gradient(ellipse at 94% 88%,rgba(159,205,125,.42),transparent 32%),
+   linear-gradient(145deg,#e6f2d9 0%,#d4e8c5 46%,#edf4df 100%)!important;
+ background-image:
+   radial-gradient(ellipse at 8% 0%,rgba(200,232,164,.78),transparent 34%),
+   radial-gradient(ellipse at 94% 88%,rgba(159,205,125,.42),transparent 32%),
+   linear-gradient(145deg,#e6f2d9 0%,#d4e8c5 46%,#edf4df 100%)!important;
+}
+html body[data-theme="forest"] header.app-header{background:#f3f8e9eF!important;border-bottom:2px dashed #9fbd87!important}
+html body[data-theme="forest"] .sidebar{background:#eff7e7f2!important;border:2px dashed #9cbd83!important;box-shadow:0 8px 22px #456b3512!important}
+html body[data-theme="forest"] .main{background:transparent!important}
+html body[data-theme="forest"] .hero,
+html body[data-theme="forest"] .panel,
+html body[data-theme="forest"] .stat,
+html body[data-theme="forest"] .mini,
+html body[data-theme="forest"] .tablewrap{
+ background:#f8fbf1ed!important;border:1.5px dashed #b0c99b!important;box-shadow:0 5px 18px #466a3310!important;color:#294b35!important
+}
+html body[data-theme="forest"] .hero h2,
+html body[data-theme="forest"] .sectionhead h2,
+html body[data-theme="forest"] .panel h2,
+html body[data-theme="forest"] .stat b{color:#355d3b!important}
+html body[data-theme="forest"] .navbtn{color:#416447!important;border-radius:13px!important}
+html body[data-theme="forest"] .navbtn:hover{background:#e1efcf!important}
+html body[data-theme="forest"] .navbtn.active{background:#cfe5b6!important;border:1px dashed #8eaf72!important;color:#294b35!important}
+html body[data-theme="forest"] .nav-folder{background:#eaf4df!important;border:1.5px dashed #a7c38d!important;border-radius:16px!important;padding:5px!important;margin-bottom:8px!important}
+html body[data-theme="forest"] .navfolder-title{display:flex!important;align-items:center!important;gap:8px!important;background:#dcecc9!important;color:#355d3b!important;border-radius:11px!important;padding:9px 10px!important}
+html body[data-theme="forest"] .navfolder-title:after{content:"🐻 🍯"!important;display:inline-block!important;margin-left:auto!important;font-size:15px!important;letter-spacing:1px!important;line-height:1!important}
+html body[data-theme="forest"] .nav-folder[data-nav-group="catalog"] .navfolder-title:after{content:"🐻 🌿"!important}
+html body[data-theme="forest"] .nav-folder[data-nav-group="matching"] .navfolder-title:after{content:"🐻 🐝"!important}
+html body[data-theme="forest"] .nav-folder[data-nav-group="tools"] .navfolder-title:after{content:"🐻 🍯"!important}
+html body[data-theme="forest"] .nav-folder-items .navbtn .navicon{width:22px!important;min-width:22px!important;font-size:16px!important}
+html body[data-theme="forest"] .nav-folder-items .navbtn{background:transparent!important;border:1px solid transparent!important}
+html body[data-theme="forest"] .nav-folder-items .navbtn:hover{background:#e5f0d8!important}
+html body[data-theme="forest"] .btn{background:#729b55!important;color:#fff!important;border:1px solid #5f8547!important}
+html body[data-theme="forest"] .btn.alt{background:#e4efd8!important;color:#42653a!important;border-color:#b4cda0!important}
+html body[data-theme="forest"] .theme-drift{opacity:.12!important}
+html body[data-theme="forest"] #themeScene .scene-doodle{width:30px!important;height:30px!important;font-size:24px!important;opacity:.16!important;filter:none!important}
+html body[data-theme="forest"] #themeScene .scene-doodle svg{width:100%!important;height:100%!important}
+html body[data-theme="forest"] .winter-bear-spot,
+html body[data-theme="forest"] #bear-container,
+html body[data-theme="forest"] #fat-bear-overlay{display:none!important;visibility:hidden!important;opacity:0!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art{width:34px!important;height:34px!important}
+html body[data-theme="forest"] .theme-click-doodle{font-size:21px!important}
+html body header.app-header .brand-mark{width:74px!important;height:74px!important;min-width:74px!important;flex:0 0 74px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:#111!important}
+html body header.app-header .brand-mark svg{width:100%!important;height:100%!important;display:block!important}
+html body[data-theme="minimal"] .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important}
