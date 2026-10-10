@@ -1388,7 +1388,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
-</style><link rel="stylesheet" href="/winter-theme.css?v=33"><style id="fat-bear-motion-upgrade">
+</style><link rel="stylesheet" href="/winter-theme.css?v=34"><style id="fat-bear-motion-upgrade">
 /* Fat Bear Week-inspired growth and gentle living motion */
 #bear-container{will-change:transform}
 #bear-container:not(.is-hibernating) #bear-sprite{animation:fatBearIdle 2.8s ease-in-out infinite;transform-origin:50% 90%}
@@ -1752,18 +1752,7 @@ body{margin:0}
 </main></div>
 
 
-<button id="funToggleBtn" type="button" aria-label="Mở Góc Gấu" aria-expanded="false" title="Giải trí · Góc Gấu MatchMã" style="position:fixed;right:16px;bottom:18px;z-index:100001;display:flex;align-items:center;gap:8px;padding:10px 14px;border:2px solid #d5dfc2;border-radius:999px;background:#fffaf0;color:#3e5738;box-shadow:0 5px 18px #25331f30;font:700 14px/1.2 system-ui,sans-serif;cursor:pointer;touch-action:manipulation"><span aria-hidden="true" style="font-size:22px">🐻</span><span>Giải trí</span></button>
-<aside id="funWidget" class="fun-widget" hidden aria-label="Góc Gấu MatchMã">
- <div class="fun-widget-bar" id="funWidgetDragBar"><div class="fun-widget-brand"><span class="fun-widget-mascot"></span><div><strong data-i18n="funTitle">Góc Gấu MatchMã</strong><small data-i18n="funSubTitle">Cho gấu ăn cá · hiệu ứng vui</small></div></div>
- <div class="fun-widget-actions"><button type="button" id="funMinimizeBtn" title="Thu gọn" aria-label="Thu gọn">−</button><button type="button" id="funMaximizeBtn" title="Phóng to" aria-label="Phóng to">□</button><button type="button" id="funCloseBtn" title="Tắt góc gấu" aria-label="Tắt">×</button></div></div>
- <div class="fun-widget-content"><p class="fun-widget-intro" data-i18n="funIntro">Bấm cá đang bơi trên trang để cho gấu ăn. Mỗi con cá làm gấu lớn thêm một chút.</p>
- <div class="bear-stats"><div><small data-i18n="funFishEaten">Cá đã ăn</small><b id="funFishCount">0</b></div><div><small data-i18n="funBearStage">Trạng thái gấu</small><b id="funBearStage">Gấu đói bụng</b></div><div><small data-i18n="funGrowth">Kích thước</small><b id="funBearGrowth">100%</b></div></div>
- <div class="bear-panel-preview"><span class="bear-panel-sprite" id="funBearPreview" aria-hidden="true"></span><span class="bear-panel-expression" id="funBearFace" aria-hidden="true">🥺</span><p id="funBearMessage" aria-live="polite" data-i18n="funWelcome">Gấu đang đợi cá. Bấm vào một con cá để bắt đầu!</p></div>
- <div class="fun-footer-actions"><button type="button" class="btn" id="funSpawnFish" data-i18n="funMoreFish">Thả thêm cá 🐟</button><button type="button" class="btn alt" id="funResetBear" data-i18n="funReset">Cho chơi lại</button></div>
- <div class="fun-effects-row"><span data-i18n="funEffectsLabel">Hiệu ứng nền</span><button type="button" id="funEffectsToggle" aria-pressed="true" data-i18n="funEffectsOff">Tắt hiệu ứng</button></div>
- <p class="fun-local-note" data-i18n="funLocalNote">Góc giải trí không ảnh hưởng dữ liệu đối chiếu. Bộ đếm chỉ lưu trên thiết bị này.</p>
- </div>
-</aside>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script>
@@ -3011,7 +3000,7 @@ $('useRememberedName').addEventListener('click',()=>{if(!savedMemory.length){ale
 updateThresholdLabels();let preferredLang='vi';try{preferredLang=localStorage.getItem('matchma-language')||'vi'}catch(e){}setLanguage(preferredLang);updateCanRun();updateStats();
 initAccount();renderMemoryPage();
 ['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
-document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initFunWidget();initCalculatorWidget();
+document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initCalculatorWidget();
 
 /* Keep hand-drawn click decorations enabled. Snow spans the full viewport while feeding or hibernating. */
 renderBearSnow=function(){
@@ -3045,21 +3034,4 @@ renderBearSnow=function(){
 renderBearSnow();
 
 </script><!-- Removed duplicate static bear mascot; the interactive SVG bear belongs to the entertainment scene only. --><script src="/winter-theme.js?v=12"></script>
-<script id="fat-bear-preference-sync">
-(()=> {
- const key='matchma-bear-effects-v1';
- const apply=()=>{
-  let enabled=true;
-  try{enabled=localStorage.getItem(key)!=='0'}catch(_){}
-  document.body.dataset.funEffects=enabled?'on':'off';
-  const toggle=document.getElementById('funEffectsToggle');
-  if(toggle){
-   toggle.setAttribute('aria-pressed',String(enabled));
-   if(typeof tr==='function')toggle.textContent=tr(enabled?'funEffectsOff':'funEffectsOn');
-  }
-  if(typeof renderBearSnow==='function')renderBearSnow();
- };
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
-})();
-</script>
 </body></html>
