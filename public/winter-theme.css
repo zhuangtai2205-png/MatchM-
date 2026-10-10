@@ -220,3 +220,13 @@ body[data-theme="vampire"]{background:linear-gradient(145deg,#f5edf8,#e8dff0 55%
 body[data-theme="vampire"] header.app-header,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .chart-card,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini{background:#f7f0fa!important;color:#674e72!important;border-color:#d9c4e2!important}
 body[data-theme="cat"]{background:linear-gradient(145deg,#fbf2ed,#f0e2dc 55%,#fff8f3)!important}
 body[data-theme="cat"] header.app-header,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .chart-card,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{background:#fff7f1f5!important;border-color:#e7cfc3!important}
+
+
+/* Corner mascot redesign: no bear illustration in non-bear themes; animated pastel mascot in bear theme only. */
+.winter-bear-spot,.winter-bear-replacement{display:none!important}
+body[data-theme="bear"] .winter-bear-spot{display:block!important;width:clamp(142px,18vw,222px);max-height:205px;right:8px;bottom:-8px;object-fit:contain;filter:drop-shadow(0 7px 5px #668b6925);animation:pastelBearBob 4s ease-in-out infinite;transform-origin:50% 85%}
+body[data-theme="bear"] .hero:has(.winter-bear-spot){padding-right:clamp(150px,19vw,240px)!important}
+@keyframes pastelBearBob{0%,100%{transform:translateY(0) rotate(-1.2deg)}35%{transform:translateY(-5px) rotate(1deg)}65%{transform:translateY(-2px) rotate(0deg)}}
+@media(max-width:650px){body[data-theme="bear"] .winter-bear-spot{width:132px;max-height:125px;right:5px;bottom:-5px}body[data-theme="bear"] .hero:has(.winter-bear-spot){padding-right:14px!important;padding-bottom:132px!important}}
+/* Keep other themes free of the bear corner illustration. */
+body[data-theme="ocean"] .hero,body[data-theme="retro"] .hero,body[data-theme="pink"] .hero,body[data-theme="vampire"] .hero,body[data-theme="cat"] .hero{padding-right:25px!important}
