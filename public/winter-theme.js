@@ -2,29 +2,25 @@
   'use strict';
   const $ = (selector, root=document) => root.querySelector(selector);
   const themeMotifs = {
-    ocean:{background:["〰","〰","🫧","🐠","🐚","🪸","🐟"],click:["🧜‍♀️","🐠","🐬","🫧","🐚","🐟"],nav:["🐠","🐚","🪸","🐬","🫧"]},
-    retro:{background:["♪","♫","♬","𝄞","♩"],click:["♪","♫","♬","♩","𝄞"],nav:["♫","♪","♬","𝄞","♩"]},
-    pink:{background:["✿","🌸","❀","🌷","🌺"],click:["🌸","🌺","🌷","🌼","🌹","❀"],nav:["🌸","🌷","🌼","🌺","✿"]},
-    vampire:{background:["☾","🦇","✦","🕸","🕯️"],click:["🦇","🎃","🕷️","🕸️","🕯️","☠️"],nav:["🦇","🕸️","🕯️","🎃","☾"]},
-    cat:{background:["🐾","🐈","🐟","✦","🧶"],click:["🐈","🐈‍⬛","🐟","🦴","🐾","🧶"],nav:["🐈","🐟","🧶","🦴","🐾"]}
+    ocean:{background:["wave","wave","bubble","fish","wave","coral","wave"],click:["mermaid","fish","bubble","dolphin"],nav:[]},
+    retro:{background:["♪","♫","♬","𝄞","♩"],click:["♪","♫","♬","♩","𝄞"],nav:[]},
+    pink:{background:["petal","petal","flower","petal","sakura"],click:["🌸","🌺","🌷","❀"],nav:[]},
+    vampire:{background:["web","bat","moon","web","candle"],click:["🦇","🕸","✦","🕯"],nav:[]},
+    cat:{background:["cat","yarn","paw","yarn","cat"],click:["🐈","🧶","🐾","🧵"],nav:[]},
+    bear:{background:["pine","pine","snow","paw","pine"],click:["🐟","❄","🍃"],nav:[]}
   };
   const theme = () => document.body.dataset.theme || 'ocean';
   function renderScenery(){
-    const root=$('#themeScene');
-    if(!root) return;
-    const t=theme(), cfg=themeMotifs[t]||themeMotifs.ocean;
-    root.replaceChildren();
-    cfg.background.forEach((symbol,i)=>{
-      const el=document.createElement('span');
-      el.className='scene-doodle '+(t==='ocean'&&symbol==='〰'?'scene-wave':'');
-      el.textContent=symbol;
-      el.style.left=(4+(i*19)%91)+'%';
-      el.style.top=(9+(i*23)%77)+'%';
-      el.style.setProperty('--doodle-delay',(-i*1.7)+'s');
-      el.style.setProperty('--doodle-size',(18+(i%3)*10)+'px');
+    const root=$('#themeScene'); if(!root)return;
+    const t=theme(),cfg=themeMotifs[t]||themeMotifs.ocean; root.replaceChildren();
+    cfg.background.forEach((kind,i)=>{
+      const el=document.createElement('span'); el.className='scene-doodle scene-'+kind;
+      el.setAttribute('aria-hidden','true');
+      const glyph={wave:'〰',bubble:'○',fish:'🐟',coral:'🪸',mermaid:'🧜‍♀️',petal:'🌸',flower:'✿',sakura:'🌸',web:'🕸',bat:'🦇',moon:'☾',candle:'🕯',cat:'🐈',yarn:'🧶',paw:'🐾',pine:'♠',snow:'❄'}[kind]||kind;
+      el.textContent=glyph; el.style.left=(4+(i*19)%91)+'%'; el.style.top=(8+(i*23)%78)+'%';
+      el.style.setProperty('--doodle-delay',(-i*1.7)+'s'); el.style.setProperty('--doodle-size',(18+(i%3)*10)+'px');
       root.appendChild(el);
     });
-    document.querySelectorAll('.navbtn .theme-nav-doodle').forEach(el=>el.remove());
   }
   function showClick(e){
     if(e.button!==0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -42,10 +38,9 @@
     }
   }
   function initBear(){
-    document.querySelectorAll('.app-header .logo > :not(.brand-logo-img)').forEach(el=>el.remove());
+    const logo=document.querySelector('.app-header .logo');
+    if(logo) logo.querySelectorAll(':scope > :not(.brand-logo-img)').forEach(el=>el.remove());
     document.querySelectorAll('.navbtn .navicon,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(el=>el.remove());
-    document.querySelectorAll('#funToggleBtn,#funWidget,#fat-bear-overlay,.fun-widget-mascot,.winter-bear-spot').forEach(el=>el.remove());
-    if(document.body.dataset.theme==='bear')document.body.dataset.theme='ocean';
   }
   function start(){
     renderScenery();
