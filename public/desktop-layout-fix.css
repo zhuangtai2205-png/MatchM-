@@ -146,3 +146,15 @@ html body #bear-snow, html body #fish-pool, html body #bear-plus-layer {
   html body .shell.app-shell > #appSidebar.sidebar { padding: 8px !important; }
   html body .shell.app-shell > #appSidebar.sidebar > details.nav-folder { padding: 6px !important; }
 }
+
+/* Permanently hide entertainment/bear feature requested by site owner. */
+html body #funToggleBtn, html body #funWidget, html body #fat-bear-overlay,
+html body #bear-container, html body #bear-snow, html body #fish-pool,
+html body #bear-plus-layer, html body .fun-widget-mascot, html body .fun-toggle-icon,
+html body [data-feature="entertainment"], html body [data-feature="bear-entertainment"],
+html body [data-nav="entertainment"], html body [data-nav="fun"],
+html body .entertainment-widget, html body .bear-entertainment,
+html body .fun-toggle, html body .fun-widget, html body .bear-fish {
+ display:none!important; visibility:hidden!important; opacity:0!important;
+ pointer-events:none!important; animation:none!important; transition:none!important;
+}
