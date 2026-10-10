@@ -888,3 +888,62 @@ html body[data-theme="bear"]{
  --page-art:radial-gradient(ellipse at 14% 8%,#f8f9e9 0,transparent 34%),radial-gradient(ellipse at 88% 82%,#c6e1c8 0,transparent 38%),linear-gradient(145deg,#e8f2df,#d5e8d4);
  --menu-folder-bg:#dcebd2;--menu-head-bg:#cce2bd;--menu-item-bg:#eef6e6;--menu-active-bg:#bfdcae;--menu-border:#9dbb88;--menu-tab:#a9c795;--menu-ink:#496b58;
 }
+
+
+/* Final theme-color audit: remove hard-coded honey/cream fills from shared controls. */
+html body[data-theme]{
+ --accent-bg:var(--menu-active-bg);
+ --accent-border:var(--sketch-line);
+ --warm-card-bg:var(--surface-bg);
+ --warm-card-border:var(--sketch-line);
+ --toolbar-bg:var(--surface-bg);
+ --toolbar-ink:var(--page-ink);
+}
+html body[data-theme] .sidebar-account-shortcut,
+html body[data-theme] .sidebar-help,
+html body[data-theme] .sidefoot,
+html body[data-theme] .local-pill,
+html body[data-theme] .toolbar-select,
+html body[data-theme] .toolbar-font,
+html body[data-theme] .quick-settings>summary{
+ background:var(--warm-card-bg)!important;
+ color:var(--page-ink)!important;
+ border-color:var(--warm-card-border)!important;
+}
+html body[data-theme] .sidebar-avatar{
+ background:var(--accent-bg)!important;border-color:var(--accent-border)!important;color:var(--page-ink)!important;
+}
+html body[data-theme] .btn,
+html body[data-theme] button.btn,
+html body[data-theme] .toolbar-font button[aria-pressed=true]{
+ background:var(--accent-bg)!important;color:var(--page-ink)!important;border-color:var(--accent-border)!important;
+}
+html body[data-theme] .btn.alt,
+html body[data-theme] .btn.soft,
+html body[data-theme] .okmsg,
+html body[data-theme] .progressbox,
+html body[data-theme] .rule{
+ background:var(--control-bg)!important;color:var(--page-ink)!important;border-color:var(--sketch-line)!important;
+}
+html body[data-theme] th,
+html body[data-theme] table th,
+html body[data-theme] .nav-folder>summary.navfolder-title{
+ background:var(--menu-head-bg)!important;color:var(--page-ink)!important;border-color:var(--sketch-line)!important;
+}
+html body[data-theme] .stat,
+html body[data-theme] .mini,
+html body[data-theme] .chart-card,
+html body[data-theme] .card,
+html body[data-theme] .result-card,
+html body[data-theme] .upload,
+html body[data-theme] .tool-card,
+html body[data-theme] .modal-content{
+ background:var(--surface-bg)!important;color:var(--page-ink)!important;border-color:var(--sketch-line)!important;
+}
+html body[data-theme] .toolbar-font button{color:var(--page-ink)!important}
+html body[data-theme="ocean"]{--accent-bg:#c3edf3;--accent-border:#83c8d7;--warm-card-bg:#e9f9fb;--warm-card-border:#91cedb;--toolbar-bg:#e9f9fb}
+html body[data-theme="retro"]{--accent-bg:#d9d5c9;--accent-border:#898579;--warm-card-bg:#ece9df;--warm-card-border:#aaa596;--toolbar-bg:#ece9df}
+html body[data-theme="pink"]{--accent-bg:#f3c6da;--accent-border:#e0a2bf;--warm-card-bg:#ffedf4;--warm-card-border:#e4b1c8;--toolbar-bg:#ffedf4}
+html body[data-theme="vampire"]{--accent-bg:#563047;--accent-border:#a15c76;--warm-card-bg:#302136;--warm-card-border:#89546a;--toolbar-bg:#302136}
+html body[data-theme="cat"]{--accent-bg:#e5c9c0;--accent-border:#cba69b;--warm-card-bg:#f5e9e3;--warm-card-border:#d2b0a5;--toolbar-bg:#f5e9e3}
+html body[data-theme="bear"]{--accent-bg:#c7e2b2;--accent-border:#9dbb88;--warm-card-bg:#eaf3e1;--warm-card-border:#a0bd8c;--toolbar-bg:#eaf3e1}
