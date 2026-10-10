@@ -1437,31 +1437,11 @@ html body .nav-folder>summary .bear-icon{display:none!important}
 @keyframes fatBearSleep{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(2px) scale(1.018,.985)}}
 @media(prefers-reduced-motion:reduce){#bear-container #bear-sprite{animation:none!important}}
 
-/* FINAL FIX: preserve the original MatchMã logo proportions and stop the growing bear from covering the mobile UI. */
-header.app-header .brand{align-items:center!important;min-width:0!important;gap:10px!important}
-header.app-header .logo{width:76px!important;height:98px!important;min-width:76px!important;flex:0 0 76px!important;margin:0!important;padding:0!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;animation:none!important}
-header.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;aspect-ratio:360/460!important;transform:none!important;filter:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
-header.app-header .brand-copy{min-width:0!important}
-header.app-header .brand-copy .subbrand{line-height:1.3!important}
-#fat-bear-overlay{z-index:30!important}
-#fat-bear-overlay #bear-container{left:12px!important;bottom:12px!important;width:94px!important;height:108px!important;max-width:94px!important;max-height:108px!important;transform:scale(1)!important;transform-origin:bottom left!important;filter:drop-shadow(0 3px 3px #493b2418)!important}
-#fat-bear-overlay #bear-sprite{font-size:66px!important;max-width:100%!important;max-height:100%!important}
-#fat-bear-overlay .winter-bear-replacement{max-width:94px!important;max-height:108px!important;object-fit:contain!important;object-position:center bottom!important}
-#fat-bear-overlay #bear-expression{top:20px!important;left:54px!important;font-size:18px!important}
-#fat-bear-overlay .bear-caption{left:0!important;bottom:0!important;min-width:0!important;padding:3px 6px!important;max-width:100px!important}
-#fat-bear-overlay .bear-caption b{font-size:9px!important}
-@media(max-width:650px){
- header.app-header .logo{width:58px!important;height:74px!important;min-width:58px!important;flex-basis:58px!important}
- #fat-bear-overlay #bear-container{left:8px!important;bottom:8px!important;width:76px!important;height:88px!important;max-width:76px!important;max-height:88px!important;transform:scale(1)!important}
- #fat-bear-overlay #bear-sprite{font-size:54px!important}
- #fat-bear-overlay .winter-bear-replacement{max-width:76px!important;max-height:88px!important}
- #fat-bear-overlay #bear-expression{top:16px!important;left:44px!important;font-size:15px!important}
- #fat-bear-overlay .bear-caption{display:none!important}
-}
+/* Revert the emergency bear size overrides; preserve the site's original bear artwork/behavior. */
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
-  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=23" alt="Logo MatchMã"></div>
+  <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=24" alt="Logo MatchMã"></div>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
    <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
@@ -3001,7 +2981,7 @@ renderBearSnow();
 <script id="matchma-logo-lock">
 (()=> {
   'use strict';
-  const LOGO='/matchma-logo.svg?v=23';
+  const LOGO='/matchma-logo.svg?v=24';
   function fixBrand(){
     document.querySelectorAll('.app-header .logo').forEach(box=>{
       let img=box.querySelector(':scope > img.brand-logo-img');
