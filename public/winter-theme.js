@@ -24,8 +24,7 @@
       const el=document.createElement('span'); el.className='scene-doodle scene-'+kind;
       el.setAttribute('aria-hidden','true');
       const glyph={wave:'〰',bubble:'○',fish:'🐟',coral:'🪸',mermaid:'🧜‍♀️',petal:'🌸',flower:'✿',sakura:'🌸',web:'🕸',bat:'🦇',moon:'☾',candle:'🕯',cat:'🐈',yarn:'🧶',paw:'🐾',pine:'🌲',bear:'🐻',honey:'🍯',bee:'🐝',snow:'❄'}[kind]||kind;
-      if(t==='forest' && forestArt[kind]) el.innerHTML=forestArt[kind]; else el.textContent=glyph;
-      el.textContent=glyph; el.style.left=(4+(i*19)%91)+'%'; el.style.top=(8+(i*23)%78)+'%';
+      if(t==='forest' && forestArt[kind]) el.innerHTML=forestArt[kind]; else el.textContent=glyph; el.style.left=(4+(i*19)%91)+'%'; el.style.top=(8+(i*23)%78)+'%';
       el.style.setProperty('--doodle-delay',(-i*1.7)+'s'); el.style.setProperty('--doodle-size',(18+(i%3)*10)+'px');
       root.appendChild(el);
     });
