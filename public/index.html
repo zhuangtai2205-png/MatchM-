@@ -1778,6 +1778,39 @@ header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
 header.app-header .brand-copy h1{margin:0!important;font-family:Georgia,"Times New Roman",serif!important;font-size:clamp(28px,3.2vw,40px)!important;font-weight:800!important;line-height:1.05!important;letter-spacing:-.035em!important;white-space:nowrap!important;color:inherit!important}
 @media(max-width:700px){header.app-header .brand{gap:8px!important}header.app-header .brand-mark{width:52px!important;height:52px!important;min-width:52px!important;flex-basis:52px!important}header.app-header .brand-copy h1{font-size:clamp(23px,5.2vw,30px)!important;white-space:normal!important}}
 </style>
+<style id="matchma-single-final-brand-v76">
+/* One authoritative header rule, placed last in <head> to neutralize legacy overrides. */
+header.app-header .brand{
+ display:flex!important;align-items:center!important;gap:14px!important;
+ min-width:0!important;flex:0 1 auto!important;
+}
+header.app-header .brand-mark{
+ display:block!important;position:relative!important;overflow:hidden!important;
+ width:76px!important;height:76px!important;min-width:76px!important;
+ flex:0 0 76px!important;margin:0!important;padding:0!important;
+}
+header.app-header .brand-mark .brand-logo-img{
+ display:block!important;position:absolute!important;inset:0!important;
+ width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
+ object-fit:contain!important;object-position:center!important;transform:none!important;
+}
+header.app-header .brand-copy{display:flex!important;flex-direction:column!important;justify-content:center!important;min-width:0!important}
+header.app-header .brand-copy h1,
+header.app-header .brand-copy h1 span{
+ font-family:Georgia,"Times New Roman",serif!important;font-weight:700!important;
+ font-size:clamp(27px,3vw,38px)!important;line-height:1.05!important;
+ letter-spacing:-.025em!important;white-space:nowrap!important;margin:0!important;
+}
+header.app-header .brand-copy .subbrand{font-size:12px!important;line-height:1.35!important}
+@media(max-width:700px){
+ header.app-header .brand{gap:9px!important}
+ header.app-header .brand-mark{width:58px!important;height:58px!important;min-width:58px!important;flex-basis:58px!important}
+ header.app-header .brand-copy h1,header.app-header .brand-copy h1 span{
+  font-size:clamp(23px,5.8vw,30px)!important;white-space:normal!important;
+ }
+ header.app-header .brand-copy .subbrand{font-size:10px!important}
+}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
