@@ -42,11 +42,8 @@
     }
   }
   function initBear(){
-    document.querySelectorAll('option[value="bear"],option[data-theme="bear"]').forEach(option=>option.remove());
-    document.querySelectorAll('#bear-container,#bear-sprite,.winter-bear-spot,#fat-bear-overlay,#funWidget,#funToggleBtn,.bear-fish,.bear-plus-one').forEach(el=>el.remove());
     document.querySelectorAll('.navbtn .theme-nav-doodle,.navbtn .icon3d,.navbtn .bear-icon').forEach(el=>el.remove());
-    if(document.body.dataset.theme==="bear") document.body.dataset.theme="ocean";
-    document.querySelectorAll('select').forEach(select=>{if(select.value==="bear"){select.value="ocean";select.dispatchEvent(new Event("change",{bubbles:true}));}});
+    document.querySelectorAll('.app-header .logo::before,.app-header .logo::after').forEach(()=>{});
   }
   function start(){
     renderScenery();
