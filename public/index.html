@@ -2004,6 +2004,7 @@ header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inhe
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
   <button type="button" id="calculatorToggleBtn" class="calculator-toggle-button" aria-controls="calculatorWidget" aria-expanded="false" title="Mở máy tính" data-i18n-title="calculatorOpen"><span class="calculator-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.3 1"><rect x="4" y="2.5" width="16" height="19" rx="2.2"/><path d="M7.5 6.5 H16.5 M7.5 10 H16.5"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="12" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/></g></svg></span><span data-i18n="calculatorName">Máy tính</span></button>
+  <button type="button" id="openEntertainment" class="calculator-toggle-button mm-ent-toolbar-button" title="Mở giải trí" aria-haspopup="dialog"><span class="calculator-toggle-icon" aria-hidden="true">🎮</span><span>Giải trí</span></button>
  </div>
 </header>
 <aside id="calculatorWidget" class="calculator-widget" hidden aria-label="Máy tính MatchMã">
@@ -2050,7 +2051,7 @@ header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inhe
  <button class="navbtn" data-page="stockforecast" title="Dự báo tồn kho"><span class="navicon" aria-hidden="true"></span><span data-i18n="navStockForecast">Dự báo tồn kho</span></button>
  <div class="sidebar-bottom">
   <button class="navbtn" data-page="settings" title="Cài đặt"><span class="navicon" aria-hidden="true"></span><span data-i18n="navSettings">Cài đặt</span></button>
-  <button class="navbtn" type="button" id="openEntertainment" title="Giải trí" aria-haspopup="dialog"><span class="navicon" aria-hidden="true">🎮</span><span>Giải trí</span></button>
+  
   <details class="sidebar-help"><summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary><div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div></details>
  </div>
 </aside>
@@ -3043,7 +3044,7 @@ $('fontDown').onclick=()=>setFontScale(fontScale-.05);$('fontReset').onclick=()=
 try{fontScale=1;localStorage.setItem('matchma-font-scale','1')}catch(e){fontScale=1}
 document.documentElement.style.setProperty('--font-scale',String(fontScale));document.body.dataset.fontScale=String(fontScale);
 function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();const groups=[...document.querySelectorAll('.nav-folder')];const targetGroup=groups.find(g=>g.querySelector('.navbtn[data-page="'+page+'"]'));if(targetGroup&&!targetGroup.open)targetGroup.open=true;if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
-document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+document.querySelectorAll('.navbtn:not(#openEntertainment)').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
 document.querySelectorAll('.nav-folder[data-nav-group]').forEach(group=>{
  const key='matchma-sidebar-group-v2-'+group.dataset.navGroup;
  try{const saved=localStorage.getItem(key);if(saved!==null)group.open=saved==='1'}catch(e){}
@@ -3428,7 +3429,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
 })();</script>
-<script>const entertainmentButton=document.getElementById("openEntertainment");if(entertainmentButton){entertainmentButton.onclick=null;entertainmentButton.addEventListener("click",()=>window.open("/entertainment.html","_blank","noopener"));}</script>
+
 
 <div id="matchmaEntertainmentOverlay" hidden role="dialog" aria-modal="true" aria-label="Góc giải trí">
  <div class="mm-ent-shell">
