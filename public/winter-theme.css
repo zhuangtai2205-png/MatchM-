@@ -536,3 +536,9 @@ body[data-theme="bear"] #bear-container.is-munching #bear-sprite{animation:bearC
 body:not([data-theme="bear"]) #bear-container{display:none!important}
 .navbtn .theme-nav-doodle,.navbtn .icon3d,.navbtn .bear-icon{display:none!important}
 .app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
+
+
+/* Remove all bear artwork/icons from logo, menus and the corner; keep the original brand logo image. */
+#bear-container,#bear-sprite,.winter-bear-spot,#fat-bear-overlay,#funWidget,#funToggleBtn,.bear-fish,.bear-plus-one,
+.navbtn .bear-icon,.navbtn .icon3d,.navbtn .theme-nav-doodle{display:none!important;visibility:hidden!important;pointer-events:none!important}
+.app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
