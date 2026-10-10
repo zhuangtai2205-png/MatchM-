@@ -1324,7 +1324,7 @@ body[data-theme="minimal"] .theme-drift{opacity:.08!important;filter:none!import
  </div>
  <div class="headright">
   <span class="local-pill"><i></i><span data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span></span>
-  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐱 Mèo</option><option value="forest">🌲 Gấu rừng</option><option value="minimal">◻ Tối giản</option></select></label>
+  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐱 Mèo</option><option value="bear">🐻 Gấu rừng</option><option value="forest">🌿 Rừng xanh</option><option value="minimal">◻ Tối giản</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
@@ -2717,4 +2717,23 @@ body[data-theme="minimal"] .navbtn{position:relative;z-index:2;cursor:pointer}
 body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .nav-folder{pointer-events:auto}
 /* Restore bear theme selection and its green woodland palette. */
 body[data-theme="bear"]{background:radial-gradient(ellipse at 9% 0%,#e4efce 0,transparent 36%),radial-gradient(ellipse at 91% 12%,#d3ebdb 0,transparent 38%),linear-gradient(150deg,#f1f4e2,#fbf0d9 52%,#e3f0e3)!important;color:#403429!important}
+</style>
+
+<style id="matchma-opaque-themes-logo-v53">
+/* Make the supplied PNG mark visually larger while keeping title font unchanged. */
+.app-header .brand-mark,.brand .brand-mark{width:176px!important;height:150px!important;flex:0 0 176px!important;min-width:176px!important;margin-right:-12px!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.65)!important;transform-origin:center center!important}
+.app-header .brand{gap:0!important;align-items:center!important}
+@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark{width:124px!important;height:112px!important;flex-basis:124px!important;min-width:124px!important;margin-right:-8px!important}.app-header .brand-logo-img{transform:scale(1.45)!important}}
+/* Bear theme: opaque surfaces, no translucent green wash; readable type. */
+body[data-theme="bear"]{font-family:Nunito,Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;background:#e8efda!important;color:#403429!important}
+body[data-theme="bear"] .page,body[data-theme="bear"] .sidebar,body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini,body[data-theme="bear"] .nav-folder{background:#fffdf5!important;backdrop-filter:none!important;opacity:1!important}
+body[data-theme="bear"] .nav-folder{background:#f8f6e9!important}
+body[data-theme="bear"] .hero{background:#fdf9ed!important}
+body[data-theme="bear"] .navbtn,body[data-theme="bear"] .navfolder-title,body[data-theme="bear"] button,body[data-theme="bear"] select{font-family:inherit!important;letter-spacing:normal!important;line-height:1.45}
+body[data-theme="bear"]::before,body[data-theme="bear"]::after{pointer-events:none!important}
+/* Minimal theme: remove decorative overlays from hit testing and stabilize fonts. */
+body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;color:#343b40!important;background:#f5f6f4!important}
+body[data-theme="minimal"] .page,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini{background:#fff!important;opacity:1!important;backdrop-filter:none!important}
+body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;letter-spacing:normal!important;font-kerning:normal;line-height:1.45}
 </style>
