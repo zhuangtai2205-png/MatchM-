@@ -1948,3 +1948,45 @@ html body[data-theme="minimal"] .nav-folder:after,
 html body[data-theme="minimal"] .navbtn:before{content:none!important;display:none!important}
 @keyframes forestBearHoneyFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(3deg)}}
 @keyframes forestPineSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+
+/* Final requested design: hand-drawn cat samurai logo, forest illustration, text-only minimalist theme. */
+html body header.app-header .brand-mark{display:inline-flex!important;visibility:visible!important;opacity:1!important;flex:0 0 58px!important;width:58px!important;height:58px!important;min-width:58px!important;min-height:58px!important;margin:0 12px 0 0!important;padding:0!important;overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important;color:#171717!important}
+html body header.app-header .brand-mark svg{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:100%!important}
+html body header.app-header .brand{gap:12px!important}
+html body .brand-copy .subbrand{font-family:Georgia,'Times New Roman',serif!important;font-size:28px!important;font-weight:700!important;letter-spacing:-1px!important;color:#171717!important}
+html body .brand-copy .subbrand:after{content:none!important}
+html body #themeScene{pointer-events:none!important}
+html body #themeScene .scene-doodle{position:absolute;display:block;width:clamp(42px,6vw,76px);height:clamp(42px,6vw,76px);font-size:clamp(28px,4vw,52px)!important;line-height:1;opacity:.28;filter:drop-shadow(0 2px 2px #76502a22)}
+html body #themeScene .scene-doodle svg{width:100%;height:100%;overflow:visible}
+html body[data-theme="forest"] #themeScene .scene-doodle{opacity:.42}
+html body[data-theme="forest"] #themeScene .scene-bear,
+html body[data-theme="forest"] #themeScene .scene-honey,
+html body[data-theme="forest"] #themeScene .scene-bee{animation:forestBearHoneyFloat 6s ease-in-out infinite}
+html body[data-theme="forest"] #themeScene .scene-pine{transform-origin:bottom center;animation:forestPineSway 6s ease-in-out infinite}
+html body .theme-click-doodle.forest-click-art{position:fixed;z-index:9999;width:54px;height:54px;display:block;pointer-events:none;animation:forestClickPop 1.05s ease-out forwards}
+html body .theme-click-doodle.forest-click-art svg{width:100%;height:100%;overflow:visible}
+html body[data-theme="minimal"] #themeScene,
+html body[data-theme="minimal"] .theme-scenery,
+html body[data-theme="minimal"] .winter-snow-layer,
+html body[data-theme="minimal"] .winter-paper-speckle,
+html body[data-theme="minimal"] .winter-doodle,
+html body[data-theme="minimal"] .winter-bear-spot,
+html body[data-theme="minimal"] #bear-container,
+html body[data-theme="minimal"] #fat-bear-overlay{display:none!important;visibility:hidden!important;opacity:0!important}
+html body[data-theme="minimal"]{background:#fff!important;background-image:none!important}
+html body[data-theme="minimal"] *,
+html body[data-theme="minimal"] *:before,
+html body[data-theme="minimal"] *:after{animation:none!important;transition:none!important}
+html body[data-theme="minimal"] .nav-folder:before,
+html body[data-theme="minimal"] .nav-folder:after,
+html body[data-theme="minimal"] .navbtn:before,
+html body[data-theme="minimal"] .navbtn:after,
+html body[data-theme="minimal"] .navicon:before,
+html body[data-theme="minimal"] .folder-chevron{content:none!important;display:none!important}
+html body[data-theme="minimal"] .nav-folder{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important}
+html body[data-theme="minimal"] .nav-folder-items{background:transparent!important}
+html body[data-theme="minimal"] .navbtn,
+html body[data-theme="minimal"] .navfolder-title{background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+@keyframes forestBearHoneyFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+@keyframes forestPineSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes forestClickPop{0%{opacity:0;transform:translate(-50%,-40%) scale(.45) rotate(-8deg)}18%{opacity:1;transform:translate(-50%,-60%) scale(1.08) rotate(5deg)}100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-100% + var(--ty))) scale(.75) rotate(var(--rot))}}
