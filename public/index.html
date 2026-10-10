@@ -2012,7 +2012,7 @@ function initCalculatorWidget(){
 /* Entertainment feature removed: no bear widget initializer. */
 
 const THEME_KEY='matchma-theme-v3';
-function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','forest','minimal'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
+function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','forest','minimal','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
 function initTheme(){let saved='forest';try{saved=localStorage.getItem(THEME_KEY)||'forest'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
@@ -2702,4 +2702,19 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 .app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 .app-header .brand{gap:8px!important}
 @media(max-width:650px){.app-header .brand-mark,.brand .brand-mark,.logo{width:108px!important;height:108px!important;flex-basis:108px!important;min-width:108px!important}}
+</style>
+
+<style id="matchma-minimal-bear-logo-fix-v52">
+/* Targeted repair: preserve title typography; enlarge only the original PNG logo. */
+.app-header .brand-mark,.brand .brand-mark,.logo{width:190px!important;height:190px!important;flex:0 0 190px!important;min-width:190px!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important}
+@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark,.logo{width:132px!important;height:132px!important;flex-basis:132px!important;min-width:132px!important}}
+/* Minimal theme: stable readable typography and clickable navigation. */
+body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:14px;line-height:1.5}
+body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;line-height:1.4;letter-spacing:normal;pointer-events:auto}
+body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,body[data-theme="minimal"]::before,body[data-theme="minimal"]::after{pointer-events:none!important}
+body[data-theme="minimal"] .navbtn{position:relative;z-index:2;cursor:pointer}
+body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .nav-folder{pointer-events:auto}
+/* Restore bear theme selection and its green woodland palette. */
+body[data-theme="bear"]{background:radial-gradient(ellipse at 9% 0%,#e4efce 0,transparent 36%),radial-gradient(ellipse at 91% 12%,#d3ebdb 0,transparent 38%),linear-gradient(150deg,#f1f4e2,#fbf0d9 52%,#e3f0e3)!important;color:#403429!important}
 </style>
