@@ -1388,54 +1388,39 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
-</style><link rel="stylesheet" href="/winter-theme.css?v=10"><style id="logo-bear-fix">
-/* Last-resort UI bug fixes: logo stays original, folder titles stay flat, Bear Corner works. */
-html body .app-header .logo,
-html body .app-header .brand .logo{
-  position:relative!important;isolation:isolate!important;
-  display:flex!important;align-items:center!important;justify-content:center!important;
-  width:48px!important;height:58px!important;min-width:48px!important;
-  padding:0!important;overflow:hidden!important;
-  background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+</style><link rel="stylesheet" href="/winter-theme.css?v=11"><style id="logo-bear-fix">
+/* Logo is brand artwork only. Never overlay mascots, emoji, pseudo-elements or theme effects. */
+html body header.app-header .brand>.logo{
+ position:relative!important;display:flex!important;flex:0 0 48px!important;
+ width:48px!important;height:58px!important;min-width:48px!important;min-height:58px!important;
+ padding:0!important;margin:0!important;overflow:hidden!important;isolation:isolate!important;
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
 }
-html body .app-header .logo::before,html body .app-header .logo::after,
-html body .app-header .brand .logo::before,html body .app-header .brand .logo::after,
-html body .logo:before,html body .logo:after{
-  content:none!important;display:none!important;visibility:hidden!important;
-  background:none!important;background-image:none!important;-webkit-mask:none!important;mask:none!important;
+html body header.app-header .brand>.logo::before,
+html body header.app-header .brand>.logo::after,
+html body header.app-header .brand>.logo:before,
+html body header.app-header .brand>.logo:after{
+ content:none!important;display:none!important;visibility:hidden!important;
+ background:none!important;background-image:none!important;mask:none!important;-webkit-mask:none!important;
 }
-html body .app-header .logo > :not(.brand-logo-img){display:none!important}
-html body .app-header .brand-logo-img{
-  display:block!important;position:static!important;inset:auto!important;
-  width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
-  object-fit:contain!important;object-position:center!important;
-  opacity:1!important;visibility:visible!important;z-index:1!important;
-  filter:none!important;transform:none!important;
+html body header.app-header .brand>.logo>*{display:none!important;visibility:hidden!important}
+html body header.app-header .brand>.logo>img.brand-logo-img{
+ display:block!important;visibility:visible!important;opacity:1!important;position:static!important;
+ inset:auto!important;flex:none!important;width:48px!important;height:58px!important;
+ max-width:48px!important;max-height:58px!important;object-fit:contain!important;
+ background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ filter:none!important;transform:none!important;mix-blend-mode:normal!important;z-index:1!important;
 }
-/* Remove decorative icons only from folder headings, not icons from normal page links. */
+/* Prevent the optional mascot widget from ever drawing over the brand area. */
+html body #fat-bear-overlay,html body #bear-container,html body #bear-sprite{pointer-events:none}
+html body #fat-bear-overlay:not([hidden]){z-index:999!important}
+html body .app-header .fun-toggle-icon{display:none!important}
+/* Folder headings contain text and disclosure arrows only; no 3D decorations. */
 html body .nav-folder>summary .navicon,
 html body .nav-folder>summary .navfolder-tab-icon,
 html body .nav-folder>summary .theme-nav-doodle,
 html body .nav-folder>summary .icon3d,
-html body .nav-folder>summary .bear-icon{display:none!important;visibility:hidden!important}
-html body .nav-folder>summary.navfolder-title{display:flex!important;gap:8px!important}
-/* Do not globally hide the Bear Corner: [hidden] controls its closed state. */
-html body #funWidget[hidden],html body #fat-bear-overlay[hidden]{display:none!important}
-html body #funWidget:not([hidden]){display:block!important;visibility:visible!important;z-index:100000!important}
-html body #funToggleBtn{display:inline-flex!important;visibility:visible!important;pointer-events:auto!important}
-html body #fat-bear-overlay:not([hidden]){
-  display:block!important;visibility:visible!important;position:fixed!important;
-  inset:0!important;width:100vw!important;height:100vh!important;
-  z-index:99998!important;pointer-events:none!important;overflow:hidden!important;
-}
-html body #fat-bear-overlay #bear-container{
-  display:block!important;visibility:visible!important;opacity:1!important;
-  position:absolute!important;right:clamp(8px,4vw,48px)!important;
-  bottom:clamp(70px,10vh,120px)!important;left:auto!important;top:auto!important;
-  width:min(58vw,430px)!important;height:auto!important;pointer-events:auto!important;
-  background:transparent!important;border:0!important;box-shadow:none!important;
-}
-html body #fat-bear-overlay #bear-sprite{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:auto!important}
+html body .nav-folder>summary .bear-icon{display:none!important}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -1450,7 +1435,7 @@ html body #fat-bear-overlay #bear-sprite{display:block!important;visibility:visi
   <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐈 Mèo</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
-<button type="button" id="funToggleBtn" class="fun-toggle-button" aria-controls="funWidget" aria-expanded="false" title="Mở Góc Gấu"><span class="fun-toggle-icon">🐻</span><span data-i18n="funOpen">Góc Gấu</span></button>
+<button type="button" id="funToggleBtn" class="fun-toggle-button" aria-controls="funWidget" aria-expanded="false" title="Mở Góc Gấu"><span class="fun-toggle-icon" aria-hidden="true">✦</span><span data-i18n="funOpen">Góc Gấu</span></button>
   <button type="button" id="calculatorToggleBtn" class="calculator-toggle-button" aria-controls="calculatorWidget" aria-expanded="false" title="Mở máy tính" data-i18n-title="calculatorOpen"><span class="calculator-toggle-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2.3 1"><rect x="4" y="2.5" width="16" height="19" rx="2.2"/><path d="M7.5 6.5 H16.5 M7.5 10 H16.5"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="12" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/><circle cx="8" cy="18" r="1" fill="currentColor"/><circle cx="12" cy="18" r="1" fill="currentColor"/><circle cx="16" cy="18" r="1" fill="currentColor"/></g></svg></span><span data-i18n="calculatorName">Máy tính</span></button>
  </div>
 </header>
@@ -2997,4 +2982,7 @@ renderBearSnow=function(){
 /* Repaint snow after startup without changing the user's saved bear progress. */
 renderBearSnow();
 
-</script><script src="/winter-theme.js?v=9"></script></body></html>
+</script><script src="/winter-theme.js?v=10"></script><script id="brand-logo-guard">
+(()=>{function cleanBrandLogo(){const logo=document.querySelector('header.app-header .brand>.logo');if(!logo)return;for(const child of [...logo.children])if(!child.matches('img.brand-logo-img'))child.remove();const img=logo.querySelector('img.brand-logo-img');if(img){img.src='/matchma-logo.svg?v=16';img.alt='Logo MatchMã';}}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',cleanBrandLogo,{once:true});else cleanBrandLogo();const header=document.querySelector('header.app-header .brand>.logo');if(header)new MutationObserver(cleanBrandLogo).observe(header,{childList:true,subtree:false});})();
+</script>
+</body></html>
