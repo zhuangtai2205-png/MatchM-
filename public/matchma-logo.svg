@@ -1,29 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 390" role="img" aria-label="MatchMã">
-  <title>MatchMã</title>
-  <rect width="320" height="390" fill="none"/>
-  <g fill="none" stroke="#111" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Circular brush mark -->
-    <path stroke-width="2.5" d="M204 114A90 90 0 1 0 224 160"/>
-    <!-- Back and shoulder of the swordsman -->
-    <path stroke-width="2.4" d="M107 270Q112 246 125 231Q140 216 151 199Q158 188 159 171"/>
-    <!-- Conical Vietnamese hat -->
-    <path stroke-width="2.4" fill="#fff" d="M139 118L195 72L250 118Q198 141 139 118Z"/>
-    <path stroke-width="1.1" d="M195 72L151 122M195 72L166 126M195 72L183 130M195 72L204 132M195 72L226 128M195 72L240 123"/>
-    <!-- Face and neck, facing right -->
-    <path stroke-width="2.3" d="M158 119Q158 140 171 151Q177 158 176 168Q175 178 188 183Q202 190 216 179Q228 169 220 157L215 145Q219 138 211 133Q205 128 205 119"/>
-    <path stroke-width="2.1" d="M174 140L184 146"/>
-    <path stroke-width="2.2" fill="#111" d="M207 142L217 146L210 148Z"/>
-    <path stroke-width="1.8" d="M184 170Q196 178 207 171"/>
-    <!-- Sword blade -->
-    <path stroke-width="2.8" d="M192 190L239 132Q254 120 269 103Q268 123 254 141L203 198Z"/>
-    <path stroke-width="1.6" d="M198 190L247 134M205 193L254 138"/>
-    <!-- Hilt and hand -->
-    <path stroke-width="2.1" d="M191 187L202 196L196 209L184 204Z"/>
-    <path stroke-width="2.2" d="M182 185Q177 180 172 186L166 192L173 201L183 199L188 208L196 202"/>
-    <path stroke-width="1.3" d="M169 190L178 195M176 185L183 193M180 201L187 197M190 188L197 194"/>
-  </g>
-  <g fill="#050505" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle">
-    <text x="160" y="318" font-size="53" font-weight="400" letter-spacing="-.7">match</text>
-    <text x="160" y="365" font-size="53" font-weight="400" letter-spacing="-.7">mã</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 460" role="img" aria-label="MatchMã">
+<title>Logo MatchMã</title>
+<rect width="360" height="460" fill="none"/>
+<g stroke="#111" stroke-linecap="round" stroke-linejoin="round">
+  <!-- The near-complete circular brush stroke from the supplied original -->
+  <path d="M274 105A112 112 0 1 0 292 188" fill="none" stroke-width="3"/>
+  <!-- body silhouette and shoulder -->
+  <path d="M91 273Q101 245 122 226Q143 208 151 180L160 148" fill="none" stroke-width="2.8"/>
+  <!-- conical Vietnamese hat -->
+  <path d="M111 137L190 75L269 137Q190 164 111 137Z" fill="#fff" stroke-width="2.8"/>
+  <path d="M190 75L126 140M190 75L151 148M190 75L174 157M190 75L207 157M190 75L231 149M190 75L254 141" fill="none" stroke-width="1.2"/>
+  <path d="M158 139Q157 169 176 188Q187 199 201 196Q218 191 225 177L218 158Q222 150 214 143L208 136" fill="#fff" stroke-width="2.8"/>
+  <path d="M171 160L185 169" fill="none" stroke-width="2.2"/>
+  <path d="M211 159L221 163L214 167Z" fill="#111" stroke-width="1.2"/>
+  <path d="M188 184Q199 191 210 184" fill="none" stroke-width="1.8"/>
+  <!-- long curved sword -->
+  <path d="M201 211Q239 170 270 127Q286 108 302 91Q300 119 284 143L215 224Z" fill="#fff" stroke-width="3"/>
+  <path d="M208 214L280 132M216 218L289 140" fill="none" stroke-width="1.4"/>
+  <!-- hand, guard and pommel -->
+  <path d="M196 207L213 220L204 237L188 227Z" fill="#fff" stroke-width="2.4"/>
+  <path d="M184 202Q177 195 171 203L165 211L175 222L187 218L196 230L205 222" fill="#fff" stroke-width="2.4"/>
+  <path d="M168 208L179 215M174 202L184 212M181 222L191 216M196 207L205 215" fill="none" stroke-width="1.3"/>
+  <path d="M191 226L181 238Q176 242 170 238L166 234Q165 229 171 225L180 222" fill="#fff" stroke-width="2.2"/>
+</g>
+<g fill="#050505" font-family="Georgia, 'Times New Roman', serif" font-weight="400" text-anchor="middle">
+  <text x="180" y="363" font-size="66" letter-spacing="-1.3">match</text>
+  <text x="180" y="431" font-size="66" letter-spacing="-1.1">mã</text>
+</g>
 </svg>
