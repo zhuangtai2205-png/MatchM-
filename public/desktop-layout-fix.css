@@ -158,3 +158,10 @@ html body .fun-toggle, html body .fun-widget, html body .bear-fish {
  display:none!important; visibility:hidden!important; opacity:0!important;
  pointer-events:none!important; animation:none!important; transition:none!important;
 }
+
+/* New transparent cat-and-sword brand mark. */
+.app-header .brand{display:flex;align-items:center;gap:12px;min-width:0}
+.app-header .brand-mark{display:inline-flex;flex:0 0 54px;width:54px;height:54px;align-items:center;justify-content:center;color:#24465f;background:transparent;border:0;box-shadow:none;overflow:visible}
+.app-header .brand-mark svg{display:block;width:100%;height:100%;object-fit:contain}
+@media(max-width:650px){.app-header .brand-mark{flex-basis:46px;width:46px;height:46px}}
+#funToggleBtn,#funWidget,#fat-bear-overlay,#bear-container,#bear-snow,#fish-pool,#bear-plus-layer,.fun-widget,.fun-toggle,.entertainment-widget,[data-feature="entertainment"],[data-feature="bear-entertainment"]{display:none!important;visibility:hidden!important;pointer-events:none!important;animation:none!important}
