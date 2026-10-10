@@ -193,3 +193,30 @@ body[data-theme="vampire"]{background:radial-gradient(ellipse at top,#39233f,#16
 body[data-theme="vampire"] header.app-header,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .chart-card,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini{background:rgba(45,29,48,.96)!important;color:#f2dfe7!important}
 body[data-theme="cat"]{background:linear-gradient(145deg,#f3e9e3,#e4d4cc 55%,#faf2ed)!important;color:#60453d!important}
 body[data-theme="cat"] header.app-header,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .chart-card,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{background:rgba(250,241,235,.96)!important}
+
+
+/* Pastel art direction: soften the entire interface while keeping each theme distinct. */
+body[data-theme="bear"]{
+ --ink:#496b58!important;--muted:#718d7a!important;
+ background:radial-gradient(ellipse at 14% 8%,#f7f8e8 0,transparent 34%),radial-gradient(ellipse at 88% 82%,#d8eee0 0,transparent 38%),#e7f1e4!important;
+ color:#496b58!important;
+}
+body[data-theme="bear"] header.app-header{background:#f4f7e9ed!important;border-bottom-color:#b5cdb2!important}
+body[data-theme="bear"] .sidebar{background:#eef5e8f5!important;border-color:#bdd4b7!important}
+body[data-theme="bear"] .main{background:#e6f1e066!important}
+body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .chart-card{background:#f7f8ebf2!important;border-color:#bdd4b7!important;box-shadow:0 5px 18px #6e997411!important}
+body[data-theme="bear"] .navbtn.active{background:#d0e8c9!important;border-color:#a5c79b!important}
+body[data-theme="bear"] .btn{background:#c8e3bd!important;border-color:#a5c79b!important;color:#456a52!important}
+body[data-theme="bear"] .stat,body[data-theme="bear"] .mini{background:#f3f7e9!important;border-color:#cadcc1!important}
+body[data-theme="bear"] .winter-bear-spot{width:clamp(150px,19vw,238px);max-height:215px;right:3px;bottom:-8px;filter:drop-shadow(0 5px 5px #688a6822);animation:winterBearBreathe 5.2s ease-in-out infinite}
+body[data-theme="bear"] .hero{background:linear-gradient(120deg,#f7f8ebf5,#e5f2e7f5)!important}
+body[data-theme="ocean"]{background:linear-gradient(145deg,#edfaff,#d9f1f6 55%,#e6f8f3)!important}
+body[data-theme="ocean"] header.app-header,body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .hero,body[data-theme="ocean"] .panel,body[data-theme="ocean"] .chart-card,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .mini{background:#f0fbfcf2!important;border-color:#b8dfe6!important}
+body[data-theme="retro"]{background:linear-gradient(145deg,#f7f4ec,#ebe8df)!important}
+body[data-theme="retro"] header.app-header,body[data-theme="retro"] .sidebar,body[data-theme="retro"] .hero,body[data-theme="retro"] .panel,body[data-theme="retro"] .chart-card,body[data-theme="retro"] .stat,body[data-theme="retro"] .mini{background:#f8f6ef!important;border-color:#d8d2c4!important}
+body[data-theme="pink"]{background:linear-gradient(145deg,#fff5f8,#f8e4ee 55%,#fff6f9)!important}
+body[data-theme="pink"] header.app-header,body[data-theme="pink"] .sidebar,body[data-theme="pink"] .hero,body[data-theme="pink"] .panel,body[data-theme="pink"] .chart-card,body[data-theme="pink"] .stat,body[data-theme="pink"] .mini{background:#fff5f9f5!important;border-color:#efc9dc!important}
+body[data-theme="vampire"]{background:linear-gradient(145deg,#f5edf8,#e8dff0 55%,#f8eff5)!important;color:#674e72!important}
+body[data-theme="vampire"] header.app-header,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .chart-card,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini{background:#f7f0fa!important;color:#674e72!important;border-color:#d9c4e2!important}
+body[data-theme="cat"]{background:linear-gradient(145deg,#fbf2ed,#f0e2dc 55%,#fff8f3)!important}
+body[data-theme="cat"] header.app-header,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .chart-card,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{background:#fff7f1f5!important;border-color:#e7cfc3!important}
