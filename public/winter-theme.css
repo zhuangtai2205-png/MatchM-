@@ -1417,3 +1417,162 @@ html body header.app-header .brand-copy h1{font-size:clamp(19px,5vw,29px)!import
 html body #bear-container{width:clamp(116px,29vw,170px)!important;height:clamp(160px,40vw,220px)!important}
 html body #bear-sprite svg{width:100%!important;height:100%!important;display:block!important;overflow:visible!important}
 @media(max-width:650px){html body header.app-header{align-items:center!important}html body header.app-header .brand>.logo,html body header.app-header .brand>.logo>img.brand-logo-img{width:48px!important;height:62px!important;min-width:48px!important;min-height:62px!important;max-width:48px!important;max-height:62px!important;flex-basis:48px!important}html body #bear-container{width:clamp(112px,31vw,150px)!important;height:clamp(150px,42vw,190px)!important}}
+
+
+
+/* LAST-LOADED NAVIGATION FIX — overrides legacy theme rules that made sidebar groups flex-row. */
+html body .app-shell.shell{
+ display:grid!important;
+ grid-template-columns:minmax(240px,280px) minmax(0,1fr)!important;
+ align-items:start!important;
+ gap:18px!important;
+ width:100%!important;
+ max-width:1600px!important;
+ margin:0 auto!important;
+ padding:0 20px 36px!important;
+ box-sizing:border-box!important;
+}
+html body .app-shell.shell #appSidebar.sidebar{
+ display:flex!important;
+ flex-direction:column!important;
+ flex-wrap:nowrap!important;
+ align-items:stretch!important;
+ justify-content:flex-start!important;
+ align-content:stretch!important;
+ gap:9px!important;
+ position:sticky!important;
+ top:12px!important;
+ float:none!important;
+ inset:auto!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:calc(100vh - 24px)!important;
+ overflow-x:hidden!important;
+ overflow-y:auto!important;
+ padding:12px!important;
+ margin:0!important;
+ box-sizing:border-box!important;
+ transform:none!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>*{
+ position:relative!important;
+ inset:auto!important;
+ float:none!important;
+ clear:both!important;
+ order:initial!important;
+ flex:0 0 auto!important;
+ align-self:stretch!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ margin:0!important;
+ transform:none!important;
+ box-sizing:border-box!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>details.nav-folder{
+ display:block!important;
+ position:relative!important;
+ flex:0 0 auto!important;
+ width:100%!important;
+ min-width:0!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ margin:3px 0!important;
+ padding:7px!important;
+ overflow:visible!important;
+ contain:none!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>details.nav-folder>summary.navfolder-title{
+ display:flex!important;
+ position:relative!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:44px!important;
+ margin:0!important;
+ padding:10px!important;
+ box-sizing:border-box!important;
+ white-space:normal!important;
+ line-height:1.35!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>details.nav-folder>.nav-folder-items{
+ display:none!important;
+ position:static!important;
+ inset:auto!important;
+ float:none!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ margin:0!important;
+ padding:8px 2px 2px!important;
+ overflow:visible!important;
+ transform:none!important;
+ box-sizing:border-box!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>details.nav-folder[open]>.nav-folder-items{
+ display:flex!important;
+ flex-direction:column!important;
+ flex-wrap:nowrap!important;
+ align-items:stretch!important;
+ justify-content:flex-start!important;
+ gap:7px!important;
+}
+html body .app-shell.shell #appSidebar.sidebar .nav-folder-items>.navbtn{
+ display:flex!important;
+ position:relative!important;
+ flex:0 0 auto!important;
+ align-self:stretch!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:44px!important;
+ margin:0!important;
+ padding:10px!important;
+ box-sizing:border-box!important;
+ white-space:normal!important;
+ overflow-wrap:anywhere!important;
+ transform:none!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>button.navbtn{
+ display:flex!important;
+ flex:0 0 auto!important;
+ align-items:center!important;
+ width:100%!important;
+ min-height:46px!important;
+ height:auto!important;
+ margin:0!important;
+ padding:10px 12px!important;
+ box-sizing:border-box!important;
+ white-space:normal!important;
+}
+html body .app-shell.shell #appSidebar.sidebar .nav-folder::before,
+html body .app-shell.shell #appSidebar.sidebar .nav-folder::after{
+ pointer-events:none!important;
+}
+html body .app-shell.shell #appSidebar.sidebar>.sidebar-bottom{
+ display:flex!important;
+ flex-direction:column!important;
+ gap:8px!important;
+}
+@media(min-width:1051px){
+ html body .app-shell.shell{grid-template-columns:minmax(240px,280px) minmax(0,1fr)!important}
+ html body .app-shell.shell #appSidebar.sidebar{position:sticky!important;max-height:calc(100vh - 24px)!important;overflow-y:auto!important}
+}
+@media(max-width:1050px){
+ html body .app-shell.shell{grid-template-columns:minmax(0,1fr)!important;padding:0 12px 28px!important}
+ html body .app-shell.shell #appSidebar.sidebar{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important}
+}
+@media(max-width:650px){
+ html body .app-shell.shell{padding:0 9px 24px!important;gap:12px!important}
+ html body .app-shell.shell #appSidebar.sidebar{padding:9px!important;gap:7px!important}
+}
