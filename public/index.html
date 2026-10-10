@@ -2364,7 +2364,7 @@ function setLanguage(value){lang=['vi','en','de','zh-TW','zh-CN'].includes(value
 let fontScale=1;
 function setFontScale(value){fontScale=Math.min(1.25,Math.max(.85,Math.round(value*20)/20));document.documentElement.style.setProperty('--font-scale',String(fontScale));document.body.dataset.fontScale=String(fontScale);['fontDown','fontReset','fontUp'].forEach(id=>$(id).setAttribute('aria-pressed','false'));$('fontReset').setAttribute('aria-pressed',fontScale===1?'true':'false');$('fontDown').setAttribute('aria-pressed',fontScale<=.85?'true':'false');$('fontUp').setAttribute('aria-pressed',fontScale>=1.25?'true':'false');try{localStorage.setItem('matchma-font-scale',String(fontScale))}catch(e){}}
 $('fontDown').onclick=()=>setFontScale(fontScale-.05);$('fontReset').onclick=()=>setFontScale(1);$('fontUp').onclick=()=>setFontScale(fontScale+.05);
-try{const savedScale=Number(localStorage.getItem('matchma-font-scale'));if(savedScale>=.85&&savedScale<=1.25)fontScale=savedScale}catch(e){}
+try{fontScale=1;localStorage.setItem('matchma-font-scale','1')}catch(e){fontScale=1}
 document.documentElement.style.setProperty('--font-scale',String(fontScale));document.body.dataset.fontScale=String(fontScale);
 function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.page===page));updatePageBreadcrumb();const groups=[...document.querySelectorAll('.nav-folder')];const targetGroup=groups.find(g=>g.querySelector('.navbtn[data-page="'+page+'"]'));if(targetGroup&&!targetGroup.open)targetGroup.open=true;if(page==='overview')renderOverviewAccount();if(page==='results')renderResults();if(page==='memory')renderMemoryPage();if(page==='platforms'){renderPlatformLinks($('platformQuery').value);if(platformBuilt)renderPlatformAudit()}if(page==='autofill')updateAutoFillButton();if(page==='stockforecast')updateStockForecastButtons();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>showPage(b.dataset.page));
@@ -2747,5 +2747,26 @@ body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,b
 @media(max-width:650px){
  .app-header .brand-mark,.brand .brand-mark{width:142px!important;height:126px!important;flex-basis:142px!important;min-width:142px!important;margin-right:-12px!important}
  .app-header .brand-logo-img{transform:scale(1.75)!important}
+}
+</style>
+
+<style id="matchma-global-font-logo-balance-v55">
+/* Restore consistent Vietnamese typography and balanced header layout. */
+html{font-size:16px!important}
+body{font-family:Inter,Arial,"Helvetica Neue",sans-serif!important;font-size:15px!important;line-height:1.5!important}
+body *{font-family:inherit}
+h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important;letter-spacing:-.5px!important}
+h2{line-height:1.25}
+.subbrand{font-size:12px!important;line-height:1.4!important}
+.app-header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}
+.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;flex:0 1 auto!important;min-width:0!important}
+.app-header .brand-mark,.brand .brand-mark{width:104px!important;height:104px!important;flex:0 0 104px!important;min-width:104px!important;margin:0!important;overflow:visible!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:none!important}
+.app-header .brand-copy{position:static!important;z-index:auto!important;min-width:0}
+@media(max-width:650px){
+ .app-header{flex-wrap:wrap!important}
+ .app-header .brand{gap:8px!important}
+ .app-header .brand-mark,.brand .brand-mark{width:76px!important;height:76px!important;flex-basis:76px!important;min-width:76px!important}
+ h1{font-size:clamp(22px,6vw,30px)!important}
 }
 </style>
