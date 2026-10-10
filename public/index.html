@@ -2929,3 +2929,79 @@ body[data-theme="minimal"] .theme-drift{opacity:0!important;filter:none!importan
  body[data-theme="forest"] .theme-drift,body[data-theme="minimal"] .theme-drift{animation:none!important}
 }
 </style>
+
+
+<style id="matchma-forest-menu-handdraw-repair-v42">
+/* Repair menu rows consistently in Forest and Minimal; preserve navigation behavior */
+body[data-theme="forest"] .sidebar,
+body[data-theme="minimal"] .sidebar {min-width:0!important;overflow:visible!important}
+body[data-theme="forest"] .sidebar nav,
+body[data-theme="minimal"] .sidebar nav,
+body[data-theme="forest"] .sidebar .nav-list,
+body[data-theme="minimal"] .sidebar .nav-list {display:flex!important;flex-direction:column!important;gap:8px!important;min-width:0!important}
+body[data-theme="forest"] .navbtn,
+body[data-theme="minimal"] .navbtn {
+ display:flex!important;align-items:center!important;justify-content:flex-start!important;
+ gap:12px!important;width:100%!important;min-width:0!important;min-height:52px!important;
+ height:auto!important;padding:11px 14px!important;margin:0!important;box-sizing:border-box!important;
+ white-space:normal!important;overflow:visible!important;text-align:left!important;
+ line-height:1.35!important;font-size:14px!important;font-weight:650!important;
+}
+body[data-theme="forest"] .navbtn .navicon,
+body[data-theme="minimal"] .navbtn .navicon {
+ display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 30px!important;width:30px!important;height:30px!important;min-width:30px!important;
+ margin:0!important;padding:0!important;background:transparent!important;border:0!important;
+}
+body[data-theme="forest"] .navbtn .navicon svg,
+body[data-theme="minimal"] .navbtn .navicon svg {
+ display:block!important;width:28px!important;height:28px!important;max-width:28px!important;max-height:28px!important;
+ overflow:visible!important;
+}
+body[data-theme="forest"] .nav-folder,
+body[data-theme="minimal"] .nav-folder {display:block!important;width:100%!important;min-width:0!important;box-sizing:border-box!important}
+body[data-theme="forest"] .nav-folder > summary,
+body[data-theme="minimal"] .nav-folder > summary {
+ display:flex!important;align-items:center!important;gap:10px!important;
+ min-width:0!important;max-width:100%!important;box-sizing:border-box!important;
+ white-space:normal!important;line-height:1.35!important;cursor:pointer!important;
+}
+body[data-theme="forest"] .nav-folder > summary > *,
+body[data-theme="minimal"] .nav-folder > summary > * {min-width:0!important}
+body[data-theme="forest"] .nav-folder > :not(summary),
+body[data-theme="minimal"] .nav-folder > :not(summary) {min-width:0!important}
+body[data-theme="forest"] .navbtn.active {
+ background:#e4efd8!important;color:#2f5935!important;
+ border:2px dashed #6e9866!important;border-radius:13px 10px 15px 11px!important;
+ box-shadow:2px 2px 0 rgba(71,112,63,.12)!important;
+}
+body[data-theme="forest"] .navbtn,
+body[data-theme="forest"] .nav-folder > summary {
+ border:1.5px dashed #a9c49a!important;border-radius:11px 14px 10px 13px!important;
+ background:rgba(252,255,246,.82)!important;color:#36583b!important;
+ box-shadow:none!important;letter-spacing:.01em!important;
+}
+body[data-theme="forest"] .nav-folder > summary {padding:12px!important;font-weight:750!important}
+body[data-theme="forest"] .nav-folder[open] > summary {background:#e8f2dc!important;border-bottom-style:dotted!important}
+body[data-theme="forest"] .nav-folder .navbtn {margin-top:6px!important}
+body[data-theme="forest"] .navicon svg g {stroke-dasharray:2.6 1.5!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+body[data-theme="minimal"] .navbtn,
+body[data-theme="minimal"] .nav-folder > summary {
+ background:#fff!important;color:#34454b!important;border:1px solid #e0e6e8!important;
+ border-radius:9px!important;box-shadow:none!important;
+}
+body[data-theme="minimal"] .navbtn.active {
+ background:#eaf0f1!important;border-color:#8da0a6!important;
+ box-shadow:inset 3px 0 #657c83!important;
+}
+body[data-theme="minimal"] .nav-folder > summary {padding:12px!important;font-weight:700!important}
+body[data-theme="forest"] .navbtn:focus-visible,
+body[data-theme="minimal"] .navbtn:focus-visible,
+body[data-theme="forest"] .nav-folder > summary:focus-visible,
+body[data-theme="minimal"] .nav-folder > summary:focus-visible {outline:3px solid #8db7c4!important;outline-offset:2px!important}
+@media(max-width:760px){
+ body[data-theme="forest"] .navbtn,body[data-theme="minimal"] .navbtn {min-height:48px!important;padding:10px!important;gap:9px!important}
+ body[data-theme="forest"] .navbtn .navicon,body[data-theme="minimal"] .navbtn .navicon {flex-basis:27px!important;width:27px!important;height:27px!important;min-width:27px!important}
+ body[data-theme="forest"] .navbtn .navicon svg,body[data-theme="minimal"] .navbtn .navicon svg {width:25px!important;height:25px!important}
+}
+</style>
