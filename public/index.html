@@ -3038,3 +3038,62 @@ body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #e
 body[data-theme="minimal"] .navbtn.active,body[data-theme="minimal"] .navbtn:hover{background:#f5f5f5!important;color:#222!important}
 body[data-theme="minimal"] .navicon{display:inline-flex!important}
 </style>
+
+<style id="matchma-header-two-column-v64">
+/* Explicit two-column header: brand on the left, controls on the right. */
+header.app-header{
+ display:grid!important;
+ grid-template-columns:minmax(0,auto) minmax(0,1fr)!important;
+ align-items:center!important;
+ justify-content:stretch!important;
+ column-gap:clamp(12px,2vw,28px)!important;
+ row-gap:0!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ padding:12px clamp(12px,2vw,24px)!important;
+ margin:0!important;
+ box-sizing:border-box!important;
+}
+header.app-header .brand{
+ grid-column:1!important;grid-row:1!important;
+ display:flex!important;flex-flow:row nowrap!important;
+ align-items:center!important;justify-content:flex-start!important;
+ gap:14px!important;width:auto!important;min-width:0!important;max-width:100%!important;
+}
+header.app-header .brand-mark{
+ width:clamp(96px,12vw,150px)!important;
+ height:clamp(88px,10vw,120px)!important;
+ min-width:clamp(96px,12vw,150px)!important;
+ flex:0 0 clamp(96px,12vw,150px)!important;
+ overflow:visible!important;
+}
+header.app-header .brand-mark img.brand-logo-img{
+ display:block!important;width:100%!important;height:100%!important;
+ max-width:none!important;max-height:none!important;object-fit:contain!important;
+}
+header.app-header .brand-copy{display:block!important;min-width:0!important;flex:0 1 auto!important}
+header.app-header .brand-copy h1{
+ margin:0!important;white-space:nowrap!important;
+ font-size:clamp(23px,3vw,36px)!important;line-height:1.15!important;
+}
+header.app-header .brand-copy .subbrand{display:none!important}
+header.app-header .headright{
+ grid-column:2!important;grid-row:1!important;
+ display:flex!important;flex-flow:row wrap!important;
+ align-items:center!important;justify-content:flex-end!important;
+ align-content:center!important;gap:8px!important;
+ width:100%!important;min-width:0!important;max-width:none!important;
+}
+header.app-header .headright>*{max-width:100%!important;min-width:0!important}
+@media(max-width:700px){
+ header.app-header{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr)!important;column-gap:8px!important;padding:8px!important}
+ header.app-header .brand{gap:6px!important}
+ header.app-header .brand-mark{width:clamp(58px,17vw,82px)!important;height:clamp(58px,17vw,82px)!important;min-width:clamp(58px,17vw,82px)!important;flex-basis:clamp(58px,17vw,82px)!important}
+ header.app-header .brand-copy h1{font-size:clamp(17px,4.8vw,25px)!important;white-space:normal!important;overflow-wrap:anywhere!important}
+ header.app-header .headright{gap:4px!important;justify-content:flex-end!important}
+ header.app-header .headright .local-pill{display:none!important}
+ header.app-header .headright .toolbar-select,header.app-header .headright .toolbar-font{font-size:11px!important}
+ header.app-header .headright select,header.app-header .headright button{font-size:11px!important;padding:4px 6px!important}
+}
+</style>
