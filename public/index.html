@@ -1421,6 +1421,21 @@ html body .nav-folder>summary .navfolder-tab-icon,
 html body .nav-folder>summary .theme-nav-doodle,
 html body .nav-folder>summary .icon3d,
 html body .nav-folder>summary .bear-icon{display:none!important}
+</style>
+<style id="fat-bear-motion-upgrade">
+/* Fat Bear Week-inspired growth and gentle living motion */
+#bear-container{will-change:transform}
+#bear-container:not(.is-hibernating) #bear-sprite{animation:fatBearIdle 2.8s ease-in-out infinite;transform-origin:50% 90%}
+#bear-container.is-munching #bear-sprite{animation:fatBearChomp .42s ease-in-out 2}
+#bear-container.is-hibernating #bear-sprite{animation:fatBearSleep 3.8s ease-in-out infinite;transform-origin:50% 90%}
+#bear-container.is-hibernating{filter:drop-shadow(0 7px 7px #493b2430)}
+#bear-container.is-hibernating .bear-caption{opacity:.92}
+#bear-sprite #bearBody,#bear-sprite #bearHeadShape{transition:fill .45s,stroke-width .45s}
+#bear-snow{pointer-events:none}
+@keyframes fatBearIdle{0%,100%{transform:translateY(0) rotate(-1deg) scaleX(1)}50%{transform:translateY(-3px) rotate(1deg) scaleX(1.015)}}
+@keyframes fatBearChomp{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-5px) scale(1.06,1.03)}70%{transform:translateY(1px) scale(1.025,.98)}}
+@keyframes fatBearSleep{0%,100%{transform:translateY(0) scale(1,1)}50%{transform:translateY(2px) scale(1.018,.985)}}
+@media(prefers-reduced-motion:reduce){#bear-container #bear-sprite{animation:none!important}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2077,7 +2092,7 @@ let bearHibernating=false,bearHibernateTimer=null,bearSnowLevel='';
 function bearScale(){
  const base=$('bear-container'),width=base?base.offsetWidth:300;
  const fitCap=Math.max(1,Math.min(1.72,(window.innerWidth-24)/(Math.max(1,width)*1.04)));
- return Math.min(fitCap,1+Math.min(fishEaten,9)*.075);
+ return Math.min(fitCap,1+Math.min(fishEaten,10)*.105);
 }
 function bearStageKey(){if(bearHibernating)return 'funSleeping';return fishEaten>=9?'funKing':fishEaten>=7?'funFull':fishEaten>=4?'funChubby':fishEaten>=1?'funHappy':'funHungry'}
 function bearExpression(){return bearHibernating?'😴':fishEaten>=9?'😌':fishEaten>=7?'😋':fishEaten>=4?'😊':fishEaten>=1?'☺':'•'}
@@ -2965,5 +2980,22 @@ renderBearSnow();
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fixBrand,{once:true}); else fixBrand();
   new MutationObserver(fixBrand).observe(document.documentElement,{subtree:true,childList:true});
+})();
+</script>
+<script id="fat-bear-preference-sync">
+(()=> {
+ const key='matchma-bear-effects-v1';
+ const apply=()=>{
+  let enabled=true;
+  try{enabled=localStorage.getItem(key)!=='0'}catch(_){}
+  document.body.dataset.funEffects=enabled?'on':'off';
+  const toggle=document.getElementById('funEffectsToggle');
+  if(toggle){
+   toggle.setAttribute('aria-pressed',String(enabled));
+   if(typeof tr==='function')toggle.textContent=tr(enabled?'funEffectsOff':'funEffectsOn');
+  }
+  if(typeof renderBearSnow==='function')renderBearSnow();
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
 })();
 </script></body></html>
