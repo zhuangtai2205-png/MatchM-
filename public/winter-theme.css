@@ -54,3 +54,9 @@ th{background:#f9e9ce!important;color:#80563e!important}td{border-bottom:1px das
 @media(max-width:950px){.hero{padding-right:205px!important}.winter-bear-spot{width:185px;max-height:165px}}
 @media(max-width:650px){.hero{padding:18px 16px 138px!important;min-height:0}.hero:has(.winter-bear-spot){padding-right:16px!important;padding-bottom:136px!important}.winter-bear-spot{width:142px;max-height:133px;right:3px;bottom:-7px}.winter-snow-layer{opacity:.52}.winter-doodle{font-size:20px}.sidebar{border-radius:16px!important}}
 @media(prefers-reduced-motion:reduce){.winter-flake,.winter-doodle,.winter-bear-spot{animation:none!important}.winter-flake{display:none}}
+/* Replace the old corner sprite with the connected hand-drawn bear while preserving its click target. */
+#winterSnow,.winter-snow-layer{pointer-events:none!important}
+#bear-container{position:absolute!important;isolation:isolate!important}
+#bear-sprite{opacity:0!important;visibility:visible!important}
+.winter-bear-replacement{position:absolute!important;inset:0!important;z-index:4!important;display:block!important;width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;object-position:center bottom!important;pointer-events:none!important;overflow:visible!important;transform:none!important;filter:drop-shadow(0 2px 1px #7d48241a)!important}
+#fat-bear-overlay[hidden]{display:none!important}
