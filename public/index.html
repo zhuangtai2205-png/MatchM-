@@ -3428,5 +3428,5 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
 })();</script>
-<script>document.getElementById("openEntertainment")?.addEventListener("click",()=>window.open("/entertainment.html","_blank","noopener"));</script>
+<script>const entertainmentButton=document.getElementById("openEntertainment");if(entertainmentButton){entertainmentButton.onclick=null;entertainmentButton.addEventListener("click",()=>window.open("/entertainment.html","_blank","noopener"));}</script>
 </body></html>
