@@ -15,8 +15,8 @@ app.get(['/','/index.html'],(req,res,next)=>{
     // multiple observers and conflicting theme/logo mutations on page startup.
     html=html.replace(/<link rel="stylesheet" href="\/winter-theme\.css\?v=\d+">/g,'');
     html=html.replace(/<script src="\/winter-theme\.js\?v=\d+"><\/script>/g,'');
-    html=html.replace('</head>','<link rel="stylesheet" href="/winter-theme.css?v=16"></head>');
-    html=html.replace('</body>','<script src="/winter-theme.js?v=14"></script></body>');
+    html=html.replace('</head>','<link rel="stylesheet" href="/winter-theme.css?v=17"></head>');
+    html=html.replace('</body>','<script src="/winter-theme.js?v=15"></script></body>');
     res.set('Cache-Control','no-cache, no-store, must-revalidate');
     res.type('html').send(html);
   });
