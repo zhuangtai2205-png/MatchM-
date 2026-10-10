@@ -1981,6 +1981,13 @@ header.app-header .brand-copy h1 span{
  }
 })();
 </script>
+<style id="matchma-title-size-restored-v70">
+/* Keep the vintage typewriter title at a deliberate readable size, independent of body font choice. */
+header.app-header .brand-copy h1{font-family:"Special Elite","Courier New",monospace!important;font-size:clamp(30px,2.7vw,38px)!important;line-height:1.12!important;font-weight:400!important;letter-spacing:.015em!important;}
+header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inherit!important;}
+@media(max-width:700px){header.app-header .brand-copy h1{font-size:clamp(26px,6vw,32px)!important;line-height:1.12!important;}}
+</style>
+
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2220,7 +2227,7 @@ header.app-header .brand-copy h1 span{
  </div>
  <div class="panel"><h2>Trạng thái đồng bộ</h2><p id="syncStatus">Chưa đăng nhập — chưa có đồng bộ đám mây.</p><p class="hint">Bạn cần tạo dự án Supabase và chạy SQL bên trên trước khi đồng bộ. Nếu chưa cấu hình, bộ nhớ cục bộ vẫn hoạt động như bình thường.</p></div>
 </section>
-<section class="page" id="page-settings"><div class="sectionhead"><div><h2 data-i18n="settingsTitle">Cài đặt</h2><p data-i18n="settingsDesc">Chọn ngôn ngữ giao diện và ngưỡng phần trăm để phân loại kết quả OK.</p></div></div><div class="grid"><div class="panel"><h2 data-i18n="languageTitle">Ngôn ngữ giao diện</h2><p data-i18n="languageDesc">Thay đổi ngôn ngữ menu, hướng dẫn và nhãn trạng thái.</p><div class="field"><label data-i18n="languageLabel">Ngôn ngữ</label><select id="language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></div><div class="okmsg" data-i18n="langLocal">Lựa chọn áp dụng ngay cho giao diện này.</div></div><div class="panel" id="fontSettingsPanel"><h2>Font chữ toàn website</h2><p>Chọn một trong 10 font. Thay đổi áp dụng ngay và được lưu trên thiết bị này.</p><div class="field"><label for="siteFontFamily">Kiểu chữ</label><select id="siteFontFamily"><option value="Be Vietnam Pro">1. Be Vietnam Pro — rõ dấu tiếng Việt</option><option value="Nunito">2. Nunito — tròn, thân thiện</option><option value="Inter">3. Inter — hiện đại, gọn</option><option value="Roboto">4. Roboto — trung tính</option><option value="Open Sans">5. Open Sans — dễ đọc</option><option value="Lato">6. Lato — mềm mại</option><option value="Montserrat">7. Montserrat — hình học</option><option value="Poppins">8. Poppins — hiện đại, bo tròn</option><option value="Baloo 2">9. Baloo 2 — vui tươi</option><option value="Merriweather">10. Merriweather — serif</option></select></div><div class="field"><label for="siteFontPreview">Xem trước</label><div id="siteFontPreview" style="padding:14px;border:1px dashed var(--line);border-radius:12px;font-size:20px">MatchMã — Đối chiếu hàng hóa có dấu tiếng Việt: ă â ê ô ơ ư đ.</div></div><div class="actions"><button class="btn alt" type="button" id="resetSiteFont">Khôi phục font mặc định</button></div></div><div class="panel"><h2 data-i18n="thresholdTitle">Ngưỡng phần trăm được tính OK</h2><p data-i18n="thresholdDesc">Ví dụ: đặt 80% thì điểm từ 80% trở lên mới được xem là OK nếu không có thuộc tính mâu thuẫn.</p><div class="field"><label data-i18n="thresholdOkLabel">Điểm tối thiểu để tự xếp OK</label><div class="thresholdvalue"><span id="thresholdValue">80</span>%</div><input id="threshold" type="range" min="50" max="100" step="5" value="80"><div style="display:flex;justify-content:space-between" class="muted"><span>50%</span><span>75%</span><span>100%</span></div></div><div class="rule"><strong data-i18n="exampleTitle">Cách phân loại mặc định</strong><div id="thresholdExplanation">≥ 80% = OK · 45–79% = rà soát · dưới 45% = không khớp. Có thuộc tính xung đột luôn cần rà soát.</div></div><div class="actions"><button class="btn" id="applySettings" data-i18n="applySettings">Áp dụng cài đặt</button></div></div></div><div class="panel"><h2 data-i18n="matchingRules">Quy tắc đối chiếu</h2><div class="grid"><div><p data-i18n="ruleNoSku">1. Dòng danh mục chuẩn thiếu mã/SKU sẽ không bao giờ được dùng làm ứng viên ghép.</p><p data-i18n="ruleName">2. Tên được chuẩn hóa dấu tiếng Việt, một số tên thương hiệu viết tắt và dung tích/trọng lượng chuẩn.</p></div><div><p data-i18n="ruleConflict">3. Các thuộc tính đối lập như có đường/không đường, có gas/không gas, nguyên kem/tách béo buộc phải rà soát.</p><p data-i18n="rulePrivacy">4. File được đọc ngay trong trình duyệt, không tải nội dung file lên máy chủ ứng dụng.</p></div></div></div></section>
+<section class="page" id="page-settings"><div class="sectionhead"><div><h2 data-i18n="settingsTitle">Cài đặt</h2><p data-i18n="settingsDesc">Chọn ngôn ngữ giao diện và ngưỡng phần trăm để phân loại kết quả OK.</p></div></div><div class="grid"><div class="panel"><h2 data-i18n="languageTitle">Ngôn ngữ giao diện</h2><p data-i18n="languageDesc">Thay đổi ngôn ngữ menu, hướng dẫn và nhãn trạng thái.</p><div class="field"><label data-i18n="languageLabel">Ngôn ngữ</label><select id="language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></div><div class="okmsg" data-i18n="langLocal">Lựa chọn áp dụng ngay cho giao diện này.</div></div><div class="panel" id="fontSettingsPanel"><h2>Font chữ toàn website</h2><p>Chọn một trong 10 font. Thay đổi áp dụng ngay và được lưu trên thiết bị này.</p><div class="field"><label for="siteFontFamily">Kiểu chữ</label><select id="siteFontFamily"><option value="IBM Plex Sans">1. IBM Plex Sans — kỹ thuật, rõ nét</option><option value="Source Sans 3">2. Source Sans 3 — gọn, dễ đọc</option><option value="DM Sans">3. DM Sans — hiện đại, cân đối</option><option value="Work Sans">4. Work Sans — sạch, chuyên nghiệp</option><option value="Raleway">5. Raleway — thanh, thanh lịch</option><option value="Ubuntu">6. Ubuntu — thân thiện, đậm nét</option><option value="Oswald">7. Oswald — hẹp, mạnh mẽ</option><option value="Playfair Display">8. Playfair Display — serif cổ điển</option><option value="Space Grotesk">9. Space Grotesk — hình học, cá tính</option><option value="Comfortaa">10. Comfortaa — bo tròn, mềm mại</option></select></div><div class="field"><label for="siteFontPreview">Xem trước</label><div id="siteFontPreview" style="padding:14px;border:1px dashed var(--line);border-radius:12px;font-size:20px">MatchMã — Đối chiếu hàng hóa có dấu tiếng Việt: ă â ê ô ơ ư đ.</div></div><div class="actions"><button class="btn alt" type="button" id="resetSiteFont">Khôi phục font mặc định</button></div></div><div class="panel"><h2 data-i18n="thresholdTitle">Ngưỡng phần trăm được tính OK</h2><p data-i18n="thresholdDesc">Ví dụ: đặt 80% thì điểm từ 80% trở lên mới được xem là OK nếu không có thuộc tính mâu thuẫn.</p><div class="field"><label data-i18n="thresholdOkLabel">Điểm tối thiểu để tự xếp OK</label><div class="thresholdvalue"><span id="thresholdValue">80</span>%</div><input id="threshold" type="range" min="50" max="100" step="5" value="80"><div style="display:flex;justify-content:space-between" class="muted"><span>50%</span><span>75%</span><span>100%</span></div></div><div class="rule"><strong data-i18n="exampleTitle">Cách phân loại mặc định</strong><div id="thresholdExplanation">≥ 80% = OK · 45–79% = rà soát · dưới 45% = không khớp. Có thuộc tính xung đột luôn cần rà soát.</div></div><div class="actions"><button class="btn" id="applySettings" data-i18n="applySettings">Áp dụng cài đặt</button></div></div></div><div class="panel"><h2 data-i18n="matchingRules">Quy tắc đối chiếu</h2><div class="grid"><div><p data-i18n="ruleNoSku">1. Dòng danh mục chuẩn thiếu mã/SKU sẽ không bao giờ được dùng làm ứng viên ghép.</p><p data-i18n="ruleName">2. Tên được chuẩn hóa dấu tiếng Việt, một số tên thương hiệu viết tắt và dung tích/trọng lượng chuẩn.</p></div><div><p data-i18n="ruleConflict">3. Các thuộc tính đối lập như có đường/không đường, có gas/không gas, nguyên kem/tách béo buộc phải rà soát.</p><p data-i18n="rulePrivacy">4. File được đọc ngay trong trình duyệt, không tải nội dung file lên máy chủ ứng dụng.</p></div></div></div></section>
 <div class="foot">MatchMã · <span data-i18n="footText">So khớp có kiểm soát · Kiểm tra trước khi xác nhận</span></div>
 </main></div>
 
@@ -3366,23 +3373,23 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 </script><script src="/winter-theme.js?v=20"></script><script>
 /* Font picker v75: set font directly on every rendered element so theme-specific !important rules cannot override it. */
 (function(){
- const KEY='matchma-site-font-family-v3';
- const FONTS=['Be Vietnam Pro','Nunito','Inter','Roboto','Open Sans','Lato','Montserrat','Poppins','Baloo 2','Merriweather'];
+ const KEY='matchma-site-font-family-v4';
+ const FONTS=['IBM Plex Sans','Source Sans 3','DM Sans','Work Sans','Raleway','Ubuntu','Oswald','Playfair Display','Space Grotesk','Comfortaa'];
  function applyFont(value){
   const name=FONTS.includes(value)?value:'Be Vietnam Pro';
   const stack='"'+name+'", "Noto Sans", "Noto Sans TC", "Noto Sans SC", "Noto Sans JP", Arial, sans-serif';
   // Load the actual font files before applying the family; a family name alone falls back silently.
   const fontFamilies={
-   'Be Vietnam Pro':'Be+Vietnam+Pro:wght@400;500;600;700',
-   'Nunito':'Nunito:wght@400;500;600;700',
-   'Inter':'Inter:wght@400;500;600;700',
-   'Roboto':'Roboto:wght@400;500;700',
-   'Open Sans':'Open+Sans:wght@400;500;600;700',
-   'Lato':'Lato:wght@400;700',
-   'Montserrat':'Montserrat:wght@400;500;600;700',
-   'Poppins':'Poppins:wght@400;500;600;700',
-   'Baloo 2':'Baloo+2:wght@400;500;600;700',
-   'Merriweather':'Merriweather:wght@400;700'
+   'IBM Plex Sans':'IBM+Plex+Sans:wght@400;500;600;700',
+   'Source Sans 3':'Source+Sans+3:wght@400;500;600;700',
+   'DM Sans':'DM+Sans:wght@400;500;600;700',
+   'Work Sans':'Work+Sans:wght@400;500;600;700',
+   'Raleway':'Raleway:wght@400;500;600;700',
+   'Ubuntu':'Ubuntu:wght@400;500;700',
+   'Oswald':'Oswald:wght@400;500;600;700',
+   'Playfair Display':'Playfair+Display:wght@400;500;600;700',
+   'Space Grotesk':'Space+Grotesk:wght@400;500;600;700',
+   'Comfortaa':'Comfortaa:wght@400;500;600;700'
   };
   let fontLink=document.getElementById('matchma-selected-font-resource');
   if(!fontLink){fontLink=document.createElement('link');fontLink.id='matchma-selected-font-resource';fontLink.rel='stylesheet';document.head.appendChild(fontLink)}
@@ -3401,15 +3408,15 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
   try{localStorage.setItem(KEY,name)}catch(e){}
  }
  function init(){
-  let saved='Be Vietnam Pro';
-  try{saved=localStorage.getItem(KEY)||localStorage.getItem('matchma-site-font-family-v2')||localStorage.getItem('matchma-site-font-family-v1')||saved}catch(e){}
+  let saved='IBM Plex Sans';
+  try{saved=localStorage.getItem(KEY)||saved}catch(e){}
   applyFont(saved);
   document.addEventListener('change',function(event){
    if(event.target && event.target.id==='siteFontFamily') applyFont(event.target.value);
   });
   document.addEventListener('click',function(event){
    const target=event.target && event.target.closest ? event.target.closest('#resetSiteFont') : null;
-   if(target){event.preventDefault();applyFont('Be Vietnam Pro')}
+   if(target){event.preventDefault();applyFont('IBM Plex Sans')}
   });
   // Reapply after theme scripts update styles; direct inline !important wins over theme CSS.
   const observer=new MutationObserver(function(){applyFontFromSaved()});
