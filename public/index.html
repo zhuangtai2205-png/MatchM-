@@ -3140,19 +3140,20 @@ header.app-header .headright{grid-column:2!important;grid-row:1!important;min-wi
 
 
 
-<style id="matchma-logo-5x-font-fix-v67">
-/* 5x visual enlargement only: no layout dimensions or surrounding elements changed. */
+<style id="matchma-logo-5x-font-fix-v68">
+/* Keep the existing 5x logo enlargement without changing surrounding layout dimensions. */
 header.app-header .brand-mark{overflow:visible!important}
 header.app-header .brand-mark img.brand-logo-img{
  transform:scale(5)!important;
  transform-origin:left center!important;
 }
-/* Keep one consistent font family for Vietnamese text; preserve existing sizes and weights. */
-html body,html body *{
- font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;
+/* Fix Vietnamese diacritics in the logo heading: use the already-loaded Vietnamese-capable font
+   for the whole heading and its colored span so “MatchMã” cannot fall back glyph-by-glyph. */
+html body header.app-header .brand-copy h1,
+html body header.app-header .brand-copy h1 span{
+ font-family:"Be Vietnam Pro",Arial,sans-serif!important;
  font-synthesis:none!important;
-}
-html body header.app-header .brand-copy h1{
- font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;
+ font-kerning:normal!important;
+ font-variant-ligatures:normal!important;
 }
 </style>
