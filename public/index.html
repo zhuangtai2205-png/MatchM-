@@ -3140,34 +3140,30 @@ header.app-header .headright{grid-column:2!important;grid-row:1!important;min-wi
 
 
 
-<style id="matchma-logo-size-and-vietnamese-font-fix-v69">
-/* Correct the previous bug: never scale the whole logo image with transform:scale(5).
-   Keep the image inside its layout box so it cannot cover the menu or heading. */
-header.app-header .brand{align-items:center!important;min-width:0!important}
+<style id="matchma-logo-stable-layout-v70">
+/* Stable logo sizing: scale the container, never the image; avoid overlaying the page. */
+header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
 header.app-header .brand-mark{
  display:flex!important;align-items:center!important;justify-content:center!important;
- width:clamp(64px,7vw,82px)!important;
- height:clamp(64px,7vw,82px)!important;
- min-width:clamp(64px,7vw,82px)!important;
- flex:0 0 clamp(64px,7vw,82px)!important;
- overflow:hidden!important;
+ width:88px!important;height:88px!important;min-width:88px!important;
+ flex:0 0 88px!important;overflow:hidden!important;
 }
 header.app-header .brand-mark img.brand-logo-img{
  display:block!important;width:100%!important;height:100%!important;
  max-width:100%!important;max-height:100%!important;object-fit:contain!important;
- transform:none!important;transform-origin:center!important;
+ transform:none!important;position:static!important;
 }
-html body header.app-header .brand-copy h1,
-html body header.app-header .brand-copy h1 span{
+header.app-header .brand-copy{min-width:0!important}
+header.app-header .brand-copy h1{
+ display:block!important;margin:0!important;
  font-family:"Be Vietnam Pro",Arial,sans-serif!important;
- font-synthesis:none!important;
+ font-size:clamp(24px,3vw,36px)!important;line-height:1.15!important;
+ white-space:nowrap!important;
 }
+header.app-header .brand-copy h1 span{font-family:inherit!important}
 @media(max-width:700px){
  header.app-header .brand{gap:8px!important}
- header.app-header .brand-mark{
-  width:clamp(56px,15vw,68px)!important;height:clamp(56px,15vw,68px)!important;
-  min-width:clamp(56px,15vw,68px)!important;flex-basis:clamp(56px,15vw,68px)!important;
- }
+ header.app-header .brand-mark{width:72px!important;height:72px!important;min-width:72px!important;flex-basis:72px!important}
  header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,26px)!important;white-space:normal!important}
 }
 </style>
