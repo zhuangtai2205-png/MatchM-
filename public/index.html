@@ -3194,7 +3194,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
   // Reapply after theme scripts update styles; direct inline !important wins over theme CSS.
   const observer=new MutationObserver(function(){applyFontFromSaved()});
   observer.observe(document.body,{attributes:true,attributeFilter:['data-theme']});
-  function applyFontFromSaved(){let n='Be Vietnam Pro';try{n=localStorage.getItem(KEY)||n}catch(e){};document.documentElement.style.setProperty('--matchma-font-family','"'+n+'", Arial, sans-serif')}
+  function applyFontFromSaved(){let n='Be Vietnam Pro';try{n=localStorage.getItem(KEY)||n}catch(e){};applyFont(n)}
  }
  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
 })();</script>
