@@ -1507,6 +1507,28 @@ body{margin:0}
  .main .hero,.main .panel{padding:14px!important}
 }
 </style>
+
+<style id="matchma-final-laptop-layout">
+/* Last-in-cascade overrides for laptop layout and readable navigation groups. */
+html body .shell.app-shell{display:grid!important;grid-template-columns:minmax(250px,285px) minmax(0,1fr)!important;align-items:start!important;gap:18px!important;width:100%!important;max-width:none!important;height:auto!important;overflow:visible!important}
+html body .shell.app-shell>#appSidebar.sidebar{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:9px!important;position:sticky!important;top:10px!important;width:100%!important;height:auto!important;max-height:calc(100vh - 20px)!important;overflow-x:hidden!important;overflow-y:auto!important;z-index:30!important}
+html body .shell.app-shell>#appSidebar.sidebar>*{position:relative!important;inset:auto!important;float:none!important;clear:both!important;transform:none!important;flex:0 0 auto!important;width:100%!important;min-width:0!important;height:auto!important;max-height:none!important;margin:0!important;box-sizing:border-box!important}
+html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder{display:block!important;position:relative!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;padding:7px!important;margin:0!important}
+html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder>summary.navfolder-title{display:flex!important;position:relative!important;inset:auto!important;width:100%!important;height:auto!important;min-height:46px!important;max-height:none!important;margin:0!important;padding:10px!important;align-items:center!important;justify-content:space-between!important;white-space:normal!important;line-height:1.4!important;box-sizing:border-box!important}
+html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder>.nav-folder-items{display:none!important;position:static!important;inset:auto!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;margin:0!important;padding:8px 2px 2px!important;transform:none!important;box-sizing:border-box!important}
+html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder[open]>.nav-folder-items{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important}
+html body .shell.app-shell>#appSidebar.sidebar>details.nav-folder>.nav-folder-items>.navbtn{display:flex!important;position:relative!important;inset:auto!important;flex:0 0 auto!important;width:100%!important;height:auto!important;min-height:44px!important;max-height:none!important;margin:0!important;padding:10px!important;white-space:normal!important;line-height:1.35!important;box-sizing:border-box!important}
+html body .shell.app-shell>main.main{display:block!important;position:relative!important;inset:auto!important;float:none!important;width:100%!important;min-width:0!important;height:auto!important;overflow:visible!important}
+html body .main .page{display:none} html body .main .page.active{display:block!important}
+html body .main .hero,html body .main .panel{max-width:100%!important;min-width:0!important;overflow-wrap:anywhere!important}
+.app-header{display:flex!important;flex-flow:row wrap!important;align-items:center!important;gap:12px!important;min-height:86px!important;height:auto!important;max-width:none!important;width:100%!important;box-sizing:border-box!important}
+.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+.app-header .brand-mark{display:inline-flex!important;width:56px!important;height:56px!important;flex:0 0 56px!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.app-header .brand-mark svg{width:100%!important;height:100%!important;display:block!important;object-fit:contain!important}
+#fat-bear-overlay,#funWidget,#funToggleBtn,#bear-container,#bear-sprite,#bear-snow,#fish-pool,#bear-plus-layer,[id*="bear-caption"],[class*="fun-widget"],[class*="bear-fish"]{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;animation:none!important}
+@media(max-width:900px){html body .shell.app-shell{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}html body .shell.app-shell>#appSidebar.sidebar{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important}}
+@media(max-width:650px){.app-header .brand-mark{width:46px!important;height:46px!important;flex-basis:46px!important}.app-header .headright{flex:1 1 100%!important;justify-content:flex-start!important}}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2902,7 +2924,7 @@ $('useRememberedName').addEventListener('click',()=>{if(!savedMemory.length){ale
 updateThresholdLabels();let preferredLang='vi';try{preferredLang=localStorage.getItem('matchma-language')||'vi'}catch(e){}setLanguage(preferredLang);updateCanRun();updateStats();
 initAccount();renderMemoryPage();
 ['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
-document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initCalculatorWidget();
+document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initCalculatorWidget();
 
 /* Entertainment and bear snow startup removed. */
 
