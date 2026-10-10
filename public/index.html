@@ -1113,6 +1113,24 @@ body[data-fun-effects="off"] #bear-snow{display:none!important}
  #bear-sprite,#bearHead,#bearBackLeg,#bearFrontLeg,#bearFrontPaw,#bearTail,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite,#bear-snow .bear-snowflake,.bear-snowflake{animation:none!important;transition:none!important}
  .intro-menu-card{transition:none}.calc-key:hover{transform:none}
 }
+
+/* MatchMã — phẳng 2D, giấy vẽ tay; tuyết phủ toàn màn hình khi gấu ăn/ngủ */
+#catClickFX{display:none!important}
+.cat-flower-particle,.bear-plus-one.bear-confetti-doodle{display:none!important}
+button,a,.navbtn,.btn,.panel,.hero,.stat,.sidebar,.mini,.fun-widget{box-shadow:none!important;filter:none}
+button:hover,.btn:hover,.navbtn:hover{transform:none!important;filter:none!important}
+#fat-bear-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
+#bear-snow{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important;pointer-events:none!important;z-index:1!important;opacity:0;transition:opacity .5s ease}
+#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.68!important}
+#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.92!important}
+#bear-snow .bear-snowflake{position:absolute!important;top:-8vh;z-index:1!important;display:block!important;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite!important}
+#bear-container{z-index:3!important;filter:none!important;box-shadow:none!important}
+#bear-sprite,#bear-sprite svg{filter:none!important}
+#fish-pool{z-index:4!important}
+.bear-fish{box-shadow:none!important;filter:none!important}
+body[data-theme="bear"]::before,body[data-theme="bear"]::after{pointer-events:none!important}
+@media(prefers-reduced-motion:reduce){#bear-snow .bear-snowflake{animation:none!important;top:var(--snow-static-top,25vh)!important}}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2646,4 +2664,38 @@ updateThresholdLabels();let preferredLang='vi';try{preferredLang=localStorage.ge
 initAccount();renderMemoryPage();
 ['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
 document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initFunWidget();initCalculatorWidget();
+
+/* Disable click-triggered decoration: keep only the bear's own 2D actions. */
+spawnBearConfetti=function(){};
+/* Draw hand-sketched snow across the entire viewport while feeding or hibernating. */
+renderBearSnow=function(){
+ const root=$('bear-snow'),overlay=$('fat-bear-overlay');
+ if(!root||!overlay)return;
+ const bear=$('bear-container');
+ const active=fishEaten>0||bearHibernating||(bear&&bear.classList.contains('is-munching'));
+ if(!active){root.replaceChildren();overlay.dataset.snowLevel='off';bearSnowLevel='off';return}
+ const level=(bearHibernating||fishEaten>=8)?'heavy':'light';
+ const count=level==='heavy'?46:28;
+ if(bearSnowLevel!==level||root.childElementCount!==count){
+  root.replaceChildren();
+  for(let i=0;i<count;i++){
+   const flake=document.createElement('span');
+   flake.className='bear-snowflake';
+   flake.innerHTML=bearSnowflakeSvg(i);
+   flake.style.left=(Math.random()*100)+'%';
+   flake.style.setProperty('--snow-size',(8+Math.random()*(level==='heavy'?17:12))+'px');
+   flake.style.setProperty('--snow-duration',(7+Math.random()*(level==='heavy'?8:10))+'s');
+   flake.style.setProperty('--snow-delay',(-Math.random()*18)+'s');
+   flake.style.setProperty('--snow-drift',((Math.random()-.5)*150)+'px');
+   flake.style.setProperty('--snow-opacity',(0.35+Math.random()*.5).toFixed(2));
+   flake.style.setProperty('--snow-static-top',(Math.random()*90)+'vh');
+   root.appendChild(flake);
+  }
+  bearSnowLevel=level;
+ }
+ overlay.dataset.snowLevel=level;
+};
+/* Repaint snow after startup without changing the user's saved bear progress. */
+renderBearSnow();
+
 </script></body></html>
