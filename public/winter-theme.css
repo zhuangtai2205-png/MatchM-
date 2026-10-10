@@ -1,0 +1,56 @@
+/* MatchMã — warm hand-drawn winter theme */
+:root{--ink:#75432f;--muted:#9a7663;--line:#e8c9ad;--purple:#e7a332;--paper:#fff8e9;--winter-blue:#8ec6df;--font-scale:1}
+html{min-height:100%;background:#f8f0df}
+body{color:var(--ink)!important;font-family:'Baloo 2','Nunito','Trebuchet MS',sans-serif!important;background:radial-gradient(ellipse at 13% 7%,#fffdf4 0,transparent 36%),radial-gradient(ellipse at 85% 88%,#dcecf2 0,transparent 31%),repeating-linear-gradient(0deg,rgba(150,111,74,.025) 0 1px,transparent 1px 5px),#f8f0df!important}
+body:before{content:none!important}
+header,.shell,.foot{z-index:2!important}
+header.app-header{border-bottom:2px dashed #d5b18e!important;background:rgba(255,249,235,.86)!important;border-radius:0!important;box-shadow:none!important}
+.sidebar{background:rgba(255,249,236,.92)!important;border:2px dashed #d9b18d!important;border-radius:21px!important;box-shadow:none!important}
+.main{background:rgba(255,250,239,.56)!important;border:0!important;box-shadow:none!important}
+.page{background:transparent!important;border:0!important;box-shadow:none!important;padding:6px!important}
+.hero,.panel,.chart-card{position:relative;background:rgba(255,250,239,.94)!important;border:2px dashed #d7b18f!important;border-radius:22px!important;box-shadow:2px 3px 0 rgba(155,103,66,.06)!important}
+.hero{overflow:hidden;min-height:188px;padding:24px 245px 22px 25px!important}
+.hero h2,.sectionhead h2,.panel h2,.chart-heading h2{color:#75432f!important;font-family:'Baloo 2','Nunito',sans-serif!important;text-decoration:none!important;letter-spacing:.1px!important}
+.hero h2{font-size:calc(clamp(25px,2.7vw,35px)*var(--font-scale,1))!important;line-height:1.18}
+.hero p,.sectionhead p,.panel p,.hint,.muted,.eyebrow{color:#8b6652!important}
+.eyebrow{text-transform:none!important;letter-spacing:.6px!important}
+.navbtn{border:1.5px dashed transparent!important;border-radius:16px!important;color:#80543d!important;font-family:'Baloo 2','Nunito',sans-serif!important;transition:background .18s,transform .18s!important}
+.navbtn:hover{background:#fff0d8!important;border-color:#e4bf96!important;transform:rotate(-.4deg)}
+.navbtn.active{background:#ffd985!important;border:1.5px dashed #d99a43!important;color:#6c4029!important;box-shadow:none!important}
+.nav-folder{border:1.5px dashed #dfb894!important;border-radius:15px!important;padding:4px!important}
+.navfolder-title,.nav-folder>summary.navfolder-title{background:#fff3df!important;border-radius:12px!important;color:#82563e!important}
+.nav-folder-items .navbtn{border-radius:12px!important}
+.navtitle,.sidebar-section-heading{color:#b08a6b!important;letter-spacing:.5px!important}
+.sidebar-help,.sidebar-account-shortcut,.sidefoot{background:#fff2dc!important;border:1.5px dashed #e0bd98!important;border-radius:15px!important}
+.sidebar-avatar{background:#ffe1a0!important;border:1.5px dashed #d9a85d!important}
+.btn{background:#ffd06e!important;color:#75432f!important;border:1.5px dashed #c78b39!important;border-radius:17px!important;box-shadow:none!important;font-weight:800!important}
+.btn:hover{background:#ffc85b!important;transform:translateY(-1px) rotate(-.4deg)!important}
+.btn.alt{background:#e6f2f5!important;border:1.5px dashed #a7cedb!important;color:#4d7585!important}
+.btn.soft,.okmsg{background:#e4f1dc!important;border:1.5px dashed #b5cba2!important;color:#55734d!important}
+input[type=text],input[type=number],select,.search,td select,textarea{border:1.5px dashed #d8b99b!important;border-radius:12px!important;background:#fffdf6!important;color:#75432f!important;outline-color:#e9b65b!important}
+.field input[type=range]{accent-color:#e6a43a!important}
+.stat,.mini{background:#fff9ec!important;border:1.5px dashed #e3c4a5!important;border-radius:17px!important;box-shadow:none!important}
+.stat b{color:#b96f37!important}.stat.good b{color:#578260!important}.stat.review b{color:#a77735!important}.stat.none b{color:#ae5e69!important}
+th{background:#f9e9ce!important;color:#80563e!important}td{border-bottom:1px dashed #ead6c0!important}
+.tablewrap{border:1.5px dashed #dfc2a5!important;border-radius:15px!important;box-shadow:none!important}
+.badge{border-radius:10px!important;border:1px dashed currentColor}
+.progressbox,.rule{background:#fff2da!important;border:1.5px dashed #e2c09b!important;border-radius:15px!important}
+.bar{background:#f1dfc5!important}.bar>div{background:linear-gradient(90deg,#e7a33b,#8cb9c8)!important}
+.local-pill,.toolbar-select,.toolbar-font{background:#fff8e9!important;border:1.5px dashed #dfbd98!important;border-radius:15px!important;color:#80563e!important}
+.toolbar-font button{color:#80563e!important}.toolbar-font button[aria-pressed=true]{background:#ffd985!important}
+#currentPageLabel{color:#75432f!important}
+.winter-bear-spot{position:absolute;right:5px;bottom:-13px;width:clamp(135px,18vw,228px);height:auto;max-height:205px;object-fit:contain;object-position:bottom right;pointer-events:none;z-index:1;filter:drop-shadow(0 4px 0 rgba(123,74,44,.05));animation:winterBearBreathe 4.8s ease-in-out infinite;transform-origin:bottom center}
+.hero>*:not(.winter-bear-spot){position:relative;z-index:2}
+.hero:has(.winter-bear-spot){padding-right:clamp(150px,19vw,250px)!important}
+.winter-snow-layer{position:fixed;inset:0;z-index:100;pointer-events:none;overflow:hidden;opacity:.8}
+.winter-flake{position:absolute;top:-30px;color:#8fc9e2;text-shadow:0 1px 0 #fff;font-size:var(--flake-size,18px);opacity:var(--flake-opacity,.7);animation:winterSnowFall var(--flake-time,14s) linear var(--flake-delay,0s) infinite;will-change:transform}
+.winter-flake:nth-child(3n){color:#b2d9e7}.winter-flake:nth-child(4n){color:#7cb9d6}
+.winter-paper-speckle{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.24;background-image:radial-gradient(#bd9675 .55px,transparent .8px),radial-gradient(#fff .7px,transparent 1px);background-size:7px 8px,11px 13px;background-position:0 0,3px 5px}
+.winter-doodle{position:fixed;z-index:0;pointer-events:none;color:#93c9df;opacity:.7;font-size:27px;animation:winterDrift 7s ease-in-out infinite}
+.winter-doodle.one{top:18%;left:2%}.winter-doodle.two{top:34%;right:3%;animation-delay:-3s}.winter-doodle.three{bottom:18%;left:37%;animation-delay:-5s}
+@keyframes winterSnowFall{0%{transform:translate3d(0,-5vh,0) rotate(0deg)}50%{transform:translate3d(24px,50vh,0) rotate(150deg)}100%{transform:translate3d(-18px,110vh,0) rotate(320deg)}}
+@keyframes winterBearBreathe{0%,100%{transform:translateY(0) rotate(-.5deg)}50%{transform:translateY(-3px) rotate(.5deg)}}
+@keyframes winterDrift{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(6deg)}}
+@media(max-width:950px){.hero{padding-right:205px!important}.winter-bear-spot{width:185px;max-height:165px}}
+@media(max-width:650px){.hero{padding:18px 16px 138px!important;min-height:0}.hero:has(.winter-bear-spot){padding-right:16px!important;padding-bottom:136px!important}.winter-bear-spot{width:142px;max-height:133px;right:3px;bottom:-7px}.winter-snow-layer{opacity:.52}.winter-doodle{font-size:20px}.sidebar{border-radius:16px!important}}
+@media(prefers-reduced-motion:reduce){.winter-flake,.winter-doodle,.winter-bear-spot{animation:none!important}.winter-flake{display:none}}
