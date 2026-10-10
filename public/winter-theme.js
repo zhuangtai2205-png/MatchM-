@@ -40,7 +40,7 @@
   function initBear(){
     const logo=document.querySelector('.app-header .logo');
     if(logo) logo.querySelectorAll(':scope > :not(.brand-logo-img)').forEach(el=>el.remove());
-    document.querySelectorAll('.navbtn .navicon,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(el=>el.remove());
+    document.querySelectorAll('.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(el=>el.remove());
   }
   function start(){
     renderScenery();
