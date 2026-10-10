@@ -896,7 +896,52 @@ body[data-theme="bear"] .theme-drift{opacity:.22!important}
 body[data-theme="bear"] .fun-widget{background:#fffaf0;border-color:#d4dfb9}body[data-theme="bear"] .fun-widget-bar{background:linear-gradient(120deg,#dfe9cd,#f7e9cb);border-color:#d4dfb9}
 .intro-purpose-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:12px 0}.intro-purpose-card{padding:18px;min-width:0}.intro-purpose-card h2{font-size:calc(17px * var(--font-scale, 1));margin:8px 0 7px}.intro-purpose-card p{font-size:calc(13px * var(--font-scale, 1));line-height:1.65;color:#79685f}.intro-step-icon{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#f7e8d8;font-size:22px}.intro-workflow{padding:20px;margin:12px 0}.intro-steps{list-style:none;margin:0;padding:0;display:grid;gap:0}.intro-steps li{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;align-items:center;padding:14px 0;border-bottom:1px solid #f0e2d5}.intro-steps li:last-child{border-bottom:0}.intro-step-number{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:#f4e0cb;color:#8d6249;font-size:calc(13px * var(--font-scale, 1));font-weight:950}.intro-steps strong{font-size:calc(13px * var(--font-scale, 1));color:#624a3e}.intro-steps p{margin:3px 0 0;font-size:calc(12px * var(--font-scale, 1));color:#89776b;line-height:1.5}.intro-steps .btn{white-space:nowrap;font-size:calc(11px * var(--font-scale, 1));padding:8px 10px}.intro-notice{display:flex;align-items:flex-start;gap:11px;padding:15px 17px;margin:12px 0;background:#fff7e9;border-color:#f0dfc8}.intro-notice>span{font-size:20px}.intro-notice p{margin:0;font-size:calc(12px * var(--font-scale, 1));color:#7f6859;line-height:1.6}
 @media(max-width:650px){.fun-toggle-button{font-size:0;gap:0;width:36px;height:32px;justify-content:center;padding:5px}.fun-toggle-icon{font-size:18px}.fun-widget{top:auto;right:9px;bottom:9px;width:calc(100vw - 18px);height:min(70dvh,520px);min-width:0;min-height:280px;max-height:calc(100dvh - 18px)}.fun-widget.is-maximized{left:8px!important;right:8px!important;top:8px!important;bottom:8px!important}.intro-purpose-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.intro-steps li{grid-template-columns:30px minmax(0,1fr);gap:9px}.intro-steps li>.btn{grid-column:2;justify-self:start}}
-</style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
+
+/* Hand-drawn paper-and-pencil theme art */
+html,body{margin:0!important;width:100%;max-width:100%;min-height:100%;overflow-x:clip!important}
+*{box-sizing:border-box}
+#themeScene{inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important}
+.theme-drift{display:grid;place-items:center;filter:none!important;text-shadow:none!important;overflow:visible}
+.theme-drift svg{display:block;width:var(--size);height:var(--size);overflow:visible;filter:drop-shadow(0 1px 1px #6b514018)}
+.cat-flower-particle{display:block;width:31px;height:31px;font-size:0!important;line-height:0;filter:none!important;overflow:visible}
+.cat-flower-particle svg{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 2px 2px #5e48351c)}
+body[data-theme="ocean"] .cat-flower-particle svg{--doodle-ink:#317a92}
+body[data-theme="retro"] .cat-flower-particle svg{--doodle-ink:#242424}
+body[data-theme="pink"] .cat-flower-particle svg{--doodle-ink:#a95f84}
+body[data-theme="vampire"] .cat-flower-particle svg{--doodle-ink:#693d6d}
+body[data-theme="cat"] .cat-flower-particle svg{--doodle-ink:#8d6246}
+body[data-theme="bear"] .cat-flower-particle svg{--doodle-ink:#783f20}
+#fat-bear-overlay{inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
+#bear-container{position:absolute!important;left:50%!important;bottom:-3px!important;width:clamp(170px,32vw,320px)!important;height:auto!important;aspect-ratio:320/180;display:block!important;padding:0!important;margin:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;outline:none!important;overflow:visible!important;pointer-events:auto!important;transform:translateX(-50%) scale(var(--bear-scale,1))!important;transform-origin:50% 100%!important;transition:transform .12s linear!important;filter:drop-shadow(0 -4px 8px #3f2c1c12)!important;z-index:1}
+#bear-container:focus-visible{outline:3px dashed #a97143!important;outline-offset:4px!important;border-radius:12px!important}
+#bear-sprite{display:block;width:100%;height:auto;overflow:visible;filter:none!important}
+#bear-expression{display:none!important}
+#bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .42s ease-in-out}
+@keyframes bearHandDrawnChomp{0%,100%{translate:0 0}24%{translate:0 3px}52%{translate:0 -5px}76%{translate:0 1px}}
+.bear-caption{left:50%!important;bottom:7px!important;transform:translateX(-50%)!important;min-width:0!important;width:max-content;max-width:calc(100vw - 24px);padding:4px 8px!important;background:#fff9edee!important;border:1px dashed #caa17c!important;border-radius:10px!important;box-shadow:0 3px 9px #6f4a2812!important;pointer-events:none!important}
+.bear-caption b{font-size:10px!important}.bear-caption small{font-size:9px!important}
+#fish-pool{inset:0!important;pointer-events:none!important;overflow:hidden}
+.bear-fish{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:drop-shadow(0 2px 2px #68452b1a)!important;width:54px!important;height:38px!important;padding:0!important;animation:bearFishSwim var(--fish-speed,3.2s) ease-in-out infinite alternate!important}
+.bear-fish svg{display:block;width:100%;height:100%;overflow:visible}
+.bear-fish:hover{background:transparent!important;filter:drop-shadow(0 4px 3px #68452b30) brightness(1.05)!important}
+.bear-plus-one{border:1px dashed #d08a43;border-radius:999px;padding:4px 8px;background:#fff8e8e8;color:#a65e12!important;box-shadow:0 2px 7px #5b39120e}
+.fun-widget{border:1px solid #e5d2be!important;box-shadow:0 17px 40px #58422b29!important}
+.fun-widget-bar{border-bottom:1px dashed #ddc7b0!important}
+.fun-widget-actions button{box-shadow:none!important}
+body[data-theme] .logo{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+body[data-theme] .page.active{outline:none!important}
+body[data-theme] .hero,body[data-theme] .panel,body[data-theme] .sidebar,body[data-theme] .stat{outline:none}
+body[data-theme="bear"]::before{content:none!important}
+body[data-theme="bear"]::after{content:"";position:fixed;left:0;right:0;bottom:0;height:140px;z-index:0;pointer-events:none;background:linear-gradient(180deg,transparent,#d6e4bc55 55%,#cbd9af80)!important}
+@media(max-width:650px){
+ #bear-container{width:clamp(150px,45vw,210px)!important;bottom:-2px!important}
+ .bear-caption{bottom:5px!important}
+ .bear-fish{width:46px!important;height:33px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #bear-container,#bear-sprite,.bear-fish{animation:none!important;transition:none!important}
+ .theme-drift{animation:none!important}
+}</style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
   <div class="logo" aria-label="MatchMã" title="MatchMã"><img class="brand-logo-img" src="/matchma-logo.svg?v=7" alt="Logo MatchMã mèo đội nón lá cầm kiếm"></div>
@@ -914,7 +959,36 @@ body[data-theme="bear"] .fun-widget{background:#fffaf0;border-color:#d4dfb9}body
  </div>
 </header>
 <div id="fat-bear-overlay" hidden aria-label="Góc tương tác Gấu" aria-hidden="true">
- <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu"><span id="bear-sprite" aria-hidden="true">🐻</span><span id="bear-expression" aria-hidden="true">🥺</span><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span></button>
+ <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu">
+ <svg id="bear-sprite" viewBox="0 0 320 180" role="img" aria-label="Chú gấu nâu vẽ tay, nét chì xước">
+  <defs>
+   <pattern id="bearHatch" patternUnits="userSpaceOnUse" width="13" height="11"><path d="M-2 9 L8 1 M5 12 L15 3" stroke="#6f3519" stroke-width="1.1" stroke-dasharray="2.5 2.1" opacity=".34" fill="none"/></pattern>
+   <clipPath id="bearBodyClip"><path d="M35 159 C25 130 30 99 52 85 C66 74 82 79 96 84 C124 63 194 64 221 83 C258 84 288 109 286 143 L279 159 C263 166 237 162 217 161 L94 163 C69 165 48 165 35 159Z"/></clipPath>
+   <filter id="bearRoughEdge" x="-5%" y="-8%" width="110%" height="118%"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="2" seed="7" result="grain"/><feDisplacementMap in="SourceGraphic" in2="grain" scale=".75" xChannelSelector="R" yChannelSelector="G"/></filter>
+  </defs>
+  <g filter="url(#bearRoughEdge)" stroke-linecap="round" stroke-linejoin="round">
+   <path id="bearBody" d="M35 159 C25 130 30 99 52 85 C66 74 82 79 96 84 C124 63 194 64 221 83 C258 84 288 109 286 143 L279 159 C263 166 237 162 217 161 L94 163 C69 165 48 165 35 159Z" fill="#b45309" stroke="#78350f" stroke-width="4" stroke-dasharray="3 1.5"/>
+   <rect x="31" y="69" width="260" height="100" fill="url(#bearHatch)" clip-path="url(#bearBodyClip)" opacity=".85"/>
+   <path d="M61 144 Q77 132 94 145 M228 145 Q244 130 261 143" fill="none" stroke="#78350f" stroke-width="2.4" stroke-dasharray="3 2"/>
+   <path d="M62 151 Q72 157 88 153 M236 153 Q250 158 265 151" fill="none" stroke="#f7c37c" stroke-width="2" opacity=".75"/>
+   <circle cx="113" cy="48" r="20" fill="#b45309" stroke="#78350f" stroke-width="4" stroke-dasharray="2.5 1.5"/>
+   <circle cx="207" cy="48" r="20" fill="#b45309" stroke="#78350f" stroke-width="4" stroke-dasharray="2.5 1.5"/>
+   <circle cx="114" cy="49" r="9" fill="#7c3d20" stroke="#78350f" stroke-width="2"/>
+   <circle cx="207" cy="49" r="9" fill="#7c3d20" stroke="#78350f" stroke-width="2"/>
+   <path id="bearHead" d="M85 77 C78 56 91 32 118 30 C137 27 148 37 159 43 C178 31 204 42 222 60 C239 80 220 103 194 108 L121 108 C99 104 88 94 85 77Z" fill="#c46a24" stroke="#78350f" stroke-width="4" stroke-dasharray="3 1.5"/>
+   <path d="M100 68 Q118 61 132 70 M185 69 Q202 60 216 71" fill="none" stroke="#e9a55d" stroke-width="2.4" stroke-dasharray="2 2"/>
+   <path d="M125 70 Q133 62 141 70" fill="none" stroke="#422519" stroke-width="3.4"/>
+   <path d="M181 70 Q189 62 197 70" fill="none" stroke="#422519" stroke-width="3.4"/>
+   <ellipse cx="160" cy="84" rx="35" ry="24" fill="#f6d2a0" stroke="#78350f" stroke-width="3" stroke-dasharray="3 1.5"/>
+   <path d="M151 76 Q160 70 169 77 Q168 85 160 86 Q152 85 151 76Z" fill="#4a2c20" stroke="#462819" stroke-width="2"/>
+   <path id="bear-mouth" d="M145 88 Q160 100 176 88" fill="none" stroke="#542b20" stroke-width="3" stroke-linecap="round"/>
+   <path d="M160 86 L160 91" fill="none" stroke="#542b20" stroke-width="2.5"/>
+   <path d="M119 94 Q128 101 137 96 M182 96 Q192 101 201 94" fill="none" stroke="#b75d35" stroke-width="2" stroke-dasharray="2 2"/>
+   <path d="M44 112 Q56 118 58 127 M272 113 Q263 120 265 129 M105 117 Q114 122 118 129 M207 120 Q215 116 222 123" fill="none" stroke="#763a1b" stroke-width="1.5" stroke-dasharray="2 3" opacity=".75"/>
+  </g>
+ </svg>
+ <span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
+</button>
  <div id="fish-pool" aria-label="Cá cho gấu ăn"></div><div id="bear-plus-layer" aria-hidden="true"></div>
 </div>
 <aside id="funWidget" class="fun-widget" hidden aria-label="Góc Gấu MatchMã">
@@ -1442,6 +1516,48 @@ function renderPlatformLinks(query){const links=platformSearchTargets(query);con
 function openPlatformSearch(query){$('platformQuery').value=query||'';renderPlatformLinks(query||'');showPage('platforms')}
 
 
+function themeDoodleSvg(theme,index=0){
+ const variant=((index%3)+3)%3;
+ const start='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-dasharray="2.6 1.5">';
+ const end='</g></svg>';
+ const ocean=[
+  '<path d="M5 24 Q14 10 28 20 L39 12 L37 24 L40 36 L28 28 Q15 38 5 24Z" fill="#83cfdf" stroke="#317a92"/><path d="M15 22 Q23 20 29 24 M10 27 Q15 30 19 28" fill="none" stroke="#317a92"/><circle cx="13" cy="22" r="1.7" fill="#214f62" stroke="none"/>',
+  '<path d="M7 25 Q19 6 31 24 Q19 42 7 25Z" fill="#a8dce8" stroke="#337f9a"/><path d="M30 24 L42 14 L40 25 L42 36Z" fill="#6bb7cd" stroke="#337f9a"/><circle cx="16" cy="22" r="1.7" fill="#245b70" stroke="none"/><path d="M17 30 Q22 33 27 28" fill="none" stroke="#337f9a"/>',
+  '<circle cx="13" cy="14" r="5" fill="none" stroke="#5bacc6"/><circle cx="30" cy="10" r="3" fill="none" stroke="#5bacc6"/><path d="M5 32 Q12 26 19 32 T33 32 T47 32 M7 39 Q14 33 21 39 T35 39 T47 39" fill="none" stroke="#4f9eb8"/>'
+ ];
+ const retro=[
+  '<path d="M19 8 V32 Q18 39 11 37 Q5 35 10 30 Q13 27 19 30 M19 8 L39 4 V26 Q38 33 31 31 Q25 29 30 24 Q33 22 39 24" fill="#e9e7dd" stroke="#333"/><path d="M20 13 L38 9" stroke="#777"/>',
+  '<path d="M14 8 V31 Q13 38 7 35 Q3 33 8 29 Q10 27 14 30 M14 8 L32 4 V25 Q31 32 25 30 Q20 28 25 24 Q28 22 32 24" fill="#f4f1e8" stroke="#222"/><path d="M6 42 Q17 39 28 42 T46 42" fill="none" stroke="#777"/>',
+  '<path d="M9 16 Q14 10 19 16 T29 16 T39 16 M9 25 Q14 19 19 25 T29 25 T39 25" fill="none" stroke="#333"/><path d="M21 5 V33 Q20 39 14 37 Q9 35 14 31 Q17 29 21 32 M21 5 L40 2 V24 Q39 30 33 28 Q28 26 33 22 Q36 20 40 22" fill="#dedbd1" stroke="#222"/>'
+ ];
+ const pink=[
+  '<path d="M24 23 C9 19 12 7 21 11 Q24 13 24 18 C29 5 41 10 36 20 Q34 23 29 24 C42 28 36 40 27 34 Q24 32 24 28 C19 42 7 34 14 26 Q17 23 21 24Z" fill="#f2bad4" stroke="#a95f84"/><circle cx="24" cy="24" r="5" fill="#f7db94" stroke="#ad7958"/><path d="M24 31 Q23 39 18 44" fill="none" stroke="#6c9a69"/>',
+  '<path d="M23 24 C11 20 14 9 22 13 Q24 15 24 19 C31 7 40 15 34 22 Q32 24 28 25 C40 31 30 40 24 31 C17 41 8 32 17 25Z" fill="#ffd7e6" stroke="#b86f93"/><circle cx="24" cy="24" r="4.5" fill="#f3d48d" stroke="#ae835b"/><path d="M24 30 Q28 39 34 42" fill="none" stroke="#729a6e"/>',
+  '<path d="M24 5 Q29 15 24 20 Q19 15 24 5Z M24 28 Q29 38 24 43 Q19 38 24 28Z M5 24 Q15 19 20 24 Q15 29 5 24Z M28 24 Q38 19 43 24 Q38 29 28 24Z" fill="#f8d1e2" stroke="#b56d91"/><circle cx="24" cy="24" r="6" fill="#f6d58c" stroke="#a67c59"/>'
+ ];
+ const vampire=[
+  '<path d="M5 17 L14 20 L19 12 L24 18 L29 12 L34 20 L43 17 L37 31 Q24 43 11 31Z" fill="#70446f" stroke="#3c273f"/><circle cx="19" cy="26" r="1.5" fill="#f1c6d8" stroke="none"/><circle cx="29" cy="26" r="1.5" fill="#f1c6d8" stroke="none"/>',
+  '<path d="M11 17 Q9 7 19 10 L24 15 L29 10 Q39 7 37 17 Q36 33 24 38 Q12 33 11 17Z" fill="#eea95b" stroke="#7a412a"/><path d="M17 23 L20 26 L23 23 M26 23 L29 26 L32 23 M20 32 Q24 28 28 32" fill="none" stroke="#7a412a"/>',
+  '<path d="M8 8 L8 40 M8 8 L40 40 M40 8 L8 40 M40 8 L40 40 M4 16 Q24 24 44 16 M4 32 Q24 24 44 32" fill="none" stroke="#705273"/><path d="M22 15 Q16 23 24 27 Q32 23 26 15 M24 27 L20 35 M24 27 L28 35" fill="none" stroke="#b35a83"/>'
+ ];
+ const cat=[
+  '<path d="M8 19 L7 7 L18 13 Q24 10 30 13 L41 7 L40 20 Q43 35 24 40 Q5 35 8 19Z" fill="#e7c6a8" stroke="#8d6246"/><path d="M16 25 Q19 22 21 25 M27 25 Q30 22 33 25 M21 32 Q24 35 27 32" fill="none" stroke="#5f4434"/>',
+  '<path d="M7 23 Q17 14 24 25 Q31 14 41 23 Q42 34 24 39 Q6 34 7 23Z" fill="#dcb28d" stroke="#8d6246"/><circle cx="17" cy="27" r="1.6" fill="#5b4230" stroke="none"/><circle cx="31" cy="27" r="1.6" fill="#5b4230" stroke="none"/><path d="M15 32 L8 30 M15 35 L8 36 M33 32 L40 30 M33 35 L40 36" fill="none" stroke="#8d6246"/>',
+  '<path d="M4 24 Q16 6 29 21 L40 13 L38 25 L41 35 L29 28 Q16 40 4 24Z" fill="#f2d2a4" stroke="#8d6246"/><path d="M11 23 L26 23 M12 27 L23 27 M20 20 L25 29" fill="none" stroke="#8d6246"/><circle cx="14" cy="22" r="1.3" fill="#5b4230" stroke="none"/>'
+ ];
+ const bear=[
+  '<path d="M8 23 Q5 11 15 11 Q20 11 21 16 Q26 11 32 11 Q43 11 40 24 L37 36 Q24 44 11 36Z" fill="#c46a24" stroke="#783f20"/><circle cx="15" cy="14" r="7" fill="#b45309" stroke="#783f20"/><circle cx="34" cy="14" r="7" fill="#b45309" stroke="#783f20"/><path d="M15 27 Q18 24 21 27 M27 27 Q30 24 33 27 M20 33 Q24 37 28 33" fill="none" stroke="#4c2d20"/>',
+  '<path d="M5 24 Q16 9 28 20 L40 12 L38 24 L41 35 L28 28 Q15 39 5 24Z" fill="#e7a066" stroke="#854a2b"/><path d="M10 24 Q20 20 28 25" fill="none" stroke="#854a2b"/><circle cx="13" cy="22" r="1.4" fill="#51301e" stroke="none"/>',
+  '<path d="M7 13 L16 8 L19 18 L29 18 L32 8 L41 13 L39 33 Q24 43 9 33Z" fill="#9fbc7d" stroke="#536e43"/><path d="M13 23 Q18 18 21 23 M27 23 Q30 18 35 23 M19 31 Q24 35 29 31" fill="none" stroke="#536e43"/>'
+ ];
+ const collection={ocean,retro,pink,vampire,cat,bear};
+ const drawing=(collection[theme]||collection.ocean)[variant];
+ return start+drawing+end;
+}
+function themeFishSvg(index=0){
+ const colors=['#e89a56','#f0b05b','#91cad2'];const fill=colors[index%colors.length];
+ return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 36" aria-hidden="true"><g stroke="#79462d" stroke-width="2" stroke-dasharray="3 1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18 Q20 2 39 15 L53 6 L51 18 L53 30 L39 21 Q20 34 7 18Z" fill="'+fill+'"/><path d="M24 13 Q28 18 24 23 M31 13 Q35 18 31 23" fill="none" stroke="#fff0ce" stroke-width="1.6"/><circle cx="16" cy="16" r="2" fill="#3c2a22" stroke="none"/><path d="M9 20 Q13 23 16 21" fill="none"/></g></svg>';
+}
 function updateThemeDecorations(theme){
  const iconMaps={
   ocean:{overview:'🏝️',catalog:'🐟',run:'🧜‍♀️',results:'🐬',memory:'🐚',platforms:'🐠',autofill:'🫧',stockforecast:'🐡',account:'🐳',settings:'🌊'},
@@ -1462,31 +1578,51 @@ function updateThemeScene(theme){
   cat:['🐈','🐈‍⬛','🐟','🦴','🧶','🐾','🐱','🐠'],bear:['🐻','🐟','🌲','🍯','🐾','🌿','🐟','🐻‍❄️']
  };
  const spots=[[3,19,23],[15,37,18],[29,14,25],[43,33,19],[56,12,21],[67,41,23],[78,20,17],[91,36,24],[8,69,20],[26,83,18],[74,76,22],[94,68,18]];
- spots.forEach((p,i)=>{const el=document.createElement('span');el.className='theme-drift';el.textContent=scenes[theme][i%scenes[theme].length];el.style.setProperty('--x',p[0]+'%');el.style.setProperty('--y',p[1]+'%');el.style.setProperty('--size',p[2]+'px');el.style.setProperty('--opacity',theme==='retro'?'0.17':theme==='vampire'?'0.23':'0.19');el.style.setProperty('--dur',(4.2+(i%5)*.7)+'s');el.style.setProperty('--delay',(-i*.63)+'s');el.style.setProperty('--dx',((i%2?1:-1)*(7+i%4*4))+'px');el.style.setProperty('--dy',(-9-i%3*5)+'px');el.style.setProperty('--turn',((i%2?1:-1)*8)+'deg');root.appendChild(el)});
+ spots.forEach((p,i)=>{const el=document.createElement('span');el.className='theme-drift';el.innerHTML=themeDoodleSvg(theme,i);el.style.setProperty('--x',p[0]+'%');el.style.setProperty('--y',p[1]+'%');el.style.setProperty('--size',p[2]+'px');el.style.setProperty('--opacity',theme==='retro'?'0.17':theme==='vampire'?'0.23':'0.19');el.style.setProperty('--dur',(4.2+(i%5)*.7)+'s');el.style.setProperty('--delay',(-i*.63)+'s');el.style.setProperty('--dx',((i%2?1:-1)*(7+i%4*4))+'px');el.style.setProperty('--dy',(-9-i%3*5)+'px');el.style.setProperty('--turn',((i%2?1:-1)*8)+'deg');root.appendChild(el)});
 }
 
 const BEAR_EATEN_KEY='matchma-bear-fish-eaten-v1',BEAR_EFFECT_KEY='matchma-bear-effects-v1';
 let fishEaten=0,fishSerial=0;
 try{fishEaten=Math.max(0,Math.min(10000,Number(localStorage.getItem(BEAR_EATEN_KEY))||0))}catch(e){fishEaten=0}
-function bearScale(){return Math.min(2.5,1+fishEaten*.15)}
+function bearScale(){const base=$('bear-container');const width=base?base.offsetWidth:320;const fitCap=window.innerWidth/(Math.max(1,width)*1.08);return Math.min(2,fitCap,1+fishEaten*.12)}
 function bearStageKey(){return fishEaten>=10?'funKing':fishEaten>=7?'funFull':fishEaten>=4?'funChubby':fishEaten>=1?'funHappy':'funHungry'}
 function bearExpression(){return fishEaten>=10?'🤩':fishEaten>=7?'😋':fishEaten>=4?'😌':fishEaten>=1?'😊':'🥺'}
+let bearVisualScale=1,bearScaleVelocity=0,bearScaleFrame=0,bearLastFrame=0,bearReady=false;
+function animateBearScale(target){
+ if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){bearVisualScale=target;bearScaleVelocity=0;document.documentElement.style.setProperty('--bear-scale',String(target));return}
+ if(bearScaleFrame)cancelAnimationFrame(bearScaleFrame);
+ bearLastFrame=0;
+ const tick=(now)=>{
+  const dt=Math.min(.032,Math.max(.001,(now-(bearLastFrame||now))/1000));bearLastFrame=now;
+  const acceleration=(target-bearVisualScale)*125-bearScaleVelocity*21;
+  bearScaleVelocity+=acceleration*dt;bearVisualScale+=bearScaleVelocity*dt;
+  if(Math.abs(target-bearVisualScale)<.002&&Math.abs(bearScaleVelocity)<.015){bearVisualScale=target;bearScaleVelocity=0;document.documentElement.style.setProperty('--bear-scale',String(target));bearScaleFrame=0;return}
+  document.documentElement.style.setProperty('--bear-scale',String(bearVisualScale));bearScaleFrame=requestAnimationFrame(tick)
+ };
+ bearScaleFrame=requestAnimationFrame(tick)
+}
 function updateBearDisplay(){
  const scale=bearScale(),title=tr(bearStageKey()),count=tr('funFishCountLabel').replace('{count}',fishEaten);
- document.documentElement.style.setProperty('--bear-scale',String(scale));
- const sprite=$('bear-sprite'),face=$('bear-expression'),preview=$('funBearPreview'),previewFace=$('funBearFace');
- if(sprite)sprite.textContent=fishEaten>=10?'🐻‍❄️':'🐻';if(face)face.textContent=bearExpression();if(preview)preview.textContent=fishEaten>=10?'🐻‍❄️':'🐻';if(previewFace)previewFace.textContent=bearExpression();
+ if(!bearReady){bearVisualScale=scale;document.documentElement.style.setProperty('--bear-scale',String(scale));bearReady=true}else animateBearScale(scale);
+ const sprite=$('bear-sprite'),body=sprite&&sprite.querySelector('#bearBody'),head=sprite&&sprite.querySelector('#bearHead'),mouth=sprite&&sprite.querySelector('#bear-mouth');
+ if(body){body.setAttribute('fill',fishEaten>=4?'#9a3412':'#b45309');body.setAttribute('stroke-dasharray',fishEaten>=4?'3 .8':'3 1.5')}
+ if(head){head.setAttribute('fill',fishEaten>=4?'#ae481b':'#c46a24')}
+ if(mouth){mouth.setAttribute('d',fishEaten>=1?'M145 86 Q160 103 176 86':'M145 89 Q160 79 176 89')}
+ const preview=$('funBearPreview'),previewFace=$('funBearFace');
+ if(preview)preview.textContent=fishEaten>=10?'🐻‍❄️':'🐻';
+ if(previewFace)previewFace.textContent=bearExpression();
  if($('bear-caption-title'))$('bear-caption-title').textContent=title;if($('bear-caption-count'))$('bear-caption-count').textContent=count;
  if($('funFishCount'))$('funFishCount').textContent=String(fishEaten);if($('funBearStage'))$('funBearStage').textContent=title;if($('funBearGrowth'))$('funBearGrowth').textContent=Math.round(scale*100)+'%';
  if($('funBearMessage')&&$('funBearMessage').dataset.manual!=='1')$('funBearMessage').textContent=fishEaten?tr('funChomp'):tr('funWelcome');
 }
+
 function showBearPlus(x,y,textValue){const layer=$('bear-plus-layer');if(!layer)return;const p=document.createElement('span');p.className='bear-plus-one';p.textContent=textValue||tr('funChomp');p.style.left=x+'px';p.style.top=y+'px';layer.appendChild(p);setTimeout(()=>p.remove(),950)}
-function fishPosition(){const width=window.innerWidth,height=window.innerHeight;const x=35+Math.random()*Math.max(40,width-90),y=70+Math.random()*Math.max(40,height-150);return{x:Math.max(8,Math.min(x,width-55)),y:Math.max(50,Math.min(y,height-65))}}
-function spawnBearFish(n=1){const pool=$('fish-pool'),overlay=$('fat-bear-overlay');if(!pool||overlay.hidden)return;for(let i=0;i<n&&pool.children.length<9;i++){const fish=document.createElement('button');fish.type='button';fish.className='bear-fish';fish.textContent=['🐟','🐠','🐡','🐟','🐟'][Math.floor(Math.random()*5)];fish.setAttribute('aria-label',lang==='vi'?'Bấm để cho gấu ăn cá':'Click to feed the bear');fish.title=lang==='vi'?'Cho gấu ăn':'Feed the bear';const p=fishPosition();fish.style.left=p.x+'px';fish.style.top=p.y+'px';fish.style.setProperty('--fish-dx',((Math.random()-.5)*48)+'px');fish.style.setProperty('--fish-dy',((Math.random()-.5)*36)+'px');fish.style.setProperty('--fish-speed',(2.3+Math.random()*2)+'s');fish.dataset.fishId=String(++fishSerial);fish.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();feedBear(fish,e.clientX,e.clientY)});pool.appendChild(fish)}}
+function fishPosition(){const width=window.innerWidth,height=window.innerHeight;const x=18+Math.random()*Math.max(40,width-100);const band=Math.min(265,Math.max(115,height*.28));const y=height-55-Math.random()*band;return{x:Math.max(8,Math.min(x,width-58)),y:Math.max(60,Math.min(y,height-54))}}
+function spawnBearFish(n=1){const pool=$('fish-pool'),overlay=$('fat-bear-overlay');if(!pool||overlay.hidden)return;for(let i=0;i<n&&pool.children.length<9;i++){const fish=document.createElement('button');fish.type='button';fish.className='bear-fish';fish.innerHTML=themeFishSvg(Math.floor(Math.random()*6));fish.setAttribute('aria-label',lang==='vi'?'Bấm để cho gấu ăn cá':'Click to feed the bear');fish.title=lang==='vi'?'Cho gấu ăn':'Feed the bear';const p=fishPosition();fish.style.left=p.x+'px';fish.style.top=p.y+'px';fish.style.setProperty('--fish-dx',((Math.random()-.5)*48)+'px');fish.style.setProperty('--fish-dy',((Math.random()-.5)*36)+'px');fish.style.setProperty('--fish-speed',(2.3+Math.random()*2)+'s');fish.dataset.fishId=String(++fishSerial);fish.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();feedBear(fish,e.clientX,e.clientY)});pool.appendChild(fish)}}
 function feedBear(fish,x,y){if(!fish||!fish.isConnected)return;fish.disabled=true;fish.style.transition='transform .28s,opacity .28s';fish.style.transform='scale(.2) rotate(35deg)';fish.style.opacity='0';const rect=fish.getBoundingClientRect();const px=Number.isFinite(x)?x:rect.left,py=Number.isFinite(y)?y:rect.top;fishEaten++;try{localStorage.setItem(BEAR_EATEN_KEY,String(fishEaten))}catch(e){}fish.remove();updateBearDisplay();showBearPlus(px,py);const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funChomp');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1200)}if(!$('fat-bear-overlay').hidden&&$('fish-pool').children.length<7)setTimeout(()=>spawnBearFish(1),380);if(document.body.dataset.funEffects!=='off')spawnBearConfetti(px,py)}
-function petBear(){const face=$('bear-expression');if(face)face.textContent=['🥰','😊','😽','🤗'][Math.floor(Math.random()*4)];if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funPet');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay()},1300)}const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}}
+function petBear(){const mouth=$('bear-sprite')&&$('bear-sprite').querySelector('#bear-mouth');if(mouth)mouth.setAttribute('d','M143 85 Q160 106 178 85');if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funPet');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay()},1300)}const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}}
 function spawnBearConfetti(x,y){const layer=$('bear-plus-layer');if(!layer)return;const arr=document.body.dataset.theme==='bear'?['🍃','🐟','🐾','✨']:['🐟','✨','🐾','💚'];for(let i=0;i<6;i++){const p=document.createElement('span');p.className='bear-plus-one';p.textContent=arr[Math.floor(Math.random()*arr.length)];p.style.left=(x+(Math.random()-.5)*100)+'px';p.style.top=(y+(Math.random()-.5)*40)+'px';p.style.animationDelay=(Math.random()*100)+'ms';layer.appendChild(p);setTimeout(()=>p.remove(),1050)}}
-function resetBear(){fishEaten=0;try{localStorage.setItem(BEAR_EATEN_KEY,'0')}catch(e){}const pool=$('fish-pool');if(pool)pool.textContent='';if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay();spawnBearFish(7)}
+function resetBear(){fishEaten=0;bearScaleVelocity=0;try{localStorage.setItem(BEAR_EATEN_KEY,'0')}catch(e){}const pool=$('fish-pool');if(pool)pool.textContent='';if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay();spawnBearFish(7)}
 function setFunWidgetOpen(open){const widget=$('funWidget'),btn=$('funToggleBtn'),overlay=$('fat-bear-overlay');if(!widget||!btn||!overlay)return;widget.hidden=!open;overlay.hidden=!open;overlay.setAttribute('aria-hidden',String(!open));btn.setAttribute('aria-expanded',String(!!open));btn.title=tr(open?'funClose':'funTitleButton');if(open){widget.classList.remove('is-minimized','is-maximized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent='□';updateBearDisplay();if(!$('fish-pool').children.length)spawnBearFish(7)}}
 function initFunWidget(){const btn=$('funToggleBtn'),widget=$('funWidget'),overlay=$('fat-bear-overlay'),drag=$('funWidgetDragBar');if(!btn||!widget||!overlay)return;btn.addEventListener('click',()=>setFunWidgetOpen(widget.hidden));$('funCloseBtn').addEventListener('click',()=>setFunWidgetOpen(false));$('funMinimizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-minimized');$('funMinimizeBtn').textContent=widget.classList.contains('is-minimized')?'+':'−';$('funMinimizeBtn').title=tr(widget.classList.contains('is-minimized')?'funExpand':'funMinimize')});$('funMaximizeBtn').addEventListener('click',()=>{widget.classList.toggle('is-maximized');widget.classList.remove('is-minimized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent=widget.classList.contains('is-maximized')?'❐':'□';$('funMaximizeBtn').title=tr(widget.classList.contains('is-maximized')?'funRestore':'funMaximize')});$('funResetBear').addEventListener('click',resetBear);$('funSpawnFish').addEventListener('click',()=>{spawnBearFish(3);if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=lang==='vi'?'Đã thả thêm cá! Hãy bắt một con cho gấu.':'More fish added! Catch one for the bear.';setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1300)}});$('funEffectsToggle').addEventListener('click',()=>{const off=document.body.dataset.funEffects!=='off';document.body.dataset.funEffects=off?'off':'on';$('funEffectsToggle').textContent=tr(off?'funEffectsOn':'funEffectsOff');$('funEffectsToggle').setAttribute('aria-pressed',String(!off));try{localStorage.setItem(BEAR_EFFECT_KEY,off?'0':'1')}catch(e){}});$('bear-container').addEventListener('click',petBear);let dragging=false,startX=0,startY=0,startLeft=0,startTop=0;drag.addEventListener('pointerdown',e=>{if(e.target.closest('button')||widget.classList.contains('is-maximized'))return;dragging=true;const r=widget.getBoundingClientRect();startX=e.clientX;startY=e.clientY;startLeft=r.left;startTop=r.top;widget.style.left=r.left+'px';widget.style.top=r.top+'px';widget.style.right='auto';widget.style.bottom='auto';try{drag.setPointerCapture(e.pointerId)}catch(_){} });drag.addEventListener('pointermove',e=>{if(!dragging)return;const maxLeft=Math.max(0,window.innerWidth-widget.offsetWidth),maxTop=Math.max(0,window.innerHeight-65);widget.style.left=Math.min(maxLeft,Math.max(0,startLeft+e.clientX-startX))+'px';widget.style.top=Math.min(maxTop,Math.max(0,startTop+e.clientY-startY))+'px'});const stop=()=>{dragging=false};drag.addEventListener('pointerup',stop);drag.addEventListener('pointercancel',stop);let effects=true;try{effects=localStorage.getItem(BEAR_EFFECT_KEY)!=='0'}catch(e){}document.body.dataset.funEffects=effects?'on':'off';$('funEffectsToggle').textContent=tr(effects?'funEffectsOff':'funEffectsOn');$('funEffectsToggle').setAttribute('aria-pressed',String(effects));updateBearDisplay()}
 
@@ -2009,7 +2145,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
    const motion=theme==='bear'?'theme-bear':theme==='cat'?'theme-cat':theme==='vampire'?'theme-bat':theme==='pink'?'theme-flower':theme==='retro'?'theme-note':'theme-fish';
    for(let i=0;i<count;i++){
      const particle=document.createElement('span');particle.className='cat-flower-particle '+motion;
-     particle.textContent=icons[Math.floor(Math.random()*icons.length)];
+     particle.innerHTML=themeDoodleSvg(theme,Math.floor(Math.random()*9));particle.setAttribute('aria-hidden','true');
      particle.style.left=e.clientX+'px';particle.style.top=e.clientY+'px';
      particle.style.setProperty('--dx',(Math.random()*128-64)+'px');
      particle.style.setProperty('--dy',(-24-Math.random()*(theme==='cat'?82:64))+'px');
