@@ -1388,7 +1388,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
-</style><link rel="stylesheet" href="/winter-theme.css?v=22"><style id="logo-bear-fix">
+</style><link rel="stylesheet" href="/winter-theme.css?v=23"><style id="logo-bear-fix">
 /* Logo is brand artwork only. Never overlay mascots, emoji, pseudo-elements or theme effects. */
 html body header.app-header .brand>.logo{
  position:relative!important;display:flex!important;flex:0 0 48px!important;
@@ -2021,6 +2021,11 @@ function openPlatformSearch(query){$('platformQuery').value=query||'';renderPlat
 
 function themeDoodleSvg(theme,index=0){
  const variant=((index%3)+3)%3;
+ // Give each menu entry its own hand-drawn variation rather than identical repeats.
+ const item=((index%11)+11)%11;
+ const turn=[0,-7,8,-12,12,4,-4,10,-10,6,-6][item];
+ const scale=[1,.92,1.06,.88,1.1,.96,1.03,.9,1.08,.94,1.02][item];
+ const transform='translate(24 24) rotate('+turn+') scale('+scale+') translate(-24 -24)';
  const start='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" aria-hidden="true"><g stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke-dasharray="2.6 1.5">';
  const end='</g></svg>';
  const ocean=[
@@ -2055,7 +2060,9 @@ function themeDoodleSvg(theme,index=0){
  ];
  const collection={ocean,retro,pink,vampire,cat,bear};
  const drawing=(collection[theme]||collection.ocean)[variant];
- return start+drawing+end;
+ const accents={ocean:'#277f9b',retro:'#4d514c',pink:'#b85d8d',vampire:'#d06b91',cat:'#966b58',bear:'#4d7950'};
+ const accent=accents[theme]||accents.ocean;
+ return start+'<g transform="'+transform+'">'+drawing+'</g><path d="M5 5l2 2m34 34 2 2" fill="none" stroke="'+accent+'" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>'+end;
 }
 function themeFishSvg(index=0){
  const colors=['#e89a56','#f0b05b','#91cad2'];const fill=colors[index%colors.length];
