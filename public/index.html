@@ -3168,5 +3168,68 @@ html body .app-shell>#appSidebar .nav-folder::after{pointer-events:none!importan
  html body .app-shell>#appSidebar>details.nav-folder{padding:6px!important}
  html body .app-shell>#appSidebar>details.nav-folder>summary.navfolder-title{min-height:44px!important}
 }
+
+/* Definitive sidebar repair: reset inherited theme positioning, reveal open group items. */
+html body #appSidebar,
+html body aside#appSidebar.sidebar{
+  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+  align-items:stretch!important;justify-content:flex-start!important;
+  gap:10px!important;height:auto!important;min-height:0!important;
+  max-height:calc(100vh - 145px)!important;overflow-x:hidden!important;overflow-y:auto!important;
+  position:relative!important;box-sizing:border-box!important;
+}
+html body #appSidebar>*{
+  order:initial!important;float:none!important;clear:both!important;
+  flex:0 0 auto!important;position:relative!important;inset:auto!important;
+  top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;
+  transform:none!important;translate:none!important;
+  width:100%!important;min-width:0!important;max-width:100%!important;
+  box-sizing:border-box!important;
+}
+html body #appSidebar>details.nav-folder{
+  display:block!important;height:auto!important;min-height:0!important;max-height:none!important;
+  margin:2px 0 8px!important;padding:7px!important;overflow:visible!important;
+  align-self:stretch!important;contain:initial!important;
+}
+html body #appSidebar>details.nav-folder>summary.navfolder-title{
+  display:flex!important;position:relative!important;inset:auto!important;
+  width:100%!important;height:auto!important;min-height:46px!important;
+  margin:0!important;padding:10px!important;box-sizing:border-box!important;
+  cursor:pointer!important;white-space:normal!important;line-height:1.35!important;
+}
+html body #appSidebar>details.nav-folder>.nav-folder-items,
+html body #appSidebar>details.nav-folder[open]>.nav-folder-items{
+  display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;
+  align-items:stretch!important;justify-content:flex-start!important;
+  position:relative!important;inset:auto!important;float:none!important;
+  visibility:visible!important;opacity:1!important;
+  width:100%!important;height:auto!important;min-height:0!important;
+  max-height:none!important;overflow:visible!important;
+  gap:7px!important;margin:0!important;padding:8px 2px 2px!important;
+  box-sizing:border-box!important;transform:none!important;
+}
+html body #appSidebar>details.nav-folder:not([open])>.nav-folder-items{display:none!important}
+html body #appSidebar .nav-folder-items>.navbtn{
+  display:flex!important;position:relative!important;inset:auto!important;float:none!important;
+  flex:0 0 auto!important;align-self:stretch!important;
+  width:100%!important;height:auto!important;min-height:44px!important;max-height:none!important;
+  margin:0!important;padding:10px 12px!important;box-sizing:border-box!important;
+  visibility:visible!important;opacity:1!important;transform:none!important;
+  white-space:normal!important;overflow-wrap:anywhere!important;
+}
+html body #appSidebar>.navbtn{
+  display:flex!important;position:relative!important;flex:0 0 auto!important;
+  min-height:46px!important;height:auto!important;margin:0 0 4px!important;
+}
+html body #appSidebar>.sidebar-bottom{
+  display:flex!important;flex-direction:column!important;gap:8px!important;
+  margin-top:6px!important;height:auto!important;
+}
+html body #appSidebar .nav-folder::before,
+html body #appSidebar .nav-folder::after{pointer-events:none!important}
+@media(max-width:650px){
+ html body #appSidebar{max-height:calc(100vh - 110px)!important;padding:10px!important;gap:8px!important}
+ html body #appSidebar>details.nav-folder{margin:2px 0 6px!important}
+}
 </style>
 </body></html>
