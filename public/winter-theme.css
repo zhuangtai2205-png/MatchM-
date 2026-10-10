@@ -2116,3 +2116,42 @@ html body[data-theme="forest"] .theme-click-doodle.forest-click-art{width:32px!i
 html body header.app-header .brand-mark{width:58px!important;height:58px!important;min-width:58px!important;flex:0 0 58px!important;margin-right:9px!important}
 html body header.app-header .brand-mark .matchma-logo{width:100%!important;height:100%!important;display:block!important}
 @media(max-width:600px){html body header.app-header .brand-mark{width:46px!important;height:46px!important;min-width:46px!important;flex-basis:46px!important}}
+
+/* FINAL user-requested theme corrections: forest is green, no bear/forest wallpaper. */
+html body[data-theme="forest"] #themeScene,
+html body[data-theme="forest"] #themeScene .scene-doodle,
+html body[data-theme="forest"] .theme-scenery,
+html body[data-theme="forest"] .winter-doodle,
+html body[data-theme="forest"] .winter-bear-spot,
+html body[data-theme="forest"] #bear-container,
+html body[data-theme="forest"] #fat-bear-overlay{display:none!important;visibility:hidden!important;opacity:0!important}
+html body[data-theme="forest"]{
+ background:#d6edc5!important;
+ background-image:linear-gradient(135deg,#dff0d2 0%,#cce7b8 52%,#e5f2d9 100%)!important;
+}
+html body[data-theme="forest"] .navfolder-title:after{content:"🐻"!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;margin-left:auto!important;font-size:19px!important;line-height:1!important}
+html body[data-theme="forest"] .nav-folder[data-nav-group="catalog"] .navfolder-title:after,
+html body[data-theme="forest"] .nav-folder[data-nav-group="matching"] .navfolder-title:after,
+html body[data-theme="forest"] .nav-folder[data-nav-group="tools"] .navfolder-title:after{content:"🐻"!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art{width:34px!important;height:34px!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art svg{width:100%!important;height:100%!important;display:block!important}
+/* Minimal theme: labels only, no icon, folder sticker or decorative click animation. */
+html body[data-theme="minimal"] .navicon,
+html body[data-theme="minimal"] .navfolder-title:after,
+html body[data-theme="minimal"] .folder-chevron,
+html body[data-theme="minimal"] .folder-icon,
+html body[data-theme="minimal"] .nav-folder::before,
+html body[data-theme="minimal"] .nav-folder::after,
+html body[data-theme="minimal"] .navbtn::before,
+html body[data-theme="minimal"] .navbtn::after{display:none!important;content:none!important}
+html body[data-theme="minimal"] .navbtn{gap:0!important;padding-left:12px!important}
+html body[data-theme="minimal"] .navfolder-title{list-style:none!important}
+html body[data-theme="minimal"] .navfolder-title::-webkit-details-marker{display:none!important}
+html body[data-theme="minimal"] #themeScene,
+html body[data-theme="minimal"] .theme-click-doodle{display:none!important}
+/* New minimalist identity: geometric M with subtle cat-ear silhouette, no sword or busy badge. */
+html body header.app-header .brand-mark{width:42px!important;height:42px!important;min-width:42px!important;flex:0 0 42px!important;margin-right:4px!important;color:#202020!important}
+html body header.app-header .brand-mark .matchma-logo{width:100%!important;height:100%!important;display:block!important}
+html body header.app-header .brand-copy h1{font-family:Georgia,'Times New Roman',serif!important;font-size:clamp(24px,2.5vw,31px)!important;letter-spacing:-1px!important;font-weight:700!important}
+html body header.app-header .brand-copy .subbrand{display:none!important}
+@media(max-width:600px){html body header.app-header .brand-mark{width:36px!important;height:36px!important;min-width:36px!important;flex-basis:36px!important}}
