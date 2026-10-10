@@ -1,107 +1,87 @@
 (() => {
-  const start = () => {
-    if (document.querySelector('.winter-snow-layer')) return;
-    const speckle = document.createElement('div');
-    speckle.className = 'winter-paper-speckle';
-    speckle.setAttribute('aria-hidden', 'true');
-    document.body.appendChild(speckle);
-
-    const snow = document.createElement('div');
-    snow.className = 'winter-snow-layer';
-    snow.setAttribute('aria-hidden', 'true');
-    const symbols = ['❄', '✳', '❅', '✻'];
-    for (let i = 0; i < 32; i++) {
-      const flake = document.createElement('span');
-      flake.className = 'winter-flake';
-      flake.textContent = symbols[i % symbols.length];
-      flake.style.left = (Math.random() * 100) + '%';
-      flake.style.setProperty('--flake-size', (11 + Math.random() * 17) + 'px');
-      flake.style.setProperty('--flake-time', (10 + Math.random() * 14) + 's');
-      flake.style.setProperty('--flake-delay', (-Math.random() * 24) + 's');
-      flake.style.setProperty('--flake-opacity', (.35 + Math.random() * .5).toFixed(2));
-      snow.appendChild(flake);
-    }
-    document.body.appendChild(snow);
-
-    [['❄','one'],['🐟','two'],['✳','three']].forEach(([symbol, cls]) => {
-      const doodle = document.createElement('span');
-      doodle.className = 'winter-doodle ' + cls;
-      doodle.textContent = symbol;
-      doodle.setAttribute('aria-hidden', 'true');
-      document.body.appendChild(doodle);
-    });
-
-    const makeBear = (className) => {
-      const img = document.createElement('img');
-      img.className = className;
-      img.src = '/winter-bear.svg?v=4';
-      img.alt = className === 'winter-bear-spot' ? 'Gấu con pastel chuyển động, ôm cá nhỏ' : '';
-      img.decoding = 'async';
-      if (className !== 'winter-bear-spot') img.setAttribute('aria-hidden', 'true');
-      return img;
-    };
-    const heroBear = makeBear('winter-bear-spot');
-    const gameBear = makeBear('winter-bear-replacement');
-    const sprite = document.getElementById('bear-sprite');
-    const container = document.getElementById('bear-container');
-    if (container && sprite && !container.querySelector('.winter-bear-replacement')) {
-      container.appendChild(gameBear);
-    }
-
-    const placeHeroBear = () => {
-      const activePage = document.querySelector('.page.active') || document;
-      const hero = activePage.querySelector('.hero');
-      if (hero && heroBear.parentElement !== hero) hero.appendChild(heroBear);
-      else if (!hero && heroBear.parentElement) heroBear.remove();
-    };
-    placeHeroBear();
-    const observer = new MutationObserver(() => placeHeroBear());
-    document.querySelectorAll('.page').forEach(page => observer.observe(page, {attributes:true, attributeFilter:['class']}));
-    document.querySelectorAll('.navbtn').forEach(btn => btn.addEventListener('click', () => setTimeout(placeHeroBear, 80)));\n    new MutationObserver(() => placeHeroBear()).observe(document.body, {attributes:true, attributeFilter:['data-theme']});
-    window.addEventListener('resize', placeHeroBear, {passive:true});
+  'use strict';
+  const $ = (selector, root=document) => root.querySelector(selector);
+  const themeMotifs = {
+    bear: {background:['❄','✳','🐟','🍃','🐾'], click:['🐟','❄','🐾','✨','🐻'], nav:['🐻','🐟','🌲','🍯','❄']},
+    ocean:{background:['〰','🫧','🐠','🐚','〰','🪸'],click:['🧜‍♀️','🐠','🐬','🫧','🐚','🐟'],nav:['🐠','🐚','🪸','🐬','🫧']},
+    retro:{background:['♪','♫','♬','𝄞','♩'],click:['♪','♫','♬','♩','𝄞'],nav:['♫','♪','♬','𝄞','♩']},
+    pink:{background:['✿','🌸','❀','🌷','🌺'],click:['🌸','🌺','🌷','🌼','🌹','❀'],nav:['🌸','🌷','🌼','🌺','✿']},
+    vampire:{background:['☾','🦇','✦','🕸','🕯️'],click:['🦇','🎃','🕷️','🕸️','🕯️','☠️'],nav:['🦇','🕸️','🕯️','🎃','☾']},
+    cat:{background:['🐾','🐈','🐟','✦','🧶'],click:['🐈','🐈‍⬛','🐟','🦴','🐾','🧶'],nav:['🐈','🐟','🧶','🦴','🐾']}
   };
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true});
-  else start();
-})();
-
-/* Per-theme background motifs and hand-drawn-feeling click feedback. */
-(() => {
- const motifs={
-  bear:{bg:['❄','✳','🐟','❅'],click:['🐟','❄','🐾','✨','🐻']},
-  ocean:{bg:['〰','🐠','🫧','🐚','〰'],click:['🧜‍♀️','🐠','🐬','🫧','🐚','🐟']},
-  retro:{bg:['♪','♫','♬','𝄞'],click:['♪','♫','♬','♩','𝄞']},
-  pink:{bg:['✿','🌸','❀','🌷'],click:['🌸','🌺','🌷','🌼','🌹','❀']},
-  vampire:{bg:['☾','🦇','✦','🕸'],click:['🦇','🎃','🕷️','🕸️','🕯️','☠️']},
-  cat:{bg:['🐾','🐈','🐟','✦'],click:['🐈','🐈‍⬛','🐟','🦴','🐾','🧶']}
- };
- let scene;
- function currentTheme(){return document.body.dataset.theme||'bear'}
- function paintScene(){
-  const theme=currentTheme(),config=motifs[theme]||motifs.bear;
-  if(!scene){scene=document.createElement('div');scene.className='theme-scenery';scene.setAttribute('aria-hidden','true');document.body.appendChild(scene)}
-  scene.replaceChildren();
-  config.bg.forEach((symbol,i)=>{
-   const el=document.createElement('span');el.textContent=symbol;
-   el.style.left=(5+(i*23)%88)+'%';el.style.top=(12+(i*19)%72)+'%';
-   el.style.fontSize=(20+(i%3)*13)+'px';el.style.animationDelay=(-i*1.8)+'s';
-   if(theme==='ocean'&&symbol==='〰')el.className='scenery-wave';
-   scene.appendChild(el);
-  });
- }
- paintScene();
- new MutationObserver(paintScene).observe(document.body,{attributes:true,attributeFilter:['data-theme']});
- document.addEventListener('pointerdown',e=>{
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  const config=motifs[currentTheme()]||motifs.bear;
-  for(let i=0;i<2;i++){
-   const el=document.createElement('span');el.className='theme-click-doodle';
-   el.textContent=config.click[Math.floor(Math.random()*config.click.length)];
-   el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';
-   el.style.setProperty('--tx',(Math.random()*90-45)+'px');
-   el.style.setProperty('--ty',(-28-Math.random()*58)+'px');
-   el.style.setProperty('--rot',(Math.random()*70-35)+'deg');
-   document.body.appendChild(el);el.addEventListener('animationend',()=>el.remove(),{once:true});
-   setTimeout(()=>el.remove(),1100);
+  const theme = () => document.body.dataset.theme || 'ocean';
+  function renderScenery(){
+    const root=$('#themeScene');
+    if(!root) return;
+    const t=theme(), cfg=themeMotifs[t]||themeMotifs.ocean;
+    root.replaceChildren();
+    cfg.background.forEach((symbol,i)=>{
+      const el=document.createElement('span');
+      el.className='scene-doodle '+(t==='ocean'&&symbol==='〰'?'scene-wave':'');
+      el.textContent=symbol;
+      el.style.left=(4+(i*19)%91)+'%';
+      el.style.top=(9+(i*23)%77)+'%';
+      el.style.setProperty('--doodle-delay',(-i*1.7)+'s');
+      el.style.setProperty('--doodle-size',(18+(i%3)*10)+'px');
+      root.appendChild(el);
+    });
+    document.querySelectorAll('.navbtn').forEach((btn,i)=>{
+      let badge=btn.querySelector('.theme-nav-doodle');
+      if(!badge){badge=document.createElement('span');badge.className='theme-nav-doodle';badge.setAttribute('aria-hidden','true');btn.prepend(badge)}
+      badge.textContent=cfg.nav[i%cfg.nav.length];
+    });
   }
- },{passive:true});
+  function showClick(e){
+    if(e.button!==0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const cfg=themeMotifs[theme()]||themeMotifs.ocean;
+    for(let i=0;i<3;i++){
+      const el=document.createElement('span');el.className='theme-click-doodle';
+      el.textContent=cfg.click[Math.floor(Math.random()*cfg.click.length)];
+      el.style.left=e.clientX+'px';el.style.top=e.clientY+'px';
+      el.style.setProperty('--tx',(Math.random()*90-45)+'px');
+      el.style.setProperty('--ty',(-24-Math.random()*70)+'px');
+      el.style.setProperty('--rot',(Math.random()*70-35)+'deg');
+      document.body.appendChild(el);
+      el.addEventListener('animationend',()=>el.remove(),{once:true});
+      window.setTimeout(()=>el.remove(),1200);
+    }
+  }
+  function initBear(){
+    const container=$('#bear-container');
+    if(container) {
+      const sprite=$('#bear-sprite',container);
+      if(sprite) sprite.style.display='none';
+    }
+    let mascot=$('.winter-bear-spot');
+    if(!mascot){
+      mascot=document.createElement('img');
+      mascot.className='winter-bear-spot';
+      mascot.src='/winter-bear.svg?v=5';
+      mascot.alt='Gấu con hoạt hình đang ôm cá';
+      mascot.decoding='async';
+    }
+    function placeMascot(){
+      const isBear=theme()==='bear';
+      const page=$('.page.active');
+      const hero=page && $('.hero',page);
+      if(!isBear || !hero){mascot.remove();return}
+      if(mascot.parentElement!==hero) hero.appendChild(mascot);
+    }
+    placeMascot();
+    const observer=new MutationObserver(placeMascot);
+    observer.observe(document.body,{attributes:true,attributeFilter:['data-theme']});
+    document.querySelectorAll('.page').forEach(page=>observer.observe(page,{attributes:true,attributeFilter:['class']}));
+    document.querySelectorAll('.navbtn').forEach(btn=>btn.addEventListener('click',()=>window.setTimeout(placeMascot,100)));
+  }
+  function start(){
+    renderScenery();
+    initBear();
+    document.addEventListener('pointerdown',showClick,{passive:true});
+    const observer=new MutationObserver(()=>renderScenery());
+    observer.observe(document.body,{attributes:true,attributeFilter:['data-theme']});
+    const picker=$('#themeSelect');
+    if(picker) picker.addEventListener('change',()=>window.setTimeout(renderScenery,0));
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
 })();
