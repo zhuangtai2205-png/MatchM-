@@ -1389,7 +1389,7 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
 </style><link rel="stylesheet" href="/winter-theme.css?v=36">
-<link rel="stylesheet" href="/desktop-layout-fix.css?v=3"><style id="fat-bear-motion-upgrade">
+<link rel="stylesheet" href="/desktop-layout-fix.css?v=4"><style id="fat-bear-motion-upgrade">
 /* Fat Bear Week-inspired growth and gentle living motion */
 #bear-container{will-change:transform}
 #bear-container:not(.is-hibernating) #bear-sprite{animation:fatBearIdle 2.8s ease-in-out infinite;transform-origin:50% 90%}
@@ -1515,6 +1515,8 @@ body{margin:0}
     <circle cx="43" cy="49" r="39" fill="none" stroke="currentColor" stroke-width="2.2" opacity=".45"/>
     <path d="M18 37 16 16 34 27Q46 21 58 28L76 13 73 42Q81 56 69 72 57 84 41 81 19 78 14 59Z" fill="#fff" stroke="#24465f" stroke-width="3.5" stroke-linejoin="round"/>
     <path d="M20 34 20 22 31 30M61 30 72 20 70 37" fill="#f4c7d8" stroke="#24465f" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M12 37 Q45 30 80 37 L47 7 Z" fill="#fffdf8" stroke="#24465f" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M47 7 35 35 M47 7 43 36 M47 7 52 36 M47 7 62 35 M20 36 Q47 42 75 36" fill="none" stroke="#a9b7c2" stroke-width="1.1" stroke-linecap="round"/>
     <path d="M28 48q5-6 10 0M50 48q5-6 10 0" fill="none" stroke="#24465f" stroke-width="3.2" stroke-linecap="round"/>
     <path d="M42 56 47 60 52 56Z" fill="#db8cae" stroke="#24465f" stroke-width="1.7" stroke-linejoin="round"/>
     <path d="M47 60q-1 8-9 5m9-5q1 8 9 5" fill="none" stroke="#24465f" stroke-width="2.2" stroke-linecap="round"/>
@@ -2165,111 +2167,7 @@ function updateThemeScene(theme){
  spots.forEach((p,i)=>{const el=document.createElement('span');el.className='theme-drift';el.innerHTML=themeDoodleSvg(theme,i);el.style.setProperty('--x',p[0]+'%');el.style.setProperty('--y',p[1]+'%');el.style.setProperty('--size',p[2]+'px');el.style.setProperty('--opacity',theme==='retro'?'0.17':theme==='vampire'?'0.23':'0.19');el.style.setProperty('--dur',(4.2+(i%5)*.7)+'s');el.style.setProperty('--delay',(-i*.63)+'s');el.style.setProperty('--dx',((i%2?1:-1)*(7+i%4*4))+'px');el.style.setProperty('--dy',(-9-i%3*5)+'px');el.style.setProperty('--turn',((i%2?1:-1)*8)+'deg');root.appendChild(el)});
 }
 
-const BEAR_EATEN_KEY='matchma-bear-fish-eaten-v3',BEAR_EFFECT_KEY='matchma-bear-effects-v1';
-let fishEaten=0,fishSerial=0;
-try{fishEaten=Math.max(0,Math.min(10000,Number(localStorage.getItem(BEAR_EATEN_KEY))||0))}catch(e){fishEaten=0}
-const BEAR_HIBERNATE_AT=10;
-let bearHibernating=false,bearHibernateTimer=null,bearSnowLevel='';
-function bearScale(){
- const base=$('bear-container'),width=base?base.offsetWidth:300;
- const fitCap=Math.max(1,Math.min(1.72,(window.innerWidth-24)/(Math.max(1,width)*1.04)));
- return Math.min(fitCap,1+Math.min(fishEaten,10)*.105);
-}
-function bearStageKey(){if(bearHibernating)return 'funSleeping';return fishEaten>=9?'funKing':fishEaten>=7?'funFull':fishEaten>=4?'funChubby':fishEaten>=1?'funHappy':'funHungry'}
-function bearExpression(){return bearHibernating?'😴':fishEaten>=9?'😌':fishEaten>=7?'😋':fishEaten>=4?'😊':fishEaten>=1?'☺':'•'}
-let bearVisualScale=1,bearScaleVelocity=0,bearScaleFrame=0,bearLastFrame=0,bearReady=false;
-function animateBearScale(target){
- if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){bearVisualScale=target;bearScaleVelocity=0;document.documentElement.style.setProperty('--bear-scale',String(target));return}
- if(bearScaleFrame)cancelAnimationFrame(bearScaleFrame);bearLastFrame=0;
- const tick=(now)=>{
-  const dt=Math.min(.032,Math.max(.001,(now-(bearLastFrame||now))/1000));bearLastFrame=now;
-  const acceleration=(target-bearVisualScale)*105-bearScaleVelocity*20;bearScaleVelocity+=acceleration*dt;bearVisualScale+=bearScaleVelocity*dt;
-  if(Math.abs(target-bearVisualScale)<.002&&Math.abs(bearScaleVelocity)<.015){bearVisualScale=target;bearScaleVelocity=0;document.documentElement.style.setProperty('--bear-scale',String(target));bearScaleFrame=0;return}
-  document.documentElement.style.setProperty('--bear-scale',String(bearVisualScale));bearScaleFrame=requestAnimationFrame(tick)
- };
- bearScaleFrame=requestAnimationFrame(tick)
-}
-function bearSnowflakeSvg(i=0){
- const stroke=i%2?'#8db9cd':'#b4c8d1';
- return '<svg viewBox="0 0 32 32" aria-hidden="true"><g fill="none" stroke="'+stroke+'" stroke-width="1.65" stroke-dasharray="2.2 1.1" stroke-linecap="round" stroke-linejoin="round"><path d="M16 2 V30 M3.7 9 L28.3 23 M3.7 23 L28.3 9"/><path d="M12 5 L16 9 L20 5 M12 27 L16 23 L20 27 M4 14 L9 14 L8 9 M24 23 L23 18 L28 18 M4 18 L9 18 L8 23 M24 9 L23 14 L28 14"/></g></svg>';
-}
-function renderBearSnow(){
- const root=$('bear-snow'),overlay=$('fat-bear-overlay');if(!root||!overlay)return;
- const level=(bearHibernating||fishEaten===0)?'light':fishEaten>=8?'heavy':fishEaten>=4?'light':'off';
- if(level==='off'){root.replaceChildren();overlay.dataset.snowLevel='off';bearSnowLevel='off';return}
- const count=level==='heavy'?30:17;
- if(bearSnowLevel!==level||root.childElementCount!==count){
-  root.replaceChildren();
-  for(let i=0;i<count;i++){
-   const flake=document.createElement('span');flake.className='bear-snowflake';flake.innerHTML=bearSnowflakeSvg(i);
-   flake.style.left=(Math.random()*100)+'%';
-   flake.style.setProperty('--snow-size',(7+Math.random()*(level==='heavy'?15:11))+'px');
-   flake.style.setProperty('--snow-duration',(8+Math.random()*(level==='heavy'?7:9))+'s');
-   flake.style.setProperty('--snow-delay',(-Math.random()*17)+'s');
-   flake.style.setProperty('--snow-drift',((Math.random()-.5)*190)+'px');
-   flake.style.setProperty('--snow-opacity',(0.32+Math.random()*.52).toFixed(2));
-   flake.style.top=(-4-Math.random()*24)+'vh';root.appendChild(flake);
-  }
-  bearSnowLevel=level;
- }
- overlay.dataset.snowLevel=level;
-}
-function updateBearDisplay(){
- const scale=bearScale(),title=tr(bearStageKey()),count=tr('funFishCountLabel').replace('{count}',fishEaten);
- if(!bearReady){bearVisualScale=scale;document.documentElement.style.setProperty('--bear-scale',String(scale));bearReady=true}else animateBearScale(scale);
- const sprite=$('bear-sprite'),body=sprite&&sprite.querySelector('#bearBody'),headShape=sprite&&sprite.querySelector('#bearHeadShape'),mouth=sprite&&sprite.querySelector('#bear-mouth'),mouthOpen=sprite&&sprite.querySelector('#bearMouthOpen');
- if(body){body.setAttribute('fill',fishEaten>=4?'#9a3412':'#b45309');body.setAttribute('stroke-dasharray',fishEaten>=4?'3 .8':'3 1.5')}
- if(headShape)headShape.setAttribute('fill',fishEaten>=4?'#ad4a17':'#c56824');
- if(mouth)mouth.setAttribute('d',bearHibernating?'M489 115 Q497 118 505 115':fishEaten>=1?'M476 112 Q490 128 507 112':'M489 109 L489 116 Q481 124 473 116 M489 116 Q500 125 508 116');if(mouthOpen)mouthOpen.style.opacity=(!bearHibernating&&fishEaten>0)?'.82':'0';
- const leftEye=sprite&&sprite.querySelector('#bearEyeLeft'),rightEye=sprite&&sprite.querySelector('#bearEyeRight');
- if(leftEye)leftEye.setAttribute('d',bearHibernating?'M395 72 Q404 82 413 72':'M395 76 Q404 67 413 77');
- if(rightEye)rightEye.setAttribute('d',bearHibernating?'M435 72 Q444 82 453 72':'M435 76 Q444 67 453 77');
- const blanket=sprite&&sprite.querySelector('#bearSleepBlanket'),quilt=sprite&&sprite.querySelector('#bearSleepQuilt');
- if(blanket)blanket.style.display=bearHibernating?'block':'none';if(quilt)quilt.style.display=bearHibernating?'block':'none';
- const sleepZ=$('bear-sleep-z');if(sleepZ)sleepZ.style.display=bearHibernating?'block':'none';
- const preview=$('funBearPreview'),previewFace=$('funBearFace');
- if(preview)preview.innerHTML=themeDoodleSvg('bear',Math.min(2,Math.floor(fishEaten/3)));
- if(previewFace)previewFace.textContent=bearExpression();
- if($('bear-caption-title'))$('bear-caption-title').textContent=title;
- if($('bear-caption-count'))$('bear-caption-count').textContent=count;
- if($('funFishCount'))$('funFishCount').textContent=String(fishEaten);
- if($('funBearStage'))$('funBearStage').textContent=title;
- if($('funBearGrowth'))$('funBearGrowth').textContent=Math.round(scale*100)+'%';
- if($('funBearMessage')&&$('funBearMessage').dataset.manual!=='1')$('funBearMessage').textContent=bearHibernating?tr('funSleepText'):fishEaten?tr('funChomp'):tr('funWelcome');
- renderBearSnow();
-}
-function showBearPlus(x,y,textValue){const layer=$('bear-plus-layer');if(!layer)return;const p=document.createElement('span');p.className='bear-plus-one';p.textContent=textValue||tr('funChomp');p.style.left=x+'px';p.style.top=y+'px';layer.appendChild(p);setTimeout(()=>p.remove(),950)}
-function fishPosition(){const width=window.innerWidth,height=window.innerHeight;const band=Math.min(235,Math.max(110,height*.27));const x=20+Math.random()*Math.max(35,width-95);const y=height-48-Math.random()*band;return{x:Math.max(9,Math.min(x,width-62)),y:Math.max(56,Math.min(y,height-52))}}
-function spawnBearFish(n=1){const pool=$('fish-pool'),overlay=$('fat-bear-overlay');if(!pool||overlay.hidden||bearHibernating)return;for(let i=0;i<n&&pool.children.length<8;i++){const fish=document.createElement('button');fish.type='button';fish.className='bear-fish';fish.innerHTML=themeFishSvg(Math.floor(Math.random()*6));fish.setAttribute('aria-label',lang==='vi'?'Bấm để cho gấu ăn cá':'Click to feed the bear');fish.title=lang==='vi'?'Cho gấu ăn':'Feed the bear';const p=fishPosition();fish.style.left=p.x+'px';fish.style.top=p.y+'px';fish.style.setProperty('--fish-dx',((Math.random()-.5)*48)+'px');fish.style.setProperty('--fish-dy',((Math.random()-.5)*36)+'px');fish.style.setProperty('--fish-speed',(2.3+Math.random()*2)+'s');fish.dataset.fishId=String(++fishSerial);fish.addEventListener('click',e=>{e.preventDefault();e.stopPropagation();feedBear(fish,e.clientX,e.clientY)});pool.appendChild(fish)}}
-function feedBear(fish,x,y){
- if(!fish||!fish.isConnected||bearHibernating)return;
- fish.disabled=true;fish.style.transition='transform .26s,opacity .26s';fish.style.transform='scale(.1) rotate(28deg)';fish.style.opacity='0';
- const rect=fish.getBoundingClientRect(),px=Number.isFinite(x)?x:rect.left,py=Number.isFinite(y)?y:rect.top;
- fishEaten++;try{localStorage.setItem(BEAR_EATEN_KEY,String(fishEaten))}catch(e){}
- fish.remove();updateBearDisplay();showBearPlus(px,py);
- const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}
- if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funChomp');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;const mouthOpen=$('bear-sprite')&&$('bear-sprite').querySelector('#bearMouthOpen');if(mouthOpen)mouthOpen.style.opacity='0'},1000)}
- if(fishEaten>=BEAR_HIBERNATE_AT){if(bearHibernateTimer)clearTimeout(bearHibernateTimer);bearHibernateTimer=setTimeout(goBearHibernation,2600)}
- else if(!$('fat-bear-overlay').hidden&&$('fish-pool').children.length<6)setTimeout(()=>spawnBearFish(1),420);
- if(document.body.dataset.funEffects!=='off')spawnBearConfetti(px,py);
-}
-function goBearHibernation(){
- bearHibernateTimer=null;if(fishEaten<BEAR_HIBERNATE_AT)return;
- bearHibernating=true;
- const bear=$('bear-container');if(bear)bear.classList.add('is-hibernating');
- const pool=$('fish-pool');if(pool)pool.replaceChildren();
- if($('funBearMessage')){delete $('funBearMessage').dataset.manual;$('funBearMessage').textContent=tr('funSleepText')}
- updateBearDisplay();
-}
-function petBear(){
- if(bearHibernating){resetBear();if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funWakeText');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual},1600)}return}
- const mouth=$('bear-sprite')&&$('bear-sprite').querySelector('#bear-mouth'),mouthOpen=$('bear-sprite')&&$('bear-sprite').querySelector('#bearMouthOpen');if(mouth)mouth.setAttribute('d','M476 112 Q490 128 507 112');if(mouthOpen)mouthOpen.style.opacity='.85';
- if($('funBearMessage')){$('funBearMessage').dataset.manual='1';$('funBearMessage').textContent=tr('funPet');setTimeout(()=>{if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay()},1300)}
- const bear=$('bear-container');if(bear){bear.classList.remove('is-munching');void bear.offsetWidth;bear.classList.add('is-munching')}
-}
-function spawnBearConfetti(x,y){const layer=$('bear-plus-layer');if(!layer)return;const theme=document.body.dataset.theme||'ocean';for(let i=0;i<6;i++){const p=document.createElement('span');p.className='bear-plus-one bear-confetti-doodle';p.innerHTML=themeDoodleSvg(theme,i);p.style.left=(x+(Math.random()-.5)*100)+'px';p.style.top=(y+(Math.random()-.5)*40)+'px';p.style.animationDelay=(Math.random()*100)+'ms';layer.appendChild(p);setTimeout(()=>p.remove(),1050)}}
-function resetBear(){if(bearHibernateTimer){clearTimeout(bearHibernateTimer);bearHibernateTimer=null}bearHibernating=false;fishEaten=0;bearScaleVelocity=0;bearSnowLevel='';const bear=$('bear-container');if(bear)bear.classList.remove('is-hibernating');try{localStorage.setItem(BEAR_EATEN_KEY,'0')}catch(e){}const pool=$('fish-pool');if(pool)pool.textContent='';if($('funBearMessage'))delete $('funBearMessage').dataset.manual;updateBearDisplay();spawnBearFish(7)}
-function setFunWidgetOpen(open){const widget=$('funWidget'),btn=$('funToggleBtn'),overlay=$('fat-bear-overlay');if(!widget||!btn||!overlay)return;widget.hidden=!open;overlay.hidden=!open;overlay.setAttribute('aria-hidden',String(!open));btn.setAttribute('aria-expanded',String(!!open));btn.title=tr(open?'funClose':'funTitleButton');if(open){widget.classList.remove('is-minimized','is-maximized');$('funMinimizeBtn').textContent='−';$('funMaximizeBtn').textContent='□';updateBearDisplay();if(!$('fish-pool').children.length&&!bearHibernating)spawnBearFish(7)}}
+/* Removed: bear feeding, growth, snow, hibernation, and entertainment program. */
 let calcCurrent='0',calcStored=null,calcOperator=null,calcWaitNext=false,calcExpression='';
 const calcOpLabel={'+':'+','−':'−','×':'×','÷':'÷'};
 function calcFmt(n){if(!Number.isFinite(n))return 'Lỗi';if(Math.abs(n)<1e-10)n=0;const rounded=Number(n.toPrecision(11));return String(rounded)}
@@ -3006,51 +2904,29 @@ initAccount();renderMemoryPage();
 ['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
 document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initCalculatorWidget();
 
-/* Keep hand-drawn click decorations enabled. Snow spans the full viewport while feeding or hibernating. */
-renderBearSnow=function(){
- const root=$('bear-snow'),overlay=$('fat-bear-overlay');
- if(!root||!overlay)return;
- const bear=$('bear-container');
- const active=fishEaten>0||bearHibernating||(bear&&bear.classList.contains('is-munching'));
- if(!active){root.replaceChildren();overlay.dataset.snowLevel='off';bearSnowLevel='off';return}
- const level=(bearHibernating||fishEaten>=8)?'heavy':'light';
- const count=level==='heavy'?46:28;
- if(bearSnowLevel!==level||root.childElementCount!==count){
-  root.replaceChildren();
-  for(let i=0;i<count;i++){
-   const flake=document.createElement('span');
-   flake.className='bear-snowflake';
-   flake.innerHTML=bearSnowflakeSvg(i);
-   flake.style.left=(Math.random()*100)+'%';
-   flake.style.setProperty('--snow-size',(8+Math.random()*(level==='heavy'?17:12))+'px');
-   flake.style.setProperty('--snow-duration',(7+Math.random()*(level==='heavy'?8:10))+'s');
-   flake.style.setProperty('--snow-delay',(-Math.random()*18)+'s');
-   flake.style.setProperty('--snow-drift',((Math.random()-.5)*150)+'px');
-   flake.style.setProperty('--snow-opacity',(0.35+Math.random()*.5).toFixed(2));
-   flake.style.setProperty('--snow-static-top',(Math.random()*90)+'vh');
-   root.appendChild(flake);
-  }
-  bearSnowLevel=level;
- }
- overlay.dataset.snowLevel=level;
-};
-/* Bear entertainment startup removed. */
+/* Entertainment and bear snow startup removed. */
+
 </script><!-- Removed duplicate static bear mascot; the interactive SVG bear belongs to the entertainment scene only. --><script>
-/* MatchMã: remove the entertainment/bear program UI and its navigation entry. */
+/* Permanent removal of the retired entertainment feature and old bear mascot. */
 (function(){
- const removeEntertainment=()=>{
-  document.querySelectorAll('#funToggleBtn,#funWidget,#fat-bear-overlay,#bear-container,#bear-snow,#fish-pool,#bear-plus-layer,.fun-widget,.fun-toggle,.entertainment-widget,[data-feature="entertainment"],[data-feature="bear-entertainment"]').forEach(el=>el.remove());
+ const isEntertainmentLabel=s=>/^(giải trí|góc gấu|entertainment|bear corner)$/i.test((s||'').replace(/[🐻🐟❄️🍃🌲]/gu,'').trim());
+ const cleanup=()=>{
+  document.querySelectorAll('[id*="funWidget" i],[id*="funToggle" i],[id*="fat-bear" i],[id*="bear-container" i],[id*="bear-sprite" i],[id*="bear-snow" i],[id*="fish-pool" i],[id*="bear-plus" i],[class*="fun-widget" i],[class*="fun-toggle" i],[class*="bear-fish" i],[class*="bear-caption" i],[data-feature*="entertainment" i]').forEach(el=>el.remove());
   document.querySelectorAll('button,a,[role="button"],summary,li').forEach(el=>{
    if(el.closest('.brand-mark')) return;
    const label=(el.innerText||el.getAttribute('aria-label')||el.title||'').trim();
-   if(/^(giải trí|góc gấu|entertainment|bear corner)$/i.test(label)) el.remove();
+   if(isEntertainmentLabel(label)) el.remove();
   });
+  const theme=document.querySelector('#themeSelect');
+  if(theme) [...theme.options].filter(o=>/bear|gấu/i.test(o.value+' '+o.textContent)).forEach(o=>o.remove());
+  if(document.body.dataset.theme==='bear') document.body.dataset.theme='ocean';
  };
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',removeEntertainment,{once:true}); else removeEntertainment();
- const observer=new MutationObserver(removeEntertainment);
- observer.observe(document.documentElement,{childList:true,subtree:true});
- setTimeout(()=>observer.disconnect(),12000);
+ const start=()=>{cleanup();const observer=new MutationObserver(cleanup);observer.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['data-theme']});};
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true}); else start();
+ window.setFunWidgetOpen=()=>{};
+ window.resetBear=()=>{};
+ window.feedBear=()=>{};
 })();
 </script>
-<script src="/winter-theme.js?v=12"></script>
+<script src="/winter-theme.js?v=13"></script>
 </body></html>
