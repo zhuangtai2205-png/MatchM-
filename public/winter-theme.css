@@ -1204,3 +1204,16 @@ html body[data-theme="ocean"] .sidebar .nav-folder>summary,
 html body[data-theme="ocean"] .sidebar .nav-folder .navfolder-title{
  background:#a9e1eb!important;color:#164e65!important;border-color:#63b3c7!important;
 }
+
+
+/* FINAL FIX: force folder stickers visible over older content:none rules. */
+html body[data-theme] .sidebar .nav-folder::before,
+html body[data-theme] .sidebar .nav-folder::after{
+ content:""!important;display:block!important;visibility:visible!important;
+ background-repeat:no-repeat!important;background-position:center!important;background-size:contain!important;
+ opacity:.72!important;position:absolute!important;pointer-events:none!important;z-index:0!important;
+}
+html body[data-theme] .sidebar .nav-folder::before{right:8px!important;top:38px!important;width:58px!important;height:48px!important}
+html body[data-theme] .sidebar .nav-folder::after{right:9px!important;bottom:7px!important;width:66px!important;height:43px!important}
+html body[data-theme="ocean"] .sidebar .nav-folder:nth-of-type(2)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 52'%3E%3Cg fill='none' stroke='%233a91b2' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 12q7-7 14 0t14 0t14 0t14 0M5 20q7-7 14 0t14 0t14 0t14 0'/%3E%3Cpath d='M9 39q10-13 21 0-11 13-21 0zm0 0-9-7v14zM42 35q9-11 19 0-10 11-19 0zm0 0-7-5v10zM61 43q6-8 13 0-7 8-13 0z' stroke='%231d7797'/%3E%3C/g%3E%3C/svg%3E")!important}
+html body[data-theme="ocean"] .sidebar .nav-folder:nth-of-type(3)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 52'%3E%3Cg fill='none' stroke='%232b9fbb' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M3 43q7-7 14 0t14 0t14 0t14 0M9 19q10-13 21 0-11 13-21 0zm0 0-8-6v12zM42 26q9-11 19 0-10 11-19 0zm0 0-7-5v10z'/%3E%3C/g%3E%3C/svg%3E")!important}
