@@ -570,3 +570,44 @@ html body .nav-folder>summary .bear-icon{
   display:none!important;visibility:hidden!important;content:none!important;
 }
 html body .nav-folder>summary.navfolder-title{display:flex!important;gap:8px!important}
+
+
+/* FINAL PALETTE LOCK: every theme uses its own hue family, no shared yellow/cream controls. */
+html body[data-theme="ocean"]{
+ --theme-bg:#e8f7ff!important;--theme-panel:#f5fcff!important;--theme-ink:#124d70!important;
+ --theme-muted:#477f9b!important;--theme-line:#a8d9ee!important;--theme-accent:#087eae!important;--theme-soft:#cdefff!important;
+ background:#e8f7ff!important;color:#124d70!important
+}
+html body[data-theme="ocean"] .app-header,html body[data-theme="ocean"] .sidebar,
+html body[data-theme="ocean"] .main,html body[data-theme="ocean"] .hero,
+html body[data-theme="ocean"] .panel,html body[data-theme="ocean"] .stat,
+html body[data-theme="ocean"] .mini,html body[data-theme="ocean"] .page,
+html body[data-theme="ocean"] .nav-folder,html body[data-theme="ocean"] .navtitle,
+html body[data-theme="ocean"] .nav-folder>summary,html body[data-theme="ocean"] .navbtn,
+html body[data-theme="ocean"] .toolbar-select,html body[data-theme="ocean"] .toolbar-font,
+html body[data-theme="ocean"] .local-pill,html body[data-theme="ocean"] .btn,
+html body[data-theme="ocean"] .upload,html body[data-theme="ocean"] .tablewrap{
+ background-color:var(--theme-panel)!important;color:var(--theme-ink)!important;border-color:var(--theme-line)!important
+}
+html body[data-theme="ocean"] .navbtn.active,html body[data-theme="ocean"] .navbtn:hover,
+html body[data-theme="ocean"] .nav-folder[open]>summary,html body[data-theme="ocean"] .btn:not(.alt){
+ background:#bfe9fb!important;color:#104f72!important;border-color:#1388b5!important
+}
+html body[data-theme="pink"]{--theme-bg:#fff0f6!important;--theme-panel:#fff9fc!important;--theme-ink:#8d3d64!important;--theme-muted:#ac6687!important;--theme-line:#efbfd5!important;--theme-accent:#d85b99!important;--theme-soft:#fbd8e9!important;background:#fff0f6!important;color:#8d3d64!important}
+html body[data-theme="pink"] .app-header,html body[data-theme="pink"] .sidebar,html body[data-theme="pink"] .main,html body[data-theme="pink"] .hero,html body[data-theme="pink"] .panel,html body[data-theme="pink"] .stat,html body[data-theme="pink"] .mini,html body[data-theme="pink"] .page,html body[data-theme="pink"] .nav-folder,html body[data-theme="pink"] .navtitle,html body[data-theme="pink"] .nav-folder>summary,html body[data-theme="pink"] .navbtn,html body[data-theme="pink"] .toolbar-select,html body[data-theme="pink"] .toolbar-font,html body[data-theme="pink"] .local-pill,html body[data-theme="pink"] .btn,html body[data-theme="pink"] .upload,html body[data-theme="pink"] .tablewrap{background-color:var(--theme-panel)!important;color:var(--theme-ink)!important;border-color:var(--theme-line)!important}
+html body[data-theme="pink"] .navbtn.active,html body[data-theme="pink"] .navbtn:hover,html body[data-theme="pink"] .nav-folder[open]>summary,html body[data-theme="pink"] .btn:not(.alt){background:#f9cce0!important;color:#84355b!important;border-color:#d85b99!important}
+html body[data-theme="retro"]{--theme-bg:#f2f2f2!important;--theme-panel:#fff!important;--theme-ink:#242424!important;--theme-muted:#666!important;--theme-line:#c6c6c6!important;--theme-accent:#555!important;--theme-soft:#e6e6e6!important;background:#f2f2f2!important;color:#242424!important}
+html body[data-theme="retro"] .app-header,html body[data-theme="retro"] .sidebar,html body[data-theme="retro"] .main,html body[data-theme="retro"] .hero,html body[data-theme="retro"] .panel,html body[data-theme="retro"] .stat,html body[data-theme="retro"] .mini,html body[data-theme="retro"] .page,html body[data-theme="retro"] .nav-folder,html body[data-theme="retro"] .navtitle,html body[data-theme="retro"] .nav-folder>summary,html body[data-theme="retro"] .navbtn,html body[data-theme="retro"] .toolbar-select,html body[data-theme="retro"] .toolbar-font,html body[data-theme="retro"] .local-pill,html body[data-theme="retro"] .btn,html body[data-theme="retro"] .upload,html body[data-theme="retro"] .tablewrap{background-color:var(--theme-panel)!important;color:var(--theme-ink)!important;border-color:var(--theme-line)!important}
+html body[data-theme="vampire"]{--theme-bg:#171321!important;--theme-panel:#251d35!important;--theme-ink:#f5eafa!important;--theme-muted:#c6b1d4!important;--theme-line:#5b4772!important;--theme-accent:#bd5577!important;--theme-soft:#3a2b4c!important;background:#171321!important;color:#f5eafa!important}
+html body[data-theme="vampire"] .app-header,html body[data-theme="vampire"] .sidebar,html body[data-theme="vampire"] .main,html body[data-theme="vampire"] .hero,html body[data-theme="vampire"] .panel,html body[data-theme="vampire"] .stat,html body[data-theme="vampire"] .mini,html body[data-theme="vampire"] .page,html body[data-theme="vampire"] .nav-folder,html body[data-theme="vampire"] .navtitle,html body[data-theme="vampire"] .nav-folder>summary,html body[data-theme="vampire"] .navbtn,html body[data-theme="vampire"] .toolbar-select,html body[data-theme="vampire"] .toolbar-font,html body[data-theme="vampire"] .local-pill,html body[data-theme="vampire"] .btn,html body[data-theme="vampire"] .upload,html body[data-theme="vampire"] .tablewrap{background-color:var(--theme-panel)!important;color:var(--theme-ink)!important;border-color:var(--theme-line)!important}
+html body[data-theme="vampire"] .navbtn.active,html body[data-theme="vampire"] .navbtn:hover,html body[data-theme="vampire"] .nav-folder[open]>summary,html body[data-theme="vampire"] .btn:not(.alt){background:#4a2d50!important;color:#fff0f5!important;border-color:#bd5577!important}
+html body[data-theme="cat"]{--theme-bg:#f7f0eb!important;--theme-panel:#fffaf6!important;--theme-ink:#654438!important;--theme-muted:#9b776b!important;--theme-line:#e6cbbd!important;--theme-accent:#b96f56!important;--theme-soft:#f1ddd2!important;background:#f7f0eb!important;color:#654438!important}
+html body[data-theme="cat"] .app-header,html body[data-theme="cat"] .sidebar,html body[data-theme="cat"] .main,html body[data-theme="cat"] .hero,html body[data-theme="cat"] .panel,html body[data-theme="cat"] .stat,html body[data-theme="cat"] .mini,html body[data-theme="cat"] .page,html body[data-theme="cat"] .nav-folder,html body[data-theme="cat"] .navtitle,html body[data-theme="cat"] .nav-folder>summary,html body[data-theme="cat"] .navbtn,html body[data-theme="cat"] .toolbar-select,html body[data-theme="cat"] .toolbar-font,html body[data-theme="cat"] .local-pill,html body[data-theme="cat"] .btn,html body[data-theme="cat"] .upload,html body[data-theme="cat"] .tablewrap{background-color:var(--theme-panel)!important;color:var(--theme-ink)!important;border-color:var(--theme-line)!important}
+html body[data-theme="cat"] .navbtn.active,html body[data-theme="cat"] .navbtn:hover,html body[data-theme="cat"] .nav-folder[open]>summary,html body[data-theme="cat"] .btn:not(.alt){background:#efd3c4!important;color:#654438!important;border-color:#b96f56!important}
+/* Remove all decorative 3D/menu icons and any bear mascot globally. */
+html body .navbtn .navicon,html body .nav-folder>summary .navicon,
+html body .nav-folder>summary .navfolder-tab-icon,html body .nav-folder>summary .theme-nav-doodle,
+html body .nav-folder>summary .icon3d,html body .nav-folder>summary .bear-icon{display:none!important}
+html body .navbtn{gap:10px!important}
+html body .app-header .logo::before,html body .app-header .logo::after{content:none!important;display:none!important}
+html body .app-header .brand-logo-img{content:url('/matchma-logo.svg?v=17')!important}
