@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 540" role="img" aria-labelledby="title">
+<title id="title">Gấu nâu mùa đông ôm cá</title>
+<defs>
+ <filter id="grain" x="-10%" y="-10%" width="120%" height="120%">
+  <feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="11" result="noise"/>
+  <feColorMatrix in="noise" type="saturate" values="0" result="mono"/>
+  <feComponentTransfer><feFuncA type="table" tableValues="0 .13"/></feComponentTransfer>
+  <feBlend in="SourceGraphic" mode="multiply"/>
+ </filter>
+ <pattern id="pencil" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(28)">
+  <path d="M0 1H8 M0 5H8" stroke="#f8c58a" stroke-width=".65" opacity=".38"/>
+ </pattern>
+</defs>
+<!-- snowy shadow -->
+<ellipse cx="258" cy="494" rx="190" ry="25" fill="#b6d7e9" opacity=".6"/>
+<path d="M82 440C72 365 91 284 143 235C166 213 187 206 209 204C217 158 246 128 291 132C335 135 362 165 370 205C416 228 441 277 441 339L455 431C458 464 433 486 397 489L161 489C119 488 91 472 82 440Z" fill="#b96932" stroke="#75412c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M82 440C72 365 91 284 143 235C166 213 187 206 209 204C217 158 246 128 291 132C335 135 362 165 370 205C416 228 441 277 441 339L455 431C458 464 433 486 397 489L161 489C119 488 91 472 82 440Z" fill="url(#pencil)" opacity=".72"/>
+<!-- round ears, attached to head -->
+<path d="M208 201C186 169 197 136 222 132C245 129 258 151 255 174Z" fill="#bd743c" stroke="#75412c" stroke-width="7" stroke-linejoin="round"/>
+<path d="M216 171C209 155 217 147 228 151" fill="none" stroke="#e7a56a" stroke-width="7" stroke-linecap="round"/>
+<path d="M328 172C324 146 340 128 360 137C378 145 378 170 362 193Z" fill="#bd743c" stroke="#75412c" stroke-width="7" stroke-linejoin="round"/>
+<path d="M344 155C353 149 363 158 360 171" fill="none" stroke="#e7a56a" stroke-width="7" stroke-linecap="round"/>
+<!-- head blends into shoulder/body -->
+<path d="M193 228C177 193 204 160 239 157C260 135 302 143 322 162C355 167 381 195 381 229C408 249 414 285 397 310C383 332 353 342 321 339L227 328C192 322 173 296 179 267C181 250 186 239 193 228Z" fill="#c7793d" stroke="#75412c" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M193 228C177 193 204 160 239 157C260 135 302 143 322 162C355 167 381 195 381 229C408 249 414 285 397 310C383 332 353 342 321 339L227 328C192 322 173 296 179 267C181 250 186 239 193 228Z" fill="url(#pencil)" opacity=".65"/>
+<!-- face -->
+<path d="M254 225C267 209 302 207 322 222C342 237 344 262 329 279C314 296 278 298 255 282C235 269 238 243 254 225Z" fill="#f3c783" stroke="#9c572f" stroke-width="4"/>
+<path d="M242 216Q252 208 262 215 M319 214Q330 207 340 217" fill="none" stroke="#e8ad70" stroke-width="4" stroke-linecap="round"/>
+<path d="M248 231Q258 220 267 231" fill="none" stroke="#60382a" stroke-width="7" stroke-linecap="round"/>
+<path d="M310 231Q320 220 329 231" fill="none" stroke="#60382a" stroke-width="7" stroke-linecap="round"/>
+<ellipse cx="289" cy="249" rx="18" ry="14" fill="#63392a"/>
+<path d="M287 261Q289 274 277 278Q267 281 259 273 M289 270Q301 285 316 270" fill="none" stroke="#63392a" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="239" cy="258" r="8" fill="#e99483" opacity=".7"/><circle cx="337" cy="258" r="8" fill="#e99483" opacity=".7"/>
+<!-- scarf -->
+<path d="M185 302C219 326 277 332 328 307L352 330C315 367 239 374 188 341Z" fill="#8fc7df" stroke="#496f85" stroke-width="6" stroke-linejoin="round"/>
+<path d="M188 321C232 346 290 349 336 324" fill="none" stroke="#d9edf1" stroke-width="5" stroke-dasharray="8 9" stroke-linecap="round"/>
+<path d="M206 342L190 393Q205 411 225 397L247 355Z" fill="#7fb8d1" stroke="#496f85" stroke-width="6" stroke-linejoin="round"/>
+<path d="M199 368l10 7m-13 5 10 7m9-29 10 7" stroke="#d9edf1" stroke-width="4" stroke-linecap="round"/>
+<!-- legs and paws -->
+<path d="M113 431C120 397 153 390 184 414L219 464C227 480 212 493 191 493L147 489C120 486 105 462 113 431Z" fill="#bd713a" stroke="#75412c" stroke-width="7" stroke-linejoin="round"/>
+<path d="M286 439C300 410 336 408 359 435L384 466C394 483 378 495 356 495H316C291 492 275 466 286 439Z" fill="#bd713a" stroke="#75412c" stroke-width="7" stroke-linejoin="round"/>
+<path d="M143 462Q160 452 176 465 M154 477Q170 467 185 479 M321 472Q337 459 350 473 M337 486Q350 476 364 485" fill="none" stroke="#75412c" stroke-width="5" stroke-linecap="round"/>
+<!-- arms -->
+<path d="M162 349C130 362 126 398 151 421C170 438 196 428 214 408L240 380L222 349C201 366 185 370 173 359Z" fill="#c7793d" stroke="#75412c" stroke-width="7" stroke-linejoin="round"/>
+<path d="M333 350C355 346 377 364 375 387C373 410 352 420 333 407L311 390L317 359Z" fill="#c7793d" stroke="#75412c" stroke-width="7" stroke-linejoin="round"/>
+<!-- fish held close to chest -->
+<path d="M211 387C229 365 265 365 287 383C269 403 236 411 211 387Z" fill="#ef8b80" stroke="#76503a" stroke-width="5" stroke-linejoin="round"/>
+<path d="M214 387L198 372L199 403Z" fill="#8ebf8c" stroke="#76503a" stroke-width="4" stroke-linejoin="round"/>
+<path d="M242 376L252 397M259 376L268 390" fill="none" stroke="#ffd3ae" stroke-width="4" stroke-linecap="round"/>
+<circle cx="275" cy="382" r="3.5" fill="#50362d"/>
+<!-- tiny hand-drawn snow -->
+<g stroke="#80b8d5" stroke-width="4" stroke-linecap="round" opacity=".9">
+ <path d="M93 108v24m-12-12h24m-20-8 16 16m0-16-16 16"/>
+ <path d="M416 112v20m-10-10h20m-17-7 14 14m0-14-14 14"/>
+ <path d="M437 390v18m-9-9h18m-15-6 12 12m0-12-12 12"/>
+</g>
+<path d="M104 452q8 8 16 0m323 9q7 7 14 0" fill="none" stroke="#f8f2e6" stroke-width="5" stroke-linecap="round"/>
+</svg>
