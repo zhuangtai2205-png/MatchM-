@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MatchMã — Kiểm tra danh mục sản phẩm</title>
+<html lang="vi"><head>
+<link rel="icon" type="image/svg+xml" href="/matchma-logo.svg?v=31">
+<link rel="apple-touch-icon" href="/matchma-logo.svg?v=31"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MatchMã — Kiểm tra danh mục sản phẩm</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&family=Nunito:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -1316,19 +1318,9 @@ body[data-theme="minimal"] .theme-drift{opacity:.08!important;filter:none!import
 </style><link rel="stylesheet" href="/winter-theme.css?v=24"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
-  <span class="brand-mark" aria-label="Logo Match Mã — mèo samurai và kiếm trong khung tròn" role="img">
-<svg class="matchma-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
- <circle cx="50" cy="50" r="46" fill="#fff" stroke="#111" stroke-width="2.5"/>
- <g fill="#fff" stroke="#111" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M22 74Q27 52 44 45L42 30 52 37 59 27 65 42Q75 49 74 62L66 73 49 81Z"/>
-  <path d="M39 42 31 36 43 35 48 42M52 37 58 31 61 43" />
-  <path d="M33 42 25 49 45 55 49 47Z M28 51 20 59 47 65 48 57Z M24 61 19 68 46 74 47 66Z"/>
-  <path d="M55 73 80 35Q84 29 88 25Q88 35 82 43L60 77Z"/>
-  <path d="M50 73 58 81 63 76 55 68Z"/>
-  <path d="M49 81 38 91Q35 94 32 91Q30 89 33 86L50 70" />
- </g>
- <path d="M60 52l5 2M63 59q-4 4-8 1" fill="none" stroke="#111" stroke-width="2.2" stroke-linecap="round"/>
-</svg></span>
+  <span class="brand-mark" aria-label="Logo Match Mã — mèo samurai và kiếm" role="img">
+  <img class="matchma-logo-image" src="/matchma-logo.svg?v=31" alt="Logo Match Mã: mèo samurai cầm kiếm">
+ </span>
   <div class="brand-copy">
    <h1>Match<span>Mã</span></h1>
    <div class="subbrand"><span data-i18n="tagline">Đối chiếu danh mục sản phẩm</span><span class="crumb-sep">›</span><strong id="currentPageLabel">Tổng quan</strong></div>
@@ -2709,3 +2701,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 
 </script><script src="/winter-theme.js?v=20"></script>
 </body></html>
+<style id="matchma-logo-final-fix">
+.app-header .brand-mark{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+.app-header .brand-mark .matchma-logo-image{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
+</style>
