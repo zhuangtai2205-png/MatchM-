@@ -2737,3 +2737,15 @@ body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSys
 body[data-theme="minimal"] .page,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini{background:#fff!important;opacity:1!important;backdrop-filter:none!important}
 body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;letter-spacing:normal!important;font-kerning:normal;line-height:1.45}
 </style>
+
+<style id="matchma-logo-fill-header-space-v54">
+/* Enlarge the supplied logo artwork itself to use the empty header area; title typography stays untouched. */
+.app-header .brand{display:flex!important;align-items:center!important;gap:0!important;min-width:0}
+.app-header .brand-mark,.brand .brand-mark{width:230px!important;height:176px!important;flex:0 0 230px!important;min-width:230px!important;margin:0 -22px 0 0!important;overflow:visible!important}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(2.15)!important;transform-origin:center!important}
+.app-header .brand-copy{position:relative;z-index:1}
+@media(max-width:650px){
+ .app-header .brand-mark,.brand .brand-mark{width:142px!important;height:126px!important;flex-basis:142px!important;min-width:142px!important;margin-right:-12px!important}
+ .app-header .brand-logo-img{transform:scale(1.75)!important}
+}
+</style>
