@@ -2084,3 +2084,10 @@ html body[data-theme="forest"] .theme-click-doodle{font-size:21px!important}
 html body header.app-header .brand-mark{width:74px!important;height:74px!important;min-width:74px!important;flex:0 0 74px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:#111!important}
 html body header.app-header .brand-mark svg{width:100%!important;height:100%!important;display:block!important}
 html body[data-theme="minimal"] .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important}
+
+/* Clean, compact brand mark: match the approved cat + nón lá + katana reference. */
+html body header.app-header .brand-mark{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:62px!important;height:62px!important;min-width:62px!important;flex:0 0 62px!important;padding:0!important;margin:0 10px 0 0!important;overflow:visible!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;color:#111!important}
+html body header.app-header .brand-mark .matchma-logo{display:block!important;width:100%!important;height:100%!important;overflow:visible!important}
+html body header.app-header .brand-copy h1{font-family:Georgia,'Times New Roman',serif!important;font-weight:700!important;letter-spacing:-.8px!important}
+html body header.app-header .brand-copy h1 span{color:inherit!important}
+@media(max-width:600px){html body header.app-header .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important;margin-right:7px!important}}
