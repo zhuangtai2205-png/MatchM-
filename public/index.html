@@ -2942,6 +2942,28 @@ renderBearSnow=function(){
 renderBearSnow();
 
 </script><script src="/winter-theme.js?v=11"></script>
-<script id="matchma-no-bear-icons">
-(()=>{function fix(){const b=document.body;if(b&&b.dataset.theme==='bear')b.dataset.theme='ocean';document.querySelectorAll('.app-header .logo').forEach(l=>{[...l.children].forEach(n=>{if(!n.matches('img.brand-logo-img'))n.remove()});const im=l.querySelector('.brand-logo-img');if(im){im.src='/matchma-logo.svg?v=17';im.alt='Logo MatchMã'}});document.querySelectorAll('.navbtn .navicon,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon,.fun-widget-mascot,.winter-bear-spot,#funToggleBtn,#funWidget,#fat-bear-overlay').forEach(n=>n.remove());}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',fix,{once:true});else fix();new MutationObserver(fix).observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['data-theme']});})();
+<script id="matchma-logo-lock">
+(()=> {
+  'use strict';
+  const LOGO='/matchma-logo.svg?v=18';
+  function fixBrand(){
+    document.querySelectorAll('.app-header .logo').forEach(box=>{
+      let img=box.querySelector(':scope > img.brand-logo-img');
+      if(!img){
+        img=document.createElement('img');
+        img.className='brand-logo-img';
+        img.alt='Logo MatchMã';
+        box.replaceChildren(img);
+      } else {
+        [...box.children].forEach(node=>{if(node!==img)node.remove()});
+      }
+      if(!img.getAttribute('src') || !img.getAttribute('src').includes('/matchma-logo.svg')) img.setAttribute('src',LOGO);
+      img.alt='Logo MatchMã';
+      img.draggable=false;
+    });
+    document.querySelectorAll('.app-header .winter-bear-spot,.app-header .bear-icon,.app-header .theme-nav-doodle,.app-header .icon3d,.navbtn .navicon,.nav-folder>summary .navicon,.nav-folder>summary .theme-nav-doodle,.nav-folder>summary .icon3d,.nav-folder>summary .bear-icon').forEach(node=>node.remove());
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',fixBrand,{once:true}); else fixBrand();
+  new MutationObserver(fixBrand).observe(document.documentElement,{subtree:true,childList:true});
+})();
 </script></body></html>
