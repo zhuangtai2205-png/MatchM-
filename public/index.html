@@ -3138,19 +3138,21 @@ header.app-header .headright{grid-column:2!important;grid-row:1!important;min-wi
 }
 </style>
 
-<style id="matchma-logo-visual-only-font-normalize-v66">
-/* Increase only the logo artwork visually; preserve header layout and all surrounding sizes. */
+
+
+<style id="matchma-logo-5x-font-fix-v67">
+/* 5x visual enlargement only: no layout dimensions or surrounding elements changed. */
 header.app-header .brand-mark{overflow:visible!important}
 header.app-header .brand-mark img.brand-logo-img{
- transform:scale(1.65)!important;
+ transform:scale(5)!important;
  transform-origin:left center!important;
 }
-/* Consistent Vietnamese text font, without globally changing element sizes. */
-html,body,body *:not(svg):not(svg *):not(.icon):not(.lucide){
+/* Keep one consistent font family for Vietnamese text; preserve existing sizes and weights. */
+html body,html body *{
  font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;
  font-synthesis:none!important;
 }
-header.app-header .brand-copy h1{
- font-family:Georgia,"Times New Roman",serif!important;
+html body header.app-header .brand-copy h1{
+ font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;
 }
 </style>
