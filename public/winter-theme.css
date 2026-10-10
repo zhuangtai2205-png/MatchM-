@@ -106,3 +106,90 @@ body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"
 @keyframes themeFloat{0%,100%{translate:0 0;rotate:-2deg}50%{translate:0 -13px;rotate:2deg}}
 @media(max-width:650px){.logo:after{font-size:30px}.navbtn{font-size:13px!important}}
 @media(prefers-reduced-motion:reduce){.theme-scenery span,.theme-click-doodle{animation:none!important}.theme-click-doodle{display:none!important}}
+
+
+/* Forest-bear palette correction: green forest, never the cream-paper palette. */
+html:has(body[data-theme="bear"]){background:#183d2d!important}
+body[data-theme="bear"]{
+  --ink:#214b35!important;
+  background:
+    radial-gradient(ellipse at 12% 12%,rgba(151,190,119,.28),transparent 35%),
+    radial-gradient(ellipse at 88% 82%,rgba(91,145,91,.24),transparent 34%),
+    repeating-linear-gradient(135deg,rgba(210,229,175,.025) 0 2px,transparent 2px 8px),
+    #e5efd8!important;
+  color:#254b35!important;
+}
+body[data-theme="bear"] .winter-paper-speckle{
+  opacity:.10!important;
+  background-image:radial-gradient(#497b4c .55px,transparent .8px),radial-gradient(#f3f7df .7px,transparent 1px)!important;
+}
+body[data-theme="bear"] header.app-header{
+  background:rgba(226,239,209,.94)!important;
+  border-bottom-color:#78996a!important;
+}
+body[data-theme="bear"] .sidebar{
+  background:rgba(218,235,201,.96)!important;
+  border-color:#83a879!important;
+}
+body[data-theme="bear"] .main{background:rgba(226,239,210,.38)!important}
+body[data-theme="bear"] .hero,
+body[data-theme="bear"] .panel,
+body[data-theme="bear"] .chart-card{
+  background:rgba(239,247,225,.94)!important;
+  border-color:#86a977!important;
+  box-shadow:2px 3px 0 rgba(40,86,49,.08)!important;
+}
+body[data-theme="bear"] .navbtn{color:#315d3b!important}
+body[data-theme="bear"] .navbtn:hover{background:#d4e8c1!important;border-color:#8cae78!important}
+body[data-theme="bear"] .navbtn.active{background:#a9cf86!important;border-color:#628d52!important;color:#234b30!important}
+body[data-theme="bear"] .navfolder-title,
+body[data-theme="bear"] .nav-folder>summary.navfolder-title,
+body[data-theme="bear"] .sidebar-help,
+body[data-theme="bear"] .sidebar-account-shortcut,
+body[data-theme="bear"] .sidefoot{
+  background:#e1edcf!important;border-color:#9bb887!important;color:#315b3b!important;
+}
+body[data-theme="bear"] .sidebar-avatar{background:#b9d995!important;border-color:#789c62!important}
+body[data-theme="bear"] .btn{
+  background:#b6d98c!important;border-color:#789d5c!important;color:#284d31!important;
+}
+body[data-theme="bear"] .btn:hover{background:#c8e5a5!important}
+body[data-theme="bear"] .btn.alt{background:#d5e9d9!important;border-color:#8eb8a0!important;color:#315d4c!important}
+body[data-theme="bear"] .stat,
+body[data-theme="bear"] .mini{
+  background:#edf5df!important;border-color:#a6c18f!important;
+}
+body[data-theme="bear"] th{background:#d6e8c3!important;color:#31583b!important}
+body[data-theme="bear"] td{border-bottom-color:#c7dbb7!important}
+body[data-theme="bear"] input[type=text],
+body[data-theme="bear"] input[type=number],
+body[data-theme="bear"] select,
+body[data-theme="bear"] .search,
+body[data-theme="bear"] td select,
+body[data-theme="bear"] textarea{
+  background:#f5f8e9!important;border-color:#a5bf8e!important;color:#284d34!important;
+}
+body[data-theme="bear"] .progressbox,
+body[data-theme="bear"] .rule{background:#e1edcf!important;border-color:#a1bc88!important}
+body[data-theme="bear"] .bar{background:#d1e2bd!important}
+body[data-theme="bear"] .bar>div{background:linear-gradient(90deg,#7da95c,#5e9c8c)!important}
+body[data-theme="bear"] .local-pill,
+body[data-theme="bear"] .toolbar-select,
+body[data-theme="bear"] .toolbar-font{background:#e8f1d9!important;border-color:#a4bd8d!important;color:#315b3b!important}
+body[data-theme="bear"] .toolbar-font button{color:#315b3b!important}
+body[data-theme="bear"] .toolbar-font button[aria-pressed=true]{background:#b6d98c!important}
+body[data-theme="bear"] .theme-scenery{color:#4f8a60!important;opacity:.17!important}
+
+/* Other themes retain their own palettes; remove the global cream canvas when active. */
+body[data-theme="ocean"]{background:linear-gradient(180deg,#d9f5fa,#b8e7ed 55%,#e8fbf7)!important;color:#174e64!important}
+body[data-theme="ocean"] header.app-header,body[data-theme="ocean"] .sidebar{background:rgba(220,247,250,.95)!important}
+body[data-theme="ocean"] .main{background:rgba(203,239,244,.4)!important}
+body[data-theme="ocean"] .hero,body[data-theme="ocean"] .panel,body[data-theme="ocean"] .chart-card,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .mini{background:rgba(235,251,252,.94)!important}
+body[data-theme="retro"]{background:#e5e1d6!important;color:#222!important}
+body[data-theme="retro"] header.app-header,body[data-theme="retro"] .sidebar,body[data-theme="retro"] .hero,body[data-theme="retro"] .panel,body[data-theme="retro"] .chart-card,body[data-theme="retro"] .stat,body[data-theme="retro"] .mini{background:#f0eee7!important}
+body[data-theme="pink"]{background:linear-gradient(145deg,#fff0f5,#f8dce8 55%,#fff5f8)!important;color:#7d3f61!important}
+body[data-theme="pink"] header.app-header,body[data-theme="pink"] .sidebar,body[data-theme="pink"] .hero,body[data-theme="pink"] .panel,body[data-theme="pink"] .chart-card,body[data-theme="pink"] .stat,body[data-theme="pink"] .mini{background:rgba(255,240,247,.95)!important}
+body[data-theme="vampire"]{background:radial-gradient(ellipse at top,#39233f,#160f20 72%)!important;color:#f2dfe7!important}
+body[data-theme="vampire"] header.app-header,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .chart-card,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini{background:rgba(45,29,48,.96)!important;color:#f2dfe7!important}
+body[data-theme="cat"]{background:linear-gradient(145deg,#f3e9e3,#e4d4cc 55%,#faf2ed)!important;color:#60453d!important}
+body[data-theme="cat"] header.app-header,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .chart-card,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{background:rgba(250,241,235,.96)!important}
