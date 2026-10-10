@@ -317,3 +317,39 @@ body[data-theme="bear"] .sidebar,body[data-theme="bear"] .hero,body[data-theme="
 body[data-theme="bear"] .winter-bear-spot{z-index:1!important;pointer-events:none!important}
 body[data-theme="bear"] .hero h2,body[data-theme="bear"] .hero p,body[data-theme="bear"] .hero .eyebrow{z-index:2!important}
 @media(max-width:720px){.app-header .brand-copy{min-width:0}.app-header .brand-logo-img{width:44px!important;height:44px!important}.app-header .logo{width:44px!important;height:44px!important;flex-basis:44px!important}}
+
+
+/* Final theme-specific correction: preserve MatchMã brand, use real pastel palettes and hand-drawn motif navigation. */
+.app-header .logo:after,.logo:after{content:none!important;display:none!important}
+.app-header .logo svg{opacity:1!important}
+.app-header .logo .brand-logo-img{opacity:1!important}
+.app-header .logo{background:transparent!important;box-shadow:none!important}
+.navbtn:before{content:none!important;display:none!important}
+#themeScene{z-index:0!important}
+#themeScene .scene-doodle{pointer-events:none;mix-blend-mode:multiply}
+body[data-theme="bear"]{--theme-surface:#eff7e9!important;background:radial-gradient(ellipse at 10% 12%,#f6fae9 0,transparent 35%),linear-gradient(145deg,#eaf5e5 0%,#d9eddf 58%,#e5f2e3 100%)!important;color:#42634c!important}
+body[data-theme="bear"] .app-header,body[data-theme="bear"] .sidebar,body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini,body[data-theme="bear"] .page{background-color:#f0f7e8ed!important;border-color:#bdd4b7!important}
+body[data-theme="bear"] .navbtn.active{background:#d5e9c8!important;color:#315c3e!important}
+body[data-theme="bear"] .hero{background:linear-gradient(120deg,#f5f8e9f5,#e5f2e7f5)!important}
+body[data-theme="bear"] .winter-bear-spot{width:clamp(155px,18vw,210px)!important;max-height:180px!important;right:8px!important;bottom:-2px!important;object-fit:contain!important;object-position:center bottom!important}
+body[data-theme="ocean"]{--theme-surface:#effbff!important;background:linear-gradient(180deg,#e9faff 0%,#cceff7 52%,#e5faf5 100%)!important;color:#174e64!important}
+body[data-theme="ocean"] .app-header,body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .hero,body[data-theme="ocean"] .panel,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .mini,body[data-theme="ocean"] .page{background-color:#f0fbfdf0!important;border-color:#b3dfe8!important}
+body[data-theme="ocean"] #themeScene .scene-doodle{color:#168ca9!important;opacity:.14!important}
+body[data-theme="ocean"] #themeScene .scene-wave{font-size:clamp(72px,12vw,155px)!important;opacity:.10!important;color:#36a8c1!important;transform:scaleX(2.1)!important}
+body[data-theme="retro"]{--theme-surface:#f1f1ef!important;background:linear-gradient(145deg,#f5f5f2,#dedfdf)!important;color:#282828!important}
+body[data-theme="retro"] .app-header,body[data-theme="retro"] .sidebar,body[data-theme="retro"] .hero,body[data-theme="retro"] .panel,body[data-theme="retro"] .stat,body[data-theme="retro"] .mini,body[data-theme="retro"] .page{background-color:#f5f5f2f2!important;border-color:#9c9c99!important;color:#282828!important}
+body[data-theme="retro"] #themeScene .scene-doodle{color:#292929!important;opacity:.13!important}
+body[data-theme="retro"] .theme-nav-doodle{font-family:Georgia,serif!important;color:#242424!important}
+body[data-theme="pink"]{--theme-surface:#fff1f7!important;background:radial-gradient(ellipse at 14% 3%,#fff 0,transparent 34%),linear-gradient(145deg,#fff5fa 0%,#f7dfeb 57%,#fff7fb 100%)!important;color:#874765!important}
+body[data-theme="pink"] .app-header,body[data-theme="pink"] .sidebar,body[data-theme="pink"] .hero,body[data-theme="pink"] .panel,body[data-theme="pink"] .stat,body[data-theme="pink"] .mini,body[data-theme="pink"] .page{background-color:#fff5f9f2!important;border-color:#efc4d8!important}
+body[data-theme="pink"] #themeScene .scene-doodle{color:#d86e9d!important;opacity:.18!important}
+body[data-theme="vampire"]{--theme-surface:#26192f!important;background:radial-gradient(ellipse at top,#422a4e 0%,#24172e 58%,#12101a 100%)!important;color:#f8e9f1!important}
+body[data-theme="vampire"] .app-header,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini,body[data-theme="vampire"] .page{background-color:#2b1e34f5!important;color:#f8e9f1!important;border-color:#704a78!important}
+body[data-theme="cat"]{--theme-surface:#fff1eb!important;background:radial-gradient(ellipse at 12% 8%,#fffaf5 0,transparent 35%),linear-gradient(145deg,#fbefe8,#ead9cf 58%,#fff7f1)!important;color:#60453d!important}
+body[data-theme="cat"] .app-header,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini,body[data-theme="cat"] .page{background-color:#fff7f1f5!important;border-color:#dfc2b4!important}
+.theme-nav-doodle{border-color:currentColor!important;background:rgba(255,255,255,.22)!important}
+body[data-theme="ocean"] .theme-nav-doodle{color:#238fa8!important}
+body[data-theme="retro"] .theme-nav-doodle{color:#303030!important}
+body[data-theme="pink"] .theme-nav-doodle{color:#c56b95!important}
+body[data-theme="bear"] .theme-nav-doodle{color:#56845e!important}
+@media(max-width:650px){body[data-theme="bear"] .winter-bear-spot{width:132px!important;max-height:128px!important;right:4px!important}}
