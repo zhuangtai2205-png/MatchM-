@@ -2705,3 +2705,51 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 .app-header .brand-mark{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
 .app-header .brand-mark .matchma-logo-image{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center!important}
 </style>
+
+<style id="matchma-forest-minimal-layout-font-and-transparent-logo-fix">
+/* Logo must stay transparent and unboxed in every theme */
+.app-header .brand-mark,
+body[data-theme] .app-header .brand-mark,
+body[data-theme="forest"] .app-header .brand-mark,
+body[data-theme="minimal"] .app-header .brand-mark {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+.app-header .brand-mark .matchma-logo-image {
+  display:block!important; width:100%!important; height:100%!important;
+  object-fit:contain!important; object-position:center!important;
+  background:transparent!important; border:0!important; box-shadow:none!important;
+}
+/* Forest and Minimal use the same typography and structural layout as other themes */
+body[data-theme="forest"], body[data-theme="minimal"] {
+  font-family: var(--app-font, Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif) !important;
+  letter-spacing: normal;
+}
+body[data-theme="forest"] :is(button,input,select,textarea),
+body[data-theme="minimal"] :is(button,input,select,textarea),
+body[data-theme="forest"] :is(h1,h2,h3,h4,p,label,small,strong,span,td,th),
+body[data-theme="minimal"] :is(h1,h2,h3,h4,p,label,small,strong,span,td,th) {
+  font-family: inherit !important;
+  letter-spacing: normal;
+  text-transform: none;
+}
+body[data-theme="forest"] .app-shell,
+body[data-theme="minimal"] .app-shell { width: min(1440px, calc(100% - 32px)); margin-inline:auto; }
+body[data-theme="forest"] .app-header,
+body[data-theme="minimal"] .app-header { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+body[data-theme="forest"] .brand,
+body[data-theme="minimal"] .brand { display:flex; align-items:center; gap:12px; min-width:0; }
+body[data-theme="forest"] .brand-copy,
+body[data-theme="minimal"] .brand-copy { min-width:0; }
+body[data-theme="forest"] .app-shell .main,
+body[data-theme="minimal"] .app-shell .main { min-width:0; }
+@media(max-width:650px){
+ body[data-theme="forest"] .app-shell,body[data-theme="minimal"] .app-shell{width:100%;margin:0}
+ body[data-theme="forest"] .app-header,body[data-theme="minimal"] .app-header{align-items:flex-start}
+}
+</style>
