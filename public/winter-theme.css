@@ -2155,3 +2155,25 @@ html body header.app-header .brand-mark .matchma-logo{width:100%!important;heigh
 html body header.app-header .brand-copy h1{font-family:Georgia,'Times New Roman',serif!important;font-size:clamp(24px,2.5vw,31px)!important;letter-spacing:-1px!important;font-weight:700!important}
 html body header.app-header .brand-copy .subbrand{display:none!important}
 @media(max-width:600px){html body header.app-header .brand-mark{width:36px!important;height:36px!important;min-width:36px!important;flex-basis:36px!important}}
+
+/* Complete theme polish: forest green, folder stickers and multi-motif click effects. */
+html body[data-theme="forest"]{background:#d8edc8!important;background-image:linear-gradient(135deg,#e1f1d4 0%,#c8e5b6 52%,#e8f3dc 100%)!important}
+html body[data-theme="forest"] #themeScene,html body[data-theme="forest"] #themeScene *{display:none!important}
+html body[data-theme="forest"] .navfolder-title:after{content:"🐻"!important;display:inline-flex!important;margin-left:auto!important;font-size:18px!important}
+html body[data-theme="forest"] .nav-folder:nth-of-type(2) .navfolder-title:after{content:"🌼"!important}
+html body[data-theme="forest"] .nav-folder:nth-of-type(3) .navfolder-title:after{content:"🦋"!important}
+html body[data-theme="forest"] .nav-folder:nth-of-type(4) .navfolder-title:after{content:"🐻"!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art{width:40px!important;height:40px!important;font-size:28px!important}
+html body[data-theme="forest"] .theme-click-doodle.forest-click-art svg{width:100%!important;height:100%!important;display:block!important}
+html body[data-theme="minimal"] .navicon,
+html body[data-theme="minimal"] .navfolder-title:after,
+html body[data-theme="minimal"] .nav-folder::before,
+html body[data-theme="minimal"] .nav-folder::after,
+html body[data-theme="minimal"] .navbtn::before,
+html body[data-theme="minimal"] .navbtn::after{display:none!important;content:none!important}
+html body[data-theme="minimal"] .navbtn{gap:0!important}
+html body header.app-header .brand-mark{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:46px!important;height:46px!important;min-width:46px!important;flex:0 0 46px!important;margin-right:8px!important;color:#303030!important;background:transparent!important;border:0!important;box-shadow:none!important;border-radius:50%!important}
+html body header.app-header .brand-mark .matchma-logo{width:100%!important;height:100%!important;display:block!important}
+html body header.app-header .brand-copy h1{font-family:Georgia,'Times New Roman',serif!important;letter-spacing:-.8px!important}
+html body header.app-header .brand-copy .subbrand{display:none!important}
+@media(max-width:600px){html body header.app-header .brand-mark{width:40px!important;height:40px!important;min-width:40px!important;flex-basis:40px!important}}
