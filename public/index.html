@@ -1388,11 +1388,54 @@ body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bott
 @media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
 @media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
 
-</style><link rel="stylesheet" href="/winter-theme.css?v=9"><style id="logo-bear-fix">
-.app-header .logo,.brand .logo{position:relative!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
-.app-header .logo::before,.app-header .logo::after,.brand .logo::before,.brand .logo::after{content:none!important;display:none!important;visibility:hidden!important}
-.app-header .brand-logo-img{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;z-index:2!important;object-fit:contain!important;filter:none!important}
-#funToggleBtn,#funWidget,#fat-bear-overlay{display:none!important;visibility:hidden!important;pointer-events:none!important}
+</style><link rel="stylesheet" href="/winter-theme.css?v=10"><style id="logo-bear-fix">
+/* Last-resort UI bug fixes: logo stays original, folder titles stay flat, Bear Corner works. */
+html body .app-header .logo,
+html body .app-header .brand .logo{
+  position:relative!important;isolation:isolate!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  width:48px!important;height:58px!important;min-width:48px!important;
+  padding:0!important;overflow:hidden!important;
+  background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+}
+html body .app-header .logo::before,html body .app-header .logo::after,
+html body .app-header .brand .logo::before,html body .app-header .brand .logo::after,
+html body .logo:before,html body .logo:after{
+  content:none!important;display:none!important;visibility:hidden!important;
+  background:none!important;background-image:none!important;-webkit-mask:none!important;mask:none!important;
+}
+html body .app-header .logo > :not(.brand-logo-img){display:none!important}
+html body .app-header .brand-logo-img{
+  display:block!important;position:static!important;inset:auto!important;
+  width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;
+  object-fit:contain!important;object-position:center!important;
+  opacity:1!important;visibility:visible!important;z-index:1!important;
+  filter:none!important;transform:none!important;
+}
+/* Remove decorative icons only from folder headings, not icons from normal page links. */
+html body .nav-folder>summary .navicon,
+html body .nav-folder>summary .navfolder-tab-icon,
+html body .nav-folder>summary .theme-nav-doodle,
+html body .nav-folder>summary .icon3d,
+html body .nav-folder>summary .bear-icon{display:none!important;visibility:hidden!important}
+html body .nav-folder>summary.navfolder-title{display:flex!important;gap:8px!important}
+/* Do not globally hide the Bear Corner: [hidden] controls its closed state. */
+html body #funWidget[hidden],html body #fat-bear-overlay[hidden]{display:none!important}
+html body #funWidget:not([hidden]){display:block!important;visibility:visible!important;z-index:100000!important}
+html body #funToggleBtn{display:inline-flex!important;visibility:visible!important;pointer-events:auto!important}
+html body #fat-bear-overlay:not([hidden]){
+  display:block!important;visibility:visible!important;position:fixed!important;
+  inset:0!important;width:100vw!important;height:100vh!important;
+  z-index:99998!important;pointer-events:none!important;overflow:hidden!important;
+}
+html body #fat-bear-overlay #bear-container{
+  display:block!important;visibility:visible!important;opacity:1!important;
+  position:absolute!important;right:clamp(8px,4vw,48px)!important;
+  bottom:clamp(70px,10vh,120px)!important;left:auto!important;top:auto!important;
+  width:min(58vw,430px)!important;height:auto!important;pointer-events:auto!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+}
+html body #fat-bear-overlay #bear-sprite{display:block!important;visibility:visible!important;opacity:1!important;width:100%!important;height:auto!important}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -2954,4 +2997,4 @@ renderBearSnow=function(){
 /* Repaint snow after startup without changing the user's saved bear progress. */
 renderBearSnow();
 
-</script><script src="/winter-theme.js?v=8"></script></body></html>
+</script><script src="/winter-theme.js?v=9"></script></body></html>
