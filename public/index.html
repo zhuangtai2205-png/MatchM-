@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MatchMã — Kiểm tra danh mục sản phẩm</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Courier+Prime:wght@400;700&family=Nunito:wght@400;500;600;700;800;900&family=Special+Elite&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700;900&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700;900&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Nunito:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@400;700;900&family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#302b48;--muted:#77738b;--line:#e8e0f1;--lav:#ebe6ff;--pink:#f7e2ed;--mint:#dff4eb;--purple:#7865c5;--paper:#fffdfd;--green:#287653;--amber:#966514;--red:#9d4d66}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fff7fa,#f4f1ff 55%,#f1fbf7);color:var(--ink);font:15px/1.5 Inter,system-ui,-apple-system,sans-serif}button,input,select{font:inherit}button{cursor:pointer}header{max-width:1500px;margin:auto;padding:22px 26px 14px;display:flex;align-items:center;justify-content:space-between;gap:16px}.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,#dfd7ff,#f7dce8);display:grid;place-items:center;font-size:calc(24px * var(--font-scale, 1));box-shadow:0 8px 25px #7565af20}h1{font-size:calc(clamp(24px,3vw,34px) * var(--font-scale, 1));letter-spacing:-1.1px;margin:0}h1 span{color:#a66a9a}.subbrand{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.headright{display:flex;align-items:center;gap:10px}.pill{background:#ffffffbd;border:1px solid #fff;border-radius:99px;padding:9px 14px;color:#726a8b}.shell{max-width:1500px;margin:auto;padding:0 26px 44px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px}.sidebar{align-self:start;background:#ffffffac;border:1px solid #fff;border-radius:22px;padding:12px;position:sticky;top:12px}.navtitle{font-size:calc(11px * var(--font-scale, 1));letter-spacing:1.1px;color:#9890a8;padding:10px 12px}.navbtn{width:100%;border:0;background:transparent;color:#716984;border-radius:13px;text-align:left;padding:12px;display:flex;align-items:center;gap:12px;margin:2px 0}.navbtn:hover{background:#f4f0fc}.navbtn.active{background:#eae5fb;color:#574b91;font-weight:750}.navicon{width:25px;text-align:center;font-size:calc(17px * var(--font-scale,1))}.sidefoot{margin:14px 5px 5px;padding:13px;border-radius:14px;background:#f7f3ff;color:#77708e;font-size:calc(12px * var(--font-scale,1))}.main{min-width:0}.page{display:none;animation:fade .18s ease}.page.active{display:block}@keyframes fade{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:none}}.hero,.panel{background:#ffffffc9;border:1px solid #fff;border-radius:23px;padding:23px;box-shadow:0 12px 38px #8c7ca10b;margin-bottom:16px}.hero{background:linear-gradient(120deg,#fffdfdce,#f2edffdc);padding:27px}.eyebrow{text-transform:uppercase;letter-spacing:1.3px;color:#8a7caa;font-size:calc(11px * var(--font-scale, 1));font-weight:800}.hero h2{font-size:calc(clamp(24px,3vw,33px) * var(--font-scale, 1));line-height:1.2;letter-spacing:-.8px;margin:9px 0}.hero p,.muted,.hint{color:var(--muted);font-size:calc(13px * var(--font-scale,1))}.hero p{max-width:760px}.sectionhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:15px}.sectionhead h2,.panel h2{margin:0 0 6px;font-size:calc(19px * var(--font-scale,1))}.sectionhead p,.panel p{margin:0;color:var(--muted);font-size:calc(13px * var(--font-scale,1))}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.upload{display:block;border:1.5px dashed #c5b8dc;border-radius:17px;padding:22px;text-align:center;background:#faf8ff;cursor:pointer;margin:15px 0}.upload:hover{background:#f4efff;border-color:#aa9cdb}.upload .bigicon{font-size:calc(27px * var(--font-scale, 1));display:block;margin-bottom:7px}.upload input{display:block;width:100%;margin-top:12px;font-size:calc(12px * var(--font-scale,1))}.btn{border:0;background:var(--purple);color:white;padding:11px 17px;border-radius:12px;font-weight:750;box-shadow:0 5px 14px #7968c62b}.btn:hover{filter:brightness(1.04);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.btn.alt{background:#eee9fb;color:#574b89;box-shadow:none}.btn.soft{background:#e4f5ed;color:#286c4d;box-shadow:none}.field{margin:12px 0}.field label{display:block;font-size:calc(12px * var(--font-scale, 1));font-weight:750;color:#6c6580;margin-bottom:5px}.field input[type=text],.field select,.field input[type=number],.field input[type=range],.search{width:100%}.field input[type=text],.field select,.field input[type=number],.search{padding:10px 12px;border:1px solid #e4ddec;border-radius:11px;background:#fff;color:var(--ink);outline-color:#aa9ddd}.field input[type=range]{accent-color:var(--purple)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0}.stat{background:#fff;border:1px solid #fff;border-radius:18px;padding:16px;min-width:0}.stat b{display:block;font-size:calc(29px * var(--font-scale, 1));letter-spacing:-.6px}.stat small{color:var(--muted);font-size:calc(12px * var(--font-scale,1))}.stat.good b{color:var(--green)}.stat.review b{color:var(--amber)}.stat.none b{color:var(--red)}.twostat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.mini{background:#fff;border:1px solid #eee8f5;border-radius:15px;padding:13px}.mini b{font-size:calc(19px * var(--font-scale, 1));display:block}.mini span{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.tablewrap{overflow:auto;border-radius:15px;border:1px solid #eee8f5;background:#fff}table{border-collapse:collapse;width:100%;min-width:770px}th,td{text-align:left;padding:11px 12px;border-bottom:1px solid #f0ecf5;font-size:calc(12px * var(--font-scale, 1));vertical-align:top}th{background:#faf7ff;color:#71668e;position:sticky;top:0;z-index:1}td select{margin:0;min-width:115px;border:1px solid #e4ddec;border-radius:9px;padding:7px;background:#fff;color:var(--ink);font-size:calc(12px * var(--font-scale,1))}.badge{display:inline-block;padding:4px 8px;border-radius:99px;font-size:calc(11px * var(--font-scale, 1));font-weight:750;white-space:nowrap}.badge.good{background:#ddf5e8;color:#2c7c58}.badge.review{background:#fff0cf;color:#946a19}.badge.none{background:#f9e1e8;color:#9a4b64}.badge.rejected{background:#eee9fb;color:#635588}.empty{text-align:center;padding:34px 16px;color:var(--muted)}.progressbox{display:none;background:#f5f1ff;border:1px solid #e8e0fc;border-radius:14px;padding:13px;margin-top:14px}.progressbox.show{display:block}.bar{height:8px;background:#ded6f5;border-radius:99px;overflow:hidden;margin-top:8px}.bar>div{height:100%;width:0;background:linear-gradient(90deg,#9e8bde,#6bba9b);transition:width .12s}.resulttools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0}.search{max-width:340px}.pager{display:flex;gap:9px;align-items:center;justify-content:flex-end;padding:12px}.pager span{font-size:calc(12px * var(--font-scale, 1));color:var(--muted)}.thresholdvalue{font-size:calc(30px * var(--font-scale, 1));font-weight:850;color:#6554ad}.rule{padding:12px;border-radius:13px;background:#f5f0ff;color:#6e628e;font-size:calc(13px * var(--font-scale, 1));margin-top:12px}.okmsg{padding:12px;border-radius:13px;background:#eaf8f0;color:#367554;font-size:calc(13px * var(--font-scale,1))}.foot{text-align:center;color:#8a8499;font-size:calc(12px * var(--font-scale, 1));padding:16px}@media(max-width:950px){.shell{grid-template-columns:1fr}.sidebar{position:static;display:flex;overflow-x:auto;gap:3px;padding:8px}.navtitle,.sidefoot{display:none}.navbtn{width:auto;flex:0 0 auto;padding:10px 13px}.navicon{width:auto}.grid3{grid-template-columns:1fr 1fr}}@media(max-width:650px){header{padding:15px 14px;align-items:flex-start;flex-direction:column}.headright{width:100%;justify-content:space-between}.shell{padding:0 12px 25px;gap:12px}.hero,.panel{padding:17px;border-radius:18px}.grid,.grid3,.twostat{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat{padding:12px}.stat b{font-size:calc(25px * var(--font-scale,1))}.sectionhead{flex-direction:column}.search{max-width:none}.navbtn{font-size:calc(12px * var(--font-scale, 1));gap:7px}.navicon{font-size:calc(15px * var(--font-scale,1))}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
@@ -1313,7 +1313,472 @@ body[data-theme="minimal"] .theme-drift{opacity:.08!important;filter:none!import
 @keyframes minimalPulse{0%,100%{transform:translate(-50%,-50%) scale(.8);opacity:.45}50%{transform:translate(-50%,-50%) scale(1.12);opacity:.85}}
 .app-header .brand-mark{width:72px!important;height:72px!important;flex-basis:72px!important;padding:3px!important;background:#fff!important;border:2px solid #d7e8ed!important;border-radius:18px!important;box-shadow:0 4px 14px #234b5b1c!important}
 .app-header .brand-mark svg{width:100%!important;height:100%!important}
-</style><link rel="stylesheet" href="/winter-theme.css?v=24"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
+</style><link rel="stylesheet" href="/winter-theme.css?v=24"><style id="matchma-restore-logo-png-v50">
+.app-header .brand-mark,.brand .brand-mark,.logo{width:150px!important;height:150px!important;flex:0 0 150px!important;min-width:150px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+.app-header .brand{gap:8px!important}
+@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark,.logo{width:108px!important;height:108px!important;flex-basis:108px!important;min-width:108px!important}}
+</style>
+<style id="matchma-minimal-bear-logo-fix-v52">
+/* Targeted repair: preserve title typography; enlarge only the original PNG logo. */
+.app-header .brand-mark,.brand .brand-mark,.logo{width:190px!important;height:190px!important;flex:0 0 190px!important;min-width:190px!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important}
+@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark,.logo{width:132px!important;height:132px!important;flex-basis:132px!important;min-width:132px!important}}
+/* Minimal theme: stable readable typography and clickable navigation. */
+body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:14px;line-height:1.5}
+body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;line-height:1.4;letter-spacing:normal;pointer-events:auto}
+body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,body[data-theme="minimal"]::before,body[data-theme="minimal"]::after{pointer-events:none!important}
+body[data-theme="minimal"] .navbtn{position:relative;z-index:2;cursor:pointer}
+body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .nav-folder{pointer-events:auto}
+/* Restore bear theme selection and its green woodland palette. */
+body[data-theme="bear"]{background:radial-gradient(ellipse at 9% 0%,#e4efce 0,transparent 36%),radial-gradient(ellipse at 91% 12%,#d3ebdb 0,transparent 38%),linear-gradient(150deg,#f1f4e2,#fbf0d9 52%,#e3f0e3)!important;color:#403429!important}
+</style>
+<style id="matchma-opaque-themes-logo-v53">
+/* Make the supplied PNG mark visually larger while keeping title font unchanged. */
+.app-header .brand-mark,.brand .brand-mark{width:176px!important;height:150px!important;flex:0 0 176px!important;min-width:176px!important;margin-right:-12px!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.65)!important;transform-origin:center center!important}
+.app-header .brand{gap:0!important;align-items:center!important}
+@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark{width:124px!important;height:112px!important;flex-basis:124px!important;min-width:124px!important;margin-right:-8px!important}.app-header .brand-logo-img{transform:scale(1.45)!important}}
+/* Bear theme: opaque surfaces, no translucent green wash; readable type. */
+body[data-theme="bear"]{font-family:Nunito,Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;background:#e8efda!important;color:#403429!important}
+body[data-theme="bear"] .page,body[data-theme="bear"] .sidebar,body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini,body[data-theme="bear"] .nav-folder{background:#fffdf5!important;backdrop-filter:none!important;opacity:1!important}
+body[data-theme="bear"] .nav-folder{background:#f8f6e9!important}
+body[data-theme="bear"] .hero{background:#fdf9ed!important}
+body[data-theme="bear"] .navbtn,body[data-theme="bear"] .navfolder-title,body[data-theme="bear"] button,body[data-theme="bear"] select{font-family:inherit!important;letter-spacing:normal!important;line-height:1.45}
+body[data-theme="bear"]::before,body[data-theme="bear"]::after{pointer-events:none!important}
+/* Minimal theme: remove decorative overlays from hit testing and stabilize fonts. */
+body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;color:#343b40!important;background:#f5f6f4!important}
+body[data-theme="minimal"] .page,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini{background:#fff!important;opacity:1!important;backdrop-filter:none!important}
+body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;letter-spacing:normal!important;font-kerning:normal;line-height:1.45}
+</style>
+<style id="matchma-logo-fill-header-space-v54">
+/* Enlarge the supplied logo artwork itself to use the empty header area; title typography stays untouched. */
+.app-header .brand{display:flex!important;align-items:center!important;gap:0!important;min-width:0}
+.app-header .brand-mark,.brand .brand-mark{width:230px!important;height:176px!important;flex:0 0 230px!important;min-width:230px!important;margin:0 -22px 0 0!important;overflow:visible!important}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(2.15)!important;transform-origin:center!important}
+.app-header .brand-copy{position:relative;z-index:1}
+@media(max-width:650px){
+ .app-header .brand-mark,.brand .brand-mark{width:142px!important;height:126px!important;flex-basis:142px!important;min-width:142px!important;margin-right:-12px!important}
+ .app-header .brand-logo-img{transform:scale(1.75)!important}
+}
+</style>
+<style id="matchma-global-font-logo-balance-v55">
+/* Restore consistent Vietnamese typography and balanced header layout. */
+html{font-size:16px!important}
+body{font-family:Inter,Arial,"Helvetica Neue",sans-serif!important;font-size:15px!important;line-height:1.5!important}
+body *{font-family:inherit}
+h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important;letter-spacing:-.5px!important}
+h2{line-height:1.25}
+.subbrand{font-size:12px!important;line-height:1.4!important}
+.app-header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}
+.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;flex:0 1 auto!important;min-width:0!important}
+.app-header .brand-mark,.brand .brand-mark{width:104px!important;height:104px!important;flex:0 0 104px!important;min-width:104px!important;margin:0!important;overflow:visible!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:none!important}
+.app-header .brand-copy{position:static!important;z-index:auto!important;min-width:0}
+@media(max-width:650px){
+ .app-header{flex-wrap:wrap!important}
+ .app-header .brand{gap:8px!important}
+ .app-header .brand-mark,.brand .brand-mark{width:76px!important;height:76px!important;flex-basis:76px!important;min-width:76px!important}
+ h1{font-size:clamp(22px,6vw,30px)!important}
+}
+</style>
+<style id="matchma-logo-size-final-v56">
+/* Logo artwork only: fill the empty left header space without enlarging title. */
+.app-header .brand{gap:8px!important;align-items:center!important}
+.app-header .brand-mark,.brand .brand-mark{width:168px!important;height:142px!important;flex:0 0 168px!important;min-width:168px!important;margin:0!important;overflow:visible!important}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.5)!important;transform-origin:center!important}
+.app-header .brand-copy{flex:0 1 auto!important;min-width:0!important}
+.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important}
+@media(max-width:650px){
+ .app-header .brand-mark,.brand .brand-mark{width:112px!important;height:104px!important;flex-basis:112px!important;min-width:112px!important}
+ .app-header .brand-logo-img{transform:scale(1.35)!important}
+ .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
+}
+</style>
+<style id="matchma-minimal-click-logo-final-v57">
+/* Repair minimal-theme hit testing without changing folder markup or icons. */
+body[data-theme="minimal"] #themeScene,
+body[data-theme="minimal"] #catClickFX,
+body[data-theme="minimal"] .theme-scene,
+body[data-theme="minimal"] .theme-overlay,
+body[data-theme="minimal"] .snow-layer,
+body[data-theme="minimal"] .decor-layer,
+body[data-theme="minimal"] canvas{pointer-events:none!important}
+body[data-theme="minimal"] .sidebar,
+body[data-theme="minimal"] .nav-folder,
+body[data-theme="minimal"] .navbtn,
+body[data-theme="minimal"] .navfolder-title,
+body[data-theme="minimal"] .nav-folder summary,
+body[data-theme="minimal"] button,
+body[data-theme="minimal"] a,
+body[data-theme="minimal"] select{pointer-events:auto!important;cursor:pointer}
+body[data-theme="minimal"] .sidebar,
+body[data-theme="minimal"] .navbtn,
+body[data-theme="minimal"] .nav-folder,
+body[data-theme="minimal"] .navfolder-title{position:relative;z-index:5}
+/* Final logo sizing rule wins over all earlier conflicting rules; title unchanged. */
+.app-header .brand{display:flex!important;align-items:center!important;gap:6px!important;min-width:0!important}
+.app-header .brand-mark,.brand .brand-mark{width:210px!important;height:170px!important;flex:0 0 210px!important;min-width:210px!important;margin:0!important;overflow:visible!important}
+.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.9)!important;transform-origin:center center!important}
+.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;letter-spacing:-.5px!important}
+@media(max-width:650px){
+ .app-header .brand-mark,.brand .brand-mark{width:132px!important;height:116px!important;flex-basis:132px!important;min-width:132px!important}
+ .app-header .brand-logo-img{transform:scale(1.5)!important}
+ .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
+}
+</style>
+<style id="matchma-minimal-flat-logo-large-v58">
+/* Minimal means plain monochrome UI, no decorative color, animation, or click FX. */
+body[data-theme="minimal"]{background:#fff!important;background-image:none!important;color:#222!important}
+body[data-theme="minimal"]::before,body[data-theme="minimal"]::after,
+body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
+body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] .theme-scene,
+body[data-theme="minimal"] .theme-overlay,body[data-theme="minimal"] canvas{display:none!important;animation:none!important;transition:none!important;pointer-events:none!important}
+body[data-theme="minimal"] .page,
+body[data-theme="minimal"] .sidebar,
+body[data-theme="minimal"] .hero,
+body[data-theme="minimal"] .panel,
+body[data-theme="minimal"] .stat,
+body[data-theme="minimal"] .mini,
+body[data-theme="minimal"] .nav-folder,
+body[data-theme="minimal"] .navbtn,
+body[data-theme="minimal"] .navfolder-title{background:#fff!important;background-image:none!important;color:#222!important;border-color:#ddd!important;box-shadow:none!important;backdrop-filter:none!important;border-radius:0!important}
+body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important;padding:8px 0!important;margin:4px 0!important}
+body[data-theme="minimal"] .nav-folder::before{display:none!important}
+body[data-theme="minimal"] .navbtn:hover,
+body[data-theme="minimal"] .navbtn:active,
+body[data-theme="minimal"] .navbtn.active,
+body[data-theme="minimal"] .navfolder-title:hover{background:#fff!important;border-color:transparent!important;box-shadow:none!important;color:#222!important;transform:none!important;filter:none!important}
+body[data-theme="minimal"] .navicon{font-size:0!important;background:none!important}
+body[data-theme="minimal"] .navicon::before,
+body[data-theme="minimal"] .navfolder-tab-icon{display:inline-block!important;width:18px!important;height:15px!important;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath fill='none' stroke='%23444' stroke-width='1.6' d='M1 3.5h8l2 2H23v11H1z'/%3E%3C/svg%3E")!important;filter:none!important}
+body[data-theme="minimal"] .navbtn{border:0!important;padding:9px 8px!important;transition:none!important}
+body[data-theme="minimal"] button,
+body[data-theme="minimal"] a,
+body[data-theme="minimal"] select{transition:none!important;animation:none!important;box-shadow:none!important}
+/* Increase the actual supplied PNG, not its container alone; keep title typography unchanged. */
+.app-header .brand{display:flex!important;align-items:center!important;gap:4px!important;min-width:0!important}
+.app-header .brand-mark,.brand .brand-mark{width:270px!important;height:220px!important;flex:0 0 270px!important;min-width:270px!important;margin:0!important;padding:0!important;overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(2.1)!important;transform-origin:center center!important}
+.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;letter-spacing:-.5px!important}
+@media(max-width:650px){
+ .app-header .brand-mark,.brand .brand-mark{width:150px!important;height:132px!important;flex-basis:150px!important;min-width:150px!important}
+ .app-header .brand-logo-img{transform:scale(1.65)!important}
+ .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
+}
+</style>
+<style id="matchma-logo-visible-minimal-repair-v59">
+/* Final header geometry: larger visible artwork, independent of title sizing. */
+header.app-header{overflow:visible!important}
+header.app-header .brand{display:flex!important;align-items:center!important;gap:8px!important;overflow:visible!important}
+header.app-header .brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;width:250px!important;height:190px!important;min-width:250px!important;flex:0 0 250px!important;overflow:visible!important;padding:0!important;margin:0!important}
+header.app-header .brand-mark img.brand-logo-img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(1.8)!important;transform-origin:center!important}
+header.app-header .brand-copy{flex:0 0 auto!important;min-width:0!important}
+header.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important}
+@media(max-width:650px){
+ header.app-header .brand-mark{width:150px!important;height:120px!important;min-width:150px!important;flex-basis:150px!important}
+ header.app-header .brand-mark img.brand-logo-img{transform:scale(1.5)!important}
+ header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
+}
+/* Minimal theme stays plain and static while controls remain clickable. */
+body[data-theme="minimal"]{background:#fff!important;background-image:none!important;color:#222!important;font-family:Arial,"Helvetica Neue",sans-serif!important}
+body[data-theme="minimal"] *{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important}
+body[data-theme="minimal"] .navicon{font-size:initial!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
+body[data-theme="minimal"] .navicon::before{content:none!important;display:none!important}
+body[data-theme="minimal"] .navfolder-tab-icon{background:none!important}
+body[data-theme="minimal"] .nav-folder,body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,
+body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,
+body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini,body[data-theme="minimal"] .page{
+ background:#fff!important;background-image:none!important;color:#222!important;border-color:#ddd!important;border-radius:0!important
+}
+body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
+body[data-theme="minimal"] .theme-scene,body[data-theme="minimal"] .theme-overlay,
+body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] canvas{display:none!important;pointer-events:none!important}
+body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,
+body[data-theme="minimal"] button,body[data-theme="minimal"] a,body[data-theme="minimal"] select{pointer-events:auto!important;cursor:pointer!important}
+</style>
+<style id="matchma-logo-actually-large-v60">
+/* Make the complete original PNG mark visibly dominant; keep MatchMã title size unchanged. */
+header.app-header{overflow:visible!important;min-height:250px!important}
+header.app-header .brand{display:flex!important;align-items:center!important;gap:0!important;overflow:visible!important;flex:0 1 auto!important}
+header.app-header .brand-mark{width:330px!important;height:270px!important;min-width:330px!important;flex:0 0 330px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:0 -14px 0 -8px!important;padding:0!important}
+header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(2.35)!important;transform-origin:center center!important}
+header.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important}
+@media(max-width:650px){
+ header.app-header{min-height:150px!important}
+ header.app-header .brand-mark{width:175px!important;height:145px!important;min-width:175px!important;flex-basis:175px!important;margin:0 -8px 0 -4px!important}
+ header.app-header .brand-mark img.brand-logo-img{transform:scale(1.8)!important}
+ header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
+}
+</style>
+<style id="matchma-replace-minimal-theme-v61">
+/* Replace the old minimal-theme styling with a clean, flat theme. */
+body[data-theme="minimal"]{
+ --bg:#fff!important;--panel:#fff!important;--card:#fff!important;--surface:#fff!important;
+ background:#fff!important;background-image:none!important;color:#222!important;
+ font-family:Arial,"Helvetica Neue",sans-serif!important;
+}
+body[data-theme="minimal"]::before,body[data-theme="minimal"]::after,
+body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
+body[data-theme="minimal"] .theme-scene,body[data-theme="minimal"] .theme-overlay,
+body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] canvas{display:none!important}
+body[data-theme="minimal"] *{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important}
+body[data-theme="minimal"] .app-header,
+body[data-theme="minimal"] .sidebar,
+body[data-theme="minimal"] .hero,
+body[data-theme="minimal"] .panel,
+body[data-theme="minimal"] .stat,
+body[data-theme="minimal"] .mini,
+body[data-theme="minimal"] .nav-folder,
+body[data-theme="minimal"] .navbtn,
+body[data-theme="minimal"] .navfolder-title,
+body[data-theme="minimal"] .page,
+body[data-theme="minimal"] .card{
+ background:#fff!important;background-image:none!important;color:#222!important;
+ border-color:#ddd!important;border-radius:4px!important;
+}
+body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important;padding:6px 0!important}
+body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #eee!important;transform:none!important;filter:none!important}
+body[data-theme="minimal"] .navbtn:hover,
+body[data-theme="minimal"] .navbtn:active,
+body[data-theme="minimal"] .navbtn.active,
+body[data-theme="minimal"] .navfolder-title:hover{background:#f7f7f7!important;color:#222!important;border-color:#ddd!important;transform:none!important}
+body[data-theme="minimal"] .navicon{font-size:initial!important;display:inline-flex!important}
+body[data-theme="minimal"] .navicon::before{content:none!important;display:none!important}
+body[data-theme="minimal"] button,body[data-theme="minimal"] a,
+body[data-theme="minimal"] select,body[data-theme="minimal"] input{pointer-events:auto!important;cursor:pointer!important}
+body[data-theme="minimal"] .nav-folder::before{display:none!important}
+/* Preserve exact PNG asset; enlarge the actual image while keeping title typography untouched. */
+header.app-header .brand-mark{width:240px!important;height:180px!important;min-width:240px!important;flex:0 0 240px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important}
+header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(2.7)!important;transform-origin:center!important}
+header.app-header .brand-copy h1{font-size:inherit!important}
+@media(max-width:650px){
+ header.app-header .brand-mark{width:170px!important;height:130px!important;min-width:170px!important;flex-basis:170px!important}
+ header.app-header .brand-mark img.brand-logo-img{transform:scale(2.0)!important}
+}
+</style>
+<style id="matchma-final-minimal-reset-logo-fit-v62">
+/* Correct the actual mobile header: no transformed overflow/clipping. */
+header.app-header{box-sizing:border-box!important;min-height:0!important;height:auto!important;align-items:center!important;flex-wrap:wrap!important;overflow:visible!important;padding:10px 14px!important;gap:10px!important}
+header.app-header .brand{align-items:center!important;gap:8px!important;flex:0 1 auto!important;min-width:0!important;overflow:visible!important}
+header.app-header .brand-mark{box-sizing:border-box!important;width:120px!important;height:108px!important;min-width:120px!important;flex:0 0 120px!important;margin:0!important;padding:0!important;overflow:visible!important}
+header.app-header .brand-mark img.brand-logo-img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;transform:none!important}
+header.app-header .brand-copy{min-width:0!important;overflow:visible!important}
+header.app-header .brand-copy h1{display:block!important;font-size:clamp(24px,4vw,34px)!important;line-height:1.1!important;white-space:nowrap!important;margin:0!important}
+header.app-header .brand-copy .subbrand{display:none!important}
+header.app-header .headright{flex:1 1 100%!important;min-width:0!important;justify-content:flex-start!important}
+@media(min-width:900px){
+ header.app-header .brand-mark{width:155px!important;height:132px!important;min-width:155px!important;flex-basis:155px!important}
+}
+@media(max-width:650px){
+ header.app-header{padding:8px 12px!important}
+ header.app-header .brand-mark{width:100px!important;height:92px!important;min-width:100px!important;flex-basis:100px!important}
+ header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
+}
+/* A genuinely plain replacement for Minimal: remove colored/dashed theme decoration, not click behavior. */
+body[data-theme="minimal"]{background:#fff!important;background-image:none!important;color:#222!important;font-family:Arial,"Helvetica Neue",sans-serif!important;font-size:16px!important}
+body[data-theme="minimal"]::before,body[data-theme="minimal"]::after,
+body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
+body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] .theme-scene,
+body[data-theme="minimal"] .theme-overlay,body[data-theme="minimal"] canvas{display:none!important}
+body[data-theme="minimal"] .app-header,
+body[data-theme="minimal"] .shell,
+body[data-theme="minimal"] .sidebar,
+body[data-theme="minimal"] .hero,
+body[data-theme="minimal"] .panel,
+body[data-theme="minimal"] .stat,
+body[data-theme="minimal"] .mini,
+body[data-theme="minimal"] .nav-folder,
+body[data-theme="minimal"] .navbtn,
+body[data-theme="minimal"] .navfolder-title,
+body[data-theme="minimal"] .page,
+body[data-theme="minimal"] .card,
+body[data-theme="minimal"] section,
+body[data-theme="minimal"] article{
+ background:#fff!important;background-image:none!important;color:#222!important;
+ box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important;
+ border-color:#ddd!important;border-style:solid!important;border-width:1px!important;border-radius:6px!important;
+}
+body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important}
+body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #eee!important;background:#fff!important}
+body[data-theme="minimal"] .navbtn:hover,body[data-theme="minimal"] .navbtn:active,
+body[data-theme="minimal"] .navbtn.active,body[data-theme="minimal"] .navfolder-title:hover{background:#f7f7f7!important;color:#222!important;transform:none!important}
+body[data-theme="minimal"] *{animation:none!important;transition:none!important;text-shadow:none!important;box-shadow:none!important;filter:none!important}
+</style>
+<style id="matchma-header-font-minimal-fix-v63">
+/* Header: keep logo/title and utility controls in one compact row on wide screens. */
+header.app-header{height:auto!important;min-height:76px!important;padding:8px 20px!important;margin:8px auto 10px!important;display:flex!important;flex-flow:row wrap!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;overflow:visible!important}
+header.app-header .brand{display:flex!important;flex:0 0 auto!important;align-items:center!important;gap:12px!important;min-width:0!important;overflow:visible!important}
+header.app-header .brand-mark{width:145px!important;height:115px!important;min-width:145px!important;flex:0 0 145px!important;overflow:visible!important}
+header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;transform:none!important}
+header.app-header .brand-copy{flex:0 0 auto!important;min-width:0!important}
+header.app-header .brand-copy h1{font-size:clamp(25px,2.5vw,34px)!important;line-height:1.12!important;letter-spacing:normal!important;margin:0!important;white-space:nowrap!important}
+header.app-header .brand-copy .subbrand{display:none!important}
+header.app-header .headright{display:flex!important;flex:1 1 460px!important;min-width:0!important;max-width:100%!important;flex-flow:row wrap!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important}
+@media(max-width:700px){
+ header.app-header{padding:8px 12px!important;gap:8px!important}
+ header.app-header .brand{flex:1 1 100%!important}
+ header.app-header .brand-mark{width:100px!important;height:86px!important;min-width:100px!important;flex-basis:100px!important}
+ header.app-header .brand-copy h1{font-size:clamp(24px,6vw,30px)!important}
+ header.app-header .headright{flex:1 1 100%!important;justify-content:flex-start!important}
+}
+/* Normalize text sizing in Vietnamese UI; retain explicit heading hierarchy. */
+body{font-size:16px}
+body .navtitle,body .navfolder-title,body .navbtn,body .pill,body .subbrand,
+body .field label,body .field small,body .muted,body .hint,body .table-wrap,
+body input,body select,body textarea,body button{font-size:inherit}
+body .navtitle{font-size:11px!important}
+body .navfolder-title{font-size:12px!important}
+body .navbtn{font-size:14px!important;line-height:1.4!important}
+body .pill{font-size:13px!important;line-height:1.3!important}
+body .field label,body label{line-height:1.45}
+body p,body li,body td,body th,body input,body select,body textarea{line-height:1.5}
+/* Minimal theme: remove dashed outlines and colored accents consistently. */
+body[data-theme="minimal"]{--bg:#fff!important;--panel:#fff!important;--card:#fff!important;--surface:#fff!important;--ink:#222!important;--muted:#666!important;--purple:#333!important;--frame:#ddd!important;--green:#444!important;--amber:#666!important;--red:#555!important;background:#fff!important;background-image:none!important;color:#222!important;font-family:Arial,"Helvetica Neue",sans-serif!important}
+body[data-theme="minimal"] *,body[data-theme="minimal"] *::before,body[data-theme="minimal"] *::after{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;filter:none!important;background-image:none!important}
+body[data-theme="minimal"] .app-header,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini,body[data-theme="minimal"] .nav-folder,body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] .page,body[data-theme="minimal"] .card,body[data-theme="minimal"] .pill,body[data-theme="minimal"] .field,body[data-theme="minimal"] input,body[data-theme="minimal"] select,body[data-theme="minimal"] textarea,body[data-theme="minimal"] button{background:#fff!important;color:#222!important;border-color:#ddd!important;border-style:solid!important;border-width:1px!important;border-radius:4px!important}
+body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important}
+body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #eee!important;text-align:left!important}
+body[data-theme="minimal"] .navbtn.active,body[data-theme="minimal"] .navbtn:hover{background:#f5f5f5!important;color:#222!important}
+body[data-theme="minimal"] .navicon{display:inline-flex!important}
+</style>
+<style id="matchma-header-two-column-v64">
+/* Explicit two-column header: brand on the left, controls on the right. */
+header.app-header{
+ display:grid!important;
+ grid-template-columns:minmax(0,auto) minmax(0,1fr)!important;
+ align-items:center!important;
+ justify-content:stretch!important;
+ column-gap:clamp(12px,2vw,28px)!important;
+ row-gap:0!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ padding:12px clamp(12px,2vw,24px)!important;
+ margin:0!important;
+ box-sizing:border-box!important;
+}
+header.app-header .brand{
+ grid-column:1!important;grid-row:1!important;
+ display:flex!important;flex-flow:row nowrap!important;
+ align-items:center!important;justify-content:flex-start!important;
+ gap:14px!important;width:auto!important;min-width:0!important;max-width:100%!important;
+}
+header.app-header .brand-mark{
+ width:clamp(96px,12vw,150px)!important;
+ height:clamp(88px,10vw,120px)!important;
+ min-width:clamp(96px,12vw,150px)!important;
+ flex:0 0 clamp(96px,12vw,150px)!important;
+ overflow:visible!important;
+}
+header.app-header .brand-mark img.brand-logo-img{
+ display:block!important;width:100%!important;height:100%!important;
+ max-width:none!important;max-height:none!important;object-fit:contain!important;
+}
+header.app-header .brand-copy{display:block!important;min-width:0!important;flex:0 1 auto!important}
+header.app-header .brand-copy h1{
+ margin:0!important;white-space:nowrap!important;
+ font-size:clamp(23px,3vw,36px)!important;line-height:1.15!important;
+}
+header.app-header .brand-copy .subbrand{display:none!important}
+header.app-header .headright{
+ grid-column:2!important;grid-row:1!important;
+ display:flex!important;flex-flow:row wrap!important;
+ align-items:center!important;justify-content:flex-end!important;
+ align-content:center!important;gap:8px!important;
+ width:100%!important;min-width:0!important;max-width:none!important;
+}
+header.app-header .headright>*{max-width:100%!important;min-width:0!important}
+@media(max-width:700px){
+ header.app-header{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr)!important;column-gap:8px!important;padding:8px!important}
+ header.app-header .brand{gap:6px!important}
+ header.app-header .brand-mark{width:clamp(58px,17vw,82px)!important;height:clamp(58px,17vw,82px)!important;min-width:clamp(58px,17vw,82px)!important;flex-basis:clamp(58px,17vw,82px)!important}
+ header.app-header .brand-copy h1{font-size:clamp(17px,4.8vw,25px)!important;white-space:normal!important;overflow-wrap:anywhere!important}
+ header.app-header .headright{gap:4px!important;justify-content:flex-end!important}
+ header.app-header .headright .local-pill{display:none!important}
+ header.app-header .headright .toolbar-select,header.app-header .headright .toolbar-font{font-size:11px!important}
+ header.app-header .headright select,header.app-header .headright button{font-size:11px!important;padding:4px 6px!important}
+}
+</style>
+<style id="matchma-global-font-and-large-logo-v65">
+/* One consistent Vietnamese-friendly font system across the entire site. */
+html{font-size:16px!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
+body,body *:not(svg):not(svg *):not(.icon):not(.lucide){
+ font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;
+ font-synthesis:none!important;
+}
+body{font-size:16px!important;line-height:1.5!important}
+body p,body li,body td,body th,body label,body input,body select,body textarea,body button,
+body .muted,body .hint,body .subbrand,body .pill,body .navbtn,body .navfolder-title{
+ line-height:1.5!important;
+}
+body input,body select,body textarea,body button{font-size:inherit}
+body .navtitle{font-size:11px!important}
+body .navfolder-title{font-size:12px!important}
+body .navbtn{font-size:14px!important}
+body .pill{font-size:13px!important}
+body h1{font-size:clamp(26px,3vw,36px)!important;line-height:1.2!important}
+body h2{font-size:clamp(22px,2.4vw,30px)!important;line-height:1.25!important}
+body h3{font-size:20px!important;line-height:1.3!important}
+body small,body .small{font-size:12px!important;line-height:1.45!important}
+/* Make the original PNG logo visibly larger without pushing controls below the brand. */
+header.app-header{grid-template-columns:minmax(0,auto) minmax(0,1fr)!important;column-gap:clamp(12px,2vw,26px)!important}
+header.app-header .brand{flex-flow:row nowrap!important;align-items:center!important;gap:12px!important;min-width:0!important}
+header.app-header .brand-mark{
+ width:clamp(128px,15vw,176px)!important;height:clamp(112px,13vw,148px)!important;
+ min-width:clamp(128px,15vw,176px)!important;flex:0 0 clamp(128px,15vw,176px)!important;
+}
+header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important}
+header.app-header .brand-copy h1{font-size:clamp(25px,3vw,36px)!important;line-height:1.15!important;white-space:nowrap!important}
+header.app-header .headright{grid-column:2!important;grid-row:1!important;min-width:0!important;justify-content:flex-end!important}
+@media(max-width:700px){
+ header.app-header{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;column-gap:8px!important}
+ header.app-header .brand{gap:5px!important}
+ header.app-header .brand-mark{width:clamp(84px,22vw,112px)!important;height:clamp(84px,22vw,112px)!important;min-width:clamp(84px,22vw,112px)!important;flex-basis:clamp(84px,22vw,112px)!important}
+ header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,26px)!important;white-space:normal!important}
+ header.app-header .headright{grid-column:2!important;grid-row:1!important;justify-content:flex-end!important;gap:4px!important}
+}
+</style>
+<style id="matchma-logo-symbol-crop-v72">
+/* The current PNG includes its own “match mã” lettering. Crop the lower lettering
+   so only the emblem appears beside the separate HTML title; otherwise it duplicates/overlaps. */
+header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+header.app-header .brand-mark{
+ display:block!important;position:relative!important;overflow:hidden!important;
+ width:58px!important;height:58px!important;min-width:58px!important;flex:0 0 58px!important;
+}
+header.app-header .brand-mark img.brand-logo-img{
+ position:absolute!important;top:0!important;left:0!important;
+ width:100%!important;height:150%!important;max-width:none!important;max-height:none!important;
+ object-fit:cover!important;object-position:top center!important;
+ transform:none!important;
+}
+header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
+header.app-header .brand-copy h1{
+ margin:0!important;font-family:"Be Vietnam Pro",Arial,sans-serif!important;
+ font-size:clamp(24px,2.6vw,32px)!important;line-height:1.12!important;white-space:nowrap!important;
+}
+header.app-header .brand-copy h1 span{font-family:inherit!important}
+@media(max-width:700px){
+ header.app-header .brand{gap:8px!important}
+ header.app-header .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important}
+ header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,24px)!important;white-space:normal!important}
+}
+</style>
+<style id="matchma-font-live-fix-v74">
+:root{--matchma-font-family:"Be Vietnam Pro",Arial,sans-serif}
+html body,html body *:not(svg):not(svg *):not(.icon):not(.lucide){
+ font-family:var(--matchma-font-family),Arial,sans-serif!important;
+}
+#siteFontPreview{font-family:var(--matchma-font-family),Arial,sans-serif}
+header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+header.app-header .brand-mark{display:block!important;position:relative!important;overflow:hidden!important;width:68px!important;height:68px!important;min-width:68px!important;flex:0 0 68px!important}
+header.app-header .brand-mark img.brand-logo-img{position:absolute!important;inset:0 auto auto 0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:top center!important;transform:none!important}
+header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
+header.app-header .brand-copy h1{margin:0!important;font-family:var(--matchma-font-family),Arial,sans-serif!important;font-size:clamp(24px,2.8vw,34px)!important;line-height:1.12!important;letter-spacing:0!important;white-space:nowrap!important}
+@media(max-width:700px){header.app-header .brand{gap:8px!important}header.app-header .brand-mark{width:52px!important;height:52px!important;min-width:52px!important;flex-basis:52px!important}header.app-header .brand-copy h1{font-size:clamp(18px,4.5vw,24px)!important;white-space:normal!important}}
+</style>
+</head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
   <span class="brand-mark" aria-label="Logo MatchMã" role="img"><img class="brand-logo-img" src="/matchma-logo.png?v=50" alt="Logo MatchMã"></span>
@@ -2696,527 +3161,31 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 /* Entertainment and bear snow startup removed. */
 
 </script><script src="/winter-theme.js?v=20">
-/* User-selectable site font family, persisted locally. */
-const MATCHMA_FONT_KEY='matchma-site-font-family-v1';
-const MATCHMA_FONTS=['Be Vietnam Pro','Nunito','Inter','Roboto','Open Sans','Lato','Montserrat','Poppins','Baloo 2','Merriweather'];
-function setSiteFontFamily(name){
- const safe=MATCHMA_FONTS.includes(name)?name:'Be Vietnam Pro';
- document.documentElement.style.setProperty('--matchma-font-family','"'+safe+'",Arial,sans-serif');
- document.body.dataset.siteFont=safe;
- const sel=document.getElementById('siteFontFamily');if(sel)sel.value=safe;
- const preview=document.getElementById('siteFontPreview');if(preview)preview.style.fontFamily='"'+safe+'",Arial,sans-serif';
- try{localStorage.setItem(MATCHMA_FONT_KEY,safe)}catch(e){}
-}
-(function initSiteFontFamily(){
- let saved='Be Vietnam Pro';try{saved=localStorage.getItem(MATCHMA_FONT_KEY)||saved}catch(e){}
- setSiteFontFamily(saved);
- const sel=document.getElementById('siteFontFamily');
- if(sel)sel.addEventListener('change',()=>setSiteFontFamily(sel.value));
- const reset=document.getElementById('resetSiteFont');
- if(reset)reset.addEventListener('click',()=>setSiteFontFamily('Be Vietnam Pro'));
-})();
-</script>
+/* Reliable site-wide font selector: wait for DOM, update CSS variable and persist selection. */
+(function(){
+ const KEY='matchma-site-font-family-v1';
+ const FONTS=['Be Vietnam Pro','Nunito','Inter','Roboto','Open Sans','Lato','Montserrat','Poppins','Baloo 2','Merriweather'];
+ function applyFont(value){
+  const name=FONTS.includes(value)?value:'Be Vietnam Pro';
+  document.documentElement.style.setProperty('--matchma-font-family','"'+name+'", Arial, sans-serif');
+  document.documentElement.dataset.siteFont=name;
+  const select=document.getElementById('siteFontFamily');
+  if(select && select.value!==name) select.value=name;
+  const preview=document.getElementById('siteFontPreview');
+  if(preview) preview.style.setProperty('font-family','"'+name+'", Arial, sans-serif','important');
+  try{localStorage.setItem(KEY,name)}catch(e){}
+ }
+ function init(){
+  let saved='Be Vietnam Pro';try{saved=localStorage.getItem(KEY)||saved}catch(e){}
+  applyFont(saved);
+  document.addEventListener('change',function(event){
+   if(event.target && event.target.id==='siteFontFamily') applyFont(event.target.value);
+  });
+  document.addEventListener('click',function(event){
+   const target=event.target && event.target.closest ? event.target.closest('#resetSiteFont') : null;
+   if(target){event.preventDefault();applyFont('Be Vietnam Pro')}
+  });
+ }
+ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
+})();</script>
 </body></html>
-<style id="matchma-restore-logo-png-v50">
-.app-header .brand-mark,.brand .brand-mark,.logo{width:150px!important;height:150px!important;flex:0 0 150px!important;min-width:150px!important;padding:0!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important}
-.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
-.app-header .brand{gap:8px!important}
-@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark,.logo{width:108px!important;height:108px!important;flex-basis:108px!important;min-width:108px!important}}
-</style>
-
-<style id="matchma-minimal-bear-logo-fix-v52">
-/* Targeted repair: preserve title typography; enlarge only the original PNG logo. */
-.app-header .brand-mark,.brand .brand-mark,.logo{width:190px!important;height:190px!important;flex:0 0 190px!important;min-width:190px!important}
-.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important}
-@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark,.logo{width:132px!important;height:132px!important;flex-basis:132px!important;min-width:132px!important}}
-/* Minimal theme: stable readable typography and clickable navigation. */
-body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;font-size:14px;line-height:1.5}
-body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;line-height:1.4;letter-spacing:normal;pointer-events:auto}
-body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,body[data-theme="minimal"]::before,body[data-theme="minimal"]::after{pointer-events:none!important}
-body[data-theme="minimal"] .navbtn{position:relative;z-index:2;cursor:pointer}
-body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .nav-folder{pointer-events:auto}
-/* Restore bear theme selection and its green woodland palette. */
-body[data-theme="bear"]{background:radial-gradient(ellipse at 9% 0%,#e4efce 0,transparent 36%),radial-gradient(ellipse at 91% 12%,#d3ebdb 0,transparent 38%),linear-gradient(150deg,#f1f4e2,#fbf0d9 52%,#e3f0e3)!important;color:#403429!important}
-</style>
-
-<style id="matchma-opaque-themes-logo-v53">
-/* Make the supplied PNG mark visually larger while keeping title font unchanged. */
-.app-header .brand-mark,.brand .brand-mark{width:176px!important;height:150px!important;flex:0 0 176px!important;min-width:176px!important;margin-right:-12px!important}
-.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.65)!important;transform-origin:center center!important}
-.app-header .brand{gap:0!important;align-items:center!important}
-@media(max-width:650px){.app-header .brand-mark,.brand .brand-mark{width:124px!important;height:112px!important;flex-basis:124px!important;min-width:124px!important;margin-right:-8px!important}.app-header .brand-logo-img{transform:scale(1.45)!important}}
-/* Bear theme: opaque surfaces, no translucent green wash; readable type. */
-body[data-theme="bear"]{font-family:Nunito,Inter,system-ui,-apple-system,"Segoe UI",sans-serif!important;background:#e8efda!important;color:#403429!important}
-body[data-theme="bear"] .page,body[data-theme="bear"] .sidebar,body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini,body[data-theme="bear"] .nav-folder{background:#fffdf5!important;backdrop-filter:none!important;opacity:1!important}
-body[data-theme="bear"] .nav-folder{background:#f8f6e9!important}
-body[data-theme="bear"] .hero{background:#fdf9ed!important}
-body[data-theme="bear"] .navbtn,body[data-theme="bear"] .navfolder-title,body[data-theme="bear"] button,body[data-theme="bear"] select{font-family:inherit!important;letter-spacing:normal!important;line-height:1.45}
-body[data-theme="bear"]::before,body[data-theme="bear"]::after{pointer-events:none!important}
-/* Minimal theme: remove decorative overlays from hit testing and stabilize fonts. */
-body[data-theme="minimal"]{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;color:#343b40!important;background:#f5f6f4!important}
-body[data-theme="minimal"] .page,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini{background:#fff!important;opacity:1!important;backdrop-filter:none!important}
-body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] button,body[data-theme="minimal"] select{font-family:inherit!important;letter-spacing:normal!important;font-kerning:normal;line-height:1.45}
-</style>
-
-<style id="matchma-logo-fill-header-space-v54">
-/* Enlarge the supplied logo artwork itself to use the empty header area; title typography stays untouched. */
-.app-header .brand{display:flex!important;align-items:center!important;gap:0!important;min-width:0}
-.app-header .brand-mark,.brand .brand-mark{width:230px!important;height:176px!important;flex:0 0 230px!important;min-width:230px!important;margin:0 -22px 0 0!important;overflow:visible!important}
-.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(2.15)!important;transform-origin:center!important}
-.app-header .brand-copy{position:relative;z-index:1}
-@media(max-width:650px){
- .app-header .brand-mark,.brand .brand-mark{width:142px!important;height:126px!important;flex-basis:142px!important;min-width:142px!important;margin-right:-12px!important}
- .app-header .brand-logo-img{transform:scale(1.75)!important}
-}
-</style>
-
-<style id="matchma-global-font-logo-balance-v55">
-/* Restore consistent Vietnamese typography and balanced header layout. */
-html{font-size:16px!important}
-body{font-family:Inter,Arial,"Helvetica Neue",sans-serif!important;font-size:15px!important;line-height:1.5!important}
-body *{font-family:inherit}
-h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important;letter-spacing:-.5px!important}
-h2{line-height:1.25}
-.subbrand{font-size:12px!important;line-height:1.4!important}
-.app-header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:16px!important}
-.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;flex:0 1 auto!important;min-width:0!important}
-.app-header .brand-mark,.brand .brand-mark{width:104px!important;height:104px!important;flex:0 0 104px!important;min-width:104px!important;margin:0!important;overflow:visible!important}
-.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:none!important}
-.app-header .brand-copy{position:static!important;z-index:auto!important;min-width:0}
-@media(max-width:650px){
- .app-header{flex-wrap:wrap!important}
- .app-header .brand{gap:8px!important}
- .app-header .brand-mark,.brand .brand-mark{width:76px!important;height:76px!important;flex-basis:76px!important;min-width:76px!important}
- h1{font-size:clamp(22px,6vw,30px)!important}
-}
-</style>
-
-<style id="matchma-logo-size-final-v56">
-/* Logo artwork only: fill the empty left header space without enlarging title. */
-.app-header .brand{gap:8px!important;align-items:center!important}
-.app-header .brand-mark,.brand .brand-mark{width:168px!important;height:142px!important;flex:0 0 168px!important;min-width:168px!important;margin:0!important;overflow:visible!important}
-.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.5)!important;transform-origin:center!important}
-.app-header .brand-copy{flex:0 1 auto!important;min-width:0!important}
-.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important}
-@media(max-width:650px){
- .app-header .brand-mark,.brand .brand-mark{width:112px!important;height:104px!important;flex-basis:112px!important;min-width:112px!important}
- .app-header .brand-logo-img{transform:scale(1.35)!important}
- .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-</style>
-
-<style id="matchma-minimal-click-logo-final-v57">
-/* Repair minimal-theme hit testing without changing folder markup or icons. */
-body[data-theme="minimal"] #themeScene,
-body[data-theme="minimal"] #catClickFX,
-body[data-theme="minimal"] .theme-scene,
-body[data-theme="minimal"] .theme-overlay,
-body[data-theme="minimal"] .snow-layer,
-body[data-theme="minimal"] .decor-layer,
-body[data-theme="minimal"] canvas{pointer-events:none!important}
-body[data-theme="minimal"] .sidebar,
-body[data-theme="minimal"] .nav-folder,
-body[data-theme="minimal"] .navbtn,
-body[data-theme="minimal"] .navfolder-title,
-body[data-theme="minimal"] .nav-folder summary,
-body[data-theme="minimal"] button,
-body[data-theme="minimal"] a,
-body[data-theme="minimal"] select{pointer-events:auto!important;cursor:pointer}
-body[data-theme="minimal"] .sidebar,
-body[data-theme="minimal"] .navbtn,
-body[data-theme="minimal"] .nav-folder,
-body[data-theme="minimal"] .navfolder-title{position:relative;z-index:5}
-/* Final logo sizing rule wins over all earlier conflicting rules; title unchanged. */
-.app-header .brand{display:flex!important;align-items:center!important;gap:6px!important;min-width:0!important}
-.app-header .brand-mark,.brand .brand-mark{width:210px!important;height:170px!important;flex:0 0 210px!important;min-width:210px!important;margin:0!important;overflow:visible!important}
-.app-header .brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(1.9)!important;transform-origin:center center!important}
-.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;letter-spacing:-.5px!important}
-@media(max-width:650px){
- .app-header .brand-mark,.brand .brand-mark{width:132px!important;height:116px!important;flex-basis:132px!important;min-width:132px!important}
- .app-header .brand-logo-img{transform:scale(1.5)!important}
- .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-</style>
-
-<style id="matchma-minimal-flat-logo-large-v58">
-/* Minimal means plain monochrome UI, no decorative color, animation, or click FX. */
-body[data-theme="minimal"]{background:#fff!important;background-image:none!important;color:#222!important}
-body[data-theme="minimal"]::before,body[data-theme="minimal"]::after,
-body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
-body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] .theme-scene,
-body[data-theme="minimal"] .theme-overlay,body[data-theme="minimal"] canvas{display:none!important;animation:none!important;transition:none!important;pointer-events:none!important}
-body[data-theme="minimal"] .page,
-body[data-theme="minimal"] .sidebar,
-body[data-theme="minimal"] .hero,
-body[data-theme="minimal"] .panel,
-body[data-theme="minimal"] .stat,
-body[data-theme="minimal"] .mini,
-body[data-theme="minimal"] .nav-folder,
-body[data-theme="minimal"] .navbtn,
-body[data-theme="minimal"] .navfolder-title{background:#fff!important;background-image:none!important;color:#222!important;border-color:#ddd!important;box-shadow:none!important;backdrop-filter:none!important;border-radius:0!important}
-body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important;padding:8px 0!important;margin:4px 0!important}
-body[data-theme="minimal"] .nav-folder::before{display:none!important}
-body[data-theme="minimal"] .navbtn:hover,
-body[data-theme="minimal"] .navbtn:active,
-body[data-theme="minimal"] .navbtn.active,
-body[data-theme="minimal"] .navfolder-title:hover{background:#fff!important;border-color:transparent!important;box-shadow:none!important;color:#222!important;transform:none!important;filter:none!important}
-body[data-theme="minimal"] .navicon{font-size:0!important;background:none!important}
-body[data-theme="minimal"] .navicon::before,
-body[data-theme="minimal"] .navfolder-tab-icon{display:inline-block!important;width:18px!important;height:15px!important;background:center/contain no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath fill='none' stroke='%23444' stroke-width='1.6' d='M1 3.5h8l2 2H23v11H1z'/%3E%3C/svg%3E")!important;filter:none!important}
-body[data-theme="minimal"] .navbtn{border:0!important;padding:9px 8px!important;transition:none!important}
-body[data-theme="minimal"] button,
-body[data-theme="minimal"] a,
-body[data-theme="minimal"] select{transition:none!important;animation:none!important;box-shadow:none!important}
-/* Increase the actual supplied PNG, not its container alone; keep title typography unchanged. */
-.app-header .brand{display:flex!important;align-items:center!important;gap:4px!important;min-width:0!important}
-.app-header .brand-mark,.brand .brand-mark{width:270px!important;height:220px!important;flex:0 0 270px!important;min-width:270px!important;margin:0!important;padding:0!important;overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important}
-.app-header .brand-logo-img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;transform:scale(2.1)!important;transform-origin:center center!important}
-.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;letter-spacing:-.5px!important}
-@media(max-width:650px){
- .app-header .brand-mark,.brand .brand-mark{width:150px!important;height:132px!important;flex-basis:150px!important;min-width:150px!important}
- .app-header .brand-logo-img{transform:scale(1.65)!important}
- .app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-</style>
-
-<style id="matchma-logo-visible-minimal-repair-v59">
-/* Final header geometry: larger visible artwork, independent of title sizing. */
-header.app-header{overflow:visible!important}
-header.app-header .brand{display:flex!important;align-items:center!important;gap:8px!important;overflow:visible!important}
-header.app-header .brand-mark{display:flex!important;align-items:center!important;justify-content:center!important;width:250px!important;height:190px!important;min-width:250px!important;flex:0 0 250px!important;overflow:visible!important;padding:0!important;margin:0!important}
-header.app-header .brand-mark img.brand-logo-img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(1.8)!important;transform-origin:center!important}
-header.app-header .brand-copy{flex:0 0 auto!important;min-width:0!important}
-header.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important}
-@media(max-width:650px){
- header.app-header .brand-mark{width:150px!important;height:120px!important;min-width:150px!important;flex-basis:150px!important}
- header.app-header .brand-mark img.brand-logo-img{transform:scale(1.5)!important}
- header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-/* Minimal theme stays plain and static while controls remain clickable. */
-body[data-theme="minimal"]{background:#fff!important;background-image:none!important;color:#222!important;font-family:Arial,"Helvetica Neue",sans-serif!important}
-body[data-theme="minimal"] *{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important}
-body[data-theme="minimal"] .navicon{font-size:initial!important;display:inline-flex!important;align-items:center!important;justify-content:center!important}
-body[data-theme="minimal"] .navicon::before{content:none!important;display:none!important}
-body[data-theme="minimal"] .navfolder-tab-icon{background:none!important}
-body[data-theme="minimal"] .nav-folder,body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,
-body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,
-body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini,body[data-theme="minimal"] .page{
- background:#fff!important;background-image:none!important;color:#222!important;border-color:#ddd!important;border-radius:0!important
-}
-body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
-body[data-theme="minimal"] .theme-scene,body[data-theme="minimal"] .theme-overlay,
-body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] canvas{display:none!important;pointer-events:none!important}
-body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,
-body[data-theme="minimal"] button,body[data-theme="minimal"] a,body[data-theme="minimal"] select{pointer-events:auto!important;cursor:pointer!important}
-</style>
-
-<style id="matchma-logo-actually-large-v60">
-/* Make the complete original PNG mark visibly dominant; keep MatchMã title size unchanged. */
-header.app-header{overflow:visible!important;min-height:250px!important}
-header.app-header .brand{display:flex!important;align-items:center!important;gap:0!important;overflow:visible!important;flex:0 1 auto!important}
-header.app-header .brand-mark{width:330px!important;height:270px!important;min-width:330px!important;flex:0 0 330px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important;margin:0 -14px 0 -8px!important;padding:0!important}
-header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(2.35)!important;transform-origin:center center!important}
-header.app-header .brand-copy h1{font-size:clamp(24px,3vw,34px)!important;line-height:1.15!important}
-@media(max-width:650px){
- header.app-header{min-height:150px!important}
- header.app-header .brand-mark{width:175px!important;height:145px!important;min-width:175px!important;flex-basis:175px!important;margin:0 -8px 0 -4px!important}
- header.app-header .brand-mark img.brand-logo-img{transform:scale(1.8)!important}
- header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-</style>
-
-<style id="matchma-replace-minimal-theme-v61">
-/* Replace the old minimal-theme styling with a clean, flat theme. */
-body[data-theme="minimal"]{
- --bg:#fff!important;--panel:#fff!important;--card:#fff!important;--surface:#fff!important;
- background:#fff!important;background-image:none!important;color:#222!important;
- font-family:Arial,"Helvetica Neue",sans-serif!important;
-}
-body[data-theme="minimal"]::before,body[data-theme="minimal"]::after,
-body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
-body[data-theme="minimal"] .theme-scene,body[data-theme="minimal"] .theme-overlay,
-body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] canvas{display:none!important}
-body[data-theme="minimal"] *{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important}
-body[data-theme="minimal"] .app-header,
-body[data-theme="minimal"] .sidebar,
-body[data-theme="minimal"] .hero,
-body[data-theme="minimal"] .panel,
-body[data-theme="minimal"] .stat,
-body[data-theme="minimal"] .mini,
-body[data-theme="minimal"] .nav-folder,
-body[data-theme="minimal"] .navbtn,
-body[data-theme="minimal"] .navfolder-title,
-body[data-theme="minimal"] .page,
-body[data-theme="minimal"] .card{
- background:#fff!important;background-image:none!important;color:#222!important;
- border-color:#ddd!important;border-radius:4px!important;
-}
-body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important;padding:6px 0!important}
-body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #eee!important;transform:none!important;filter:none!important}
-body[data-theme="minimal"] .navbtn:hover,
-body[data-theme="minimal"] .navbtn:active,
-body[data-theme="minimal"] .navbtn.active,
-body[data-theme="minimal"] .navfolder-title:hover{background:#f7f7f7!important;color:#222!important;border-color:#ddd!important;transform:none!important}
-body[data-theme="minimal"] .navicon{font-size:initial!important;display:inline-flex!important}
-body[data-theme="minimal"] .navicon::before{content:none!important;display:none!important}
-body[data-theme="minimal"] button,body[data-theme="minimal"] a,
-body[data-theme="minimal"] select,body[data-theme="minimal"] input{pointer-events:auto!important;cursor:pointer!important}
-body[data-theme="minimal"] .nav-folder::before{display:none!important}
-/* Preserve exact PNG asset; enlarge the actual image while keeping title typography untouched. */
-header.app-header .brand-mark{width:240px!important;height:180px!important;min-width:240px!important;flex:0 0 240px!important;overflow:visible!important;display:flex!important;align-items:center!important;justify-content:center!important}
-header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;transform:scale(2.7)!important;transform-origin:center!important}
-header.app-header .brand-copy h1{font-size:inherit!important}
-@media(max-width:650px){
- header.app-header .brand-mark{width:170px!important;height:130px!important;min-width:170px!important;flex-basis:170px!important}
- header.app-header .brand-mark img.brand-logo-img{transform:scale(2.0)!important}
-}
-</style>
-
-<style id="matchma-final-minimal-reset-logo-fit-v62">
-/* Correct the actual mobile header: no transformed overflow/clipping. */
-header.app-header{box-sizing:border-box!important;min-height:0!important;height:auto!important;align-items:center!important;flex-wrap:wrap!important;overflow:visible!important;padding:10px 14px!important;gap:10px!important}
-header.app-header .brand{align-items:center!important;gap:8px!important;flex:0 1 auto!important;min-width:0!important;overflow:visible!important}
-header.app-header .brand-mark{box-sizing:border-box!important;width:120px!important;height:108px!important;min-width:120px!important;flex:0 0 120px!important;margin:0!important;padding:0!important;overflow:visible!important}
-header.app-header .brand-mark img.brand-logo-img{display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;transform:none!important}
-header.app-header .brand-copy{min-width:0!important;overflow:visible!important}
-header.app-header .brand-copy h1{display:block!important;font-size:clamp(24px,4vw,34px)!important;line-height:1.1!important;white-space:nowrap!important;margin:0!important}
-header.app-header .brand-copy .subbrand{display:none!important}
-header.app-header .headright{flex:1 1 100%!important;min-width:0!important;justify-content:flex-start!important}
-@media(min-width:900px){
- header.app-header .brand-mark{width:155px!important;height:132px!important;min-width:155px!important;flex-basis:155px!important}
-}
-@media(max-width:650px){
- header.app-header{padding:8px 12px!important}
- header.app-header .brand-mark{width:100px!important;height:92px!important;min-width:100px!important;flex-basis:100px!important}
- header.app-header .brand-copy h1{font-size:clamp(22px,6vw,30px)!important}
-}
-/* A genuinely plain replacement for Minimal: remove colored/dashed theme decoration, not click behavior. */
-body[data-theme="minimal"]{background:#fff!important;background-image:none!important;color:#222!important;font-family:Arial,"Helvetica Neue",sans-serif!important;font-size:16px!important}
-body[data-theme="minimal"]::before,body[data-theme="minimal"]::after,
-body[data-theme="minimal"] #themeScene,body[data-theme="minimal"] #catClickFX,
-body[data-theme="minimal"] .theme-drift,body[data-theme="minimal"] .theme-scene,
-body[data-theme="minimal"] .theme-overlay,body[data-theme="minimal"] canvas{display:none!important}
-body[data-theme="minimal"] .app-header,
-body[data-theme="minimal"] .shell,
-body[data-theme="minimal"] .sidebar,
-body[data-theme="minimal"] .hero,
-body[data-theme="minimal"] .panel,
-body[data-theme="minimal"] .stat,
-body[data-theme="minimal"] .mini,
-body[data-theme="minimal"] .nav-folder,
-body[data-theme="minimal"] .navbtn,
-body[data-theme="minimal"] .navfolder-title,
-body[data-theme="minimal"] .page,
-body[data-theme="minimal"] .card,
-body[data-theme="minimal"] section,
-body[data-theme="minimal"] article{
- background:#fff!important;background-image:none!important;color:#222!important;
- box-shadow:none!important;text-shadow:none!important;backdrop-filter:none!important;
- border-color:#ddd!important;border-style:solid!important;border-width:1px!important;border-radius:6px!important;
-}
-body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important}
-body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #eee!important;background:#fff!important}
-body[data-theme="minimal"] .navbtn:hover,body[data-theme="minimal"] .navbtn:active,
-body[data-theme="minimal"] .navbtn.active,body[data-theme="minimal"] .navfolder-title:hover{background:#f7f7f7!important;color:#222!important;transform:none!important}
-body[data-theme="minimal"] *{animation:none!important;transition:none!important;text-shadow:none!important;box-shadow:none!important;filter:none!important}
-</style>
-
-<style id="matchma-header-font-minimal-fix-v63">
-/* Header: keep logo/title and utility controls in one compact row on wide screens. */
-header.app-header{height:auto!important;min-height:76px!important;padding:8px 20px!important;margin:8px auto 10px!important;display:flex!important;flex-flow:row wrap!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;overflow:visible!important}
-header.app-header .brand{display:flex!important;flex:0 0 auto!important;align-items:center!important;gap:12px!important;min-width:0!important;overflow:visible!important}
-header.app-header .brand-mark{width:145px!important;height:115px!important;min-width:145px!important;flex:0 0 145px!important;overflow:visible!important}
-header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;transform:none!important}
-header.app-header .brand-copy{flex:0 0 auto!important;min-width:0!important}
-header.app-header .brand-copy h1{font-size:clamp(25px,2.5vw,34px)!important;line-height:1.12!important;letter-spacing:normal!important;margin:0!important;white-space:nowrap!important}
-header.app-header .brand-copy .subbrand{display:none!important}
-header.app-header .headright{display:flex!important;flex:1 1 460px!important;min-width:0!important;max-width:100%!important;flex-flow:row wrap!important;align-items:center!important;justify-content:flex-end!important;gap:8px!important}
-@media(max-width:700px){
- header.app-header{padding:8px 12px!important;gap:8px!important}
- header.app-header .brand{flex:1 1 100%!important}
- header.app-header .brand-mark{width:100px!important;height:86px!important;min-width:100px!important;flex-basis:100px!important}
- header.app-header .brand-copy h1{font-size:clamp(24px,6vw,30px)!important}
- header.app-header .headright{flex:1 1 100%!important;justify-content:flex-start!important}
-}
-/* Normalize text sizing in Vietnamese UI; retain explicit heading hierarchy. */
-body{font-size:16px}
-body .navtitle,body .navfolder-title,body .navbtn,body .pill,body .subbrand,
-body .field label,body .field small,body .muted,body .hint,body .table-wrap,
-body input,body select,body textarea,body button{font-size:inherit}
-body .navtitle{font-size:11px!important}
-body .navfolder-title{font-size:12px!important}
-body .navbtn{font-size:14px!important;line-height:1.4!important}
-body .pill{font-size:13px!important;line-height:1.3!important}
-body .field label,body label{line-height:1.45}
-body p,body li,body td,body th,body input,body select,body textarea{line-height:1.5}
-/* Minimal theme: remove dashed outlines and colored accents consistently. */
-body[data-theme="minimal"]{--bg:#fff!important;--panel:#fff!important;--card:#fff!important;--surface:#fff!important;--ink:#222!important;--muted:#666!important;--purple:#333!important;--frame:#ddd!important;--green:#444!important;--amber:#666!important;--red:#555!important;background:#fff!important;background-image:none!important;color:#222!important;font-family:Arial,"Helvetica Neue",sans-serif!important}
-body[data-theme="minimal"] *,body[data-theme="minimal"] *::before,body[data-theme="minimal"] *::after{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important;filter:none!important;background-image:none!important}
-body[data-theme="minimal"] .app-header,body[data-theme="minimal"] .sidebar,body[data-theme="minimal"] .hero,body[data-theme="minimal"] .panel,body[data-theme="minimal"] .stat,body[data-theme="minimal"] .mini,body[data-theme="minimal"] .nav-folder,body[data-theme="minimal"] .navbtn,body[data-theme="minimal"] .navfolder-title,body[data-theme="minimal"] .page,body[data-theme="minimal"] .card,body[data-theme="minimal"] .pill,body[data-theme="minimal"] .field,body[data-theme="minimal"] input,body[data-theme="minimal"] select,body[data-theme="minimal"] textarea,body[data-theme="minimal"] button{background:#fff!important;color:#222!important;border-color:#ddd!important;border-style:solid!important;border-width:1px!important;border-radius:4px!important}
-body[data-theme="minimal"] .nav-folder{border:0!important;border-bottom:1px solid #ddd!important}
-body[data-theme="minimal"] .navbtn{border:0!important;border-bottom:1px solid #eee!important;text-align:left!important}
-body[data-theme="minimal"] .navbtn.active,body[data-theme="minimal"] .navbtn:hover{background:#f5f5f5!important;color:#222!important}
-body[data-theme="minimal"] .navicon{display:inline-flex!important}
-</style>
-
-<style id="matchma-header-two-column-v64">
-/* Explicit two-column header: brand on the left, controls on the right. */
-header.app-header{
- display:grid!important;
- grid-template-columns:minmax(0,auto) minmax(0,1fr)!important;
- align-items:center!important;
- justify-content:stretch!important;
- column-gap:clamp(12px,2vw,28px)!important;
- row-gap:0!important;
- width:100%!important;
- height:auto!important;
- min-height:0!important;
- padding:12px clamp(12px,2vw,24px)!important;
- margin:0!important;
- box-sizing:border-box!important;
-}
-header.app-header .brand{
- grid-column:1!important;grid-row:1!important;
- display:flex!important;flex-flow:row nowrap!important;
- align-items:center!important;justify-content:flex-start!important;
- gap:14px!important;width:auto!important;min-width:0!important;max-width:100%!important;
-}
-header.app-header .brand-mark{
- width:clamp(96px,12vw,150px)!important;
- height:clamp(88px,10vw,120px)!important;
- min-width:clamp(96px,12vw,150px)!important;
- flex:0 0 clamp(96px,12vw,150px)!important;
- overflow:visible!important;
-}
-header.app-header .brand-mark img.brand-logo-img{
- display:block!important;width:100%!important;height:100%!important;
- max-width:none!important;max-height:none!important;object-fit:contain!important;
-}
-header.app-header .brand-copy{display:block!important;min-width:0!important;flex:0 1 auto!important}
-header.app-header .brand-copy h1{
- margin:0!important;white-space:nowrap!important;
- font-size:clamp(23px,3vw,36px)!important;line-height:1.15!important;
-}
-header.app-header .brand-copy .subbrand{display:none!important}
-header.app-header .headright{
- grid-column:2!important;grid-row:1!important;
- display:flex!important;flex-flow:row wrap!important;
- align-items:center!important;justify-content:flex-end!important;
- align-content:center!important;gap:8px!important;
- width:100%!important;min-width:0!important;max-width:none!important;
-}
-header.app-header .headright>*{max-width:100%!important;min-width:0!important}
-@media(max-width:700px){
- header.app-header{grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr)!important;column-gap:8px!important;padding:8px!important}
- header.app-header .brand{gap:6px!important}
- header.app-header .brand-mark{width:clamp(58px,17vw,82px)!important;height:clamp(58px,17vw,82px)!important;min-width:clamp(58px,17vw,82px)!important;flex-basis:clamp(58px,17vw,82px)!important}
- header.app-header .brand-copy h1{font-size:clamp(17px,4.8vw,25px)!important;white-space:normal!important;overflow-wrap:anywhere!important}
- header.app-header .headright{gap:4px!important;justify-content:flex-end!important}
- header.app-header .headright .local-pill{display:none!important}
- header.app-header .headright .toolbar-select,header.app-header .headright .toolbar-font{font-size:11px!important}
- header.app-header .headright select,header.app-header .headright button{font-size:11px!important;padding:4px 6px!important}
-}
-</style>
-
-<style id="matchma-global-font-and-large-logo-v65">
-/* One consistent Vietnamese-friendly font system across the entire site. */
-html{font-size:16px!important;-webkit-text-size-adjust:100%!important;text-size-adjust:100%!important}
-body,body *:not(svg):not(svg *):not(.icon):not(.lucide){
- font-family:Arial,"Helvetica Neue",Helvetica,sans-serif!important;
- font-synthesis:none!important;
-}
-body{font-size:16px!important;line-height:1.5!important}
-body p,body li,body td,body th,body label,body input,body select,body textarea,body button,
-body .muted,body .hint,body .subbrand,body .pill,body .navbtn,body .navfolder-title{
- line-height:1.5!important;
-}
-body input,body select,body textarea,body button{font-size:inherit}
-body .navtitle{font-size:11px!important}
-body .navfolder-title{font-size:12px!important}
-body .navbtn{font-size:14px!important}
-body .pill{font-size:13px!important}
-body h1{font-size:clamp(26px,3vw,36px)!important;line-height:1.2!important}
-body h2{font-size:clamp(22px,2.4vw,30px)!important;line-height:1.25!important}
-body h3{font-size:20px!important;line-height:1.3!important}
-body small,body .small{font-size:12px!important;line-height:1.45!important}
-/* Make the original PNG logo visibly larger without pushing controls below the brand. */
-header.app-header{grid-template-columns:minmax(0,auto) minmax(0,1fr)!important;column-gap:clamp(12px,2vw,26px)!important}
-header.app-header .brand{flex-flow:row nowrap!important;align-items:center!important;gap:12px!important;min-width:0!important}
-header.app-header .brand-mark{
- width:clamp(128px,15vw,176px)!important;height:clamp(112px,13vw,148px)!important;
- min-width:clamp(128px,15vw,176px)!important;flex:0 0 clamp(128px,15vw,176px)!important;
-}
-header.app-header .brand-mark img.brand-logo-img{width:100%!important;height:100%!important;object-fit:contain!important}
-header.app-header .brand-copy h1{font-size:clamp(25px,3vw,36px)!important;line-height:1.15!important;white-space:nowrap!important}
-header.app-header .headright{grid-column:2!important;grid-row:1!important;min-width:0!important;justify-content:flex-end!important}
-@media(max-width:700px){
- header.app-header{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;column-gap:8px!important}
- header.app-header .brand{gap:5px!important}
- header.app-header .brand-mark{width:clamp(84px,22vw,112px)!important;height:clamp(84px,22vw,112px)!important;min-width:clamp(84px,22vw,112px)!important;flex-basis:clamp(84px,22vw,112px)!important}
- header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,26px)!important;white-space:normal!important}
- header.app-header .headright{grid-column:2!important;grid-row:1!important;justify-content:flex-end!important;gap:4px!important}
-}
-</style>
-
-
-
-<style id="matchma-logo-symbol-crop-v72">
-/* The current PNG includes its own “match mã” lettering. Crop the lower lettering
-   so only the emblem appears beside the separate HTML title; otherwise it duplicates/overlaps. */
-header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
-header.app-header .brand-mark{
- display:block!important;position:relative!important;overflow:hidden!important;
- width:58px!important;height:58px!important;min-width:58px!important;flex:0 0 58px!important;
-}
-header.app-header .brand-mark img.brand-logo-img{
- position:absolute!important;top:0!important;left:0!important;
- width:100%!important;height:150%!important;max-width:none!important;max-height:none!important;
- object-fit:cover!important;object-position:top center!important;
- transform:none!important;
-}
-header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
-header.app-header .brand-copy h1{
- margin:0!important;font-family:"Be Vietnam Pro",Arial,sans-serif!important;
- font-size:clamp(24px,2.6vw,32px)!important;line-height:1.12!important;white-space:nowrap!important;
-}
-header.app-header .brand-copy h1 span{font-family:inherit!important}
-@media(max-width:700px){
- header.app-header .brand{gap:8px!important}
- header.app-header .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex-basis:48px!important}
- header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,24px)!important;white-space:normal!important}
-}
-</style>
-<style id="matchma-final-brand-font-settings-v73">
-/* Final overrides are deliberately last so older theme CSS cannot undo logo sizing. */
-html body{--matchma-font-family:"Be Vietnam Pro",Arial,sans-serif}
-html body,html body *:not(svg):not(svg *):not(.icon):not(.lucide){
- font-family:var(--matchma-font-family)!important;
-}
-header.app-header .brand{display:flex!important;align-items:center!important;gap:14px!important;min-width:0!important}
-header.app-header .brand-mark{
- display:block!important;position:relative!important;overflow:hidden!important;
- width:76px!important;height:76px!important;min-width:76px!important;flex:0 0 76px!important;
- border-radius:0!important;
-}
-header.app-header .brand-mark img.brand-logo-img{
- position:absolute!important;left:0!important;top:0!important;
- width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
- object-fit:contain!important;object-position:top center!important;
- transform:scale(1.65)!important;transform-origin:top center!important;
-}
-header.app-header .brand-copy{min-width:0!important;flex:0 1 auto!important}
-header.app-header .brand-copy h1{
- margin:0!important;font-family:var(--matchma-font-family)!important;
- font-size:clamp(25px,3vw,36px)!important;line-height:1.12!important;
- letter-spacing:0!important;white-space:nowrap!important;
-}
-header.app-header .brand-copy h1 span{font-family:inherit!important}
-@media(max-width:700px){
- header.app-header{align-items:center!important}
- header.app-header .brand{gap:8px!important}
- header.app-header .brand-mark{width:58px!important;height:58px!important;min-width:58px!important;flex-basis:58px!important}
- header.app-header .brand-mark img.brand-logo-img{transform:scale(1.65)!important}
- header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,24px)!important;white-space:normal!important}
-}
-</style>
-
