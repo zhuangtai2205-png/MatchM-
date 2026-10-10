@@ -1995,3 +1995,8 @@ html body[data-theme="minimal"] .navfolder-title{background:transparent!importan
 html body header.app-header .brand-copy h1{display:block!important;font-family:Georgia,'Times New Roman',serif!important;font-size:30px!important;font-weight:700!important;letter-spacing:-1px!important;line-height:1!important;color:#171717!important;margin:0!important}
 html body header.app-header .brand-copy h1 span{color:#171717!important}
 html body header.app-header .brand-copy .subbrand{display:none!important}
+
+html body[data-theme="forest"]::before{content:none!important;display:none!important}
+html body[data-theme="forest"]::after{pointer-events:none!important}
+html body[data-theme="forest"] #themeScene .scene-doodle{opacity:.58!important}
+html body[data-theme="minimal"] .sidebar .navicon{display:none!important}
