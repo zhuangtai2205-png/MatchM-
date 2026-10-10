@@ -1217,3 +1217,20 @@ html body[data-theme] .sidebar .nav-folder::before{right:8px!important;top:38px!
 html body[data-theme] .sidebar .nav-folder::after{right:9px!important;bottom:7px!important;width:66px!important;height:43px!important}
 html body[data-theme="ocean"] .sidebar .nav-folder:nth-of-type(2)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 52'%3E%3Cg fill='none' stroke='%233a91b2' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M5 12q7-7 14 0t14 0t14 0t14 0M5 20q7-7 14 0t14 0t14 0t14 0'/%3E%3Cpath d='M9 39q10-13 21 0-11 13-21 0zm0 0-9-7v14zM42 35q9-11 19 0-10 11-19 0zm0 0-7-5v10zM61 43q6-8 13 0-7 8-13 0z' stroke='%231d7797'/%3E%3C/g%3E%3C/svg%3E")!important}
 html body[data-theme="ocean"] .sidebar .nav-folder:nth-of-type(3)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 52'%3E%3Cg fill='none' stroke='%232b9fbb' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M3 43q7-7 14 0t14 0t14 0t14 0M9 19q10-13 21 0-11 13-21 0zm0 0-8-6v12zM42 26q9-11 19 0-10 11-19 0zm0 0-7-5v10z'/%3E%3C/g%3E%3C/svg%3E")!important}
+
+
+/* Entertainment visibility hotfix: legacy blanket hide rule was overriding the fixed toggle. */
+html body #funToggleBtn{
+ display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ position:fixed!important;right:16px!important;bottom:18px!important;z-index:100001!important;
+}
+html body #funWidget:not([hidden]){
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;
+ position:fixed!important;right:16px!important;bottom:76px!important;z-index:100000!important;
+}
+html body #funWidget[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+html body #fat-bear-overlay[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+html body #fat-bear-overlay:not([hidden]){
+ display:block!important;visibility:visible!important;opacity:1!important;pointer-events:none!important;z-index:99998!important;
+}
+html body #fat-bear-overlay #bear-container{pointer-events:auto!important}
