@@ -1925,9 +1925,9 @@ function themeDoodleSvg(theme,index=0){
   '<path d="M5 24 Q16 9 28 20 L40 12 L38 24 L41 35 L28 28 Q15 39 5 24Z" fill="#e7a066" stroke="#854a2b"/><path d="M10 24 Q20 20 28 25" fill="none" stroke="#854a2b"/><circle cx="13" cy="22" r="1.4" fill="#51301e" stroke="none"/>',
   '<path d="M7 13 L16 8 L19 18 L29 18 L32 8 L41 13 L39 33 Q24 43 9 33Z" fill="#9fbc7d" stroke="#536e43"/><path d="M13 23 Q18 18 21 23 M27 23 Q30 18 35 23 M19 31 Q24 35 29 31" fill="none" stroke="#536e43"/>'
  ];
- const collection={ocean,retro,pink,vampire,cat,bear};
+ const collection={ocean,retro,pink,vampire,cat,bear,forest:bear,minimal:[\n  '<circle cx="24" cy="24" r="15" fill="none" stroke="#75838a"/><path d="M17 24h14 M24 17v14" stroke="#75838a" stroke-linecap="round"/>',\n  '<rect x="11" y="11" width="26" height="26" rx="4" fill="none" stroke="#75838a"/><path d="M17 19h14 M17 25h14 M17 31h8" stroke="#75838a" stroke-linecap="round"/>',\n  '<path d="M24 8l16 16-16 16L8 24Z" fill="none" stroke="#75838a"/><circle cx="24" cy="24" r="4" fill="#d8e0e3" stroke="#75838a"/>'\n]};
  const drawing=(collection[theme]||collection.ocean)[variant];
- const accents={ocean:'#277f9b',retro:'#4d514c',pink:'#b85d8d',vampire:'#d06b91',cat:'#966b58',bear:'#4d7950'};
+ const accents={ocean:'#277f9b',retro:'#4d514c',pink:'#b85d8d',vampire:'#d06b91',cat:'#966b58',bear:'#4d7950',forest:'#4d7950',minimal:'#75838a'};
  const accent=accents[theme]||accents.ocean;
  return start+'<g transform="'+transform+'">'+drawing+'</g><path d="M5 5l2 2m34 34 2 2" fill="none" stroke="'+accent+'" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>'+end;
 }
@@ -2656,7 +2656,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
 (function(){
  const layer=$('catClickFX');if(!layer||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
  const iconsByTheme={
-  ocean:['🧜‍♀️','🐠','🐬','🐟','🫧','🐚','🪼'],
+  ocean:['🧜‍♀️','🐠','🐬','🐟','🫧','🐚','🪼'],\n  forest:['🐻','🌲','🍃','🍄','🦋','🌿','🐾','🍯'], minimal:['○','◌','◇','□','△','—','＋','✓'],
   retro:['♪','♫','♬','♩','𝄞','♭'],
   pink:['🌸','🌺','🌷','🌼','🌹','🌻','❀'],
   vampire:['🦇','🎃','🕷️','🕸️','💀','🕯️','☠️'],
