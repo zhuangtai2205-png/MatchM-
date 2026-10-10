@@ -623,7 +623,7 @@ function findForecastReplacement(target){
  const ownSku=normalizeSku(target.displaySku||target.sku||target.key);
  const names=[target.displayName,...(target.nameAliases||[])].filter(Boolean);
  const normalNames=new Set(names.map(n=>norm(n)).filter(Boolean));
- if(!normalNames.size)return 'Không có';
+ if(!normalNames.size)return tr('replacementNone');
  const found=new Map();
  const add=(sku,name,source)=>{
   const code=String(sku||'').trim(),label=String(name||'').trim();
@@ -638,7 +638,7 @@ function findForecastReplacement(target){
   for(const name of [candidate.displayName,...(candidate.nameAliases||[])])add(candidate.displaySku||candidate.sku||candidate.key,name,'Các file tồn kho/giao dịch');
  });
  const values=[...found.values()];
- return values.length?values.slice(0,3).map(v=>v.sku+' — '+v.name+' (trùng tên)').join(' | '):'Không có';
+ return values.length?values.slice(0,3).map(v=>v.sku+' — '+v.name+' ('+tr('replacementSameName')+')').join(' | '):tr('replacementNone');
 }
 function forecastAppendIssue(p,text){if(text&&!p.issues.includes(text))p.issues.push(text)}
 function runStockForecast(){
@@ -731,7 +731,7 @@ function renderStockForecast(){
  else{
   root.className='tablewrap';
   root.innerHTML='<table><thead><tr><th>'+tr('skuCodeLabel')+'</th><th>'+tr('productNameLabel')+'</th><th>'+tr('openingStockLabel')+'</th><th>'+tr('monthPurchaseLabel')+'</th><th>'+tr('monthSalesLabel')+'</th><th>'+tr('closingStockLabel')+'</th><th>'+tr('statusLabel')+'</th><th>'+tr('replacementLabel')+'</th><th>'+tr('notesLabel')+'</th></tr></thead><tbody>'+
-   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.projected!==null?forecastNumber(p.stockQty)+(p.assumedOpeningZero?' (giả định)':''):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.status==='negative'?(p.replacementSuggestion||'Không có'):'—')+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
+   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.projected!==null?forecastNumber(p.stockQty)+(p.assumedOpeningZero?' (giả định)':''):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'—')+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
  }
  $('forecastPageInfo').textContent='Trang '+(rows.length?stockForecastPage:0)+'/'+(rows.length?pages:0)+' · '+rows.length+' mặt hàng';
  $('forecastPrev').disabled=stockForecastPage<=1;$('forecastNext').disabled=stockForecastPage>=pages;
@@ -740,7 +740,7 @@ function forecastNumber(n){return Number.isFinite(n)?Number(n.toFixed(4)).toLoca
 function exportStockForecast(){
  if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
  if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
- const mapRows=list=>list.map(p=>({'SKU / Mã hàng':p.displaySku,'Tên hàng':p.displayName,'Tồn đầu kỳ':p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),'Tổng mua vào tháng':p.purchaseQty,'Tổng bán ra tháng':p.salesQty,'Tồn chốt cuối tháng':p.projected===null?'':p.projected,'Trạng thái':forecastStatusLabel(p.status),'Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,'Gợi ý SKU thay thế (trùng tên)':p.status==='negative'?(p.replacementSuggestion||'Không có'):'','Ghi chú':p.issueText}));
+ const mapRows=list=>list.map(p=>({[tr('skuCodeLabel')]:p.displaySku,[tr('productNameLabel')]:p.displayName,[tr('openingStockLabel')]:p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),[tr('monthPurchaseLabel')]:p.purchaseQty,[tr('monthSalesLabel')]:p.salesQty,[tr('closingStockLabel')]:p.projected===null?'':p.projected,[tr('statusLabel')]:forecastStatusLabel(p.status),'Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,[tr('replacementLabel')]:p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'',[tr('notesLabel')]:p.issueText}));
  const wb=XLSX.utils.book_new();
  const negRows=mapRows(stockForecastResults.filter(p=>p.status==='negative'));
  const allRows=mapRows(stockForecastResults);
@@ -1033,6 +1033,7 @@ Object.assign(I18N['zh-CN'],{
  forecastStatusNegative:'月末负库存',forecastStatusZero:'月末缺货',forecastStatusLow:'低库存',forecastStatusOK:'库存充足',forecastStatusNoStock:'缺少期初库存',forecastStatusNoKey:'缺少 SKU',forecastStatusIssue:'检查数据'
 });
 
+Object.assign(I18N.vi,{replacementSameName:'trùng tên hàng'});Object.assign(I18N.en,{replacementSameName:'same product name'});Object.assign(I18N.de,{replacementSameName:'gleicher Produktname'});Object.assign(I18N['zh-TW'],{replacementSameName:'商品名稱相同'});Object.assign(I18N['zh-CN'],{replacementSameName:'商品名称相同'});
 function tr(k){return (I18N[lang]&&I18N[lang][k])||I18N.vi[k]||k}
 function translate(){document.documentElement.lang=lang;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(tr(k))el.textContent=tr(k)});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{el.placeholder=tr(el.getAttribute('data-i18n-placeholder'))});updateThresholdLabels();updateStats();if(out.length)renderResults();if(masterRows.length)renderMasterPreview();if(typeof renderStockForecast==='function'&&stockForecastBuilt)renderStockForecast()}
 function setLanguage(value){lang=['vi','en','de','zh-TW','zh-CN'].includes(value)?value:'vi';$('language').value=lang;$('quickLang').value=lang;document.documentElement.lang=lang;try{localStorage.setItem('matchma-language',lang)}catch(e){}translate()}
