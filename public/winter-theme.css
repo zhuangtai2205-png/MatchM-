@@ -538,10 +538,17 @@ body:not([data-theme="bear"]) #bear-container{display:none!important}
 .app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
 
 
-/* Remove all bear artwork/icons from logo, menus and the corner; keep the original brand logo image. */
-#bear-container,#bear-sprite,.winter-bear-spot,#fat-bear-overlay,#funWidget,#funToggleBtn,.bear-fish,.bear-plus-one,
-.navbtn .bear-icon,.navbtn .icon3d,.navbtn .theme-nav-doodle{display:none!important;visibility:hidden!important;pointer-events:none!important}
-.app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
 
-/* Removed Bear Forest theme completely; clean up any legacy persisted theme styles. */
-body[data-theme="bear"]{--theme-bg:#e5f6fb!important;--theme-panel:#f7fdff!important;--theme-ink:#164c62!important;--theme-muted:#5c899a!important;--theme-line:#b9dfe9!important;--theme-accent:#218da8!important;--theme-soft:#d1edf4!important;background:#e5f6fb!important}
+
+/* Keep the bear corner widget independent from the selected site theme. */
+#fat-bear-overlay[hidden],#funWidget[hidden]{display:none!important}
+#fat-bear-overlay:not([hidden]){display:block!important;position:fixed!important;inset:0!important;z-index:120!important;pointer-events:none!important;overflow:hidden!important}
+#bear-container{display:block!important;position:absolute!important;pointer-events:auto!important;visibility:visible!important;opacity:1!important}
+#bear-sprite{display:block!important;visibility:visible!important;opacity:1!important;overflow:visible!important}
+#funWidget:not([hidden]){display:block!important;z-index:1000!important}
+#funToggleBtn{display:inline-flex!important;visibility:visible!important}
+body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .nav-folder{background:#f4fcff!important;color:#164c62!important;border-color:#b9dfe9!important}
+body[data-theme="retro"] .sidebar,body[data-theme="retro"] .nav-folder{background:#fafaf8!important;color:#292929!important;border-color:#bdbdb9!important}
+body[data-theme="pink"] .sidebar,body[data-theme="pink"] .nav-folder{background:#fff8fb!important;color:#874563!important;border-color:#efc8d9!important}
+body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .nav-folder{background:#281d32!important;color:#f7eaf8!important;border-color:#5e426c!important}
+body[data-theme="cat"] .sidebar,body[data-theme="cat"] .nav-folder{background:#fff9f5!important;color:#60443b!important;border-color:#e4cfc4!important}
