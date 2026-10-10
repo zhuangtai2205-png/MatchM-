@@ -1139,6 +1139,42 @@ button:hover,.navbtn:hover,.btn:hover{filter:none!important;transform:none!impor
 @media(max-width:650px){#bear-container{width:clamp(245px,72vw,355px)!important;height:clamp(180px,52vw,250px)!important;left:5px!important;bottom:6px!important}}
 @media(prefers-reduced-motion:reduce){#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite{animation:none!important}}
 
+ 
+/* 2026 hand-drawn paper refresh: warm paper, pencil outlines, flat 2D controls */
+:root{--ink:#593b2b;--muted:#927763;--line:#d9b998;--surface:#fff9ed;--accent:#c27a39;--ui-surface:#fffaf0;--ui-border:#d8b795;--ui-soft:#f8ecd9}
+body{background-color:#fbf5e8!important;background-image:radial-gradient(ellipse at 12% 10%,#fffdf6 0,transparent 52%),repeating-linear-gradient(0deg,#f7efdf 0 1px,#fbf5e8 1px 5px)!important;color:#593b2b!important;font-family:'Be Vietnam Pro','Nunito',sans-serif!important}
+header,.shell,.foot{z-index:1}
+header,.sidebar,.hero,.panel,.stat,.mini,.upload,.filterbox,.tablewrap,.progressbox,.sidebar-help,.nav-folder,.quick-settings-menu,.fun-widget,.calculator-widget{background-color:#fffaf0!important;background-image:none!important;border:1.7px solid #d9b998!important;border-radius:17px!important;box-shadow:2px 3px 0 #d9b99842!important}
+header{border-radius:19px!important}
+.nav-folder{position:relative!important;border-style:dashed!important;border-width:1.7px!important;padding:9px 8px!important;margin:10px 0 12px!important;box-shadow:none!important}
+.nav-folder::before{height:7px!important;top:-6px!important;left:13px!important;width:38px!important;background:#f3d5a8!important;border:1.5px dashed #bd8254!important;border-bottom:0!important;border-radius:7px 7px 0 0!important}
+.navfolder-title{font-family:'Be Vietnam Pro','Nunito',sans-serif!important;color:#7c5337!important;font-weight:850!important}
+.nav-folder>summary.navfolder-title:hover{background:#fff0d5!important;border-radius:10px!important}
+.nav-folder[open]>.navfolder-title{background:transparent!important}
+.navbtn,.btn,.fun-toggle-button,.quick-settings>summary,.fun-widget-actions button,.calculator-widget button{border:1.7px dashed #bf8d67!important;border-radius:13px!important;background:#fff9ed!important;color:#68462f!important;box-shadow:none!important;text-shadow:none!important;transition:background .18s,transform .18s!important}
+.navbtn{margin:3px 0!important;padding:9px 10px!important;font-weight:750!important}
+.navbtn:hover,.btn:hover,.fun-toggle-button:hover{background:#fff0d5!important;transform:translateY(-1px) rotate(-.3deg)!important;border-color:#c27a39!important}
+.navbtn.active{background:#f8dfad!important;border:2px solid #c58a4f!important;color:#633d26!important;box-shadow:2px 2px 0 #d7b18366!important}
+.navbtn.active::after{content:"✦";color:#c27a39;margin-left:auto}
+.navicon{width:25px!important;height:24px!important;flex:0 0 25px!important;filter:sepia(.35) saturate(.8)!important}
+.sectionhead h2,.hero h2,.panel h2,h1{color:#75462e!important;text-shadow:.45px .45px 0 #c78d5d!important}
+.sectionhead h2::before,.hero h2::before{filter:sepia(.5) saturate(.9)!important}
+input:not([type=checkbox]):not([type=radio]),select,textarea,.field input,.field select{background:#fffdf7!important;border:1.6px dashed #d2ac88!important;border-radius:11px!important;box-shadow:none!important;color:#593b2b!important}
+input:focus,select:focus,textarea:focus{outline:2px dashed #d59a56!important;outline-offset:2px!important}
+button,.btn,.navbtn,.upload{ -webkit-tap-highlight-color:transparent}
+table{border-collapse:separate!important;border-spacing:0!important;border:1.5px dashed #d7b795!important;border-radius:13px!important;overflow:hidden!important;background:#fffdf7!important}
+th{background:#f7e4c4!important;color:#754a30!important;border-bottom:1.5px dashed #d0a67c!important}
+td{border-bottom:1px dashed #ead8c3!important;color:#624833!important}
+.badge,.pill{border:1.3px dashed #cda47d!important;border-radius:999px!important;background:#fff1d9!important;color:#805739!important;box-shadow:none!important}
+.upload{border-style:dashed!important;border-width:2px!important;background:#fff9ed!important}
+#bear-container{width:clamp(205px,27vw,310px)!important;height:clamp(112px,15vw,160px)!important;left:10px!important;bottom:8px!important;filter:none!important}
+#bear-sprite{display:block!important;width:100%!important;height:100%!important;overflow:visible!important;filter:drop-shadow(0 3px 1px #734a3020)!important}
+#bear-expression{left:70%!important;top:7%!important;background:#fff8e9!important;border:1.3px dashed #d8b795!important;box-shadow:none!important}
+#bear-container.is-munching #bear-sprite{animation:bearChomp .4s ease-in-out}
+#bear-sprite #bearBody,#bear-sprite #bearHeadShape{transition:fill .25s}
+.bear-panel-preview{background:#fff6e6!important;border:1.5px dashed #d9b998!important;border-radius:15px!important;box-shadow:none!important}
+.bear-snowflake{opacity:.8}
+@media(max-width:650px){#bear-container{width:190px!important;height:105px!important;left:2px!important;bottom:2px!important}.nav-folder{padding:7px!important}}
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -1173,48 +1209,41 @@ button:hover,.navbtn:hover,.btn:hover{filter:none!important;transform:none!impor
 </aside>
 <div id="fat-bear-overlay" hidden aria-label="Góc tương tác Gấu" aria-hidden="true">
  <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu">
- <svg id="bear-sprite" viewBox="0 0 600 430" role="img" aria-label="Gấu nâu mập vẽ tay bằng phấn màu, đầu và thân liền mạch">
- <defs>
-  <linearGradient id="bearCoat" x1=".08" y1=".05" x2=".85" y2=".95"><stop stop-color="#d88b49"/><stop offset=".48" stop-color="#b96b35"/><stop offset="1" stop-color="#98512d"/></linearGradient>
-  <linearGradient id="bearMuzzle" x1="0" y1="0" x2=".1" y2="1"><stop stop-color="#f6d18d"/><stop offset="1" stop-color="#dfa35c"/></linearGradient>
-  <pattern id="bearFurLines" width="19" height="17" patternUnits="userSpaceOnUse"><path d="M2 4q4-3 7 0m2 9q3-3 6-1" fill="none" stroke="#663b29" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="1.5 3" opacity=".37"/></pattern>
-  <pattern id="bearWarmHatch" width="24" height="21" patternUnits="userSpaceOnUse"><path d="M1 18L10 8m5 10 7-8" fill="none" stroke="#f0b36f" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" opacity=".42"/></pattern>
-  <clipPath id="bearWholeBodyClip"><path d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z"/></clipPath>
- </defs>
- <g id="bearTorso" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Full rounded rump and belly: one continuous silhouette -->
-  <path id="bearBackLeg" d="M83 319C49 324 43 354 62 378 80 400 124 405 156 385L183 353 140 309Z" fill="#99542f" stroke="#663c2a" stroke-width="7"/>
-  <path id="bearBody" d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z" fill="url(#bearCoat)" stroke="#633b2a" stroke-width="8"/>
-  <path d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z" fill="url(#bearFurLines)" clip-path="url(#bearWholeBodyClip)" opacity=".96"/>
-  <path d="M65 357C41 321 45 269 68 226 94 177 144 149 205 139 269 127 333 143 377 177 419 209 445 255 443 304 442 350 407 380 361 391 316 402 251 397 191 398L113 397C91 393 75 378 65 357Z" fill="url(#bearWarmHatch)" clip-path="url(#bearWholeBodyClip)" opacity=".8"/>
-  <path d="M74 330C72 284 93 239 129 210M99 367q44 17 91 10m-45-167q24-12 49-10m7-26q23-7 43 1m17 3q22 5 39 20m-202 93q14-15 32-20m7 65q18-9 34-3m57 34q21 8 39 1" fill="none" stroke="#efb16e" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 8" opacity=".65"/>
-  <!-- Front paws rest fully inside the silhouette -->
-  <path id="bearFrontLeg" d="M307 286C329 276 353 283 366 306L386 360C385 380 369 391 349 385L326 365C312 348 301 317 307 286Z" fill="#b66b37" stroke="#633b2a" stroke-width="6"/>
-  <path id="bearFrontPaw" d="M323 357Q351 371 382 354L388 374Q376 394 350 390 329 388 323 372Z" fill="#a65a31" stroke="#633b2a" stroke-width="5"/>
-  <path d="M344 386l1-11m15 13 2-12m13 6 3-11" fill="none" stroke="#efb16e" stroke-width="3.5" stroke-linecap="round"/>
-  <path id="bearTail" d="M65 325Q35 304 31 328 32 349 62 351" fill="#b66b37" stroke="#633b2a" stroke-width="6"/>
-  <path d="M45 320q-6 14 4 25" fill="none" stroke="#e8a15f" stroke-width="3" stroke-dasharray="2 5"/>
-  <path id="bearSleepBlanket" d="M51 270Q94 230 145 261T254 263Q324 234 401 278L425 341Q393 389 330 397L110 397Q66 389 49 355Z" fill="#7d9270" stroke="#526746" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
-  <path id="bearSleepQuilt" d="M79 293q25 20 52 2m18 26q28 15 55-4m18-28q25 18 52 1m14 29q28 14 53-4m-237 55q25 13 49 0m23 5q27 13 52-2m30 1q25 13 49-1m17-2q21 8 37-4" fill="none" stroke="#e0e5c1" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
- </g>
- <g id="bearHead" stroke-linecap="round" stroke-linejoin="round">
-  <!-- Both ears are attached behind the broad head; no cropping at the canvas edge -->
-  <path d="M161 125C142 103 150 72 174 66 198 61 218 82 211 111Z" fill="#a95f33" stroke="#633b2a" stroke-width="7"/>
-  <path d="M183 102q13-13 23 2" fill="none" stroke="#e6a260" stroke-width="4" stroke-dasharray="2 4"/>
-  <path d="M339 111C337 85 358 63 382 71 405 79 412 103 398 124Z" fill="#a95f33" stroke="#633b2a" stroke-width="7"/>
-  <path d="M359 95q13-11 24 4" fill="none" stroke="#e6a260" stroke-width="4" stroke-dasharray="2 4"/>
-  <path id="bearHeadShape" d="M157 170C150 136 171 107 207 96 240 82 284 84 318 97 350 108 373 134 376 164 382 196 359 223 330 237 299 251 263 246 234 238L197 233C173 222 158 198 157 170Z" fill="url(#bearCoat)" stroke="#633b2a" stroke-width="8"/>
-  <path d="M172 151q14-18 33-17m18-22q20-7 37 0m15-1q23 0 40 13m-155 33q12-8 22-3" fill="none" stroke="#efb16e" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 6" opacity=".8"/>
-  <path d="M179 180C180 158 198 144 221 144 240 143 257 153 265 171 274 191 258 215 237 223 214 231 190 219 181 201Z" fill="url(#bearMuzzle)" stroke="#633b2a" stroke-width="5"/>
-  <path id="bearEyeLeft" d="M197 145q8-10 17 0" fill="none" stroke="#452c25" stroke-width="7"/>
-  <path id="bearEyeRight" d="M289 143q8-10 17 0" fill="none" stroke="#452c25" stroke-width="7"/>
-  <ellipse cx="279" cy="180" rx="35" ry="25" fill="url(#bearMuzzle)" stroke="#633b2a" stroke-width="4.5"/>
-  <path d="M262 169q0-9 11-10l18 1q8 2 3 11l-8 8q-11 4-19-2Z" fill="#452c25" stroke="#452c25" stroke-width="3"/>
-  <path id="bear-mouth" d="M278 181q-2 14-15 15m15-15q9 14 22 7" fill="none" stroke="#452c25" stroke-width="5.5"/>
-  <path id="bearMouthOpen" d="M262 177q16 28 34 0l-4 18q-13 12-25 0Z" fill="#572b25" stroke="#452c25" stroke-width="3" opacity="0"/>
-  <path d="M249 197q-8 4-12 0m61 3q9 4 14-2" fill="none" stroke="#bd7845" stroke-width="3" stroke-dasharray="2 4"/>
- </g>
- <path id="bearMotionStroke" d="M25 247q-9 18-3 36m429-42q16 16 13 34" fill="none" stroke="#d59a63" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 7" opacity=".65"/>
+ <svg id="bear-sprite" viewBox="0 0 600 430" role="img" aria-label="Gấu nâu mập ngủ nằm vẽ tay bằng phấn màu" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <linearGradient id="bearCoat" x1="0" y1="0" x2=".25" y2="1"><stop stop-color="#c9783c"/><stop offset=".56" stop-color="#b76832"/><stop offset="1" stop-color="#8f4a2b"/></linearGradient>
+ <linearGradient id="bearMuzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5c878"/><stop offset="1" stop-color="#d9984d"/></linearGradient>
+ <pattern id="bearFurLines" width="17" height="15" patternUnits="userSpaceOnUse"><path d="M2 4l4-2m4 9 4-2m-2-7 2 1" stroke="#683b29" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="1 3" fill="none" opacity=".5"/></pattern>
+ <pattern id="bearWarmHatch" width="25" height="23" patternUnits="userSpaceOnUse"><path d="M3 18l5-6m8 7 5-6M3 4l2-2" stroke="#f2bd7a" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" fill="none" opacity=".45"/></pattern>
+ <clipPath id="bearClip"><path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z"/></clipPath>
+</defs>
+<g id="bearBody">
+ <path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z" fill="url(#bearCoat)" stroke="#633a29" stroke-width="8" stroke-linejoin="round"/>
+ <path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z" fill="url(#bearFurLines)" clip-path="url(#bearClip)"/>
+ <path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z" fill="url(#bearWarmHatch)" clip-path="url(#bearClip)"/>
+ <path d="M49 321C51 268 75 219 119 183M92 363q34 13 71 12m-19-230q23-10 45-7m27-18q20-5 41 2m-104 45q19-9 36-6m-53 77q18-9 36-3" fill="none" stroke="#e8a45f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 7" opacity=".72"/>
+ <path d="M67 341Q89 309 124 317T182 352Q196 370 174 382L113 383Q76 379 67 341Z" fill="#a75b30" stroke="#633a29" stroke-width="6"/>
+ <path d="M145 310Q172 316 191 346Q205 369 189 382" fill="none" stroke="#6a3b29" stroke-width="7" stroke-linecap="round"/>
+ <path d="M348 302Q383 274 419 292Q443 307 449 343Q450 365 426 378L369 381Q344 366 348 338Z" fill="#a85d32" stroke="#633a29" stroke-width="6"/>
+ <path d="M372 354q2 11-4 17m19-20q3 12-2 20m18-21q3 11-2 18" fill="none" stroke="#6a3b29" stroke-width="4" stroke-linecap="round"/>
+ <path d="M476 324Q493 298 520 307Q547 317 550 344Q549 369 526 379L478 379Q456 364 476 324Z" fill="#b56a37" stroke="#633a29" stroke-width="6"/>
+ <path d="M490 354q2 10-3 16m18-17q3 11-2 17m17-17q3 10-2 16" fill="none" stroke="#6a3b29" stroke-width="4" stroke-linecap="round"/>
+ <path id="bearSleepBlanket" d="M50 277Q135 248 218 286T388 292Q474 258 548 306L555 353Q526 382 465 384L117 385Q67 380 50 345Z" fill="#8a9a73" stroke="#536746" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
+ <path id="bearSleepQuilt" d="M78 316q23 15 48 0m21 21q25 14 49-1m28-29q24 14 49 0m24 25q26 14 49-1m31-19q24 13 48-1m-362 42q23 12 47 0m52 13q24 12 47-1m52 2q23 12 47-1m48 1q22 10 40-3" fill="none" stroke="#e7e5c4" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
+</g>
+<g id="bearHead">
+ <path d="M395 204C376 186 378 158 397 147 416 136 439 150 442 174L439 199Z" fill="#b86a35" stroke="#633a29" stroke-width="7"/>
+ <path d="M486 187C488 160 510 146 529 160 545 171 543 194 526 208Z" fill="#b86a35" stroke="#633a29" stroke-width="7"/>
+ <path d="M390 223C389 193 411 173 443 171 473 163 510 176 529 199 550 224 550 256 532 278 516 298 488 307 458 301 429 299 403 285 392 263 384 248 385 235 390 223Z" fill="url(#bearCoat)" stroke="#633a29" stroke-width="8" stroke-linejoin="round"/>
+ <path d="M397 213q13-13 28-12m26-20q18-5 34 4m-83 48q11-5 19-2" fill="none" stroke="#f0b16b" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 6"/>
+ <path d="M433 232C438 215 456 210 473 216 492 222 502 240 493 257 484 275 460 279 442 266 432 258 429 244 433 232Z" fill="url(#bearMuzzle)" stroke="#633a29" stroke-width="5"/>
+ <path id="bearEyeLeft" d="M421 216q7-7 14 0" fill="none" stroke="#482b23" stroke-width="6.5" stroke-linecap="round"/>
+ <path id="bearEyeRight" d="M482 212q7-7 14 0" fill="none" stroke="#482b23" stroke-width="6.5" stroke-linecap="round"/>
+ <path d="M452 235q-1-7 8-9l16 1q8 2 3 10l-7 7q-10 4-16-2Z" fill="#482b23"/>
+ <path id="bear-mouth" d="M461 245q-1 12-12 13m12-13q10 11 21 5" fill="none" stroke="#482b23" stroke-width="5.5" stroke-linecap="round"/>
+ <path id="bearMouthOpen" d="M450 241q12 24 29 0l-4 15q-11 9-21 0Z" fill="#572b25" stroke="#482b23" stroke-width="3" opacity="0"/>
+ <path d="M448 270q-6 3-10 0m43 2q7 3 11-1" fill="none" stroke="#b87542" stroke-width="3" stroke-dasharray="2 4"/>
+</g>
 </svg>
  <svg id="bear-sleep-z" viewBox="0 0 68 30" aria-hidden="true"><path d="M3 5 H21 L4 24 H24 M29 3 H47 L30 21 H50 M52 5 H66 L53 21 H66" fill="none" stroke="#75563d" stroke-width="2.7" stroke-dasharray="3 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
 </button>
@@ -1865,7 +1894,7 @@ function bearSnowflakeSvg(i=0){
 }
 function renderBearSnow(){
  const root=$('bear-snow'),overlay=$('fat-bear-overlay');if(!root||!overlay)return;
- const level=fishEaten>=8?'heavy':fishEaten>=4?'light':'off';
+ const level=(bearHibernating||fishEaten===0)?'light':fishEaten>=8?'heavy':fishEaten>=4?'light':'off';
  if(level==='off'){root.replaceChildren();overlay.dataset.snowLevel='off';bearSnowLevel='off';return}
  const count=level==='heavy'?30:17;
  if(bearSnowLevel!==level||root.childElementCount!==count){
