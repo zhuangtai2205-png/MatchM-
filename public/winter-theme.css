@@ -1576,3 +1576,169 @@ html body .app-shell.shell #appSidebar.sidebar>.sidebar-bottom{
  html body .app-shell.shell{padding:0 9px 24px!important;gap:12px!important}
  html body .app-shell.shell #appSidebar.sidebar{padding:9px!important;gap:7px!important}
 }
+
+/* MatchMã stable layout reset v34: remove flex shrinking from navigation groups. */
+html body .shell.app-shell{
+ display:grid!important;
+ grid-template-columns:minmax(245px,280px) minmax(0,1fr)!important;
+ align-items:start!important;
+ gap:18px!important;
+ max-width:1600px!important;
+ width:100%!important;
+ margin:0 auto!important;
+ padding:0 20px 36px!important;
+ box-sizing:border-box!important;
+}
+html body .shell.app-shell #appSidebar.sidebar{
+ display:flex!important;
+ flex-direction:column!important;
+ flex-wrap:nowrap!important;
+ align-items:stretch!important;
+ align-content:stretch!important;
+ justify-content:flex-start!important;
+ gap:8px!important;
+ position:sticky!important;
+ top:12px!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:calc(100vh - 24px)!important;
+ overflow-x:hidden!important;
+ overflow-y:auto!important;
+ padding:12px!important;
+ margin:0!important;
+ box-sizing:border-box!important;
+}
+html body .shell.app-shell #appSidebar.sidebar > *{
+ position:relative!important;
+ inset:auto!important;
+ flex:0 0 auto!important;
+ flex-shrink:0!important;
+ align-self:stretch!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ margin:0!important;
+ transform:none!important;
+ box-sizing:border-box!important;
+}
+html body .shell.app-shell #appSidebar.sidebar > details.nav-folder{
+ display:block!important;
+ flex:0 0 auto!important;
+ flex-shrink:0!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ margin:5px 0!important;
+ padding:8px!important;
+ overflow:visible!important;
+ contain:none!important;
+}
+html body .shell.app-shell #appSidebar.sidebar > details.nav-folder > summary.navfolder-title{
+ display:flex!important;
+ position:relative!important;
+ align-items:center!important;
+ justify-content:space-between!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:44px!important;
+ margin:0!important;
+ padding:10px!important;
+ box-sizing:border-box!important;
+ line-height:1.4!important;
+ white-space:normal!important;
+ overflow-wrap:anywhere!important;
+}
+html body .shell.app-shell #appSidebar.sidebar > details.nav-folder > .nav-folder-items{
+ display:none!important;
+ position:static!important;
+ width:100%!important;
+ height:auto!important;
+ min-height:0!important;
+ max-height:none!important;
+ margin:0!important;
+ padding:8px 2px 2px!important;
+ overflow:visible!important;
+ box-sizing:border-box!important;
+}
+html body .shell.app-shell #appSidebar.sidebar > details.nav-folder[open] > .nav-folder-items{
+ display:flex!important;
+ flex-direction:column!important;
+ flex-wrap:nowrap!important;
+ align-items:stretch!important;
+ gap:6px!important;
+}
+html body .shell.app-shell #appSidebar.sidebar .nav-folder-items > .navbtn{
+ display:flex!important;
+ flex:0 0 auto!important;
+ flex-shrink:0!important;
+ width:100%!important;
+ min-width:0!important;
+ max-width:100%!important;
+ height:auto!important;
+ min-height:42px!important;
+ max-height:none!important;
+ margin:0!important;
+ padding:9px 10px!important;
+ box-sizing:border-box!important;
+ white-space:normal!important;
+ overflow-wrap:anywhere!important;
+ transform:none!important;
+}
+html body .shell.app-shell #appSidebar.sidebar > button.navbtn{
+ display:flex!important;
+ flex:0 0 auto!important;
+ flex-shrink:0!important;
+ width:100%!important;
+ min-height:44px!important;
+ height:auto!important;
+ margin:0!important;
+ padding:10px!important;
+ box-sizing:border-box!important;
+ white-space:normal!important;
+}
+html body .shell.app-shell #appSidebar.sidebar .sidebar-bottom{
+ display:flex!important;
+ flex:0 0 auto!important;
+ flex-direction:column!important;
+ gap:8px!important;
+ margin-top:6px!important;
+}
+html body .shell.app-shell #appSidebar.sidebar .nav-folder::before,
+html body .shell.app-shell #appSidebar.sidebar .nav-folder::after{pointer-events:none!important}
+@media(max-width:1050px){
+ html body .shell.app-shell{grid-template-columns:minmax(0,1fr)!important;padding:0 12px 28px!important}
+ html body .shell.app-shell #appSidebar.sidebar{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important}
+}
+@media(max-width:650px){
+ html body .shell.app-shell{padding:0 9px 24px!important;gap:12px!important}
+ html body .shell.app-shell #appSidebar.sidebar{padding:9px!important;gap:7px!important}
+}
+/* Remove the brand image/pseudo-logo, entertainment button, and all bear scene layers. */
+html body .app-header .logo,
+html body .app-header .brand-logo-img,
+html body .app-header .brand::before,
+html body .app-header .brand::after,
+html body .app-header::before,
+html body .app-header::after,
+html body #funToggleBtn,
+html body #funWidget,
+html body #fat-bear-overlay,
+html body #bear-container,
+html body #bear-sprite,
+html body #winterBearCorner,
+html body #bear-snow,
+html body #fish-pool,
+html body #bear-plus-layer{
+ display:none!important;
+ visibility:hidden!important;
+ opacity:0!important;
+ pointer-events:none!important;
+}
+html body .app-header .brand{background:none!important;background-image:none!important}
