@@ -1,0 +1,25 @@
+/* MatchMã Fat Bear Week Easter egg — isolated from app layout */
+#matchma-fat-bear-week{position:fixed;right:14px;bottom:12px;width:164px;z-index:100000;isolation:isolate;pointer-events:none;font-family:Nunito,system-ui,sans-serif;color:#284735}
+#matchma-fat-bear-week *{box-sizing:border-box}
+#matchma-fat-bear-week .fbw-scene{height:155px;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:visible}
+#matchma-fat-bear-week .fbw-ground{position:absolute;bottom:5px;width:132px;height:22px;border-radius:50%;background:radial-gradient(ellipse,#416d3d2b 0%,#416d3d00 72%)}
+#matchma-fat-bear-week .fbw-bear{position:relative;z-index:2;width:112px;height:130px;overflow:visible;transform-origin:50% 100%;animation:fbw-breathe 2.8s ease-in-out infinite;filter:drop-shadow(0 4px 3px #273d2418);pointer-events:auto;cursor:pointer;touch-action:manipulation;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+#matchma-fat-bear-week .fbw-bear:focus-visible{outline:2px solid #4b8553;outline-offset:3px;border-radius:24px}
+#matchma-fat-bear-week .fbw-bear svg{display:block;width:100%;height:100%;overflow:visible}
+#matchma-fat-bear-week .fbw-fish{position:absolute;z-index:3;right:5px;top:35px;width:35px;height:23px;opacity:0;pointer-events:none}
+#matchma-fat-bear-week .fbw-fish svg{width:100%;height:100%}
+#matchma-fat-bear-week .fbw-speech{position:absolute;top:1px;left:50%;transform:translateX(-50%);max-width:154px;width:max-content;padding:5px 9px;border:1px solid #dce9d7;border-radius:13px;background:#fffdf5;color:#37583c;box-shadow:0 3px 12px #253b2510;text-align:center;font-size:11px;font-weight:800;line-height:1.25}
+#matchma-fat-bear-week .fbw-controls{display:flex;justify-content:center;gap:5px;position:relative;z-index:4;pointer-events:auto}
+#matchma-fat-bear-week .fbw-feed{border:1px solid #c8dfc2;border-radius:999px;padding:7px 12px;background:#edf8e8;color:#315e37;font:800 11px/1.2 Nunito,system-ui,sans-serif;box-shadow:0 3px 10px #1e46201c;cursor:pointer;touch-action:manipulation}
+#matchma-fat-bear-week .fbw-feed:hover{background:#dff1d8;transform:translateY(-1px)}
+#matchma-fat-bear-week .fbw-feed:focus-visible{outline:2px solid #477d4b;outline-offset:2px}
+#matchma-fat-bear-week .fbw-progress{margin:5px auto 0;width:88px;height:4px;border-radius:9px;background:#dfead9;overflow:hidden}
+#matchma-fat-bear-week .fbw-progress span{display:block;height:100%;width:0;background:#6e9d5d;border-radius:9px;transition:width .35s ease}
+#matchma-fat-bear-week.fbw-eating .fbw-fish{animation:fbw-fish-feed .82s cubic-bezier(.3,.7,.2,1) forwards}
+#matchma-fat-bear-week.fbw-eating .fbw-bear{animation:fbw-chomp .7s ease-in-out}
+#matchma-fat-bear-week.fbw-happy .fbw-speech{background:#f1f9e8}
+@keyframes fbw-breathe{0%,100%{translate:0 0}50%{translate:0 -3px}}
+@keyframes fbw-chomp{0%,100%{transform:scale(var(--fbw-size,1))}35%{transform:scale(calc(var(--fbw-size,1)*1.06),calc(var(--fbw-size,1)*.96))}65%{transform:scale(calc(var(--fbw-size,1)*.98),calc(var(--fbw-size,1)*1.04))}}
+@keyframes fbw-fish-feed{0%{opacity:1;transform:translate(0,0) rotate(-8deg) scale(1)}65%{opacity:1;transform:translate(-48px,47px) rotate(18deg) scale(.85)}100%{opacity:0;transform:translate(-55px,60px) rotate(30deg) scale(.25)}}
+@media(max-width:480px){#matchma-fat-bear-week{right:5px;bottom:5px;transform:scale(.88);transform-origin:bottom right}}
+@media(prefers-reduced-motion:reduce){#matchma-fat-bear-week .fbw-bear{animation:none;transition:none}#matchma-fat-bear-week .fbw-fish{animation:none!important}#matchma-fat-bear-week .fbw-progress span{transition:none}}
