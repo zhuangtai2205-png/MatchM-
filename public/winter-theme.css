@@ -628,3 +628,30 @@ html body .navbtn .navicon,html body .nav-folder>summary .navicon,html body .nav
 @keyframes oceanWaveDrift{0%,100%{translate:-8px 0}50%{translate:14px 7px}}
 @keyframes petalFall{0%{translate:0 -20px;rotate:0deg}100%{translate:25px 95px;rotate:120deg}}
 @media(prefers-reduced-motion:reduce){html body #themeScene .scene-doodle{animation:none!important}}
+
+/* MatchMa hand-drawn polish + logo overlap fix (2026-10) */
+header.app-header{position:relative!important;isolation:isolate!important;overflow:visible!important}
+header.app-header .brand{position:relative!important;display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important;z-index:5!important}
+header.app-header .logo{position:relative!important;isolation:isolate!important;display:grid!important;place-items:center!important;flex:0 0 58px!important;width:58px!important;height:58px!important;min-width:58px!important;overflow:hidden!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;z-index:6!important}
+header.app-header .logo::before,header.app-header .logo::after{content:none!important;display:none!important}
+header.app-header .logo .brand-logo-img{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:none!important;opacity:1!important;z-index:2!important}
+header.app-header .brand-copy{position:relative!important;z-index:6!important;min-width:0!important}
+header.app-header .winter-bear-spot,header.app-header .bear-icon,header.app-header .logo .theme-nav-doodle{display:none!important}
+header.app-header h1{line-height:1.1!important;overflow-wrap:anywhere}
+@media(max-width:650px){header.app-header .logo{flex-basis:46px!important;width:46px!important;height:46px!important;min-width:46px!important}.brand{align-items:center!important}}
+/* Keep the interface hand-drawn without forcing the winter/yellow palette on every theme. */
+body{font-family:'Baloo 2','Nunito','Be Vietnam Pro',sans-serif!important;background-color:#f7f7fb!important}
+.hero,.panel,.sidebar,.stat,.mini,.chart-card,.tablewrap,.upload,.sidefoot,.sidebar-help,.sidebar-account-shortcut{border-style:dashed!important;box-shadow:none!important}
+.navbtn,.btn,.field input[type=text],.field select,.field input[type=number],.search,textarea,.local-pill,.toolbar-select,.toolbar-font{border-style:dashed!important}
+body[data-theme="ocean"]{--ink:#235568!important;--muted:#648d9b!important;--paper:#f0fbfd!important;--purple:#63b8ce!important;background:#effbfe!important;color:#235568!important}
+body[data-theme="ocean"] .hero,body[data-theme="ocean"] .panel,body[data-theme="ocean"] .sidebar,body[data-theme="ocean"] .stat,body[data-theme="ocean"] .mini{background:#f5fdffed!important;border-color:#91d0de!important}
+body[data-theme="retro"]{--ink:#353535!important;--muted:#696969!important;background:#f3f0e8!important;color:#353535!important}
+body[data-theme="retro"] .hero,body[data-theme="retro"] .panel,body[data-theme="retro"] .sidebar,body[data-theme="retro"] .stat,body[data-theme="retro"] .mini{background:#fbf8ef!important;border-color:#777!important}
+body[data-theme="pink"]{--ink:#814b69!important;--muted:#a77892!important;background:#fff4fa!important;color:#814b69!important}
+body[data-theme="pink"] .hero,body[data-theme="pink"] .panel,body[data-theme="pink"] .sidebar,body[data-theme="pink"] .stat,body[data-theme="pink"] .mini{background:#fff9fc!important;border-color:#e8b7d0!important}
+body[data-theme="vampire"]{--ink:#f2dfe5!important;--muted:#c6a1ad!important;background:#211b2a!important;color:#f2dfe5!important}
+body[data-theme="vampire"] .hero,body[data-theme="vampire"] .panel,body[data-theme="vampire"] .sidebar,body[data-theme="vampire"] .stat,body[data-theme="vampire"] .mini{background:#302333!important;border-color:#96546b!important;color:#f2dfe5!important}
+body[data-theme="cat"]{--ink:#6f514c!important;--muted:#9b7a73!important;background:#fbf3ef!important;color:#6f514c!important}
+body[data-theme="cat"] .hero,body[data-theme="cat"] .panel,body[data-theme="cat"] .sidebar,body[data-theme="cat"] .stat,body[data-theme="cat"] .mini{background:#fffaf7!important;border-color:#d8b8ad!important}
+body[data-theme="bear"]{--ink:#315d3b!important;--muted:#68856a!important;background:#e9f3e2!important;color:#315d3b!important}
+body[data-theme="bear"] .hero,body[data-theme="bear"] .panel,body[data-theme="bear"] .sidebar,body[data-theme="bear"] .stat,body[data-theme="bear"] .mini{background:#f5faef!important;border-color:#a9c894!important}
