@@ -1962,16 +1962,25 @@ html{--matchma-font-family:"Be Vietnam Pro","Noto Sans","Noto Sans TC","Noto San
 html body,html body *:not(svg):not(svg *):not(.icon):not(.lucide){font-family:var(--matchma-font-family)!important}
 #siteFontFamily option{font-family:Arial,sans-serif}
 </style>
-<style id="matchma-title-fixed-typewriter-v68">
-/* Vintage typewriter title: fixed independently of the website font selector. */
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+<style id="matchma-title-fixed-typewriter-v69">
+/* Vintage typewriter title remains independent of the website font selector. */
 header.app-header .brand-copy h1,
 header.app-header .brand-copy h1 span{
- font-family:"Special Elite","Courier Prime","Courier New",monospace!important;
+ font-family:"Special Elite","Courier New",monospace!important;
  font-weight:400!important;
  letter-spacing:.015em!important;
 }
 </style>
+<script id="matchma-load-vintage-typewriter-v69">
+(function(){
+ var id='matchma-vintage-typewriter-font';
+ if(!document.getElementById(id)){
+  var l=document.createElement('link');l.id=id;l.rel='stylesheet';
+  l.href='https://fonts.googleapis.com/css2?family=Special+Elite&display=swap';
+  document.head.appendChild(l);
+ }
+})();
+</script>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -3382,7 +3391,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
   document.documentElement.style.setProperty('--matchma-font-family',stack);
   document.documentElement.dataset.siteFont=name;
   document.querySelectorAll('body, body *').forEach(function(el){
-   if(el.matches('svg, svg *, .icon, .lucide')) return;
+   if(el.matches('svg, svg *, .icon, .lucide, header.app-header .brand-copy h1, header.app-header .brand-copy h1 *')) return;
    el.style.setProperty('font-family',stack,'important');
   });
   const select=document.getElementById('siteFontFamily');
