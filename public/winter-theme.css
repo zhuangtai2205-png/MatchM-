@@ -510,3 +510,19 @@ html body .navbtn:hover,html body .navbtn.active{background:var(--theme-soft,#ee
 .app-header .logo::before,.app-header .logo::after,.brand .logo::before,.brand .logo::after{content:none!important;display:none!important;visibility:hidden!important}
 .app-header .brand-logo-img{display:block!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:2!important;filter:none!important;object-fit:contain!important}
 #funToggleBtn,#funWidget,#fat-bear-overlay{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+
+/* Theme-colored navigation: consistent selected, hover and group states */
+body[data-theme="ocean"]{--theme-bg:#e5f6fb;--theme-panel:#f7fdff;--theme-ink:#164c62;--theme-muted:#5c899a;--theme-line:#b9dfe9;--theme-accent:#218da8;--theme-soft:#d1edf4}
+body[data-theme="pink"]{--theme-bg:#fcebf3;--theme-panel:#fff8fb;--theme-ink:#874563;--theme-muted:#a66e87;--theme-line:#efc8d9;--theme-accent:#cf78a0;--theme-soft:#f8dce8}
+body[data-theme="retro"]{--theme-bg:#ededeb;--theme-panel:#fafaf8;--theme-ink:#292929;--theme-muted:#696969;--theme-line:#bdbdb9;--theme-accent:#4c4c4c;--theme-soft:#e2e2df}
+body[data-theme="bear"]{--theme-bg:#eaf4e7;--theme-panel:#f7fbf3;--theme-ink:#355642;--theme-muted:#698572;--theme-line:#c9dfc8;--theme-accent:#63936d;--theme-soft:#dcebd8}
+body[data-theme="vampire"]{--theme-bg:#17111f;--theme-panel:#281d32;--theme-ink:#f7eaf8;--theme-muted:#c3a9cb;--theme-line:#5e426c;--theme-accent:#a34d68;--theme-soft:#3b2947}
+body[data-theme="cat"]{--theme-bg:#f7eee9;--theme-panel:#fff9f5;--theme-ink:#60443b;--theme-muted:#97786d;--theme-line:#e4cfc4;--theme-accent:#b87d68;--theme-soft:#f1dfd5}
+body[data-theme] .sidebar{background:var(--theme-panel)!important;border:1px solid var(--theme-line)!important}
+body[data-theme] .navtitle,body[data-theme] .nav-folder,body[data-theme] .nav-folder>summary,body[data-theme] .nav-folder>summary.navfolder-title{background:var(--theme-soft)!important;color:var(--theme-ink)!important;border-color:var(--theme-accent)!important}
+body[data-theme] .navbtn{background:var(--theme-panel)!important;color:var(--theme-ink)!important;border:1px solid var(--theme-line)!important}
+body[data-theme] .navbtn:hover,body[data-theme] .navbtn.active{background:var(--theme-soft)!important;color:var(--theme-ink)!important;border:1px solid var(--theme-accent)!important;box-shadow:inset 3px 0 var(--theme-accent)!important}
+body[data-theme="vampire"] .navbtn,body[data-theme="vampire"] .nav-folder{background:#281d32!important;color:#f7eaf8!important}
+body[data-theme="vampire"] .navbtn:hover,body[data-theme="vampire"] .navbtn.active{background:#3b2947!important}
+.app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
