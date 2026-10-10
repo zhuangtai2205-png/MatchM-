@@ -2177,3 +2177,16 @@ html body header.app-header .brand-mark .matchma-logo{width:100%!important;heigh
 html body header.app-header .brand-copy h1{font-family:Georgia,'Times New Roman',serif!important;letter-spacing:-.8px!important}
 html body header.app-header .brand-copy .subbrand{display:none!important}
 @media(max-width:600px){html body header.app-header .brand-mark{width:40px!important;height:40px!important;min-width:40px!important;flex-basis:40px!important}}
+
+/* Hotfix from mobile visual review: bee silhouette must read as a bee, not a crab. */
+html body header.app-header .brand-mark{width:48px!important;height:48px!important;min-width:48px!important;flex:0 0 48px!important}
+html body header.app-header .brand-mark .matchma-logo{width:100%!important;height:100%!important;display:block!important}
+html body header.app-header .brand-copy h1{white-space:nowrap!important}
+html body[data-theme="forest"] .navbtn .navicon{font-size:0!important;width:28px!important;min-width:28px!important;position:relative!important}
+html body[data-theme="forest"] .navbtn .navicon::after{font-size:19px!important;line-height:1!important}
+html body[data-theme="forest"] .navbtn:nth-child(3n+1) .navicon::after{content:"🐻"!important}
+html body[data-theme="forest"] .navbtn:nth-child(3n+2) .navicon::after{content:"🌼"!important}
+html body[data-theme="forest"] .navbtn:nth-child(3n) .navicon::after{content:"🦋"!important}
+html body[data-theme="forest"] .nav-folder .navfolder-title:after{content:"🐻"!important;display:inline-flex!important;margin-left:auto!important;font-size:18px!important}
+html body[data-theme="minimal"] .navbtn .navicon{display:none!important}
+html body[data-theme="minimal"] .navfolder-title:after{display:none!important;content:none!important}
