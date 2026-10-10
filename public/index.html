@@ -3140,13 +3140,16 @@ header.app-header .headright{grid-column:2!important;grid-row:1!important;min-wi
 
 
 
-<style id="matchma-logo-stable-layout-v70">
-/* Stable logo sizing: scale the container, never the image; avoid overlaying the page. */
-header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+<style id="matchma-logo-balanced-layout-v71">
+/* Balanced fixed-size brand: the icon stays compact and never overlays content. */
+header.app-header .brand{
+ display:flex!important;align-items:center!important;gap:10px!important;
+ min-width:0!important;flex:0 1 auto!important;
+}
 header.app-header .brand-mark{
  display:flex!important;align-items:center!important;justify-content:center!important;
- width:88px!important;height:88px!important;min-width:88px!important;
- flex:0 0 88px!important;overflow:hidden!important;
+ width:64px!important;height:64px!important;min-width:64px!important;
+ flex:0 0 64px!important;overflow:hidden!important;
 }
 header.app-header .brand-mark img.brand-logo-img{
  display:block!important;width:100%!important;height:100%!important;
@@ -3157,13 +3160,16 @@ header.app-header .brand-copy{min-width:0!important}
 header.app-header .brand-copy h1{
  display:block!important;margin:0!important;
  font-family:"Be Vietnam Pro",Arial,sans-serif!important;
- font-size:clamp(24px,3vw,36px)!important;line-height:1.15!important;
+ font-size:clamp(24px,2.6vw,32px)!important;line-height:1.12!important;
  white-space:nowrap!important;
 }
 header.app-header .brand-copy h1 span{font-family:inherit!important}
 @media(max-width:700px){
- header.app-header .brand{gap:8px!important}
- header.app-header .brand-mark{width:72px!important;height:72px!important;min-width:72px!important;flex-basis:72px!important}
- header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,26px)!important;white-space:normal!important}
+ header.app-header .brand{gap:7px!important}
+ header.app-header .brand-mark{
+  width:56px!important;height:56px!important;min-width:56px!important;flex-basis:56px!important;
+ }
+ header.app-header .brand-copy h1{font-size:clamp(18px,4.8vw,24px)!important;white-space:normal!important}
+ header.app-header .brand-copy .subbrand{font-size:11px!important;gap:4px!important}
 }
 </style>
