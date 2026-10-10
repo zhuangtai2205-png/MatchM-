@@ -1,23 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 492" role="img" aria-label="Match Mã — mèo samurai cầm kiếm" preserveAspectRatio="xMidYMid meet">
-<title>Match Mã</title>
-<rect width="660" height="492" fill="#fff"/>
-<g fill="none" stroke="#080808" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
-<circle cx="330" cy="171" r="104"/>
-<path d="M267 235 Q278 203 303 187 L316 158 Q326 143 350 151 L377 169 L395 186 L378 190 Q389 199 380 210 Q375 219 363 219 L354 234 L348 250"/>
-<path d="M302 185 L284 179 L296 160 L322 165 L328 181 Z" fill="#fff"/>
-<path d="M296 160 L303 144 L326 151 L322 165"/>
-<path d="M285 180 L275 194 L329 208 L332 190 Z" fill="#fff"/>
-<path d="M275 194 L265 209 L329 224 L329 208 Z" fill="#fff"/>
-<path d="M265 209 L256 225 L325 240 L329 224 Z" fill="#fff"/>
-<path d="M312 150 L297 117 L322 128 L340 161 Q347 171 354 164 L339 126 L350 119 L366 163"/>
-<path d="M368 194 L380 198"/>
-<path d="M365 216 Q373 219 378 213"/>
-<path d="M344 237 L396 177 L440 125 Q446 145 428 166 L384 220"/>
-<path d="M340 241 L357 256 L370 243 L353 228 Z" fill="#fff"/>
-<path d="M354 252 L329 281 Q323 288 317 282 Q313 278 320 271 L342 246" fill="#fff"/>
-<path d="M360 246 L411 185"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Mèo samurai cầm kiếm trong vòng tròn">
+<title>MatchMã — mèo samurai</title>
+<rect width="100" height="100" fill="white"/>
+<g fill="white" stroke="#111" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="50" cy="50" r="46"/>
+  <!-- cat head and neck, in side profile facing right -->
+  <path d="M25 79 C28 68 34 58 42 53 L44 43 C46 35 53 31 61 34 L69 39 L77 48 L71 51 C74 55 73 60 68 63 C65 65 61 65 58 64 L54 71 L52 82"/>
+  <!-- cheek / neck silhouette -->
+  <path d="M41 54 C35 61 31 69 29 77" fill="none"/>
+  <!-- samurai helmet crest and ties -->
+  <path d="M45 37 L35 21 L47 25 L54 38 Q57 42 61 39 L57 24 L63 20 L69 38" />
+  <path d="M46 35 L40 30 L49 31"/>
+  <!-- segmented helmet plates -->
+  <path d="M42 38 L32 35 L27 43 L48 49 L51 42 Z"/>
+  <path d="M31 44 L24 51 L47 57 L49 50 Z"/>
+  <path d="M25 52 L20 60 L46 66 L47 58 Z"/>
+  <path d="M21 61 L18 68 L44 74 L46 67 Z"/>
+  <!-- face -->
+  <path d="M63 48 L68 50" fill="none" stroke-width="2"/>
+  <path d="M67 57 Q64 60 61 58" fill="none" stroke-width="1.5"/>
+  <!-- sword, diagonal from lower-left to upper-right -->
+  <path d="M57 65 L80 38 Q86 30 91 23 Q91 34 84 43 L61 70 Z"/>
+  <path d="M56 66 L62 72 L58 76 L52 70 Z"/>
+  <path d="M55 72 L38 89 Q35 92 32 89 Q30 87 33 84 L51 68" />
+  <path d="M53 70 L80 40" fill="none" stroke-width="1"/>
+  <!-- sword guard -->
+  <path d="M49 66 L62 78 L65 75 L52 63 Z"/>
 </g>
-<g fill="#080808" font-family="Arial, Helvetica, sans-serif" font-weight="800" text-anchor="middle">
-<text x="330" y="350" font-size="67" letter-spacing="-2">match</text>
-<text x="330" y="407" font-size="67" letter-spacing="-2">mã</text>
-</g></svg>
+</svg>
