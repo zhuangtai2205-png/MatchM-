@@ -1114,36 +1114,32 @@ body[data-fun-effects="off"] #bear-snow{display:none!important}
  .intro-menu-card{transition:none}.calc-key:hover{transform:none}
 }
 
-/* MatchMã — phẳng 2D, giấy vẽ tay; tuyết phủ toàn màn hình khi gấu ăn/ngủ */
-body[data-fun-effects="off"] #bear-snow{display:block!important}
-#catClickFX{display:none!important}
-.cat-flower-particle,.bear-plus-one.bear-confetti-doodle{display:none!important}
-button,a,.navbtn,.btn,.panel,.hero,.stat,.sidebar,.mini,.fun-widget{box-shadow:none!important;filter:none}
-button:hover,.btn:hover,.navbtn:hover{transform:none!important;filter:none!important}
+/* MatchMã — nét vẽ tay 2D, nhân vật không bị cắt và hiệu ứng được bật lại. */
+#catClickFX{display:block!important;position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99999!important}
+.cat-flower-particle,.bear-plus-one.bear-confetti-doodle{display:block!important}
+.cat-flower-particle{width:32px!important;height:32px!important;opacity:1}
+.cat-flower-particle svg{width:100%;height:100%;display:block}
 #fat-bear-overlay{position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;overflow:hidden!important;pointer-events:none!important;z-index:99998!important}
-#bear-snow{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important;pointer-events:none!important;z-index:1!important;opacity:0;transition:opacity .5s ease}
-#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.68!important}
-#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.92!important}
-#bear-snow .bear-snowflake{position:absolute!important;top:-8vh;z-index:1!important;display:block!important;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite!important}
-#bear-container{z-index:3!important;filter:none!important;box-shadow:none!important}
-#bear-sprite,#bear-sprite svg{filter:none!important}
-#fish-pool{z-index:4!important}
-.bear-fish{box-shadow:none!important;filter:none!important}
-body[data-theme="bear"]::before,body[data-theme="bear"]::after{pointer-events:none!important}
-@media(prefers-reduced-motion:reduce){#bear-snow .bear-snowflake{animation:none!important;top:var(--snow-static-top,25vh)!important}}
-
-
-/* Final hand-drawn bear styling based on the user's reference illustration. */
-#bear-container{width:clamp(280px,39vw,470px)!important;max-width:calc(100vw - 18px)!important;filter:none!important}
-#bear-sprite{filter:none!important;shape-rendering:geometricPrecision}
-#bear-sprite #bearTorso{stroke-linecap:round;stroke-linejoin:round}
-#bear-container.is-hibernating{transform:translateX(-50%) scale(var(--bear-scale,1)) translateY(7px)!important;filter:none!important}
+#bear-container{position:absolute!important;left:clamp(8px,2vw,24px)!important;bottom:10px!important;width:clamp(280px,37vw,450px)!important;height:clamp(164px,26vw,263px)!important;max-width:calc(100vw - 16px)!important;display:flex!important;align-items:flex-end!important;justify-content:center!important;overflow:visible!important;background:transparent!important;border:0!important;padding:0!important;pointer-events:auto!important;cursor:pointer!important;transform:scale(var(--bear-scale,1))!important;transform-origin:bottom left!important;filter:none!important;box-shadow:none!important}
+#bear-sprite{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;overflow:visible!important;object-fit:contain!important;preserveAspectRatio:xMidYMax meet;filter:none!important;transform-origin:50% 100%!important}
+#bear-container.is-hibernating{transform:scale(var(--bear-scale,1))!important}
 #bear-container.is-hibernating #bear-sprite{animation:bearSleepBreathe 3.4s ease-in-out infinite!important}
 #bear-container.is-munching #bear-sprite{animation:bearHandDrawnChomp .46s ease-in-out!important}
-#bear-snow{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;pointer-events:none!important;overflow:hidden!important}
-#bear-snow .bear-snowflake{filter:none!important}
-@media(max-width:650px){#bear-container{width:clamp(220px,58vw,320px)!important;max-width:calc(100vw - 12px)!important}}
-@media(prefers-reduced-motion:reduce){#bear-sprite,#bear-container.is-hibernating #bear-sprite,#bear-container.is-munching #bear-sprite{animation:none!important}}
+#bear-snow{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;overflow:hidden!important;pointer-events:none!important;z-index:1!important;opacity:0;transition:opacity .5s ease}
+#fat-bear-overlay[data-snow-level="light"] #bear-snow{opacity:.72!important}
+#fat-bear-overlay[data-snow-level="heavy"] #bear-snow{opacity:.94!important}
+#bear-snow .bear-snowflake{position:absolute!important;top:-8vh;display:block!important;animation:bearSnowFall var(--snow-duration,12s) linear var(--snow-delay,0s) infinite!important}
+#bear-container{z-index:3!important}
+#fish-pool{z-index:4!important}
+.bear-fish{box-shadow:none!important;filter:none!important}
+:root{--hand-ink:#67452f;--hand-line:#b9a18a}
+button,.navbtn,.panel,.page,.sidebar,.hero,.stat,.fun-widget,.toolbar-select{box-shadow:none!important;filter:none}
+button,.navbtn{border-radius:12px;border-style:dashed;border-color:var(--hand-line,#b9a18a)}
+.navbtn.active{box-shadow:none!important;border-style:dashed!important}
+.panel,.page,.sidebar,.hero,.stat{border-style:dashed!important;border-color:var(--hand-line,#b9a18a)!important;box-shadow:none!important}
+button:hover,.navbtn:hover,.btn:hover{transform:none!important;filter:none!important}
+@media(max-width:650px){#bear-container{width:clamp(235px,62vw,320px)!important;height:clamp(138px,39vw,195px)!important;left:6px!important;bottom:8px!important}}
+@media(prefers-reduced-motion:reduce){#bear-snow .bear-snowflake{animation:none!important;top:var(--snow-static-top,25vh)!important}}
 
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
@@ -2679,9 +2675,7 @@ initAccount();renderMemoryPage();
 ['fontDown','fontReset','fontUp'].forEach(id=>$(id).addEventListener('click',()=>{if($('quickSettings'))$('quickSettings').open=false}));$('quickLang').addEventListener('change',()=>{if($('quickSettings'))$('quickSettings').open=false});
 document.querySelectorAll('.nav-folder').forEach((g,i)=>g.open=i===0);initTheme();initPlatformAudit();initAutoFill();initStockForecast();renderStockForecast();initFunWidget();initCalculatorWidget();
 
-/* Disable click-triggered decoration: keep only the bear's own 2D actions. */
-spawnBearConfetti=function(){};
-/* Draw hand-sketched snow across the entire viewport while feeding or hibernating. */
+/* Keep hand-drawn click decorations enabled. Snow spans the full viewport while feeding or hibernating. */
 renderBearSnow=function(){
  const root=$('bear-snow'),overlay=$('fat-bear-overlay');
  if(!root||!overlay)return;
