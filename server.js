@@ -1,1 +1,27 @@
-const express=require('express');const app=express();const path=require('path');const fs=require('fs');const PORT=process.env.PORT||3000;app.disable('x-powered-by');app.use(express.json({limit:'2mb'}));app.get('/health',(req,res)=>res.json({ok:true,app:'MatchMa'}));app.get(['/','/index.html'],(req,res,next)=>{fs.readFile(path.join(__dirname,'public','index.html'),'utf8',(err,html)=>{if(err)return next(err);html=html.replace('</head>','<link rel="stylesheet" href="/winter-theme.css?v=2"></head>');html=html.replace('</body>','<script src="/winter-theme.js?v=2"></script></body>');res.set('Cache-Control','no-cache, no-store, must-revalidate');res.type('html').send(html);});});app.use(express.static(path.join(__dirname,'public')));app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));app.listen(PORT,'0.0.0.0',()=>console.log('MatchMa listening on '+PORT));
+const express=require('express');
+const app=express();
+const path=require('path');
+const fs=require('fs');
+const PORT=process.env.PORT||3000;
+
+app.disable('x-powered-by');
+app.use(express.json({limit:'2mb'}));
+app.get('/health',(req,res)=>res.json({ok:true,app:'MatchMa'}));
+
+app.get(['/','/index.html'],(req,res,next)=>{
+  fs.readFile(path.join(__dirname,'public','index.html'),'utf8',(err,html)=>{
+    if(err)return next(err);
+    // Keep exactly one copy of each theme asset. Old duplicate copies caused
+    // multiple observers and conflicting theme/logo mutations on page startup.
+    html=html.replace(/<link rel="stylesheet" href="\/winter-theme\.css\?v=\d+">/g,'');
+    html=html.replace(/<script src="\/winter-theme\.js\?v=\d+"><\/script>/g,'');
+    html=html.replace('</head>','<link rel="stylesheet" href="/winter-theme.css?v=14"></head>');
+    html=html.replace('</body>','<script src="/winter-theme.js?v=12"></script></body>');
+    res.set('Cache-Control','no-cache, no-store, must-revalidate');
+    res.type('html').send(html);
+  });
+});
+
+app.use(express.static(path.join(__dirname,'public')));
+app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'public','index.html')));
+app.listen(PORT,'0.0.0.0',()=>console.log('MatchMa listening on '+PORT));
