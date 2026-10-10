@@ -2802,3 +2802,56 @@ body[data-theme="forest"] .app-shell,body[data-theme="minimal"] .app-shell { box
 .app-header .brand-mark .matchma-logo-image{width:100%!important;height:100%!important;object-fit:contain!important;mix-blend-mode:normal!important}
 @media(max-width:650px){.app-header .brand-mark{width:58px!important;height:76px!important;flex-basis:58px!important}}
 </style>
+
+<style id="matchma-final-logo-and-theme-repair-v39">
+/* Logo: larger, preserve the exact PNG aspect ratio and transparent pixels */
+.app-header .brand-mark,
+body .app-header .brand-mark,
+body[data-theme] .app-header .brand-mark {
+  display:flex!important; align-items:center!important; justify-content:center!important;
+  width:104px!important; height:104px!important; flex:0 0 104px!important;
+  min-width:104px!important; padding:0!important; margin:0!important; box-sizing:border-box!important;
+  background:transparent!important; border:0!important; border-radius:0!important;
+  box-shadow:none!important; overflow:visible!important;
+}
+.app-header .brand-mark .matchma-logo-image {
+  display:block!important; width:100%!important; height:100%!important;
+  object-fit:contain!important; object-position:center!important;
+  background:transparent!important; border:0!important; border-radius:0!important;
+  box-shadow:none!important; mix-blend-mode:normal!important;
+}
+.app-header .brand {display:flex!important;align-items:center!important;gap:16px!important;min-width:0!important}
+.app-header .brand-copy {min-width:0!important}
+.app-header .brand-copy h1 {margin:0!important;line-height:1.1!important}
+.app-header .subbrand {line-height:1.35!important}
+
+/* Forest and Minimal inherit the app's normal typography and core layout.
+   Theme-specific colors, backgrounds and decorative effects remain intact. */
+body[data-theme="forest"], body[data-theme="minimal"] {
+  font-family:inherit!important; letter-spacing:normal!important; text-transform:none!important;
+}
+body[data-theme="forest"] :is(button,input,select,textarea,h1,h2,h3,h4,p,label,small,strong,span,td,th),
+body[data-theme="minimal"] :is(button,input,select,textarea,h1,h2,h3,h4,p,label,small,strong,span,td,th) {
+  font-family:inherit!important; letter-spacing:normal!important; text-transform:none!important;
+  box-sizing:border-box;
+}
+body[data-theme="forest"] .page, body[data-theme="minimal"] .page {min-width:0!important;max-width:100%!important}
+body[data-theme="forest"] .sidebar, body[data-theme="minimal"] .sidebar {min-width:0!important}
+body[data-theme="forest"] .hero, body[data-theme="minimal"] .hero,
+body[data-theme="forest"] .panel, body[data-theme="minimal"] .panel,
+body[data-theme="forest"] .stat, body[data-theme="minimal"] .stat,
+body[data-theme="forest"] .mini, body[data-theme="minimal"] .mini {box-sizing:border-box!important;min-width:0}
+body[data-theme="forest"] .main, body[data-theme="minimal"] .main {min-width:0!important}
+body[data-theme="minimal"] .page {padding:clamp(12px,2vw,22px)!important}
+body[data-theme="minimal"] .panel, body[data-theme="minimal"] .hero,
+body[data-theme="minimal"] .stat, body[data-theme="minimal"] .mini,
+body[data-theme="minimal"] .sidebar {border-radius:12px!important}
+@media(max-width:650px){
+ .app-header .brand-mark,body .app-header .brand-mark,body[data-theme] .app-header .brand-mark {
+   width:76px!important;height:76px!important;flex-basis:76px!important;min-width:76px!important;
+ }
+ .app-header .brand {gap:10px!important}
+ .app-header .brand-copy h1 {font-size:clamp(20px,5vw,28px)!important}
+ body[data-theme="minimal"] .page {padding:10px!important}
+}
+</style>
