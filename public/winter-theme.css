@@ -526,3 +526,13 @@ body[data-theme] .navbtn:hover,body[data-theme] .navbtn.active{background:var(--
 body[data-theme="vampire"] .navbtn,body[data-theme="vampire"] .nav-folder{background:#281d32!important;color:#f7eaf8!important}
 body[data-theme="vampire"] .navbtn:hover,body[data-theme="vampire"] .navbtn.active{background:#3b2947!important}
 .app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
+
+
+/* Bear corner: one clean hand-drawn bear only inside the hero; never on the logo or menu. */
+body[data-theme="bear"] .hero{position:relative!important;overflow:hidden}
+body[data-theme="bear"] #bear-container{position:absolute!important;right:12px!important;left:auto!important;bottom:0!important;width:clamp(100px,12vw,150px)!important;height:auto!important;aspect-ratio:240/220!important;display:block!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;z-index:3!important;cursor:pointer!important;transform:none!important;filter:drop-shadow(0 4px 3px #4d38251c)!important}
+body[data-theme="bear"] #bear-sprite{display:block!important;width:100%!important;height:auto!important;font-size:initial!important;overflow:visible!important;animation:bearIdleBreathe 3.6s ease-in-out infinite!important}
+body[data-theme="bear"] #bear-container.is-munching #bear-sprite{animation:bearChomp .42s ease-in-out!important}
+body:not([data-theme="bear"]) #bear-container{display:none!important}
+.navbtn .theme-nav-doodle,.navbtn .icon3d,.navbtn .bear-icon{display:none!important}
+.app-header .logo::before,.app-header .logo::after,.app-header .brand .logo::before,.app-header .brand .logo::after{content:none!important;display:none!important}
