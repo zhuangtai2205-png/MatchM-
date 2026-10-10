@@ -1365,3 +1365,32 @@ body[data-theme="bear"] .sidebar .navbtn[data-page="settings"]::before{content:"
 /* The bear mascot is independent from the interactive entertainment overlay. */
 #winterBearCorner{position:fixed;left:8px;bottom:8px;width:clamp(72px,15vw,118px);height:clamp(72px,14vw,108px);background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%20120%20110'%3E%3Cg%20stroke%3D'%2367452f'%20stroke-width%3D'3.2'%20stroke-linecap%3D'round'%20stroke-linejoin%3D'round'%3E%3Ccircle%20cx%3D'30'%20cy%3D'26'%20r%3D'15'%20fill%3D'%23b87a49'%2F%3E%3Ccircle%20cx%3D'90'%20cy%3D'26'%20r%3D'15'%20fill%3D'%23b87a49'%2F%3E%3Cpath%20d%3D'M20%2046Q22%2025%2043%2029Q60%2019%2078%2029Q99%2025%20101%2047L96%2080Q82%20100%2060%2099Q38%20100%2024%2080Z'%20fill%3D'%23c58a58'%2F%3E%3Cpath%20d%3D'M39%2057q8-8%2014%200M67%2057q8-8%2014%200'%20fill%3D'none'%2F%3E%3Cpath%20d%3D'M48%2072q12%2011%2024%200'%20fill%3D'none'%2F%3E%3Cpath%20d%3D'M54%2066q6-5%2012%200q-6%207-12%200'%20fill%3D'%2367452f'%2F%3E%3C%2Fg%3E%3Cpath%20d%3D'M38%2039q22-10%2044%200'%20fill%3D'none'%20stroke%3D'%23e0ad7d'%20stroke-width%3D'3'%2F%3E%3C%2Fsvg%3E");background-repeat:no-repeat;background-size:contain;background-position:center bottom;z-index:900;pointer-events:none;filter:drop-shadow(0 3px 3px #345b4520);animation:winterBearBreathe 4.8s ease-in-out infinite}
 @media(max-width:650px){#winterBearCorner{width:74px;height:70px;left:5px;bottom:5px}}
+
+/* Logo repair: preserve the complete original MatchMã artwork and its native 320:390 ratio.
+   Earlier overrides used several competing sizes and clipped the artwork. */
+html body header.app-header .brand{display:flex!important;align-items:center!important;gap:12px!important;min-width:0!important}
+html body header.app-header .brand>.logo{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ flex:0 0 76px!important;width:76px!important;height:93px!important;
+ min-width:76px!important;min-height:93px!important;max-width:76px!important;max-height:93px!important;
+ margin:0!important;padding:0!important;overflow:visible!important;isolation:isolate!important;
+ border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+}
+html body header.app-header .brand>.logo::before,
+html body header.app-header .brand>.logo::after{content:none!important;display:none!important}
+html body header.app-header .brand>.logo>img.brand-logo-img{
+ display:block!important;visibility:visible!important;opacity:1!important;
+ position:static!important;inset:auto!important;flex:0 0 76px!important;
+ width:76px!important;height:93px!important;min-width:76px!important;min-height:93px!important;
+ max-width:76px!important;max-height:93px!important;object-fit:contain!important;object-position:center!important;
+ margin:0!important;padding:0!important;overflow:visible!important;transform:none!important;
+ filter:none!important;-webkit-filter:none!important;clip-path:none!important;mask:none!important;
+ border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+ mix-blend-mode:normal!important;content:normal!important;
+}
+html body[data-theme="vampire"] header.app-header .brand>.logo>img.brand-logo-img{filter:none!important;-webkit-filter:none!important}
+@media(max-width:650px){
+ html body header.app-header .brand{gap:7px!important;align-items:center!important}
+ html body header.app-header .brand>.logo{flex:0 0 60px!important;width:60px!important;height:74px!important;min-width:60px!important;min-height:74px!important;max-width:60px!important;max-height:74px!important}
+ html body header.app-header .brand>.logo>img.brand-logo-img{flex:0 0 60px!important;width:60px!important;height:74px!important;min-width:60px!important;min-height:74px!important;max-width:60px!important;max-height:74px!important}
+}
