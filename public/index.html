@@ -1937,6 +1937,25 @@ header.app-header .headright{
  header.app-header .headright{flex:1 1 100%!important;width:100%!important;justify-content:flex-start!important}
 }
 </style>
+<style id="matchma-title-toolbar-same-row-v65">
+/* Desktop: title and toolbar share one horizontal line; do not create a blank toolbar band. */
+@media(min-width:701px){
+ header.app-header{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:6px 16px!important;margin:0!important;min-height:0!important;height:auto!important}
+ header.app-header .brand{display:flex!important;flex:0 0 auto!important;align-items:center!important;align-self:center!important;gap:8px!important;width:auto!important;max-width:none!important;margin:0!important;padding:0!important}
+ header.app-header .brand-mark{flex:0 0 76px!important;width:76px!important;height:58px!important;min-width:76px!important;overflow:visible!important}
+ header.app-header .brand-mark img.brand-logo-img{left:0!important;top:50%!important;width:76px!important;height:58px!important;transform:translateY(-50%) scale(1.28)!important;transform-origin:left center!important;object-position:left center!important}
+ header.app-header .brand-copy,header.app-header .brand-copy h1{flex:0 0 auto!important;white-space:nowrap!important}
+ header.app-header .headright{display:flex!important;flex:1 1 auto!important;align-self:center!important;align-items:center!important;justify-content:flex-end!important;flex-flow:row nowrap!important;gap:5px!important;width:auto!important;min-width:0!important;max-width:none!important;margin:0!important}
+ header.app-header .headright>*{flex:0 1 auto!important;min-width:0!important}
+ header.app-header .headright .local-pill{white-space:nowrap!important}
+ header.app-header .headright select{max-width:150px!important}
+}
+@media(max-width:700px){
+ header.app-header{align-items:center!important}
+ header.app-header .brand{align-items:center!important}
+ header.app-header .headright{align-items:center!important}
+}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
