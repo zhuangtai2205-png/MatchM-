@@ -1,17 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Cua đen trắng Match Mã">
-<title>Match Mã — cua tối giản</title>
-<g fill="none" stroke="#000" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
- <circle cx="50" cy="50" r="46"/>
- <path d="M35 40 C30 35 26 29 28 23 C30 17 36 15 41 18 L46 23 L41 29 L35 27 L39 35"/>
- <path d="M65 40 C70 35 74 29 72 23 C70 17 64 15 59 18 L54 23 L59 29 L65 27 L61 35"/>
- <path d="M44 39 L43 33 M56 39 L57 33"/>
- <circle cx="43" cy="31" r="3.2"/><circle cx="57" cy="31" r="3.2"/>
- <path d="M29 47 Q50 34 71 47 Q75 53 69 62 Q61 70 50 70 Q39 70 31 62 Q25 53 29 47 Z"/>
- <path d="M30 49 L20 43 L12 50 L10 56"/>
- <path d="M28 57 L17 56 L12 64 L12 68"/>
- <path d="M32 64 L24 70 L24 77"/>
- <path d="M70 49 L80 43 L88 50 L90 56"/>
- <path d="M72 57 L83 56 L88 64 L88 68"/>
- <path d="M68 64 L76 70 L76 77"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 390" role="img" aria-label="Match Mã mèo samurai đội nón lá cầm kiếm">
+<title>match mã</title>
+<g fill="none" stroke="#080808" stroke-linecap="round" stroke-linejoin="round">
+ <circle cx="150" cy="139" r="112" stroke-width="4.5"/>
+ <!-- conical hat -->
+ <path d="M68 124 L130 52 L216 95 Q165 97 112 117 Z" fill="#fff" stroke-width="4"/>
+ <path d="M130 52 L102 111 M130 52 L145 106 M130 52 L179 101" stroke-width="1.6"/>
+ <path d="M68 124 Q131 94 216 95 Q186 117 142 121 Q97 132 68 124Z" fill="#080808" stroke-width="2"/>
+ <!-- cat ears and head silhouette -->
+ <path d="M99 128 L104 108 L121 122 Q145 112 165 123 L183 108 L190 133 Q201 151 190 169 Q185 183 165 187 L158 204 L116 208 Q94 195 94 172Z" fill="#fff" stroke-width="4"/>
+ <path d="M137 143 Q149 140 157 149 Q149 153 138 147Z" fill="#080808" stroke-width="1.5"/>
+ <path d="M140 160 L161 163 M139 166 L158 171 M136 172 L152 178" stroke-width="1.4"/>
+ <!-- neck/shoulder and stylized armor -->
+ <path d="M112 194 Q92 205 91 227 L126 245 L159 224 L159 202" fill="#080808" stroke-width="3"/>
+ <path d="M117 214 L126 220 L120 228 L111 222Z M133 226 L142 232 L136 240 L127 234Z" fill="#fff" stroke-width="1"/>
+ <!-- katana separate from face -->
+ <path d="M157 240 L230 151 Q238 141 246 135 L241 154 L170 252Z" fill="#fff" stroke-width="4"/>
+ <path d="M152 235 L170 251" stroke-width="5"/>
+ <path d="M148 231 L166 249" stroke-width="2"/>
+ <path d="M156 250 L163 256" stroke-width="4"/>
+</g>
+<g fill="#080808" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-weight="bold">
+ <text x="150" y="312" font-size="49" letter-spacing="-2">match</text>
+ <text x="150" y="365" font-size="49">mã</text>
 </g>
 </svg>
