@@ -1305,6 +1305,92 @@ body[data-theme="bear"] .foot{color:#956e58!important}
  body[data-theme="bear"] #themeScene:before{height:115px}
 }
 
+
+/* Final bear-theme correction: hand-drawn controls and a complete, connected bear */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;500;600;700;800;900&display=swap');
+body[data-theme="bear"]{
+ font-family:'Patrick Hand','Nunito',sans-serif!important;color:#75402b!important;
+ background-color:#fbf4e5!important;
+ background-image:radial-gradient(#a77d5014 .7px,transparent 1px),radial-gradient(#c6a77a13 .6px,transparent 1px),linear-gradient(180deg,#fff9ed 0%,#fbf3e3 72%,#f3f0df 100%)!important;
+ background-size:8px 8px,13px 13px,auto!important;background-position:0 0,4px 3px,0 0!important;
+}
+body[data-theme="bear"] :is(h1,h2,h3,h4,.navbtn,.navfolder-title,.navicon,button,label,.eyebrow,.subbrand,.sectionhead,.hero p,.panel p,.stat,.mini,.field,.sidebar-account-copy){
+ font-family:'Patrick Hand','Nunito',sans-serif!important;letter-spacing:.15px!important;
+}
+body[data-theme="bear"] .app-header{background:#fff8e9e8!important;border-bottom:2px dashed #d1a17a!important;box-shadow:none!important}
+body[data-theme="bear"] .app-shell{grid-template-columns:230px minmax(0,1fr)!important;gap:15px!important}
+body[data-theme="bear"] .sidebar{
+ display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important;
+ padding:13px!important;background:#fff8e9d9!important;border:1.5px dashed #c9956f!important;border-radius:20px!important;box-shadow:none!important;
+}
+body[data-theme="bear"] .nav-folder{
+ display:block!important;flex:0 0 auto!important;margin:0!important;padding:5px!important;
+ background:#fffaf0!important;border:1.5px dashed #d2a47f!important;border-radius:15px!important;box-shadow:none!important;
+}
+body[data-theme="bear"] .navfolder-title{
+ display:flex!important;align-items:center!important;gap:7px!important;padding:9px 8px!important;
+ color:#75402b!important;background:#f8e9cf!important;border:1px dashed #c9956f!important;border-radius:12px!important;
+ font-size:16px!important;font-weight:700!important;cursor:pointer!important;list-style:none!important;
+}
+body[data-theme="bear"] .navfolder-title::-webkit-details-marker{display:none!important}
+body[data-theme="bear"] .nav-folder[open]>.navfolder-title{background:#f8d995!important;border-style:solid!important}
+body[data-theme="bear"] .nav-folder-items{display:grid!important;gap:5px!important;padding:6px 1px 1px!important}
+body[data-theme="bear"] .navbtn{
+ display:flex!important;align-items:center!important;gap:9px!important;min-height:39px!important;
+ padding:8px 11px!important;background:#fffaf0!important;color:#75402b!important;
+ border:1.5px dashed #d3ad8d!important;border-radius:12px!important;box-shadow:none!important;
+ font-size:16px!important;font-weight:600!important;transition:background .18s ease,transform .18s ease!important;
+}
+body[data-theme="bear"] .navbtn:hover,body[data-theme="bear"] .nav-folder .navbtn:hover{
+ background:#f9e8bd!important;border-color:#b77b4d!important;transform:translateY(-1px)!important;
+}
+body[data-theme="bear"] .navbtn.active,body[data-theme="bear"] .nav-folder .navbtn.active{
+ background:#f7d991!important;color:#673a26!important;border:1.8px solid #bd8149!important;
+ box-shadow:none!important;border-left:4px solid #bd8149!important;
+}
+body[data-theme="bear"] .navicon{filter:none!important;font-size:18px!important}
+body[data-theme="bear"] .sidebar-account-shortcut,body[data-theme="bear"] .sidebar-help,body[data-theme="bear"] .sidebar-bottom{
+ background:#fffaf0!important;border:1.5px dashed #d3ad8d!important;border-radius:14px!important;box-shadow:none!important;
+}
+body[data-theme="bear"] .page{background:#fffaf0d9!important;border:1.5px dashed #d3ad8d!important;border-radius:20px!important;box-shadow:none!important}
+body[data-theme="bear"] :is(.hero,.panel,.stat,.mini,.overview-card,.folder-card,.upload,.tablewrap,.result-card,.progressbox,.rule,.okmsg){
+ background-color:#fffaf0!important;border:1.5px dashed #d3ad8d!important;border-radius:17px!important;box-shadow:none!important;backdrop-filter:none!important;
+}
+body[data-theme="bear"] .hero h2,body[data-theme="bear"] .sectionhead h2,body[data-theme="bear"] .panel h2{
+ color:#75402b!important;text-decoration:underline;text-decoration-style:wavy;text-decoration-color:#d6a27c;text-underline-offset:7px;
+}
+body[data-theme="bear"] .btn,body[data-theme="bear"] button.btn,body[data-theme="bear"] .btn.alt,body[data-theme="bear"] .btn.soft{
+ background:#f8d995!important;color:#75402b!important;border:1.5px dashed #c68a4f!important;border-radius:999px!important;box-shadow:none!important;
+}
+body[data-theme="bear"] :is(input,select,textarea,.search,.field input[type=text],.field select,.field input[type=number]){
+ background:#fffdf6!important;border:1.5px dashed #d3ad8d!important;border-radius:11px!important;color:#75402b!important;box-shadow:none!important;
+}
+body[data-theme="bear"] th{background:#f8e8cb!important;color:#75402b!important;border-bottom:1.5px dashed #d3ad8d!important}
+body[data-theme="bear"] td{border-bottom:1px dashed #ead8c3!important}
+body[data-theme="bear"] #themeScene{z-index:0!important;pointer-events:none!important}
+body[data-theme="bear"] #fat-bear-overlay{z-index:8!important;overflow:visible!important;pointer-events:none!important}
+body[data-theme="bear"] #bear-container{
+ position:absolute!important;left:clamp(8px,5vw,68px)!important;bottom:4px!important;
+ width:clamp(235px,35vw,450px)!important;height:auto!important;aspect-ratio:620/390!important;
+ max-width:calc(100vw - 16px)!important;min-width:0!important;padding:0!important;margin:0!important;
+ display:block!important;overflow:visible!important;background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+ transform:scale(var(--bear-scale,1))!important;transform-origin:bottom left!important;filter:none!important;
+}
+body[data-theme="bear"] #bear-sprite{
+ display:block!important;width:100%!important;height:auto!important;max-height:36vh!important;min-width:0!important;
+ overflow:visible!important;object-fit:contain!important;transform:none!important;filter:drop-shadow(0 2px 1px #7d48241a)!important;
+}
+body[data-theme="bear"] .bear-caption{left:50%!important;bottom:3px!important;transform:translateX(-50%)!important;background:#fff8e9ed!important;color:#75402b!important;border:1.5px dashed #c9956f!important;border-radius:12px!important;box-shadow:none!important}
+body[data-theme="bear"] .bear-caption b{font-size:12px!important}
+body[data-theme="bear"] .bear-caption small{font-size:11px!important}
+body[data-theme="bear"] #bear-snow{position:absolute!important;inset:0!important;overflow:hidden!important;pointer-events:none!important}
+body[data-theme="bear"] .bear-snowflake{filter:none!important;opacity:.75!important}
+body[data-theme="bear"] .bear-fish{background:#fff8e9!important;border:1px dashed #c9956f!important;box-shadow:none!important}
+body[data-theme="bear"] .fun-widget,body[data-theme="bear"] .calculator-widget{background:#fff8e9!important;border:1.5px dashed #c9956f!important;border-radius:18px!important;box-shadow:none!important;color:#75402b!important}
+body[data-theme="bear"] .fun-widget-bar{background:#f8e8cb!important;border-bottom:1.5px dashed #c9956f!important}
+@media(max-width:950px){body[data-theme="bear"] .app-shell{grid-template-columns:1fr!important}body[data-theme="bear"] .sidebar{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;overflow:visible!important}body[data-theme="bear"] .nav-folder{flex:1 1 180px!important}}
+@media(max-width:650px){body[data-theme="bear"] .app-header{padding:9px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}body[data-theme="bear"] .sidebar{gap:5px!important;padding:8px!important}body[data-theme="bear"] .nav-folder{flex:1 1 145px!important}body[data-theme="bear"] #bear-container{width:clamp(205px,54vw,300px)!important;left:2px!important;bottom:0!important}body[data-theme="bear"] #bear-sprite{max-height:28vh!important}}
+
 </style></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -1339,40 +1425,40 @@ body[data-theme="bear"] .foot{color:#956e58!important}
 </aside>
 <div id="fat-bear-overlay" hidden aria-label="Góc tương tác Gấu" aria-hidden="true">
  <button type="button" id="bear-container" aria-label="Chạm để vuốt ve chú gấu" title="Vuốt ve gấu">
- <svg id="bear-sprite" viewBox="0 0 600 430" role="img" aria-label="Gấu nâu mập ngủ nằm vẽ tay bằng phấn màu" xmlns="http://www.w3.org/2000/svg">
+ <svg id="bear-sprite" viewBox="0 0 620 390" role="img" aria-label="Gấu nâu tròn mập nằm nghỉ, vẽ tay bằng bút sáp" xmlns="http://www.w3.org/2000/svg">
 <defs>
- <linearGradient id="bearCoat" x1="0" y1="0" x2=".25" y2="1"><stop stop-color="#c9783c"/><stop offset=".56" stop-color="#b76832"/><stop offset="1" stop-color="#8f4a2b"/></linearGradient>
- <linearGradient id="bearMuzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5c878"/><stop offset="1" stop-color="#d9984d"/></linearGradient>
- <pattern id="bearFurLines" width="17" height="15" patternUnits="userSpaceOnUse"><path d="M2 4l4-2m4 9 4-2m-2-7 2 1" stroke="#683b29" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="1 3" fill="none" opacity=".5"/></pattern>
- <pattern id="bearWarmHatch" width="25" height="23" patternUnits="userSpaceOnUse"><path d="M3 18l5-6m8 7 5-6M3 4l2-2" stroke="#f2bd7a" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" fill="none" opacity=".45"/></pattern>
- <clipPath id="bearClip"><path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z"/></clipPath>
+ <linearGradient id="bearCoat" x1="0" y1="0" x2=".3" y2="1"><stop stop-color="#d88942"/><stop offset=".58" stop-color="#bd6b30"/><stop offset="1" stop-color="#a65328"/></linearGradient>
+ <linearGradient id="bearMuzzle" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffd98a"/><stop offset="1" stop-color="#e8ae58"/></linearGradient>
+ <pattern id="bearFurLines" width="18" height="17" patternUnits="userSpaceOnUse"><path d="M2 5l5-3m5 10 4-2m-4-7 2 1" stroke="#773f28" stroke-width="1.7" stroke-linecap="round" stroke-dasharray="1 4" fill="none" opacity=".38"/></pattern>
+ <pattern id="bearWarmHatch" width="24" height="22" patternUnits="userSpaceOnUse"><path d="M3 17l5-6m8 7 5-6M4 4l2-2" stroke="#f4c27a" stroke-width="2" stroke-linecap="round" stroke-dasharray="1 4" fill="none" opacity=".55"/></pattern>
+ <clipPath id="bearClip"><path d="M40 317C48 253 83 177 152 136 211 101 293 99 355 126 391 142 416 167 431 194 451 179 480 180 504 198 535 220 549 254 535 282 524 305 498 319 465 324L111 345C72 345 44 337 40 317Z"/></clipPath>
 </defs>
 <g id="bearBody">
- <path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z" fill="url(#bearCoat)" stroke="#633a29" stroke-width="8" stroke-linejoin="round"/>
- <path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z" fill="url(#bearFurLines)" clip-path="url(#bearClip)"/>
- <path d="M39 341C45 284 58 222 105 174 147 131 212 105 275 111 333 115 365 142 398 178 420 166 445 158 465 176 493 178 521 201 531 226 543 250 541 272 526 287 552 291 571 313 566 342 562 368 533 383 499 381L120 388C75 388 44 370 39 341Z" fill="url(#bearWarmHatch)" clip-path="url(#bearClip)"/>
- <path d="M49 321C51 268 75 219 119 183M92 363q34 13 71 12m-19-230q23-10 45-7m27-18q20-5 41 2m-104 45q19-9 36-6m-53 77q18-9 36-3" fill="none" stroke="#e8a45f" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 7" opacity=".72"/>
- <path d="M67 341Q89 309 124 317T182 352Q196 370 174 382L113 383Q76 379 67 341Z" fill="#a75b30" stroke="#633a29" stroke-width="6"/>
- <path d="M145 310Q172 316 191 346Q205 369 189 382" fill="none" stroke="#6a3b29" stroke-width="7" stroke-linecap="round"/>
- <path d="M348 302Q383 274 419 292Q443 307 449 343Q450 365 426 378L369 381Q344 366 348 338Z" fill="#a85d32" stroke="#633a29" stroke-width="6"/>
- <path d="M372 354q2 11-4 17m19-20q3 12-2 20m18-21q3 11-2 18" fill="none" stroke="#6a3b29" stroke-width="4" stroke-linecap="round"/>
- <path d="M476 324Q493 298 520 307Q547 317 550 344Q549 369 526 379L478 379Q456 364 476 324Z" fill="#b56a37" stroke="#633a29" stroke-width="6"/>
- <path d="M490 354q2 10-3 16m18-17q3 11-2 17m17-17q3 10-2 16" fill="none" stroke="#6a3b29" stroke-width="4" stroke-linecap="round"/>
- <path id="bearSleepBlanket" d="M50 277Q135 248 218 286T388 292Q474 258 548 306L555 353Q526 382 465 384L117 385Q67 380 50 345Z" fill="#8a9a73" stroke="#536746" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
- <path id="bearSleepQuilt" d="M78 316q23 15 48 0m21 21q25 14 49-1m28-29q24 14 49 0m24 25q26 14 49-1m31-19q24 13 48-1m-362 42q23 12 47 0m52 13q24 12 47-1m52 2q23 12 47-1m48 1q22 10 40-3" fill="none" stroke="#e7e5c4" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
+ <!-- One continuous, low, rounded body silhouette: no floating or cut-off head -->
+ <path d="M38 316C42 271 61 223 94 187C131 145 180 119 235 111C289 101 342 114 383 143C407 160 424 184 436 208C456 189 480 186 501 201C526 219 541 247 536 273C531 300 505 319 470 326L112 346C75 345 45 336 38 316Z" fill="url(#bearCoat)" stroke="#713c26" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M38 316C42 271 61 223 94 187C131 145 180 119 235 111C289 101 342 114 383 143C407 160 424 184 436 208C456 189 480 186 501 201C526 219 541 247 536 273C531 300 505 319 470 326L112 346C75 345 45 336 38 316Z" fill="url(#bearFurLines)" clip-path="url(#bearClip)"/>
+ <path d="M38 316C42 271 61 223 94 187C131 145 180 119 235 111C289 101 342 114 383 143C407 160 424 184 436 208C456 189 480 186 501 201C526 219 541 247 536 273C531 300 505 319 470 326L112 346C75 345 45 336 38 316Z" fill="url(#bearWarmHatch)" clip-path="url(#bearClip)"/>
+ <path d="M83 252Q111 203 148 181M117 224q18-17 37-20M161 168q23-14 43-15M210 140q24-10 46-6M267 133q22-5 43 4M324 151q19 4 34 17M91 291q21-12 39-7M153 316q18-6 32 2M205 330q17-6 32 1M272 332q17-7 34 0" fill="none" stroke="#f6c17a" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="2 6" opacity=".8"/>
+ <!-- Front paws resting naturally along the same baseline -->
+ <path d="M355 285C373 267 399 270 416 287C430 300 432 321 418 333Q395 345 368 336L342 323Z" fill="#b96630" stroke="#713c26" stroke-width="6" stroke-linejoin="round"/>
+ <path d="M379 320q7 9 4 17m17-18q7 8 4 16" fill="none" stroke="#713c26" stroke-width="4" stroke-linecap="round"/>
+ <path d="M445 286C461 268 486 273 500 290C512 304 510 323 495 334Q474 342 451 332L432 316Z" fill="#c27337" stroke="#713c26" stroke-width="6" stroke-linejoin="round"/>
+ <path d="M463 319q6 9 3 15m17-16q6 8 3 14" fill="none" stroke="#713c26" stroke-width="4" stroke-linecap="round"/>
+ <path d="M42 302q-17-4-18 10q4 17 22 16" fill="#bd6b30" stroke="#713c26" stroke-width="6" stroke-linecap="round"/>
+ <path id="bearSleepBlanket" d="M64 266Q150 237 226 270T386 278Q454 254 522 290L526 314Q490 340 438 339L116 344Q73 338 64 310Z" fill="#8a9a73" stroke="#536746" stroke-width="6" stroke-dasharray="5 4" style="display:none"/>
+ <path id="bearSleepQuilt" d="M91 305q23 13 46-1m22 18q24 13 48-1m28-26q24 13 48 0m24 24q25 13 48-1m31-18q22 12 43 0m-354 36q22 10 44 0m51 12q23 10 44 0m51 0q23 10 44 0" fill="none" stroke="#f4e4b9" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="3 5" style="display:none"/>
 </g>
 <g id="bearHead">
- <path d="M395 204C376 186 378 158 397 147 416 136 439 150 442 174L439 199Z" fill="#b86a35" stroke="#633a29" stroke-width="7"/>
- <path d="M486 187C488 160 510 146 529 160 545 171 543 194 526 208Z" fill="#b86a35" stroke="#633a29" stroke-width="7"/>
- <path d="M390 223C389 193 411 173 443 171 473 163 510 176 529 199 550 224 550 256 532 278 516 298 488 307 458 301 429 299 403 285 392 263 384 248 385 235 390 223Z" fill="url(#bearCoat)" stroke="#633a29" stroke-width="8" stroke-linejoin="round"/>
- <path d="M397 213q13-13 28-12m26-20q18-5 34 4m-83 48q11-5 19-2" fill="none" stroke="#f0b16b" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 6"/>
- <path d="M433 232C438 215 456 210 473 216 492 222 502 240 493 257 484 275 460 279 442 266 432 258 429 244 433 232Z" fill="url(#bearMuzzle)" stroke="#633a29" stroke-width="5"/>
- <path id="bearEyeLeft" d="M421 216q7-7 14 0" fill="none" stroke="#482b23" stroke-width="6.5" stroke-linecap="round"/>
- <path id="bearEyeRight" d="M482 212q7-7 14 0" fill="none" stroke="#482b23" stroke-width="6.5" stroke-linecap="round"/>
- <path d="M452 235q-1-7 8-9l16 1q8 2 3 10l-7 7q-10 4-16-2Z" fill="#482b23"/>
- <path id="bear-mouth" d="M461 245q-1 12-12 13m12-13q10 11 21 5" fill="none" stroke="#482b23" stroke-width="5.5" stroke-linecap="round"/>
- <path id="bearMouthOpen" d="M450 241q12 24 29 0l-4 15q-11 9-21 0Z" fill="#572b25" stroke="#482b23" stroke-width="3" opacity="0"/>
- <path d="M448 270q-6 3-10 0m43 2q7 3 11-1" fill="none" stroke="#b87542" stroke-width="3" stroke-dasharray="2 4"/>
+ <!-- Head overlaps deeply into the shoulder so it is visibly attached -->
+ <path d="M358 211C346 193 350 169 367 158C384 146 403 156 408 177C421 159 444 157 458 174C469 187 467 204 456 216C477 222 491 239 492 259C494 283 475 302 449 307C421 314 391 302 373 285C356 269 350 239 358 211Z" fill="url(#bearCoat)" stroke="#713c26" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M365 194q14-14 29-10m22-14q16-5 28 5m-69 42q9-4 16-1" fill="none" stroke="#f5c17b" stroke-width="3.3" stroke-linecap="round" stroke-dasharray="2 5" opacity=".8"/>
+ <path d="M397 247C400 230 418 222 435 227C454 232 465 248 458 263C451 279 430 284 412 274C400 268 394 258 397 247Z" fill="url(#bearMuzzle)" stroke="#713c26" stroke-width="4.5"/>
+ <path id="bearEyeLeft" d="M380 229q7-8 15 0" fill="none" stroke="#4b2b20" stroke-width="6" stroke-linecap="round"/>
+ <path id="bearEyeRight" d="M427 224q7-7 14 0" fill="none" stroke="#4b2b20" stroke-width="6" stroke-linecap="round"/>
+ <path d="M414 244q-1-7 7-8l13 1q7 2 3 9l-6 6q-8 3-14-2Z" fill="#4b2b20"/>
+ <path id="bear-mouth" d="M421 252q-1 11-11 12m11-12q9 10 19 4" fill="none" stroke="#4b2b20" stroke-width="5" stroke-linecap="round"/>
+ <path id="bearMouthOpen" d="M410 248q11 22 27 0l-4 13q-10 8-19 0Z" fill="#572b25" stroke="#482b23" stroke-width="2.5" opacity="0"/>
+ <path d="M401 275q-5 3-9 0m43 2q6 3 10-1" fill="none" stroke="#b87542" stroke-width="2.5" stroke-dasharray="2 4"/>
 </g>
 </svg>
  <svg id="bear-sleep-z" viewBox="0 0 68 30" aria-hidden="true"><path d="M3 5 H21 L4 24 H24 M29 3 H47 L30 21 H50 M52 5 H66 L53 21 H66" fill="none" stroke="#75563d" stroke-width="2.7" stroke-dasharray="3 1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="bear-caption"><b id="bear-caption-title">Gấu đói bụng</b><small id="bear-caption-count">Đã ăn 0 cá</small></span>
