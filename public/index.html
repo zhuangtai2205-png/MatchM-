@@ -2025,9 +2025,9 @@ function initCalculatorWidget(){
 
 /* Entertainment feature removed: no bear widget initializer. */
 
-const THEME_KEY='matchma-theme-v2';
+const THEME_KEY='matchma-theme-v3';
 function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','forest','minimal'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
-function initTheme(){let saved='ocean';try{saved=localStorage.getItem(THEME_KEY)||'ocean'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
+function initTheme(){let saved='forest';try{saved=localStorage.getItem(THEME_KEY)||'forest'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
  $('platformFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);platformSourceHeaders=d.headers;platformSourceRows=d.rows.map((row,i)=>({row:{...row},sourceIndex:i+1,status:'todo'}));platformPage=1;fillSelect('platformNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('platformIdCol',d.headers,guessStt(d.headers),true);$('platformFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng. STT/ID nguồn sẽ không bị chỉnh sửa.';$('buildPlatformAudit').disabled=!d.headers.length;$('exportPlatformAudit').disabled=true;platformBuilt=false;renderPlatformAudit()}catch(err){alert(err.message||'Không đọc được file');}});
