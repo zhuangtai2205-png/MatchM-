@@ -34,7 +34,7 @@
     const makeBear = (className) => {
       const img = document.createElement('img');
       img.className = className;
-      img.src = '/winter-bear.svg?v=2';
+      img.src = '/winter-bear.svg?v=3';
       img.alt = className === 'winter-bear-spot' ? 'Gấu nâu vẽ tay quàng khăn xanh, ôm cá giữa tuyết' : '';
       img.decoding = 'async';
       if (className !== 'winter-bear-spot') img.setAttribute('aria-hidden', 'true');
