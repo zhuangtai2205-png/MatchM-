@@ -1045,3 +1045,90 @@ html body[data-theme="bear"] .sidebar .nav-folder::after{background-image:url("d
 #fat-bear-overlay #bear-snow,#fat-bear-overlay #fish-pool,#fat-bear-overlay #bear-plus-layer{position:absolute!important;inset:0!important;pointer-events:none!important}
 #fat-bear-overlay #fish-pool .bear-fish{pointer-events:auto!important}
 @media(max-width:650px){#fat-bear-overlay #bear-container{width:clamp(245px,83vw,480px)!important;bottom:0!important}#fat-bear-overlay #bear-sprite{max-height:60vh!important}}
+
+
+/* HOTFIX: override legacy !important cream/yellow declarations with theme-scoped, higher-specificity rules. */
+html body[data-theme="ocean"]{
+ --fix-bg:#bfeaf2;--fix-panel:#ddf5f8;--fix-control:#c9edf3;--fix-line:#79c4d2;--fix-ink:#164e65;--fix-accent:#a5e0e9;
+}
+html body[data-theme="retro"]{
+ --fix-bg:#c9ceca;--fix-panel:#e0e3df;--fix-control:#cdd3ce;--fix-line:#89938c;--fix-ink:#303633;--fix-accent:#b7c2ba;
+}
+html body[data-theme="pink"]{
+ --fix-bg:#f3c6da;--fix-panel:#f9dce8;--fix-control:#f5cfe0;--fix-line:#d887ae;--fix-ink:#783c60;--fix-accent:#efb2ce;
+}
+html body[data-theme="vampire"]{
+ --fix-bg:#17101e;--fix-panel:#281b31;--fix-control:#38243f;--fix-line:#8d4f70;--fix-ink:#f3dce8;--fix-accent:#503047;
+}
+html body[data-theme="cat"]{
+ --fix-bg:#dfc8c0;--fix-panel:#ecd8d0;--fix-control:#e5c9c0;--fix-line:#bd9388;--fix-ink:#67463f;--fix-accent:#d7afa3;
+}
+html body[data-theme="bear"]{
+ --fix-bg:#cce2c6;--fix-panel:#dcebd6;--fix-control:#c7e2b2;--fix-line:#8eae82;--fix-ink:#355b42;--fix-accent:#b8d9aa;
+}
+html body[data-theme]{
+ background:var(--fix-bg)!important;color:var(--fix-ink)!important;
+}
+html body[data-theme] .app-header,
+html body[data-theme] header,
+html body[data-theme] .page,
+html body[data-theme] main,
+html body[data-theme] .sidebar,
+html body[data-theme] .hero,
+html body[data-theme] .panel,
+html body[data-theme] .content,
+html body[data-theme] .workspace,
+html body[data-theme] .stat,
+html body[data-theme] .mini,
+html body[data-theme] .chart-card,
+html body[data-theme] .tablewrap,
+html body[data-theme] .card,
+html body[data-theme] .result-card,
+html body[data-theme] .upload,
+html body[data-theme] .tool-card,
+html body[data-theme] .modal-content,
+html body[data-theme] .quick-settings,
+html body[data-theme] .nav-folder,
+html body[data-theme] .sidebar-account-shortcut,
+html body[data-theme] .sidebar-help,
+html body[data-theme] .sidefoot{
+ background:var(--fix-panel)!important;color:var(--fix-ink)!important;border-color:var(--fix-line)!important;
+}
+html body[data-theme] .navbtn,
+html body[data-theme] .nav-folder>summary,
+html body[data-theme] .navfolder-title,
+html body[data-theme] .nav-folder .navbtn,
+html body[data-theme] .local-pill,
+html body[data-theme] .toolbar-select,
+html body[data-theme] .toolbar-font,
+html body[data-theme] .btn,
+html body[data-theme] button,
+html body[data-theme] input,
+html body[data-theme] select,
+html body[data-theme] textarea,
+html body[data-theme] .progressbox,
+html body[data-theme] .rule,
+html body[data-theme] th{
+ background:var(--fix-control)!important;color:var(--fix-ink)!important;border-color:var(--fix-line)!important;
+}
+html body[data-theme="vampire"] .navbtn,
+html body[data-theme="vampire"] .nav-folder>summary,
+html body[data-theme="vampire"] .nav-folder .navbtn,
+html body[data-theme="vampire"] .btn,
+html body[data-theme="vampire"] button,
+html body[data-theme="vampire"] input,
+html body[data-theme="vampire"] select,
+html body[data-theme="vampire"] textarea{color:var(--fix-ink)!important}
+html body[data-theme] .navbtn.active,
+html body[data-theme] .nav-folder[open]>summary,
+html body[data-theme] .toolbar-font button[aria-pressed="true"]{
+ background:var(--fix-accent)!important;color:var(--fix-ink)!important;border-color:var(--fix-line)!important;
+}
+html body[data-theme="ocean"]::before,
+html body[data-theme="ocean"]::after,
+html body[data-theme="pink"]::before,
+html body[data-theme="pink"]::after,
+html body[data-theme="cat"]::before,
+html body[data-theme="cat"]::after,
+html body[data-theme="bear"]::before,
+html body[data-theme="bear"]::after{pointer-events:none}
