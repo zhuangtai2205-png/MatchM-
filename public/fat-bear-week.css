@@ -93,3 +93,9 @@
 #matchma-fbw-sea-layer .fbw-sea-creature{font-size:32px;width:42px;height:42px}
 #matchma-fbw-sea-layer .fbw-fish:hover,#matchma-fbw-sea-layer .fbw-sea-creature:hover{scale:1.12}
 @media(max-width:500px){#matchma-fat-bear-week{transform:translateX(-50%) scale(.9)!important;transform-origin:bottom center!important}#matchma-fbw-toggle{right:8px!important;bottom:8px!important}}
+
+/* Use a familiar standard bear emoji instead of custom drawn artwork */
+#matchma-fat-bear-week .fbw-bear{display:grid!important;place-items:center!important;background:transparent!important;border:0!important;padding:0!important}
+#matchma-fat-bear-week .fbw-bear-icon{display:block;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:112px;line-height:1;filter:drop-shadow(0 4px 3px #50342620);user-select:none}
+#matchma-fat-bear-week.fbw-hibernating .fbw-bear-icon{filter:drop-shadow(0 4px 3px #50342620)}
+@media(max-width:500px){#matchma-fat-bear-week .fbw-bear-icon{font-size:100px}}
