@@ -7,24 +7,7 @@ root.innerHTML=`
 <div class="fbw-world" aria-label="Đại dương hoạt hình">
  <div class="fbw-moon">✦</div><div class="fbw-bubble b1"></div><div class="fbw-bubble b2"></div>
  <div class="fbw-message" aria-live="polite">Chạm vào cá để cho gấu ăn nhé!</div>
- <div class="fbw-bear-wrap"><button class="fbw-bear" aria-label="Gấu mập, chạm để vỗ về"><svg viewBox="0 0 160 190" role="img" aria-label="Gấu nâu mập dễ thương vẽ minh họa 2D">
- <defs><linearGradient id="bearCoat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c9945f"/><stop offset=".6" stop-color="#a96f43"/><stop offset="1" stop-color="#885431"/></linearGradient></defs>
- <ellipse cx="80" cy="178" rx="49" ry="7" fill="#523d4a" opacity=".12"/>
- <ellipse cx="48" cy="28" rx="20" ry="22" fill="#9a6039" stroke="#74472e" stroke-width="3"/><ellipse cx="112" cy="28" rx="20" ry="22" fill="#9a6039" stroke="#74472e" stroke-width="3"/>
- <ellipse cx="48" cy="29" rx="10" ry="11" fill="#e6b7a0"/><ellipse cx="112" cy="29" rx="10" ry="11" fill="#e6b7a0"/>
- <ellipse cx="80" cy="105" rx="55" ry="65" fill="url(#bearCoat)" stroke="#74472e" stroke-width="3"/>
- <ellipse cx="29" cy="112" rx="17" ry="28" transform="rotate(-24 29 112)" fill="#a66c41" stroke="#74472e" stroke-width="3"/>
- <ellipse cx="131" cy="112" rx="17" ry="28" transform="rotate(24 131 112)" fill="#a66c41" stroke="#74472e" stroke-width="3"/>
- <ellipse cx="54" cy="157" rx="23" ry="17" fill="#8d5937" stroke="#74472e" stroke-width="3"/><ellipse cx="106" cy="157" rx="23" ry="17" fill="#8d5937" stroke="#74472e" stroke-width="3"/>
- <ellipse cx="80" cy="117" rx="34" ry="39" fill="#ead0a8" stroke="#c39b70" stroke-width="2"/>
- <ellipse cx="61" cy="76" rx="5" ry="6" fill="#35251e"/><ellipse cx="99" cy="76" rx="5" ry="6" fill="#35251e"/>
- <circle cx="62.5" cy="74.5" r="1.7" fill="#fff"/><circle cx="100.5" cy="74.5" r="1.7" fill="#fff"/>
- <ellipse cx="47" cy="91" rx="8" ry="5" fill="#d98583" opacity=".62"/><ellipse cx="113" cy="91" rx="8" ry="5" fill="#d98583" opacity=".62"/>
- <ellipse cx="80" cy="93" rx="17" ry="13" fill="#f7e2c5" stroke="#c39b70" stroke-width="2"/>
- <path d="M72 90Q80 82 88 90Q88 97 80 97Q72 97 72 90Z" fill="#493027"/>
- <path d="M80 98v5m0 0q-6 6-11 0m11 0q6 6 11 0" fill="none" stroke="#694333" stroke-width="2.5" stroke-linecap="round"/>
- <path d="M60 122q20 12 40 0" fill="none" stroke="#d0ad83" stroke-width="2.5" stroke-linecap="round"/>
- </svg></button></div>
+ <div class="fbw-bear-wrap"><button class="fbw-bear" aria-label="Gấu nâu, chạm để vuốt ve"><span class="fbw-bear-icon" aria-hidden="true">🐻</span></button></div>
  <div class="fbw-ground"></div><div class="fbw-snow" aria-hidden="true"></div>
 </div>
 <div class="fbw-status"><span>🐟 Cá đã ăn <b class="fbw-count">0</b>/20</span><div class="fbw-progress"><span></span></div></div>
