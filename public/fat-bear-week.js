@@ -3,7 +3,7 @@
   'use strict';
   if(document.getElementById('matchma-fbw-toggle')) return;
   const toggle=document.createElement('button');
-  toggle.id='matchma-fbw-toggle'; toggle.type='button'; toggle.textContent='🐻 Chơi cùng gấu';
+  toggle.id='matchma-fbw-toggle'; toggle.type='button'; toggle.textContent='🐻 Easter Egg';
   toggle.setAttribute('aria-expanded','false');
   toggle.setAttribute('aria-controls','matchma-fat-bear-week');
   document.body.appendChild(toggle);
@@ -40,12 +40,13 @@
     </div>
     <div class="fbw-progress"><span></span></div>
     <div class="fbw-caption">Cá đã ăn: <b class="fbw-count">0</b>/20</div>
+    <div class="fbw-dock"><button type="button" class="fbw-close" aria-label="Đóng trò chơi">×</button><button type="button" class="fbw-feed" aria-label="Cho gấu ăn cá">🐟 <small>♥ <span class="fbw-votes">0</span></small></button><button type="button" class="fbw-share" aria-label="Chia sẻ trò chơi">↗</button></div>
   `;
   document.body.appendChild(root);
   const layer=document.createElement('div'); layer.id='matchma-fbw-sea-layer'; layer.hidden=true;
   layer.setAttribute('aria-label','Sinh vật biển'); document.body.appendChild(layer);
   const bear=root.querySelector('.fbw-bear'),speech=root.querySelector('.fbw-speech');
-  const bar=root.querySelector('.fbw-progress span'),count=root.querySelector('.fbw-count'),snow=root.querySelector('.fbw-snow');
+  const bar=root.querySelector('.fbw-progress span'),count=root.querySelector('.fbw-count'),snow=root.querySelector('.fbw-snow'),feedButton=root.querySelector('.fbw-feed'),closeButton=root.querySelector('.fbw-close'),shareButton=root.querySelector('.fbw-share'),votes=root.querySelector('.fbw-votes');
   let active=false,meals=0,fish=[],decor=[],raf=0,last=0,busy=false,spawnTimer=0;
   const MAX=20;
   // Loose, slightly uneven outlines keep every sea creature in a hand-drawn cartoon style.
@@ -88,7 +89,7 @@
     setTimeout(()=>{
       if(!active){busy=false;return}
       meals++;count.textContent=meals;bar.style.width=(meals/MAX*100)+'%';
-      root.style.setProperty('--fbw-growth',String(Math.min(1.65,1+meals*.027)));
+      root.style.setProperty('--fbw-growth',String(Math.min(2.15,1+meals*.055)));votes.textContent=meals;
       root.classList.add('fbw-eating','fbw-happy');
       speech.textContent=meals>=MAX?'No căng rồi, gấu đi ngủ đông!':['Măm măm!','Cá ngon quá!','Gấu lớn thêm rồi!'][meals%3];
       fish=fish.filter(x=>x!==f);f.el.remove();
@@ -119,7 +120,7 @@
     fish.forEach(f=>f.el.remove());fish=[];decor.forEach(d=>d.el.remove());decor=[];
   }
   function wake(){
-    meals=0;count.textContent='0';bar.style.width='0%';root.style.setProperty('--fbw-growth','1');
+    meals=0;count.textContent='0';bar.style.width='0%';root.style.setProperty('--fbw-growth','1');votes.textContent='0';
     root.classList.remove('fbw-hibernating','fbw-snowing');snow.innerHTML='';fish.forEach(f=>f.el.remove());fish=[];decor.forEach(d=>d.el.remove());decor=[];
     for(let i=0;i<7;i++)addFish();for(let i=0;i<12;i++)addDecor();
     speech.textContent='Nhấp cá để cho gấu ăn!';
@@ -141,6 +142,9 @@
     cancelAnimationFrame(raf);clearTimeout(spawnTimer);busy=false;
   }
   toggle.addEventListener('click',()=>active?stop():start());
+  closeButton.addEventListener('click',stop);
+  feedButton.addEventListener('click',()=>{const target=fish.find(f=>!f.busy);if(target)feed(target);else if(meals>=MAX)speech.textContent='Gấu no rồi, đang ngủ đông!';});
+  shareButton.addEventListener('click',()=>{const url=location.href;if(navigator.share){navigator.share({title:'Easter Egg MatchMã — Fat Bear Week',url}).catch(()=>{});}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(()=>{speech.textContent='Đã sao chép liên kết!';}).catch(()=>{speech.textContent=url;});}else speech.textContent=url;});
   bear.addEventListener('click',()=>{speech.textContent=meals>=MAX?'Gấu đang ngủ đông. Tắt rồi mở lại để chơi tiếp!':'Nhấp vào những chú cá đang bơi nhé!'});
   addDecor();decor.forEach(d=>d.el.remove());decor=[];
   window.addEventListener('resize',()=>{fish.forEach(f=>{f.x=Math.min(f.x,innerWidth-55);f.y=Math.min(f.y,innerHeight-90)})});
