@@ -211,3 +211,27 @@
  background:#fff!important;color:#30251f!important;border:1px solid #c9a18e!important;
 }
 #mmChatPanel .mm-chat-input::placeholder{color:#806d62!important;opacity:1!important}
+
+
+/* Final requested look: translucent, frosted-glass chat; gift control stays removed */
+#mmChatPanel{
+ background:rgba(255,250,246,.58)!important;
+ backdrop-filter:blur(14px) saturate(125%)!important;
+ -webkit-backdrop-filter:blur(14px) saturate(125%)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ background:rgba(250,238,229,.70)!important;
+ backdrop-filter:blur(14px) saturate(125%)!important;
+ -webkit-backdrop-filter:blur(14px) saturate(125%)!important;
+}
+#mmChatPanel .mm-chat-body,
+#mmChatPanel #mmChatContent,
+#mmChatPanel .mm-chat-messages{
+ background:rgba(255,253,250,.48)!important;
+ backdrop-filter:blur(12px)!important;
+ -webkit-backdrop-filter:blur(12px)!important;
+}
+#mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.94)!important;color:#2e241e!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(230,245,248,.94)!important;color:#204955!important}
