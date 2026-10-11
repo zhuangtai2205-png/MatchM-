@@ -38,3 +38,23 @@
 @keyframes fbw-sleep{0%,100%{transform:translateX(-50%) scale(var(--fbw-growth,1)) rotate(0)}50%{transform:translateX(-50%) scale(calc(var(--fbw-growth,1)*.98)) rotate(-2deg)}}
 @media(max-width:480px){#matchma-fbw-toggle{right:8px;bottom:8px;padding:8px 11px}#matchma-fat-bear-week{right:1px;bottom:43px;transform:scale(.86);transform-origin:bottom right}#matchma-fbw-sea-layer .fbw-swim-fish{width:39px;height:26px}}
 @media(prefers-reduced-motion:reduce){#matchma-fat-bear-week .fbw-bear{animation:none;transition:none}#matchma-fat-bear-week .fbw-progress span{transition:none}#matchma-fat-bear-week .fbw-snow i{animation-duration:12s}}
+
+/* Fat Bear Week-style bottom overlay and floating control dock */
+#matchma-fat-bear-week{right:auto;left:50%;bottom:0;transform:translateX(-50%);width:min(100vw,380px);height:220px;z-index:100000;pointer-events:none;overflow:visible}
+#matchma-fat-bear-week .fbw-scene{height:166px;width:100%;pointer-events:none}
+#matchma-fat-bear-week .fbw-ground{width:150px;height:18px}
+#matchma-fat-bear-week .fbw-bear{width:118px;height:145px;pointer-events:auto;filter:drop-shadow(0 3px 3px #42291b20)}
+#matchma-fat-bear-week .fbw-speech{top:3px;max-width:190px;font-size:11px;padding:6px 10px;background:#fffaf4;color:#754c32;border-color:#e7d3bd}
+#matchma-fat-bear-week .fbw-progress{width:110px;height:5px;margin-top:0}
+#matchma-fat-bear-week .fbw-progress span{background:linear-gradient(90deg,#df9556,#9c6842)}
+#matchma-fat-bear-week .fbw-caption{font-size:10px;color:#775b47;margin-top:3px}
+#matchma-fat-bear-week .fbw-dock{position:absolute;bottom:7px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:12px;pointer-events:auto;z-index:10}
+#matchma-fat-bear-week .fbw-dock button{border:0;border-radius:50%;width:52px;height:52px;background:#80502f;color:#fff8ef;box-shadow:0 4px 12px #39251835;display:grid;place-items:center;font:700 23px/1 Nunito,system-ui,sans-serif;cursor:pointer;touch-action:manipulation;transition:transform .18s ease,background .18s ease}
+#matchma-fat-bear-week .fbw-dock button:hover{transform:translateY(-3px);background:#98623b}
+#matchma-fat-bear-week .fbw-dock .fbw-feed{width:62px;height:62px;background:#98643b;font-size:25px;position:relative}
+#matchma-fat-bear-week .fbw-dock .fbw-feed small{position:absolute;top:-22px;left:50%;transform:translateX(-50%);white-space:nowrap;border-radius:20px;border:1px solid #e1c9b4;background:#fffaf4;color:#80502f;padding:4px 8px;font-size:11px;box-shadow:0 2px 6px #39251812}
+#matchma-fat-bear-week .fbw-dock .fbw-close,#matchma-fat-bear-week .fbw-dock .fbw-share{font-size:25px}
+#matchma-fat-bear-week.fbw-hibernating .fbw-dock .fbw-feed{opacity:.55}
+#matchma-fbw-toggle{right:12px;bottom:12px;z-index:100010;background:#fff8f0;color:#765038;border-color:#e7cfb8}
+#matchma-fbw-sea-layer{z-index:99998}
+@media(max-width:480px){#matchma-fat-bear-week{right:auto;left:50%;bottom:0;transform:translateX(-50%) scale(.9);transform-origin:bottom center;width:100vw}#matchma-fat-bear-week .fbw-dock{gap:10px}#matchma-fat-bear-week .fbw-dock button{width:47px;height:47px}#matchma-fat-bear-week .fbw-dock .fbw-feed{width:56px;height:56px}}
