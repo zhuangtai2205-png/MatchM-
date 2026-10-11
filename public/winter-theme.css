@@ -2190,3 +2190,51 @@ html body[data-theme="forest"] .navbtn:nth-child(3n) .navicon::after{content:"ü
 html body[data-theme="forest"] .nav-folder .navfolder-title:after{content:"üêª"!important;display:inline-flex!important;margin-left:auto!important;font-size:18px!important}
 html body[data-theme="minimal"] .navbtn .navicon{display:none!important}
 html body[data-theme="minimal"] .navfolder-title:after{display:none!important;content:none!important}
+
+
+/* MatchMa UI polish: calmer backgrounds, consistent spacing and readable result filters. */
+:root{
+  --ui-border:#d9e1df;
+  --ui-surface:rgba(255,255,255,.88);
+  --ui-input:#fffefa;
+  --ui-head:#edf2ef;
+  --ui-soft:#f1f4f1;
+}
+body[data-theme="ocean"]{--ink:#35545d;--muted:#718a90;--purple:#729eaa;--frame:#d3e3e5;background:linear-gradient(135deg,#f5fafb,#edf5f7 55%,#f4f8f5)!important}
+body[data-theme="retro"]{--ink:#3d4140;--muted:#7b807d;--purple:#777e7b;--frame:#d8dcd8;background:linear-gradient(135deg,#f5f5f1,#efefeb 58%,#f7f7f4)!important}
+body[data-theme="pink"]{--ink:#765467;--muted:#9a7d8c;--purple:#c08aa6;--frame:#ead6df;background:linear-gradient(135deg,#fff9fb,#f8f0f4 58%,#fff9f8)!important}
+body[data-theme="vampire"]{--ink:#5c4b56;--muted:#8d7c86;--purple:#a87b8b;--frame:#dfd1d8;background:linear-gradient(135deg,#f8f4f6,#f0eaee 58%,#faf6f7)!important}
+body[data-theme="cat"]{--ink:#62554d;--muted:#948176;--purple:#b29b8b;--frame:#e5d9cf;background:linear-gradient(135deg,#fbf8f2,#f6efe9 58%,#fbf7f3)!important}
+body[data-theme="bear"]{--ink:#55483d;--muted:#897d70;--purple:#aa927b;--frame:#e2d8c9;background:linear-gradient(135deg,#faf8f2,#f2eee4 58%,#f8f6ef)!important}
+body[data-theme="forest"]{--ink:#405848;--muted:#7a8c7d;--purple:#809b84;--frame:#d6e0d3;background:linear-gradient(135deg,#f7f9f4,#eef3eb 58%,#f8f8f3)!important}
+body[data-theme="minimal"]{--ink:#41484b;--muted:#7b8387;--purple:#8b969a;--frame:#dfe3e4;background:linear-gradient(135deg,#f8f9f8,#f0f2f1 58%,#fafaf9)!important}
+body[data-theme] .hero,
+body[data-theme] .panel,
+body[data-theme] .sidebar,
+body[data-theme] .stat,
+body[data-theme] .mini,
+body[data-theme] .chart-card{
+  background:var(--ui-surface,rgba(255,255,255,.88))!important;
+  border-color:var(--ui-border,#d9e1df)!important;
+  box-shadow:0 5px 20px rgba(45,60,55,.045)!important;
+}
+body[data-theme] .filterbox{
+  background:rgba(255,255,255,.68)!important;
+  border:1px solid var(--ui-border,#d9e1df)!important;
+  border-radius:15px!important;
+  padding:10px 12px!important;
+}
+body[data-theme] .resulttools{gap:8px!important;margin:7px 0!important;align-items:center!important}
+body[data-theme] .resulttools .search{flex:2 1 230px!important;min-width:190px!important;height:40px!important}
+body[data-theme] .resulttools select{flex:1 1 155px!important;min-width:145px!important;max-width:none!important;min-height:40px!important;padding:8px 10px!important;border-radius:10px!important}
+body[data-theme] .resulttools .btn{min-height:40px!important;padding:8px 13px!important;white-space:nowrap}
+body[data-theme] #resultCount{font-size:12px!important;white-space:nowrap}
+body[data-theme] .tablewrap{border-radius:13px!important}
+@media(max-width:900px){
+  body[data-theme] .resulttools .search{flex:1 1 100%!important;min-width:0!important}
+  body[data-theme] .resulttools select{flex:1 1 45%!important;min-width:0!important}
+}
+@media(max-width:520px){
+  body[data-theme] .resulttools select{flex:1 1 100%!important}
+  body[data-theme] .filterbox{padding:8px!important}
+}
