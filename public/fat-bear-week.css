@@ -262,3 +262,18 @@
 @media(max-width:500px){
  #matchma-fat-bear-week .fbw-bear-icon{font-size:19px!important}
 }
+
+/* Final compact illustration scale: fish should feel hand-drawn, not oversized */
+#matchma-fbw-sea-layer .fbw-fish{
+ width:48px!important;height:34px!important;
+ filter:none!important;
+}
+#matchma-fbw-sea-layer .fbw-fish svg{width:100%!important;height:100%!important}
+#matchma-fbw-sea-layer .fbw-sea-creature{
+ width:42px!important;height:42px!important;
+ filter:none!important;
+}
+#matchma-fbw-sea-layer .fbw-fish:hover,
+#matchma-fbw-sea-layer .fbw-sea-creature:hover{
+ filter:none!important;
+}
