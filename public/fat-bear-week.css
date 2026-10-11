@@ -295,3 +295,39 @@
 #matchma-fbw-sea-layer .fbw-sea-creature:nth-child(3n + 1) .fbw-sea-glyph{color:#e9b95f}
 #matchma-fbw-sea-layer .fbw-sea-creature:hover{background:transparent!important;box-shadow:none!important;transform:scale(1.12)!important}
 @keyframes fbw-sea-float{from{margin-top:-4px}to{margin-top:5px}}
+
+/* Ocean palette outlines for the bear; larger fish and drifting bubbles */
+#matchma-fat-bear-week .fbw-bear-icon{
+ text-shadow:
+  -1.5px 0 #66cbd0, 1.5px 0 #f19bb5,
+  0 -1.5px #f1c86b, 0 1.5px #66cbd0,
+  -1px -1px #f19bb5, 1px 1px #f1c86b,
+  0 3px 5px rgba(58,47,73,.16)!important;
+}
+#matchma-fbw-sea-layer .fbw-fish,
+#matchma-fbw-sea-layer .fbw-sea-creature{
+ width:58px!important;height:50px!important;
+ background:transparent!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;padding:0!important;overflow:visible!important;
+}
+#matchma-fbw-sea-layer .fbw-fish .fbw-sea-glyph{
+ font-size:46px!important;color:#61c6d0!important;
+ text-shadow:-1px 0 #f2a0b5,1px 1px #f3cf72!important;
+}
+#matchma-fbw-sea-layer .fbw-sea-creature .fbw-sea-glyph{
+ font-size:40px!important;text-shadow:-1px 0 #f2a0b5,1px 1px #f3cf72!important;
+}
+#matchma-fat-bear-week .fbw-world:before,
+#matchma-fat-bear-week .fbw-world:after{
+ content:"";position:absolute;bottom:15%;width:10px;height:10px;border-radius:50%;
+ border:1.5px solid rgba(101,198,208,.8);pointer-events:none;
+ animation:fbw-bubble-rise 4.5s linear infinite;
+ box-shadow:0 0 0 3px rgba(255,255,255,.18);
+}
+#matchma-fat-bear-week .fbw-world:before{left:12%;animation-delay:-1.4s}
+#matchma-fat-bear-week .fbw-world:after{left:82%;width:6px;height:6px;animation-delay:-3s}
+@keyframes fbw-bubble-rise{
+ 0%{transform:translateY(30px) scale(.7);opacity:0}
+ 20%{opacity:.8}
+ 100%{transform:translateY(-180px) scale(1.15);opacity:0}
+}
