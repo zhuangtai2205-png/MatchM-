@@ -213,3 +213,34 @@
 @media(prefers-reduced-motion:reduce){
  #matchma-fbw-sea-layer .fbw-fish,#matchma-fbw-sea-layer .fbw-sea-creature{animation:none!important}
 }
+
+/* Hand-inked storybook finish for game art only */
+#matchma-fbw-sea-layer .fbw-fish,
+#matchma-fbw-sea-layer .fbw-sea-creature{
+  background:transparent!important;border:0!important;border-radius:0!important;
+  outline:0!important;box-shadow:none!important;padding:0!important;
+  -webkit-appearance:none!important;appearance:none!important;
+}
+#matchma-fbw-sea-layer .fbw-fish{
+  width:78px!important;height:58px!important;
+  filter:drop-shadow(0 3px 2px rgba(73,59,76,.12))!important;
+}
+#matchma-fbw-sea-layer .fbw-fish svg{
+  width:100%;height:100%;overflow:visible;
+}
+#matchma-fbw-sea-layer .fbw-sea-creature{
+  width:62px!important;height:62px!important;
+  filter:drop-shadow(0 3px 2px rgba(73,59,76,.10))!important;
+}
+#matchma-fbw-sea-layer .fbw-sea-creature svg{
+  width:100%;height:100%;overflow:visible;
+}
+#matchma-fbw-sea-layer .fbw-fish:hover,
+#matchma-fbw-sea-layer .fbw-sea-creature:hover{
+  transform:scale(1.12)!important;filter:drop-shadow(0 4px 4px rgba(73,59,76,.18))!important;
+  background:transparent!important;box-shadow:none!important;
+}
+#matchma-fbw-sea-layer .fbw-fish:focus-visible,
+#matchma-fbw-sea-layer .fbw-sea-creature:focus-visible{
+  outline:2px dashed #d9a6bd!important;outline-offset:4px!important;
+}
