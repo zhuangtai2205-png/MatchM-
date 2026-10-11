@@ -3643,7 +3643,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
  },{passive:true});
 })();
 
-['searchResult','statusFilter','scoreFilter','issueFilter','memoryFilter','sortResults'].forEach(id=>{if($(id))$(id).addEventListener(id==='searchResult'?'input':'change',()=>{currentPage=1;renderResults()})});
+['searchResult','statusFilter','skuFilter','scoreFilter','issueFilter','memoryFilter','sortResults'].forEach(id=>{if($(id))$(id).addEventListener(id==='searchResult'?'input':'change',()=>{currentPage=1;renderResults()})});
 $('resetFilters').addEventListener('click',()=>{ $('searchResult').value='';$('statusFilter').value='all';$('skuFilter').value='all';$('scoreFilter').value='all';$('issueFilter').value='all';$('memoryFilter').value='all';$('sortResults').value='default';currentPage=1;renderResults()});
 $('searchMemory').addEventListener('input',renderMemoryPage);
 $('exportMemory').addEventListener('click',exportMemoryBackup);
@@ -3719,7 +3719,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
  let timer=null,restoring=true;
  window.scheduleWorkspaceSnapshot=function(){if(restoring)return;clearTimeout(timer);timer=setTimeout(()=>saveSnapshot().catch(e=>console.warn('MatchMã session save failed',e)),500)};
  async function saveSnapshot(){
-  const snap={version:1,savedAt:new Date().toISOString(),masterRows,checkRows,out,masterHeaders,checkHeaders,currentPage,pageSize,threshold,lang,activePage:document.querySelector('.page.active')?.id?.replace(/^page-/,'')||'overview',maps:{skuCol:$('skuCol').value,nameCol:$('nameCol').value,specCol:$('specCol').value,unitCol:$('unitCol').value,queryCol:$('queryCol').value,querySkuCol:$('querySkuCol').value,querySpecCol:$('querySpecCol').value,queryUomCol:$('queryUomCol').value},filters:{searchResult:$('searchResult').value,statusFilter:$('statusFilter').value,scoreFilter:$('scoreFilter').value,issueFilter:$('issueFilter').value,memoryFilter:$('memoryFilter').value,sortResults:$('sortResults').value,threshold:$('threshold').value}};
+  const snap={version:1,savedAt:new Date().toISOString(),masterRows,checkRows,out,masterHeaders,checkHeaders,currentPage,pageSize,threshold,lang,activePage:document.querySelector('.page.active')?.id?.replace(/^page-/,'')||'overview',maps:{skuCol:$('skuCol').value,nameCol:$('nameCol').value,specCol:$('specCol').value,unitCol:$('unitCol').value,queryCol:$('queryCol').value,querySkuCol:$('querySkuCol').value,querySpecCol:$('querySpecCol').value,queryUomCol:$('queryUomCol').value},filters:{searchResult:$('searchResult').value,statusFilter:$('statusFilter').value,skuFilter:$('skuFilter').value,scoreFilter:$('scoreFilter').value,issueFilter:$('issueFilter').value,memoryFilter:$('memoryFilter').value,sortResults:$('sortResults').value,threshold:$('threshold').value}};
   await put(snap);
   const status=$('sessionSaveStatus');if(status)status.textContent='Đã lưu phiên làm việc trên thiết bị · '+new Date().toLocaleTimeString('vi-VN');
  }
