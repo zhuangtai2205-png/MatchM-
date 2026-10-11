@@ -281,3 +281,34 @@
 #mmSocialFx .mm-fx-flower,#mmSocialFx .mm-fx-snow,#mmSocialFx .mm-fx-pine,#mmSocialFx .mm-fx-leaf{
  text-shadow:0 2px 4px rgba(50,35,20,.24)!important;
 }
+
+
+/* Final layout correction: gift button must sit immediately to the RIGHT of Emoji/Kaomoji */
+#mmChatPanel #mmChatFooter .mm-chat-tools{
+ display:flex!important;
+ flex-direction:row!important;
+ flex-wrap:nowrap!important;
+ justify-content:flex-start!important;
+ align-items:center!important;
+ gap:8px!important;
+ width:100%!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-kaomoji-wrap,
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-gift-wrap{
+ display:inline-flex!important;
+ flex:0 0 auto!important;
+ width:max-content!important;
+ max-width:none!important;
+ margin:0!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-kaomoji-wrap > #mmKaomojiToggle,
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-gift-wrap > #mmGiftToggle{
+ display:inline-flex!important;
+ align-items:center!important;
+ justify-content:center!important;
+ width:auto!important;
+ min-width:0!important;
+ max-width:none!important;
+ white-space:nowrap!important;
+ margin:0!important;
+}
