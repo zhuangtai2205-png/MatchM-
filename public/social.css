@@ -119,16 +119,10 @@
 #mmChatPanel .mm-chat-footer{background:#f8ebe3;color:#3d302b}
 #mmChatPanel .mm-chat-head,#mmChatPanel .mm-chat-tabs,#mmChatPanel .mm-chat-body,#mmChatPanel .mm-chat-footer{box-shadow:none;backdrop-filter:none}
 #mmChatPanel .mm-chat-tools{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important;margin:0 0 8px;overflow:visible}
-#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel .mm-chat-tools>.mm-gift-wrap{display:inline-flex!important;flex:0 0 auto!important;align-self:center!important;width:max-content!important;min-width:0!important;margin:0!important;float:none!important;clear:none!important;position:relative!important}
-#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{display:inline-flex!important;flex:0 0 auto!important;align-items:center;justify-content:center;width:auto!important;white-space:nowrap!important;padding:8px 12px;font-size:13px}
 #mmChatPanel .mm-chat-input{background:#fff;color:#302720;border:1px solid #caa895}
 #mmChatPanel .mm-chat-input::placeholder{color:#806e63;opacity:1}
 #mmChatPanel .mm-chat-bubble{color:#352821;background:#f0e4dc;border-color:#e0c9bb}
 #mmChatPanel .mm-chat-bubble.mm-mine{background:#dceef4}
-#mmChatPanel .mm-chat-tools .mm-kaomoji-panel,#mmChatPanel .mm-chat-tools .mm-gift-panel{position:absolute;bottom:calc(100% + 8px);top:auto;left:0;right:auto;width:min(320px,calc(100vw - 48px));max-width:calc(100vw - 48px);margin:0;z-index:2147483647;background:#fffaf5;color:#352821;border:1px solid #d8b6a4;border-radius:13px;padding:9px;box-shadow:0 12px 30px rgba(70,42,30,.22);backdrop-filter:none}
-#mmChatPanel .mm-chat-tools .mm-gift-panel{left:auto;right:0}
-#mmChatPanel .mm-chat-tools .mm-kaomoji-panel[hidden],#mmChatPanel .mm-chat-tools .mm-gift-panel[hidden]{display:none}
-#mmChatPanel .mm-chat-tools .mm-gift-panel:not([hidden]){display:block}
 #mmSocialFx{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;overflow:hidden!important;pointer-events:none!important;z-index:2147483646!important;contain:none!important}
 #mmSocialFx .mm-fx-item{position:absolute!important;display:block!important;top:-12vh!important;left:var(--x)!important;line-height:1!important;opacity:0;visibility:visible!important;pointer-events:none!important;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;animation:mm-fall var(--duration) linear var(--delay) forwards!important;will-change:transform,opacity!important;text-shadow:0 2px 4px rgba(50,35,20,.24)!important}
 #mmSocialFx .mm-fx-leaf{color:#c96a2b!important}
@@ -139,7 +133,6 @@
 @keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:1}88%{opacity:.95}100%{transform:translate3d(var(--drift,30px),112vh,0) rotate(var(--spin,180deg));opacity:0}}
 #mmIncomingToast{position:fixed!important;left:50%!important;top:18px!important;transform:translate(-50%,-18px)!important;z-index:2147483647!important;max-width:min(92vw,460px)!important;padding:12px 18px!important;border:1px solid #b4d9df!important;border-radius:16px!important;background:#fffaf5!important;color:#3d302b!important;box-shadow:0 10px 34px rgba(30,75,85,.25)!important;font:700 14px/1.45 Inter,system-ui,sans-serif!important;text-align:center!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important}
 #mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
-@media(max-width:480px){#mmChatPanel{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}#mmChatPanel .mm-chat-tools{gap:6px!important}#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{padding:7px 9px;font-size:12px}#mmIncomingToast{top:10px!important;font-size:12px!important;padding:10px 13px!important}}
 
 
 /* Toolbar layout: two explicit columns, no scaling or zoom */
@@ -157,7 +150,6 @@
  flex-wrap:unset!important;
 }
 #mmChatPanel #mmChatFooter .mm-chat-tools>.mm-kaomoji-wrap,
-#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-gift-wrap{
  display:block!important;
  position:relative!important;
  grid-row:1!important;
@@ -167,9 +159,7 @@
  margin:0!important;
 }
 #mmChatPanel #mmChatFooter .mm-chat-tools>.mm-kaomoji-wrap{grid-column:1!important}
-#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-gift-wrap{grid-column:2!important}
 #mmChatPanel #mmChatFooter .mm-chat-tools #mmKaomojiToggle,
-#mmChatPanel #mmChatFooter .mm-chat-tools #mmGiftToggle{
  display:inline-flex!important;
  width:max-content!important;
  max-width:none!important;
@@ -181,11 +171,6 @@
 
 /* Final authoritative toolbar rule: controls must remain side by side */
 #mmChatPanel #mmChatFooter .mm-chat-tools{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow:visible!important}
-#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-gift-wrap{display:inline-flex!important;flex:0 0 auto!important;position:relative!important;width:max-content!important;min-width:0!important;max-width:none!important;margin:0!important;float:none!important;clear:none!important}
-#mmChatPanel #mmChatFooter .mm-chat-tools #mmKaomojiToggle,#mmChatPanel #mmChatFooter .mm-chat-tools #mmGiftToggle{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;white-space:nowrap!important}
 
 /* Gift feature intentionally removed from the private chat composer */
-#mmChatPanel #mmChatFooter .mm-gift-wrap,
-#mmChatPanel #mmChatFooter #mmGiftToggle,
-#mmChatPanel #mmChatFooter #mmGiftPanel{display:none!important}
 #mmChatPanel #mmChatFooter .mm-chat-tools{display:flex!important;flex-flow:row nowrap!important;justify-content:flex-start!important;align-items:center!important;width:100%!important}
