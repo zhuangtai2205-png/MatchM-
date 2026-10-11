@@ -234,3 +234,50 @@
 }
 #mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
 @media(max-width:480px){#mmIncomingToast{top:10px!important;font-size:12px!important;padding:10px 13px!important}}
+
+
+/* MatchMa chat readability repair: opaque layered panel, strong contrast, visible full-screen effects */
+#mmChatPanel{
+ background:#fffaf5!important;
+ background-color:#fffaf5!important;
+ border:1px solid #d5b3a2!important;
+ border-radius:22px!important;
+ box-shadow:0 18px 55px rgba(73,43,31,.24)!important;
+ opacity:1!important;
+ -webkit-backdrop-filter:none!important;
+ backdrop-filter:none!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-body,
+#mmChatPanel .mm-chat-footer{
+ background:#fffaf5!important;
+ background-color:#fffaf5!important;
+ background-image:none!important;
+ color:#3d302b!important;
+ opacity:1!important;
+}
+#mmChatPanel .mm-chat-head{background:#f5e4da!important;border-bottom:1px solid #e0c2b2!important}
+#mmChatPanel .mm-chat-tabs{background:#f9eee7!important;border-bottom:1px solid #ead3c7!important}
+#mmChatPanel .mm-chat-body{background:#fffaf5!important}
+#mmChatPanel .mm-chat-footer{background:#f8ebe3!important;border-top:1px solid #e0c2b2!important}
+#mmChatPanel .mm-chat-messages{background:#fffaf5!important;color:#3d302b!important}
+#mmChatPanel .mm-chat-messages *{text-shadow:none!important}
+#mmChatPanel .mm-chat-status,
+#mmChatPanel .mm-chat-head small{color:#6d5a50!important}
+#mmChatPanel .mm-chat-bubble,
+#mmChatPanel .mm-message-bubble{background:#f0e4dc!important;color:#352821!important;border:1px solid #e0c9bb!important}
+#mmChatPanel .mm-chat-input{background:#fff!important;color:#302720!important;border:1px solid #caa895!important}
+#mmChatPanel .mm-chat-input::placeholder{color:#806e63!important;opacity:1!important}
+#mmChatPanel .mm-chat-tabs button,
+#mmChatPanel .mm-chat-footer button{color:#49362e!important}
+#mmChatPanel .mm-chat-tools .mm-gift-panel:not([hidden]),
+#mmChatPanel .mm-chat-tools .mm-kaomoji-panel:not([hidden]){
+ background:#fffaf5!important;color:#352821!important;border:1px solid #d8b6a4!important;
+ box-shadow:0 12px 30px rgba(70,42,30,.22)!important;backdrop-filter:none!important;
+}
+#mmSocialFx{position:fixed!important;inset:0!important;overflow:hidden!important;z-index:2147483646!important;pointer-events:none!important}
+#mmSocialFx .mm-fx-item{font-size:var(--size)!important;opacity:0;will-change:transform,opacity!important}
+#mmSocialFx .mm-fx-flower,#mmSocialFx .mm-fx-snow,#mmSocialFx .mm-fx-pine,#mmSocialFx .mm-fx-leaf{
+ text-shadow:0 2px 4px rgba(50,35,20,.24)!important;
+}
