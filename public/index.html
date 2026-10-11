@@ -3254,7 +3254,11 @@ function norm(s){
  // CĐ là cách viết tắt của có đường trong tên sữa; chỉ diễn giải khi có ngữ cảnh sữa/VNM.
  const dairyContext=/\b(sua|vnm|vinamil|milk)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ');
- t=t.replace(/\b(\d+(?:[.,]\d+)?)\s*(?:liters?|litres?|lit|l)\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'ml ')
+ // Chuẩn hóa số viết bằng chữ và các cách ghi dung tích thường gặp.
+ t=t.replace(/\b(mot|1)\s*(lit|litre|liter|liters|litres|l)\b/g,' vol_1000ml ')
+  .replace(/\b(mot|1)\s*(nghin|ngan)\s*ml\b/g,' vol_1000ml ')
+  .replace(/\b(1)\s*l\b/g,' vol_1000ml ')
+  .replace(/\b(\d+(?:[.,]\d+)?)\s*(?:liters?|litres?|lit|l)\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'ml ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*ml\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.')))+'ml ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*kg\b/g,(_,n)=>' weight_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'g ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*g\b/g,(_,n)=>' weight_'+Math.round(parseFloat(n.replace(',','.')))+'g ');
@@ -3367,7 +3371,9 @@ async function runMatch(){
    let best=null,bestRank=-1;
    for(const m of candidates.values()){
     const nameScore=similarity(queryNameTokens,m.nameTokens);
-    if(nameScore<.45)continue;
+    const exactSku=!!querySku&&normalizeSku(querySku)===normalizeSku(m.code);
+    // SKU trùng là bằng chứng mạnh; vẫn đối chiếu tên/quy cách để phát hiện dữ liệu mâu thuẫn.
+    if(nameScore<.45&&!exactSku)continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
     const attributeConflict=conflictTokens(queryTokens,m.tokens);
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens);
@@ -3375,7 +3381,7 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=familyConflict?-1:nameScore-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    const rank=familyConflict?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&best.score>=.45&&!best.familyConflict);
