@@ -25,7 +25,7 @@ const art=[
 {n:'cá nóc',svg:'<span class="fbw-sea-glyph">𓆡</span>'},
 {n:'rùa biển',svg:'<span class="fbw-sea-glyph">𓆉</span>'},
 {n:'vỏ sò biển',svg:'<span class="fbw-sea-glyph">𓇼</span>'}
-
+];
 const seaArt=[
 {name:'cá đuôi dài',svg:'<span class="fbw-sea-glyph">𓆝</span>'},
 {name:'cá nhỏ',svg:'<span class="fbw-sea-glyph">𓆟</span>'},
