@@ -277,3 +277,21 @@
 #matchma-fbw-sea-layer .fbw-sea-creature:hover{
  filter:none!important;
 }
+
+/* Cute ocean glyphs inspired by the user's 𓆝 𓆟 𓆞 𓆉 reference */
+#matchma-fbw-sea-layer .fbw-sea-creature{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:40px!important;height:40px!important;padding:0!important;
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;filter:none!important;cursor:pointer;
+ animation:fbw-sea-float 2.8s ease-in-out infinite alternate;
+}
+#matchma-fbw-sea-layer .fbw-sea-glyph{
+ display:block;font-family:"Segoe UI Symbol","Noto Sans Egyptian Hieroglyphs",sans-serif;
+ font-size:34px;line-height:1;color:#65bfc6;
+ text-shadow:0 1px 0 rgba(255,255,255,.65);
+}
+#matchma-fbw-sea-layer .fbw-sea-creature:nth-child(3n) .fbw-sea-glyph{color:#ef9aab}
+#matchma-fbw-sea-layer .fbw-sea-creature:nth-child(3n + 1) .fbw-sea-glyph{color:#e9b95f}
+#matchma-fbw-sea-layer .fbw-sea-creature:hover{background:transparent!important;box-shadow:none!important;transform:scale(1.12)!important}
+@keyframes fbw-sea-float{from{margin-top:-4px}to{margin-top:5px}}
