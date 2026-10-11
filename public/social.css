@@ -207,3 +207,14 @@ body[data-theme="retro"]{--mm-social-glass:rgba(244,243,236,.88);--mm-social-tin
 #mmChatFab{position:fixed!important;right:24px!important;bottom:94px!important;left:auto!important;top:auto!important;z-index:2147483000!important;display:flex!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;cursor:pointer!important;}
 #mmChatPanel{z-index:2147483001!important;}
 @media(max-width:760px){#mmChatFab{right:14px!important;bottom:86px!important;}}
+
+/* Restore the original ultra-transparent chat-window look. */
+#mmChatPanel{background:rgba(248,252,250,.06)!important;background-color:rgba(248,252,250,.06)!important;background-image:none!important;-webkit-backdrop-filter:blur(5px)!important;backdrop-filter:blur(5px)!important;border:1px solid rgba(255,255,255,.16)!important;box-shadow:0 5px 18px rgba(40,60,55,.045)!important}
+#mmChatPanel .mm-chat-head,#mmChatPanel .mm-chat-tabs,#mmChatPanel .mm-chat-footer{background:rgba(255,255,255,.035)!important;background-image:none!important;border-color:rgba(255,255,255,.10)!important;box-shadow:none!important}
+#mmChatPanel .mm-chat-body{background:rgba(255,255,255,.012)!important;background-image:none!important}
+#mmChatPanel .mm-chat-row,#mmChatPanel .mm-chat-input,#mmChatPanel .mm-chat-select,#mmChatPanel .mm-icon-btn,#mmChatPanel .mm-chat-tabs button[aria-selected=true]{background:rgba(255,255,255,.045)!important;background-image:none!important;border-color:rgba(255,255,255,.12)!important;box-shadow:none!important}
+#mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.055)!important;background-image:none!important;border-color:rgba(255,255,255,.12)!important;box-shadow:none!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(199,231,224,.09)!important}
+#mmChatPanel .mm-chat-icon{background:rgba(255,255,255,.045)!important;border-color:rgba(255,255,255,.10)!important}
+#mmChatPanel .mm-kaomoji-panel{background:rgba(248,252,253,.16)!important;backdrop-filter:blur(5px);box-shadow:none!important}
+@media(prefers-reduced-transparency:reduce){#mmChatPanel{background:rgba(248,252,250,.90)!important}}
