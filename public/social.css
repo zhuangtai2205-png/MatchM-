@@ -144,3 +144,15 @@
 .mm-gift-row-top{position:relative!important;display:flex!important;visibility:visible!important;opacity:1!important;min-height:32px!important;margin:0 0 7px!important;padding:3px 0!important;z-index:2!important}
 .mm-gift-row-top span{font-weight:700!important;white-space:nowrap!important}
 .mm-gift-row-top button{display:inline-flex!important;visibility:visible!important;opacity:1!important}
+
+/* Compact chat tools: gifts live beside Kaomoji */
+.mm-chat-tools{display:flex;gap:8px;align-items:flex-start;flex-wrap:wrap;margin-bottom:8px}
+.mm-chat-tools .mm-kaomoji-wrap,.mm-gift-wrap{position:relative;min-width:0}
+.mm-gift-panel{position:absolute;bottom:calc(100% + 6px);left:0;z-index:40;width:min(330px,78vw);padding:9px;border:1px solid rgba(90,165,185,.5);border-radius:13px;background:rgba(235,250,252,.94);box-shadow:0 6px 22px rgba(20,70,90,.10);backdrop-filter:blur(4px)}
+.mm-gift-panel[hidden]{display:none!important}
+.mm-gift-panel .mm-gift-row{display:flex!important;flex-wrap:wrap!important;gap:6px!important;margin:0!important}
+.mm-gift-panel .mm-gift-row button{padding:7px 9px!important;font-size:12px!important}
+@keyframes mm-fall{0%{opacity:0;transform:translate3d(0,-3vh,0) rotate(0)}10%{opacity:1}85%{opacity:.95}100%{opacity:0;transform:translate3d(var(--drift,30px),110vh,0) rotate(var(--spin,180deg))}}
+#mmSocialFx .mm-fx-item{animation-name:mm-fall!important}
+.mm-delete-message{display:block;margin:4px 0 0 auto;padding:2px 7px;border:1px dashed rgba(150,110,100,.45);border-radius:7px;background:transparent;color:inherit;font-size:10px;cursor:pointer}
+.mm-delete-message:hover{background:rgba(220,100,100,.12)}
