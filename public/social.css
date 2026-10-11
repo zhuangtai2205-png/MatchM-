@@ -177,3 +177,18 @@ body[data-theme="retro"]{--mm-social-glass:rgba(244,243,236,.88);--mm-social-tin
 #mmChatPanel .mm-chat-icon{background:rgba(255,255,255,.10)!important;border-color:rgba(255,255,255,.16)!important}
 #mmChatPanel .mm-chat-headcopy small,#mmChatPanel .mm-chat-status,#mmChatPanel .mm-chat-row-copy small{color:var(--ink,#294b5a)!important;text-shadow:0 1px 2px rgba(255,255,255,.25)}
 @media(prefers-reduced-transparency:reduce){#mmChatPanel{background:rgba(248,252,250,.92)!important}}
+
+
+/* Prevent the floating chat control from colliding with the bottom-right bear game pill. */
+#mmChatFab{right:24px!important;bottom:94px!important;z-index:100030!important}
+#mmChatPanel{z-index:100031!important;max-height:calc(100dvh - 180px);}
+#mmChatPanel .mm-online-section{padding:3px 0 11px;margin-bottom:10px;border-bottom:1px dashed rgba(88,160,132,.38)}
+#mmChatPanel .mm-online-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 7px;font-size:12px;color:#247b5c}
+#mmChatPanel .mm-online-title span{min-width:20px;padding:2px 7px;border-radius:20px;background:rgba(68,190,133,.20);text-align:center;font-size:11px;font-weight:800}
+#mmChatPanel .mm-conversation-title{margin:2px 2px 8px;font-size:12px;font-weight:800;opacity:.88}
+#mmChatPanel .mm-online-section .mm-chat-row{background:rgba(215,255,230,.28)!important;border-color:rgba(70,185,125,.30)!important}
+#mmChatPanel .mm-online-section .mm-chat-dot{flex:0 0 8px;background:#16b86b;box-shadow:0 0 0 3px rgba(22,184,107,.16),0 0 10px rgba(22,184,107,.5)}
+#mmSocialFx{z-index:100040!important}
+.mm-fx-item.mm-rain{width:3px;height:22px;background:linear-gradient(180deg,rgba(191,245,255,.1),#48bce9 35%,#1688c5);opacity:0;box-shadow:0 0 7px rgba(72,188,233,.85),0 0 2px #fff}
+@keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:.95}88%{opacity:.88}100%{transform:translate3d(var(--drift),112vh,0) rotate(var(--spin));opacity:0}}
+@media(max-width:760px){#mmChatFab{right:14px!important;bottom:86px!important}#mmChatPanel{right:8px!important;bottom:148px!important;max-height:calc(100dvh - 165px)}}
