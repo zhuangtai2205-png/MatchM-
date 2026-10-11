@@ -155,3 +155,59 @@
 @keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:1}88%{opacity:.95}100%{transform:translate3d(var(--drift,30px),112vh,0) rotate(var(--spin,180deg));opacity:0}}
 #mmIncomingToast{position:fixed!important;left:50%!important;top:16px!important;transform:translate(-50%,-12px)!important;z-index:2147483647!important;max-width:min(92vw,460px)!important;padding:13px 18px!important;border:1px solid #b7dce2!important;border-radius:15px!important;background:#fffaf5!important;color:#382a23!important;box-shadow:0 10px 34px rgba(30,75,85,.25)!important;font:700 14px/1.45 system-ui,sans-serif!important;text-align:center!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important}
 #mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
+
+
+/* Readability pass: opaque chat surfaces, restrained backdrop blur, clear message cards */
+#mmChatPanel{
+ background:rgba(255,250,246,.985)!important;
+ color:#30251f!important;
+ border:1px solid #c9a18e!important;
+ box-shadow:0 18px 48px rgba(52,34,25,.25)!important;
+ backdrop-filter:blur(12px)!important;
+ -webkit-backdrop-filter:blur(12px)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ background:rgba(250,238,229,.985)!important;
+ color:#38281f!important;
+ backdrop-filter:blur(12px)!important;
+ -webkit-backdrop-filter:blur(12px)!important;
+}
+#mmChatPanel .mm-chat-body,
+#mmChatPanel #mmChatContent,
+#mmChatPanel .mm-chat-messages{
+ background:rgba(255,253,250,.985)!important;
+ color:#30251f!important;
+}
+#mmChatPanel .mm-chat-messages{padding:12px!important;gap:10px!important}
+#mmChatPanel .mm-chat-bubble{
+ display:block!important;
+ max-width:88%!important;
+ padding:10px 12px!important;
+ margin:6px 0!important;
+ background:#fff!important;
+ color:#2e241e!important;
+ border:1px solid #d6b9a8!important;
+ border-radius:13px!important;
+ box-shadow:0 2px 7px rgba(61,39,28,.09)!important;
+ font-size:14px!important;
+ line-height:1.55!important;
+ overflow-wrap:anywhere!important;
+ text-shadow:none!important;
+}
+#mmChatPanel .mm-chat-bubble.mm-mine{
+ margin-left:auto!important;
+ background:#e6f5f8!important;
+ color:#204955!important;
+ border-color:#91ceda!important;
+}
+#mmChatPanel .mm-chat-messages .mm-chat-status{color:#635248!important;background:transparent!important}
+#mmChatPanel .mm-chat-messages small,
+#mmChatPanel .mm-chat-messages time{color:#766359!important}
+#mmChatPanel input,
+#mmChatPanel textarea,
+#mmChatPanel .mm-chat-input{
+ background:#fff!important;color:#30251f!important;border:1px solid #c9a18e!important;
+}
+#mmChatPanel .mm-chat-input::placeholder{color:#806d62!important;opacity:1!important}
