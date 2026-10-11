@@ -2312,7 +2312,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
     <select id="statusFilter" aria-label="Lọc trạng thái"><option value="all">Tất cả trạng thái</option><option value="good">OK</option><option value="review">Cần rà soát</option><option value="none">Không khớp</option><option value="rejected">Không khớp thủ công</option></select>
     <select id="skuFilter" aria-label="Lọc SKU"><option value="all">Mọi trạng thái SKU</option><option value="same">SKU trùng nhau</option><option value="different">SKU khác nhau</option><option value="sourceMissing">Thiếu SKU nguồn</option><option value="masterMissing">Thiếu SKU chuẩn</option></select><select id="scoreFilter" aria-label="Lọc điểm tương đồng"><option value="all">Mọi điểm (%)</option><option value="high">Từ 90% trở lên</option><option value="mid">70–89%</option><option value="low">Dưới 70%</option></select>
   </div>
-  <div class="resulttools"><select id="issueFilter" aria-label="Lọc vấn đề"><option value="all">Mọi loại</option><option value="matched">Có gợi ý ghép</option><option value="unmatched">Không có gợi ý</option><option value="sku">Sai mã SKU</option><option value="unit">Sai đơn vị tính</option><option value="spec">Sai quy cách/dung tích</option><option value="anyIssue">Có bất kỳ cảnh báo nào</option></select>
+  <div class="resulttools"><select id="nameSkuFilter" aria-label="Lọc quan hệ giữa SKU và tên"><option value="all">SKU / tên hàng: tất cả</option><option value="skuDiffNameSimilar">Mã khác, tên giống/gần giống</option><option value="skuSameNameDiff">Mã giống, tên khác</option><option value="nameNear">Tên gần giống (70–89%)</option></select>
+    <select id="issueFilter" aria-label="Lọc vấn đề"><option value="all">Mọi loại</option><option value="matched">Có gợi ý ghép</option><option value="unmatched">Không có gợi ý</option><option value="sku">Sai mã SKU</option><option value="unit">Sai đơn vị tính</option><option value="spec">Sai quy cách/dung tích</option><option value="anyIssue">Có bất kỳ cảnh báo nào</option></select>
     <select id="memoryFilter" aria-label="Lọc bộ nhớ"><option value="all">Tất cả xác nhận</option><option value="remembered">Đã ghi nhớ/xác nhận</option><option value="suggested">Gợi ý từ bộ nhớ</option><option value="notRemembered">Chưa ghi nhớ</option></select>
     <select id="sortResults" aria-label="Sắp xếp"><option value="default">Sắp xếp mặc định</option><option value="scoreDesc">Điểm cao → thấp</option><option value="scoreAsc">Điểm thấp → cao</option><option value="nameAsc">Tên A → Z</option><option value="nameDesc">Tên Z → A</option></select>
     <button type="button" class="btn alt" id="resetFilters">Xóa bộ lọc</button><span class="muted" id="resultCount"></span>
@@ -3552,6 +3553,12 @@ function renderResults(){
   if(skuState==='sourceMissing'&&sourceSku)return false;
   if(skuState==='masterMissing'&&masterSku)return false;
   if(q&&!text.includes(q))return false;
+  const nameSkuMode=$('nameSkuFilter')?$('nameSkuFilter').value:'all';
+  const namesClose=Number(x.confidence)>=70;
+  const sourceSkuNorm=sourceSku.toLocaleLowerCase(),masterSkuNorm=masterSku.toLocaleLowerCase();
+  if(nameSkuMode==='skuDiffNameSimilar'&&(!sourceSku||!masterSku||sourceSkuNorm===masterSkuNorm||!x.skuMismatch||!namesClose))return false;
+  if(nameSkuMode==='skuSameNameDiff'&&(!sourceSku||!masterSku||sourceSkuNorm!==masterSkuNorm||Number(x.confidence)>=90))return false;
+  if(nameSkuMode==='nameNear'&&(Number(x.confidence)<70||Number(x.confidence)>=90))return false;
   if(score==='high'&&x.confidence<90)return false;
   if(score==='mid'&&(x.confidence<70||x.confidence>=90))return false;
   if(score==='low'&&x.confidence>=70)return false;
@@ -3643,8 +3650,8 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
  },{passive:true});
 })();
 
-['searchResult','statusFilter','skuFilter','scoreFilter','issueFilter','memoryFilter','sortResults'].forEach(id=>{if($(id))$(id).addEventListener(id==='searchResult'?'input':'change',()=>{currentPage=1;renderResults()})});
-$('resetFilters').addEventListener('click',()=>{ $('searchResult').value='';$('statusFilter').value='all';$('skuFilter').value='all';$('scoreFilter').value='all';$('issueFilter').value='all';$('memoryFilter').value='all';$('sortResults').value='default';currentPage=1;renderResults()});
+['searchResult','statusFilter','skuFilter','scoreFilter','nameSkuFilter','issueFilter','memoryFilter','sortResults'].forEach(id=>{if($(id))$(id).addEventListener(id==='searchResult'?'input':'change',()=>{currentPage=1;renderResults()})});
+$('resetFilters').addEventListener('click',()=>{ $('searchResult').value='';$('statusFilter').value='all';$('skuFilter').value='all';$('scoreFilter').value='all';if($('nameSkuFilter'))$('nameSkuFilter').value='all';$('issueFilter').value='all';$('memoryFilter').value='all';$('sortResults').value='default';currentPage=1;renderResults()});
 $('searchMemory').addEventListener('input',renderMemoryPage);
 $('exportMemory').addEventListener('click',exportMemoryBackup);
 $('clearMemory').addEventListener('click',async()=>{if(!savedMemory.length)return;if(confirm('Bạn chắc chắn muốn xóa toàn bộ bộ nhớ xác nhận trên trình duyệt này'+(accountUser?' và tài khoản đám mây đang đăng nhập':'')+'?')){savedMemory=[];persistMemory();if(supabaseClient&&accountUser){const {error}=await supabaseClient.from('matchma_confirmed_pairs').delete().eq('user_id',accountUser.id);if(error)accountStatus('Đã xóa cục bộ nhưng chưa xóa được đám mây: '+error.message,true)}renderMemoryPage();if(out.length)renderResults()}});
@@ -3729,7 +3736,7 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
    masterRows=s.masterRows||[];checkRows=s.checkRows||[];out=s.out||[];masterHeaders=s.masterHeaders||[];checkHeaders=s.checkHeaders||[];currentPage=s.currentPage||1;pageSize=s.pageSize||50;threshold=s.threshold||80;lang=s.lang||'vi';
    if(masterRows.length){fillSelect('skuCol',masterHeaders,s.maps?.skuCol||'',false);fillSelect('nameCol',masterHeaders,s.maps?.nameCol||'',false);fillSelect('specCol',masterHeaders,s.maps?.specCol||'',true);fillSelect('unitCol',masterHeaders,s.maps?.unitCol||'',true);$('masterCount').textContent=masterRows.length;$('masterNoSku').textContent=masterRows.filter(r=>!String(r[$('skuCol').value]||'').trim()).length;$('masterInfo').textContent='Đã khôi phục dữ liệu danh mục ('+masterRows.length+' dòng) từ phiên làm việc đã lưu.';renderMasterPreview()}
    if(checkRows.length){fillSelect('queryCol',checkHeaders,s.maps?.queryCol||'',false);fillSelect('querySkuCol',checkHeaders,s.maps?.querySkuCol||'',true);fillSelect('querySpecCol',checkHeaders,s.maps?.querySpecCol||'',true);fillSelect('queryUomCol',checkHeaders,s.maps?.queryUomCol||'',true);$('checkCount').textContent=checkRows.length;$('checkInfo').textContent='Đã khôi phục file cần rà soát ('+checkRows.length+' dòng) từ phiên làm việc đã lưu.'}
-   for(const [id,key] of [['searchResult','searchResult'],['statusFilter','statusFilter'],['skuFilter','skuFilter'],['scoreFilter','scoreFilter'],['issueFilter','issueFilter'],['memoryFilter','memoryFilter'],['sortResults','sortResults'],['threshold','threshold']])if(s.filters&&s.filters[key]!=null&&$(id))$(id).value=s.filters[key];
+   for(const [id,key] of [['searchResult','searchResult'],['statusFilter','statusFilter'],['skuFilter','skuFilter'],['scoreFilter','scoreFilter'],['nameSkuFilter','nameSkuFilter'],['issueFilter','issueFilter'],['memoryFilter','memoryFilter'],['sortResults','sortResults'],['threshold','threshold']])if(s.filters&&s.filters[key]!=null&&$(id))$(id).value=s.filters[key];
    updateThresholdLabels();updateCanRun();updateStats();$('export').disabled=!out.length;renderResults();
    const status=$('sessionSaveStatus');if(status)status.textContent='Đã khôi phục phiên làm việc lần trước · '+new Date(s.savedAt).toLocaleString('vi-VN');
    if(s.activePage&&document.getElementById('page-'+s.activePage))showPage(s.activePage);
