@@ -99,3 +99,23 @@
 #matchma-fat-bear-week .fbw-bear-icon{display:block;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;font-size:112px;line-height:1;filter:drop-shadow(0 4px 3px #50342620);user-select:none}
 #matchma-fat-bear-week.fbw-hibernating .fbw-bear-icon{filter:drop-shadow(0 4px 3px #50342620)}
 @media(max-width:500px){#matchma-fat-bear-week .fbw-bear-icon{font-size:100px}}
+
+/* Transparent full-page overlay: no boxed bear panel */
+#matchma-fat-bear-week{background:transparent!important;border:0!important;box-shadow:none!important;overflow:visible!important}
+#matchma-fat-bear-week .fbw-world{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+#matchma-fat-bear-week .fbw-bear-wrap{background:transparent!important;border:0!important;box-shadow:none!important}
+#matchma-fat-bear-week .fbw-bear{background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important}
+#matchma-fat-bear-week .fbw-bear-icon{font-size:136px!important;filter:drop-shadow(0 5px 5px #45342b20)!important}
+#matchma-fat-bear-week .fbw-ground{background:radial-gradient(ellipse,#9fbd9a38,transparent 72%)!important}
+#matchma-fat-bear-week .fbw-message{background:#fffdf8eF!important;border-color:#ead8c8!important;box-shadow:0 3px 14px #5d3d2c10!important}
+#matchma-fbw-sea-layer .fbw-fish{filter:drop-shadow(0 3px 3px #28495c24)!important;animation:fbwFishBob 2.5s ease-in-out infinite}
+#matchma-fbw-sea-layer .fbw-fish:nth-child(3n){animation-delay:-.8s}
+#matchma-fbw-sea-layer .fbw-fish:nth-child(3n + 1){animation-delay:-1.6s}
+#matchma-fbw-sea-layer .fbw-sea-creature{filter:drop-shadow(0 3px 4px #28495c20)!important;animation:fbwSeaBob 3s ease-in-out infinite}
+@keyframes fbwFishBob{0%,100%{margin-top:0}50%{margin-top:-5px}}
+@keyframes fbwSeaBob{0%,100%{margin-top:0;rotate:-4deg}50%{margin-top:-8px;rotate:4deg}}
+#matchma-fbw-global-snow{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;z-index:1000000!important;pointer-events:none!important;overflow:hidden!important;display:block!important}
+#matchma-fbw-global-snow[hidden]{display:none!important}
+#matchma-fbw-global-snow i{position:absolute;top:-30px;left:0;color:#fff!important;text-shadow:0 0 6px #b4d6f8,0 0 12px #fff;font-style:normal;font-size:var(--flake-size,12px);opacity:.88;animation:fbwWholePageSnow linear infinite;will-change:transform}
+@keyframes fbwWholePageSnow{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}10%{opacity:.9}50%{transform:translate3d(35px,50vh,0) rotate(180deg)}100%{transform:translate3d(-20px,110vh,0) rotate(360deg);opacity:.25}}
+@media(max-width:500px){#matchma-fat-bear-week .fbw-bear-icon{font-size:118px!important}}
