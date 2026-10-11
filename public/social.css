@@ -180,3 +180,10 @@
  #mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{padding:7px 9px;font-size:12px}
  #mmIncomingToast{top:10px;font-size:12px;padding:10px 13px}
 }
+
+
+/* Toolbar layout is intentionally row-only; keep gift directly beside kaomoji */
+#mmChatPanel .mm-chat-tools{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important}
+#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel .mm-chat-tools>.mm-gift-wrap{display:inline-flex!important;flex:0 0 auto!important;align-self:center!important;width:max-content!important;min-width:0!important;margin:0!important;float:none!important;clear:none!important;position:relative!important}
+#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel .mm-chat-tools>.mm-gift-wrap{order:0!important}
+#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;white-space:nowrap!important}
