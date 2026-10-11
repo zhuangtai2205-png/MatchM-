@@ -7,7 +7,7 @@ root.innerHTML=`
 <div class="fbw-world" aria-label="Đại dương hoạt hình">
  <div class="fbw-moon">✦</div><div class="fbw-bubble b1"></div><div class="fbw-bubble b2"></div>
  <div class="fbw-message" aria-live="polite">Chạm vào cá để cho gấu ăn nhé!</div>
- <div class="fbw-bear-wrap"><button class="fbw-bear" aria-label="Gấu nâu, chạm để vuốt ve"><span class="fbw-bear-icon" aria-hidden="true">🐻</span></button></div>
+ <div class="fbw-bear-wrap"><button class="fbw-bear" aria-label="Gấu nâu, chạm để vuốt ve"><span class="fbw-bear-icon" aria-hidden="true">🧸</span></button></div>
  <div class="fbw-ground"></div><div class="fbw-snow" aria-hidden="true"></div>
 </div>
 <div class="fbw-status"><span>🐟 Cá đã ăn <b class="fbw-count">0</b>/20</span><div class="fbw-progress"><span></span></div></div>
