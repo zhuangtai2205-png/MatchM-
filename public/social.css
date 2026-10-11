@@ -180,7 +180,7 @@ body[data-theme="retro"]{--mm-social-glass:rgba(244,243,236,.88);--mm-social-tin
 
 
 /* Prevent the floating chat control from colliding with the bottom-right bear game pill. */
-#mmChatFab{right:24px!important;bottom:94px!important;z-index:100030!important}
+#mmChatFab{right:24px;bottom:94px;z-index:100030!important}
 #mmChatPanel{z-index:100031!important;max-height:calc(100dvh - 180px);}
 #mmChatPanel .mm-online-section{padding:3px 0 11px;margin-bottom:10px;border-bottom:1px dashed rgba(88,160,132,.38)}
 #mmChatPanel .mm-online-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 2px 7px;font-size:12px;color:#247b5c}
@@ -191,4 +191,13 @@ body[data-theme="retro"]{--mm-social-glass:rgba(244,243,236,.88);--mm-social-tin
 #mmSocialFx{z-index:100040!important}
 .mm-fx-item.mm-rain{width:3px;height:22px;background:linear-gradient(180deg,rgba(191,245,255,.1),#48bce9 35%,#1688c5);opacity:0;box-shadow:0 0 7px rgba(72,188,233,.85),0 0 2px #fff}
 @keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:.95}88%{opacity:.88}100%{transform:translate3d(var(--drift),112vh,0) rotate(var(--spin));opacity:0}}
-@media(max-width:760px){#mmChatFab{right:14px!important;bottom:86px!important}#mmChatPanel{right:8px!important;bottom:148px!important;max-height:calc(100dvh - 165px)}}
+@media(max-width:760px){#mmChatFab{right:14px;bottom:86px;z-index:100030!important}#mmChatPanel{right:8px;bottom:148px;max-height:calc(100dvh - 165px)}}
+
+/* Flat 2D weather/leaf effects: no 3D emoji glyphs or glossy depth. */
+.mm-fx-item.mm-rain{width:2px;height:25px;border-radius:0;background:#48bce9;box-shadow:none;filter:none;opacity:0}
+.mm-fx-item.mm-flat-leaf{width:15px;height:21px;font-size:0;border-radius:100% 0 100% 0;background:#d97736;box-shadow:none;filter:none;opacity:0;transform:rotate(var(--leaf-rotation));}
+.mm-fx-item.mm-flat-leaf:nth-child(3n){background:#e99b45}
+.mm-fx-item.mm-flat-leaf:nth-child(3n + 1){background:#c65c36}
+.mm-fx-item.mm-flat-leaf:nth-child(3n + 2){background:#e7b64c}
+#mmChatFab{position:fixed;left:auto;top:auto}
+#mmChatPanel{position:fixed;left:auto;top:auto}
