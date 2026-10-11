@@ -244,3 +244,21 @@
 #matchma-fbw-sea-layer .fbw-sea-creature:focus-visible{
   outline:2px dashed #d9a6bd!important;outline-offset:4px!important;
 }
+
+/* User-provided cute kaomoji bear, transparent and borderless */
+#matchma-fat-bear-week .fbw-bear-icon{
+  display:block!important;
+  width:max-content!important;
+  max-width:none!important;
+  font-family:"Segoe UI",sans-serif!important;
+  font-size:23px!important;
+  font-weight:500!important;
+  line-height:1.14!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  color:#5b443d!important;
+  filter:drop-shadow(0 2px 2px rgba(75,52,42,.10))!important;
+}
+@media(max-width:500px){
+ #matchma-fat-bear-week .fbw-bear-icon{font-size:19px!important}
+}
