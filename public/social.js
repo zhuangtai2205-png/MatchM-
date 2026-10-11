@@ -66,7 +66,7 @@ function inject(){
  }
  makeDraggable(fab,fab,'fab');
  makeDraggable(panel,panel.querySelector('.mm-chat-head'),'panel');
- fab.addEventListener('click',function(ev){if(fab.dataset.mmDragSuppress==='1'){ev.preventDefault();return}panel.classList.toggle('mm-open');if(panel.classList.contains('mm-open')){renderChatTab();if(activeChat)loadConversation(activeChat.id)}});
+ fab.addEventListener('click',function(ev){if(fab.dataset.mmDragSuppress==='1'){ev.preventDefault();return}var opening=!panel.classList.contains('mm-open');panel.classList.toggle('mm-open',opening);if(opening){try{renderChatTab();if(activeChat)loadConversation(activeChat.id)}catch(err){console.error('Chat panel render error',err);var body=$('mmChatBody');if(body)body.innerHTML='<div class="mm-chat-status">Khung chat đã mở nhưng không tải được nội dung. Vui lòng thử tải lại trang.</div>'}}});
  $('mmChatClose').addEventListener('click',function(){panel.classList.remove('mm-open')});
  panel.querySelectorAll('[data-mm-tab]').forEach(function(b){b.addEventListener('click',function(){activeTab=b.dataset.mmTab;panel.querySelectorAll('[data-mm-tab]').forEach(function(x){x.setAttribute('aria-selected',String(x===b))});renderChatTab()})});
  $('mmGoAccount').addEventListener('click',function(){goPage('account')});$('mmSaveProfile').addEventListener('click',saveProfile);
