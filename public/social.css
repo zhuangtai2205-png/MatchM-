@@ -312,3 +312,41 @@
  white-space:nowrap!important;
  margin:0!important;
 }
+
+
+/* Actual fix for narrow chat composer: reserve enough width for both controls */
+#mmChatPanel{
+ width:min(410px,calc(100vw - 24px))!important;
+ min-width:min(360px,calc(100vw - 24px))!important;
+ max-width:calc(100vw - 24px)!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools{
+ display:grid!important;
+ grid-template-columns:max-content max-content!important;
+ grid-auto-flow:column!important;
+ justify-content:start!important;
+ align-items:center!important;
+ column-gap:8px!important;
+ row-gap:0!important;
+ flex-wrap:nowrap!important;
+ width:max-content!important;
+ min-width:100%!important;
+ overflow:visible!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-kaomoji-wrap,
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-gift-wrap{
+ display:block!important;
+ position:relative!important;
+ width:max-content!important;
+ min-width:0!important;
+ margin:0!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-kaomoji-wrap > #mmKaomojiToggle,
+#mmChatPanel #mmChatFooter .mm-chat-tools > .mm-gift-wrap > #mmGiftToggle{
+ display:inline-flex!important;
+ width:max-content!important;
+ max-width:none!important;
+ white-space:nowrap!important;
+ padding:8px 12px!important;
+ font-size:13px!important;
+}
