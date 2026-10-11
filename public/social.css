@@ -115,3 +115,13 @@
  background:rgba(255,255,255,.02)!important;
 }
 #mmConversationMessages .mm-chat-time{display:block;margin-top:6px;opacity:.72;font-size:10px}
+
+/* Community online list and group chat */
+.mm-online-section{margin:0 0 12px;padding:10px;border:1px solid rgba(119,166,174,.35);border-radius:12px}
+.mm-online-section h3{margin:0 0 8px;font-size:12px}.mm-online-section h3 span{display:inline-flex;min-width:20px;justify-content:center;border-radius:20px;background:rgba(100,190,140,.18);padding:2px 6px}
+.mm-online-dot{width:8px;height:8px;flex:none;border-radius:50%;background:#36b878;box-shadow:0 0 0 3px rgba(54,184,120,.12)}
+.mm-group-create{display:flex;gap:6px;align-items:center;margin-bottom:10px}.mm-group-create .mm-chat-input{min-width:0;flex:1}
+.mm-group-heading{display:flex;align-items:center;gap:8px;padding:8px 2px 12px}.mm-group-heading strong{flex:1;min-width:0;overflow-wrap:anywhere}
+.mm-public-items{margin-top:12px}.mm-public-items-list{display:grid;gap:8px}.mm-public-item{display:flex;gap:10px;align-items:flex-start;padding:9px;border:1px dashed rgba(100,165,178,.5);border-radius:10px;background:transparent}.mm-public-item>span{font-size:18px}.mm-public-item strong{font-size:13px}.mm-public-item p{margin:4px 0 0;font-size:12px;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--muted)}
+.mm-community-shortcut{padding-top:8px}.mm-community-shortcut button{width:100%}
+@media(max-width:480px){.mm-group-create{align-items:stretch;flex-direction:column}.mm-group-create .mm-chat-send{width:100%}}
