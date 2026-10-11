@@ -26,6 +26,15 @@ const art=[
 {n:'cá san hô',c:'#f28fa8',d:'#fff0f3',accent:'#ffd6e0',pattern:'<path d="M25 14q-5 6 0 12t0 6M38 14q5 6 0 12t0 6" fill="none" stroke="#fff0f3" stroke-width="3" stroke-linecap="round"/>'},
 {n:'cá thiên thần',c:'#8eaef5',d:'#eef3ff',accent:'#d9e3ff',pattern:'<path d="M25 13l5 8-5 9M39 13l-5 8 5 9" fill="none" stroke="#f3f5ff" stroke-width="3" stroke-linecap="round"/>'}
 ];
+const seaArt=[
+{name:'cá đuôi dài',svg:'<span class="fbw-sea-glyph">𓆝</span>'},
+{name:'cá nhỏ',svg:'<span class="fbw-sea-glyph">𓆟</span>'},
+{name:'cá nhiệt đới',svg:'<span class="fbw-sea-glyph">𓆞</span>'},
+{name:'rùa biển',svg:'<span class="fbw-sea-glyph">𓆉</span>'},
+{name:'cá nóc',svg:'<span class="fbw-sea-glyph">𓆡</span>'},
+{name:'sao biển',svg:'<span class="fbw-sea-glyph">✧</span>'},
+{name:'vỏ sò',svg:'<span class="fbw-sea-glyph">𓇼</span>'}
+];
 function fishSvg(a){
  const id='fish'+Math.random().toString(36).slice(2,8);
  return '<svg viewBox="0 0 76 54" aria-hidden="true"><g stroke="#76564f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 27Q10 16 4 15L7 27 4 38Q13 36 20 29Z" fill="'+a.accent+'"/><path d="M17 27Q20 15 34 14Q49 12 59 24Q63 27 59 30Q48 41 33 40Q20 39 17 27Z" fill="'+a.c+'"/><path d="M25 17Q32 14 39 17" fill="none" stroke="#fff8e8" stroke-width="2.4"/>'+a.pattern+'<path d="M34 15Q30 21 34 27" fill="none" stroke="#fff8e8" stroke-width="2"/><circle cx="51" cy="22" r="3.2" fill="#fffdf7"/><circle cx="52" cy="22" r="1.7" fill="#493e43" stroke="none"/><path d="M49 31q3 2 5-1" fill="none" stroke="#76564f" stroke-width="1.4"/><circle cx="44" cy="29" r="2.2" fill="#f6a2a7" stroke="none"/><path d="M36 37l4 3-5 2Z" fill="'+a.accent+'"/></g></svg>';
