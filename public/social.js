@@ -61,12 +61,12 @@ function inject(){
    target.style.left=left+'px';target.style.top=top+'px';target.style.right='auto';target.style.bottom='auto';
    if(kind==='fab'){target.dataset.mmDragged='1';}
   });
-  function finish(){if(!dragging)return;dragging=false;if(moved){target.dataset.mmDragSuppress='1';setTimeout(function(){delete target.dataset.mmDragSuppress},180)}}
+  function finish(){if(!dragging)return;dragging=false;if(moved){target.dataset.mmDragSuppress='1';setTimeout(function(){delete target.dataset.mmDragSuppress},350)}}
   handle.addEventListener('pointerup',finish);handle.addEventListener('pointercancel',finish);
  }
  makeDraggable(fab,fab,'fab');
  makeDraggable(panel,panel.querySelector('.mm-chat-head'),'panel');
- fab.addEventListener('click',function(){panel.classList.toggle('mm-open');if(panel.classList.contains('mm-open')){renderChatTab();if(activeChat)loadConversation(activeChat.id)}});
+ fab.addEventListener('click',function(ev){if(fab.dataset.mmDragSuppress==='1'){ev.preventDefault();return}panel.classList.toggle('mm-open');if(panel.classList.contains('mm-open')){renderChatTab();if(activeChat)loadConversation(activeChat.id)}});
  $('mmChatClose').addEventListener('click',function(){panel.classList.remove('mm-open')});
  panel.querySelectorAll('[data-mm-tab]').forEach(function(b){b.addEventListener('click',function(){activeTab=b.dataset.mmTab;panel.querySelectorAll('[data-mm-tab]').forEach(function(x){x.setAttribute('aria-selected',String(x===b))});renderChatTab()})});
  $('mmGoAccount').addEventListener('click',function(){goPage('account')});$('mmSaveProfile').addEventListener('click',saveProfile);
