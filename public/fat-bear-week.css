@@ -158,3 +158,58 @@
   pointer-events:none!important;
 }
 @media(max-width:500px){#matchma-fat-bear-week .fbw-bear-icon{font-size:118px!important}}
+
+/* Game-only kawaii 2D ocean polish */
+#matchma-fat-bear-week .fbw-world{
+  background:radial-gradient(ellipse at 50% 100%,rgba(255,237,220,.34),transparent 62%)!important;
+}
+#matchma-fat-bear-week .fbw-bear-icon{
+  filter:drop-shadow(0 4px 2px rgba(93,59,43,.12))!important;
+  transform-origin:50% 100%;
+}
+#matchma-fbw-sea-layer .fbw-fish,
+#matchma-fbw-sea-layer .fbw-sea-creature{
+  border:0!important;outline:0!important;background:transparent!important;
+  box-shadow:none!important;border-radius:0!important;padding:0!important;
+  -webkit-appearance:none!important;appearance:none!important;
+  overflow:visible!important;isolation:isolate;
+}
+#matchma-fbw-sea-layer .fbw-fish{
+  width:72px!important;height:52px!important;
+  filter:drop-shadow(0 4px 3px rgba(45,83,119,.16))!important;
+  animation:fbwCuteSwim 2.1s ease-in-out infinite;
+}
+#matchma-fbw-sea-layer .fbw-fish svg{
+  display:block;width:100%;height:100%;overflow:visible;
+}
+#matchma-fbw-sea-layer .fbw-fish:nth-child(3n){animation-delay:-.7s}
+#matchma-fbw-sea-layer .fbw-fish:nth-child(3n + 1){animation-delay:-1.35s}
+#matchma-fbw-sea-layer .fbw-sea-creature{
+  width:60px!important;height:60px!important;
+  filter:drop-shadow(0 4px 4px rgba(45,83,119,.12))!important;
+  animation:fbwCreatureFloat 3.2s ease-in-out infinite;
+}
+#matchma-fbw-sea-layer .fbw-sea-creature svg{
+  display:block;width:100%;height:100%;overflow:visible;
+}
+#matchma-fbw-sea-layer .fbw-sea-creature:nth-child(even){animation-delay:-1.4s}
+#matchma-fbw-sea-layer .fbw-fish:hover,
+#matchma-fbw-sea-layer .fbw-sea-creature:hover{
+  background:transparent!important;box-shadow:none!important;
+  filter:drop-shadow(0 5px 5px rgba(45,83,119,.22))!important;
+}
+@keyframes fbwCuteSwim{
+  0%,100%{margin-top:0;rotate:-2deg}
+  50%{margin-top:-6px;rotate:2deg}
+}
+@keyframes fbwCreatureFloat{
+  0%,100%{translate:0 0;rotate:-3deg}
+  50%{translate:0 -8px;rotate:3deg}
+}
+#matchma-fbw-sea-layer .fbw-fish:focus-visible,
+#matchma-fbw-sea-layer .fbw-sea-creature:focus-visible{
+  outline:2px dashed #8e9fe9!important;outline-offset:4px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #matchma-fbw-sea-layer .fbw-fish,#matchma-fbw-sea-layer .fbw-sea-creature{animation:none!important}
+}
