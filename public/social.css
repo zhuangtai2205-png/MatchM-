@@ -110,80 +110,33 @@
 .mm-community-shortcut{padding-top:8px}.mm-community-shortcut button{width:100%}
 @media(max-width:480px){.mm-group-create{align-items:stretch;flex-direction:column}.mm-group-create .mm-chat-send{width:100%}}
 
-/* Clean, single source of truth for chat, toolbar, and full-screen effects */
-#mmChatPanel{
- width:min(410px,calc(100vw - 24px)); min-width:0; max-width:calc(100vw - 24px);
- background:#fffaf5; color:#3d302b; border:1px solid #d5b3a2;
- box-shadow:0 18px 55px rgba(73,43,31,.24); backdrop-filter:none;
-}
+
+/* Clean final effects and readable chat UI */
+#mmChatPanel{width:min(410px,calc(100vw - 24px));min-width:0;max-width:calc(100vw - 24px);background:#fffaf5;color:#3d302b;border:1px solid #d5b3a2;box-shadow:0 18px 55px rgba(73,43,31,.24);backdrop-filter:none}
 #mmChatPanel .mm-chat-head{background:#f5e4da;color:#3d302b}
 #mmChatPanel .mm-chat-tabs{background:#f9eee7;color:#3d302b}
 #mmChatPanel .mm-chat-body{background:#fffaf5;color:#3d302b}
 #mmChatPanel .mm-chat-footer{background:#f8ebe3;color:#3d302b}
 #mmChatPanel .mm-chat-head,#mmChatPanel .mm-chat-tabs,#mmChatPanel .mm-chat-body,#mmChatPanel .mm-chat-footer{box-shadow:none;backdrop-filter:none}
-#mmChatPanel .mm-chat-tools{
- display:flex; flex-direction:row; flex-wrap:nowrap; align-items:center; justify-content:flex-start;
- gap:8px; width:100%; min-width:0; margin:0 0 8px; overflow:visible;
-}
-#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,
-#mmChatPanel .mm-chat-tools>.mm-gift-wrap{display:block;flex:0 0 auto;position:relative;min-width:0;width:max-content;margin:0}
-#mmChatPanel .mm-chat-tools #mmKaomojiToggle,
-#mmChatPanel .mm-chat-tools #mmGiftToggle{display:inline-flex;align-items:center;justify-content:center;width:auto;white-space:nowrap;padding:8px 12px;font-size:13px}
+#mmChatPanel .mm-chat-tools{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important;margin:0 0 8px;overflow:visible}
+#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel .mm-chat-tools>.mm-gift-wrap{display:inline-flex!important;flex:0 0 auto!important;align-self:center!important;width:max-content!important;min-width:0!important;margin:0!important;float:none!important;clear:none!important;position:relative!important}
+#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{display:inline-flex!important;flex:0 0 auto!important;align-items:center;justify-content:center;width:auto!important;white-space:nowrap!important;padding:8px 12px;font-size:13px}
 #mmChatPanel .mm-chat-input{background:#fff;color:#302720;border:1px solid #caa895}
 #mmChatPanel .mm-chat-input::placeholder{color:#806e63;opacity:1}
 #mmChatPanel .mm-chat-bubble{color:#352821;background:#f0e4dc;border-color:#e0c9bb}
 #mmChatPanel .mm-chat-bubble.mm-mine{background:#dceef4}
-#mmChatPanel .mm-chat-tools .mm-kaomoji-panel,
-#mmChatPanel .mm-chat-tools .mm-gift-panel{
- position:absolute;bottom:calc(100% + 8px);top:auto;left:0;right:auto;
- width:min(320px,calc(100vw - 48px));max-width:calc(100vw - 48px);margin:0;
- z-index:2147483647;background:#fffaf5;color:#352821;border:1px solid #d8b6a4;
- border-radius:13px;padding:9px;box-shadow:0 12px 30px rgba(70,42,30,.22);backdrop-filter:none;
-}
+#mmChatPanel .mm-chat-tools .mm-kaomoji-panel,#mmChatPanel .mm-chat-tools .mm-gift-panel{position:absolute;bottom:calc(100% + 8px);top:auto;left:0;right:auto;width:min(320px,calc(100vw - 48px));max-width:calc(100vw - 48px);margin:0;z-index:2147483647;background:#fffaf5;color:#352821;border:1px solid #d8b6a4;border-radius:13px;padding:9px;box-shadow:0 12px 30px rgba(70,42,30,.22);backdrop-filter:none}
 #mmChatPanel .mm-chat-tools .mm-gift-panel{left:auto;right:0}
-#mmChatPanel .mm-chat-tools .mm-kaomoji-panel[hidden],
-#mmChatPanel .mm-chat-tools .mm-gift-panel[hidden]{display:none}
+#mmChatPanel .mm-chat-tools .mm-kaomoji-panel[hidden],#mmChatPanel .mm-chat-tools .mm-gift-panel[hidden]{display:none}
 #mmChatPanel .mm-chat-tools .mm-gift-panel:not([hidden]){display:block}
-#mmSocialFx{
- position:fixed;inset:0;width:100vw;height:100vh;overflow:hidden;
- pointer-events:none;z-index:2147483646;contain:none;
-}
-#mmSocialFx .mm-fx-item{
- position:absolute;display:block;top:-12vh;left:var(--x);font-size:var(--size);
- line-height:1;opacity:0;visibility:visible;pointer-events:none;
- font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
- animation:mm-fall var(--duration) linear var(--delay) forwards;
- will-change:transform,opacity;text-shadow:0 2px 4px rgba(50,35,20,.24);
-}
-#mmSocialFx .mm-fx-rain{font-size:22px; color:#39a9d8}
-#mmSocialFx .mm-fx-leaf{color:#c96a2b}
-#mmSocialFx .mm-fx-flower{color:#e779aa}
-#mmSocialFx .mm-fx-snow{color:#70bfe4}
-#mmSocialFx .mm-fx-pine{color:#5b8b5d}
-@keyframes mm-fall{
- 0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}
- 8%{opacity:.98}
- 88%{opacity:.92}
- 100%{transform:translate3d(var(--drift,30px),112vh,0) rotate(var(--spin,180deg));opacity:0}
-}
-#mmIncomingToast{
- position:fixed;left:50%;top:18px;transform:translate(-50%,-18px);z-index:2147483647;
- max-width:min(92vw,460px);padding:12px 18px;border:1px solid #b4d9df;border-radius:16px;
- background:#fffaf5;color:#3d302b;box-shadow:0 10px 34px rgba(30,75,85,.2);
- font:700 14px/1.45 Inter,system-ui,sans-serif;text-align:center;opacity:0;visibility:hidden;
- pointer-events:none;transition:opacity .25s ease,transform .25s ease,visibility .25s ease;
-}
-#mmIncomingToast.mm-toast-show{opacity:1;visibility:visible;transform:translate(-50%,0)}
-@media(max-width:480px){
- #mmChatPanel{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}
- #mmChatPanel .mm-chat-tools{gap:6px}
- #mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{padding:7px 9px;font-size:12px}
- #mmIncomingToast{top:10px;font-size:12px;padding:10px 13px}
-}
-
-
-/* Toolbar layout is intentionally row-only; keep gift directly beside kaomoji */
-#mmChatPanel .mm-chat-tools{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important}
-#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel .mm-chat-tools>.mm-gift-wrap{display:inline-flex!important;flex:0 0 auto!important;align-self:center!important;width:max-content!important;min-width:0!important;margin:0!important;float:none!important;clear:none!important;position:relative!important}
-#mmChatPanel .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel .mm-chat-tools>.mm-gift-wrap{order:0!important}
-#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;white-space:nowrap!important}
+#mmSocialFx{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;overflow:hidden!important;pointer-events:none!important;z-index:2147483646!important;contain:none!important}
+#mmSocialFx .mm-fx-item{position:absolute!important;display:block!important;top:-12vh!important;left:var(--x)!important;line-height:1!important;opacity:0;visibility:visible!important;pointer-events:none!important;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;animation:mm-fall var(--duration) linear var(--delay) forwards!important;will-change:transform,opacity!important;text-shadow:0 2px 4px rgba(50,35,20,.24)!important}
+#mmSocialFx .mm-fx-leaf{color:#c96a2b!important}
+#mmSocialFx .mm-fx-flower{color:#e779aa!important}
+#mmSocialFx .mm-fx-snow{color:#70bfe4!important}
+#mmSocialFx .mm-fx-pine{color:#5b8b5d!important}
+#mmSocialFx .mm-fx-rain{color:#39a9d8!important}
+@keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:1}88%{opacity:.95}100%{transform:translate3d(var(--drift,30px),112vh,0) rotate(var(--spin,180deg));opacity:0}}
+#mmIncomingToast{position:fixed!important;left:50%!important;top:18px!important;transform:translate(-50%,-18px)!important;z-index:2147483647!important;max-width:min(92vw,460px)!important;padding:12px 18px!important;border:1px solid #b4d9df!important;border-radius:16px!important;background:#fffaf5!important;color:#3d302b!important;box-shadow:0 10px 34px rgba(30,75,85,.25)!important;font:700 14px/1.45 Inter,system-ui,sans-serif!important;text-align:center!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important}
+#mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
+@media(max-width:480px){#mmChatPanel{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}#mmChatPanel .mm-chat-tools{gap:6px!important}#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{padding:7px 9px;font-size:12px}#mmIncomingToast{top:10px!important;font-size:12px!important;padding:10px 13px!important}}
