@@ -14,7 +14,7 @@ header,.shell{position:relative;z-index:1}
 #catClickFX{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:99999}
 .cat-flower-particle{position:fixed;left:0;top:0;font-size:calc(22px * var(--font-scale, 1));line-height:1;filter:drop-shadow(0 2px 3px #9a83b322);animation:catFlowerPop .82s cubic-bezier(.2,.8,.2,1) forwards;will-change:transform,opacity}
 @keyframes catFlowerPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-16deg)}12%{opacity:1}100%{opacity:0;transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(1.25) rotate(20deg)}}
-@media(prefers-reduced-motion:reduce){body:before{opacity:.06}.cat-flower-particle{animation:none;display:none}}
+@media(prefers-reduced-motion:reduce){body:before{opacity:.06}.cat-flower-particle{animation:catFlowerPop .82s cubic-bezier(.2,.8,.2,1) forwards!important;display:block!important}}
 
 
 /* Ocean blue pastel + framed workspaces + cute font size controls */
@@ -3636,9 +3636,11 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
 
 // Hiệu ứng click theo chủ đề: bản Mèo có cú bật nảy và nhiều dấu chân hơn.
 (function(){
- const layer=$('catClickFX');if(!layer||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const layer=$('catClickFX');if(!layer)return;
  const iconsByTheme={
   ocean:['🧜‍♀️','🐠','🐬','🐟','🫧','🐚','🪼'],
+  forest:['🍃','🌿','🦋','🌼','🐻','🌱','🍂'],
+  minimal:['✦','·','○','◇','＋','✧'],
   retro:['♪','♫','♬','♩','𝄞','♭'],
   pink:['🌸','🌺','🌷','🌼','🌹','🌻','❀'],
   vampire:['🦇','🎃','🕷️','🕸️','💀','🕯️','☠️'],
@@ -3653,7 +3655,7 @@ $('sample').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
    const motion=theme==='forest'?'theme-forest':theme==='minimal'?'theme-minimal':theme==='bear'?'theme-bear':theme==='cat'?'theme-cat':theme==='vampire'?'theme-bat':theme==='pink'?'theme-flower':theme==='retro'?'theme-note':'theme-fish';
    for(let i=0;i<count;i++){
      const particle=document.createElement('span');particle.className='cat-flower-particle '+motion;
-     particle.innerHTML=themeDoodleSvg(theme,Math.floor(Math.random()*9));particle.setAttribute('aria-hidden','true');
+     particle.innerHTML=themeDoodleSvg(theme,Math.floor(Math.random()*9));if(!particle.innerHTML||particle.innerHTML.indexOf('<svg')<0){const safeIcons=iconsByTheme[theme]||iconsByTheme.ocean;particle.textContent=safeIcons[Math.floor(Math.random()*safeIcons.length)]||'✦'}particle.setAttribute('aria-hidden','true');
      particle.style.left=e.clientX+'px';particle.style.top=e.clientY+'px';
      particle.style.setProperty('--dx',(Math.random()*128-64)+'px');
      particle.style.setProperty('--dy',(-24-Math.random()*(theme==='cat'?82:64))+'px');
