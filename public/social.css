@@ -74,3 +74,18 @@
 @media(prefers-reduced-motion:reduce){.mm-fx-item{display:none}#mmChatPanel.mm-open{animation:none}#mmChatFab{transition:none}}
 
 .mm-nav-unread{margin-left:auto;min-width:18px;padding:1px 5px;border-radius:99px;background:#d96f86;color:#fff;text-align:center;font:800 10px/16px Inter,sans-serif;box-shadow:0 2px 6px #a94b5d30}
+
+/* Getting-started guide and persistent AI accuracy notice */
+.mm-ai-disclaimer{position:relative;z-index:1;margin:0 0 14px;padding:10px 14px;border:1px solid #e7d9b8;border-radius:13px;background:rgba(255,249,231,.91);color:#65543c;font-size:12px;line-height:1.6;box-shadow:0 3px 12px rgba(93,76,43,.045)}
+.mm-ai-disclaimer strong{color:#7c5420}
+.mm-guide-block{margin:14px 0}
+.mm-guide-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.mm-guide-card{min-width:0;padding:16px;border-radius:15px;background:var(--ui-surface,rgba(255,255,255,.74));border-color:var(--ui-border,rgba(130,150,140,.22));box-shadow:0 3px 12px rgba(40,60,50,.035)}
+.mm-guide-card h3{margin:0 0 9px;font-size:14px;line-height:1.4;color:var(--ink,#34443b)}
+.mm-guide-card p,.mm-guide-card li{font-size:12px;line-height:1.65;color:var(--muted,#65736a)}
+.mm-guide-card p{margin:7px 0}
+.mm-guide-card ol,.mm-guide-card ul{padding-left:19px;margin:8px 0 13px}
+.mm-guide-card li+li{margin-top:4px}
+.mm-guide-card .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.mm-guide-card .btn{font-size:11px;white-space:normal}
+@media(max-width:760px){.mm-guide-grid{grid-template-columns:minmax(0,1fr)}.mm-ai-disclaimer{font-size:11px;padding:9px 11px}.mm-guide-card{padding:13px}}
