@@ -125,3 +125,37 @@ body[data-theme="vampire"]{--mm-social-glass:rgba(242,229,234,.80);--mm-social-t
 body[data-theme="minimal"]{--mm-social-glass:rgba(239,242,243,.82);--mm-social-tint:rgba(255,255,255,.64);--mm-social-border:rgba(132,143,150,.24);--mm-social-mine:rgba(226,231,233,.88);--mm-social-accent:#858b94;--mm-social-fab:linear-gradient(145deg,#e9edefe8,#fafaf9e8)}
 body[data-theme="retro"]{--mm-social-glass:rgba(244,243,236,.88);--mm-social-tint:rgba(250,249,245,.78);--mm-social-border:rgba(118,117,108,.28);--mm-social-mine:rgba(228,228,218,.92);--mm-social-accent:#626660;--mm-social-fab:linear-gradient(145deg,#e8e7dfe8,#f9f8f2e8)}
 @media(prefers-reduced-transparency:reduce){#mmChatPanel{backdrop-filter:none;background:var(--mm-social-glass,#f7fcfd)}}
+
+
+/* Draggable floating chat + genuinely translucent glass surface. */
+#mmChatFab{touch-action:none;cursor:grab;user-select:none;-webkit-user-select:none}
+#mmChatFab:active{cursor:grabbing}
+#mmChatPanel{
+  background:rgba(247,252,250,.34)!important;
+  background-color:rgba(247,252,250,.34)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(1.12);
+  backdrop-filter:blur(22px) saturate(1.12);
+  border-color:rgba(255,255,255,.42)!important;
+  box-shadow:0 14px 42px rgba(40,60,55,.16);
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+  background:rgba(255,255,255,.18)!important;
+  border-color:rgba(255,255,255,.28)!important;
+}
+#mmChatPanel .mm-chat-body{background:rgba(255,255,255,.08)!important}
+#mmChatPanel .mm-chat-row,
+#mmChatPanel .mm-chat-input,
+#mmChatPanel .mm-chat-select,
+#mmChatPanel .mm-icon-btn,
+#mmChatPanel .mm-chat-tabs button[aria-selected=true]{
+  background:rgba(255,255,255,.24)!important;
+  border-color:rgba(255,255,255,.34)!important;
+}
+#mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.30)!important;border-color:rgba(255,255,255,.30)!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(199,231,224,.48)!important}
+#mmChatPanel .mm-chat-head{cursor:grab;touch-action:none;user-select:none}
+#mmChatPanel .mm-chat-head:active{cursor:grabbing}
+#mmChatPanel .mm-chat-head button{touch-action:manipulation}
+@media(prefers-reduced-transparency:reduce){#mmChatPanel{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(247,252,250,.92)!important}}
