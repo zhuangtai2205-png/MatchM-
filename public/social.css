@@ -178,3 +178,8 @@
  font-size:12px!important;
 }
 #mmChatPanel{width:min(440px,calc(100vw - 16px))!important;max-width:calc(100vw - 16px)!important}
+
+/* Final authoritative toolbar rule: controls must remain side by side */
+#mmChatPanel #mmChatFooter .mm-chat-tools{display:flex!important;flex-flow:row nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;width:100%!important;min-width:0!important;max-width:100%!important;overflow:visible!important}
+#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-kaomoji-wrap,#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-gift-wrap{display:inline-flex!important;flex:0 0 auto!important;position:relative!important;width:max-content!important;min-width:0!important;max-width:none!important;margin:0!important;float:none!important;clear:none!important}
+#mmChatPanel #mmChatFooter .mm-chat-tools #mmKaomojiToggle,#mmChatPanel #mmChatFooter .mm-chat-tools #mmGiftToggle{display:inline-flex!important;flex:0 0 auto!important;width:auto!important;max-width:none!important;white-space:nowrap!important}
