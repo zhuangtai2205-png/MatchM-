@@ -71,6 +71,7 @@ create table if not exists public.matchma_space_visits (
   constraint matchma_space_visits_no_self check (visitor_id <> owner_id)
 );
 create index if not exists matchma_space_visits_owner_idx on public.matchma_space_visits (owner_id, visited_at desc);
+create index if not exists matchma_space_visits_visitor_idx on public.matchma_space_visits (visitor_id, visited_at desc);
 alter table public.matchma_space_visits enable row level security;
 grant select, insert on public.matchma_space_visits to authenticated;
 drop policy if exists matchma_space_visits_read_participant on public.matchma_space_visits;
