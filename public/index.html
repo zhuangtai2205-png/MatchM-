@@ -3486,7 +3486,7 @@ async function runMatch(){
   setProgress(Math.min(offset+batch.length,checkRows.length),checkRows.length,false);
   await new Promise(resolve=>setTimeout(resolve,0));
  }
- running=false;setProgress(checkRows.length,checkRows.length,true);updateCanRun();updateStats();$('export').disabled=!out.length;renderResults();showPage('results');scheduleWorkspaceSnapshot()}
+ running=false;setProgress(checkRows.length,checkRows.length,true);updateCanRun();updateStats();$('export').disabled=!out.length;renderResults();showPage('results');scheduleWorkspaceSnapshot()
 }
 $('run').addEventListener('click',runMatch);
 function updateThresholdLabels(){$('thresholdValue').textContent=threshold;$('thresholdInline').textContent=threshold+'%';$('thresholdSummary').textContent=threshold+'%';$('thresholdRun').textContent=(lang==='en'?'OK threshold: ':'Ngưỡng OK: ')+threshold+'%';$('okRule').textContent='≥ '+threshold+'%';$('reviewRule').textContent='45–'+(threshold-1)+'%';$('noneRule').textContent='< 45%';$('thresholdExplanation').textContent='≥ '+threshold+'% = '+tr('statusGood')+' · 45–'+(threshold-1)+'% = '+tr('statusReview')+' · < 45% = '+tr('statusNone')+'. '+(lang==='en'?'Any conflicting attribute requires review.':'Có thuộc tính xung đột luôn cần rà soát.')}
