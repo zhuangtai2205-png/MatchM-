@@ -140,3 +140,41 @@
 #mmIncomingToast{position:fixed!important;left:50%!important;top:18px!important;transform:translate(-50%,-18px)!important;z-index:2147483647!important;max-width:min(92vw,460px)!important;padding:12px 18px!important;border:1px solid #b4d9df!important;border-radius:16px!important;background:#fffaf5!important;color:#3d302b!important;box-shadow:0 10px 34px rgba(30,75,85,.25)!important;font:700 14px/1.45 Inter,system-ui,sans-serif!important;text-align:center!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important}
 #mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
 @media(max-width:480px){#mmChatPanel{width:calc(100vw - 16px);max-width:calc(100vw - 16px)}#mmChatPanel .mm-chat-tools{gap:6px!important}#mmChatPanel .mm-chat-tools #mmKaomojiToggle,#mmChatPanel .mm-chat-tools #mmGiftToggle{padding:7px 9px;font-size:12px}#mmIncomingToast{top:10px!important;font-size:12px!important;padding:10px 13px!important}}
+
+
+/* Toolbar layout: two explicit columns, no scaling or zoom */
+#mmChatPanel #mmChatFooter .mm-chat-tools{
+ display:grid!important;
+ grid-template-columns:max-content max-content!important;
+ grid-auto-flow:row!important;
+ align-items:center!important;
+ justify-content:start!important;
+ column-gap:8px!important;
+ row-gap:0!important;
+ width:max-content!important;
+ min-width:0!important;
+ max-width:100%!important;
+ flex-wrap:unset!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-kaomoji-wrap,
+#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-gift-wrap{
+ display:block!important;
+ position:relative!important;
+ grid-row:1!important;
+ width:max-content!important;
+ min-width:0!important;
+ max-width:none!important;
+ margin:0!important;
+}
+#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-kaomoji-wrap{grid-column:1!important}
+#mmChatPanel #mmChatFooter .mm-chat-tools>.mm-gift-wrap{grid-column:2!important}
+#mmChatPanel #mmChatFooter .mm-chat-tools #mmKaomojiToggle,
+#mmChatPanel #mmChatFooter .mm-chat-tools #mmGiftToggle{
+ display:inline-flex!important;
+ width:max-content!important;
+ max-width:none!important;
+ white-space:nowrap!important;
+ padding:7px 9px!important;
+ font-size:12px!important;
+}
+#mmChatPanel{width:min(440px,calc(100vw - 16px))!important;max-width:calc(100vw - 16px)!important}
