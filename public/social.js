@@ -45,6 +45,8 @@ function inject(){
  $('mmChatClose').addEventListener('click',function(){panel.classList.remove('mm-open')});
  panel.querySelectorAll('[data-mm-tab]').forEach(function(b){b.addEventListener('click',function(){activeTab=b.dataset.mmTab;panel.querySelectorAll('[data-mm-tab]').forEach(function(x){x.setAttribute('aria-selected',String(x===b))});renderChatTab()})});
  $('mmGoAccount').addEventListener('click',function(){goPage('account')});$('mmSaveProfile').addEventListener('click',saveProfile);
+ var bearHelp=$('mmExplainBearTheme');if(bearHelp)bearHelp.addEventListener('click',function(){var sel=$('themeSelect');if(sel){sel.value='bear';sel.dispatchEvent(new Event('change',{bubbles:true}));msg('mmProfileStatus','Đã chọn theme Gấu rừng ở thanh trên cùng.');}else alert('Hãy chọn “Gấu rừng” ở ô Giao diện trên thanh đầu trang.');});
+ var chatHelp=$('mmOpenChatGuide');if(chatHelp)chatHelp.addEventListener('click',function(){var fab=$('mmChatFab');if(fab)fab.click();else alert('Nút chat nổi nằm ở góc dưới bên phải sau khi tải bản mới.');});
  $('mmCommunitySearch').addEventListener('input',function(){clearTimeout(searchTimer);searchTimer=setTimeout(searchPeople,250)});
  $('mmCloseVisitedSpace').addEventListener('click',function(){$('mmVisitedSpaceWrap').hidden=true});
  $('mmMessageSpaceOwner').addEventListener('click',function(){if(visitedProfile)openChat(visitedProfile)});
