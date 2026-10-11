@@ -3636,61 +3636,46 @@ document.querySelectorAll('.nav-folder').forEach(g=>g.open=true);initTheme();ini
 /* Entertainment and bear snow startup removed. */
 
 </script><script src="/winter-theme.js?v=20"></script><script>
-/* Font picker v75: set font directly on every rendered element so theme-specific !important rules cannot override it. */
+/* Font picker performance fix: use the existing CSS variable instead of rewriting every DOM node. */
 (function(){
  const KEY='matchma-site-font-family-v4';
  const FONTS=['IBM Plex Sans','Source Sans 3','DM Sans','Work Sans','Raleway','Ubuntu','Oswald','Playfair Display','Space Grotesk','Comfortaa'];
+ const FONT_URL={
+  'IBM Plex Sans':'IBM+Plex+Sans:wght@400;500;600;700',
+  'Source Sans 3':'Source+Sans+3:wght@400;500;600;700',
+  'DM Sans':'DM+Sans:wght@400;500;600;700',
+  'Work Sans':'Work+Sans:wght@400;500;600;700',
+  'Raleway':'Raleway:wght@400;500;600;700',
+  'Ubuntu':'Ubuntu:wght@400;500;700',
+  'Oswald':'Oswald:wght@400;500;600;700',
+  'Playfair Display':'Playfair+Display:wght@400;500;600;700',
+  'Space Grotesk':'Space+Grotesk:wght@400;500;600;700',
+  'Comfortaa':'Comfortaa:wght@400;500;600;700'
+ };
+ let lastApplied='';
  function applyFont(value){
-  const name=FONTS.includes(value)?value:'Be Vietnam Pro';
-  const stack='"'+name+'", "Noto Sans", "Noto Sans TC", "Noto Sans SC", "Noto Sans JP", Arial, sans-serif';
-  // Load the actual font files before applying the family; a family name alone falls back silently.
-  const fontFamilies={
-   'IBM Plex Sans':'IBM+Plex+Sans:wght@400;500;600;700',
-   'Source Sans 3':'Source+Sans+3:wght@400;500;600;700',
-   'DM Sans':'DM+Sans:wght@400;500;600;700',
-   'Work Sans':'Work+Sans:wght@400;500;600;700',
-   'Raleway':'Raleway:wght@400;500;600;700',
-   'Ubuntu':'Ubuntu:wght@400;500;700',
-   'Oswald':'Oswald:wght@400;500;600;700',
-   'Playfair Display':'Playfair+Display:wght@400;500;600;700',
-   'Space Grotesk':'Space+Grotesk:wght@400;500;600;700',
-   'Comfortaa':'Comfortaa:wght@400;500;600;700'
-  };
-  let fontLink=document.getElementById('matchma-selected-font-resource');
-  if(!fontLink){fontLink=document.createElement('link');fontLink.id='matchma-selected-font-resource';fontLink.rel='stylesheet';document.head.appendChild(fontLink)}
-  fontLink.href='https://fonts.googleapis.com/css2?family='+fontFamilies[name]+'&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap';
-  document.documentElement.style.setProperty('--matchma-font-family',stack);
+  const name=FONTS.includes(value)?value:'IBM Plex Sans';
+  if(name===lastApplied)return;
+  lastApplied=name;
+  const stack='"'+name+'", "Noto Sans", Arial, sans-serif';
+  let link=document.getElementById('matchma-selected-font-resource');
+  if(!link){link=document.createElement('link');link.id='matchma-selected-font-resource';link.rel='stylesheet';document.head.appendChild(link)}
+  link.href='https://fonts.googleapis.com/css2?family='+FONT_URL[name]+'&family=Noto+Sans:wght@400;500;600;700&display=swap';
   document.documentElement.style.setProperty('--matchma-font-family',stack);
   document.documentElement.dataset.siteFont=name;
-  document.querySelectorAll('body, body *').forEach(function(el){
-   if(el.matches('svg, svg *, .icon, .lucide, header.app-header .brand-copy h1, header.app-header .brand-copy h1 *')) return;
-   el.style.setProperty('font-family',stack,'important');
-  });
   const select=document.getElementById('siteFontFamily');
-  if(select && select.value!==name) select.value=name;
+  if(select&&select.value!==name)select.value=name;
   const preview=document.getElementById('siteFontPreview');
-  if(preview) preview.style.setProperty('font-family',stack,'important');
+  if(preview)preview.style.setProperty('font-family',stack,'important');
   try{localStorage.setItem(KEY,name)}catch(e){}
  }
+ function readSaved(){let n='IBM Plex Sans';try{n=localStorage.getItem(KEY)||n}catch(e){}return n}
  function init(){
-  let saved='IBM Plex Sans';
-  try{saved=localStorage.getItem(KEY)||saved}catch(e){}
-  applyFont(saved);
-  document.addEventListener('change',function(event){
-   if(event.target && event.target.id==='siteFontFamily') applyFont(event.target.value);
-  });
-  document.addEventListener('click',function(event){
-   const target=event.target && event.target.closest ? event.target.closest('#resetSiteFont') : null;
-   if(target){event.preventDefault();applyFont('IBM Plex Sans')}
-  });
-  // Reapply after theme scripts update styles; direct inline !important wins over theme CSS.
-  const observer=new MutationObserver(function(){applyFontFromSaved()});
-  observer.observe(document.body,{attributes:true,attributeFilter:['data-theme']});
-  // Wait for the selected web font to load, then re-apply in case late-rendered nodes were added.
-  if(document.fonts && document.fonts.ready){document.fonts.ready.then(function(){applyFontFromSaved()}).catch(function(){})}
-  function applyFontFromSaved(){let n='Be Vietnam Pro';try{n=localStorage.getItem(KEY)||n}catch(e){};applyFont(n)}
+  applyFont(readSaved());
+  document.addEventListener('change',e=>{if(e.target&&e.target.id==='siteFontFamily')applyFont(e.target.value)});
+  document.addEventListener('click',e=>{const t=e.target&&e.target.closest?e.target.closest('#resetSiteFont'):null;if(t){e.preventDefault();applyFont('IBM Plex Sans')}});
  }
- if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init,{once:true}); else init();
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();</script>
 
 
