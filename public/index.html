@@ -1995,124 +1995,102 @@ header.app-header .brand-copy h1 span{font:inherit!important;letter-spacing:inhe
  display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important;animation:none!important
 }
 </style>
-<style id="vampire-pastel-halloween-v1">
-/* Vampire: pastel lavender + soft crimson, gentle Halloween atmosphere */
+<style id="vampire-pastel-halloween-v2">
+/* Applied only while Vampire is selected */
 body[data-theme="vampire"]{
- --ink:#49334f!important;--muted:#8d7395!important;--line:#e4c8e8!important;
- --purple:#b65a86!important;--paper:#fff8fc!important;--green:#5e927c!important;
- --amber:#a87952!important;--red:#b84e6a!important;
- color:#49334f!important;
- background:
-  radial-gradient(ellipse at 7% 8%,#f6dce9 0,transparent 34%),
-  radial-gradient(ellipse at 90% 12%,#e8dafa 0,transparent 36%),
-  radial-gradient(ellipse at 70% 95%,#f4dce7 0,transparent 38%),
-  linear-gradient(135deg,#fbf4ff 0%,#f3eafa 48%,#fff0f3 100%)!important;
- font-family:'Nunito','Baloo 2',system-ui,sans-serif!important;
+ --bg:#f8effb!important;--panel:#fff8fc!important;--card:#fff9fd!important;
+ --surface:#fff8fc!important;--ink:#51364f!important;--muted:#92768f!important;
+ --purple:#a76db0!important;--frame:#e5c7e8!important;--line:#e5c7e8!important;
+ --green:#668b78!important;--amber:#b47b79!important;--red:#bd526d!important;
+ color:#51364f!important;
+ background:radial-gradient(ellipse at 12% 4%,#f0d8f6 0,transparent 30%),
+ radial-gradient(ellipse at 92% 14%,#f7dbe5 0,transparent 34%),
+ linear-gradient(145deg,#f9f0ff,#f3e9f8 52%,#fff0f3)!important;
 }
-body[data-theme="vampire"] header,
-body[data-theme="vampire"] header.app-header{
- background:rgba(250,241,255,.88)!important;border-color:#dfc2e6!important;color:#49334f!important;
- box-shadow:0 5px 20px #8c5c9710!important;backdrop-filter:blur(10px)
+body[data-theme="vampire"] .app-header,
+body[data-theme="vampire"] header{
+ background:#f7e9fb!important;color:#51364f!important;border-color:#dfbfe5!important;
 }
+body[data-theme="vampire"] .sidebar,
+body[data-theme="vampire"] .main,
 body[data-theme="vampire"] .shell,
-body[data-theme="vampire"] .main{background:transparent!important;color:#49334f!important}
+body[data-theme="vampire"] #app{
+ background:transparent!important;color:#51364f!important;
+}
 body[data-theme="vampire"] .sidebar{
- background:rgba(255,249,255,.88)!important;border:1.5px solid #e4c9ec!important;
- box-shadow:0 8px 24px #80558b10!important
+ background:rgba(255,248,255,.94)!important;border:1px solid #e3c5e8!important;
 }
 body[data-theme="vampire"] .hero,
 body[data-theme="vampire"] .panel,
-body[data-theme="vampire"] .chart-card,
+body[data-theme="vampire"] .card,
 body[data-theme="vampire"] .stat,
-body[data-theme="vampire"] .mini{
- background:rgba(255,250,255,.9)!important;color:#49334f!important;
- border:1.5px solid #e6cce9!important;box-shadow:0 7px 22px #9b628c10!important;
+body[data-theme="vampire"] .mini,
+body[data-theme="vampire"] .tablewrap,
+body[data-theme="vampire"] .page,
+body[data-theme="vampire"] .nav-folder,
+body[data-theme="vampire"] .navfolder-title{
+ background:#fff8fc!important;color:#593b59!important;border-color:#e5c8e8!important;
+ box-shadow:0 5px 18px #8d538b12!important;
 }
 body[data-theme="vampire"] .hero{
- background:linear-gradient(115deg,#f8eaff 0%,#fbeaf2 72%,#fff5f8 100%)!important;
- border-color:#dfbce4!important
+ background:linear-gradient(120deg,#f0dffa,#f8e4ee 75%,#fff0f3)!important;
+ border-color:#dcb9e5!important;
 }
-body[data-theme="vampire"] .hero h2,
-body[data-theme="vampire"] .sectionhead h2,
-body[data-theme="vampire"] .panel h2,
-body[data-theme="vampire"] .chart-heading h2,
-body[data-theme="vampire"] .currentPageLabel,
-body[data-theme="vampire"] #currentPageLabel{
- color:#59385f!important;font-family:'Baloo 2','Nunito',sans-serif!important;letter-spacing:0!important
-}
-body[data-theme="vampire"] .hero p,
-body[data-theme="vampire"] .sectionhead p,
-body[data-theme="vampire"] .panel p,
+body[data-theme="vampire"] h1,
+body[data-theme="vampire"] h2,
+body[data-theme="vampire"] h3,
+body[data-theme="vampire"] .brand,
+body[data-theme="vampire"] .sectionhead,
+body[data-theme="vampire"] .currentPageLabel{color:#70416f!important}
+body[data-theme="vampire"] p,
+body[data-theme="vampire"] small,
+body[data-theme="vampire"] label,
 body[data-theme="vampire"] .muted,
 body[data-theme="vampire"] .hint,
-body[data-theme="vampire"] .eyebrow,
-body[data-theme="vampire"] .subbrand{color:#92799a!important}
+body[data-theme="vampire"] .eyebrow{color:#987c99!important}
 body[data-theme="vampire"] .navbtn{
- color:#6e5277!important;border-color:transparent!important;background:transparent!important;
- font-family:'Nunito','Baloo 2',sans-serif!important
+ color:#76547b!important;background:transparent!important;border-color:#ead9ed!important;
 }
 body[data-theme="vampire"] .navbtn:hover,
 body[data-theme="vampire"] .navbtn.active{
- background:#f0dff6!important;border:1px solid #d6b4e2!important;color:#633e70!important;
- box-shadow:none!important
+ color:#743d70!important;background:#f0def6!important;border-color:#d9b5e4!important;
 }
-body[data-theme="vampire"] .nav-folder,
-body[data-theme="vampire"] .nav-folder[open]{
- background:#fbf4ff!important;border-color:#e3c9eb!important
-}
-body[data-theme="vampire"] .navfolder-title,
-body[data-theme="vampire"] .nav-folder>summary.navfolder-title,
-body[data-theme="vampire"] .sidefoot,
-body[data-theme="vampire"] .sidebar-help,
-body[data-theme="vampire"] .sidebar-account-shortcut,
-body[data-theme="vampire"] .rule,
-body[data-theme="vampire"] .pill,
-body[data-theme="vampire"] .font-tools,
-body[data-theme="vampire"] .theme-picker select,
-body[data-theme="vampire"] .local-pill,
-body[data-theme="vampire"] .toolbar-select,
-body[data-theme="vampire"] .toolbar-font{
- background:#f7eafa!important;color:#684a73!important;border-color:#e0c2e8!important
-}
+body[data-theme="vampire"] button,
 body[data-theme="vampire"] .btn{
- background:#b64f79!important;color:#fff9fc!important;border:1px solid #c96a91!important;
- box-shadow:0 4px 10px #a64c791a!important;border-radius:13px!important
+ border-color:#d8b1dc!important;
 }
-body[data-theme="vampire"] .btn:hover{background:#a9436c!important}
-body[data-theme="vampire"] .btn.alt{
- background:#f0e2f7!important;color:#67466f!important;border-color:#d9b9e4!important
+body[data-theme="vampire"] .btn:not(.alt):not(.soft),
+body[data-theme="vampire"] button.primary{
+ color:#fff8fc!important;background:#b95378!important;border-color:#c86c8d!important;
 }
-body[data-theme="vampire"] .btn.soft{
- background:#e6f3ec!important;color:#47745e!important;border-color:#c2e0d0!important
+body[data-theme="vampire"] .btn.alt,
+body[data-theme="vampire"] .btn.soft,
+body[data-theme="vampire"] .pill,
+body[data-theme="vampire"] .toolbar-select,
+body[data-theme="vampire"] .toolbar-font,
+body[data-theme="vampire"] .font-tools{
+ color:#704b75!important;background:#f2e3f7!important;border-color:#e0c5e7!important;
 }
 body[data-theme="vampire"] input,
 body[data-theme="vampire"] select,
 body[data-theme="vampire"] textarea,
-body[data-theme="vampire"] td select,
 body[data-theme="vampire"] .search{
- background:#fffaff!important;color:#49334f!important;border-color:#dfc6e7!important
+ color:#51364f!important;background:#fffaff!important;border-color:#dfc5e6!important;
 }
-body[data-theme="vampire"] th{background:#f2e4f8!important;color:#6c4b78!important}
-body[data-theme="vampire"] td{border-color:#efe0f0!important}
-body[data-theme="vampire"] .tablewrap{background:#fffaff!important;border-color:#e5cfe9!important}
-body[data-theme="vampire"] .stat b{color:#9c4d78!important}
-body[data-theme="vampire"] .stat.good b{color:#56866e!important}
-body[data-theme="vampire"] .stat.review b{color:#a87952!important}
-body[data-theme="vampire"] .stat.none b{color:#b84e6a!important}
-body[data-theme="vampire"] .progressbox,
-body[data-theme="vampire"] .bar{background:#f0e2f5!important;border-color:#e0c7e7!important}
-body[data-theme="vampire"] .bar>div{background:linear-gradient(90deg,#b75a88,#8d75bd)!important}
-body[data-theme="vampire"] .brand-logo-img{filter:none!important}
-body[data-theme="vampire"] #themeScene .theme-drift{opacity:.13!important;filter:saturate(.7)!important}
-body[data-theme="vampire"] .theme-drift{filter:saturate(.65)!important}
+body[data-theme="vampire"] th{background:#f0e1f6!important;color:#704a78!important}
+body[data-theme="vampire"] td{border-color:#efdfef!important}
+body[data-theme="vampire"] a{color:#a24d79!important}
+body[data-theme="vampire"] .bar{background:#ead9ef!important}
+body[data-theme="vampire"] .bar>div{background:linear-gradient(90deg,#b95580,#9577ba)!important}
+body[data-theme="vampire"] #themeScene .theme-drift{opacity:.15!important;filter:saturate(.62)!important}
+body[data-theme="vampire"] #themeScene{opacity:.8!important}
 body[data-theme="vampire"]::before{
- content:"☾   ✦      🦇       ✦      ☽"!important;color:#9a72b0!important;opacity:.10!important;
+ content:"☾   ✦      🦇      ✧      ☽"!important; color:#986ab0!important;opacity:.11!important
 }
 body[data-theme="vampire"]::after{
- background:radial-gradient(ellipse at 12% 100%,#d98eae30,transparent 58%),
- radial-gradient(ellipse at 92% 0%,#b8a0df35,transparent 55%)!important;opacity:.7!important
+ background:radial-gradient(ellipse at 12% 100%,#d98eae25,transparent 58%),
+ radial-gradient(ellipse at 92% 0%,#b8a0df2c,transparent 55%)!important;opacity:.8!important
 }
-@media(prefers-reduced-motion:reduce){body[data-theme="vampire"] #themeScene .theme-drift{animation:none!important}}
 </style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
