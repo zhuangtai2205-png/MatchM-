@@ -41,6 +41,31 @@ function inject(){
  panel.innerHTML='<div class="mm-chat-head"><span class="mm-chat-icon">💬</span><div class="mm-chat-headcopy"><strong>Góc trò chuyện</strong><small id="mmChatSubtitle">Kết nối cùng cộng đồng</small></div><button type="button" class="mm-icon-btn" id="mmChatClose" aria-label="Đóng">✕</button></div>'+
  '<div class="mm-chat-tabs"><button type="button" data-mm-tab="chats" aria-selected="true">Tin nhắn</button><button type="button" data-mm-tab="people" aria-selected="false">Tìm người</button></div>'+
  '<div class="mm-chat-body" id="mmChatBody"><div class="mm-chat-status" id="mmChatStatus">Đang kết nối…</div><div id="mmChatContent"></div></div><div class="mm-chat-footer" id="mmChatFooter"><div class="mm-chat-status">Đăng nhập để trò chuyện.</div></div>';document.body.appendChild(panel);
+ /* Drag the floating chat button and the chat window by its header. */
+ function makeDraggable(target,handle,kind){
+  if(!target||!handle)return;
+  var sx=0,sy=0,ox=0,oy=0,moved=false,dragging=false;
+  handle.style.touchAction='none';
+  handle.addEventListener('pointerdown',function(ev){
+   if(ev.button!==undefined&&ev.button!==0)return;
+   if(ev.target&&ev.target.closest&&ev.target.closest('button,input,textarea,select,a'))return;
+   var rect=target.getBoundingClientRect();sx=ev.clientX;sy=ev.clientY;ox=rect.left;oy=rect.top;moved=false;dragging=true;
+   try{handle.setPointerCapture(ev.pointerId)}catch(e){}
+  });
+  handle.addEventListener('pointermove',function(ev){
+   if(!dragging)return;
+   var dx=ev.clientX-sx,dy=ev.clientY-sy;
+   if(Math.abs(dx)+Math.abs(dy)>5)moved=true;
+   if(!moved)return;
+   var rect=target.getBoundingClientRect(),left=Math.max(6,Math.min(window.innerWidth-rect.width-6,ox+dx)),top=Math.max(6,Math.min(window.innerHeight-rect.height-6,oy+dy));
+   target.style.left=left+'px';target.style.top=top+'px';target.style.right='auto';target.style.bottom='auto';
+   if(kind==='fab'){target.dataset.mmDragged='1';}
+  });
+  function finish(){if(!dragging)return;dragging=false;if(moved){target.dataset.mmDragSuppress='1';setTimeout(function(){delete target.dataset.mmDragSuppress},180)}}
+  handle.addEventListener('pointerup',finish);handle.addEventListener('pointercancel',finish);
+ }
+ makeDraggable(fab,fab,'fab');
+ makeDraggable(panel,panel.querySelector('.mm-chat-head'),'panel');
  fab.addEventListener('click',function(){panel.classList.toggle('mm-open');if(panel.classList.contains('mm-open')){renderChatTab();if(activeChat)loadConversation(activeChat.id)}});
  $('mmChatClose').addEventListener('click',function(){panel.classList.remove('mm-open')});
  panel.querySelectorAll('[data-mm-tab]').forEach(function(b){b.addEventListener('click',function(){activeTab=b.dataset.mmTab;panel.querySelectorAll('[data-mm-tab]').forEach(function(x){x.setAttribute('aria-selected',String(x===b))});renderChatTab()})});
