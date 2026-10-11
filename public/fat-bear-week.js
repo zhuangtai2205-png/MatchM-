@@ -18,14 +18,14 @@ const layer=document.createElement('div');layer.id='matchma-fbw-sea-layer';layer
 const $=q=>root.querySelector(q),bear=$('.fbw-bear'),message=$('.fbw-message'),count=$('.fbw-count'),votes=$('.fbw-votes'),progress=$('.fbw-progress span'),snow=$('.fbw-snow');
 let active=false,eaten=0,items=[],raf=0,last=0,hibernating=false;
 const art=[
-{n:'cá hề',c:'#ff9a62',d:'#fff7e8',accent:'#fff2d8',pattern:'<path d="M25 12Q31 21 25 31M39 11Q45 21 39 32" fill="none" stroke="#fff5df" stroke-width="5" stroke-linecap="round"/>'},
-{n:'cá xanh',c:'#68c6d9',d:'#e9fbff',accent:'#c8f2f5',pattern:'<path d="M24 14Q32 21 24 29M38 12Q46 21 38 31" fill="none" stroke="#e7fbff" stroke-width="4" stroke-linecap="round"/>'},
-{n:'cá vàng',c:'#ffd166',d:'#fff4bc',accent:'#fff0a8',pattern:'<path d="M24 13Q31 21 24 30M38 12Q45 21 38 31" fill="none" stroke="#fff3bf" stroke-width="4" stroke-linecap="round"/>'},
-{n:'cá tím',c:'#bd9be8',d:'#f7edff',accent:'#e8d5ff',pattern:'<circle cx="31" cy="21" r="5" fill="#f6eaff"/><circle cx="31" cy="21" r="2" fill="#d6b4fa"/>'},
-{n:'cá nóc',c:'#9dd7a6',d:'#efffe7',accent:'#e0f6c9',pattern:'<circle cx="26" cy="17" r="2" fill="#eaffdd"/><circle cx="36" cy="25" r="2" fill="#eaffdd"/><circle cx="26" cy="27" r="1.5" fill="#eaffdd"/>'},
-{n:'cá san hô',c:'#f28fa8',d:'#fff0f3',accent:'#ffd6e0',pattern:'<path d="M25 14q-5 6 0 12t0 6M38 14q5 6 0 12t0 6" fill="none" stroke="#fff0f3" stroke-width="3" stroke-linecap="round"/>'},
-{n:'cá thiên thần',c:'#8eaef5',d:'#eef3ff',accent:'#d9e3ff',pattern:'<path d="M25 13l5 8-5 9M39 13l-5 8 5 9" fill="none" stroke="#f3f5ff" stroke-width="3" stroke-linecap="round"/>'}
-];
+{n:'cá đuôi dài',svg:'<span class="fbw-sea-glyph">𓆝</span>'},
+{n:'cá nhỏ',svg:'<span class="fbw-sea-glyph">𓆟</span>'},
+{n:'cá nhiệt đới',svg:'<span class="fbw-sea-glyph">𓆞</span>'},
+{n:'cá rạn san hô',svg:'<span class="fbw-sea-glyph">𓆝</span>'},
+{n:'cá nóc',svg:'<span class="fbw-sea-glyph">𓆡</span>'},
+{n:'rùa biển',svg:'<span class="fbw-sea-glyph">𓆉</span>'},
+{n:'vỏ sò biển',svg:'<span class="fbw-sea-glyph">𓇼</span>'}
+
 const seaArt=[
 {name:'cá đuôi dài',svg:'<span class="fbw-sea-glyph">𓆝</span>'},
 {name:'cá nhỏ',svg:'<span class="fbw-sea-glyph">𓆟</span>'},
@@ -35,10 +35,8 @@ const seaArt=[
 {name:'sao biển',svg:'<span class="fbw-sea-glyph">✧</span>'},
 {name:'vỏ sò',svg:'<span class="fbw-sea-glyph">𓇼</span>'}
 ];
-function fishSvg(a){
- const id='fish'+Math.random().toString(36).slice(2,8);
- return '<svg viewBox="0 0 76 54" aria-hidden="true"><g stroke="#76564f" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 27Q10 16 4 15L7 27 4 38Q13 36 20 29Z" fill="'+a.accent+'"/><path d="M17 27Q20 15 34 14Q49 12 59 24Q63 27 59 30Q48 41 33 40Q20 39 17 27Z" fill="'+a.c+'"/><path d="M25 17Q32 14 39 17" fill="none" stroke="#fff8e8" stroke-width="2.4"/>'+a.pattern+'<path d="M34 15Q30 21 34 27" fill="none" stroke="#fff8e8" stroke-width="2"/><circle cx="51" cy="22" r="3.2" fill="#fffdf7"/><circle cx="52" cy="22" r="1.7" fill="#493e43" stroke="none"/><path d="M49 31q3 2 5-1" fill="none" stroke="#76564f" stroke-width="1.4"/><circle cx="44" cy="29" r="2.2" fill="#f6a2a7" stroke="none"/><path d="M36 37l4 3-5 2Z" fill="'+a.accent+'"/></g></svg>';
-}
+function fishSvg(a){return a.svg;}
+
 function spawnFish(x,y){
  if(!active||hibernating)return;const a=art[Math.floor(Math.random()*art.length)],el=document.createElement('button');el.type='button';el.className='fbw-fish';el.setAttribute('aria-label','Cho gấu ăn '+a.n);el.innerHTML=fishSvg(a);el.style.left=(x??(30+Math.random()*Math.max(200,innerWidth-100)))+'px';el.style.top=(y??(100+Math.random()*Math.max(100,innerHeight-300)))+'px';layer.appendChild(el);
  const o={el,x:parseFloat(el.style.left),y:parseFloat(el.style.top),vx:(Math.random()>.5?1:-1)*(36+Math.random()*34),vy:(Math.random()-.5)*12,phase:Math.random()*6,busy:false};items.push(o);el.addEventListener('click',()=>feed(o));}
