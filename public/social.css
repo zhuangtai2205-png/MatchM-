@@ -166,3 +166,14 @@ body[data-theme="retro"]{--mm-social-glass:rgba(244,243,236,.88);--mm-social-tin
 #mmChatPanel .mm-chat-head{border-radius:3px 3px 0 0;border-bottom:1px dashed rgba(104,145,120,.45)!important}
 #mmChatPanel .mm-chat-body{overflow:auto}
 @media(max-width:760px){#mmChatPanel::before{top:-37px;left:10px;font-size:14px}}
+
+/* Ultra-transparent chat: let the active page/theme show through clearly. */
+#mmChatPanel{background:rgba(248,252,250,.10)!important;background-color:rgba(248,252,250,.10)!important;-webkit-backdrop-filter:blur(8px) saturate(1.03)!important;backdrop-filter:blur(8px) saturate(1.03)!important;border-color:rgba(255,255,255,.20)!important;box-shadow:0 8px 24px rgba(40,60,55,.08)!important}
+#mmChatPanel .mm-chat-head,#mmChatPanel .mm-chat-tabs,#mmChatPanel .mm-chat-footer{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.15)!important}
+#mmChatPanel .mm-chat-body{background:rgba(255,255,255,.025)!important}
+#mmChatPanel .mm-chat-row,#mmChatPanel .mm-chat-input,#mmChatPanel .mm-chat-select,#mmChatPanel .mm-icon-btn,#mmChatPanel .mm-chat-tabs button[aria-selected=true]{background:rgba(255,255,255,.09)!important;border-color:rgba(255,255,255,.16)!important;box-shadow:none!important}
+#mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.12)!important;border-color:rgba(255,255,255,.16)!important;box-shadow:none!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(199,231,224,.18)!important}
+#mmChatPanel .mm-chat-icon{background:rgba(255,255,255,.10)!important;border-color:rgba(255,255,255,.16)!important}
+#mmChatPanel .mm-chat-headcopy small,#mmChatPanel .mm-chat-status,#mmChatPanel .mm-chat-row-copy small{color:var(--ink,#294b5a)!important;text-shadow:0 1px 2px rgba(255,255,255,.25)}
+@media(prefers-reduced-transparency:reduce){#mmChatPanel{background:rgba(248,252,250,.92)!important}}
