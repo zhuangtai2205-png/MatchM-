@@ -3461,8 +3461,10 @@ function variantConflict(a,b){
 }
 function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))||variantConflict(a,b)}
 function sharedEvidence(a,b){
- const B=new Set(b),ignored=new Set(['vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g','san','pham','hang','loai','cua','va','voi','banh','thung','loc','hop','goi','chai','lon','tui','pack','masita','os','chi','kchi']);
- return a.filter(t=>B.has(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!/^\d/.test(t)&&!ignored.has(t)).length
+ // Count only meaningful name signals. Packaging words, short abbreviations, and SKU/year/size fragments
+ // must never make unrelated products look like a match.
+ const B=new Set(b),ignored=new Set(['san','pham','hang','loai','cua','va','voi','banh','thung','loc','hop','goi','chai','lon','tui','pack','masita','os','chi','kchi','tns','y24','y25','y26','tt','pm','os','kchi','vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g']);
+ return a.filter(t=>B.has(t)&&t.length>=4&&!/[0-9]/.test(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!ignored.has(t)).length
 }
 function similarity(aTokens,bTokens){if(!aTokens.length||!bTokens.length)return 0;let common=0;const small=aTokens.length<=bTokens.length?aTokens:bTokens,large=new Set(aTokens.length<=bTokens.length?bTokens:aTokens);for(const token of small)if(large.has(token))common++;return 2*common/(aTokens.length+bTokens.length)}
 function plainText(s){return String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim()}
@@ -3548,7 +3550,7 @@ async function runMatch(){
     // SKU trùng là bằng chứng mạnh; vẫn đối chiếu tên/quy cách để phát hiện dữ liệu mâu thuẫn.
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens);
     // Không ghép chỉ vì trùng từ loại chung như “bánh”, “thùng”, “lốc”; cần dấu hiệu tên đặc trưng hoặc SKU chính xác.
-    if(!exactSku&&(nameScore<.45||evidence<2))continue;
+    if(!exactSku&&(nameScore<.60||evidence<2))continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
     const attributeConflict=conflictTokens(queryTokens,m.tokens);
     const uConflict=unitConflict(queryUnit,m.unit);
