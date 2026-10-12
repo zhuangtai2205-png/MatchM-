@@ -3563,9 +3563,9 @@ async function runMatch(){
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
     const rank=familyConflict?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
-    if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
+    if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
-   const eligibleMatch=!!(best&&best.score>=.45&&!best.familyConflict);
+   const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
    const item={i:offset+b+1,query:queryName,querySpec,querySku,queryUnit,
     sku:eligibleMatch?best.m.code:'',match:eligibleMatch?best.m.name:'',spec:eligibleMatch?best.m.spec:'',unit:eligibleMatch?best.m.unit:'',
     score:best?best.score:0,confidence:eligibleMatch?Math.round(best.score*100):0,evidence:best?best.evidence:0,
