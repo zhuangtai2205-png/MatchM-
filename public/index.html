@@ -3364,6 +3364,13 @@ $('master').addEventListener('change',e=>loadFile('master',e.target.files[0]));$
 function norm(s){
  let t=String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');
  t=t.replace(/\bvinamilk?\b/g,' vnm ').replace(/\b(coca\s*cola|cocacola)\b/g,' cocacola ').replace(/\b(nuti\s*food|nutifood)\b/g,' nutifood ');
+ // Mã viết tắt thường gặp trên file hàng hóa.
+ t=t.replace(/\bsb\b/g,' sua_bot ')
+  .replace(/\bsttt\b/g,' sua_tuoi ')
+  .replace(/\bsudd\b/g,' sua_uong_dinh_duong ')
+  .replace(/\b(?:sp|ht|km)\b/g,' ')
+  .replace(/\bso\s*(\d+)\b/g,' $1 ')
+  .replace(/\b(\d+)\s*so\b/g,' $1 ');
  // Chuẩn hóa cụm sản phẩm để phân biệt nhóm hàng
  const phrases=[
   [/\bsua\s+tuoi\b/g,'sua_tuoi'],[/\bsua\s+dac\b/g,'sua_dac'],[/\bsua\s+chua\b/g,'sua_chua'],[/\bsua\s+bot\b/g,'sua_bot'],[/\bsua\s+hat\b/g,'sua_hat'],[/\bsua\s+tam\b/g,'sua_tam'],
