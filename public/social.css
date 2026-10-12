@@ -275,3 +275,11 @@
 #mmChatPanel [data-action="gift"],
 #mmChatPanel [aria-label*="Quà tặng"],
 #mmChatPanel [title*="Quà tặng"]{display:none!important;visibility:hidden!important}
+
+
+/* Definitive chat panel legibility and gift-control removal */
+#mmChatPanel{background:rgba(255,250,246,.985)!important;color:#30251f!important;backdrop-filter:blur(10px) saturate(110%)!important;-webkit-backdrop-filter:blur(10px) saturate(110%)!important;box-shadow:0 16px 42px rgba(40,30,24,.24)!important}
+#mmChatPanel .mm-chat-head,#mmChatPanel .mm-chat-tabs,#mmChatPanel .mm-chat-footer{background:rgba(250,239,231,.99)!important;color:#38281f!important}
+#mmChatPanel .mm-chat-body{background:rgba(255,253,250,.99)!important;color:#30251f!important}
+#mmChatPanel .mm-chat-status,#mmChatPanel .mm-chat-headcopy,#mmChatPanel .mm-chat-headcopy *{color:#38281f!important}
+#mmChatPanel .mm-chat-footer button[aria-label*="quà" i],#mmChatPanel .mm-chat-footer button[title*="quà" i],#mmChatPanel .mm-chat-footer [data-action*="gift" i],#mmChatPanel .mm-gift-wrap,#mmChatPanel #mmGiftToggle{display:none!important}
