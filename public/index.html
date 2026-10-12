@@ -2348,7 +2348,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
     <select id="sortResults" aria-label="Sắp xếp"><option value="default">Sắp xếp mặc định</option><option value="scoreDesc">Điểm cao → thấp</option><option value="scoreAsc">Điểm thấp → cao</option><option value="nameAsc">Tên A → Z</option><option value="nameDesc">Tên Z → A</option></select>
     <button type="button" class="btn alt" id="resetFilters">Xóa bộ lọc</button><span class="muted" id="resultCount"></span>
   </div>
-</div><div id="results" class="empty" data-i18n="resultsWait">Chưa có kết quả. Hãy tải file và chạy rà soát trước.</div><div class="pager"><button class="btn alt" id="prevPage" disabled data-i18n="prev">← Trước</button><span id="pageInfo">Trang 0/0</span><button class="btn alt" id="nextPage" disabled data-i18n="next">Tiếp →</button></div></section>
+</div><div class="resulttools" id="bulkReviewTools" style="align-items:center;gap:10px;margin:10px 0"><label style="display:flex;align-items:center;gap:7px;white-space:nowrap"><input type="checkbox" id="selectAllVisible"> Chọn tất cả dòng đang hiển thị</label><span id="selectedRowsCount" class="muted">Đã chọn 0 dòng</span><select id="bulkStatus" aria-label="Trạng thái áp dụng cho dòng đã chọn"><option value="review">Cần rà soát</option><option value="good">OK</option><option value="none">Không khớp</option><option value="rejected">Không khớp thủ công</option></select><button type="button" class="btn alt" id="applyBulkStatus">Áp dụng cho dòng đã chọn</button></div><div id="results" class="empty" data-i18n="resultsWait">Chưa có kết quả. Hãy tải file và chạy rà soát trước.</div><div class="pager"><button class="btn alt" id="prevPage" disabled data-i18n="prev">← Trước</button><span id="pageInfo">Trang 0/0</span><button class="btn alt" id="nextPage" disabled data-i18n="next">Tiếp →</button></div></section>
 <section class="page" id="page-memory">
   <div class="sectionhead"><div><h2>🧠 Bộ nhớ cặp hàng đã xác nhận</h2><p>Lưu cục bộ trên trình duyệt này để lần rà soát sau có thể ưu tiên gợi ý những cặp bạn đã xác nhận. Bộ nhớ không thay thế bước kiểm tra mã, đơn vị và quy cách.</p></div></div>
   <div class="stats"><div class="stat"><small>Số cặp đã ghi nhớ</small><b id="memoryCount">0</b></div><div class="stat"><small>Phạm vi lưu</small><b style="font-size:17px">Trình duyệt này</b></div></div>
@@ -3435,8 +3435,8 @@ function productFamily(tokens){
 function incompatibleFamily(a,b){const fa=productFamily(a),fb=productFamily(b);return !!(fa&&fb&&fa!==fb)}
 function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))}
 function sharedEvidence(a,b){
- const B=new Set(b),ignored=new Set(['vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g','san','pham','hang','loai','cua','va','voi']);
- return a.filter(t=>B.has(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!ignored.has(t)).length
+ const B=new Set(b),ignored=new Set(['vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g','san','pham','hang','loai','cua','va','voi','banh','thung','loc','hop','goi','chai','lon','tui','pack','masita','os','chi','kchi']);
+ return a.filter(t=>B.has(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!/^\d/.test(t)&&!ignored.has(t)).length
 }
 function similarity(aTokens,bTokens){if(!aTokens.length||!bTokens.length)return 0;let common=0;const small=aTokens.length<=bTokens.length?aTokens:bTokens,large=new Set(aTokens.length<=bTokens.length?bTokens:aTokens);for(const token of small)if(large.has(token))common++;return 2*common/(aTokens.length+bTokens.length)}
 function plainText(s){return String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').trim()}
@@ -3520,10 +3520,11 @@ async function runMatch(){
     const nameScore=similarity(queryNameTokens,m.nameTokens);
     const exactSku=!!querySku&&normalizeSku(querySku)===normalizeSku(m.code);
     // SKU trùng là bằng chứng mạnh; vẫn đối chiếu tên/quy cách để phát hiện dữ liệu mâu thuẫn.
-    if(nameScore<.45&&!exactSku)continue;
+    const evidence=sharedEvidence(queryNameTokens,m.nameTokens);
+    // Không ghép chỉ vì trùng từ loại chung như “bánh”, “thùng”, “lốc”; cần dấu hiệu tên đặc trưng hoặc SKU chính xác.
+    if(!exactSku&&(nameScore<.45||evidence<2))continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
     const attributeConflict=conflictTokens(queryTokens,m.tokens);
-    const evidence=sharedEvidence(queryNameTokens,m.nameTokens);
     const uConflict=unitConflict(queryUnit,m.unit);
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
@@ -3621,7 +3622,7 @@ function renderResults(){
  if(!pageRows.length){$('results').className='empty';$('results').textContent='Không có dòng nào phù hợp bộ lọc hiện tại.'}
  else{
   $('results').className='tablewrap';
-  $('results').innerHTML='<table><thead><tr><th>'+tr('index')+'</th><th>'+tr('queryName')+'</th><th>'+tr('suggestion')+'</th><th>'+tr('inputSku')+'</th><th>'+tr('masterSku')+'</th><th>'+tr('inputUom')+'</th><th>'+tr('masterUom')+'</th><th>'+tr('confidence')+'</th><th>'+tr('status')+'</th><th>'+tr('validation')+'</th><th>'+tr('notes')+'</th><th>Ghi nhớ / tra cứu</th></tr></thead><tbody>'+
+  $('results').innerHTML='<table><thead><tr><th><input type="checkbox" id="selectAllPageRows" aria-label="Chọn tất cả dòng trang này"></th><th>'+tr('index')+'</th><th>'+tr('queryName')+'</th><th>'+tr('suggestion')+'</th><th>'+tr('inputSku')+'</th><th>'+tr('masterSku')+'</th><th>'+tr('inputUom')+'</th><th>'+tr('masterUom')+'</th><th>'+tr('confidence')+'</th><th>'+tr('status')+'</th><th>'+tr('validation')+'</th><th>'+tr('notes')+'</th><th>Ghi nhớ / tra cứu</th></tr></thead><tbody>'+
   pageRows.map(x=>{
    const validation=[x.skuMismatch?tr('skuMismatch'):'',x.unitConflict?tr('unitMismatch'):'',x.packConflict?tr('packMismatch'):''].filter(Boolean).join(' · ')||tr('noMismatch');
    const remembered=isMemoryPairRemembered(x);
@@ -3629,15 +3630,25 @@ function renderResults(){
    const memoryButton=x.match?'<button type="button" class="btn alt row-action" data-confirm-row="'+x.i+'">'+memoryLabel+'</button>':'';
    const searchButton='<button type="button" class="btn alt row-action" data-platform-row="'+x.i+'">Tìm trên sàn</button>';
    const memoryBadge=x.memorySuggestion?'<div class="muted">↳ Bộ nhớ cũ</div>':'';
-   return '<tr><td>'+x.i+'</td><td>'+esc(x.query)+(x.querySpec?'<div class="muted">'+esc(x.querySpec)+'</div>':'')+'</td><td>'+esc(x.match||'—')+(x.spec?'<div class="muted">'+esc(x.spec)+'</div>':'')+memoryBadge+'</td><td>'+esc(x.querySku||'—')+'</td><td>'+esc(x.sku||'—')+'</td><td>'+esc(x.queryUnit||'—')+'</td><td>'+esc(x.unit||'—')+'</td><td>'+x.confidence+'%</td><td><select data-row="'+x.i+'"><option value="good" '+(x.status==='good'?'selected':'')+'>OK</option><option value="review" '+(x.status==='review'?'selected':'')+'>'+tr('statusReview')+'</option><option value="none" '+(x.status==='none'?'selected':'')+'>'+tr('statusNone')+'</option><option value="rejected" '+(x.status==='rejected'?'selected':'')+'>'+tr('statusRejected')+'</option></select></td><td>'+esc(validation)+'</td><td>'+esc(x.reason)+'</td><td><div class="row-actions">'+memoryButton+searchButton+'</div></td></tr>'
+   return '<tr><td><input type="checkbox" class="result-row-check" data-select-row="'+x.i+'" aria-label="Chọn dòng '+x.i+'"></td><td>'+x.i+'</td><td>'+esc(x.query)+(x.querySpec?'<div class="muted">'+esc(x.querySpec)+'</div>':'')+'</td><td>'+esc(x.match||'—')+(x.spec?'<div class="muted">'+esc(x.spec)+'</div>':'')+memoryBadge+'</td><td>'+esc(x.querySku||'—')+'</td><td>'+esc(x.sku||'—')+'</td><td>'+esc(x.queryUnit||'—')+'</td><td>'+esc(x.unit||'—')+'</td><td>'+x.confidence+'%</td><td><select data-row="'+x.i+'"><option value="good" '+(x.status==='good'?'selected':'')+'>OK</option><option value="review" '+(x.status==='review'?'selected':'')+'>'+tr('statusReview')+'</option><option value="none" '+(x.status==='none'?'selected':'')+'>'+tr('statusNone')+'</option><option value="rejected" '+(x.status==='rejected'?'selected':'')+'>'+tr('statusRejected')+'</option></select></td><td>'+esc(validation)+'</td><td>'+esc(x.reason)+'</td><td><div class="row-actions">'+memoryButton+searchButton+'</div></td></tr>'
   }).join('')+'</tbody></table>';
+  document.querySelectorAll('.result-row-check').forEach(ch=>{ch.checked=selectedResultRows.has(Number(ch.dataset.selectRow));ch.onchange=()=>{const id=Number(ch.dataset.selectRow);if(ch.checked)selectedResultRows.add(id);else selectedResultRows.delete(id);updateBulkSelectionUI()}});
+  const pageSelect=$('selectAllPageRows');if(pageSelect){pageSelect.checked=pageRows.length>0&&pageRows.every(x=>selectedResultRows.has(x.i));pageSelect.onchange=()=>{pageRows.forEach(x=>pageSelect.checked?selectedResultRows.add(x.i):selectedResultRows.delete(x.i));renderResults()}}
   document.querySelectorAll('select[data-row]').forEach(s=>s.onchange=()=>{const item=out.find(x=>x.i===Number(s.dataset.row));if(item){item.status=s.value;item.manualStatus=true;updateStats();renderResults()}});
   document.querySelectorAll('[data-confirm-row]').forEach(b=>b.onclick=()=>saveMemoryFromItem(b.dataset.confirmRow));
   document.querySelectorAll('[data-platform-row]').forEach(b=>b.onclick=()=>{const item=out.find(x=>x.i===Number(b.dataset.platformRow));if(item)openPlatformSearch(item.query)});
  }
- $('pageInfo').textContent=tr('page')+' '+currentPage+tr('of')+totalPages;$('prevPage').disabled=currentPage<=1;$('nextPage').disabled=currentPage>=totalPages
+ $('pageInfo').textContent=tr('page')+' '+currentPage+tr('of')+totalPages;$('prevPage').disabled=currentPage<=1;$('nextPage').disabled=currentPage>=totalPages;updateBulkSelectionUI()
 }
-$('prevPage').onclick=()=>{if(currentPage>1){currentPage--;renderResults()}};$('nextPage').onclick=()=>{currentPage++;renderResults()};$('searchResult').addEventListener('input',()=>{currentPage=1;renderResults()});$('statusFilter').addEventListener('change',()=>{currentPage=1;renderResults()});
+const selectedResultRows=new Set();
+function updateBulkSelectionUI(){
+ const count=$('selectedRowsCount');if(count)count.textContent='Đã chọn '+selectedResultRows.size+' dòng';
+ const all=$('selectAllVisible');if(all){const visible=[...document.querySelectorAll('.result-row-check')];all.checked=visible.length>0&&visible.every(x=>selectedResultRows.has(Number(x.dataset.selectRow)));all.indeterminate=visible.some(x=>selectedResultRows.has(Number(x.dataset.selectRow)))&&!all.checked}
+ const page=$('selectAllPageRows');if(page){const visible=[...document.querySelectorAll('.result-row-check')];page.checked=visible.length>0&&visible.every(x=>x.checked)}
+}
+$('selectAllVisible').onchange=()=>{document.querySelectorAll('.result-row-check').forEach(x=>{const id=Number(x.dataset.selectRow);if($('selectAllVisible').checked)selectedResultRows.add(id);else selectedResultRows.delete(id);x.checked=$('selectAllVisible').checked});updateBulkSelectionUI()};
+$('applyBulkStatus').onclick=()=>{if(!selectedResultRows.size){alert('Hãy chọn ít nhất một dòng kết quả.');return}const status=$('bulkStatus').value;out.forEach(x=>{if(selectedResultRows.has(x.i)){x.status=status;x.manualStatus=true;x.reason=status==='good'?'Đã kiểm tra thủ công: OK':status==='review'?'Đã đánh dấu kiểm tra thủ công':status==='rejected'?'Đã loại thủ công':'Đã đánh dấu không khớp thủ công'}});updateStats();renderResults();updateBulkSelectionUI()};
+{if(currentPage>1){currentPage--;renderResults()}};$('nextPage').onclick=()=>{currentPage++;renderResults()};$('searchResult').addEventListener('input',()=>{currentPage=1;renderResults()});$('statusFilter').addEventListener('change',()=>{currentPage=1;renderResults()});
 $('export').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));return}const rows=out.map(r=>({'STT':r.i,'Tên cần soát':r.query,'Mã trong file':r.querySku,'Tên hàng đề xuất':r.match,'SKU chuẩn':r.sku,'ĐVT file':r.queryUnit,'ĐVT chuẩn':r.unit,'Quy cách file':r.querySpec,'Quy cách chuẩn':r.spec,'Điểm tương đồng (%)':r.confidence,'Sai mã':r.skuMismatch?'Có':'Không','Sai đơn vị':r.unitConflict?'Có':'Không','Sai quy cách':r.packConflict?'Có':'Không','Trạng thái':r.status==='good'?'OK':r.status==='review'?'Cần rà soát':r.status==='rejected'?'Không khớp thủ công':'Không khớp','Ghi chú':r.reason}));const wb=XLSX.utils.book_new(),ws=XLSX.utils.json_to_sheet(rows);XLSX.utils.book_append_sheet(wb,ws,'Ket qua');XLSX.writeFile(wb,'matchma-ket-qua.xlsx')};
 function downloadImportTemplate(kind){
  if(typeof XLSX==='undefined'){alert('Chưa tải được thư viện Excel. Hãy tải lại trang rồi thử lại.');return}
