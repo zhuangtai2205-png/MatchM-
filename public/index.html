@@ -2365,7 +2365,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
  </div>
  <div class="panel"><div class="sectionhead"><div><h2>Rà soát hàng loạt bằng file</h2><p>Tải file gốc .xlsx, .xls hoặc .csv; chọn cột tên, sau đó mở trang tìm kiếm bên ngoài và tự đánh dấu kết quả đã kiểm tra.</p></div><span class="pill">Excel / CSV</span></div>
   <label class="upload"><span class="bigicon">📄</span><strong>Chọn file sản phẩm cần rà trên sàn</strong><input id="platformFile" type="file" accept=".csv,.xlsx,.xls"></label><div class="template-row"><span>File mẫu: STT, tên sản phẩm</span><button class="btn alt sample-download" data-sample="platform">Tải file mẫu ↓</button></div>
-  <div id="platformFileInfo" class="hint">Chưa tải file rà soát sàn.</div><div id="platformAuditProgress" class="hint" role="status" aria-live="polite">Chọn file rồi bấm “Rà soát tự động 7 nguồn”. Hệ thống sẽ phân biệt kết quả tìm thấy, không tìm thấy và nguồn không phản hồi.</div>
+  <div id="platformFileInfo" class="hint">Chưa tải file rà soát sàn.</div><div id="platformAuditProgress" class="hint" role="status" aria-live="polite">Chọn file rồi bấm “Rà soát tự động 7 nguồn”. Hệ thống tra cứu qua dịch vụ phía máy chủ và phân biệt kết quả tìm thấy, không tìm thấy, nguồn không phản hồi.</div>
   <div class="grid"><div class="field"><label for="platformNameCol">Cột tên sản phẩm</label><select id="platformNameCol" disabled><option value="">— Chọn cột —</option></select></div><div class="field"><label for="platformIdCol">Cột STT/mã dòng (chỉ hiển thị, không chỉnh sửa)</label><select id="platformIdCol" disabled><option value="">— Không chọn —</option></select></div></div>
   <div class="actions"><button class="btn" id="buildPlatformAudit" disabled>Tạo danh sách rà soát</button><button class="btn" id="runPlatformAudit" disabled>🔎 Rà soát tự động 7 nguồn</button><button class="btn alt" id="exportPlatformAudit" disabled>Xuất Excel kết quả sàn ↓</button></div>
   <div class="stats"><div class="stat"><small>Tổng dòng</small><b id="platformAuditTotal">0</b></div><div class="stat good"><small>Đã có kết quả</small><b id="platformAuditFound">0</b></div><div class="stat review"><small>Cần kiểm tra</small><b id="platformAuditReview">0</b></div><div class="stat none"><small>Chưa tìm thấy</small><b id="platformAuditNone">0</b></div></div>
@@ -2478,6 +2478,8 @@ let masterRows=[],checkRows=[],out=[],masterHeaders=[],checkHeaders=[],currentPa
 let platformSourceRows=[],platformSourceHeaders=[],platformPage=1,platformPageSize=30,platformBuilt=false,autoFillRows=[],autoFillHeaders=[],autoFillResults=[],autoFillTargetOptions=[];
 let stockForecastFiles={purchase:null,sales:null,stock:null},stockForecastResults=[],stockForecastPage=1,stockForecastPageSize=50,stockForecastKeyModeTouched=false,stockForecastBuilt=false;
 let supabaseClient=null,accountUser=null,accountSubscription=null,cloudBusy=false;const SUPABASE_CONFIG_KEY='matchma-supabase-config-v1';
+const PLATFORM_AUDIT_SUPABASE_URL='https://qslpfmuwqenlvzidoqsy.supabase.co';
+const PLATFORM_AUDIT_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFzbHBmbXV3cWVubHZpZG9xc3kiLCJyb2xlIjoiYW5vbiIsImlhdCI6MTc5MTUzMzg2OCwiZXhwIjoyMTA3MTA5ODY4fQ.t7xptUYfeRM7dRMo0Mnt_EDL2YKfdp8zn8-oanJ4TgE'.replace('qslpfmuwqenlvzidoqsy','qslpfmuwqenlvzidoqsy'));
 const $=id=>document.getElementById(id);
 const MEMORY_KEY='matchma-confirmed-pairs-v1';
 let activeMemoryStorageKey=MEMORY_KEY;
@@ -3020,7 +3022,7 @@ async function runPlatformAudit(){
  // Sequential row processing avoids flooding the search provider and preserves row order.
  for(const item of pending){
   try{
-   const response=await fetch('/api/platform-audit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:item.searchName,sources:['google','shopping','shopee','lazada','tiki','tiktok','sendo']})});
+   const response=await fetch(PLATFORM_AUDIT_SUPABASE_URL+'/functions/v1/marketplace-audit',{method:'POST',headers:{'Content-Type':'application/json','apikey':PLATFORM_AUDIT_ANON_KEY,'Authorization':'Bearer '+PLATFORM_AUDIT_ANON_KEY},body:JSON.stringify({query:item.searchName,sources:['google','shopping','shopee','lazada','tiki','tiktok','sendo']})});
    if(!response.ok)throw new Error('HTTP '+response.status);
    const data=await response.json();if(!data.ok||!Array.isArray(data.results))throw new Error('Phản hồi tìm kiếm không hợp lệ');
    item.sourceResults=data.results;
