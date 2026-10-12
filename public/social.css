@@ -291,3 +291,31 @@
 #mmChatPanel .mm-chat-body{background:rgba(255,253,250,.985)!important}
 #mmChatPanel .mm-chat-tools{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;gap:8px!important}
 #mmChatPanel .mm-gift-wrap,#mmChatPanel #mmGiftToggle,#mmChatPanel [data-action*=gift i],#mmChatPanel [class*=gift i]{display:none!important;visibility:hidden!important;width:0!important;height:0!important;margin:0!important;padding:0!important}
+
+
+/* Rebuild chat panel as a readable, solid frosted card; gift UI removed completely */
+#mmChatPanel{
+ background:rgba(255,250,246,.985)!important;
+ opacity:1!important;
+ isolation:isolate!important;
+ backdrop-filter:blur(12px) saturate(115%)!important;
+ -webkit-backdrop-filter:blur(12px) saturate(115%)!important;
+ border:1px solid rgba(119,157,160,.62)!important;
+ box-shadow:0 12px 36px rgba(32,56,61,.22)!important;
+}
+#mmChatPanel::before,#mmChatPanel::after{pointer-events:none!important}
+#mmChatPanel .mm-chat-head,#mmChatPanel .mm-chat-tabs,#mmChatPanel .mm-chat-footer{
+ background:rgba(250,239,231,.99)!important;
+ opacity:1!important;
+}
+#mmChatPanel .mm-chat-body,#mmChatPanel #mmChatContent,#mmChatPanel .mm-chat-messages{
+ background:rgba(255,253,250,.99)!important;
+ opacity:1!important;
+}
+#mmChatPanel .mm-chat-bubble{background:#fff!important;color:#30251f!important;border:1px solid #d8c2b4!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:#e4f4f7!important;color:#204955!important;border-color:#8fcbd8!important}
+#mmChatPanel .mm-chat-footer .mm-gift-wrap,
+#mmChatPanel .mm-chat-footer #mmGiftToggle,
+#mmChatPanel .mm-chat-footer [data-action*="gift" i],
+#mmChatPanel .mm-chat-footer button[aria-label*="quà" i],
+#mmChatPanel .mm-chat-footer button[title*="quà" i]{display:none!important}
