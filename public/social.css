@@ -243,3 +243,35 @@
 @keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:1}88%{opacity:.95}100%{transform:translate3d(var(--drift,30px),112vh,0) rotate(var(--spin,180deg));opacity:0}}
 #mmIncomingToast{position:fixed!important;left:50%!important;top:16px!important;z-index:2147483647!important;max-width:min(92vw,460px)!important;padding:13px 18px!important;background:rgba(255,250,246,.97)!important;color:#382a23!important;border:1px solid #b7dce2!important;border-radius:15px!important;box-shadow:0 10px 34px rgba(30,75,85,.25)!important;font:700 14px/1.45 system-ui,sans-serif!important;text-align:center!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important}
 #mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
+
+
+/* User-requested final chat appearance: opaque readable panel, slight blur behind it */
+#mmChatPanel{
+ background:rgba(255,250,246,.97)!important;
+ color:#30251f!important;
+ backdrop-filter:blur(8px) saturate(115%)!important;
+ -webkit-backdrop-filter:blur(8px) saturate(115%)!important;
+ box-shadow:0 16px 42px rgba(52,34,25,.22)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ background:rgba(250,238,229,.97)!important;
+ color:#38281f!important;
+ backdrop-filter:blur(8px)!important;
+ -webkit-backdrop-filter:blur(8px)!important;
+}
+#mmChatPanel .mm-chat-body,
+#mmChatPanel #mmChatContent,
+#mmChatPanel .mm-chat-messages{
+ background:rgba(255,253,250,.96)!important;
+ color:#30251f!important;
+}
+#mmChatPanel .mm-chat-bubble{background:#fff!important;color:#2e241e!important;border:1px solid #d6b9a8!important;text-shadow:none!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:#e6f5f8!important;color:#204955!important;border-color:#91ceda!important}
+/* Ensure any stale gift control is hidden, including cached or alternate markup */
+#mmChatPanel .mm-gift-wrap,
+#mmChatPanel #mmGiftToggle,
+#mmChatPanel [data-action="gift"],
+#mmChatPanel [aria-label*="Quà tặng"],
+#mmChatPanel [title*="Quà tặng"]{display:none!important;visibility:hidden!important}
