@@ -3057,7 +3057,7 @@ function runAutoFill(){
   for(const m of candidates.values()){
    const score=similarity(tokens,m.nameTokens);if(score<.45)continue;
    const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),evidence=sharedEvidence(tokens,m.nameTokens);
-   if(familyConflict)continue;
+   if(familyConflict||variantConflict(allTokens,m.tokens)||evidence<1)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const rank=score-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
    if(rank>bestRank){bestRank=rank;best={m,score,evidence,attributeConflict,uConflict,pConflict,memorySuggestion}}
@@ -3433,7 +3433,38 @@ function productFamily(tokens){
  return '';
 }
 function incompatibleFamily(a,b){const fa=productFamily(a),fb=productFamily(b);return !!(fa&&fb&&fa!==fb)}
-function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))}
+// Explicit product variants must never be treated as equivalent merely because package sizes/numbers match.
+function variantConflict(a,b){
+ const A=new Set(a),B=new Set(b);
+ const groups=[
+  ['raisin','raisin_nho_kho','nho_kho','raisins','raisin'],
+  ['almond','almond_white','hanh_nhan'],
+  ['apple','tao'],
+  ['orange','cam'],
+  ['strawberry','dau_tay'],
+  ['chocolate','socola','socolat'],
+  ['vanilla','vani'],
+  ['coffee','cafe','ca_phe'],
+  ['original','nguyen_ban'],
+  ['spicy','cay'],
+  ['chicken','ga'],
+  ['beef','bo'],
+  ['shrimp','tom'],
+  ['seaweed','rong_bien']
+ ];
+ for(const group of groups){
+  const left=group.filter(t=>A.has(t)),right=group.filter(t=>B.has(t));
+  if(left.length&&right.length&&!left.some(t=>right.includes(t)))return true;
+ }
+ // Distinct explicit brands/product identifiers are useful evidence, not noise.
+ const brandGroups=[['masita','os','kchi'],['beryls','beryl'],['vinamilk','vnm','vinamil'],['dielac','optimum']];
+ for(const group of brandGroups){
+  const left=group.filter(t=>A.has(t)),right=group.filter(t=>B.has(t));
+  if(left.length&&right.length&&!left.some(t=>right.includes(t)))return true;
+ }
+ return false;
+}
+function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))||variantConflict(a,b)}
 function sharedEvidence(a,b){
  const B=new Set(b),ignored=new Set(['vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g','san','pham','hang','loai','cua','va','voi','banh','thung','loc','hop','goi','chai','lon','tui','pack','masita','os','chi','kchi']);
  return a.filter(t=>B.has(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!/^\d/.test(t)&&!ignored.has(t)).length
