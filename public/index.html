@@ -3532,8 +3532,12 @@ async function runMatch(){
   const tokens=[...new Set(getTokens(masterName+' '+masterSpec+' '+masterUnit))];
   return {row:r,code:String(r[sku]).trim(),name:masterName,spec:masterSpec,unit:masterUnit,nameTokens,tokens,index:i};
  });
- const index=new Map();
- for(const m of master)for(const token of m.tokens){if(!index.has(token))index.set(token,[]);index.get(token).push(m)}
+ const index=new Map(),skuIndex=new Map();
+ for(const m of master){
+  for(const token of m.tokens){if(!index.has(token))index.set(token,[]);index.get(token).push(m)}
+  const normalized=normalizeSku(m.code);
+  if(normalized){if(!skuIndex.has(normalized))skuIndex.set(normalized,[]);skuIndex.get(normalized).push(m)}
+ }
  for(let offset=0;offset<checkRows.length;offset+=20){
   const batch=checkRows.slice(offset,offset+20);
   for(let b=0;b<batch.length;b++){
@@ -3542,6 +3546,8 @@ async function runMatch(){
    const queryTokens=[...new Set(getTokens(queryName+' '+querySpec+' '+queryUnit))];
    const candidates=new Map();
    for(const token of queryTokens){const list=index.get(token)||[];for(const m of list)candidates.set(m.index,m)}
+   // SKU chính xác phải được tìm trực tiếp, không phụ thuộc tên có token chung hay không.
+   if(querySku){const exactCandidates=skuIndex.get(normalizeSku(querySku))||[];for(const m of exactCandidates)candidates.set(m.index,m)}
    let best=null,bestRank=-1;
    for(const m of candidates.values()){
     const nameScore=similarity(queryNameTokens,m.nameTokens);
