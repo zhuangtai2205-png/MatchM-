@@ -14,13 +14,14 @@ function uiState(){var yes=signed();if($('mmCommunityLogin'))$('mmCommunityLogin
 function inject(){
  if(initialized)return;initialized=true;
  var nav=document.querySelector('.navbtn[data-page="workspace"]');
+ if(nav){nav.style.display='none';nav.setAttribute('aria-hidden','true');}
  if(nav){var b=document.createElement('button');b.className='navbtn';b.dataset.page='community';b.title='Tin nhắn & không gian cộng đồng';b.innerHTML='<span class="navicon" aria-hidden="true">✉</span><span>Tin nhắn & cộng đồng</span><span id="mmNavUnread" hidden></span>';nav.insertAdjacentElement('afterend',b);b.addEventListener('click',function(){goPage('community')})}
  var main=document.querySelector('.main');
  if(main){var page=document.createElement('section');page.className='page';page.id='page-community';
  page.innerHTML='<div class="sectionhead"><div><h2>✦ Không gian cộng đồng</h2><p>Nhắn tin trực tiếp, gặp người đang online và ghé thăm không gian cá nhân.</p></div><span class="pill" id="mmCommunityStatus">Đang kết nối…</span></div>'+
  '<div id="mmCommunityLogin" class="mm-community-panel"><h3>🔐 Đăng nhập để tham gia</h3><p>Tin nhắn và không gian cá nhân được gắn với tài khoản Match Mã của bạn.</p><div class="mm-community-actions"><button class="btn" id="mmGoAccount" type="button">Mở mục tài khoản</button></div></div>'+
  '<div id="mmCommunityApp" hidden><div class="mm-community-grid"><div>'+
- '<div class="mm-community-panel"><h3>🪴 Không gian của tôi</h3><p>Đặt tên hiển thị, trang trí, chọn nền và quyết định ai được ghé thăm.</p><div id="mmOwnSpacePreview" class="mm-space-preview"><div class="mm-space-decor">🍁 🌸 ✨</div><h3>Không gian của bạn</h3></div>'+
+ '<div class="mm-community-panel"><h3>🪴 Không gian của tôi</h3><p>Quản lý hồ sơ công khai, khách ghé thăm, ghi chú và tiến trình cá nhân ngay trong khu vực này.</p><div class="mm-community-actions"><button class="btn alt" id="mmOpenPrivateWorkspace" type="button">Mở ghi chú & tiến trình cá nhân →</button></div><div id="mmOwnSpacePreview" class="mm-space-preview"><div class="mm-space-decor">🍁 🌸 ✨</div><h3>Không gian của bạn</h3></div>'+
  '<div class="mm-chat-form-grid" style="margin-top:14px"><div><label class="mm-chat-label" for="mmProfileName">Tên hiển thị</label><input class="mm-chat-input" id="mmProfileName" maxlength="60" placeholder="Tên mọi người nhìn thấy"></div>'+
  '<div><label class="mm-chat-label" for="mmProfileUsername">Tên tài khoản công khai</label><input class="mm-chat-input" id="mmProfileUsername" maxlength="24" placeholder="vd: gau_nho"></div>'+
  '<div><label class="mm-chat-label" for="mmProfileAvatar">Biểu tượng đại diện</label><select class="mm-chat-select" id="mmProfileAvatar"><option>🌿</option><option>🐻</option><option>🐱</option><option>🌸</option><option>🐟</option><option>🦋</option><option>🌙</option><option>✨</option><option>🍁</option><option>🐰</option></select></div>'+
@@ -44,7 +45,7 @@ function inject(){
  fab.addEventListener('click',function(){panel.classList.toggle('mm-open');if(panel.classList.contains('mm-open')){renderChatTab();if(activeGroup)loadGroupConversation(activeGroup.id);else if(activeChat)loadConversation(activeChat.id)}});
  $('mmChatClose').addEventListener('click',function(){panel.classList.remove('mm-open')});
  panel.querySelectorAll('[data-mm-tab]').forEach(function(b){b.addEventListener('click',function(){activeTab=b.dataset.mmTab;panel.querySelectorAll('[data-mm-tab]').forEach(function(x){x.setAttribute('aria-selected',String(x===b))});renderChatTab()})});
- $('mmGoAccount').addEventListener('click',function(){goPage('account')});$('mmSaveProfile').addEventListener('click',saveProfile);
+ $('mmGoAccount').addEventListener('click',function(){goPage('account')});$('mmOpenPrivateWorkspace').addEventListener('click',function(){goPage('workspace')});$('mmSaveProfile').addEventListener('click',saveProfile);
  $('mmCommunitySearch').addEventListener('input',function(){clearTimeout(searchTimer);searchTimer=setTimeout(searchPeople,250)});
  $('mmCloseVisitedSpace').addEventListener('click',function(){$('mmVisitedSpaceWrap').hidden=true});
  $('mmMessageSpaceOwner').addEventListener('click',function(){if(visitedProfile)openChat(visitedProfile)});
