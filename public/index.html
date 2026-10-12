@@ -1249,6 +1249,22 @@ body[data-theme="bear"] .bear-caption small{font-size:11px!important}
 @media(prefers-reduced-motion:reduce){}
 
 /* Revert the emergency bear size overrides; preserve the site's original bear artwork/behavior. */
+
+/* Fix result-table layout at browser zoom and font-size changes.
+   Keep columns readable and scroll the table horizontally instead of collapsing them. */
+#page-results .tablewrap{width:100%;max-width:100%;overflow:auto!important;overscroll-behavior-x:contain}
+#page-results .tablewrap>table{width:max-content!important;min-width:1450px!important;table-layout:auto!important}
+#page-results .tablewrap th,#page-results .tablewrap td{white-space:normal;overflow-wrap:anywhere;word-break:normal;min-width:76px}
+#page-results .tablewrap th:nth-child(1),#page-results .tablewrap td:nth-child(1){min-width:44px;width:44px}
+#page-results .tablewrap th:nth-child(2),#page-results .tablewrap td:nth-child(2),
+#page-results .tablewrap th:nth-child(3),#page-results .tablewrap td:nth-child(3){min-width:125px;width:125px}
+#page-results .tablewrap th:nth-child(4),#page-results .tablewrap td:nth-child(4),
+#page-results .tablewrap th:nth-child(5),#page-results .tablewrap td:nth-child(5){min-width:135px;width:135px}
+#page-results .tablewrap th:nth-child(9),#page-results .tablewrap td:nth-child(9){min-width:190px;width:190px}
+#page-results .tablewrap th:last-child,#page-results .tablewrap td:last-child{min-width:190px}
+#page-results .tablewrap td select{min-width:125px;max-width:100%}
+@media(max-width:700px){#page-results .tablewrap>table{min-width:1320px!important}}
+
 </style>
 
 <style id="matchma-layout-stability">
@@ -2175,7 +2191,7 @@ table td,table th{border-color:#eceaf0}
 input,select,textarea{border-color:#e3e0e9}
 input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);border-color:#aaa4c8}
 @media(max-width:760px){.resulttools input.search,.resulttools select{flex:1 1 100%;min-width:0;max-width:none}#resultCount{margin-left:0}.filterbox{padding:10px}.app-shell.shell{gap:12px!important}}
-</style><link rel="stylesheet" href="/social.css?v=44"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
+</style><link rel="stylesheet" href="/social.css?v=23"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
   <span class="brand-mark" aria-label="Logo MatchMã" role="img"><img class="brand-logo-img" src="/matchma-logo.png?v=50" alt="Logo MatchMã"></span>
