@@ -3057,7 +3057,10 @@ function runAutoFill(){
   for(const m of candidates.values()){
    const score=similarity(tokens,m.nameTokens);if(score<.45)continue;
    const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),evidence=sharedEvidence(tokens,m.nameTokens);
-   if(familyConflict||variantConflict(allTokens,m.tokens)||evidence<1)continue;
+   // Chặn cứng lỗi nguy hiểm: "cơm trắng" không bao giờ là "Revive trắng".
+   const sourceNorm=norm(name),masterNorm=norm(m.name);
+   const riceVsRevive=((/\b(com|gao|gao_nep)\b/.test(sourceNorm)&&/\brevive\b/.test(masterNorm))||(/\brevive\b/.test(sourceNorm)&&/\b(com|gao|gao_nep)\b/.test(masterNorm)));
+   if(familyConflict||riceVsRevive||variantConflict(allTokens,m.tokens)||evidence<1)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const rank=score-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
    if(rank>bestRank){bestRank=rank;best={m,score,evidence,attributeConflict,uConflict,pConflict,memorySuggestion}}
