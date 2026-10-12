@@ -362,3 +362,35 @@
 #mmChatPanel .mm-chat-footer [class*="gift" i],
 #mmChatPanel .mm-chat-footer button[aria-label*="quà" i],
 #mmChatPanel .mm-chat-footer button[title*="quà" i]{display:none!important}
+
+
+/* Translucent frosted-glass chat: page remains visible but softened behind it */
+#mmChatPanel{
+ background:rgba(235,249,250,.76)!important;
+ backdrop-filter:blur(9px) saturate(125%)!important;
+ -webkit-backdrop-filter:blur(9px) saturate(125%)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ background:rgba(229,246,247,.79)!important;
+ backdrop-filter:blur(7px)!important;
+ -webkit-backdrop-filter:blur(7px)!important;
+}
+#mmChatPanel .mm-chat-body{
+ background:rgba(241,251,251,.68)!important;
+ backdrop-filter:blur(8px)!important;
+ -webkit-backdrop-filter:blur(8px)!important;
+}
+#mmChatPanel #mmChatContent,
+#mmChatPanel .mm-chat-list,
+#mmChatPanel .mm-chat-messages,
+#mmChatPanel .mm-chat-row{background-color:transparent!important}
+#mmChatPanel .mm-chat-bubble{
+ background:rgba(255,255,255,.94)!important;color:#234752!important;
+ border:1px solid rgba(107,176,189,.72)!important;
+}
+#mmChatPanel .mm-chat-bubble.mm-mine{
+ background:rgba(215,243,247,.95)!important;color:#204955!important;
+ border-color:#8fcbd8!important;
+}
