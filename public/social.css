@@ -394,3 +394,43 @@
  background:rgba(215,243,247,.95)!important;color:#204955!important;
  border-color:#8fcbd8!important;
 }
+
+
+/* Theme-colored frosted glass chat: translucent theme tint with readable message cards */
+#mmChatPanel{
+ background:color-mix(in srgb,var(--theme-bg, var(--bg, #dff5f7)) 76%, transparent)!important;
+ background-color:rgba(218,242,245,.74)!important;
+ backdrop-filter:blur(12px) saturate(135%)!important;
+ -webkit-backdrop-filter:blur(12px) saturate(135%)!important;
+ border-color:color-mix(in srgb,var(--theme-accent, #64bdcf) 58%, transparent)!important;
+}
+html[data-theme="pink"] #mmChatPanel,body[data-theme="pink"] #mmChatPanel,
+html[data-theme="sakura"] #mmChatPanel,body[data-theme="sakura"] #mmChatPanel{
+ background:rgba(255,224,237,.76)!important;
+}
+html[data-theme="vampire"] #mmChatPanel,body[data-theme="vampire"] #mmChatPanel{
+ background:rgba(43,35,53,.82)!important;color:#fff2fb!important;
+}
+html[data-theme="forest"] #mmChatPanel,body[data-theme="forest"] #mmChatPanel,
+html[data-theme="bear"] #mmChatPanel,body[data-theme="bear"] #mmChatPanel{
+ background:rgba(218,240,218,.77)!important;
+}
+html[data-theme="minimal"] #mmChatPanel,body[data-theme="minimal"] #mmChatPanel{
+ background:rgba(240,242,241,.78)!important;
+}
+html[data-theme="retro"] #mmChatPanel,body[data-theme="retro"] #mmChatPanel,
+html[data-theme="black-white"] #mmChatPanel,body[data-theme="black-white"] #mmChatPanel{
+ background:rgba(238,238,238,.82)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ background:rgba(255,255,255,.34)!important;
+ backdrop-filter:blur(9px)!important;-webkit-backdrop-filter:blur(9px)!important;
+}
+#mmChatPanel .mm-chat-body{
+ background:rgba(255,255,255,.24)!important;
+ backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
+}
+#mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.88)!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(218,245,248,.9)!important}
