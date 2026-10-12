@@ -12,7 +12,7 @@ app.get('/health',(req,res)=>res.json({ok:true,app:'MatchMa'}));
 // "unverified", never as proof that a product does not exist.
 const MARKET_SOURCES = {
   google: {name:'Google Search', domain:'', url:q=>'https://www.google.com/search?q='+encodeURIComponent(q)},
-  shopping: {name:'Google Shopping', domain:'', url:q=>'https://www.google.com/search?tbm=shop&q='+encodeURIComponent(q)},
+  shopping: {name:'Google Shopping', domain:'google.com', searchPrefix:'site:google.com/shopping ', url:q=>'https://www.google.com/search?tbm=shop&q='+encodeURIComponent(q)},
   shopee: {name:'Shopee', domain:'shopee.vn', url:q=>'https://shopee.vn/search?keyword='+encodeURIComponent(q)},
   lazada: {name:'Lazada', domain:'lazada.vn', url:q=>'https://www.lazada.vn/catalog/?q='+encodeURIComponent(q)},
   tiki: {name:'Tiki', domain:'tiki.vn', url:q=>'https://tiki.vn/search?q='+encodeURIComponent(q)},
@@ -27,7 +27,7 @@ function parseDdgResults(html, source){
     let href=decodeHtml(m[1]), title=decodeHtml(m[2].replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim());
     if(href.startsWith('//'))href='https:'+href;
     try{const u=new URL(href);if(u.hostname.includes('duckduckgo.com')&&u.searchParams.has('uddg'))href=decodeURIComponent(u.searchParams.get('uddg'));}catch(_){}
-    try{const u=new URL(href);if(!/^https?:$/.test(u.protocol))continue;if(source.domain&&!u.hostname.toLowerCase().endsWith(source.domain))continue;}catch(_){continue;}
+    try{const u=new URL(href);if(!/^https?:$/.test(u.protocol))continue;if(source.domain&&!u.hostname.toLowerCase().endsWith(source.domain))continue;if(key==='shopping'&&!/\/shopping\//i.test(u.pathname))continue;}catch(_){continue;}
     if(title&&href&&!results.some(x=>x.url===href))results.push({title,url:href});
   }
   if(results.length)return {ok:true,results};
@@ -36,7 +36,7 @@ function parseDdgResults(html, source){
 }
 async function searchOneSource(query, key){
   const source=MARKET_SOURCES[key]; if(!source)return {source:key,status:'unverified',message:'Nguồn không hợp lệ.'};
-  const searchText=source.domain ? 'site:'+source.domain+' '+query : query;
+  const searchText=source.searchPrefix ? source.searchPrefix+query : source.domain ? 'site:'+source.domain+' '+query : query;
   const searchUrl=source.url(query);
   try{
     const url='https://html.duckduckgo.com/html/?q='+encodeURIComponent(searchText);
