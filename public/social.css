@@ -235,3 +235,11 @@
 }
 #mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.94)!important;color:#2e241e!important}
 #mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(230,245,248,.94)!important;color:#204955!important}
+
+
+/* Ensure falling leaf glyphs render at their generated sizes above every page layer */
+#mmSocialFx{position:fixed!important;inset:0!important;width:100vw!important;height:100vh!important;overflow:hidden!important;pointer-events:none!important;z-index:2147483646!important}
+#mmSocialFx .mm-fx-item{position:absolute!important;display:block!important;top:-10vh!important;left:var(--x)!important;font-size:var(--size,24px)!important;line-height:1!important;opacity:0;visibility:visible!important;pointer-events:none!important;animation:mm-fall var(--duration,4s) linear var(--delay,0s) forwards!important;will-change:transform,opacity!important}
+@keyframes mm-fall{0%{transform:translate3d(0,-8vh,0) rotate(0);opacity:0}8%{opacity:1}88%{opacity:.95}100%{transform:translate3d(var(--drift,30px),112vh,0) rotate(var(--spin,180deg));opacity:0}}
+#mmIncomingToast{position:fixed!important;left:50%!important;top:16px!important;z-index:2147483647!important;max-width:min(92vw,460px)!important;padding:13px 18px!important;background:rgba(255,250,246,.97)!important;color:#382a23!important;border:1px solid #b7dce2!important;border-radius:15px!important;box-shadow:0 10px 34px rgba(30,75,85,.25)!important;font:700 14px/1.45 system-ui,sans-serif!important;text-align:center!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,transform .25s ease,visibility .25s ease!important}
+#mmIncomingToast.mm-toast-show{opacity:1!important;visibility:visible!important;transform:translate(-50%,0)!important}
