@@ -3421,12 +3421,12 @@ function productFamily(tokens){
   ['dishwashing',['nuoc_rua_chen']],
   ['laundry',['bot_giat','nuoc_giat','nuoc_xa_vai']],
   ['drinking_water',['nuoc_suoi','nuoc_khoang']],
-  ['soft_drink',['nuoc_ngot','nuoc_ep','cocacola','nuoc_tang_luc']],
+  ['soft_drink',['nuoc_ngot','nuoc_ep','cocacola','nuoc_tang_luc','revive','nuoc_the_thao','isotonic']],
   ['fish_sauce',['nuoc_mam']],
   ['soy_sauce',['nuoc_tuong']],
   ['instant_noodles',['mi_goi','mi_ly']],
   ['coffee',['ca_phe','cafe']],
-  ['rice',['gao','gao_nep']],
+  ['rice',['gao','gao_nep','com','com_trang']],
   ['tissue',['giay_ve_sinh','khan_giay','giay_an']]
  ];
  for(const [family,terms] of groups)if(terms.some(t=>T.has(t)))return family;
@@ -3462,7 +3462,7 @@ function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong'
 function sharedEvidence(a,b){
  // Count only meaningful name signals. Packaging words, short abbreviations, and SKU/year/size fragments
  // must never make unrelated products look like a match.
- const B=new Set(b),ignored=new Set(['san','pham','hang','loai','cua','va','voi','banh','thung','loc','hop','goi','chai','lon','tui','pack','masita','os','chi','kchi','tns','y24','y25','y26','tt','pm','os','kchi','vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g']);
+ const B=new Set(b),ignored=new Set(['san','pham','hang','loai','cua','va','voi','banh','thung','loc','hop','goi','chai','lon','tui','pack','masita','os','chi','kchi','tns','y24','y25','y26','tt','pm','os','kchi','trang','den','do','xanh','vang','tim','vol_250ml','vol_330ml','vol_500ml','vol_1000ml','vol_1500ml','weight_1000g']);
  return a.filter(t=>B.has(t)&&t.length>=4&&!/[0-9]/.test(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_')&&!ignored.has(t)).length
 }
 function similarity(aTokens,bTokens){if(!aTokens.length||!bTokens.length)return 0;let common=0;const small=aTokens.length<=bTokens.length?aTokens:bTokens,large=new Set(aTokens.length<=bTokens.length?bTokens:aTokens);for(const token of small)if(large.has(token))common++;return 2*common/(aTokens.length+bTokens.length)}
