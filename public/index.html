@@ -2365,9 +2365,19 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
  </div>
  <div class="panel"><div class="sectionhead"><div><h2>Rà soát hàng loạt bằng file</h2><p>Tải file gốc .xlsx, .xls hoặc .csv; chọn cột tên, sau đó mở trang tìm kiếm bên ngoài và tự đánh dấu kết quả đã kiểm tra.</p></div><span class="pill">Excel / CSV</span></div>
   <label class="upload"><span class="bigicon">📄</span><strong>Chọn file sản phẩm cần rà trên sàn</strong><input id="platformFile" type="file" accept=".csv,.xlsx,.xls"></label><div class="template-row"><span>File mẫu: STT, tên sản phẩm</span><button class="btn alt sample-download" data-sample="platform">Tải file mẫu ↓</button></div>
-  <div id="platformFileInfo" class="hint">Chưa tải file rà soát sàn.</div><div id="platformAuditProgress" class="hint" role="status" aria-live="polite">Chọn file rồi bấm “Rà soát tự động 7 nguồn”. Hệ thống tra cứu qua dịch vụ phía máy chủ và phân biệt kết quả tìm thấy, không tìm thấy, nguồn không phản hồi.</div>
+  <div id="platformFileInfo" class="hint">Chưa tải file rà soát sàn.</div>
+  <fieldset class="platform-source-picker" style="border:1px solid var(--line,#ddd);border-radius:12px;padding:12px;margin:12px 0"><legend style="padding:0 6px;font-weight:700">Chọn nguồn cần rà soát</legend><div class="grid3">
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="google"> Google Search</label>
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="shopping"> Google Shopping</label>
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="shopee"> Shopee</label>
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="lazada"> Lazada</label>
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="tiki"> Tiki</label>
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="tiktok"> TikTok Shop</label>
+   <label class="checkline"><input type="checkbox" class="platform-source-check" value="sendo"> Sendo</label>
+  </div><div class="actions"><button class="btn alt" type="button" id="platformSelectAll">Chọn cả 7 nguồn</button><button class="btn alt" type="button" id="platformSelectNone">Bỏ chọn tất cả</button></div><p class="hint">Chỉ những nguồn được đánh dấu mới được gọi rà soát và đưa vào báo cáo Excel.</p></fieldset>
+  <div id="platformAuditProgress" class="hint" role="status" aria-live="polite">Chọn file, đánh dấu nguồn cần tra rồi bấm “Rà soát các nguồn đã chọn”. Mỗi nguồn có trạng thái riêng; nguồn bỏ chọn sẽ không được gọi.</div>
   <div class="grid"><div class="field"><label for="platformNameCol">Cột tên sản phẩm</label><select id="platformNameCol" disabled><option value="">— Chọn cột —</option></select></div><div class="field"><label for="platformIdCol">Cột STT/mã dòng (chỉ hiển thị, không chỉnh sửa)</label><select id="platformIdCol" disabled><option value="">— Không chọn —</option></select></div></div>
-  <div class="actions"><button class="btn" id="buildPlatformAudit" disabled>Tạo danh sách rà soát</button><button class="btn" id="runPlatformAudit" disabled>🔎 Rà soát tự động 7 nguồn</button><button class="btn alt" id="exportPlatformAudit" disabled>Xuất Excel kết quả sàn ↓</button></div>
+  <div class="actions"><button class="btn" id="buildPlatformAudit" disabled>Tạo danh sách rà soát</button><button class="btn" id="runPlatformAudit" disabled>🔎 Rà soát các nguồn đã chọn</button><button class="btn alt" id="exportPlatformAudit" disabled>Xuất Excel kết quả sàn ↓</button></div>
   <div class="stats"><div class="stat"><small>Tổng dòng</small><b id="platformAuditTotal">0</b></div><div class="stat good"><small>Đã có kết quả</small><b id="platformAuditFound">0</b></div><div class="stat review"><small>Cần kiểm tra</small><b id="platformAuditReview">0</b></div><div class="stat none"><small>Chưa tìm thấy</small><b id="platformAuditNone">0</b></div></div>
   <div class="resulttools"><input id="platformAuditSearch" type="text" class="search" placeholder="Lọc theo STT hoặc tên hàng…"><select id="platformAuditStatus"><option value="all">Tất cả trạng thái</option><option value="todo">Chưa kiểm tra</option><option value="found">Có sản phẩm</option><option value="none">Không tìm thấy</option><option value="review">Chưa kiểm tra được</option></select><span id="platformAuditInfo" class="muted"></span></div>
   <div id="platformAuditTable" class="empty">Tải file để bắt đầu.</div>
@@ -2857,13 +2867,13 @@ function renderMemoryPage(){renderOverviewAccount();if(!$('memoryList'))return;c
 function exportMemoryBackup(){const blob=new Blob([JSON.stringify({app:'MatchMa',version:1,exportedAt:new Date().toISOString(),pairs:savedMemory},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='matchma-bo-nho-xac-nhan.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function importMemoryBackup(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(String(reader.result||''));const pairs=Array.isArray(data)?data:data.pairs;if(!Array.isArray(pairs))throw new Error('invalid');let added=0;for(const p of pairs){if(!p||typeof p.sourceName!=='string'||typeof p.sku!=='string'||!p.sku.trim())continue;const key=pairKey(p.sourceName);if(!key)continue;const old=savedMemory.find(m=>m.key===key&&normalizeSku(m.sku)===normalizeSku(p.sku));if(old){Object.assign(old,p,{key});}else{savedMemory.push({...p,key});added++}}if(!persistMemory())return;renderMemoryPage();alert('Đã nhập/ghép bộ nhớ. Số cặp mới thêm: '+added)}catch(e){alert('Tệp bộ nhớ không hợp lệ. Hãy chọn tệp JSON do MatchMã xuất ra.')}};reader.readAsText(file)}
 function platformSearchTargets(query){const q=String(query||'').trim();if(!q)return [];return [
- {name:'Google Search',url:'https://www.google.com/search?q='+encodeURIComponent(q)},
- {name:'Google Shopping',url:'https://www.google.com/search?tbm=shop&q='+encodeURIComponent(q)},
- {name:'Shopee Việt Nam',url:'https://shopee.vn/search?keyword='+encodeURIComponent(q)},
- {name:'Lazada Việt Nam',url:'https://www.lazada.vn/catalog/?q='+encodeURIComponent(q)},
- {name:'Tiki',url:'https://tiki.vn/search?q='+encodeURIComponent(q)},
- {name:'TikTok',url:'https://www.tiktok.com/search?q='+encodeURIComponent(q)},
- {name:'Sendo',url:'https://www.sendo.vn/search?keyword='+encodeURIComponent(q)}
+ {key:'google',name:'Google Search',url:'https://www.google.com/search?q='+encodeURIComponent(q)},
+ {key:'shopping',name:'Google Shopping',url:'https://www.google.com/search?tbm=shop&q='+encodeURIComponent(q)},
+ {key:'shopee',name:'Shopee',url:'https://shopee.vn/search?keyword='+encodeURIComponent(q)},
+ {key:'lazada',name:'Lazada',url:'https://www.lazada.vn/catalog/?q='+encodeURIComponent(q)},
+ {key:'tiki',name:'Tiki',url:'https://tiki.vn/search?q='+encodeURIComponent(q)},
+ {key:'tiktok',name:'TikTok Shop',url:'https://www.tiktok.com/search?q='+encodeURIComponent(q)},
+ {key:'sendo',name:'Sendo',url:'https://www.sendo.vn/search?keyword='+encodeURIComponent(q)}
 ]}
 function renderPlatformLinks(query){const links=platformSearchTargets(query);const root=$('platformLinks');if(!root)return;if(!links.length){root.className='empty';root.textContent='Nhập tên sản phẩm để tạo liên kết tra cứu.';return}root.className='platform-links';root.innerHTML=links.map(x=>'<a class="platform-link" href="'+esc(x.url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.name)+' <span>↗</span></a>').join('')}
 function openPlatformSearch(query){$('platformQuery').value=query||'';renderPlatformLinks(query||'');showPage('platforms')}
@@ -3010,33 +3020,44 @@ function initPlatformAudit(){
  $('platformPrev').addEventListener('click',()=>{if(platformPage>1){platformPage--;renderPlatformAudit()}});
  $('platformNext').addEventListener('click',()=>{platformPage++;renderPlatformAudit()});
  $('exportPlatformAudit').addEventListener('click',exportPlatformAudit);
+ $('platformSelectAll').addEventListener('click',()=>{document.querySelectorAll('.platform-source-check').forEach(x=>x.checked=true);});
+ $('platformSelectNone').addEventListener('click',()=>{document.querySelectorAll('.platform-source-check').forEach(x=>x.checked=false);});
 }
+function selectedPlatformSources(){return Array.from(document.querySelectorAll('.platform-source-check:checked')).map(x=>x.value)}
 async function runPlatformAudit(){
  if(!platformSourceRows.length){alert('Hãy tải file trước.');return}
  if(!$('platformNameCol').value){alert('Chọn cột tên sản phẩm trước.');return}
+ const sources=selectedPlatformSources();
+ if(!sources.length){alert('Hãy đánh dấu ít nhất một nguồn cần rà soát.');return}
+ const sourceNames={google:'Google Search',shopping:'Google Shopping',shopee:'Shopee',lazada:'Lazada',tiki:'Tiki',tiktok:'TikTok Shop',sendo:'Sendo'};
  platformSourceRows.forEach(x=>{x.searchName=String(x.row[$('platformNameCol').value]||'').trim()});
  platformBuilt=true;platformPage=1;
  const btn=$('runPlatformAudit');btn.disabled=true;const progress=$('platformAuditProgress');
  const pending=platformSourceRows.filter(x=>x.searchName);
- let done=0;progress.textContent='Đang rà soát '+pending.length+' sản phẩm trên 7 nguồn. Vui lòng giữ trang mở…';renderPlatformAudit();
- // Sequential row processing avoids flooding the search provider and preserves row order.
+ let done=0;progress.textContent='Đang rà soát '+pending.length+' sản phẩm trên '+sources.length+' nguồn đã chọn ('+sources.map(k=>sourceNames[k]).join(', ')+'). Vui lòng giữ trang mở…';renderPlatformAudit();
  for(const item of pending){
   try{
-   const response=await fetch(PLATFORM_AUDIT_SUPABASE_URL+'/functions/v1/marketplace-audit',{method:'POST',headers:{'Content-Type':'application/json','apikey':PLATFORM_AUDIT_ANON_KEY,'Authorization':'Bearer '+PLATFORM_AUDIT_ANON_KEY},body:JSON.stringify({query:item.searchName,sources:['google','shopping','shopee','lazada','tiki','tiktok','sendo']})});
+   const response=await fetch(PLATFORM_AUDIT_SUPABASE_URL+'/functions/v1/marketplace-audit',{method:'POST',headers:{'Content-Type':'application/json','apikey':PLATFORM_AUDIT_ANON_KEY,'Authorization':'Bearer '+PLATFORM_AUDIT_ANON_KEY},body:JSON.stringify({query:item.searchName,sources})});
    if(!response.ok)throw new Error('HTTP '+response.status);
    const data=await response.json();if(!data.ok||!Array.isArray(data.results))throw new Error('Phản hồi tìm kiếm không hợp lệ');
-   item.sourceResults=data.results;
-   const found=data.results.some(x=>x.status==='found');
-   const allChecked=data.results.length===7&&data.results.every(x=>x.status==='found'||x.status==='not_found');
+   const prior=item.sourceResults||[];
+   item.sourceResults=prior.filter(x=>!sources.includes(x.source)).concat(data.results);
+   const chosen=item.sourceResults.filter(x=>sources.includes(x.source));
+   const found=chosen.some(x=>x.status==='found');
+   const allChecked=chosen.length===sources.length&&chosen.every(x=>x.status==='found'||x.status==='not_found');
    item.status=found?'found':allChecked?'none':'review';
    item.checkedAt=data.checkedAt||new Date().toISOString();
-  }catch(err){item.sourceResults=['google','shopping','shopee','lazada','tiki','tiktok','sendo'].map(k=>({source:k,name:({google:'Google Search',shopping:'Google Shopping',shopee:'Shopee',lazada:'Lazada',tiki:'Tiki',tiktok:'TikTok',sendo:'Sendo'})[k],status:'unverified',message:'Không gọi được dịch vụ tìm kiếm.',searchUrl:platformSearchTargets(item.searchName).find(x=>x.name===({google:'Google Search',shopping:'Google Shopping',shopee:'Shopee Việt Nam',lazada:'Lazada Việt Nam',tiki:'Tiki',tiktok:'TikTok',sendo:'Sendo'})[k])?.url||''}));item.status='review';}
-  done++;progress.textContent='Đã xử lý '+done+'/'+pending.length+' sản phẩm. Có sản phẩm: '+platformSourceRows.filter(x=>x.status==='found').length+' · Không tìm thấy: '+platformSourceRows.filter(x=>x.status==='none').length+' · Chưa kiểm tra được: '+platformSourceRows.filter(x=>x.status==='review').length;
+  }catch(err){
+   const prior=item.sourceResults||[];
+   const failed=sources.map(k=>({source:k,name:sourceNames[k],status:'unverified',message:'Lỗi gọi dịch vụ: '+String(err.message||'không xác định'),searchUrl:platformSearchTargets(item.searchName).find(x=>x.key===k)?.url||''}));
+   item.sourceResults=prior.filter(x=>!sources.includes(x.source)).concat(failed);item.status='review';
+  }
+  done++;progress.textContent='Đã xử lý '+done+'/'+pending.length+' sản phẩm trên '+sources.length+' nguồn đã chọn. Có sản phẩm: '+platformSourceRows.filter(x=>x.status==='found').length+' · Không tìm thấy: '+platformSourceRows.filter(x=>x.status==='none').length+' · Chưa kiểm tra được: '+platformSourceRows.filter(x=>x.status==='review').length;
   renderPlatformAudit();
  }
- platformSourceRows.filter(x=>!x.searchName).forEach(x=>{x.status='review';x.sourceResults=[]});
+ platformSourceRows.filter(x=>!x.searchName).forEach(x=>{x.status='review'});
  $('exportPlatformAudit').disabled=false;btn.disabled=false;
- progress.textContent='Hoàn tất '+done+'/'+pending.length+' sản phẩm. Các dòng không có tên hoặc nguồn không phản hồi được giữ là “Chưa kiểm tra được”, không tự kết luận là không có hàng.';
+ progress.textContent='Hoàn tất '+done+'/'+pending.length+' sản phẩm; đã rà '+sources.length+' nguồn: '+sources.map(k=>sourceNames[k]).join(', ')+'. Các nguồn bỏ chọn không được gọi.';
  renderPlatformAudit();
 }
 function renderPlatformAudit(){
@@ -3046,12 +3067,12 @@ function renderPlatformAudit(){
  $('platformAuditTotal').textContent=platformSourceRows.length;$('platformAuditFound').textContent=found;$('platformAuditNone').textContent=none;$('platformAuditReview').textContent=review;
  let rows=platformSourceRows.map((x,i)=>({...x,_i:i})).filter(x=>(status==='all'||x.status===status)&&(!q||String((stt?x.row[stt]+' ':'')+x.searchName+' '+JSON.stringify(x.row)).toLowerCase().includes(q)));
  $('platformAuditInfo').textContent=rows.length+' dòng phù hợp';
- if(!platformBuilt||!platformSourceRows.length){root.className='empty';root.textContent='Tải file, chọn cột tên hàng và bấm “Rà soát tự động 7 nguồn”.';$('platformPageInfo').textContent='Trang 0/0';$('platformPrev').disabled=true;$('platformNext').disabled=true;return}
+ if(!platformBuilt||!platformSourceRows.length){root.className='empty';root.textContent='Tải file, chọn cột tên hàng và bấm “Rà soát các nguồn đã chọn”.';$('platformPageInfo').textContent='Trang 0/0';$('platformPrev').disabled=true;$('platformNext').disabled=true;return}
  const pages=Math.max(1,Math.ceil(rows.length/platformPageSize));if(platformPage>pages)platformPage=pages;const display=rows.slice((platformPage-1)*platformPageSize,platformPage*platformPageSize);
  const statusText={todo:'Chưa kiểm tra',found:'Có sản phẩm',none:'Không tìm thấy',review:'Chưa kiểm tra được'};
  if(!display.length){root.className='empty';root.textContent='Không có dòng phù hợp với bộ lọc.'}else{root.className='tablewrap';root.innerHTML='<table><thead><tr><th>STT nguồn</th><th>Tên hàng cần rà</th><th>Kết quả 7 nguồn</th><th>Trạng thái tổng</th></tr></thead><tbody>'+display.map(x=>{
  const searchName=x.searchName||String(x.row[$('platformNameCol').value]||'').trim();
- const resultLinks=x.sourceResults&&x.sourceResults.length?x.sourceResults.map(r=>'<div class="market-audit-result"><b>'+esc(r.name||r.source)+'</b> <span class="market-status market-status-'+esc(r.status)+'">'+esc(r.status==='found'?'Có sản phẩm':r.status==='not_found'?'Không tìm thấy':'Chưa kiểm tra được')+'</span><div>'+((r.productUrl)?'<a class="platform-link compact" target="_blank" rel="noopener noreferrer" href="'+esc(r.productUrl)+'">Mở sản phẩm ↗</a> ':'')+(r.searchUrl?'<a class="platform-link compact" target="_blank" rel="noopener noreferrer" href="'+esc(r.searchUrl)+'">Mở tìm kiếm ↗</a>':'')+'</div>'+(r.message?'<small>'+esc(r.message)+'</small>':'')+'</div>').join(''):'<div class="market-row-links">'+platformSearchTargets(searchName).map(l=>'<a class="platform-link compact" target="_blank" rel="noopener noreferrer" href="'+esc(l.url)+'">'+esc(l.name)+' ↗</a>').join('')+'</div>';
+ const resultLinks=x.sourceResults&&x.sourceResults.length?x.sourceResults.map(r=>'<div class="market-audit-result"><b>'+esc(r.name||r.source)+'</b> <span class="market-status market-status-'+esc(r.status)+'">'+esc(r.status==='found'?'Có sản phẩm':r.status==='not_found'?'Không tìm thấy':'Chưa kiểm tra được')+'</span><div>'+((r.productUrl)?'<a class="platform-link compact" target="_blank" rel="noopener noreferrer" href="'+esc(r.productUrl)+'">Mở sản phẩm ↗</a> ':'')+(r.searchUrl?'<a class="platform-link compact" target="_blank" rel="noopener noreferrer" href="'+esc(r.searchUrl)+'">Mở tìm kiếm ↗</a>':'')+'</div>'+(r.message?'<small>'+esc(r.message)+'</small>':'')+'</div>').join(''):'<div class="market-row-links">'+platformSearchTargets(searchName).filter(l=>selectedPlatformSources().includes(l.key)).map(l=>'<a class="platform-link compact" target="_blank" rel="noopener noreferrer" href="'+esc(l.url)+'">'+esc(l.name)+' ↗</a>').join('')+'</div>';
  return '<tr><td>'+esc(stt?x.row[stt]:x.sourceIndex)+'</td><td>'+esc(searchName||'(tên trống)')+'</td><td><div class="market-audit-results">'+resultLinks+'</div></td><td><strong>'+esc(statusText[x.status]||x.status)+'</strong><br><select data-platform-status="'+x._i+'"><option value="todo" '+(x.status==='todo'?'selected':'')+'>Chưa kiểm tra</option><option value="found" '+(x.status==='found'?'selected':'')+'>Có sản phẩm (xác nhận thủ công)</option><option value="none" '+(x.status==='none'?'selected':'')+'>Không tìm thấy (xác nhận thủ công)</option><option value="review" '+(x.status==='review'?'selected':'')+'>Chưa kiểm tra được</option></select></td></tr>';
  }).join('')+'</tbody></table>';
  document.querySelectorAll('[data-platform-status]').forEach(sel=>sel.addEventListener('change',()=>{const row=platformSourceRows[Number(sel.dataset.platformStatus)];row.status=sel.value;row.manuallySetStatus=true;renderPlatformAudit()}));
@@ -3063,11 +3084,14 @@ function exportPlatformAudit(){
  const headers=platformSourceHeaders.slice(),used=new Set(headers);
  const unique=(name)=>{let out=name,n=2;while(used.has(out))out=name+' ('+(n++)+')';used.add(out);return out};
  const statusCol=unique('Trạng thái rà soát sàn'),queryCol=unique('Tên dùng để tìm kiếm'),checkedCol=unique('Thời điểm rà soát');
- const sources=[['google','Google Search'],['shopping','Google Shopping'],['shopee','Shopee'],['lazada','Lazada'],['tiki','Tiki'],['tiktok','TikTok'],['sendo','Sendo']];
+ const selected=selectedPlatformSources();
+ if(!selected.length){alert('Hãy chọn ít nhất một nguồn để xuất.');return}
+ const sourceLabels={google:'Google Search',shopping:'Google Shopping',shopee:'Shopee',lazada:'Lazada',tiki:'Tiki',tiktok:'TikTok Shop',sendo:'Sendo'};
+ const sources=selected.map(key=>[key,sourceLabels[key]]);
  const sourceCols=sources.map(([key,name])=>({key,name,status:unique(name+' - Trạng thái'),search:unique(name+' - Link tìm kiếm'),product:unique(name+' - Link sản phẩm'),title:unique(name+' - Tên kết quả'),note:unique(name+' - Ghi chú')}));
  const label={todo:'Chưa kiểm tra',found:'Có sản phẩm',none:'Không tìm thấy',review:'Chưa kiểm tra được'};
  const rows=platformSourceRows.map(x=>{const row={...x.row};const query=x.searchName||String(x.row[$('platformNameCol').value]||'');row[statusCol]=label[x.status]||x.status;row[queryCol]=query;row[checkedCol]=x.checkedAt||'';const fallback=platformSearchTargets(query);
- sourceCols.forEach(c=>{const r=(x.sourceResults||[]).find(v=>v.source===c.key)||{};row[c.status]=r.status==='found'?'Có sản phẩm':r.status==='not_found'?'Không tìm thấy':r.status==='unverified'?'Chưa kiểm tra được':'Chưa kiểm tra';row[c.search]=r.searchUrl||(fallback.find(v=>v.name===c.name||v.name===({shopee:'Shopee Việt Nam',lazada:'Lazada Việt Nam'}[c.key]))||{}).url||'';row[c.product]=r.productUrl||'';row[c.title]=r.productTitle||'';row[c.note]=r.message||''});return row});
+ sourceCols.forEach(c=>{const r=(x.sourceResults||[]).find(v=>v.source===c.key)||{};row[c.status]=r.status==='found'?'Có sản phẩm':r.status==='not_found'?'Không tìm thấy':r.status==='unverified'?'Chưa kiểm tra được':'Chưa kiểm tra';row[c.search]=r.searchUrl||(fallback.find(v=>v.key===c.key)||{}).url||'';row[c.product]=r.productUrl||'';row[c.title]=r.productTitle||'';row[c.note]=r.message||''});return row});
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows,{header:[...headers,statusCol,queryCol,checkedCol,...sourceCols.flatMap(c=>[c.status,c.search,c.product,c.title,c.note])]}),'Ra soat san');XLSX.writeFile(wb,'matchma-ra-soat-san.xlsx');
 }
 function initAutoFill(){
