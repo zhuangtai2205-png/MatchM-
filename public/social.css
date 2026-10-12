@@ -434,3 +434,29 @@ html[data-theme="black-white"] #mmChatPanel,body[data-theme="black-white"] #mmCh
 }
 #mmChatPanel .mm-chat-bubble{background:rgba(255,255,255,.88)!important}
 #mmChatPanel .mm-chat-bubble.mm-mine{background:rgba(218,245,248,.9)!important}
+
+
+/* Borderless theme-tinted frosted chat panel */
+#mmChatPanel{
+ border:0!important;
+ outline:0!important;
+ box-shadow:0 12px 34px rgba(30,55,62,.12)!important;
+ background:rgba(218,242,245,.38)!important;
+ backdrop-filter:blur(14px) saturate(135%)!important;
+ -webkit-backdrop-filter:blur(14px) saturate(135%)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ border-color:transparent!important;
+ box-shadow:none!important;
+ background:rgba(255,255,255,.16)!important;
+ backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
+}
+#mmChatPanel .mm-chat-body{
+ border-color:transparent!important;box-shadow:none!important;
+ background:rgba(255,255,255,.10)!important;
+ backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important;
+}
+#mmChatPanel .mm-chat-bubble{border:0!important;box-shadow:0 1px 5px rgba(30,55,62,.08)!important}
+#mmChatPanel .mm-chat-bubble.mm-mine{border:0!important}
