@@ -3438,12 +3438,11 @@ function variantConflict(a,b){
  const A=new Set(a),B=new Set(b);
  // Each entry is one product variant; words within an entry are aliases, entries are mutually exclusive.
  const variants=[
-  [['raisin','raisins','nho_kho'],['almond','hanh_nhan']],
-  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay'],['chocolate','socola','socolat'],['vanilla','vani']],
+  // Các vị/loại nhân là lựa chọn loại trừ nhau, kể cả khi tên sản phẩm thuộc các dòng bánh khác nhau.
+  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay'],['chocolate','socola','socolat'],['vanilla','vani'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai']],
   [['co_duong'],['khong_duong']],
   [['co_gas'],['khong_gas']],
-  [['nguyen_kem'],['tach_beo']],
-  [['chicken','ga'],['beef','bo'],['shrimp','tom']]
+  [['nguyen_kem'],['tach_beo']]
  ];
  for(const group of variants){
   const left=group.findIndex(alias=>alias.some(t=>A.has(t)));
@@ -3451,7 +3450,7 @@ function variantConflict(a,b){
   if(left>=0&&right>=0&&left!==right)return true;
  }
  // If both names explicitly identify different known brands, don't auto-pair them.
- const brands=['beryls','masita','vinamilk','vinamil','vnm','dielac','optimum','nescafe','oreo','lays','kchi'];
+ const brands=['beryls','masita','tns','vinamilk','vinamil','vnm','dielac','optimum','nescafe','oreo','lays','kchi'];
  const left=brands.filter(t=>A.has(t)),right=brands.filter(t=>B.has(t));
  if(left.length&&right.length){
   const canon=x=>x==='vnm'||x==='vinamil'?'vinamilk':x==='beryls'?'beryls':x;
