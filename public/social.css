@@ -319,3 +319,46 @@
 #mmChatPanel .mm-chat-footer [data-action*="gift" i],
 #mmChatPanel .mm-chat-footer button[aria-label*="quà" i],
 #mmChatPanel .mm-chat-footer button[title*="quà" i]{display:none!important}
+
+
+/* Final isolation fix: chat must cover the page underneath, not blend with page cards */
+#mmChatPanel{
+ position:fixed!important;z-index:2147483000!important;
+ background:#fffaf5!important;background-color:rgba(255,250,245,.995)!important;
+ opacity:1!important;isolation:isolate!important;
+ backdrop-filter:blur(5px)!important;-webkit-backdrop-filter:blur(5px)!important;
+ border:1px solid #9dcbd2!important;
+ box-shadow:0 14px 38px rgba(25,55,62,.24)!important;
+}
+#mmChatPanel .mm-chat-head,
+#mmChatPanel .mm-chat-tabs,
+#mmChatPanel .mm-chat-footer{
+ background:#f8eee6!important;background-color:rgba(248,238,230,.99)!important;
+ opacity:1!important;mix-blend-mode:normal!important;
+}
+#mmChatPanel .mm-chat-body{
+ background:#fffdf9!important;background-color:rgba(255,253,249,.99)!important;
+ opacity:1!important;mix-blend-mode:normal!important;
+}
+#mmChatPanel #mmChatContent,
+#mmChatPanel .mm-chat-list,
+#mmChatPanel .mm-chat-messages,
+#mmChatPanel .mm-chat-row{
+ background-color:transparent!important;opacity:1!important;
+}
+#mmChatPanel .mm-chat-bubble{
+ background:#ffffff!important;color:#30251f!important;
+ border:1px solid #d6b9a8!important;opacity:1!important;
+}
+#mmChatPanel .mm-chat-bubble.mm-mine{
+ background:#e4f4f7!important;color:#204955!important;border-color:#8fcbd8!important;
+}
+#mmChatPanel .mm-chat-status,
+#mmChatPanel .mm-chat-headcopy,
+#mmChatPanel .mm-chat-headcopy *{color:#38281f!important;opacity:1!important}
+#mmChatPanel .mm-chat-footer .mm-gift-wrap,
+#mmChatPanel .mm-chat-footer #mmGiftToggle,
+#mmChatPanel .mm-chat-footer [data-action*="gift" i],
+#mmChatPanel .mm-chat-footer [class*="gift" i],
+#mmChatPanel .mm-chat-footer button[aria-label*="quà" i],
+#mmChatPanel .mm-chat-footer button[title*="quà" i]{display:none!important}
