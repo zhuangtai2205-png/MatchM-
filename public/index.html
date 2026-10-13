@@ -4044,4 +4044,14 @@ body[data-theme="retro"] .btn,body[data-theme="retro"] .btn.alt,body[data-theme=
  window.addEventListener('load',loadAvatar);window.addEventListener('matchma-account-ready',loadAvatar);
 })();
 </script>
+<style id="matchma-fullscreen-layout-fix-v1">
+/* Full-width desktop workspace: remove the 1500px cap causing unused screen space. */
+html,body{width:100%;min-height:100%}
+body{min-height:100vh;overflow-x:hidden}
+header{width:100%!important;max-width:none!important;margin-inline:0!important;padding-inline:clamp(14px,2vw,32px)!important}
+.shell{width:100%!important;max-width:none!important;margin-inline:0!important;grid-template-columns:minmax(190px,220px) minmax(0,1fr)!important;padding-inline:clamp(14px,2vw,32px)!important;padding-bottom:24px!important}
+.main,.page{min-width:0!important}.page.active{width:100%}.tablewrap{max-width:100%}
+@media(min-width:951px){.shell{align-items:start}.sidebar{min-width:0}}
+@media(max-width:950px){.shell{grid-template-columns:minmax(0,1fr)!important}}
+</style>
 </body></html>
