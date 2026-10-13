@@ -2437,7 +2437,8 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
    <div class="stat review"><small data-i18n="forecastLowCount">Hết tồn / sắp hết</small><b id="forecastLow">0</b></div>
    <div class="stat"><small data-i18n="forecastMissingCount">SKU thiếu trong tồn đầu kỳ</small><b id="forecastMissing">0</b></div>
   </div>
-  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…" data-i18n-placeholder="forecastSearchPlaceholder"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="negative" selected data-i18n="forecastFilterNegative">Chỉ SKU âm cuối tháng</option><option value="all" data-i18n="forecastFilterAll">Tất cả SKU</option><option value="low" data-i18n="forecastFilterLow">Hết tồn / sắp hết</option><option value="noStock" data-i18n="forecastFilterMissing">Thiếu trong tồn đầu kỳ</option><option value="issue" data-i18n="forecastFilterIssue">Thiếu SKU hoặc lỗi số lượng</option></select></div>
+  <div id="forecastActivitySummary" class="panel" style="margin:12px 0;padding:14px"><strong>So sánh mua vào · bán ra · tồn đầu kỳ</strong><div id="forecastActivityCounts" class="stats" style="margin-top:10px"></div><p class="hint">Dựa trên việc SKU có xuất hiện trong từng file, không dựa riêng vào số lượng. Bấm từng nhóm để lọc kết quả.</p></div>
+  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…" data-i18n-placeholder="forecastSearchPlaceholder"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="negative" selected data-i18n="forecastFilterNegative">Chỉ SKU âm cuối tháng</option><option value="all" data-i18n="forecastFilterAll">Tất cả SKU</option><option value="low" data-i18n="forecastFilterLow">Hết tồn / sắp hết</option><option value="noStock" data-i18n="forecastFilterMissing">Thiếu trong tồn đầu kỳ</option><option value="issue" data-i18n="forecastFilterIssue">Thiếu SKU hoặc lỗi số lượng</option><option value="purchaseNoStock">Có mua, không có tồn đầu kỳ</option><option value="salesNoStock">Có bán, không có tồn đầu kỳ</option><option value="purchaseNoSales">Có mua, không có bán</option><option value="salesNoPurchase">Có bán, không có mua</option><option value="newProduct">Sản phẩm mới (có giao dịch, chưa có tồn đầu kỳ)</option></select></div>
   <div id="forecastOutput" class="empty" data-i18n="forecastOutputEmpty">Chưa có kết quả. Tải đủ ba file rồi tính tồn cuối tháng.</div>
   <div class="pager"><button class="btn alt" id="forecastPrev" disabled data-i18n="prev">← Trước</button><span id="forecastPageInfo">Trang 0/0</span><button class="btn alt" id="forecastNext" disabled data-i18n="next">Tiếp →</button></div>
  </div>
@@ -2747,6 +2748,31 @@ function runStockForecast(){
  $('forecastRunInfo').textContent=tr('forecastRunDone').replace('{count}',stockForecastResults.length);
  renderStockForecast();
 }
+function forecastActivityClass(p){
+ const buy=p.purchaseRows>0,sell=p.salesRows>0,stock=p.inStock;
+ if(!stock&&buy&&!sell)return 'purchaseNoStock';
+ if(!stock&&sell&&!buy)return 'salesNoStock';
+ if(buy&&!sell)return 'purchaseNoSales';
+ if(sell&&!buy)return 'salesNoPurchase';
+ if(!stock&&(buy||sell))return 'newProduct';
+ return 'normal';
+}
+function forecastActivityLabel(p){
+ const k=forecastActivityClass(p);
+ return ({purchaseNoStock:'Có mua · không có tồn đầu kỳ',salesNoStock:'Có bán · không có tồn đầu kỳ',purchaseNoSales:'Có mua · không có bán',salesNoPurchase:'Có bán · không có mua',newProduct:'Sản phẩm mới · chưa có tồn đầu kỳ',normal:'Mua/bán/tồn đã có dữ liệu'})[k]||'—';
+}
+function renderForecastActivityCounts(){
+ const root=$('forecastActivityCounts');if(!root)return;
+ const groups=[
+  ['purchaseNoStock','Có mua · không tồn',p=>p.purchaseRows>0&&!p.inStock],
+  ['salesNoStock','Có bán · không tồn',p=>p.salesRows>0&&!p.inStock],
+  ['purchaseNoSales','Có mua · không bán',p=>p.purchaseRows>0&&p.salesRows===0],
+  ['salesNoPurchase','Có bán · không mua',p=>p.salesRows>0&&p.purchaseRows===0],
+  ['newProduct','Sản phẩm mới',p=>!p.inStock&&(p.purchaseRows>0||p.salesRows>0)]
+ ];
+ root.innerHTML=groups.map(([key,label,test])=>'<button type="button" class="stat" data-forecast-activity="'+key+'" style="cursor:pointer;text-align:left"><small>'+label+'</small><b>'+stockForecastResults.filter(test).length+'</b></button>').join('');
+ root.querySelectorAll('[data-forecast-activity]').forEach(btn=>btn.addEventListener('click',()=>{$('forecastFilter').value=btn.dataset.forecastActivity;stockForecastPage=1;renderStockForecast()}));
+}
 function forecastStatusLabel(status){
  return ({negative:tr('forecastStatusNegative'),zero:tr('forecastStatusZero'),low:tr('forecastStatusLow'),ok:tr('forecastStatusOK'),noStock:tr('forecastStatusNoStock'),noKey:tr('forecastStatusNoKey'),issue:tr('forecastStatusIssue')})[status]||status;
 }
@@ -2756,7 +2782,7 @@ function renderStockForecast(){
  const negatives=stockForecastResults.filter(p=>p.status==='negative').length;
  const low=stockForecastResults.filter(p=>p.status==='zero'||p.status==='low').length;
  const missing=stockForecastResults.filter(p=>p.assumedOpeningZero||p.status==='noKey').length;
- $('forecastTotal').textContent=stockForecastResults.length;$('forecastNegative').textContent=negatives;$('forecastLow').textContent=low;$('forecastMissing').textContent=missing;
+ $('forecastTotal').textContent=stockForecastResults.length;$('forecastNegative').textContent=negatives;$('forecastLow').textContent=low;$('forecastMissing').textContent=missing;renderForecastActivityCounts();
  let rows=stockForecastResults.filter(p=>{
   const searchable=(p.displaySku+' '+p.displayName+' '+p.issueText).toLowerCase();
   if(q&&!searchable.includes(q))return false;
@@ -2764,6 +2790,7 @@ function renderStockForecast(){
   if(filter==='low'&&p.status!=='zero'&&p.status!=='low')return false;
   if(filter==='noStock'&&!p.assumedOpeningZero)return false;
   if(filter==='issue'&&p.status!=='issue'&&p.status!=='noKey')return false;
+  if(['purchaseNoStock','salesNoStock','purchaseNoSales','salesNoPurchase','newProduct'].includes(filter)&&forecastActivityClass(p)!==filter)return false;
   return true;
  });
  const pages=Math.max(1,Math.ceil(rows.length/stockForecastPageSize));if(stockForecastPage>pages)stockForecastPage=pages;
@@ -2774,7 +2801,7 @@ function renderStockForecast(){
  else{
   root.className='tablewrap';
   root.innerHTML='<table><thead><tr><th>'+tr('skuCodeLabel')+'</th><th>'+tr('productNameLabel')+'</th><th>'+tr('openingStockLabel')+'</th><th>'+tr('monthPurchaseLabel')+'</th><th>'+tr('monthSalesLabel')+'</th><th>'+tr('closingStockLabel')+'</th><th>'+tr('statusLabel')+'</th><th>'+tr('replacementLabel')+'</th><th>'+tr('notesLabel')+'</th></tr></thead><tbody>'+
-   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.projected!==null?forecastNumber(p.stockQty)+(p.assumedOpeningZero?' (giả định)':''):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'—')+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
+   shown.map(p=>'<tr><td>'+esc(p.displaySku||'—')+'</td><td>'+esc(p.displayName)+'</td><td>'+(p.projected!==null?forecastNumber(p.stockQty)+(p.assumedOpeningZero?' (giả định)':''):p.inStock?'Kiểm tra':'—')+'</td><td>'+forecastNumber(p.purchaseQty)+'</td><td>'+forecastNumber(p.salesQty)+'</td><td>'+(p.projected===null?'—':forecastNumber(p.projected))+'</td><td>'+forecastStatusBadge(p.status)+'</td><td>'+esc(forecastActivityLabel(p))+'</td><td>'+esc(p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'—')+'</td><td>'+esc(p.issueText|| (p.status==='negative'?'Tồn chốt cuối tháng âm sau khi trừ bán ra.':p.status==='noStock'?'SKU có giao dịch nhưng không có tồn đầu kỳ trong file.':''))+'</td></tr>').join('')+'</tbody></table>';
  }
  $('forecastPageInfo').textContent=tr('page')+' '+(rows.length?stockForecastPage:0)+'/'+(rows.length?pages:0)+' · '+rows.length+' '+tr('forecastPageCount');
  $('forecastPrev').disabled=stockForecastPage<=1;$('forecastNext').disabled=stockForecastPage>=pages;
@@ -2783,7 +2810,7 @@ function forecastNumber(n){return Number.isFinite(n)?Number(n.toFixed(4)).toLoca
 function exportStockForecast(){
  if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
  if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
- const mapRows=list=>list.map(p=>({[tr('skuCodeLabel')]:p.displaySku,[tr('productNameLabel')]:p.displayName,[tr('openingStockLabel')]:p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),[tr('monthPurchaseLabel')]:p.purchaseQty,[tr('monthSalesLabel')]:p.salesQty,[tr('closingStockLabel')]:p.projected===null?'':p.projected,[tr('statusLabel')]:forecastStatusLabel(p.status),'Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,[tr('replacementLabel')]:p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'',[tr('notesLabel')]:p.issueText}));
+ const mapRows=list=>list.map(p=>({[tr('skuCodeLabel')]:p.displaySku,[tr('productNameLabel')]:p.displayName,[tr('openingStockLabel')]:p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),[tr('monthPurchaseLabel')]:p.purchaseQty,[tr('monthSalesLabel')]:p.salesQty,[tr('closingStockLabel')]:p.projected===null?'':p.projected,[tr('statusLabel')]:forecastStatusLabel(p.status),'Phân loại mua/bán/tồn':forecastActivityLabel(p),'Có trong file mua vào':p.purchaseRows>0?'Có':'Không','Có trong file bán ra':p.salesRows>0?'Có':'Không','Có trong file tồn đầu kỳ':p.inStock?'Có':'Không','Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,[tr('replacementLabel')]:p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'',[tr('notesLabel')]:p.issueText}));
  const wb=XLSX.utils.book_new();
  const negRows=mapRows(stockForecastResults.filter(p=>p.status==='negative'));
  const allRows=mapRows(stockForecastResults);
