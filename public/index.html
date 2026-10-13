@@ -1265,6 +1265,26 @@ body[data-theme="bear"] .bear-caption small{font-size:11px!important}
 #page-results .tablewrap td select{min-width:125px;max-width:100%}
 @media(max-width:700px){#page-results .tablewrap>table{min-width:1320px!important}}
 
+
+/* Full-width layout fix: use the entire viewport without horizontal overflow */
+html,body{width:100%;min-height:100%;margin:0}
+body{overflow-x:hidden}
+header.app-header{width:100%;max-width:none;margin:0;padding-left:clamp(14px,2.4vw,40px);padding-right:clamp(14px,2.4vw,40px)}
+.shell{width:100%;max-width:none;margin:0;padding-left:clamp(14px,2.4vw,40px);padding-right:clamp(14px,2.4vw,40px);grid-template-columns:minmax(205px,235px) minmax(0,1fr);gap:clamp(14px,1.4vw,24px)}
+.main,.page{min-width:0;width:100%}
+.page.active{display:block}
+.page .hero,.page .panel,.page .tablewrap{max-width:100%;min-width:0}
+@media(min-width:1501px){
+ header.app-header,.shell{padding-left:clamp(32px,3vw,64px);padding-right:clamp(32px,3vw,64px)}
+}
+@media(max-width:950px){
+ .shell{grid-template-columns:minmax(0,1fr)}
+ header.app-header{width:100%}
+}
+@media(max-width:650px){
+ header.app-header{padding:12px}
+ .shell{padding:0 12px 24px;gap:12px}
+}
 </style>
 
 <style id="matchma-layout-stability">
