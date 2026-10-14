@@ -1183,6 +1183,14 @@ body[data-theme="bear"] .foot{color:#956e58!important}
 }
 
 
+/* HARD FIX: bear theme must span the entire viewport, including header toolbar */
+html,body{width:100%!important;max-width:none!important;margin:0!important}
+body[data-theme="bear"] header.app-header{width:100%!important;max-width:none!important;margin:0!important;box-sizing:border-box!important}
+body[data-theme="bear"] .app-shell,body[data-theme="bear"] .shell{width:100%!important;max-width:none!important;margin:0!important;box-sizing:border-box!important}
+body[data-theme="bear"] .headright{min-width:0!important;max-width:100%!important;flex:1 1 auto!important;justify-content:flex-end!important;flex-wrap:wrap!important}
+body[data-theme="bear"] .app-header{gap:12px!important}
+body[data-theme="bear"] .main{min-width:0!important;width:100%!important}
+@media(min-width:951px){body[data-theme="bear"] header.app-header{padding-left:24px!important;padding-right:24px!important}body[data-theme="bear"] .app-shell{grid-template-columns:minmax(0,1fr)!important}}
 /* Final bear-theme correction: hand-drawn controls and a complete, connected bear */
 @import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;500;600;700;800;900&display=swap');
 body[data-theme="bear"]{
