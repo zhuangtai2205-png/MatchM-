@@ -2438,7 +2438,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
 </section>
 
 <section class="page" id="page-invoicecompare">
- <div class="sectionhead"><div><h2>🧾 So sánh dữ liệu 2 file hóa đơn</h2><p>Đối chiếu theo Ngày hóa đơn + Số hóa đơn; so sánh tổng tiền trước thuế và tổng tiền thuế, tính chênh lệch thiếu/thừa.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div>
+ <div class="sectionhead"><div><h2>🧾 So sánh dữ liệu 2 file hóa đơn</h2><p>Đối chiếu theo Ngày hóa đơn + Số hóa đơn; so sánh tổng tiền trước thuế và tổng tiền thuế, tính chênh lệch thiếu/thừa.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div><div class="panel" style="margin-bottom:14px"><h2>📥 File mẫu để chuẩn bị dữ liệu import</h2><p>Tải file mẫu để biết chính xác tên và thứ tự cột. Cả file A và file B nên có đủ 4 cột dưới đây; nhập ngày theo định dạng DD/MM/YYYY và tiền bằng số, không kèm chữ “đồng”.</p><div class="template-row"><span>Ngày hóa đơn · Số hóa đơn · Tổng tiền trước thuế · Tổng tiền thuế</span><button class="btn alt sample-download" data-sample="invoice">Tải file mẫu hóa đơn ↓</button></div><p class="hint">Ví dụ: 15/10/2026 · HD0001 · 1000000 · 100000. Không gộp nhiều hóa đơn vào một ô; mỗi dòng là một hóa đơn.</p></div>
  <div class="grid">
   <div class="panel"><h2>1. File hóa đơn gốc / đối chiếu A</h2><p>Tải file chuẩn để làm mốc so sánh.</p><label class="upload"><span class="bigicon">📄</span><strong>Chọn file A</strong><input id="invoiceFileA" type="file" accept=".csv,.xlsx,.xls"></label><div id="invoiceInfoA" class="hint">Chưa tải file.</div></div>
   <div class="panel"><h2>2. File hóa đơn cần kiểm tra B</h2><p>Tải file thứ hai cần so sánh với file A.</p><label class="upload"><span class="bigicon">📑</span><strong>Chọn file B</strong><input id="invoiceFileB" type="file" accept=".csv,.xlsx,.xls"></label><div id="invoiceInfoB" class="hint">Chưa tải file.</div></div>
@@ -3835,6 +3835,7 @@ $('export').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
 function downloadImportTemplate(kind){
  if(typeof XLSX==='undefined'){alert('Chưa tải được thư viện Excel. Hãy tải lại trang rồi thử lại.');return}
  const templates={
+  invoice:{file:'matchma-mau-so-sanh-hoa-don.xlsx',sheet:'Hoa don',rows:[['Ngày hóa đơn','Số hóa đơn','Tổng tiền trước thuế','Tổng tiền thuế'],['15/10/2026','HD0001',1000000,100000],['16/10/2026','HD0002',2500000,250000],['17/10/2026','HD0003',780000,78000]]},
   check:{file:'matchma-mau-file-can-ra-soat.xlsx',sheet:'Can ra soat',rows:[['Tên sản phẩm','SKU (nếu có)','Quy cách','ĐVT'],['Sua VNM co duong 1L','SKU001','1L','Hộp'],['Nuoc suoi 500ml','','500ml','Chai']]},
   platform:{file:'matchma-mau-ra-soat-san.xlsx',sheet:'Ra soat san',rows:[['STT','Tên sản phẩm'],[1,'Sữa tươi Vinamilk 1L'],[2,'Nước suối 500ml']]},
   autofill:{file:'matchma-mau-tu-dien-ma.xlsx',sheet:'File goc',rows:[['STT','Tên sản phẩm','Quy cách','ĐVT','SKU'],[1,'Sữa VNM có đường 1L','1L','Hộp',''],[2,'Nước suối 500ml','500ml','Chai','']]},
