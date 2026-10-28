@@ -4124,7 +4124,19 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  const fmt=n=>Number(n||0).toLocaleString('vi-VN',{minimumFractionDigits:0,maximumFractionDigits:2});
  const escHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const isBlankRow=r=>!r||!r.some(v=>String(v??'').trim()!=='');
- function headerRowIndex(matrix){return matrix.findIndex(r=>{const a=norm(r[0]),b=norm(r[1]),all=r.map(norm).join(' ');const money=r.some(h=>{const n=norm(h);return n.startsWith('PS ')||n.includes('PHAT SINH')||n==='NO'||n==='CO'});const account=all.includes('TK')||all.includes('TAI KHOAN')||all.includes('ACCOUNT');return a.includes('CT')&&b.includes('CT')&&money&&account})}
+ function headerRowIndex(matrix){
+  const has=(headers,patterns)=>headers.some(h=>{const n=norm(h).replace(/[^A-Z0-9 ]/g,' ').replace(/\\s+/g,' ').trim();return patterns.some(p=>p.test(n))});
+  return matrix.findIndex(r=>{
+   const headers=(r||[]).map(h=>norm(h).replace(/[^A-Z0-9 ]/g,' ').replace(/\\s+/g,' ').trim());
+   const code=has(headers,[/^(MA CT|MA CHUNG TU|LOAI CT|MA CHUNG TU HOACH TOAN)$/,/^MA CT\\b/]);
+   const voucher=has(headers,[/SO CTU?\\b/,/SO CHUNG TU/,/SO CHUNG TU GOC/,/CHUNG TU SO/]);
+   const desc=has(headers,[/DIEN GIAI/,/NOI DUNG/]);
+   const account=has(headers,[/TK DOI UNG/,/TAI KHOAN DOI UNG/,/^TK\\b/,/TAI KHOAN/]);
+   const debit=has(headers,[/^PS NO\\b/,/PHAT SINH NO/,/^NO\\b/,/SO TIEN NO/]);
+   const credit=has(headers,[/^PS CO\\b/,/PHAT SINH CO/,/^CO\\b/,/SO TIEN CO/]);
+   return code&&voucher&&desc&&account&&debit&&credit;
+  });
+ }
  function readCsvMatrix(text){return parseCSV(text)}
  async function readMatrix(file){
   const ext=(file.name.split('.').pop()||'').toLowerCase();
