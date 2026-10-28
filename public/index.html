@@ -4218,7 +4218,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const target=p.invoices.length&&p.amount>referencedTotal+0.005?p.amount-referencedTotal:p.invoices.length?0:p.amount;
    if(target<=0.005)continue;
    const available=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date));
-   const subset=uniqueSubset(available,target,inv=>inv.total);
+   // Allow a unique one-to-one match for sub-unit rounding differences (<= 0.50).
+   // Keep the variance visible as "dư lẻ"; do not silently treat it as fully settled.
+   const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=0.5);
+   let subset=roundedCandidates.length===1?[roundedCandidates[0]]:null;
+   if(!subset)subset=uniqueSubset(available,target,inv=>inv.total);
    if(subset){subset.forEach(inv=>{if(!p.invoices.includes(inv)){p.invoices.push(inv);inv.payments.push(p)}});}
   }
   // Match a single PN against a unique combination of smaller unassigned UNC payments.
