@@ -2288,6 +2288,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
    <button class="navbtn" data-page="autofill" title="Điền mã từ file gốc"><span class="navicon" aria-hidden="true"></span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
   </div>
  </details>
+ <button class="navbtn" data-page="debitcredit" title="Dò Nợ Có"><span class="navicon" aria-hidden="true">⇄</span><span>Dò Nợ Có</span></button>
  <button class="navbtn" data-page="invoicecompare" title="So sánh hóa đơn"><span class="navicon" aria-hidden="true"></span><span>So sánh 2 file hóa đơn</span></button> <button class="navbtn" data-page="stockforecast" title="Dự báo tồn kho"><span class="navicon" aria-hidden="true"></span><span data-i18n="navStockForecast">Dự báo tồn kho</span></button>
  <div class="sidebar-bottom">
   <button class="navbtn" data-page="settings" title="Cài đặt"><span class="navicon" aria-hidden="true"></span><span data-i18n="navSettings">Cài đặt</span></button>
@@ -2444,7 +2445,31 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
   <div class="panel"><h2>2. File hóa đơn cần kiểm tra B</h2><p>Tải file thứ hai cần so sánh với file A.</p><label class="upload"><span class="bigicon">📑</span><strong>Chọn file B</strong><input id="invoiceFileB" type="file" accept=".csv,.xlsx,.xls"></label><div id="invoiceInfoB" class="hint">Chưa tải file.</div></div>
  </div>
  <div class="panel"><h2>Quy tắc đối chiếu</h2><p>Hai dòng chỉ được ghép khi <b>ngày hóa đơn</b> và <b>số hóa đơn</b> cùng khớp. Các cột cần có: Ngày hóa đơn, Số hóa đơn, Tổng tiền trước thuế, Tổng tiền thuế. Hỗ trợ tên cột gần tương đương; nếu không tự nhận diện được, hãy đổi tiêu đề cột trong file theo các tên này.</p><div class="actions"><button class="btn" id="invoiceCompareRun" disabled>So sánh hai file</button><button class="btn alt" id="invoiceCompareExport" disabled>Xuất kết quả Excel ↓</button></div><div id="invoiceSummary" class="stats" style="margin-top:14px"></div><div style="display:flex;flex-wrap:wrap;gap:10px;margin:14px 0"><input id="invoiceFilterSearch" type="search" oninput="filterInvoiceTable()" placeholder="Tìm ngày hoặc số hóa đơn…" style="flex:2;min-width:200px"><select id="invoiceFilterStatus" onchange="filterInvoiceTable()" style="flex:1;min-width:170px"><option value="">Tất cả kết quả</option><option>Khớp</option><option>Lệch tiền</option><option>Chỉ có ở file A</option><option>Chỉ có ở file B</option><option>Trùng số hóa đơn</option></select><select id="invoiceFilterDiff" onchange="filterInvoiceTable()" style="flex:1;min-width:170px"><option value="">Tất cả chênh lệch</option><option value="diff">Có chênh lệch tiền</option><option value="zero">Không chênh lệch tiền</option></select><button class="btn alt" id="invoiceFilterReset" type="button" onclick="resetInvoiceFilters()">Xóa lọc</button></div><div id="invoiceFilterCount" class="hint"></div><div id="invoiceResults" class="tablewrap"><div class="empty">Tải lên cả hai file để bắt đầu.</div></div></div>
- </section> <section class="page" id="page-stockforecast">
+ </section> <section class="page" id="page-debitcredit">
+ <div class="sectionhead"><div><h2>⇄ Dò Nợ Có</h2><p>Tải bảng kê kế toán lên, nhóm theo số phiếu và kiểm tra tổng phát sinh Có − tổng phát sinh Nợ.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div>
+ <div class="panel">
+  <h2>1. Tải file sổ kế toán</h2>
+  <p>File cần có các cột tương ứng với <b>Số phiếu/chứng từ</b>, <b>Tài khoản</b>, <b>Phát sinh Nợ</b> và <b>Phát sinh Có</b>. Có thể chọn lại cột sau khi tải.</p>
+  <label class="upload"><span class="bigicon">📄</span><strong>Chọn file Excel hoặc CSV</strong><input id="dcFile" type="file" accept=".xlsx,.xls,.csv"></label>
+  <div id="dcFileInfo" class="hint">Chưa có file.</div>
+  <div class="grid">
+   <div class="field"><label for="dcVoucherCol">Cột số phiếu / chứng từ</label><select id="dcVoucherCol" disabled></select></div>
+   <div class="field"><label for="dcAccountCol">Cột tài khoản</label><select id="dcAccountCol" disabled></select></div>
+   <div class="field"><label for="dcDebitCol">Cột phát sinh Nợ</label><select id="dcDebitCol" disabled></select></div>
+   <div class="field"><label for="dcCreditCol">Cột phát sinh Có</label><select id="dcCreditCol" disabled></select></div>
+  </div>
+  <div class="actions"><button class="btn" id="dcRun" type="button" disabled>Chạy dò Nợ Có</button><button class="btn alt" id="dcExport" type="button" disabled>Xuất Excel kết quả</button></div>
+  <div class="hint">Ví dụ: phiếu PN01 có các dòng TK 1561 và TK 11211. Công cụ cộng Nợ/Có của toàn bộ dòng thuộc PN01; không tự mặc định tài khoản nào là Nợ hay Có.</div>
+ </div>
+ <div id="dcResultsPanel" class="panel" hidden>
+  <div class="sectionhead"><div><h2>2. Kết quả đối chiếu</h2><p>Chênh lệch = Tổng Có − Tổng Nợ. Chênh lệch bằng 0 là cân đối.</p></div></div>
+  <div class="stats"><div class="stat"><small>Số phiếu</small><b id="dcCount">0</b></div><div class="stat"><small>Tổng phát sinh Nợ</small><b id="dcTotalDebit">0</b></div><div class="stat"><small>Tổng phát sinh Có</small><b id="dcTotalCredit">0</b></div><div class="stat review"><small>Phiếu lệch</small><b id="dcUnbalanced">0</b></div></div>
+  <div class="resulttools"><input class="search" id="dcSearch" type="text" placeholder="Tìm số phiếu hoặc tài khoản…"><select id="dcStatusFilter" aria-label="Lọc trạng thái"><option value="all">Tất cả phiếu</option><option value="balanced">Cân đối</option><option value="unbalanced">Bị lệch</option></select></div>
+  <div id="dcResults" class="tablewrap"><div class="empty">Chưa có kết quả.</div></div>
+  <div id="dcDetail" class="panel" hidden><h2>Chi tiết phiếu</h2><div id="dcDetailTable" class="tablewrap"></div></div>
+ </div>
+ </section>
+ <section class="page" id="page-stockforecast">
  <div class="sectionhead"><div><h2 data-i18n="forecastPageTitle">📦 Dự báo âm kho cuối tháng</h2><p data-i18n="forecastPageDesc">Đối chiếu duy nhất theo SKU để biết mặt hàng nào sẽ âm khi chốt sổ cuối tháng.</p></div><span class="pill">Excel .xlsx / .xls / CSV</span></div>
  <div class="panel"><h2 data-i18n="forecastFilesTitle">1. Tải ba file dữ liệu</h2><p data-i18n="forecastFilesDesc">Chốt sổ theo tháng, không tính theo từng ngày: tải file tồn đầu kỳ (trước các giao dịch trong tháng), cùng file mua vào và bán ra đã lọc đủ cả tháng. Ứng dụng bỏ qua cột ngày, cộng tổng số lượng của từng SKU trong toàn bộ file.</p>
   <div class="grid3">
@@ -4092,4 +4117,30 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
 @media(min-width:951px){.shell{align-items:start}.sidebar{min-width:0}}
 @media(max-width:950px){.shell{grid-template-columns:minmax(0,1fr)!important}}
 </style>
+<script id="matchma-debit-credit-v1">
+(function(){
+ const $=id=>document.getElementById(id);
+ let headers=[],rows=[],results=[],details=[],filename='';
+ const fields={voucher:'',account:'',debit:'',credit:''};
+ const num=v=>{let s=String(v??'').trim().replace(/\s/g,'');if(!s)return 0;s=s.replace(/[^0-9,.-]/g,'');if(s.includes(',')&&s.includes('.')){if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'')}else if(s.includes(',')){const p=s.split(',');s=p[p.length-1].length===3?p.join(''):s.replace(',','.')}const n=Number(s);return Number.isFinite(n)?n:0};
+ const fmt=n=>Number(n||0).toLocaleString('vi-VN',{minimumFractionDigits:0,maximumFractionDigits:2});
+ const escHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const guessCol=(re)=>headers.find(h=>re.test(h))||'';
+ function fill(id,selected){const el=$(id);el.innerHTML='';headers.forEach(h=>{const o=document.createElement('option');o.value=h;o.textContent=h;el.appendChild(o)});el.disabled=!headers.length;if(selected&&headers.includes(selected))el.value=selected}
+ function detect(){fields.voucher=guessCol(/(số phiếu|so phieu|chứng từ|chung tu|mã phiếu|ma phieu|voucher|document.?no|reference)/i);fields.account=guessCol(/(tài khoản|tai khoan|account|tk nợ có|account.?code)/i);fields.debit=guessCol(/(phát sinh nợ|phat sinh no|số tiền nợ|so tien no|debit|nợ phát sinh|no ps|ps nợ|ps no)/i);fields.credit=guessCol(/(phát sinh có|phat sinh co|số tiền có|so tien co|credit|có phát sinh|co ps|ps có|ps co)/i);fill('dcVoucherCol',fields.voucher);fill('dcAccountCol',fields.account);fill('dcDebitCol',fields.debit);fill('dcCreditCol',fields.credit);$('dcRun').disabled=!(headers.length&&rows.length);$('dcFileInfo').textContent=filename+' · '+rows.length.toLocaleString('vi-VN')+' dòng dữ liệu. Vui lòng kiểm tra các cột đã nhận diện.'}
+ $('dcFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;try{const parsed=await readFile(file);headers=parsed.headers;rows=parsed.rows;filename=file.name;detect();$('dcResultsPanel').hidden=true}catch(err){$('dcFileInfo').textContent='Không đọc được file: '+(err.message||String(err));rows=[];headers=[];$('dcRun').disabled=true}});
+ ['dcVoucherCol','dcAccountCol','dcDebitCol','dcCreditCol'].forEach(id=>$(id).addEventListener('change',()=>{$('dcRun').disabled=!(rows.length&&$('dcVoucherCol').value&&$('dcAccountCol').value&&$('dcDebitCol').value&&$('dcCreditCol').value)}));
+ function run(){const v=$('dcVoucherCol').value,a=$('dcAccountCol').value,d=$('dcDebitCol').value,c=$('dcCreditCol').value;if(!v||!a||!d||!c){alert('Vui lòng chọn đủ 4 cột: số phiếu, tài khoản, Nợ và Có.');return}
+ const map=new Map();details=[];
+ rows.forEach((r,i)=>{const voucher=String(r[v]??'').trim();if(!voucher)return;const account=String(r[a]??'').trim();const debit=num(r[d]),credit=num(r[c]);if(!map.has(voucher))map.set(voucher,{voucher,debit:0,credit:0,accounts:new Map(),count:0});const x=map.get(voucher);x.debit+=debit;x.credit+=credit;x.count++;if(!x.accounts.has(account))x.accounts.set(account,{account,debit:0,credit:0,count:0});const y=x.accounts.get(account);y.debit+=debit;y.credit+=credit;y.count++;details.push({voucher,account,debit,credit,sourceRow:i+2})});
+ results=[...map.values()].map(x=>({...x,accounts:[...x.accounts.values()].sort((a,b)=>a.account.localeCompare(b.account,'vi')),diff:x.credit-x.debit,balanced:Math.abs(x.credit-x.debit)<0.005})).sort((a,b)=>a.voucher.localeCompare(b.voucher,'vi'));
+ $('dcResultsPanel').hidden=false;$('dcCount').textContent=results.length.toLocaleString('vi-VN');$('dcTotalDebit').textContent=fmt(results.reduce((s,x)=>s+x.debit,0));$('dcTotalCredit').textContent=fmt(results.reduce((s,x)=>s+x.credit,0));$('dcUnbalanced').textContent=results.filter(x=>!x.balanced).length.toLocaleString('vi-VN');$('dcExport').disabled=!results.length;render();$('dcDetail').hidden=true}
+ function render(){const q=$('dcSearch').value.trim().toLowerCase(),status=$('dcStatusFilter').value;const list=results.filter(x=>(x.voucher+' '+x.accounts.map(a=>a.account).join(' ')).toLowerCase().includes(q)&&(status==='all'||(status==='balanced'?x.balanced:!x.balanced)));if(!list.length){$('dcResults').innerHTML='<div class="empty">Không có phiếu phù hợp bộ lọc.</div>';return}
+ $('dcResults').innerHTML='<table><thead><tr><th>Số phiếu</th><th>Số dòng</th><th>Tài khoản</th><th>Tổng Nợ</th><th>Tổng Có</th><th>Có − Nợ</th><th>Trạng thái</th><th>Chi tiết</th></tr></thead><tbody>'+list.map(x=>'<tr><td><b>'+escHtml(x.voucher)+'</b></td><td>'+x.count+'</td><td>'+escHtml(x.accounts.map(a=>a.account||'(trống)').join(', ')||'—')+'</td><td>'+fmt(x.debit)+'</td><td>'+fmt(x.credit)+'</td><td><b>'+fmt(x.diff)+'</b></td><td><span class="badge '+(x.balanced?'good':'none')+'">'+(x.balanced?'Cân đối':'Bị lệch')+'</span></td><td><button class="btn alt" type="button" data-dc-detail="'+escHtml(x.voucher)+'">Xem</button></td></tr>').join('')+'</tbody></table>';
+ $('dcResults').querySelectorAll('[data-dc-detail]').forEach(b=>b.addEventListener('click',()=>showDetail(b.dataset.dcDetail)))}
+ function showDetail(voucher){const x=results.find(r=>r.voucher===voucher);if(!x)return;$('dcDetail').hidden=false;$('dcDetailTable').innerHTML='<table><thead><tr><th>Tài khoản</th><th>Số dòng</th><th>Tổng Nợ</th><th>Tổng Có</th><th>Có − Nợ</th></tr></thead><tbody>'+x.accounts.map(a=>'<tr><td>'+escHtml(a.account||'(trống)')+'</td><td>'+a.count+'</td><td>'+fmt(a.debit)+'</td><td>'+fmt(a.credit)+'</td><td>'+fmt(a.credit-a.debit)+'</td></tr>').join('')+'<tr><th>TỔNG PHIẾU '+escHtml(x.voucher)+'</th><th>'+x.count+'</th><th>'+fmt(x.debit)+'</th><th>'+fmt(x.credit)+'</th><th>'+fmt(x.diff)+'</th></tr></tbody></table>';$('dcDetail').scrollIntoView({behavior:'smooth',block:'nearest'})}
+ $('dcRun').addEventListener('click',run);$('dcSearch').addEventListener('input',render);$('dcStatusFilter').addEventListener('change',render);
+ $('dcExport').addEventListener('click',()=>{if(typeof XLSX==='undefined'){alert('Thư viện Excel chưa tải xong.');return}const wb=XLSX.utils.book_new();const summary=results.map(x=>({'Số phiếu':x.voucher,'Số dòng':x.count,'Tài khoản':x.accounts.map(a=>a.account).join(', '),'Tổng Nợ':x.debit,'Tổng Có':x.credit,'Có - Nợ':x.diff,'Trạng thái':x.balanced?'Cân đối':'Bị lệch'}));XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(summary),'Tong hop');const detail=details.map(x=>({'Số phiếu':x.voucher,'Tài khoản':x.account,'Phát sinh Nợ':x.debit,'Phát sinh Có':x.credit,'Dòng file gốc':x.sourceRow}));XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(detail),'Chi tiet');XLSX.writeFile(wb,'Doi_chieu_No_Co.xlsx')});
+})();
+</script>
 </body></html>
