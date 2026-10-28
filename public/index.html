@@ -4179,7 +4179,13 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
   const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
   function uniqueSubset(items,target,getAmount,maxItems=14){
-   const pool=items.filter(x=>Math.abs(getAmount(x))>0.005).slice(0,80);
+   // First check exact single-item matches across ALL eligible rows. The old
+   // implementation returned null whenever there were >14 candidates, which
+   // caused many valid PN/UNC matches to be missed on a normal ledger.
+   const pool=items.filter(x=>getAmount(x)>0.005&&getAmount(x)<=target+0.005);
+   const exact=pool.filter(x=>closeMoney(getAmount(x),target));
+   if(exact.length===1)return exact;
+   if(exact.length>1)return null;
    if(pool.length>maxItems)return null;
    let found=null,count=0;
    function walk(pos,sum,chosen){
