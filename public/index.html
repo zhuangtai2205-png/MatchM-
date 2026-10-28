@@ -4163,9 +4163,23 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const candidates=invoices.filter(inv=>!inv.payments.length&&Math.abs(inv.total-p.amount)<0.005);
    if(candidates.length===1){p.invoices=[candidates[0]];candidates[0].payments.push(p)}
   }
+  // Adjustment vouchers (e.g. "DIEU CHINH HOA DON") can cancel the original PN without an UNC payment.
+  // If an adjustment PN and an original PN have equal/opposite net totals, treat them as reconciled together.
+  const pairColors=['E2F0D9','DDEBF7','FCE4D6','E4DFEC','FFF2CC','DDEBF7','F4CCCC','D9EAD3'];
+  let colorIndex=0;
+  const adjustmentInvoices=invoices.filter(inv=>inv.rows.some(rec=>/DIEU CHINH|DIEU CHINH HOA DON|HOA DON DIEU CHINH/.test(norm(rec.base[2]))));
+  for(const adj of adjustmentInvoices){
+   if(adj._adjustedPair)continue;
+   const candidates=invoices.filter(inv=>inv!==adj&&!inv._adjustedPair&&!adjustmentInvoices.includes(inv)&&!inv.payments.length&&Math.abs(inv.total+adj.total)<0.005);
+   if(Math.abs(adj.total)>0.005&&candidates.length===1){
+    const original=candidates[0],color=pairColors[colorIndex++%pairColors.length];
+    adj._adjustedPair=original;original._adjustedPair=adj;adj._adjustedColor=original._adjustedColor=color;
+    [original,adj].forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.result='';rec._color=color;});inv.rows[0].totalPN=inv.total;});
+    // Keep both vouchers out of the unpaid-payment reconciliation below.
+   }
+  }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
-  const visitedI=new Set(),visitedP=new Set();
-  const pairColors=['E2F0D9','DDEBF7','FCE4D6','E4DFEC','FFF2CC','DDEBF7','F4CCCC','D9EAD3'];let colorIndex=0;
+  const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
   for(const start of invoices){
    if(visitedI.has(start.key))continue;
    const compI=[],compP=[],queue=[{type:'i',obj:start}];visitedI.add(start.key);
@@ -4180,9 +4194,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    compP.forEach(p=>{p.rec.status='ok';p.rec.result=''});
   }
   // Purchases with no payment link are marked as unpaid.
-  for(const inv of invoices){if(!inv.payments.length){inv.rows[0].totalPN=inv.total;inv.rows[0].result=inv.total;inv.rows[0].status='chưa thanh toán';}}
+  for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows[0].totalPN=inv.total;inv.rows[0].result=inv.total;inv.rows[0].status='chưa thanh toán';}}
   // UNC entries that cannot be matched to a PN are surfaced separately.
-  for(const inv of invoices){if(!inv.payments.length){inv.rows.forEach(rec=>rec._color='FFF2CC')}}
+  for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows.forEach(rec=>rec._color='FFF2CC')}}
   for(const p of payments){if(!p.invoices.length){p.rec.result=p.amount;p.rec.status='unc không có pn';p.rec._color='F4CCCC'}}
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status]);rec.output=output;return rec});
   summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>=0.005).length};
