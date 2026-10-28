@@ -4212,7 +4212,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   for(const adj of adjustmentInvoices){
    if(adj._adjustedPair)continue;
    const descText=norm(adj.rows.map(rec=>rec.base[2]).join(' '));
-   const referencedTokens=(descText.match(/[A-Z0-9]+/g)||[]).filter(t=>/\\d/.test(t));
+   const referencedTokens=(descText.match(/[A-Z0-9]+/g)||[]).filter(t=>/[0-9]/.test(t));
    const candidates=invoices.filter(inv=>inv!==adj&&!inv._adjustedPair&&!adjustmentInvoices.includes(inv)&&Math.abs(inv.total+adj.total)<0.005&&(!referencedTokens.length||referencedTokens.includes(inv.numberToken)));
    if(Math.abs(adj.total)>0.005&&candidates.length===1){
     const original=candidates[0],color=pairColors[colorIndex++%pairColors.length];
