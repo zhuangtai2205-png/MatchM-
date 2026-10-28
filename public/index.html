@@ -4211,7 +4211,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const adjustmentInvoices=invoices.filter(inv=>inv.rows.some(rec=>/DIEU CHINH|DIEU CHINH HOA DON|HOA DON DIEU CHINH/.test(norm(rec.base[2]))));
   for(const adj of adjustmentInvoices){
    if(adj._adjustedPair)continue;
-   const candidates=invoices.filter(inv=>inv!==adj&&!inv._adjustedPair&&!adjustmentInvoices.includes(inv)&&!inv.payments.length&&Math.abs(inv.total+adj.total)<0.005);
+   const descText=norm(adj.rows.map(rec=>rec.base[2]).join(' '));
+   const referencedTokens=(descText.match(/[A-Z0-9]+/g)||[]).filter(t=>/\\d/.test(t));
+   const candidates=invoices.filter(inv=>inv!==adj&&!inv._adjustedPair&&!adjustmentInvoices.includes(inv)&&Math.abs(inv.total+adj.total)<0.005&&(!referencedTokens.length||referencedTokens.includes(inv.numberToken)));
    if(Math.abs(adj.total)>0.005&&candidates.length===1){
     const original=candidates[0],color=pairColors[colorIndex++%pairColors.length];
     adj._adjustedPair=original;original._adjustedPair=adj;adj._adjustedColor=original._adjustedColor=color;
