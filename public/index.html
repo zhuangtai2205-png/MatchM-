@@ -4240,24 +4240,37 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
   const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
   function uniqueSubset(items,target,getAmount,maxItems=14){
-   // First check exact single-item matches across ALL eligible rows. The old
-   // implementation returned null whenever there were >14 candidates, which
-   // caused many valid PN/UNC matches to be missed on a normal ledger.
-   const pool=items.filter(x=>getAmount(x)>0.005&&getAmount(x)<=target+0.005);
-   const exact=pool.filter(x=>closeMoney(getAmount(x),target));
-   if(exact.length===1)return exact;
+   // Match groups by the sum of their amounts, not only one-to-one.
+   // Use cents-based dynamic programming so ledgers with more than 14 candidate
+   // vouchers are not silently rejected. Keep at most two ways per sum: if a
+   // sum has multiple possible combinations, do not guess which vouchers belong.
+   const targetCents=Math.round(Number(target)*100);
+   if(!Number.isFinite(targetCents)||targetCents<=0)return null;
+   const pool=items.map((item,index)=>({item,index,cents:Math.round(Number(getAmount(item))*100)}))
+    .filter(x=>x.cents>0&&x.cents<=targetCents);
+   const exact=pool.filter(x=>x.cents===targetCents);
+   if(exact.length===1)return [exact[0].item];
    if(exact.length>1)return null;
-   if(pool.length>maxItems)return null;
-   let found=null,count=0;
-   function walk(pos,sum,chosen){
-    if(count>1)return;
-    if(chosen.length&&closeMoney(sum,target)){found=chosen.slice();count++;return}
-    if(pos>=pool.length||sum>target+0.005)return;
-    walk(pos+1,sum+getAmount(pool[pos]),chosen.concat(pool[pos]));
-    walk(pos+1,sum,chosen);
+   // Sum-state cap protects the browser on very large ledgers. A capped search
+   // returns no match (never a false positive) rather than guessing.
+   const states=new Map([[0,{count:1,indices:[]}]]);
+   const STATE_LIMIT=30000;
+   for(let i=0;i<pool.length;i++){
+    const cents=pool[i].cents;
+    const prior=[...states.entries()];
+    for(const [sum,state] of prior){
+     const next=sum+cents;
+     if(next>targetCents)continue;
+     const candidate=state.indices.concat(i);
+     const existing=states.get(next);
+     if(!existing)states.set(next,{count:state.count,indices:candidate});
+     else existing.count=Math.min(2,existing.count+state.count);
+    }
+    if(states.size>STATE_LIMIT)return null;
    }
-   walk(0,0,[]);
-   return count===1?found:null;
+   const result=states.get(targetCents);
+   if(!result||result.count!==1||!result.indices.length)return null;
+   return result.indices.map(i=>pool[i].item);
   }
   for(const p of payments.filter(p=>Math.abs(p.amount)>0.005)){
    // If the description already references some invoices but the UNC amount is
