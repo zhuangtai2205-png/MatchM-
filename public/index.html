@@ -4151,7 +4151,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  }
  function extractInvoiceTokens(desc){
   const d=norm(desc);const at=d.indexOf('HD');if(at<0)return [];
-  const segment=d.slice(at+2).split(/ CTY | CT TNHH | CT DI | CHUYEN TIEN | CK CTY /)[0];
+  // Only parse the invoice reference after HD; stop before advance/balance notes
+  // so amounts such as "DA UNG TRUOC 240" are never mistaken for invoice numbers.
+  const segment=d.slice(at+2).split(/ DA UNG TRUOC | CON NO | TT HET | TT 1 PHAN | CTY | CT TNHH | CT DI | CHUYEN TIEN | CK CTY /)[0];
   return (segment.match(/[A-Z0-9]+/g)||[]).filter(t=>/\d/.test(t));
  }
  function dateValue(v){
@@ -4188,6 +4190,29 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     if(matches.length===1&&!p.invoices.includes(matches[0]))p.invoices.push(matches[0]);
    }
    p.invoices.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p)});
+  }
+  // Link documented advance payments to the later PN when a settlement UNC explicitly
+  // says it is paying the invoice after deducting an advance (e.g. "DA UNG TRUOC 240").
+  // An advance may pre-date the invoice, so this rule intentionally allows up to 60 days
+  // on either side, but only when the stated advance amount uniquely identifies one UNC.
+  for(const p of payments){
+   const desc=norm(p.rec.base[2]);
+   if(!p.invoices.length || !/DA UNG TRUOC/.test(desc))continue;
+   const m=desc.match(/DA UNG TRUOC\s+(\d+(?:[.,]\d+)?)/);
+   if(!m)continue;
+   const stated=num(m[1].replace(',','.'));
+   const expected=stated>=100000?stated:stated*1000000;
+   const invoice=p.invoices[0];
+   const candidates=payments.filter(a=>{
+    if(a===p||a.invoices.length||! /UNG TRUOC/.test(norm(a.rec.base[2])))return false;
+    const days=Math.abs(dateValue(a.date)-dateValue(invoice.date))/86400000;
+    return Number.isFinite(days)&&days<=60&&Math.abs(a.amount-expected)<=0.5;
+   });
+   if(candidates.length===1){
+    const advance=candidates[0];
+    advance.invoices.push(invoice);
+    if(!invoice.payments.includes(advance))invoice.payments.push(advance);
+   }
   }
   // Amount-based group matching for descriptions without invoice numbers:
   // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
@@ -4280,7 +4305,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const list=resultRows.filter(rec=>(!q||rec.output.some(v=>String(v??'').toLowerCase().includes(q)))&&(status==='all'||String(rec.status).toLowerCase()===status));
   $('dcResultCount').textContent='Hiển thị '+list.length.toLocaleString('vi-VN')+' / '+resultRows.length.toLocaleString('vi-VN')+' dòng dữ liệu.';
   if(!list.length){$('dcResults').innerHTML='<div class="empty">Không có dòng phù hợp bộ lọc.</div>';return}
-  $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr style="'+(rec._color?'background:#'+rec._color+';':'')+'">'+rec.output.map((v,i)=>{const val=(i===outputHeaders.length-1&&v)?'<span class="badge '+(v==='ok'?'good':(v==='dư lẻ'?'review':'none'))+'">'+escHtml(v)+'</span>':escHtml(v===null||v===undefined?'':v);return '<td style="'+(rec._color?'background:#'+rec._color+';':'')+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
+  $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr>'+rec.output.map((v,i)=>{const val=(i===outputHeaders.length-1&&v)?'<span class="badge '+(v==='ok'?'good':(v==='dư lẻ'?'review':'none'))+'">'+escHtml(v)+'</span>':escHtml(v===null||v===undefined?'':v);const tint=rec._color&&i>=4?'background:#'+rec._color+';':'';return '<td style="'+tint+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
  }
  $('dcFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;filename=file.name;$('dcFileInfo').textContent='Đang đọc file…';$('dcRun').disabled=true;$('dcExport').disabled=true;try{const parsed=await readMatrix(file);sheetName=parsed.sheetName;const records=prepare(parsed.matrix);window.__dcRecords=records;$('dcFileInfo').textContent='Đã import '+filename+' · sheet '+(sheetName||'CSV')+' · '+records.length.toLocaleString('vi-VN')+' dòng. Nhấn “Đối chiếu công nợ” để tính kết quả.';$('dcRun').disabled=!records.length;$('dcResultsPanel').hidden=true}catch(err){window.__dcRecords=[];$('dcFileInfo').textContent='Không đọc được file: '+(err.message||String(err));}});
  $('dcRun').addEventListener('click',()=>{try{const records=window.__dcRecords||[];if(!records.length){alert('Vui lòng import file sổ kế toán trước.');return}compute(records);$('dcResultsPanel').hidden=false;$('dcExport').disabled=false;render()}catch(err){alert('Lỗi khi đối chiếu: '+(err.message||String(err)))}});
