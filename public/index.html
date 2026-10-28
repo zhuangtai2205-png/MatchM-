@@ -2451,9 +2451,11 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
   <h2>1. Import sổ kế toán</h2>
   <p>Chọn file sổ chi tiết công nợ như <b>0887.xlsx</b>. Công cụ tự tìm dòng tiêu đề kể cả khi đầu file có tên công ty, tên sổ và thời gian báo cáo. Không cần xóa các dòng đầu file.</p>
   <label class="upload"><span class="bigicon">📄</span><strong>Import file Excel hoặc CSV</strong><input id="dcFile" type="file" accept=".xlsx,.xls,.csv"></label>
+  <div class="template-row"><span><b>File mẫu sổ công nợ:</b> Mã ct · Số chứng từ · Diễn giải · TK đ/ư · Ps nợ · Ps có · Mã vv · Mã ct (2) · Ngày ct</span><button class="btn alt sample-download" data-sample="debt" type="button">Tải file mẫu sổ công nợ ↓</button></div>
+  <div class="rule"><b>Cách dùng file mẫu</b><br>1. Tải file mẫu Excel ở trên và mở sheet “So cong no mau”.<br>2. Giữ nguyên hàng tiêu đề và tên cột; thay các dòng ví dụ bằng dữ liệu thật hoặc dùng làm mẫu đối chiếu.<br>3. Mỗi dòng là một dòng hạch toán; một PN có thể có nhiều dòng (hàng hóa, thuế). Không xóa các dòng PN/UNC và không cần sắp xếp chứng từ cạnh nhau.<br>4. Ngày chứng từ dùng định dạng DD/MM/YYYY; Ps nợ/Ps có là số tiền dạng số, không ghi thêm chữ “đồng”.<br>5. Nếu dùng sổ kế toán xuất từ phần mềm, có thể tải trực tiếp file gốc .xlsx/.xls/.csv; không bắt buộc phải chuyển sang mẫu này.</div>
   <div id="dcFileInfo" class="hint">Chưa import file.</div>
   <div class="actions"><button class="btn" id="dcRun" type="button" disabled>Đối chiếu công nợ</button><button class="btn alt" id="dcExport" type="button" disabled>Xuất Excel đầy đủ cột</button></div>
-  <div class="hint">Quy tắc: cộng các dòng thuộc cùng mã CT + số CTừ để tính tổng PN; dò các dòng UNC có nhắc số hóa đơn trong diễn giải; nếu không có số hóa đơn, thử đối chiếu số tiền trùng khớp. Chênh lệch được ghi ở cột KẾT QUẢ và trạng thái ở TỔNG KẾT.</div>
+  <div class="hint">Quy tắc: tổng hợp các dòng cùng chứng từ; rà soát toàn bộ PN/UNC trong phạm vi ngày cho phép, không phụ thuộc vị trí dòng. Một UNC có thể thanh toán nhiều PN và nhiều UNC có thể thanh toán một PN. Chênh lệch được ghi rõ ở cột KẾT QUẢ và trạng thái ở TỔNG KẾT.</div>
  </div>
  <div id="dcResultsPanel" class="panel" hidden>
   <div class="sectionhead"><div><h2>2. Kết quả trên toàn bộ dữ liệu</h2><p>Giữ nguyên các cột nguồn; thêm Tổng tiền PN, KẾT QUẢ và TỔNG KẾT theo bố cục file làm thủ công.</p></div></div>
@@ -3855,6 +3857,7 @@ $('export').onclick=()=>{if(typeof XLSX==='undefined'){alert(tr('libErr'));retur
 function downloadImportTemplate(kind){
  if(typeof XLSX==='undefined'){alert('Chưa tải được thư viện Excel. Hãy tải lại trang rồi thử lại.');return}
  const templates={
+  debt:{file:'matchma-mau-so-cong-no.xlsx',sheet:'So cong no mau',rows:[['Mã ct','Số chứng từ','Diễn giải','TK đ/ư','Ps nợ','Ps có','Mã vv','Mã ct (2)','Ngày ct'],['PN','461','NHAP HANG',1561,0,14305560,4,'PNA','03/01/2026'],['PN','772','NHAP HANG',1561,0,9832222,4,'PNA','05/01/2026'],['UNC','16','CT DI:600713013129 CTY3854',11211,15450005,0,4,'BN1','07/01/2026'],['PN','461','Thuế GTGT đầu vào',13311,0,1144445,4,'PNA','03/01/2026'],['PN','772','Thuế GTGT đầu vào',13311,0,786578,4,'PNA','05/01/2026']]},
   invoice:{file:'matchma-mau-so-sanh-hoa-don.xlsx',sheet:'Hoa don',rows:[['Ngày hóa đơn','Số hóa đơn','Tổng tiền trước thuế','Tổng tiền thuế'],['15/10/2026','HD0001',1000000,100000],['16/10/2026','HD0002',2500000,250000],['17/10/2026','HD0003',780000,78000]]},
   check:{file:'matchma-mau-file-can-ra-soat.xlsx',sheet:'Can ra soat',rows:[['Tên sản phẩm','SKU (nếu có)','Quy cách','ĐVT'],['Sua VNM co duong 1L','SKU001','1L','Hộp'],['Nuoc suoi 500ml','','500ml','Chai']]},
   platform:{file:'matchma-mau-ra-soat-san.xlsx',sheet:'Ra soat san',rows:[['STT','Tên sản phẩm'],[1,'Sữa tươi Vinamilk 1L'],[2,'Nước suối 500ml']]},
