@@ -4199,7 +4199,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows.forEach(rec=>rec._color='FFF2CC')}}
   for(const p of payments){if(!p.invoices.length){p.rec.result=p.amount;p.rec.status='unc không có pn';p.rec._color='F4CCCC'}}
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status]);rec.output=output;return rec});
-  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>=0.005).length};
+  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>=0.005).length};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');
  }
  function render(){
