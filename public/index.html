@@ -4127,23 +4127,23 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  function debtHeaderNorm(s){
   let x=String(s??'').toLowerCase()
    // Recognize legacy Vietnamese text found in real accounting Excel exports.
-   .replace(/m·\\s*ct/g,'ma ct').replace(/m·\\s*vv/g,'ma vv')
-   .replace(/sè\\s*ctõ/g,'so ctu').replace(/diôn\\s*gi¶i/g,'dien giai')
-   .replace(/tk\\s*®\\s*\\/?/g,'tk doi ung')
-   .replace(/ps\\s*nî/g,'ps no').replace(/ps\\s*cã/g,'ps co')
-   .replace(/ngµy\\s*ct/g,'ngay ct');
-  return norm(x).toUpperCase().replace(/[^A-Z0-9 ]/g,' ').replace(/\\s+/g,' ').trim();
+   .replace(/m·\s*ct/g,'ma ct').replace(/m·\s*vv/g,'ma vv')
+   .replace(/sè\s*ctõ/g,'so ctu').replace(/diôn\s*gi¶i/g,'dien giai')
+   .replace(/tk\s*®\s*\/?/g,'tk doi ung')
+   .replace(/ps\s*nî/g,'ps no').replace(/ps\s*cã/g,'ps co')
+   .replace(/ngµy\s*ct/g,'ngay ct');
+  return norm(x).toUpperCase().replace(/[^A-Z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
  }
  function headerRowIndex(matrix){
   const has=(headers,patterns)=>headers.some(h=>patterns.some(p=>p.test(debtHeaderNorm(h))));
   return matrix.findIndex(r=>{
    const headers=(r||[]).map(debtHeaderNorm);
-   const code=has(headers,[/^(MA CT|M CT|MA CHUNG TU|LOAI CT|MA CHUNG TU HOACH TOAN)$/,/^MA CT\\b/]);
-   const voucher=has(headers,[/SO CTU?\\b/,/SE CTO\\b/,/SO CHUNG TU/,/SO CHUNG TU GOC/,/CHUNG TU SO/]);
+   const code=has(headers,[/^(MA CT|M CT|MA CHUNG TU|LOAI CT|MA CHUNG TU HOACH TOAN)$/,/^MA CT\b/]);
+   const voucher=has(headers,[/SO CTU?\b/,/SE CTO\b/,/SO CHUNG TU/,/SO CHUNG TU GOC/,/CHUNG TU SO/]);
    const desc=has(headers,[/DIEN GIAI/,/DION GIAI/,/NOI DUNG/]);
-   const account=has(headers,[/TK DOI UNG/,/TAI KHOAN DOI UNG/,/^TK\\b/,/TAI KHOAN/]);
-   const debit=has(headers,[/^PS NO\\b/,/PHAT SINH NO/,/^NO\\b/,/SO TIEN NO/]);
-   const credit=has(headers,[/^PS CO\\b/,/PHAT SINH CO/,/^CO\\b/,/SO TIEN CO/]);
+   const account=has(headers,[/TK DOI UNG/,/TAI KHOAN DOI UNG/,/^TK\b/,/TAI KHOAN/]);
+   const debit=has(headers,[/^PS NO\b/,/PHAT SINH NO/,/^NO\b/,/SO TIEN NO/]);
+   const credit=has(headers,[/^PS CO\b/,/PHAT SINH CO/,/^CO\b/,/SO TIEN CO/]);
    return code&&voucher&&desc&&account&&debit&&credit;
   });
  }
