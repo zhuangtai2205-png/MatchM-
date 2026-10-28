@@ -4215,7 +4215,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(Math.abs(adj.total)>0.005&&candidates.length===1){
     const original=candidates[0],color=pairColors[colorIndex++%pairColors.length];
     adj._adjustedPair=original;original._adjustedPair=adj;adj._adjustedColor=original._adjustedColor=color;
-    [original,adj].forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.result='';rec._color=color;});inv.rows[0].totalPN=inv.total;});
+    original.rows.forEach(rec=>{rec.status='ok';rec.result='';rec._color=color;rec.totalPN='';});original.rows[0].totalPN=Math.abs(original.total);adj.rows.forEach(rec=>{rec.status='ok';rec.result='';rec._color=color;rec.totalPN='';});
     // Keep both vouchers out of the unpaid-payment reconciliation below.
    }
   }
