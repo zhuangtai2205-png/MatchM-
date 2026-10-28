@@ -4173,8 +4173,19 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(code.startsWith('UNC'))payments.push({rec,amount:debit,tokens:extractInvoiceTokens(r[2]),date:r[dateCol],invoices:[]});
   });
   const invoices=[...invoiceMap.values()];
-  // Match explicit invoice references found after "HD" in the payment description.
-  for(const p of payments){for(const inv of invoices){if(p.tokens.includes(inv.numberToken)&&within60Days(inv.date,p.date))p.invoices.push(inv)}p.invoices.forEach(inv=>inv.payments.push(p))}
+  // Resolve explicit invoice references in UNC descriptions.
+  // Exact voucher number wins; if the description abbreviates a number (e.g. "HD 53"
+  // for voucher "53A"), allow a prefix only when it uniquely identifies one PN
+  // within the 60-day window. Never guess when more than one PN could match.
+  for(const p of payments){
+   const eligible=invoices.filter(inv=>within60Days(inv.date,p.date));
+   for(const token of p.tokens){
+    const exact=eligible.filter(inv=>inv.numberToken===token);
+    const matches=exact.length?exact:eligible.filter(inv=>inv.numberToken.startsWith(token));
+    if(matches.length===1&&!p.invoices.includes(matches[0]))p.invoices.push(matches[0]);
+   }
+   p.invoices.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p)});
+  }
   // Amount-based group matching for descriptions without invoice numbers:
   // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
   const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
@@ -4198,11 +4209,17 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    walk(0,0,[]);
    return count===1?found:null;
   }
-  for(const p of payments.filter(p=>!p.invoices.length&&Math.abs(p.amount)>0.005)){
+  for(const p of payments.filter(p=>Math.abs(p.amount)>0.005)){
+   // If the description already references some invoices but the UNC amount is
+   // larger than their total, try to identify the remaining invoices from the
+   // unpaid balance. This handles one UNC paying several PN, including when
+   // the description lists only part of the voucher references.
+   const referencedTotal=p.invoices.reduce((sum,inv)=>sum+inv.total,0);
+   const target=p.invoices.length&&p.amount>referencedTotal+0.005?p.amount-referencedTotal:p.invoices.length?0:p.amount;
+   if(target<=0.005)continue;
    const available=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date));
-   const subset=uniqueSubset(available,p.amount,inv=>inv.total);
-   if(subset&&subset.length>1){p.invoices=subset;subset.forEach(inv=>inv.payments.push(p));}
-   else if(subset&&subset.length===1){p.invoices=subset;subset.forEach(inv=>inv.payments.push(p));}
+   const subset=uniqueSubset(available,target,inv=>inv.total);
+   if(subset){subset.forEach(inv=>{if(!p.invoices.includes(inv)){p.invoices.push(inv);inv.payments.push(p)}});}
   }
   // Match a single PN against a unique combination of smaller unassigned UNC payments.
   for(const inv of invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005)){
