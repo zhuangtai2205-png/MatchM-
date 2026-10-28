@@ -4158,10 +4158,34 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const invoices=[...invoiceMap.values()];
   // Match explicit invoice references found after "HD" in the payment description.
   for(const p of payments){for(const inv of invoices){if(p.tokens.includes(inv.numberToken))p.invoices.push(inv)}p.invoices.forEach(inv=>inv.payments.push(p))}
-  // Fallback: when a payment has no invoice reference, match a unique unpaid invoice with the exact same amount.
+  // Amount-based group matching for descriptions without invoice numbers:
+  // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
+  const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
+  function uniqueSubset(items,target,getAmount,maxItems=14){
+   const pool=items.filter(x=>Math.abs(getAmount(x))>0.005).slice(0,80);
+   if(pool.length>maxItems)return null;
+   let found=null,count=0;
+   function walk(pos,sum,chosen){
+    if(count>1)return;
+    if(chosen.length&&closeMoney(sum,target)){found=chosen.slice();count++;return}
+    if(pos>=pool.length||sum>target+0.005)return;
+    walk(pos+1,sum+getAmount(pool[pos]),chosen.concat(pool[pos]));
+    walk(pos+1,sum,chosen);
+   }
+   walk(0,0,[]);
+   return count===1?found:null;
+  }
   for(const p of payments.filter(p=>!p.invoices.length&&Math.abs(p.amount)>0.005)){
-   const candidates=invoices.filter(inv=>!inv.payments.length&&Math.abs(inv.total-p.amount)<0.005);
-   if(candidates.length===1){p.invoices=[candidates[0]];candidates[0].payments.push(p)}
+   const available=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005);
+   const subset=uniqueSubset(available,p.amount,inv=>inv.total);
+   if(subset&&subset.length>1){p.invoices=subset;subset.forEach(inv=>inv.payments.push(p));}
+   else if(subset&&subset.length===1){p.invoices=subset;subset.forEach(inv=>inv.payments.push(p));}
+  }
+  // Match a single PN against a unique combination of smaller unassigned UNC payments.
+  for(const inv of invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005)){
+   const available=payments.filter(p=>!p.invoices.length&&p.amount>0.005);
+   const subset=uniqueSubset(available,inv.total,p=>p.amount);
+   if(subset){inv.payments.push(...subset);subset.forEach(p=>p.invoices=[inv]);}
   }
   // Adjustment vouchers (e.g. "DIEU CHINH HOA DON") can cancel the original PN without an UNC payment.
   // If an adjustment PN and an original PN have equal/opposite net totals, treat them as reconciled together.
