@@ -4472,6 +4472,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // UNC and cash-payment vouchers that cannot be matched to a PN are surfaced separately.
   // Không tô màu các phiếu PN chưa có UNC; chỉ ghi trạng thái để dễ rà soát.
   for(const p of payments){if(!p.invoices.length){p.rec.result=p.amount;p.rec.status='unc/phiếu chi không có pn';delete p.rec._color}}
+  // Ensure unpaid PN and UNC/PC vouchers without a linked PN never receive pair colors in the screen or Excel export.
+  records.forEach(rec=>{const status=norm(rec.status);if(status==='CHUA THANH TOAN'||status==='UNC/PHIEU CHI KHONG CO PN')delete rec._color;});
   // Expose the actual allocation so the Summary sheet can show which PN were added against each UNC.
   window.__dcPaymentSummary=payments.map(p=>({
    voucher:String(p.rec.base[1]??''),
