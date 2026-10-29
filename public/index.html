@@ -4223,12 +4223,32 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // Exact voucher number wins; if the description abbreviates a number (e.g. "HD 53"
   // for voucher "53A"), allow a prefix only when it uniquely identifies one PN
   // within the 60-day window. Never guess when more than one PN could match.
-  for(const p of payments){
+  // Process explicit UNC references chronologically so an invoice that has already
+  // been fully covered cannot be attached to a later duplicate full-value UNC.
+  // A single UNC can still pay multiple PN, and genuinely partial payments can
+  // still be combined; only lock an invoice when its single-invoice payments
+  // already cover its total (with the existing 1-dong rounding tolerance).
+  const explicitPayments=[...payments].sort((a,b)=>{
+   const da=dateValue(a.date),db=dateValue(b.date);
+   return Number.isFinite(da)&&Number.isFinite(db)?da-db:0;
+  });
+  for(const p of explicitPayments){
    const eligible=invoices.filter(inv=>within60Days(inv.date,p.date));
    for(const token of p.tokens){
     const exact=eligible.filter(inv=>inv.numberToken===token);
     const matches=exact.length?exact:eligible.filter(inv=>inv.numberToken.startsWith(token));
-    if(matches.length===1&&!p.invoices.includes(matches[0]))p.invoices.push(matches[0]);
+    if(matches.length!==1||p.invoices.includes(matches[0]))continue;
+    const inv=matches[0];
+    const alreadyAllocated=inv.payments.filter(existing=>existing.invoices.length===1);
+    const allocatedTotal=alreadyAllocated.reduce((sum,existing)=>sum+existing.amount,0);
+    // If this PN is already paid, leave the later UNC unlinked for manual review.
+    if(allocatedTotal>=inv.total-1.000001)continue;
+    // Do not attach another full-value UNC to a partially paid PN when it would
+    // exceed the remaining balance. Multi-PN UNC descriptions are handled below
+    // by the group-matching logic instead of being forced onto this one PN.
+    const remaining=inv.total-allocatedTotal;
+    if(alreadyAllocated.length&&p.amount>remaining+1.000001)continue;
+    p.invoices.push(inv);
    }
    p.invoices.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p)});
   }
