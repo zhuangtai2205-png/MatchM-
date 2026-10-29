@@ -4482,9 +4482,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   summaryFormula('B2',"'Doi chieu cong no'!E"+totalExcelRow,totalDebit);
   summaryFormula('B3',"'Doi chieu cong no'!F"+totalExcelRow,totalCredit);
   summaryFormula('B4',"'Doi chieu cong no'!E"+netExcelRow,ledgerDiff);
-  summaryFormula('B7',"'Doi chieu cong no'!E"+allPnExcelRow,invoicesTotalForExport());
-  summaryFormula('B8',"'Doi chieu cong no'!E"+unpaidExcelRow,summary.unpaid);
-  summaryFormula('B9',"'Doi chieu cong no'!E"+noPnExcelRow,summary.noPN);
+  summaryFormula('B6',"'Doi chieu cong no'!E"+allPnExcelRow,invoicesTotalForExport());
+  summaryFormula('B7',"'Doi chieu cong no'!E"+unpaidExcelRow,summary.unpaid);
+  summaryFormula('B8',"'Doi chieu cong no'!E"+noPnExcelRow,summary.noPN);
   const detailStart=sum.findIndex(r=>r[0]==='Số UNC')+2;
   paymentDetails.forEach((p,i)=>{
    const excelRow=detailStart+i;
