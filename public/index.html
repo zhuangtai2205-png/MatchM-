@@ -4379,14 +4379,14 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const available=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date));
    // Allow a unique one-to-one match when the source ledger stores cents but
    // the bank UNC stores whole đồng (e.g. 48,621,364.56 vs 48,621,364.00).
-   // Match within 1 đồng, but keep the exact variance visible as "dư lẻ".
+   // Accept a small payment variance up to 1,000 đồng as a match, per reconciliation rules.
    // Prefer an exact remaining-balance match before allowing a rounded match.
    // Otherwise a second PN within 1 đồng can make the exact PN ambiguous and
    // uniqueSubset cannot recover it because that helper only accepts 2+ items.
    const exactCandidates=available.filter(inv=>Math.abs(inv.total-target)<0.005);
    let subset=exactCandidates.length===1?[exactCandidates[0]]:null;
    if(exactCandidates.length===0){
-    const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=1.00);
+    const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=1000.00);
     subset=roundedCandidates.length===1?[roundedCandidates[0]]:null;
     if(!subset)subset=preferredPaymentSubset(available,target,inv=>inv.total,14,p.date);
    }
@@ -4462,7 +4462,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
    if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>{inv.rows[0].status='chưa thanh toán';delete inv.rows[0]._color})}
-   else if(Math.abs(diff)>=0.005){
+   else if(Math.abs(diff)>1000.00){
     anchor.status='dư lẻ';
     compI.slice(1).forEach(inv=>{inv.rows[0].status='dư lẻ'});
     // Flag every payment in a mismatched group, especially duplicate UNC references.
@@ -4486,11 +4486,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    invoices:p.invoices.map(inv=>({no:String(inv.no??''),total:roundMoney(inv.total)})),
    pnTotal:roundMoney(p.invoices.reduce((sum,inv)=>sum+inv.total,0)),
    difference:roundMoney(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0)),
-   status:p.invoices.length?(Math.abs(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0))<0.005?'ok':'dư lẻ'):'unc/phiếu chi không có pn'
+   status:p.invoices.length?(Math.abs(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0))<=1000.00?'ok':'dư lẻ'):'unc/phiếu chi không có pn'
   }));
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status]);rec.output=output;return rec});
   window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.total));
-  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>=0.005).length};
+  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>1000.00).length};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');
  }
  function render(){
