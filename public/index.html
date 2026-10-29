@@ -4240,27 +4240,22 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
   const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
   function uniqueSubset(items,target,getAmount,maxItems=14){
-   // Match groups by the sum of their amounts, not only one-to-one.
-   // Use cents-based dynamic programming so ledgers with more than 14 candidate
-   // vouchers are not silently rejected. Keep at most two ways per sum: if a
-   // sum has multiple possible combinations, do not guess which vouchers belong.
+   // Find one unique combination whose total differs by at most 1 VND.
+   // Search ABOVE and below the target: previously the DP pruned sums above
+   // target before applying tolerance, so valid rounded combinations were lost.
    const targetCents=Math.round(Number(target)*100);
    if(!Number.isFinite(targetCents)||targetCents<=0)return null;
+   const limit=targetCents+100;
    const pool=items.map((item,index)=>({item,index,cents:Math.round(Number(getAmount(item))*100)}))
-    .filter(x=>x.cents>0&&x.cents<=targetCents);
-   const exact=pool.filter(x=>x.cents===targetCents);
-   if(exact.length===1)return [exact[0].item];
-   if(exact.length>1)return null;
-   // Sum-state cap protects the browser on very large ledgers. A capped search
-   // returns no match (never a false positive) rather than guessing.
-   const states=new Map([[0,{count:1,indices:[]}]]);
-   const STATE_LIMIT=30000;
+    .filter(x=>x.cents>0&&x.cents<=limit);
+   const states=new Map([[0,{count:1,indices:[]} ]]);
+   const STATE_LIMIT=50000;
    for(let i=0;i<pool.length;i++){
     const cents=pool[i].cents;
     const prior=[...states.entries()];
     for(const [sum,state] of prior){
      const next=sum+cents;
-     if(next>targetCents)continue;
+     if(next>limit)continue;
      const candidate=state.indices.concat(i);
      const existing=states.get(next);
      if(!existing)states.set(next,{count:state.count,indices:candidate});
@@ -4268,16 +4263,16 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     }
     if(states.size>STATE_LIMIT)return null;
    }
-   // Accept rounding differences up to 1 đồng because PN totals may include
-   // cents while bank UNC rows are often recorded as whole đồng.
-   const nearby=[];
-   for(let delta=-100;delta<=100;delta++){
-    const result=states.get(targetCents+delta);
-    if(result&&result.count===1&&result.indices.length)nearby.push({delta,result});
-    else if(result&&result.count>1)return null;
+   // Treat the entire +/- 100-cent window as one ambiguity check. Never guess
+   // if multiple subsets or multiple nearby totals could explain the voucher.
+   let match=null;
+   for(let sum=Math.max(1,targetCents-100);sum<=limit;sum++){
+    const result=states.get(sum);
+    if(!result||!result.indices.length)continue;
+    if(result.count!==1||match)return null;
+    match=result;
    }
-   if(nearby.length!==1)return null;
-   return nearby[0].result.indices.map(i=>pool[i].item);
+   return match?match.indices.map(i=>pool[i].item):null;
   }
   for(const p of payments.filter(p=>Math.abs(p.amount)>0.005)){
    // If the description already references some invoices but the UNC amount is
