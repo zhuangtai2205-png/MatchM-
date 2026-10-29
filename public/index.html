@@ -4303,6 +4303,25 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    dfs(0,0,[]);
    return nodes<=NODE_LIMIT&&best&&!tied?best.map(x=>x.item):null;
   }
+  // If text references include a misleading/old PN number, recover only when there is
+  // one unique amount-exact group containing at least one explicitly referenced PN.
+  // This prevents an incorrect extra token from blocking the remaining PN (e.g. 1056 + 1058).
+  for(const p of payments.filter(p=>p.invoices.length&&p.amount>0.005)){
+   const linkedTotal=p.invoices.reduce((sum,inv)=>sum+inv.total,0);
+   if(Math.abs(linkedTotal-p.amount)<=1)continue;
+   const eligible=invoices.filter(inv=>
+    !inv._adjustedPair &&
+    inv.total>0.005 &&
+    within60Days(inv.date,p.date) &&
+    inv.payments.every(existing=>existing===p)
+   );
+   const subset=uniqueSubset(eligible,p.amount,inv=>inv.total,14,p.date);
+   if(subset&&subset.some(inv=>p.invoices.includes(inv))&&Math.abs(subset.reduce((sum,inv)=>sum+inv.total,0)-p.amount)<=1){
+    p.invoices.forEach(inv=>{inv.payments=inv.payments.filter(existing=>existing!==p)});
+    p.invoices=subset;
+    subset.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p)});
+   }
+  }
   for(const p of payments.filter(p=>Math.abs(p.amount)>0.005)){
    // If the description already references some invoices but the UNC amount is
    // larger than their total, try to identify the remaining invoices from the
