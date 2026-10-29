@@ -4240,6 +4240,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(isPaymentCode(code))payments.push({rec,code:String(r[0]??''),amount:debit,tokens:extractInvoiceTokens(r[2]),date:docDate,invoices:[]});
   });
   const invoices=[...invoiceMap.values()];
+  // Global priority: resolve all UNC payments before any PC payment can claim a PN.
+  payments.sort((a,b)=>a.type===b.type?0:(a.type==='UNC'?-1:1));
   // Resolve explicit invoice references in UNC descriptions.
   // Exact voucher number wins; if the description abbreviates a number (e.g. "HD 53"
   // for voucher "53A"), allow a prefix only when it uniquely identifies one PN
