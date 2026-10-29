@@ -4203,6 +4203,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const dateAt=r=>{
    const isDateCell=v=>{
     if(v instanceof Date)return Number.isFinite(v.getTime());
+    // SheetJS may return Excel dates as serial numbers when cellDates is false.
+    // Treat plausible Excel serials as dates too; otherwise date matching silently
+    // fails for every row and a multi-PN UNC is incorrectly reported as having no PN.
+    if(typeof v==='number')return Number.isFinite(v)&&v>=20000&&v<=90000;
     const s=String(v??'').trim();
     return /^\d{1,2}[\/.-]\d{1,2}[\/.-]\d{4}$/.test(s)||/^\d{4}-\d{1,2}-\d{1,2}(?:T.*)?$/.test(s);
    };
