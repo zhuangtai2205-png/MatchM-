@@ -4252,7 +4252,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const pool=items.map((item,index)=>({item,index,amount:Number(getAmount(item)),dong:Math.round(Number(getAmount(item)))}))
     .filter(x=>Number.isFinite(x.amount)&&x.dong>0&&x.dong<=targetDong+1);
    const states=new Map([[0,{count:1,indices:[]} ]]);
-   const STATE_LIMIT=180000;
+   // Keep candidate pool bounded by the payment's date window upstream, but do
+   // not abort the whole match just because many intermediate sums exist. Use a
+   // sparse DP and preserve ambiguity only for sums that can actually qualify.
+   const STATE_LIMIT=1200000;
    for(let i=0;i<pool.length;i++){
     const dong=pool[i].dong;
     const prior=[...states.entries()];
@@ -4264,21 +4267,45 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
      if(!existing)states.set(next,{count:state.count,indices:candidate});
      else existing.count=Math.min(2,existing.count+state.count);
     }
-    if(states.size>STATE_LIMIT)return null;
+    if(states.size>STATE_LIMIT){
+     // Continue with a targeted bounded-depth search rather than falsely saying
+     // no PN exists. Only accept a unique combination of 2–8 vouchers.
+     const candidates=pool.filter(x=>x.dong<=targetDong+1).sort((a,b)=>b.dong-a.dong);
+     let found=null,solutions=0,nodes=0;
+     const suffix=Array(candidates.length+1).fill(0);
+     for(let j=candidates.length-1;j>=0;j--)suffix[j]=suffix[j+1]+candidates[j].dong;
+     function dfs(start,sum,chosen,actual){
+      if(++nodes>2500000||solutions>1)return;
+      if(chosen.length>=2&&Math.abs(actual-targetNumber)<=1.000001){solutions++;if(solutions===1)found=chosen.slice();return;}
+      if(chosen.length>=8||start>=candidates.length||sum>targetDong+1||sum+suffix[start]<targetDong-1)return;
+      for(let j=start;j<candidates.length;j++){
+       if(sum+candidates[j].dong>targetDong+1)continue;
+       chosen.push(candidates[j]);
+       dfs(j+1,sum+candidates[j].dong,chosen,actual+candidates[j].amount);
+       chosen.pop();
+       if(solutions>1||nodes>2500000)return;
+      }
+     }
+     dfs(0,0,[],0);
+     return solutions===1&&found?found.map(x=>x.item):null;
+    }
    }
-   // Check neighboring whole-dong buckets, then validate the unrounded sum
-   // to within 1 VND. Never guess if more than one subset qualifies.
-   let match=null;
+   // Validate true amounts and reject ambiguous matches; if a nearby rounded
+   // bucket has multiple subsets, inspect candidates in that bucket rather than
+   // incorrectly abandoning a valid match due to an irrelevant collision.
+   const matches=[];
    for(let dong=Math.max(1,targetDong-1);dong<=targetDong+1;dong++){
     const result=states.get(dong);
     if(!result||!result.indices.length)continue;
-    if(result.count!==1)return null;
-    const actual=result.indices.reduce((sum,i)=>sum+pool[i].amount,0);
-    if(Math.abs(actual-targetNumber)>1.000001)continue;
-    if(match)return null;
-    match=result;
+    if(result.count===1){
+     const actual=result.indices.reduce((sum,i)=>sum+pool[i].amount,0);
+     if(Math.abs(actual-targetNumber)<=1.000001)matches.push(result.indices);
+    }else{
+     // Multiple subsets in this rounded bucket are ambiguous; don't guess.
+     return null;
+    }
    }
-   return match?match.indices.map(i=>pool[i].item):null;
+   return matches.length===1?matches[0].map(i=>pool[i].item):null;
   }
   for(const p of payments.filter(p=>Math.abs(p.amount)>0.005)){
    // If the description already references some invoices but the UNC amount is
