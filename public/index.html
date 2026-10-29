@@ -4258,10 +4258,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // Amount-based group matching for descriptions without invoice numbers:
   // one UNC may pay several PN vouchers, and several UNC rows may pay one PN.
   const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
-  function uniqueSubset(items,target,getAmount,maxItems=14){
-   // Search all plausible groups and choose the closest total within 1 đồng.
-   // Do not reject a valid group merely because a second, less accurate
-   // combination also falls inside the rounding tolerance.
+  function uniqueSubset(items,target,getAmount,maxItems=14,targetDate=null){
+   // Find the closest multi-row group within 1 đồng. When totals tie at the
+   // same rounding variance, prefer the group whose voucher dates are closest
+   // to the UNC date instead of silently rejecting every possible group.
    const targetNumber=Number(target);
    if(!Number.isFinite(targetNumber)||targetNumber<=0)return null;
    const pool=items.map(item=>({item,amount:Number(getAmount(item))}))
@@ -4270,21 +4270,29 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(pool.length<2)return null;
    const suffix=Array(pool.length+1).fill(0);
    for(let i=pool.length-1;i>=0;i--)suffix[i]=suffix[i+1]+pool[i].amount;
-   let best=null,bestDiff=Infinity,tied=false,nodes=0;
+   let best=null,bestDiff=Infinity,bestDateScore=Infinity,tied=false,nodes=0;
    const NODE_LIMIT=4000000,TOLERANCE=1.000001,TIE_EPSILON=0.005;
+   const dateScore=chosen=>{
+    const targetMs=dateValue(targetDate);
+    if(!Number.isFinite(targetMs))return 0;
+    let score=0;
+    for(const x of chosen){const ms=dateValue(x.item.date);if(!Number.isFinite(ms))return Number.POSITIVE_INFINITY;score+=Math.abs(ms-targetMs);}
+    return score;
+   };
    function dfs(start,sum,chosen){
     if(++nodes>NODE_LIMIT)return;
     const diff=Math.abs(sum-targetNumber);
     if(chosen.length>=2&&diff<=TOLERANCE){
-     if(diff<bestDiff-TIE_EPSILON){bestDiff=diff;best=chosen.slice();tied=false;}
-     else if(Math.abs(diff-bestDiff)<=TIE_EPSILON){tied=true;}
+     const ds=dateScore(chosen);
+     if(diff<bestDiff-TIE_EPSILON||(Math.abs(diff-bestDiff)<=TIE_EPSILON&&ds<bestDateScore)){
+      bestDiff=diff;bestDateScore=ds;best=chosen.slice();tied=false;
+     }else if(Math.abs(diff-bestDiff)<=TIE_EPSILON&&Math.abs(ds-bestDateScore)<1){tied=true;}
     }
     if(chosen.length>=maxItems||start>=pool.length||sum>=targetNumber+TOLERANCE)return;
     if(sum+suffix[start]<targetNumber-TOLERANCE)return;
     for(let j=start;j<pool.length;j++){
      const next=sum+pool[j].amount;
      if(next>targetNumber+TOLERANCE)continue;
-     // Once above target, positive amounts cannot improve the difference.
      if(next>targetNumber&&next-targetNumber>bestDiff+TIE_EPSILON)continue;
      chosen.push(pool[j]);
      dfs(j+1,next,chosen);
@@ -4309,7 +4317,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    // Match within 1 đồng, but keep the exact variance visible as "dư lẻ".
    const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=1.00);
    let subset=roundedCandidates.length===1?[roundedCandidates[0]]:null;
-   if(!subset)subset=uniqueSubset(available,target,inv=>inv.total);
+   if(!subset)subset=uniqueSubset(available,target,inv=>inv.total,14,p.date);
    if(subset){subset.forEach(inv=>{if(!p.invoices.includes(inv)){p.invoices.push(inv);inv.payments.push(p)}});}
   }
   // Match a single PN against a unique combination of smaller unassigned UNC payments.
@@ -4318,7 +4326,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    groupChanged=false;
    for(const inv of invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005)){
     const available=payments.filter(p=>!p.invoices.length&&p.amount>0.005&&within60Days(inv.date,p.date));
-    const subset=uniqueSubset(available,inv.total,p=>p.amount);
+    const subset=uniqueSubset(available,inv.total,p=>p.amount,14,inv.date);
     if(subset){inv.payments.push(...subset);subset.forEach(p=>{if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
    for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
@@ -4332,7 +4340,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
      return inv.total-inv.payments.reduce((sum,existing)=>sum+existing.amount,0);
     };
     const available=invoices.filter(inv=>!inv._adjustedPair&&balanceOf(inv)>0.005&&within60Days(inv.date,p.date));
-    const subset=uniqueSubset(available,p.amount,inv=>balanceOf(inv));
+    const subset=uniqueSubset(available,p.amount,inv=>balanceOf(inv),14,p.date);
     if(subset){subset.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p);if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
   }
