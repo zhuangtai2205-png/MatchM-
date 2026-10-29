@@ -4315,9 +4315,16 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    // Allow a unique one-to-one match when the source ledger stores cents but
    // the bank UNC stores whole đồng (e.g. 48,621,364.56 vs 48,621,364.00).
    // Match within 1 đồng, but keep the exact variance visible as "dư lẻ".
-   const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=1.00);
-   let subset=roundedCandidates.length===1?[roundedCandidates[0]]:null;
-   if(!subset)subset=uniqueSubset(available,target,inv=>inv.total,14,p.date);
+   // Prefer an exact remaining-balance match before allowing a rounded match.
+   // Otherwise a second PN within 1 đồng can make the exact PN ambiguous and
+   // uniqueSubset cannot recover it because that helper only accepts 2+ items.
+   const exactCandidates=available.filter(inv=>Math.abs(inv.total-target)<0.005);
+   let subset=exactCandidates.length===1?[exactCandidates[0]]:null;
+   if(exactCandidates.length===0){
+    const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=1.00);
+    subset=roundedCandidates.length===1?[roundedCandidates[0]]:null;
+    if(!subset)subset=uniqueSubset(available,target,inv=>inv.total,14,p.date);
+   }
    if(subset){subset.forEach(inv=>{if(!p.invoices.includes(inv)){p.invoices.push(inv);inv.payments.push(p)}});}
   }
   // Match a single PN against a unique combination of smaller unassigned UNC payments.
