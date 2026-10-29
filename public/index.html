@@ -4137,14 +4137,16 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  }
  function headerRowIndex(matrix){
   const has=(headers,patterns)=>headers.some(h=>patterns.some(p=>p.test(debtHeaderNorm(h))));
+  // Accounting exports vary in abbreviations, punctuation and encoding.
+  // Require the six core fields while accepting common alternate labels.
   return matrix.findIndex(r=>{
    const headers=(r||[]).map(debtHeaderNorm);
-   const code=has(headers,[/^(MA CT|M CT|MA CHUNG TU|LOAI CT|MA CHUNG TU HOACH TOAN)$/,/^MA CT\b/]);
-   const voucher=has(headers,[/SO CTU?\b/,/SE CTO\b/,/SO CHUNG TU/,/SO CHUNG TU GOC/,/CHUNG TU SO/]);
-   const desc=has(headers,[/DIEN GIAI/,/DION GIAI/,/NOI DUNG/]);
-   const account=has(headers,[/TK DOI UNG/,/TAI KHOAN DOI UNG/,/^TK\b/,/TAI KHOAN/]);
-   const debit=has(headers,[/^PS NO\b/,/PHAT SINH NO/,/^NO\b/,/SO TIEN NO/]);
-   const credit=has(headers,[/^PS CO\b/,/PHAT SINH CO/,/^CO\b/,/SO TIEN CO/]);
+   const code=has(headers,[/^MA CT\\b/,/^MA CHUNG TU\\b/,/^LOAI CT\\b/,/^CHUNG TU LOAI\\b/]);
+   const voucher=has(headers,[/^SO CTU?\\b/,/^SO CHUNG TU\\b/,/^SO CT\\b/,/^CHUNG TU SO\\b/,/^SO PHIEU\\b/]);
+   const desc=has(headers,[/DIEN GIAI/,/NOI DUNG/,/TEN HANG/,/TEN DOI TUONG/]);
+   const account=has(headers,[/^TK\\b/,/TAI KHOAN/,/TK DOI UNG/]);
+   const debit=has(headers,[/^PS NO\\b/,/PHAT SINH NO/,/^NO\\b/,/SO TIEN NO/,/NO PHAT SINH/]);
+   const credit=has(headers,[/^PS CO\\b/,/PHAT SINH CO/,/^CO\\b/,/SO TIEN CO/,/CO PHAT SINH/]);
    return code&&voucher&&desc&&account&&debit&&credit;
   });
  }
@@ -4471,7 +4473,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   if(!list.length){$('dcResults').innerHTML='<div class="empty">Không có dòng phù hợp bộ lọc.</div>';return}
   $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr>'+rec.output.map((v,i)=>{const isMoneyColumn=[4,5,6,outputHeaders.length-2].includes(i);const shown=isMoneyColumn&&v!==''&&v!==null&&v!==undefined&&Number.isFinite(Number(v))?fmt(Number(v)):v;const val=(i===outputHeaders.length-1&&v)?'<span class="badge '+(v==='ok'?'good':(v==='dư lẻ'?'review':'none'))+'">'+escHtml(v)+'</span>':escHtml(shown===null||shown===undefined?'':shown);const tint=rec._color&&i>=4?'background:#'+rec._color+';':'';return '<td style="'+tint+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
  }
- $('dcFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;filename=file.name;$('dcFileInfo').textContent='Đang đọc file…';$('dcRun').disabled=true;$('dcExport').disabled=true;try{const parsed=await readMatrix(file);sheetName=parsed.sheetName;const records=prepare(parsed.matrix);window.__dcRecords=records;$('dcFileInfo').textContent='Đã import '+filename+' · sheet '+(sheetName||'CSV')+' · '+records.length.toLocaleString('vi-VN')+' dòng. Nhấn “Đối chiếu công nợ” để tính kết quả.';$('dcRun').disabled=!records.length;$('dcResultsPanel').hidden=true}catch(err){window.__dcRecords=[];$('dcFileInfo').textContent='Không đọc được file: '+(err.message||String(err));}});
+ $('dcFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;filename=file.name;$('dcFileInfo').textContent='Đang đọc '+filename+'…';$('dcRun').disabled=true;$('dcExport').disabled=true;$('dcResultsPanel').hidden=true;window.__dcRecords=[];try{if(!file.size)throw Error('File rỗng hoặc chưa tải hoàn tất.');const parsed=await readMatrix(file);sheetName=parsed.sheetName;const records=prepare(parsed.matrix);window.__dcRecords=records;if(!records.length)throw Error('Đã đọc file nhưng không có dòng dữ liệu sau hàng tiêu đề. Kiểm tra sheet đầu tiên và dữ liệu bên dưới tiêu đề.');$('dcFileInfo').textContent='Đã import thành công: '+filename+' · sheet '+(sheetName||'CSV')+' · '+records.length.toLocaleString('vi-VN')+' dòng. Nhấn “Đối chiếu công nợ” để tính kết quả.';$('dcRun').disabled=false}catch(err){window.__dcRecords=[];$('dcFileInfo').textContent='Import chưa thành công ('+filename+'): '+(err&&err.message?err.message:String(err))+' Vui lòng kiểm tra định dạng .xlsx/.xls/.csv và hàng tiêu đề.';}});
  $('dcRun').addEventListener('click',()=>{try{const records=window.__dcRecords||[];if(!records.length){alert('Vui lòng import file sổ kế toán trước.');return}compute(records);$('dcResultsPanel').hidden=false;$('dcExport').disabled=false;render()}catch(err){alert('Lỗi khi đối chiếu: '+(err.message||String(err)))}});
  $('dcSearch').addEventListener('input',render);$('dcStatusFilter').addEventListener('change',render);
  function invoicesTotalForExport(){return (window.__dcInvoiceTotals||[]).reduce((a,x)=>a+x,0)}
