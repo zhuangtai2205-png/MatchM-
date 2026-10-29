@@ -4515,7 +4515,51 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const pnTerms=(p.invoices||[]).map(inv=>{const match=resultRows.find((r,j)=>norm(r.base[0]).replace(/ /g,'').startsWith('PN')&&String(r.base[1]??'').trim()===String(inv.no??'').trim()&&r.totalPN!==''&&r.totalPN!==undefined);if(!match)return '';const row=dataStart+resultRows.indexOf(match);return "'Doi chieu cong no'!G"+row;}).filter(Boolean);
    if(sw[totalCell]){sw[totalCell].t='n';delete sw[totalCell].f;sw[totalCell].v=Number(p.pnTotal)||0;sw[totalCell].z=moneyFormat;sw[totalCell].s={alignment:{vertical:'top',wrapText:true}};}
    if(sw[diffCell]){sw[diffCell].t='n';delete sw[diffCell].f;sw[diffCell].v=Number(p.difference)||0;sw[diffCell].z=moneyFormat;sw[diffCell].s={alignment:{vertical:'top',wrapText:true}};}
-  });;sw['!cols']=[{wch:22},{wch:20},{wch:54},{wch:20},{wch:28},{wch:25},{wch:25},{wch:22}];sw['!rows']=sum.map((r,i)=>({h:i>=9?48:24}));for(let c=0;c<3;c++){const cell=XLSX.utils.encode_cell({r:0,c});if(sw[cell])sw[cell].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{patternType:'solid',fgColor:{rgb:'4472C4'}},alignment:{vertical:'center',wrapText:true}};}for(let r=1;r<sum.length;r++)for(let c=0;c<3;c++){const cell=XLSX.utils.encode_cell({r,c});if(sw[cell])sw[cell].s={alignment:{vertical:'top',wrapText:true}};}XLSX.utils.book_append_sheet(wb,sw,'Tong ket');wb.Workbook=wb.Workbook||{};wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};XLSX.writeFile(wb,'Doi_chieu_cong_no_theo_mau.xlsx')});
+  });;sw['!cols']=[{wch:22},{wch:20},{wch:54},{wch:20},{wch:28},{wch:25},{wch:25},{wch:22}];sw['!rows']=sum.map((r,i)=>({h:i>=9?48:24}));for(let c=0;c<3;c++){const cell=XLSX.utils.encode_cell({r:0,c});if(sw[cell])sw[cell].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{patternType:'solid',fgColor:{rgb:'4472C4'}},alignment:{vertical:'center',wrapText:true}};}for(let r=1;r<sum.length;r++)for(let c=0;c<3;c++){const cell=XLSX.utils.encode_cell({r,c});if(sw[cell])sw[cell].s={alignment:{vertical:'top',wrapText:true}};}XLSX.utils.book_append_sheet(wb,sw,'Tong ket');
+  // Audit trail: human-readable calculation expressions and the exact source rows used.
+  const audit=[['LOẠI TÍNH','MÃ CT / UNC','SỐ CHỨNG TỪ','DÒNG TRÊN SHEET ĐỐI CHIẾU','DIỄN GIẢI / PHIẾU ĐƯỢC GHÉP','PS NỢ','PS CÓ','PHÉP TÍNH CỤ THỂ','KẾT QUẢ','GIẢI THÍCH']];
+  const invoiceGroups=new Map();
+  resultRows.forEach((rec,i)=>{
+   const code=String(rec.base[0]??'').trim().toUpperCase(), no=String(rec.base[1]??'').trim();
+   if(!code.startsWith('PN')||!no)return;
+   const key=norm(code).replace(/ /g,'')+'|'+norm(no);
+   if(!invoiceGroups.has(key))invoiceGroups.set(key,{code,no,items:[],total:0});
+   const g=invoiceGroups.get(key);g.items.push({rec,row:dataStart+i});g.total+=num(rec.base[5])-num(rec.base[4]);
+  });
+  invoiceGroups.forEach(g=>{
+   const refs=g.items.map(x=>x.row);
+   const credits=refs.map(r=>'F'+r),debits=refs.map(r=>'E'+r);
+   const expression=(credits.length?credits.join(' + '):'0')+(debits.length?' - '+debits.join(' - '):'');
+   audit.push(['TÍNH TỔNG PN',g.code,g.no,refs.join(', '),g.items.map(x=>String(x.rec.base[2]??'')).join(' | '),g.items.reduce((s,x)=>s+num(x.rec.base[4]),0),g.items.reduce((s,x)=>s+num(x.rec.base[5]),0),expression+' = '+fmt(g.total),roundMoney(g.total),'Cộng từng Ps có của các dòng PN rồi trừ từng Ps nợ. Dòng nguồn là số dòng Excel ở sheet Đối chiếu công nợ.']);
+   g.items.forEach(x=>audit.push(['DÒNG NGUỒN PN',g.code,g.no,x.row,String(x.rec.base[2]??''),num(x.rec.base[4]),num(x.rec.base[5]),'Ps có '+fmt(num(x.rec.base[5]))+' - Ps nợ '+fmt(num(x.rec.base[4]))+' = '+fmt(num(x.rec.base[5])-num(x.rec.base[4])),roundMoney(num(x.rec.base[5])-num(x.rec.base[4])),'Dòng hạch toán thành phần dùng để tính tổng PN ở dòng phía trên.']));
+  });
+  audit.push([],['TRUY VẾT GHÉP UNC','','','','','','','','','']);
+  (window.__dcPaymentSummary||[]).forEach(p=>{
+   const matched=(p.invoices||[]).map(inv=>{
+    const g=[...invoiceGroups.values()].find(x=>String(x.no).trim()===String(inv.no??'').trim());
+    return g?g.code+' '+g.no+' (dòng '+g.items.map(x=>x.row).join(', ')+': '+fmt(g.total)+')':'PN '+String(inv.no??'')+' ('+fmt(inv.total)+')';
+   });
+   const expression=fmt(p.amount)+' - ('+(p.invoices||[]).map(inv=>fmt(inv.total)).join(' + ')+') = '+fmt(p.difference);
+   audit.push(['TÍNH CHÊNH LỆCH UNC',String(p.voucher||''),String(p.date??''),'',matched.join(' + ')||'Chưa ghép được PN',p.amount,'',expression,roundMoney(p.difference),p.status+'; số tiền UNC trừ tổng tiền các PN được ghép.']);
+  });
+  audit.push([],['TỔNG HỢP SỔ','','','','','','','','','']);
+  audit.push(['TỔNG PHÁT SINH NỢ','','',dataStart+'-'+dataEnd,'Cột Ps nợ',totalDebit,'','E'+dataStart+':E'+dataEnd+' cộng tất cả dòng = '+fmt(totalDebit),roundMoney(totalDebit),'Tổng Ps nợ trên sheet Đối chiếu công nợ.']);
+  audit.push(['TỔNG PHÁT SINH CÓ','','',dataStart+'-'+dataEnd,'Cột Ps có', '',totalCredit,'F'+dataStart+':F'+dataEnd+' cộng tất cả dòng = '+fmt(totalCredit),roundMoney(totalCredit),'Tổng Ps có trên sheet Đối chiếu công nợ.']);
+  audit.push(['CHÊNH LỆCH NỢ - CÓ','','','','Tổng Nợ trừ Tổng Có','','',''+fmt(totalDebit)+' - '+fmt(totalCredit)+' = '+fmt(ledgerDiff),roundMoney(ledgerDiff),'Phép trừ tổng phát sinh Nợ cho tổng phát sinh Có.']);
+  audit.push(['TỔNG TIỀN TẤT CẢ PN','','','','Cộng từng PN duy nhất','','',''+[...invoiceGroups.values()].map(g=>fmt(g.total)).join(' + ')+' = '+fmt(invoicesTotalForExport()),roundMoney(invoicesTotalForExport()),'Mỗi phiếu PN chỉ tính một lần, không cộng trùng các dòng thành phần.']);
+  const aw=XLSX.utils.aoa_to_sheet(audit);
+  aw['!cols']=[{wch:24},{wch:18},{wch:18},{wch:24},{wch:58},{wch:18},{wch:18},{wch:76},{wch:20},{wch:58}];
+  aw['!freeze']={xSplit:0,ySplit:1};
+  aw['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:audit.length-1,c:9}})};
+  for(let rr=0;rr<audit.length;rr++){
+   for(let cc=0;cc<10;cc++){
+    const cell=XLSX.utils.encode_cell({r:rr,c:cc});
+    if(aw[cell]){aw[cell].s={...(aw[cell].s||{}),alignment:{vertical:'top',wrapText:true}};if([5,6,8].includes(cc)&&typeof aw[cell].v==='number')aw[cell].z=moneyFormat;}
+   }
+  }
+  for(let cc=0;cc<10;cc++){const cell=XLSX.utils.encode_cell({r:0,c:cc});if(aw[cell])aw[cell].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{patternType:'solid',fgColor:{rgb:'4472C4'}},alignment:{vertical:'center',wrapText:true}};}
+  XLSX.utils.book_append_sheet(wb,aw,'Truy vet cong thuc');
+  wb.Workbook=wb.Workbook||{};wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};XLSX.writeFile(wb,'Doi_chieu_cong_no_theo_mau.xlsx')});
 })();
 </script>
 </body></html>
