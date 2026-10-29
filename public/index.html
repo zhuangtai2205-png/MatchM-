@@ -4281,9 +4281,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const target=p.invoices.length&&p.amount>referencedTotal+0.005?p.amount-referencedTotal:p.invoices.length?0:p.amount;
    if(target<=0.005)continue;
    const available=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date));
-   // Allow a unique one-to-one match for sub-unit rounding differences (<= 0.50).
-   // Keep the variance visible as "dư lẻ"; do not silently treat it as fully settled.
-   const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=0.5);
+   // Allow a unique one-to-one match when the source ledger stores cents but
+   // the bank UNC stores whole đồng (e.g. 48,621,364.56 vs 48,621,364.00).
+   // Match within 1 đồng, but keep the exact variance visible as "dư lẻ".
+   const roundedCandidates=available.filter(inv=>Math.abs(inv.total-target)<=1.00);
    let subset=roundedCandidates.length===1?[roundedCandidates[0]]:null;
    if(!subset)subset=uniqueSubset(available,target,inv=>inv.total);
    if(subset){subset.forEach(inv=>{if(!p.invoices.includes(inv)){p.invoices.push(inv);inv.payments.push(p)}});}
