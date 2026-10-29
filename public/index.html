@@ -4243,19 +4243,22 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    // Find one unique combination whose total differs by at most 1 VND.
    // Search ABOVE and below the target: previously the DP pruned sums above
    // target before applying tolerance, so valid rounded combinations were lost.
-   const targetCents=Math.round(Number(target)*100);
+   const targetNumber=Number(target);
+   const targetCents=Math.round(targetNumber*100);
    if(!Number.isFinite(targetCents)||targetCents<=0)return null;
-   const limit=targetCents+100;
-   const pool=items.map((item,index)=>({item,index,cents:Math.round(Number(getAmount(item))*100)}))
-    .filter(x=>x.cents>0&&x.cents<=limit);
+   // Collapse ledger cents to whole-dong buckets to keep subset search tractable
+   // for large ledgers. Every candidate is validated against its true amount below.
+   const targetDong=Math.round(targetNumber);
+   const pool=items.map((item,index)=>({item,index,amount:Number(getAmount(item)),dong:Math.round(Number(getAmount(item)))}))
+    .filter(x=>Number.isFinite(x.amount)&&x.dong>0&&x.dong<=targetDong+1);
    const states=new Map([[0,{count:1,indices:[]} ]]);
-   const STATE_LIMIT=50000;
+   const STATE_LIMIT=180000;
    for(let i=0;i<pool.length;i++){
-    const cents=pool[i].cents;
+    const dong=pool[i].dong;
     const prior=[...states.entries()];
     for(const [sum,state] of prior){
-     const next=sum+cents;
-     if(next>limit)continue;
+     const next=sum+dong;
+     if(next>targetDong+1)continue;
      const candidate=state.indices.concat(i);
      const existing=states.get(next);
      if(!existing)states.set(next,{count:state.count,indices:candidate});
@@ -4263,13 +4266,16 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     }
     if(states.size>STATE_LIMIT)return null;
    }
-   // Treat the entire +/- 100-cent window as one ambiguity check. Never guess
-   // if multiple subsets or multiple nearby totals could explain the voucher.
+   // Check neighboring whole-dong buckets, then validate the unrounded sum
+   // to within 1 VND. Never guess if more than one subset qualifies.
    let match=null;
-   for(let sum=Math.max(1,targetCents-100);sum<=limit;sum++){
-    const result=states.get(sum);
+   for(let dong=Math.max(1,targetDong-1);dong<=targetDong+1;dong++){
+    const result=states.get(dong);
     if(!result||!result.indices.length)continue;
-    if(result.count!==1||match)return null;
+    if(result.count!==1)return null;
+    const actual=result.indices.reduce((sum,i)=>sum+pool[i].amount,0);
+    if(Math.abs(actual-targetNumber)>1.000001)continue;
+    if(match)return null;
     match=result;
    }
    return match?match.indices.map(i=>pool[i].item):null;
@@ -4331,10 +4337,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    while(queue.length){const item=queue.shift();if(item.type==='i'){const inv=item.obj;compI.push(inv);for(const p of inv.payments){const pk=p.rec._idx;if(!visitedP.has(pk)){visitedP.add(pk);queue.push({type:'p',obj:p})}}}else{const p=item.obj;compP.push(p);for(const inv of p.invoices){if(!visitedI.has(inv.key)){visitedI.add(inv.key);queue.push({type:'i',obj:inv})}}}}
    const invoiceTotal=compI.reduce((sum,x)=>sum+x.total,0),paymentTotal=compP.reduce((sum,x)=>sum+x.amount,0),diff=paymentTotal-invoiceTotal;
    const pairColor=pairColors[colorIndex++%pairColors.length];
-   compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';rec._color=pairColor;});inv.rows[0].totalPN=inv.total});
-   compP.forEach(p=>{p.rec._color=pairColor;});
+   // Chỉ tô màu khi nhóm đã ghép được ít nhất một UNC; phiếu PN chưa thanh toán để no fill.
+   compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';if(compP.length)rec._color=pairColor;else delete rec._color;});inv.rows[0].totalPN=inv.total});
+   if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=diff;
-   if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>inv.rows[0].status='chưa thanh toán')}
+   if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>{inv.rows[0].status='chưa thanh toán';delete inv.rows[0]._color})}
    else if(Math.abs(diff)>=0.005){anchor.status='dư lẻ';compI.slice(1).forEach(inv=>inv.rows[0].status='ok')}
    compP.forEach(p=>{p.rec.status='ok';p.rec.result=''});
   }
