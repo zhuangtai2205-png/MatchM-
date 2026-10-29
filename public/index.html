@@ -4125,6 +4125,24 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  const fmt=n=>roundMoney(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
  const escHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  const isBlankRow=r=>!r||!r.some(v=>String(v??'').trim()!=='');
+ // Register the file picker before the rest of this feature initializes.
+ $('dcFile').addEventListener('change',async e=>{
+  const file=e.target.files&&e.target.files[0]; if(!file)return;
+  filename=file.name; $('dcFileInfo').textContent='Đang đọc '+filename+'…';
+  $('dcRun').disabled=true; $('dcExport').disabled=true; $('dcResultsPanel').hidden=true; window.__dcRecords=[];
+  try {
+   if(!file.size)throw Error('File rỗng hoặc chưa tải hoàn tất.');
+   const parsed=await readMatrix(file); sheetName=parsed.sheetName;
+   const records=prepare(parsed.matrix); if(!records.length)throw Error('Không có dòng dữ liệu bên dưới hàng tiêu đề.');
+   window.__dcRecords=records;
+   $('dcFileInfo').textContent='Đã import thành công: '+filename+' · sheet '+(sheetName||'CSV')+' · '+records.length.toLocaleString('vi-VN')+' dòng. Nhấn “Đối chiếu công nợ” để tính kết quả.';
+   $('dcRun').disabled=false;
+  } catch(err) {
+   window.__dcRecords=[];
+   $('dcFileInfo').textContent='Import chưa thành công ('+filename+'): '+(err&&err.message?err.message:String(err));
+  }
+ });
+
  function debtHeaderNorm(s){
   let x=String(s??'').toLowerCase()
    // Recognize legacy Vietnamese text found in real accounting Excel exports.
@@ -4473,7 +4491,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   if(!list.length){$('dcResults').innerHTML='<div class="empty">Không có dòng phù hợp bộ lọc.</div>';return}
   $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr>'+rec.output.map((v,i)=>{const isMoneyColumn=[4,5,6,outputHeaders.length-2].includes(i);const shown=isMoneyColumn&&v!==''&&v!==null&&v!==undefined&&Number.isFinite(Number(v))?fmt(Number(v)):v;const val=(i===outputHeaders.length-1&&v)?'<span class="badge '+(v==='ok'?'good':(v==='dư lẻ'?'review':'none'))+'">'+escHtml(v)+'</span>':escHtml(shown===null||shown===undefined?'':shown);const tint=rec._color&&i>=4?'background:#'+rec._color+';':'';return '<td style="'+tint+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
  }
- $('dcFile').addEventListener('change',async e=>{const file=e.target.files&&e.target.files[0];if(!file)return;filename=file.name;$('dcFileInfo').textContent='Đang đọc '+filename+'…';$('dcRun').disabled=true;$('dcExport').disabled=true;$('dcResultsPanel').hidden=true;window.__dcRecords=[];try{if(!file.size)throw Error('File rỗng hoặc chưa tải hoàn tất.');const parsed=await readMatrix(file);sheetName=parsed.sheetName;const records=prepare(parsed.matrix);window.__dcRecords=records;if(!records.length)throw Error('Đã đọc file nhưng không có dòng dữ liệu sau hàng tiêu đề. Kiểm tra sheet đầu tiên và dữ liệu bên dưới tiêu đề.');$('dcFileInfo').textContent='Đã import thành công: '+filename+' · sheet '+(sheetName||'CSV')+' · '+records.length.toLocaleString('vi-VN')+' dòng. Nhấn “Đối chiếu công nợ” để tính kết quả.';$('dcRun').disabled=false}catch(err){window.__dcRecords=[];$('dcFileInfo').textContent='Import chưa thành công ('+filename+'): '+(err&&err.message?err.message:String(err))+' Vui lòng kiểm tra định dạng .xlsx/.xls/.csv và hàng tiêu đề.';}});
+
  $('dcRun').addEventListener('click',()=>{try{const records=window.__dcRecords||[];if(!records.length){alert('Vui lòng import file sổ kế toán trước.');return}compute(records);$('dcResultsPanel').hidden=false;$('dcExport').disabled=false;render()}catch(err){alert('Lỗi khi đối chiếu: '+(err.message||String(err)))}});
  $('dcSearch').addEventListener('input',render);$('dcStatusFilter').addEventListener('change',render);
  function invoicesTotalForExport(){return (window.__dcInvoiceTotals||[]).reduce((a,x)=>a+x,0)}
