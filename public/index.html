@@ -4120,7 +4120,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  let outputHeaders=[],outputRows=[],topRows=[],resultRows=[],filename='',sheetName='';
  let summary={count:0,unpaid:0,noPN:0,odd:0};
  const norm=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim();
- const num=v=>{if(typeof v==='number')return Number.isFinite(v)?v:0;let s=String(v??'').trim().replace(/\s/g,'');if(!s)return 0;s=s.replace(/[^0-9,.-]/g,'');if(s.includes(',')&&s.includes('.')){if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'')}else if(s.includes(',')){const p=s.split(',');s=p[p.length-1].length===3?p.join(''):s.replace(',','.')}const n=Number(s);return Number.isFinite(n)?n:0};
+ const num=v=>{if(typeof v==='number')return Number.isFinite(v)?v:0;let s=String(v??'').trim().replace(/\s/g,'').replace(/[^0-9,.-]/g,'');if(!s)return 0;const comma=s.lastIndexOf(','),dot=s.lastIndexOf('.');if(comma>=0&&dot>=0){if(comma>dot)s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'')}else if(comma>=0){const tail=s.length-comma-1;s=tail===3&&/^[-+]?\d{1,3}(,\d{3})+$/.test(s)?s.replace(/,/g,''):s.replace(',','.')}else if(dot>=0){const tail=s.length-dot-1;s=tail===3&&/^[-+]?\d{1,3}(\.\d{3})+$/.test(s)?s.replace(/\./g,''):s}const n=Number(s);return Number.isFinite(n)?n:0};
  const roundMoney=n=>{const v=Number(Number(n||0).toFixed(2));return Object.is(v,-0)?0:v};
  const fmt=n=>roundMoney(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
  const escHtml=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
