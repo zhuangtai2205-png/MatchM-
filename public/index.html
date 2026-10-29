@@ -4268,9 +4268,16 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     }
     if(states.size>STATE_LIMIT)return null;
    }
-   const result=states.get(targetCents);
-   if(!result||result.count!==1||!result.indices.length)return null;
-   return result.indices.map(i=>pool[i].item);
+   // Accept rounding differences up to 1 đồng because PN totals may include
+   // cents while bank UNC rows are often recorded as whole đồng.
+   const nearby=[];
+   for(let delta=-100;delta<=100;delta++){
+    const result=states.get(targetCents+delta);
+    if(result&&result.count===1&&result.indices.length)nearby.push({delta,result});
+    else if(result&&result.count>1)return null;
+   }
+   if(nearby.length!==1)return null;
+   return nearby[0].result.indices.map(i=>pool[i].item);
   }
   for(const p of payments.filter(p=>Math.abs(p.amount)>0.005)){
    // If the description already references some invoices but the UNC amount is
@@ -4290,55 +4297,19 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(subset){subset.forEach(inv=>{if(!p.invoices.includes(inv)){p.invoices.push(inv);inv.payments.push(p)}});}
   }
   // Match a single PN against a unique combination of smaller unassigned UNC payments.
-  for(const inv of invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005)){
-   const available=payments.filter(p=>!p.invoices.length&&p.amount>0.005&&within60Days(inv.date,p.date));
-   const subset=uniqueSubset(available,inv.total,p=>p.amount);
-   if(subset){inv.payments.push(...subset);subset.forEach(p=>p.invoices=[inv]);}
-  }
-  // Reconcile many-to-many groups: several UNC can jointly settle several PN.
-  // Only accept a unique subset on each side, and require every PN date to be
-  // on/before every UNC date with no pair more than 60 days apart.
-  function uniqueSumStates(items,getAmount){
-   const states=new Map([[0,{count:1,indices:[]}]]);
-   const LIMIT=30000;
-   for(let i=0;i<items.length;i++){
-    const cents=Math.round(Number(getAmount(items[i]))*100);
-    if(!Number.isFinite(cents)||cents<=0)continue;
-    const prior=[...states.entries()];
-    for(const [sum,state] of prior){
-     const next=sum+cents, candidate=state.indices.concat(i), existing=states.get(next);
-     if(!existing)states.set(next,{count:state.count,indices:candidate});
-     else existing.count=Math.min(2,existing.count+state.count);
-    }
-    if(states.size>LIMIT)return null;
+  let groupChanged=true,groupPass=0;
+  while(groupChanged&&groupPass++<4){
+   groupChanged=false;
+   for(const inv of invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005)){
+    const available=payments.filter(p=>!p.invoices.length&&p.amount>0.005&&within60Days(inv.date,p.date));
+    const subset=uniqueSubset(available,inv.total,p=>p.amount);
+    if(subset){inv.payments.push(...subset);subset.forEach(p=>{if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
-   states.delete(0);
-   return states;
-  }
-  const groupAnchors=[...new Set(payments.filter(p=>!p.invoices.length&&p.amount>0.005&&Number.isFinite(dateValue(p.date))).map(p=>dateValue(p.date)))].sort((a,b)=>a-b);
-  for(const anchorDate of groupAnchors){
-   const freePayments=payments.filter(p=>!p.invoices.length&&p.amount>0.005&&dateValue(p.date)>=anchorDate&&dateValue(p.date)<=anchorDate+60*86400000);
-   if(freePayments.length<2)continue;
-   const latestPaymentDate=Math.max(...freePayments.map(p=>dateValue(p.date)));
-   const freeInvoices=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&dateValue(inv.date)<=anchorDate&&dateValue(inv.date)>=latestPaymentDate-60*86400000);
-   if(freeInvoices.length<2)continue;
-   const invoiceSums=uniqueSumStates(freeInvoices,inv=>inv.total);
-   const paymentSums=uniqueSumStates(freePayments,p=>p.amount);
-   if(!invoiceSums||!paymentSums)continue;
-   const pairs=[];
-   for(const [sumI,stateI] of invoiceSums){
-    if(stateI.count!==1)continue;
-    for(let delta=-100;delta<=100;delta++){
-     const stateP=paymentSums.get(sumI+delta);
-     if(stateP&&stateP.count===1)pairs.push({sumI,sumP:sumI+delta,stateI,stateP});
-    }
+   for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
+    const available=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date));
+    const subset=uniqueSubset(available,p.amount,inv=>inv.total);
+    if(subset){subset.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p);if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
-   if(pairs.length!==1)continue;
-   const match=pairs[0];
-   const matchedInvoices=match.stateI.indices.map(i=>freeInvoices[i]);
-   const matchedPayments=match.stateP.indices.map(i=>freePayments[i]);
-   if(matchedInvoices.length<2||matchedPayments.length<2)continue;
-   matchedInvoices.forEach(inv=>{matchedPayments.forEach(p=>{if(!inv.payments.includes(p))inv.payments.push(p);if(!p.invoices.includes(inv))p.invoices.push(inv);});});
   }
   // Adjustment vouchers (e.g. "DIEU CHINH HOA DON") can cancel the original PN without an UNC payment.
   // If an adjustment PN and an original PN have equal/opposite net totals, treat them as reconciled together.
