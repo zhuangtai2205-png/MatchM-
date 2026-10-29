@@ -4141,12 +4141,12 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // Require the six core fields while accepting common alternate labels.
   return matrix.findIndex(r=>{
    const headers=(r||[]).map(debtHeaderNorm);
-   const code=has(headers,[/^MA CT\\b/,/^MA CHUNG TU\\b/,/^LOAI CT\\b/,/^CHUNG TU LOAI\\b/]);
-   const voucher=has(headers,[/^SO CTU?\\b/,/^SO CHUNG TU\\b/,/^SO CT\\b/,/^CHUNG TU SO\\b/,/^SO PHIEU\\b/]);
+   const code=has(headers,[/^MA CT\b/,/^MA CHUNG TU\b/,/^LOAI CT\b/,/^CHUNG TU LOAI\b/]);
+   const voucher=has(headers,[/^SO CTU?\b/,/^SO CHUNG TU\b/,/^SO CT\b/,/^CHUNG TU SO\b/,/^SO PHIEU\b/]);
    const desc=has(headers,[/DIEN GIAI/,/NOI DUNG/,/TEN HANG/,/TEN DOI TUONG/]);
-   const account=has(headers,[/^TK\\b/,/TAI KHOAN/,/TK DOI UNG/]);
-   const debit=has(headers,[/^PS NO\\b/,/PHAT SINH NO/,/^NO\\b/,/SO TIEN NO/,/NO PHAT SINH/]);
-   const credit=has(headers,[/^PS CO\\b/,/PHAT SINH CO/,/^CO\\b/,/SO TIEN CO/,/CO PHAT SINH/]);
+   const account=has(headers,[/^TK\b/,/TAI KHOAN/,/TK DOI UNG/]);
+   const debit=has(headers,[/^PS NO\b/,/PHAT SINH NO/,/^NO\b/,/SO TIEN NO/,/NO PHAT SINH/]);
+   const credit=has(headers,[/^PS CO\b/,/PHAT SINH CO/,/^CO\b/,/SO TIEN CO/,/CO PHAT SINH/]);
    return code&&voucher&&desc&&account&&debit&&credit;
   });
  }
