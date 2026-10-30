@@ -4650,7 +4650,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
       ?'SUM('+paymentRefs.join(',')+')-'+(pnRefs.length?'SUM('+pnRefs.join(',')+')':'0')
       :(pnRefs.length?'SUM('+pnRefs.join(',')+')':'0');
     setFormula(row,resultCol,formula,rec.result);
-   }else if(paymentType(code)&&norm(rec.status)==='UNC/PHIEU CHI KHONG CO PN'){
+   }else if(paymentType(code)&&norm(rec.status)==='UNC PHIEU CHI KHONG CO PN'){
     setFormula(row,resultCol,'E'+excelRow(rec),rec.result);
    }
   });
