@@ -4575,7 +4575,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(col>=0)return col;
    col=nextCol++;
    const headerRef=XLSX.utils.encode_cell({r:sourceHeaderRow,c:col});
-   const styleSource=ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:Math.max(0,findCol('TỔNG KẾT'))}]||ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:range.e.c})];
+   const styleSource=ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:Math.max(0,findCol('TỔNG KẾT'))})]||ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:range.e.c})];
    ws[headerRef]={t:'s',v:label};
    if(styleSource?.s)ws[headerRef].s=styleSource.s;
    headers[col]=label;
