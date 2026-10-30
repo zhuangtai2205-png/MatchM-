@@ -4487,20 +4487,21 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    }
   }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
-  let oddAmount=0;
+  let oddAmount=0,unpaidAmount=0;
   const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
   for(const start of invoices){
    if(visitedI.has(start.key))continue;
    const compI=[],compP=[],queue=[{type:'i',obj:start}];visitedI.add(start.key);
    while(queue.length){const item=queue.shift();if(item.type==='i'){const inv=item.obj;compI.push(inv);for(const p of inv.payments){const pk=p.rec._idx;if(!visitedP.has(pk)){visitedP.add(pk);queue.push({type:'p',obj:p})}}}else{const p=item.obj;compP.push(p);for(const inv of p.invoices){if(!visitedI.has(inv.key)){visitedI.add(inv.key);queue.push({type:'i',obj:inv})}}}}
    const invoiceTotal=compI.reduce((sum,x)=>sum+x.total,0),paymentTotal=compP.reduce((sum,x)=>sum+x.amount,0),diff=paymentTotal-invoiceTotal;
+   if(!compP.length)unpaidAmount+=Math.max(0,invoiceTotal);else if(diff< -1.000001)unpaidAmount+=Math.abs(diff);
    const pairColor=pairColors[colorIndex++%pairColors.length];
    // Chỉ tô màu khi nhóm đã ghép được ít nhất một UNC; phiếu PN chưa thanh toán để no fill.
    compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';if(compP.length)rec._color=pairColor;else delete rec._color;});inv.rows[0].totalPN=inv.total});
    if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
    if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>{inv.rows[0].status='chưa thanh toán';delete inv.rows[0]._color})}
-   else if(Math.abs(diff)>0.005){
+   else if(Math.abs(diff)>1.000001){
     const absDiff=Math.abs(diff),pct=invoiceTotal>0?absDiff/invoiceTotal*100:0;
     oddAmount+=absDiff;
     const direction=diff<0?'THIẾU':'DƯ';
@@ -4545,7 +4546,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   }
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status,rec._filterPN||'',rec._filterPayment||'']);rec.output=output;return rec});
   window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.total));
-  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>0.005).length,oddAmount};
+  summary={count:invoices.length,unpaid:roundMoney(unpaidAmount),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>1.000001).length,oddAmount};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');$('dcOddAmount').textContent=fmt(summary.oddAmount);
  }
  function render(){
@@ -4595,8 +4596,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const moneyFormat='#,##0.00;[Red]-#,##0.00;0.00';
   const setFormula=(row,col,formula,value)=>{
    const ref=XLSX.utils.encode_cell({r:row,c:col}),prior=ws[ref]||{};
-   // Giữ nguyên công thức đã tồn tại trong file nguồn; chỉ bổ sung khi ô chưa có công thức.
-   if(prior.f)return;
+   // Luôn cập nhật công thức theo kết quả đối chiếu mới nhất, không giữ công thức cũ đã sai.
    const cached=Number(value);
    ws[ref]={...prior,t:'n',f:String(formula).replace(/^=/,''),v:Number.isFinite(cached)?cached:0,z:moneyFormat};
   };
@@ -4684,6 +4684,61 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   resultRows.forEach((rec,i)=>{const rr=dataStart+i;for(const cc of [4,5]){const cell=XLSX.utils.encode_cell({r:rr-1,c:cc});if(ws[cell]&&String(rec.base[cc]??'').trim()!==''){ws[cell].t='n';ws[cell].v=num(rec.base[cc]);}else if(!ws[cell])ws[cell]={t:'n',v:0};}});
   // KẾT QUẢ giữ nguyên giá trị chênh lệch cuối cùng do bộ đối chiếu tính ra (dư lẻ hoặc 0); không lấy/đưa TỔNG TIỀN PN sang cột này.
   resultRows.forEach((rec,i)=>{const cell=XLSX.utils.encode_cell({r:topRows.length+1+i,c:resultCol});if(rec.result!==''&&rec.result!==null&&rec.result!==undefined){ws[cell]=ws[cell]||{};ws[cell].t='n';ws[cell].v=roundMoney(num(rec.result));ws[cell].z=moneyFormat;}});
+  // Khôi phục công thức Excel cho cả trường hợp nhập CSV hoặc workbook không giữ được sheet nguồn.
+  // G: tổng Có - tổng Nợ của toàn bộ dòng thuộc cùng một PN.
+  const exportRowNumber=i=>topRows.length+2+i;
+  const formulaCell=(row,col,formula,value)=>{
+   const ref=XLSX.utils.encode_cell({r:row-1,c:col});
+   const cached=Number(value);
+   ws[ref]={...(ws[ref]||{}),t:'n',f:String(formula).replace(/^=/,''),v:Number.isFinite(cached)?cached:0,z:moneyFormat};
+  };
+  const isPNRow=rec=>String(rec.base[0]??'').trim().toUpperCase().startsWith('PN');
+  const pnLabels=[...new Set(resultRows.filter(isPNRow).map(rec=>String(rec._filterPN||'')).filter(Boolean))];
+  const pnAnchorByLabel=new Map();
+  for(const label of pnLabels){
+   const rows=resultRows.map((rec,i)=>({rec,i})).filter(x=>isPNRow(x.rec)&&String(x.rec._filterPN||'')===label);
+   const anchor=rows.find(x=>x.rec.totalPN!==''&&x.rec.totalPN!==undefined);
+   if(!anchor)continue;
+   pnAnchorByLabel.set(label,anchor);
+   const refs=rows.map(x=>exportRowNumber(x.i));
+   const formula='SUM('+refs.map(n=>'F'+n).join(',')+')-SUM('+refs.map(n=>'E'+n).join(',')+')';
+   formulaCell(exportRowNumber(anchor.i),6,formula,anchor.rec.totalPN);
+  }
+  // Build the full connected PN ↔ UNC/PC group so K stays a live formula.
+  const collectExportGroup=startLabel=>{
+   const pns=new Set([startLabel]),payments=new Set();let changed=true;
+   while(changed){changed=false;
+    for(const rec of resultRows){
+     if(isPNRow(rec)&&pns.has(String(rec._filterPN||''))){
+      const label=String(rec._filterPayment||'');if(label&&!payments.has(label)){payments.add(label);changed=true;}
+     }
+    }
+    for(const rec of resultRows){
+     if(!paymentType(rec.base[0]))continue;
+     if(payments.has(String(rec._filterPayment||''))){
+      for(const label of String(rec._filterPN||'').split('+').map(x=>x.trim()).filter(Boolean)){if(!pns.has(label)){pns.add(label);changed=true;}}
+     }
+    }
+   }
+   const invoiceAnchors=[...pns].map(label=>pnAnchorByLabel.get(label)).filter(Boolean);
+   const paymentIndexes=resultRows.map((rec,i)=>({rec,i})).filter(x=>paymentType(x.rec.base[0])&&payments.has(String(x.rec._filterPayment||'')));
+   return {invoiceAnchors,paymentIndexes};
+  };
+  resultRows.forEach((rec,i)=>{
+   if(rec.result===''||rec.result===null||rec.result===undefined)return;
+   const row=exportRowNumber(i);
+   if(isPNRow(rec)){
+    const group=collectExportGroup(String(rec._filterPN||''));
+    const pnRefs=group.invoiceAnchors.map(x=>'G'+exportRowNumber(x.i));
+    const paymentRefs=group.paymentIndexes.map(x=>'E'+exportRowNumber(x.i));
+    const formula=paymentRefs.length?'SUM('+paymentRefs.join(',')+')-'+(pnRefs.length?'SUM('+pnRefs.join(',')+')':'0'):(pnRefs.length?'SUM('+pnRefs.join(',')+')':'0');
+    formulaCell(row,resultCol,formula,rec.result);
+   }else if(paymentType(rec.base[0])&&norm(rec.status)==='UNC PHIEU CHI KHONG CO PN'){
+    formulaCell(row,resultCol,'E'+row,rec.result);
+   }
+  });
+  wb.Workbook=wb.Workbook||{};
+  wb.Workbook.CalcPr={...(wb.Workbook.CalcPr||{}),calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};
   const lastCol=XLSX.utils.encode_col(statusCol);for(let rr=0;rr<(ws['!ref']?XLSX.utils.decode_range(ws['!ref']).e.r+1:0);rr++){for(const cc of [4,5,6,resultCol]){const cell=XLSX.utils.encode_cell({r:rr,c:cc});if(ws[cell]&&typeof ws[cell].v==='number')ws[cell].z=moneyFormat;}}
   ws['!cols']=exportHeaders.map((h,i)=>{const vals=exportRows.map(r=>String(r[i]??''));const header=String(h??'');const maxLen=Math.max(header.length,...vals.slice(0,300).map(v=>v.length));let w=Math.min(24,Math.max(5,maxLen+1));if(i===2)w=Math.min(30,Math.max(12,maxLen+1));if(i===6)w=14;if(i===resultCol)w=12;if(i===statusCol)w=22;if(i>=outputHeaders.length-2)w=Math.min(30,Math.max(16,maxLen+1));if(i===4||i===5)w=Math.min(16,Math.max(10,maxLen+1));return {wch:w};});
   const headerRow=topRows.length+1;for(let c=0;c<exportHeaders.length;c++){const cell=XLSX.utils.encode_cell({r:headerRow-1,c});if(ws[cell])ws[cell].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{patternType:'solid',fgColor:{rgb:'4472C4'}},alignment:{vertical:'center',wrapText:true}};}
