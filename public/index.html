@@ -4567,7 +4567,28 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const lastCol=XLSX.utils.encode_col(statusCol);for(let rr=0;rr<(ws['!ref']?XLSX.utils.decode_range(ws['!ref']).e.r+1:0);rr++){for(const cc of [4,5,6,resultCol]){const cell=XLSX.utils.encode_cell({r:rr,c:cc});if(ws[cell]&&typeof ws[cell].v==='number')ws[cell].z=moneyFormat;}}
   const formulaNumber=value=>{if(typeof value==='number')return Number.isFinite(value)?value:0;let t=String(value??'').trim().replace(/\s/g,'').replace(/[^0-9,.-]/g,'');if(!t)return 0;const comma=t.lastIndexOf(','),dot=t.lastIndexOf('.');if(comma>=0&&dot>=0){t=comma>dot?t.replace(/\./g,'').replace(',','.'):t.replace(/,/g,'');}else if(comma>=0){const tail=t.length-comma-1;t=tail===3&&/^[-+]?\d{1,3}(,\d{3})+$/.test(t)?t.replace(/,/g,''):t.replace(',','.');}else if(dot>=0){const tail=t.length-dot-1;t=tail===3&&/^[-+]?\d{1,3}(\.\d{3})+$/.test(t)?t.replace(/\./g,''):t;}const n=Number(t);return Number.isFinite(n)?n:0;};
   const setFormula=(cell,formula,value)=>{if(!ws[cell])ws[cell]={t:'n',v:0};ws[cell].t='n';ws[cell].f=String(formula).replace(/^=/,'');ws[cell].v=formulaNumber(value);ws[cell].z=moneyFormat;};
-  resultRows.forEach((rec,i)=>{const er=dataStart+i;const pnCell=XLSX.utils.encode_cell({r:er-1,c:6});if(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')&&rec.totalPN!==''&&rec.totalPN!==undefined){ws[pnCell]=ws[pnCell]||{};ws[pnCell].t='n';ws[pnCell].v=num(rec.totalPN);ws[pnCell].z=moneyFormat;}const resultCell=XLSX.utils.encode_cell({r:er-1,c:resultCol});if(rec.result!==''&&rec.result!==null&&rec.result!==undefined){ws[resultCell]=ws[resultCell]||{};ws[resultCell].t='n';ws[resultCell].v=roundMoney(num(rec.result));ws[resultCell].z=moneyFormat;}});
+  // Recreate the workbook's original row-level formulas: PN total in G and
+  // payment-vs-linked-PN difference in K. Do not copy G's formula into K on payment rows.
+  const exportExcelRow=new Map(resultRows.map((rec,i)=>[rec,dataStart+i]));
+  const invoiceAnchorRow=new Map();
+  invoices.forEach(inv=>{const anchor=inv.rows&&inv.rows[0];if(anchor)invoiceAnchorRow.set(inv,exportExcelRow.get(anchor));});
+  invoices.forEach(inv=>{
+   const rows=(inv.rows||[]).map(rec=>exportExcelRow.get(rec)).filter(Boolean);
+   const anchor=inv.rows&&inv.rows[0];if(!anchor||!rows.length)return;
+   const excelRow=exportExcelRow.get(anchor);
+   const debitRefs=rows.map(r=>'E'+r),creditRefs=rows.map(r=>'F'+r);
+   const formula='SUM('+creditRefs.join(',')+')-SUM('+debitRefs.join(',')+')';
+   setFormula('G'+excelRow,formula,inv.total);
+   setFormula('K'+excelRow,formula,inv.total);
+  });
+  payments.forEach(payment=>{
+   const rec=payment.rec,excelRow=exportExcelRow.get(rec);
+   if(!excelRow)return;
+   const linkedRows=[...new Set((payment.invoices||[]).map(inv=>invoiceAnchorRow.get(inv)).filter(Boolean))];
+   if(!linkedRows.length)return;
+   const formula='E'+excelRow+'-SUM('+linkedRows.map(r=>'G'+r).join(',')+')';
+   setFormula('K'+excelRow,formula,payment.amount-(payment.invoices||[]).reduce((sum,inv)=>sum+inv.total,0));
+  });
   const totalExcelRow=topRows.length+resultRows.length+3;
   setFormula('E'+totalExcelRow,'SUM(E'+dataStart+':E'+dataEnd+')',totalDebit);
   setFormula('F'+totalExcelRow,'SUM(F'+dataStart+':F'+dataEnd+')',totalCredit);
