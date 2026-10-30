@@ -4588,7 +4588,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const code=String(rec.base[0]??'').trim().toUpperCase();
    if(!code.startsWith('PN')||rec.totalPN===''||rec.totalPN===undefined)return;
    const er=excelRowOf.get(rec),voucherCode=String(rec.base[0]??'').replace(/"/g,'""'),voucherNo=String(rec.base[1]??'').replace(/"/g,'""');
-   const formula='SUMIFS($Fif(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')&&rec.totalPN!==''&&rec.totalPN!==undefined){ws[pnCell]=ws[pnCell]||{};ws[pnCell].t='n';ws[pnCell].v=num(rec.totalPN);ws[pnCell].z=moneyFormat;}const resultCell=XLSX.utils.encode_cell({r:er-1,c:resultCol});if(rec.result!==''&&rec.result!==null&&rec.result!==undefined){ws[resultCell]=ws[resultCell]||{};ws[resultCell].t='n';ws[resultCell].v=roundMoney(num(rec.result));ws[resultCell].z=moneyFormat;}});
+   const formula='SUMIFS($Fif(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')&&rec.totalPN!==''&&rec.totalPN!==undefined){ws[pnCell]=ws[pnCell]||{};if(!ws[pnCell].f){ws[pnCell].t='n';ws[pnCell].v=num(rec.totalPN);}ws[pnCell].z=moneyFormat;}const resultCell=XLSX.utils.encode_cell({r:er-1,c:resultCol});if(rec.result!==''&&rec.result!==null&&rec.result!==undefined){ws[resultCell]=ws[resultCell]||{};if(!ws[resultCell].f){ws[resultCell].t='n';ws[resultCell].v=roundMoney(num(rec.result));}ws[resultCell].z=moneyFormat;}});
   const totalExcelRow=topRows.length+resultRows.length+3;
   setFormula('E'+totalExcelRow,'SUM(E'+dataStart+':E'+dataEnd+')',totalDebit);
   setFormula('F'+totalExcelRow,'SUM(F'+dataStart+':F'+dataEnd+')',totalCredit);
