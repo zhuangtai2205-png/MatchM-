@@ -2460,7 +2460,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
  <div id="dcResultsPanel" class="panel" hidden>
   <div class="sectionhead"><div><h2>2. Kết quả trên toàn bộ dữ liệu</h2><p>Giữ nguyên các cột nguồn; thêm Tổng tiền PN, KẾT QUẢ và TỔNG KẾT theo bố cục file làm thủ công.</p></div></div>
   <div class="stats"><div class="stat"><small>Số phiếu PN</small><b id="dcCount">0</b></div><div class="stat"><small>Tổng tiền chưa thanh toán</small><b id="dcUnpaid">0</b></div><div class="stat"><small>UNC / phiếu chi chưa tìm thấy PN</small><b id="dcNoPN">0</b></div><div class="stat review"><small>Phiếu dư lẻ</small><b id="dcOdd">0</b></div></div>
-  <div class="resulttools"><input class="search" id="dcSearch" type="text" placeholder="Tìm mã phiếu, số chứng từ, diễn giải hoặc tài khoản…"><select id="dcStatusFilter" aria-label="Lọc trạng thái"><option value="all">Tất cả trạng thái</option><option value="ok">ok</option><option value="dư lẻ">dư lẻ</option><option value="chưa thanh toán">chưa thanh toán</option><option value="unc/phiếu chi không có pn">UNC / phiếu chi không có PN</option></select></div>
+  <div class="resulttools"><input class="search" id="dcSearch" type="text" placeholder="Tìm mã phiếu, số chứng từ, diễn giải hoặc tài khoản…"><select id="dcStatusFilter" aria-label="Lọc trạng thái"><option value="all">Tất cả trạng thái</option><option value="ok">ok</option><option value="dư lẻ">dư lẻ</option><option value="chưa thanh toán">chưa thanh toán</option><option value="unc/phiếu chi không có pn">UNC / phiếu chi không có PN</option><option value="điều chỉnh đối ứng">Điều chỉnh đối ứng</option></select></div>
   <div id="dcResultCount" class="hint"></div>
   <div id="dcResults" class="tablewrap"><div class="empty">Chưa có kết quả.</div></div>
  </div>
@@ -4416,6 +4416,38 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     if(subset){subset.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p);if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
   }
+  // Recover signed adjustment groups before declaring an UNC unmatched.
+  // This handles positive PN plus negative/credit PN whose net equals one bank payment.
+  function uniqueSignedInvoiceSubset(items,target,targetDate){
+   const pool=items.map(item=>({item,amount:Number(item.total)})).filter(x=>Number.isFinite(x.amount)&&Math.abs(x.amount)>0.005&&Math.abs(x.amount)<=Math.max(target*1.5,target+10000)).sort((a,b)=>Math.abs(b.amount)-Math.abs(a.amount)).slice(0,18);
+   let best=null,bestDiff=Infinity,bestDate=Infinity,tied=false,nodes=0;
+   const targetMs=dateValue(targetDate),EPS=0.005,TOL=1.000001;
+   function dfs(start,sum,chosen,hasPositive,hasNegative){
+    if(++nodes>1000000)return;
+    const diff=Math.abs(sum-target);
+    if(chosen.length>=2&&hasPositive&&hasNegative&&diff<=TOL){
+     let dateScore=0;if(Number.isFinite(targetMs))for(const x of chosen){const ms=dateValue(x.item.date);if(Number.isFinite(ms))dateScore+=Math.abs(ms-targetMs);else dateScore=Infinity;}
+     if(diff<bestDiff-EPS||(Math.abs(diff-bestDiff)<=EPS&&dateScore<bestDate)){best=chosen.slice();bestDiff=diff;bestDate=dateScore;tied=false;}else if(Math.abs(diff-bestDiff)<=EPS&&Math.abs(dateScore-bestDate)<1)tied=true;
+    }
+    if(start>=pool.length||chosen.length>=12||nodes>1000000)return;
+    for(let i=start;i<pool.length;i++){chosen.push(pool[i]);dfs(i+1,sum+pool[i].amount,chosen,hasPositive||pool[i].amount>0,hasNegative||pool[i].amount<0);chosen.pop();}
+   }
+   dfs(0,0,[],false,false);return best&&!tied?best.map(x=>x.item):null;
+  }
+  for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
+   const candidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&within60Days(inv.date,p.date));
+   const accountBuckets=new Map();
+   for(const inv of candidates){const account=norm(inv.rows.map(r=>r.base[3]).join('|'));if(!accountBuckets.has(account))accountBuckets.set(account,[]);accountBuckets.get(account).push(inv);}
+   let signedMatch=null;
+   for(const bucket of accountBuckets.values()){if(!bucket.some(inv=>inv.total< -0.005))continue;const found=uniqueSignedInvoiceSubset(bucket,p.amount,p.date);if(found){if(signedMatch){signedMatch=null;break;}signedMatch=found;}}
+   if(signedMatch){p.invoices.push(...signedMatch);signedMatch.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p)});}
+  }
+  // Keep a unique near-amount PN as a review candidate instead of saying no PN exists.
+  // Any non-zero difference remains DƯ LẺ; this fallback never marks it OK.
+  for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
+   const candidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date)).map(inv=>({inv,diff:Math.abs(inv.total-p.amount)})).filter(x=>x.diff<=10000.000001).sort((a,b)=>a.diff-b.diff);
+   if(candidates.length&&(!candidates[1]||candidates[1].diff-candidates[0].diff>0.005)){const chosen=candidates[0].inv;p.invoices.push(chosen);chosen.payments.push(p);}
+  }
   // Pair credit/return/adjustment vouchers with equal and opposite PN totals.
   // Only pair unlinked vouchers, require the same account and nearby dates, and never guess on ambiguity.
   const pairColors=['DCEFE2','D9EAF7','FCE4D6','E6DDF2','FFF1BF','F7D9DE','D6ECEB','F0DCE8','E7E8C8','D5DDF7','F8DCC2','CFE6C7','C9DDF4','EBD0DE','F7E7B5','CBE5E8','D9D7F2','F4D5C8','D8E8D2','E4D6F4','F8E1E7','D2E9F8','E9E3C7','D1E8DA','F5DCCF','D8DDF0','EAD9C5','D0E3EF','EAD7E9','E4EDCE','F6E1B8','D5E4E7','E1D8F5','F2D6D8','D3EBD0','E3E7F8','F4E0D2','D1E4DD','EBDFF0','E6EACB'];
@@ -4462,7 +4494,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
    if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>{inv.rows[0].status='chưa thanh toán';delete inv.rows[0]._color})}
-   else if(Math.abs(diff)>1000.00){
+   else if(Math.abs(diff)>0.005){
     anchor.status='dư lẻ';
     compI.slice(1).forEach(inv=>{inv.rows[0].status='dư lẻ'});
     // Flag every payment in a mismatched group, especially duplicate UNC references.
@@ -4486,11 +4518,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    invoices:p.invoices.map(inv=>({no:String(inv.no??''),total:roundMoney(inv.total)})),
    pnTotal:roundMoney(p.invoices.reduce((sum,inv)=>sum+inv.total,0)),
    difference:roundMoney(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0)),
-   status:p.invoices.length?(Math.abs(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0))<=1000.00?'ok':'dư lẻ'):'unc/phiếu chi không có pn'
+   status:p.invoices.length?(Math.abs(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0))<=0.005?'ok':'dư lẻ'):'unc/phiếu chi không có pn'
   }));
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status]);rec.output=output;return rec});
   window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.total));
-  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>1000.00).length};
+  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>0.005).length};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');
  }
  function render(){
@@ -4498,7 +4530,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const list=resultRows.filter(rec=>(!q||rec.output.some(v=>String(v??'').toLowerCase().includes(q)))&&(status==='all'||String(rec.status).toLowerCase()===status));
   $('dcResultCount').textContent='Hiển thị '+list.length.toLocaleString('vi-VN')+' / '+resultRows.length.toLocaleString('vi-VN')+' dòng dữ liệu.';
   if(!list.length){$('dcResults').innerHTML='<div class="empty">Không có dòng phù hợp bộ lọc.</div>';return}
-  $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr>'+rec.output.map((v,i)=>{const isMoneyColumn=[4,5,6,outputHeaders.length-2].includes(i);const shown=isMoneyColumn&&v!==''&&v!==null&&v!==undefined&&Number.isFinite(Number(v))?fmt(Number(v)):v;const val=(i===outputHeaders.length-1&&v)?'<span class="badge '+(v==='ok'?'good':(v==='dư lẻ'?'review':'none'))+'">'+escHtml(v)+'</span>':escHtml(shown===null||shown===undefined?'':shown);const statusKey=norm(rec.status);const voucherStatus=(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')?norm((resultRows.find(x=>String(x.base[0]??'').trim()===String(rec.base[0]??'').trim()&&String(x.base[1]??'').trim()===String(rec.base[1]??'').trim()&&['CHUA THANH TOAN','UNC/PHIEU CHI KHONG CO PN'].includes(norm(x.status)))||rec).status):statusKey);const amountColor=voucherStatus==='CHUA THANH TOAN'?'#C00000':(voucherStatus==='UNC/PHIEU CHI KHONG CO PN'?'#008000':'');const tint=rec._color&&i>=4?'background:#'+rec._color+';':'';const moneyStyle=amountColor&&isMoneyColumn?'color:'+amountColor+';':'';return '<td style="'+tint+moneyStyle+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
+  $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr>'+rec.output.map((v,i)=>{const isMoneyColumn=[4,5,6,outputHeaders.length-2].includes(i);const shown=isMoneyColumn&&v!==''&&v!==null&&v!==undefined&&Number.isFinite(Number(v))?fmt(Number(v)):v;const val=(i===outputHeaders.length-1&&v)?'<span class="badge '+(v==='ok'?'good':(v==='dư lẻ'?'review':(v==='điều chỉnh đối ứng'?'rejected':'none')))+'">'+escHtml(v)+'</span>':escHtml(shown===null||shown===undefined?'':shown);const statusKey=norm(rec.status);const voucherStatus=(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')?norm((resultRows.find(x=>String(x.base[0]??'').trim()===String(rec.base[0]??'').trim()&&String(x.base[1]??'').trim()===String(rec.base[1]??'').trim()&&['CHUA THANH TOAN','UNC/PHIEU CHI KHONG CO PN'].includes(norm(x.status)))||rec).status):statusKey);const amountColor=voucherStatus==='CHUA THANH TOAN'?'#C00000':(voucherStatus==='UNC/PHIEU CHI KHONG CO PN'?'#008000':'');const tint=rec._color&&i>=4?'background:#'+rec._color+';':'';const moneyStyle=amountColor&&isMoneyColumn?'color:'+amountColor+';':'';return '<td style="'+tint+moneyStyle+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
  }
 
  $('dcRun').addEventListener('click',()=>{try{const records=window.__dcRecords||[];if(!records.length){alert('Vui lòng import file sổ kế toán trước.');return}compute(records);$('dcResultsPanel').hidden=false;$('dcExport').disabled=false;render()}catch(err){alert('Lỗi khi đối chiếu: '+(err.message||String(err)))}});
