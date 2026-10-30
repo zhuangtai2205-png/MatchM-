@@ -4173,7 +4173,21 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  async function readMatrix(file){
   const ext=(file.name.split('.').pop()||'').toLowerCase();
   if(ext==='csv')return {matrix:readCsvMatrix(await file.text()),sheetName:'',workbook:null};
-  if(ext==='xlsx'||ext==='xls'){if(typeof XLSX==='undefined')throw Error('Thư viện Excel chưa tải xong.');const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellText:true,cellDates:true,cellStyles:true});const name=wb.SheetNames[0]||'';if(!name)throw Error('File không có sheet dữ liệu.');return {matrix:XLSX.utils.sheet_to_json(wb.Sheets[name],{header:1,defval:'',raw:false,blankrows:true}),sheetName:name,workbook:wb}}
+  if(ext==='xlsx'||ext==='xls'){
+   if(typeof XLSX==='undefined')throw Error('Thư viện Excel chưa tải xong. Hãy tải lại trang rồi thử lại.');
+   const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellText:true,cellDates:true,cellStyles:true});
+   if(!wb.SheetNames||!wb.SheetNames.length)throw Error('File không có sheet dữ liệu.');
+   // Accounting workbooks may put a cover/summary sheet before the actual ledger.
+   // Inspect every sheet and select the first one containing the required ledger headers.
+   let firstMatrix=null,firstName=wb.SheetNames[0]||'';
+   for(const name of wb.SheetNames){
+    const ws=wb.Sheets[name];if(!ws)continue;
+    const matrix=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:false,blankrows:true});
+    if(!firstMatrix){firstMatrix=matrix;firstName=name;}
+    if(headerRowIndex(matrix)>=0)return {matrix,sheetName:name,workbook:wb};
+   }
+   return {matrix:firstMatrix||[],sheetName:firstName,workbook:wb};
+  }
   throw Error('Vui lòng chọn file .xlsx, .xls hoặc .csv.');
  }
  function uniqueHeaders(headers){const seen={};return headers.map((h,i)=>{let t=String(h??'').trim()||('Cột '+(i+1));seen[t]=(seen[t]||0)+1;return seen[t]>1?t+' ('+seen[t]+')':t})}
