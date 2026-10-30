@@ -4581,7 +4581,23 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:headerRow-1,c:0},e:{r:topRows.length+resultRows.length,c:exportHeaders.length-1}})};ws['!freeze']={xSplit:0,ySplit:headerRow};
   const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'Doi chieu cong no');
 
-  wb.Workbook=wb.Workbook||{};wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};XLSX.writeFile(wb,'Doi_chieu_cong_no_theo_mau.xlsx')});
+  wb.Workbook=wb.Workbook||{};wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};
+  // Download directly from the user click; retain SheetJS writeFile as a fallback.
+  const exportName='Doi_chieu_cong_no_theo_mau.xlsx';
+  try{
+   const bytes=XLSX.write(wb,{bookType:'xlsx',type:'array',cellStyles:true});
+   const blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+   const url=URL.createObjectURL(blob),link=document.createElement('a');
+   link.href=url;link.download=exportName;link.style.display='none';
+   document.body.appendChild(link);link.click();link.remove();
+   setTimeout(()=>URL.revokeObjectURL(url),1500);
+  }catch(downloadError){
+   try{XLSX.writeFile(wb,exportName)}catch(fallbackError){
+    console.error('MatchMa Excel export failed',downloadError,fallbackError);
+    alert('Không xuất được file Excel. Vui lòng tải lại trang và thử lại. Chi tiết: '+(fallbackError.message||downloadError.message||String(fallbackError)));
+   }
+  }
+ });
 })();
 </script>
 </body></html>
