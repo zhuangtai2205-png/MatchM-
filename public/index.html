@@ -4568,11 +4568,12 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const findCol=label=>headers.findIndex(h=>norm(h)===norm(label));
   const statusCol=findCol('TỔNG KẾT');
   if(statusCol<0)throw new Error('File gốc không có cột TỔNG KẾT; không thể cập nhật trạng thái mà vẫn giữ nguyên bố cục.');
+  const baseRange=ws['!ref']?XLSX.utils.decode_range(ws['!ref']):{s:{r:0,c:0},e:{r:0,c:headers.length-1}};
+  let nextNewCol=baseRange.e.c+1;
   const findOrAdd=(label)=>{
    let c=findCol(label);
    if(c>=0)return c;
-   const range=ws['!ref']?XLSX.utils.decode_range(ws['!ref']):{s:{r:0,c:0},e:{r:0,c:headers.length-1}};
-   c=range.e.c+1;
+   c=nextNewCol++;
    const ref=XLSX.utils.encode_cell({r:sourceHeaderRow,c});
    const styleRef=ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:statusCol})];
    ws[ref]={t:'s',v:label};
