@@ -4496,7 +4496,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
    if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>{inv.rows[0].status='chưa thanh toán';delete inv.rows[0]._color})}
    else if(Math.abs(diff)>0.005){
-    const absDiff=Math.abs(diff),pct=invoiceTotal>0?absDiff/invoiceTotal*100:0;\n    oddAmount+=absDiff;
+    const absDiff=Math.abs(diff),pct=invoiceTotal>0?absDiff/invoiceTotal*100:0;
+    oddAmount+=absDiff;
     const direction=diff<0?'THIẾU':'DƯ';
     const note='DƯ LẺ - '+direction+' '+fmt(absDiff)+' ('+pct.toFixed(2).replace('.',',')+'%)';
     anchor.status=note;
