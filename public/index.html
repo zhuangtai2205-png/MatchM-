@@ -4543,6 +4543,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    p.rec._filterPayment=docLabel(p.rec.base[0],p.rec.base[1]);
   }
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status,rec._filterPN||'',rec._filterPayment||'']);rec.output=output;return rec});
+  window.__dcExportModel={invoices,payments};
   window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.total));
   summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>0.005).length,oddAmount};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');$('dcOddAmount').textContent=fmt(summary.oddAmount);
@@ -4570,6 +4571,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // Recreate the workbook's original row-level formulas: PN total in G and
   // payment-vs-linked-PN difference in K. Do not copy G's formula into K on payment rows.
   const exportExcelRow=new Map(resultRows.map((rec,i)=>[rec,dataStart+i]));
+  const exportModel=window.__dcExportModel||{};
+  const invoices=exportModel.invoices||[],payments=exportModel.payments||[];
   const invoiceAnchorRow=new Map();
   invoices.forEach(inv=>{const anchor=inv.rows&&inv.rows[0];if(anchor)invoiceAnchorRow.set(inv,exportExcelRow.get(anchor));});
   invoices.forEach(inv=>{
