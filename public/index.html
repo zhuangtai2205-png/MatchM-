@@ -4344,15 +4344,13 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    return nodes<=NODE_LIMIT&&best&&!tied?best.map(x=>x.item):null;
   }
   function preferredPaymentSubset(items,target,getAmount,maxItems=14,targetDate=null){
-   // First prefer a clean UNC-only match. If that is unavailable, explicitly
-   // search for a mixed UNC+PC group before accepting a PC-only match. This
-   // makes one PN payable by a combination of bank transfers and cash vouchers.
+   // Priority: UNC-only first, then PC-only, and finally a mixed UNC+PC group.
    const uncMatch=uniqueSubset(items.filter(p=>p.type==='UNC'),target,getAmount,maxItems,targetDate);
    if(uncMatch)return uncMatch;
-   const mixedMatch=uniqueSubset(items.filter(p=>p.type==='UNC'||p.type==='PC'),target,getAmount,maxItems,targetDate,true);
-   if(mixedMatch)return mixedMatch;
    const pcMatch=uniqueSubset(items.filter(p=>p.type==='PC'),target,getAmount,maxItems,targetDate);
    if(pcMatch)return pcMatch;
+   const mixedMatch=uniqueSubset(items.filter(p=>p.type==='UNC'||p.type==='PC'),target,getAmount,maxItems,targetDate,true);
+   if(mixedMatch)return mixedMatch;
    return uniqueSubset(items,target,getAmount,maxItems,targetDate);
   }
   // If text references include a misleading/old PN number, recover only when there is
