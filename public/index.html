@@ -4297,10 +4297,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   }
   // Amount-based group matching: exhaust UNC-only combinations before PC-only or mixed combinations.
   const closeMoney=(a,b)=>Math.abs(a-b)<0.005;
-  function uniqueSubset(items,target,getAmount,maxItems=14,targetDate=null){
+  function uniqueSubset(items,target,getAmount,maxItems=14,targetDate=null,requireMixed=false){
    // Find the closest multi-row group within 1 đồng. When totals tie at the
    // same rounding variance, prefer the group whose voucher dates are closest
-   // to the UNC date instead of silently rejecting every possible group.
+   // to the target date. requireMixed enforces at least one UNC and one PC.
    const targetNumber=Number(target);
    if(!Number.isFinite(targetNumber)||targetNumber<=0)return null;
    const pool=items.map(item=>({item,amount:Number(getAmount(item))}))
@@ -4321,7 +4321,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    function dfs(start,sum,chosen){
     if(++nodes>NODE_LIMIT)return;
     const diff=Math.abs(sum-targetNumber);
-    if(chosen.length>=2&&diff<=TOLERANCE){
+    const hasUNC=chosen.some(x=>x.item.type==='UNC'),hasPC=chosen.some(x=>x.item.type==='PC');
+    if(chosen.length>=2&&diff<=TOLERANCE&&(!requireMixed||(hasUNC&&hasPC))){
      const ds=dateScore(chosen);
      if(diff<bestDiff-TIE_EPSILON||(Math.abs(diff-bestDiff)<=TIE_EPSILON&&ds<bestDateScore)){
       bestDiff=diff;bestDateScore=ds;best=chosen.slice();tied=false;
@@ -4343,8 +4344,13 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    return nodes<=NODE_LIMIT&&best&&!tied?best.map(x=>x.item):null;
   }
   function preferredPaymentSubset(items,target,getAmount,maxItems=14,targetDate=null){
+   // First prefer a clean UNC-only match. If that is unavailable, explicitly
+   // search for a mixed UNC+PC group before accepting a PC-only match. This
+   // makes one PN payable by a combination of bank transfers and cash vouchers.
    const uncMatch=uniqueSubset(items.filter(p=>p.type==='UNC'),target,getAmount,maxItems,targetDate);
    if(uncMatch)return uncMatch;
+   const mixedMatch=uniqueSubset(items.filter(p=>p.type==='UNC'||p.type==='PC'),target,getAmount,maxItems,targetDate,true);
+   if(mixedMatch)return mixedMatch;
    const pcMatch=uniqueSubset(items.filter(p=>p.type==='PC'),target,getAmount,maxItems,targetDate);
    if(pcMatch)return pcMatch;
    return uniqueSubset(items,target,getAmount,maxItems,targetDate);
