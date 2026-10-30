@@ -4482,7 +4482,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    }
   }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
-  let oddAmount=0;\n  const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
+  let oddAmount=0;
+  const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
   for(const start of invoices){
    if(visitedI.has(start.key))continue;
    const compI=[],compP=[],queue=[{type:'i',obj:start}];visitedI.add(start.key);
