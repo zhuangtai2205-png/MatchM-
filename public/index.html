@@ -4561,7 +4561,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
 
  function exportOriginalWorkbook(){
   if(!sourceWorkbook||!sourceSheetName)throw new Error('Không có workbook Excel gốc. Nếu nhập CSV thì định dạng CSV không lưu được công thức Excel.');
-  const wb=sourceWorkbook,ws=wb.Sheets[sourceSheetName];
+  // Tạo bản làm việc riêng để workbook/file nguồn không bị thay đổi trong bộ nhớ.
+  const wb=typeof structuredClone==='function'?structuredClone(sourceWorkbook):XLSX.read(XLSX.write(sourceWorkbook,{bookType:'xlsx',type:'array'}),{type:'array',cellStyles:true});
+  const ws=wb.Sheets[sourceSheetName];
   if(!ws)throw new Error('Không tìm thấy sheet gốc.');
   const matrix=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:true,blankrows:true});
   const headers=matrix[sourceHeaderRow]||[];
@@ -4587,15 +4589,74 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const writeValue=(row,col,value)=>{
    const ref=XLSX.utils.encode_cell({r:row,c:col});
    const prior=ws[ref]||{};
-   // Công thức đã có trong file nguồn luôn được giữ nguyên, không ghi đè bằng giá trị.
    if(prior.f)return;
    ws[ref]={...prior,t:typeof value==='number'?'n':'s',v:value??''};
   };
+  const moneyFormat='#,##0.00;[Red]-#,##0.00;0.00';
+  const setFormula=(row,col,formula,value)=>{
+   const ref=XLSX.utils.encode_cell({r:row,c:col}),prior=ws[ref]||{};
+   // Giữ nguyên công thức đã tồn tại trong file nguồn; chỉ bổ sung khi ô chưa có công thức.
+   if(prior.f)return;
+   const cached=Number(value);
+   ws[ref]={...prior,t:'n',f:String(formula).replace(/^=/,''),v:Number.isFinite(cached)?cached:0,z:moneyFormat};
+  };
+  const excelRow=rec=>Number(rec.sourceRow);
+  const sameInvoice=(a,b)=>norm(a.base[0]).replace(/\\s/g,'')===norm(b.base[0]).replace(/\\s/g,'')&&norm(a.base[1]).replace(/\\s/g,'')===norm(b.base[1]).replace(/\\s/g,'');
+  // Công thức G: tổng phát sinh Có trừ phát sinh Nợ của toàn bộ dòng thuộc cùng một PN.
   resultRows.forEach(rec=>{
-   const row=Number(rec.sourceRow)-1;
+   const row=excelRow(rec)-1;
    if(!Number.isInteger(row)||row<=sourceHeaderRow)return;
-   writeValue(row,totalPNCol,rec.totalPN??'');
-   writeValue(row,resultCol,rec.result??'');
+   if(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')&&rec.totalPN!==''&&rec.totalPN!==undefined){
+    const invoiceRows=resultRows.filter(x=>sameInvoice(x,rec)).map(excelRow).filter(n=>Number.isInteger(n)&&n>sourceHeaderRow);
+    const creditRefs=invoiceRows.map(n=>'F'+n),debitRefs=invoiceRows.map(n=>'E'+n);
+    if(invoiceRows.length)setFormula(row,totalPNCol,'SUM('+creditRefs.join(',')+')-SUM('+debitRefs.join(',')+')',rec.totalPN);
+   }
+  });
+  const splitLabels=value=>String(value||'').split('+').map(x=>x.trim()).filter(Boolean);
+  const collectLinkedGroup=start=>{
+   const pnLabels=new Set([String(start._filterPN||'')].filter(Boolean)),paymentLabels=new Set();
+   let changed=true;
+   while(changed){
+    changed=false;
+    for(const rec of resultRows){
+     const code=String(rec.base[0]??'').trim().toUpperCase();
+     if(code.startsWith('PN')&&pnLabels.has(String(rec._filterPN||''))){
+      for(const label of splitLabels(rec._filterPayment))if(!paymentLabels.has(label)){paymentLabels.add(label);changed=true;}
+     }
+    }
+    for(const rec of resultRows){
+     if(!paymentType(rec.base[0]))continue;
+     if(paymentLabels.has(String(rec._filterPayment||''))){
+      for(const label of splitLabels(rec._filterPN))if(!pnLabels.has(label)){pnLabels.add(label);changed=true;}
+     }
+    }
+   }
+   const invoiceRows=resultRows.filter(rec=>String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')&&pnLabels.has(String(rec._filterPN||'')));
+   const paymentRows=resultRows.filter(rec=>paymentType(rec.base[0])&&paymentLabels.has(String(rec._filterPayment||'')));
+   const invoiceFirstRows=[...new Map(invoiceRows.filter(rec=>rec.totalPN!==''&&rec.totalPN!==undefined).map(rec=>[String(rec._filterPN||''),rec])).values()];
+   return {invoiceRows,paymentRows,invoiceFirstRows};
+  };
+  // Công thức K: chênh lệch thanh toán trừ tổng PN của cả nhóm; PN chưa thanh toán là tổng PN.
+  resultRows.forEach(rec=>{
+   const row=excelRow(rec)-1;
+   if(!Number.isInteger(row)||row<=sourceHeaderRow)return;
+   if(rec.result===''||rec.result===null||rec.result===undefined)return;
+   const code=String(rec.base[0]??'').trim().toUpperCase();
+   if(code.startsWith('PN')){
+    const group=collectLinkedGroup(rec);
+    const pnRefs=group.invoiceFirstRows.map(x=>'G'+excelRow(x));
+    const paymentRefs=group.paymentRows.map(x=>'E'+excelRow(x));
+    const formula=paymentRefs.length
+      ?'SUM('+paymentRefs.join(',')+')-'+(pnRefs.length?'SUM('+pnRefs.join(',')+')':'0')
+      :(pnRefs.length?'SUM('+pnRefs.join(',')+')':'0');
+    setFormula(row,resultCol,formula,rec.result);
+   }else if(paymentType(code)&&norm(rec.status)==='UNC/PHIEU CHI KHONG CO PN'){
+    setFormula(row,resultCol,'E'+excelRow(rec),rec.result);
+   }
+  });
+  resultRows.forEach(rec=>{
+   const row=excelRow(rec)-1;
+   if(!Number.isInteger(row)||row<=sourceHeaderRow)return;
    writeValue(row,statusCol,String(rec.status??''));
    writeValue(row,pnFilterCol,String(rec._filterPN||''));
    writeValue(row,paymentFilterCol,String(rec._filterPayment||''));
