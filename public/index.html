@@ -4559,50 +4559,52 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  $('dcRun').addEventListener('click',()=>{try{const records=window.__dcRecords||[];if(!records.length){alert('Vui lòng import file sổ kế toán trước.');return}compute(records);$('dcResultsPanel').hidden=false;$('dcExport').disabled=false;render()}catch(err){alert('Lỗi khi đối chiếu: '+(err.message||String(err)))}});
  $('dcSearch').addEventListener('input',render);$('dcStatusFilter').addEventListener('change',render);
 
- function exportOriginalAnnotatedWorkbook(){
-  if(!sourceWorkbook||!sourceAnnotated||!sourceSheetName)throw new Error('Không có workbook gốc để giữ công thức.');
+ function exportOriginalWorkbook(){
+  if(!sourceWorkbook||!sourceSheetName)throw new Error('Không có workbook Excel gốc. Nếu nhập CSV thì định dạng CSV không lưu được công thức Excel.');
   const wb=sourceWorkbook,ws=wb.Sheets[sourceSheetName];
   if(!ws)throw new Error('Không tìm thấy sheet gốc.');
   const matrix=XLSX.utils.sheet_to_json(ws,{header:1,defval:'',raw:true,blankrows:true});
   const headers=matrix[sourceHeaderRow]||[];
   const findCol=label=>headers.findIndex(h=>norm(h)===norm(label));
-  const statusCol=findCol('TỔNG KẾT');
-  if(statusCol<0)throw new Error('File gốc không có cột TỔNG KẾT; không thể cập nhật trạng thái mà vẫn giữ nguyên bố cục.');
-  const baseRange=ws['!ref']?XLSX.utils.decode_range(ws['!ref']):{s:{r:0,c:0},e:{r:0,c:headers.length-1}};
-  let nextNewCol=baseRange.e.c+1;
+  const range=ws['!ref']?XLSX.utils.decode_range(ws['!ref']):{s:{r:0,c:0},e:{r:0,c:Math.max(0,headers.length-1)}};
+  let nextCol=range.e.c+1;
   const findOrAdd=(label)=>{
-   let c=findCol(label);
-   if(c>=0)return c;
-   c=nextNewCol++;
-   const ref=XLSX.utils.encode_cell({r:sourceHeaderRow,c});
-   const styleRef=ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:statusCol})];
-   ws[ref]={t:'s',v:label};
-   if(styleRef&&styleRef.s)ws[ref].s=styleRef.s;
-   headers[c]=label;
-   return c;
+   let col=findCol(label);
+   if(col>=0)return col;
+   col=nextCol++;
+   const headerRef=XLSX.utils.encode_cell({r:sourceHeaderRow,c:col});
+   const styleSource=ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:Math.max(0,findCol('TỔNG KẾT'))}]||ws[XLSX.utils.encode_cell({r:sourceHeaderRow,c:range.e.c})];
+   ws[headerRef]={t:'s',v:label};
+   if(styleSource?.s)ws[headerRef].s=styleSource.s;
+   headers[col]=label;
+   return col;
   };
+  const totalPNCol=findOrAdd('TỔNG TIỀN PN');
+  const resultCol=findOrAdd('KẾT QUẢ');
+  const statusCol=findOrAdd('TỔNG KẾT');
   const pnFilterCol=findOrAdd('BỘ LỌC PN');
   const paymentFilterCol=findOrAdd('BỘ LỌC UNC/PC');
+  const writeValue=(row,col,value)=>{
+   const ref=XLSX.utils.encode_cell({r:row,c:col});
+   const prior=ws[ref]||{};
+   // Công thức đã có trong file nguồn luôn được giữ nguyên, không ghi đè bằng giá trị.
+   if(prior.f)return;
+   ws[ref]={...prior,t:typeof value==='number'?'n':'s',v:value??''};
+  };
   resultRows.forEach(rec=>{
-   const r=Number(rec.sourceRow)-1;
-   if(!Number.isInteger(r)||r<0)return;
-   const statusRef=XLSX.utils.encode_cell({r,c:statusCol});
-   const priorStatus=ws[statusRef]||{};
-   ws[statusRef]={...priorStatus,t:'s',v:String(rec.status??'')};
-   for(const [c,value] of [[pnFilterCol,rec._filterPN||''],[paymentFilterCol,rec._filterPayment||'']]){
-    const ref=XLSX.utils.encode_cell({r,c});
-    const prior=ws[ref]||{};
-    ws[ref]={...prior,t:'s',v:String(value)};
-    const styleRef=ws[XLSX.utils.encode_cell({r,c:statusCol})];
-    if(!prior.s&&styleRef&&styleRef.s)ws[ref].s=styleRef.s;
-   }
+   const row=Number(rec.sourceRow)-1;
+   if(!Number.isInteger(row)||row<=sourceHeaderRow)return;
+   writeValue(row,totalPNCol,rec.totalPN??'');
+   writeValue(row,resultCol,rec.result??'');
+   writeValue(row,statusCol,String(rec.status??''));
+   writeValue(row,pnFilterCol,String(rec._filterPN||''));
+   writeValue(row,paymentFilterCol,String(rec._filterPayment||''));
   });
-  const originalRange=ws['!ref']?XLSX.utils.decode_range(ws['!ref']):{s:{r:0,c:0},e:{r:0,c:0}};
-  const lastDataRow=resultRows.reduce((m,rec)=>Math.max(m,Number(rec.sourceRow)-1),sourceHeaderRow);
-  const lastCol=Math.max(originalRange.e.c,paymentFilterCol);
-  ws['!ref']=XLSX.utils.encode_range({s:originalRange.s,e:{r:Math.max(originalRange.e.r,lastDataRow),c:lastCol}});
-  ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:sourceHeaderRow,c:0},e:{r:lastDataRow,c:lastCol}})};
-  // Không ghi đè hoặc tạo lại bất kỳ công thức nào trong workbook gốc.
+  const lastRow=resultRows.reduce((m,rec)=>Math.max(m,Number(rec.sourceRow)-1),sourceHeaderRow);
+  const lastCol=Math.max(nextCol-1,range.e.c);
+  ws['!ref']=XLSX.utils.encode_range({s:range.s,e:{r:Math.max(range.e.r,lastRow),c:lastCol}});
+  ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:sourceHeaderRow,c:0},e:{r:lastRow,c:lastCol}})};
+  // Ghi trực tiếp workbook nguồn; tuyệt đối không dựng workbook mới từ mảng dữ liệu.
   try{XLSX.writeFile(wb,'Doi_chieu_cong_no_theo_mau.xlsx');}
   catch(writeErr){
    try{
@@ -4615,9 +4617,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    }catch(fallbackErr){throw new Error('Xuất Excel lỗi: '+(writeErr?.message||writeErr)+'; phương án dự phòng: '+(fallbackErr?.message||fallbackErr));}
   }
  }
-
  function invoicesTotalForExport(){return (window.__dcInvoiceTotals||[]).reduce((a,x)=>a+x,0)}
- $('dcExport').addEventListener('click',()=>{try{if(typeof XLSX==='undefined'){alert('Thư viện Excel chưa tải xong.');return}if(sourceWorkbook&&sourceAnnotated){exportOriginalAnnotatedWorkbook();return}const totalDebit=resultRows.reduce((a,r)=>a+num(r.base[4]),0),totalCredit=resultRows.reduce((a,r)=>a+num(r.base[5]),0),ledgerDiff=totalDebit-totalCredit;const sourceExportHeaders=outputHeaders.filter(h=>!['TỔNG TIỀN PN','KẾT QUẢ','TỔNG KẾT','BỘ LỌC PN','BỘ LỌC UNC/PC'].includes(h));const exportHeaders=sourceExportHeaders.slice(0,6).concat(['TỔNG TIỀN PN'],sourceExportHeaders.slice(6),['KẾT QUẢ','TỔNG KẾT','BỘ LỌC PN','BỘ LỌC UNC/PC']);const exportRows=resultRows.map(rec=>{const row=sourceExportHeaders.map(header=>{const idx=outputHeaders.indexOf(header);return idx>=0?rec.output[idx]:''});row.splice(6,0,rec.totalPN??'');row.push(rec.result??'',rec.status??'',rec._filterPN||'',rec._filterPayment||'');return row;});const dataStart=topRows.length+2,dataEnd=dataStart+resultRows.length-1,resultCol=exportHeaders.indexOf('KẾT QUẢ'),statusCol=exportHeaders.indexOf('TỔNG KẾT');const matrix=topRows.concat([exportHeaders],exportRows);const blank=Array(exportHeaders.length).fill('');matrix.push(blank.slice());const totalRow=blank.slice();totalRow[2]='TỔNG CỘNG HAI BÊN';totalRow[4]=totalDebit;totalRow[5]=totalCredit;matrix.push(totalRow);const netRow=blank.slice();netRow[2]='CHÊNH LỆCH NỢ - CÓ';netRow[4]=ledgerDiff;matrix.push(netRow);const allPnRow=blank.slice();allPnRow[2]='TỔNG TIỀN TẤT CẢ PN';allPnRow[4]=invoicesTotalForExport();matrix.push(allPnRow);const sumRow=blank.slice();sumRow[2]='TỔNG PN CHƯA THANH TOÁN';sumRow[4]=summary.unpaid;matrix.push(sumRow);const noPnRow=blank.slice();noPnRow[2]='TỔNG UNC / PHIẾU CHI CHƯA GHÉP ĐƯỢC PN';noPnRow[4]=summary.noPN;matrix.push(noPnRow);const oddAmountRow=blank.slice();oddAmountRow[2]='TỔNG DƯ LẺ';oddAmountRow[4]=summary.oddAmount;matrix.push(oddAmountRow);const oddRow=blank.slice();oddRow[2]='CHÊNH LỆCH CUỐI CÙNG (NỢ - CÓ)';oddRow[4]=ledgerDiff;matrix.push(oddRow);const ws=XLSX.utils.aoa_to_sheet(matrix);const oddSummaryRow=matrix.length-2;for(const cc of [2,4]){const cell=XLSX.utils.encode_cell({r:oddSummaryRow,c:cc});ws[cell]=ws[cell]||{t:cc===4?'n':'s',v:cc===4?summary.oddAmount:'TỔNG DƯ LẺ'};ws[cell].s={font:{bold:true,color:{rgb:'9C0006'}},fill:{patternType:'solid',fgColor:{rgb:'FCE4D6'}},alignment:{vertical:'center',horizontal:cc===4?'right':'left'},border:{top:{style:'thin',color:{rgb:'C65911'}},bottom:{style:'double',color:{rgb:'C65911'}}}};}const moneyFormat='#,##0.00;[Red]-#,##0.00;0.00';const oddValueCell=ws[XLSX.utils.encode_cell({r:oddSummaryRow,c:4})];oddValueCell.t='n';oddValueCell.v=summary.oddAmount;oddValueCell.z=moneyFormat;
+ $('dcExport').addEventListener('click',()=>{try{if(typeof XLSX==='undefined'){alert('Thư viện Excel chưa tải xong.');return}if(sourceWorkbook){exportOriginalWorkbook();return}const totalDebit=resultRows.reduce((a,r)=>a+num(r.base[4]),0),totalCredit=resultRows.reduce((a,r)=>a+num(r.base[5]),0),ledgerDiff=totalDebit-totalCredit;const sourceExportHeaders=outputHeaders.filter(h=>!['TỔNG TIỀN PN','KẾT QUẢ','TỔNG KẾT','BỘ LỌC PN','BỘ LỌC UNC/PC'].includes(h));const exportHeaders=sourceExportHeaders.slice(0,6).concat(['TỔNG TIỀN PN'],sourceExportHeaders.slice(6),['KẾT QUẢ','TỔNG KẾT','BỘ LỌC PN','BỘ LỌC UNC/PC']);const exportRows=resultRows.map(rec=>{const row=sourceExportHeaders.map(header=>{const idx=outputHeaders.indexOf(header);return idx>=0?rec.output[idx]:''});row.splice(6,0,rec.totalPN??'');row.push(rec.result??'',rec.status??'',rec._filterPN||'',rec._filterPayment||'');return row;});const dataStart=topRows.length+2,dataEnd=dataStart+resultRows.length-1,resultCol=exportHeaders.indexOf('KẾT QUẢ'),statusCol=exportHeaders.indexOf('TỔNG KẾT');const matrix=topRows.concat([exportHeaders],exportRows);const blank=Array(exportHeaders.length).fill('');matrix.push(blank.slice());const totalRow=blank.slice();totalRow[2]='TỔNG CỘNG HAI BÊN';totalRow[4]=totalDebit;totalRow[5]=totalCredit;matrix.push(totalRow);const netRow=blank.slice();netRow[2]='CHÊNH LỆCH NỢ - CÓ';netRow[4]=ledgerDiff;matrix.push(netRow);const allPnRow=blank.slice();allPnRow[2]='TỔNG TIỀN TẤT CẢ PN';allPnRow[4]=invoicesTotalForExport();matrix.push(allPnRow);const sumRow=blank.slice();sumRow[2]='TỔNG PN CHƯA THANH TOÁN';sumRow[4]=summary.unpaid;matrix.push(sumRow);const noPnRow=blank.slice();noPnRow[2]='TỔNG UNC / PHIẾU CHI CHƯA GHÉP ĐƯỢC PN';noPnRow[4]=summary.noPN;matrix.push(noPnRow);const oddAmountRow=blank.slice();oddAmountRow[2]='TỔNG DƯ LẺ';oddAmountRow[4]=summary.oddAmount;matrix.push(oddAmountRow);const oddRow=blank.slice();oddRow[2]='CHÊNH LỆCH CUỐI CÙNG (NỢ - CÓ)';oddRow[4]=ledgerDiff;matrix.push(oddRow);const ws=XLSX.utils.aoa_to_sheet(matrix);const oddSummaryRow=matrix.length-2;for(const cc of [2,4]){const cell=XLSX.utils.encode_cell({r:oddSummaryRow,c:cc});ws[cell]=ws[cell]||{t:cc===4?'n':'s',v:cc===4?summary.oddAmount:'TỔNG DƯ LẺ'};ws[cell].s={font:{bold:true,color:{rgb:'9C0006'}},fill:{patternType:'solid',fgColor:{rgb:'FCE4D6'}},alignment:{vertical:'center',horizontal:cc===4?'right':'left'},border:{top:{style:'thin',color:{rgb:'C65911'}},bottom:{style:'double',color:{rgb:'C65911'}}}};}const moneyFormat='#,##0.00;[Red]-#,##0.00;0.00';const oddValueCell=ws[XLSX.utils.encode_cell({r:oddSummaryRow,c:4})];oddValueCell.t='n';oddValueCell.v=summary.oddAmount;oddValueCell.z=moneyFormat;
   // Ensure debit/credit values are stored as numeric cells, not text; Excel SUM ignores text values.
   resultRows.forEach((rec,i)=>{const rr=dataStart+i;for(const cc of [4,5]){const cell=XLSX.utils.encode_cell({r:rr-1,c:cc});if(ws[cell]&&String(rec.base[cc]??'').trim()!==''){ws[cell].t='n';ws[cell].v=num(rec.base[cc]);}else if(!ws[cell])ws[cell]={t:'n',v:0};}});
   // KẾT QUẢ giữ nguyên giá trị chênh lệch cuối cùng do bộ đối chiếu tính ra (dư lẻ hoặc 0); không lấy/đưa TỔNG TIỀN PN sang cột này.
