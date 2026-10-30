@@ -4601,7 +4601,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    ws[ref]={...prior,t:'n',f:String(formula).replace(/^=/,''),v:Number.isFinite(cached)?cached:0,z:moneyFormat};
   };
   const excelRow=rec=>Number(rec.sourceRow);
-  const sameInvoice=(a,b)=>norm(a.base[0]).replace(/\\s/g,'')===norm(b.base[0]).replace(/\\s/g,'')&&norm(a.base[1]).replace(/\\s/g,'')===norm(b.base[1]).replace(/\\s/g,'');
+  const sameInvoice=(a,b)=>norm(a.base[0]).replace(/\s/g,'')===norm(b.base[0]).replace(/\s/g,'')&&norm(a.base[1]).replace(/\s/g,'')===norm(b.base[1]).replace(/\s/g,'');
   // Công thức G: tổng phát sinh Có trừ phát sinh Nợ của toàn bộ dòng thuộc cùng một PN.
   resultRows.forEach(rec=>{
    const row=excelRow(rec)-1;
