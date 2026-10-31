@@ -3232,7 +3232,8 @@ function runAutoFill(){
    const riceVsDrink=(hasRice(sourceWords,name+' '+spec)&&hasRevive(masterWords,m.name))||(hasRevive(sourceWords,name+' '+spec)&&hasRice(masterWords,m.name));
    if(familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||evidence<1)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
-   const rank=score-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+   const variantBonus=hasExplicitVariant(name)&&!variantMissing(name,m.name)?.25:0;
+   const rank=score+variantBonus-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
    suggestions.push({m,score,evidence,attributeConflict,uConflict,pConflict,memorySuggestion,rank});
    if(rank>bestRank){bestRank=rank;best={m,score,evidence,attributeConflict,uConflict,pConflict,memorySuggestion}}
   }
@@ -3577,8 +3578,8 @@ function norm(s){
  ];
  for(const [re,sub] of phrases)t=t.replace(re,' '+sub+' ');
  // CĐ là cách viết tắt của có đường trong tên sữa; chỉ diễn giải khi có ngữ cảnh sữa/VNM.
- const dairyContext=/\b(sua|vnm|vinamil|milk)\b/.test(t);
- if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ');
+ const dairyContext=/\b(sua|vnm|vinamil|milk|cnm)\b/.test(t);
+ if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ').replace(/\b(k\s*\.?\s*d|kd)\b/g,' khong_duong ');
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
  t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
@@ -3646,6 +3647,11 @@ function variantConflict(a,b){
  const ba=brandIdentity(a.join(' ')),bb=brandIdentity(b.join(' '));
  if(ba&&bb&&ba!==bb)return true;
  return false;
+}
+function hasExplicitVariant(value){
+ const T=new Set(getTokens(value));
+ return [...T].some(t=>t.startsWith('stage_')||t.startsWith('color_'))||
+  ['apple','tao','raisin','raisins','nho_kho','almond','hanh_nhan','orange','cam','strawberry','dau_tay','dau','grape','nho','chocolate','socola','socolat','vanilla','vani','co_duong','khong_duong','co_gas','khong_gas','nguyen_kem','tach_beo'].some(t=>T.has(t));
 }
 function variantMissing(a,b){
  const A=new Set(getTokens(a)),B=new Set(getTokens(b));
@@ -3718,6 +3724,7 @@ function brandIdentity(value){
  const tokens=norm(value).split(/\s+/).filter(Boolean),set=new Set(tokens);
  // Brand aliases: ignore document prefixes such as TPBS, SPDD, Sữa, and identify only known brands.
  if(set.has('vnm')||set.has('vinamilk')||set.has('vinamil')||set.has('dielac')||set.has('optimum')||set.has('yokogold'))return 'vinamilk';
+ if(set.has('cnm'))return 'cnm';
  if(set.has('th'))return 'th';
  if(set.has('nutricare')||set.has('colos24h')||set.has('metacare')||set.has('nepro'))return 'nutricare';
  if(set.has('nutifood')||set.has('nuti')||set.has('growplus')||set.has('grow_plus'))return 'nutifood';
@@ -3803,7 +3810,7 @@ async function runMatch(){
     // Không ghép chỉ vì trùng từ loại chung như “bánh”, “thùng”, “lốc”; cần dấu hiệu tên đặc trưng hoặc SKU chính xác.
     if(!exactSku&&(nameScore<.60||evidence<2))continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
-    const attributeConflict=conflictTokens(queryTokens,m.tokens)||variantMissing(queryName,m.name);
+    const attributeConflict=conflictTokens(queryTokens,m.tokens)||variantMissing(queryName,m.name)||brandUncertain(queryName,m.name);
     const uConflict=unitConflict(queryUnit,m.unit);
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
