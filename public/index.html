@@ -3583,7 +3583,7 @@ function norm(s){
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
  t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
-  .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
+  .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b(?![.,]\d)/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
  // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
  t=t.replace(/\bxanh\s+nhat\b/g,' color_xanh_nhat ')
   .replace(/\bxanh\b/g,' color_xanh ')
