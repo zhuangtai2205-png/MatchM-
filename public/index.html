@@ -2226,7 +2226,123 @@ table td,table th{border-color:#eceaf0}
 input,select,textarea{border-color:#e3e0e9}
 input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);border-color:#aaa4c8}
 @media(max-width:760px){.resulttools input.search,.resulttools select{flex:1 1 100%;min-width:0;max-width:none}#resultCount{margin-left:0}.filterbox{padding:10px}.app-shell.shell{gap:12px!important}}
-</style><link rel="stylesheet" href="/social.css?v=23"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
+</style><link rel="stylesheet" href="/social.css?v=23">
+<style id="matchma-cute-creative-skin">
+/* MatchMa Cute Creative skin — visual-only layer; no application logic or theme data changed. */
+:root{
+  --mm-coral:#f3c8d9;--mm-mint:#cceee1;--mm-sky:#cdebf6;
+  --mm-lav:#ddd4fa;--mm-peach:#f8dfc8;--mm-shadow:0 14px 34px rgba(83,73,112,.09);
+}
+body{font-family:'Nunito','Baloo 2',system-ui,sans-serif}
+.app-header{
+  position:relative;z-index:20;
+  background:color-mix(in srgb,var(--paper,#fff) 78%,transparent);
+  border-bottom:1px solid color-mix(in srgb,var(--line,#e8e0f1) 72%,transparent);
+  backdrop-filter:blur(16px);
+}
+.app-header .brand-copy h1{font-family:'Baloo 2','Nunito',sans-serif;font-weight:800;letter-spacing:-1.25px}
+.app-header .brand-copy .subbrand{font-weight:650}
+.app-header .brand-mark{transition:transform .24s cubic-bezier(.2,.8,.2,1)}
+.app-header .brand-mark:hover{transform:rotate(-4deg) scale(1.045)}
+.app-shell.shell{align-items:start;gap:clamp(14px,1.5vw,24px)}
+#appSidebar.sidebar{
+  border:1.5px solid color-mix(in srgb,var(--line,#e8e0f1) 82%,transparent);
+  border-radius:25px;
+  background:color-mix(in srgb,var(--paper,#fff) 86%,transparent);
+  box-shadow:var(--mm-shadow);
+  backdrop-filter:blur(14px);
+}
+#appSidebar>.sidebar-topline{padding:5px 8px 8px}
+#appSidebar .sidebar-section-heading{font-size:10px;letter-spacing:1.5px;font-weight:900}
+#appSidebar .sidebar-account-shortcut{
+  border:1px dashed color-mix(in srgb,var(--purple,#7865c5) 35%,var(--line,#e8e0f1));
+  border-radius:17px;background:color-mix(in srgb,var(--lav,#ebe6ff) 60%,var(--paper,#fff));
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+#appSidebar .sidebar-account-shortcut:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(83,73,112,.09)}
+#appSidebar .navbtn{
+  border:1px solid transparent;border-radius:15px;
+  font-weight:750;letter-spacing:.05px;
+  transition:background .18s ease,border-color .18s ease,transform .18s ease,color .18s ease;
+}
+#appSidebar .navbtn:hover{transform:translateX(3px);border-color:color-mix(in srgb,var(--line,#e8e0f1) 78%,transparent)}
+#appSidebar .navbtn.active{border-color:color-mix(in srgb,var(--purple,#7865c5) 22%,transparent);box-shadow:inset 3px 0 0 var(--purple,#7865c5),0 5px 14px rgba(83,73,112,.06)}
+#appSidebar .navicon{filter:saturate(.82)}
+#appSidebar .nav-folder{border:1px solid color-mix(in srgb,var(--line,#e8e0f1) 68%,transparent);border-radius:16px;padding:5px 7px}
+#appSidebar .navfolder-title{border-radius:12px;padding:9px 8px;font-weight:900;letter-spacing:.8px}
+#appSidebar .nav-folder-items{padding:3px 0 5px}
+.page{padding:5px!important;border:0!important;background:transparent!important;box-shadow:none!important}
+.page .hero{
+  position:relative;overflow:hidden;
+  border:1px solid color-mix(in srgb,var(--line,#e8e0f1) 78%,transparent);
+  border-radius:27px;
+  background:linear-gradient(118deg,
+    color-mix(in srgb,var(--lav,#ebe6ff) 56%,var(--paper,#fff)),
+    color-mix(in srgb,var(--pink,#f7e2ed) 42%,var(--paper,#fff)) 54%,
+    color-mix(in srgb,var(--mint,#dff4eb) 45%,var(--paper,#fff)));
+  box-shadow:var(--mm-shadow);
+}
+.page .hero:after{
+  content:"✿  ✧  ♡";
+  position:absolute;right:clamp(18px,4vw,54px);top:17px;
+  color:color-mix(in srgb,var(--purple,#7865c5) 42%,transparent);
+  font:800 25px/1 'Baloo 2',sans-serif;letter-spacing:7px;
+  transform:rotate(7deg);pointer-events:none;
+}
+.page .hero h2{font-family:'Baloo 2','Nunito',sans-serif;font-weight:800;letter-spacing:-.7px}
+.page .panel{
+  border:1px solid color-mix(in srgb,var(--line,#e8e0f1) 78%,transparent);
+  border-radius:21px;background:color-mix(in srgb,var(--paper,#fff) 93%,transparent);
+  box-shadow:0 8px 24px rgba(83,73,112,.055);
+  transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+}
+.page .panel:hover{box-shadow:0 12px 28px rgba(83,73,112,.085);border-color:color-mix(in srgb,var(--purple,#7865c5) 24%,var(--line,#e8e0f1))}
+.page .sectionhead h2,.page .panel h2{font-family:'Baloo 2','Nunito',sans-serif;font-weight:800}
+.page .stat{
+  position:relative;overflow:hidden;border-radius:19px;
+  border:1px solid color-mix(in srgb,var(--line,#e8e0f1) 70%,transparent);
+  box-shadow:0 7px 18px rgba(83,73,112,.045);
+}
+.page .stat:nth-child(4n+1){border-top:3px solid var(--mm-sky)}
+.page .stat:nth-child(4n+2){border-top:3px solid var(--mm-lav)}
+.page .stat:nth-child(4n+3){border-top:3px solid var(--mm-coral)}
+.page .stat:nth-child(4n){border-top:3px solid var(--mm-mint)}
+.page .upload{
+  border-width:2px;border-radius:19px;
+  background:linear-gradient(135deg,color-mix(in srgb,var(--lav,#ebe6ff) 38%,var(--paper,#fff)),color-mix(in srgb,var(--mint,#dff4eb) 35%,var(--paper,#fff)));
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+.page .upload:hover{transform:translateY(-2px);box-shadow:0 9px 20px rgba(83,73,112,.07)}
+.page .btn{border-radius:14px;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}
+.page .btn:hover{transform:translateY(-2px);filter:saturate(1.08);box-shadow:0 8px 18px rgba(83,73,112,.13)}
+.page .btn:active{transform:translateY(0) scale(.985)}
+.page .field input[type=text],.page .field select,.page .field input[type=number],.page .search,
+.app-header .toolbar-select,.app-header .toolbar-font{
+  border-radius:13px;
+}
+.page .tablewrap{border-radius:17px;box-shadow:0 5px 18px rgba(83,73,112,.035)}
+.page table th{font-weight:850;letter-spacing:.1px}
+.page table tbody tr:nth-child(even){background:color-mix(in srgb,var(--lav,#ebe6ff) 13%,var(--paper,#fff))}
+.page table tbody tr:hover{background:color-mix(in srgb,var(--mint,#dff4eb) 32%,var(--paper,#fff))}
+.page .badge{border-radius:9px;font-weight:850}
+.page .progressbox{border-radius:16px}
+.page .bar{height:10px}
+#calculatorWidget{border-radius:22px;box-shadow:0 18px 48px rgba(60,48,91,.18)}
+@media(max-width:950px){
+  #appSidebar.sidebar{border-radius:19px}
+  #appSidebar .navbtn:hover{transform:translateY(-1px)}
+}
+@media(max-width:650px){
+  .page{padding:0!important}
+  .page .hero:after{font-size:18px;right:14px;top:13px;letter-spacing:3px}
+}
+@media(prefers-reduced-motion:reduce){
+  .app-header .brand-mark,#appSidebar .sidebar-account-shortcut,#appSidebar .navbtn,
+  .page .panel,.page .upload,.page .btn{transition:none!important}
+}
+</style>
+
+</head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
   <span class="brand-mark" aria-label="Logo MatchMã" role="img"><img class="brand-logo-img" src="/matchma-logo.png?v=50" alt="Logo MatchMã"></span>
