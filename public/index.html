@@ -3223,7 +3223,7 @@ function runAutoFill(){
    if(brandConflict(name,m.name)){brandRejected=true;continue}
    const brandEvidence=brandIdentity(name)&&brandIdentity(m.name)?1:0;
    const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.45)continue;
-   const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence;
+   const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),familyA=productFamily(tokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence+familyEvidence;
    // Chặn cứng lỗi nguy hiểm: "cơm trắng" không bao giờ là "Revive trắng".
    const sourceNorm=norm(name),masterNorm=norm(m.name);
    const sourceWords=new Set(getTokens(name+' '+spec+' '+unit)),masterWords=new Set(m.tokens);
@@ -3746,7 +3746,8 @@ async function runMatch(){
     const nameScore=Math.min(1,similarity(queryNameTokens,m.nameTokens)+brandEvidence*.15);
     const exactSku=!!querySku&&normalizeSku(querySku)===normalizeSku(m.code);
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
-    const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence;
+    const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0;
+    const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence;
     // Không ghép chỉ vì trùng từ loại chung như “bánh”, “thùng”, “lốc”; cần dấu hiệu tên đặc trưng hoặc SKU chính xác.
     if(!exactSku&&(nameScore<.60||evidence<2))continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
