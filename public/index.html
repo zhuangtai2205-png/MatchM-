@@ -3221,8 +3221,9 @@ function runAutoFill(){
   let best=null,bestRank=-1,brandRejected=false;const suggestions=[];
   for(const m of candidates.values()){
    if(brandConflict(name,m.name)){brandRejected=true;continue}
-   const score=similarity(tokens,m.nameTokens);if(score<.45)continue;
-   const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),evidence=sharedEvidence(tokens,m.nameTokens);
+   const brandEvidence=brandIdentity(name)&&brandIdentity(m.name)?1:0;
+   const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.45)continue;
+   const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence;
    // Chặn cứng lỗi nguy hiểm: "cơm trắng" không bao giờ là "Revive trắng".
    const sourceNorm=norm(name),masterNorm=norm(m.name);
    const sourceWords=new Set(getTokens(name+' '+spec+' '+unit)),masterWords=new Set(m.tokens);
@@ -3741,10 +3742,11 @@ async function runMatch(){
    let best=null,bestRank=-1,brandRejected=false;
    for(const m of candidates.values()){
     if(brandConflict(queryName,m.name)){brandRejected=true;continue}
-    const nameScore=similarity(queryNameTokens,m.nameTokens);
+    const brandEvidence=brandIdentity(queryName)&&brandIdentity(m.name)?1:0;
+    const nameScore=Math.min(1,similarity(queryNameTokens,m.nameTokens)+brandEvidence*.15);
     const exactSku=!!querySku&&normalizeSku(querySku)===normalizeSku(m.code);
-    // SKU trùng là bằng chứng mạnh; vẫn đối chiếu tên/quy cách để phát hiện dữ liệu mâu thuẫn.
-    const evidence=sharedEvidence(queryNameTokens,m.nameTokens);
+    // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
+    const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence;
     // Không ghép chỉ vì trùng từ loại chung như “bánh”, “thùng”, “lốc”; cần dấu hiệu tên đặc trưng hoặc SKU chính xác.
     if(!exactSku&&(nameScore<.60||evidence<2))continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
