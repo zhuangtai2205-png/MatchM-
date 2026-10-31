@@ -1300,6 +1300,109 @@ header.app-header{width:100%;max-width:none;margin:0;padding-left:clamp(14px,2.4
  header.app-header{padding:12px}
  .shell{padding:0 12px 24px;gap:12px}
 }
+
+/* MatchMa reference redesign v2 — HoneyBunny dashboard structure + hand-drawn pastel mood */
+:root{
+ --mm-cream:#fff4d8;--mm-cream-2:#fff9e9;--mm-ink:#5b5548;
+ --mm-peach:#f7b995;--mm-peach-deep:#e99b76;--mm-leaf:#b7d995;
+ --mm-leaf-deep:#8dbb69;--mm-blue:#9fd8e8;--mm-white:#fffdf7;
+ --mm-card-shadow:0 10px 28px rgba(105,83,52,.08);
+}
+html,body{min-height:100%;background:#fff8e8!important;color:var(--mm-ink)!important}
+body{font-family:'Nunito','Be Vietnam Pro',system-ui,sans-serif!important}
+.app-header{
+ width:100%!important;max-width:none!important;margin:0!important;
+ min-height:82px;padding:14px clamp(18px,3vw,46px)!important;
+ background:var(--mm-cream)!important;border:0!important;border-bottom:1px solid #f1e5c9!important;
+ box-shadow:0 3px 18px rgba(105,83,52,.04)!important;backdrop-filter:none!important;
+}
+.app-header .brand-copy h1{font-family:'Baloo 2','Nunito',sans-serif!important;font-size:30px!important;font-weight:900!important;letter-spacing:-1px!important;color:#554d40!important}
+.app-header .brand-copy h1 span{color:#d58c68!important}
+.app-header .subbrand{color:#827966!important}
+.app-header .brand-mark{background:transparent!important;box-shadow:none!important}
+.app-header .headright{gap:9px!important}
+.app-header .local-pill,.app-header .toolbar-select,.app-header .toolbar-font{
+ background:#fffaf0!important;border:1px solid #f0e3c8!important;border-radius:15px!important;color:#665d4d!important;box-shadow:none!important
+}
+.shell.app-shell{
+ width:100%!important;max-width:none!important;margin:0!important;
+ padding:0 clamp(14px,2.4vw,36px) 30px!important;
+ grid-template-columns:clamp(220px,18vw,270px) minmax(0,1fr)!important;
+ gap:clamp(16px,2vw,28px)!important;align-items:stretch!important;
+}
+#appSidebar.sidebar{
+ position:sticky!important;top:0!important;align-self:stretch!important;
+ min-height:calc(100vh - 82px)!important;height:calc(100vh - 82px)!important;
+ overflow-y:auto!important;padding:18px 12px!important;
+ border:0!important;border-right:1px solid #f0e4c9!important;border-radius:0 22px 22px 0!important;
+ background:var(--mm-cream-2)!important;box-shadow:none!important;backdrop-filter:none!important
+}
+#appSidebar .sidebar-section-heading{color:#a1957d!important;font-weight:900!important;letter-spacing:1.2px!important}
+#appSidebar .sidebar-account-shortcut{background:#fffaf0!important;border:1px solid #f0e4cb!important;border-radius:16px!important;box-shadow:none!important}
+#appSidebar .navbtn,#appSidebar .nav-folder summary{
+ min-height:48px!important;border:0!important;border-radius:0 13px 13px 0!important;
+ padding:12px 14px!important;color:#655e50!important;font-weight:800!important;background:transparent!important
+}
+#appSidebar .navbtn:hover,#appSidebar .nav-folder summary:hover{background:#fff1c9!important}
+#appSidebar .navbtn.active{background:#ffedb7!important;color:#514a3e!important;box-shadow:inset 4px 0 #e9a16f!important}
+#appSidebar .navicon{font-size:18px!important}
+#appSidebar .nav-folder{border:0!important}
+#appSidebar .nav-folder-items{padding-left:8px!important}
+.main{min-width:0!important;width:100%!important;padding-top:24px!important}
+.mm-ai-disclaimer{border-radius:14px!important;background:#fff9e9!important;border:1px solid #efe2c7!important;color:#776c59!important}
+.page{padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+.page.active{animation:fade .18s ease!important}
+.hero,.panel{
+ border:0!important;border-radius:22px!important;padding:clamp(18px,2vw,27px)!important;
+ box-shadow:var(--mm-card-shadow)!important;color:#5d5144!important;margin-bottom:18px!important
+}
+.hero{background:#fff1d0!important}
+.hero h2,.sectionhead h2,.panel h2{font-family:'Baloo 2','Nunito',sans-serif!important;color:#5b5548!important;font-weight:800!important}
+.hero p,.sectionhead p,.panel p,.muted,.hint{color:#766e5d!important}
+.eyebrow{color:#b47c5d!important}
+.intro-beginner-strip{background:#fff9e9!important;border:1px solid #f2dfbf!important;border-radius:16px!important}
+.intro-learning-path{background:#f7bd9c!important}
+#page-intro>.panel:nth-of-type(2){background:#b9d995!important}
+#page-overview .panel:nth-child(odd),#page-workspace .panel:nth-child(odd),
+#page-catalog .panel:nth-child(odd),#page-run .panel:nth-child(odd){background:#f7bd9c!important}
+#page-overview .panel:nth-child(even),#page-workspace .panel:nth-child(even),
+#page-catalog .panel:nth-child(even),#page-run .panel:nth-child(even){background:#b9d995!important}
+.stats .stat,.mini{background:#fffaf0!important;border:1px solid rgba(255,255,255,.75)!important;border-radius:16px!important;box-shadow:none!important}
+.stat b{color:#62594b!important;font-family:'Baloo 2','Nunito',sans-serif!important}
+.btn{background:#9fd8e8!important;color:#3f514f!important;border-radius:12px!important;border:0!important;box-shadow:0 3px 0 #6eafc2!important}
+.btn.alt{background:#fff8e8!important;color:#665b4a!important;box-shadow:none!important;border:1px solid #eddfc1!important}
+.btn.soft{background:#e1f0d0!important;color:#526b42!important;box-shadow:none!important}
+.field input[type=text],.field select,.field input[type=number],.search,td select{
+ background:#fffdf7!important;border:1px solid #e9dfca!important;border-radius:10px!important;color:#514c42!important
+}
+.upload{background:#fff9eb!important;border:1.5px dashed #d6b995!important;border-radius:16px!important}
+.upload:hover{background:#fff3dc!important}
+.tablewrap{background:#fffdf7!important;border:1px solid #e9dfca!important;border-radius:14px!important;box-shadow:none!important}
+table{background:#fffdf7!important}
+th{background:#f8edcf!important;color:#665a48!important}
+td{color:#514d44!important;border-bottom:1px solid #f0eadc!important}
+.progressbox,.rule{background:#fff8e7!important;border:1px solid #ecdfc4!important;color:#6b614f!important}
+.bar{background:#eadfca!important}.bar>div{background:#8dbb69!important}
+.badge.good{background:#e3f1d5!important;color:#52743d!important}
+.badge.review{background:#fff0d0!important;color:#936b35!important}
+.badge.none{background:#f9e2df!important;color:#9b5e58!important}
+.foot{color:#968a73!important}
+/* Hand-drawn accents are confined to the beginner illustration area; no wallpaper or overlays over data. */
+.intro-guide-illustration{position:relative!important;min-width:68px!important;min-height:68px!important;border-radius:18px!important;background:#ffe0cf!important}
+.intro-guide-illustration:before{content:"🐰";position:absolute;inset:0;display:grid;place-items:center;font-size:35px;filter:drop-shadow(1px 2px 0 #8b6254)}
+body:before,body:after{content:none!important;display:none!important}
+#catClickFX{z-index:2!important}
+@media(max-width:950px){
+ .shell.app-shell{grid-template-columns:minmax(0,1fr)!important;padding:0 12px 24px!important}
+ #appSidebar.sidebar{position:relative!important;top:auto!important;height:auto!important;min-height:0!important;border-radius:0 0 18px 18px!important;border:0!important}
+ .main{padding-top:14px!important}
+}
+@media(max-width:650px){
+ .app-header{padding:12px!important}
+ .app-header .headright{flex-wrap:wrap!important}
+ .hero,.panel{padding:17px!important;border-radius:17px!important}
+}
+
 </style>
 
 <style id="matchma-layout-stability">
