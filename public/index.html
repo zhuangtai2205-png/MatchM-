@@ -3246,7 +3246,7 @@ function runAutoFill(){
   }else if(brandRejected){status='Không ghép — khác thương hiệu';reason='Tên thương hiệu không trùng; hệ thống không ghép khác thương hiệu.'}
   const output={...row};
   const selectedSku=autoApproved?best.m.sku:(originalCode&&!overwrite?originalCode:'');
-  if(target){if(overwrite||!originalCode)output[target]=autoApproved?best.m.sku:''}
+  if(target){if(overwrite||!originalCode)output[target]=autoApproved?best.m.sku:originalCode}
   else output[filledCol]=autoApproved?best.m.sku:'';
   output[proposalCol]=canFill?best.m.sku:'';
   output[suggestedNameCol]=canFill?best.m.name:'';
@@ -3255,13 +3255,13 @@ function runAutoFill(){
   return {sourceIndex:i+1,stt:sttCol?row[sttCol]:i+1,name,originalCode,sku:canFill?best.m.sku:'',masterName:canFill?best.m.name:'',score:canFill?Math.round(best.score*100):0,status,reason,output,suggestions:suggestions.slice(0,8),selectedSku,targetColumn:target,filledColumn:filledCol,overwrite,autoApproved};
  });
  renderAutoFillPreview();$('exportAutoFill').disabled=!autoFillResults.length;
- $('autoFillSummary').textContent='Đã rà '+autoFillResults.length+' dòng, thứ tự nguồn được giữ nguyên. Có gợi ý: '+autoFillResults.filter(x=>x.sku).length+' · đủ điều kiện tự điền theo ngưỡng: '+autoFillResults.filter(x=>x.status==='Đã điền theo ngưỡng OK').length+' · cần kiểm tra: '+autoFillResults.filter(x=>x.status==='Đã gợi ý — cần kiểm tra').length+'.';
+ $('autoFillSummary').textContent='Đã rà '+autoFillResults.length+' dòng, thứ tự nguồn được giữ nguyên. Có gợi ý: '+autoFillResults.filter(x=>x.sku).length+' · đủ điều kiện tự điền theo ngưỡng: '+autoFillResults.filter(x=>x.status==='Đã điền theo ngưỡng OK').length+' · cần kiểm tra: '+autoFillResults.filter(x=>x.status==='Chờ chọn mã khi xuất file').length+'.';
 }
 function renderAutoFillPreview(){
  const root=$('autoFillPreview');if(!autoFillResults.length){root.className='empty';root.textContent='Chưa chạy rà soát.';return}
  root.className='tablewrap';const rows=autoFillResults.slice(0,100);
  root.innerHTML='<table><thead><tr><th>Dòng nguồn</th><th>STT gốc</th><th>Tên hàng</th><th>Mã đề xuất</th><th>Tên chuẩn</th><th>Điểm</th><th>Chọn mã để xuất</th><th>Trạng thái / ghi chú</th></tr></thead><tbody>'+rows.map((x,i)=>{const options=(x.suggestions||[]).map(c=>'<option value="'+esc(c.m.sku)+'" '+(x.selectedSku===c.m.sku?'selected':'')+'>'+esc(c.m.sku+' · '+c.m.name+' ('+Math.round(c.score*100)+'%)')+'</option>').join('');const disabled=(!options)||(x.originalCode&&!x.overwrite);return '<tr><td>'+x.sourceIndex+'</td><td>'+esc(x.stt)+'</td><td>'+esc(x.name)+'</td><td>'+esc(x.sku||'—')+'</td><td>'+esc(x.masterName||'—')+'</td><td>'+x.score+'%</td><td><select data-autofill-select="'+i+'" '+(disabled?'disabled':'')+'><option value="">— Không chọn —</option>'+options+'</select></td><td>'+esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div></td></tr>'}).join('')+'</tbody></table>'+(autoFillResults.length>100?'<p class="hint">Đang xem 100 dòng đầu trong tổng '+autoFillResults.length+' dòng; file Excel sẽ có đầy đủ các dòng.</p>':'');
- root.querySelectorAll('[data-autofill-select]').forEach(sel=>sel.addEventListener('change',()=>{const x=autoFillResults[Number(sel.dataset.autofillSelect)];if(!x)return;x.selectedSku=sel.value;if(x.targetColumn){if(!x.originalCode||x.overwrite)x.output[x.targetColumn]=sel.value||''}else if(x.filledColumn)x.output[x.filledColumn]=sel.value||'';if(sel.value){x.status='Đã chọn mã thủ công';x.reason='Mã được người dùng chọn để xuất Excel.'}else if(!x.autoApproved){x.status=x.suggestions&&x.suggestions.length?'Chờ chọn mã khi xuất file':'Không có gợi ý phù hợp';}const statusCell=sel.closest('tr').lastElementChild;if(statusCell)statusCell.innerHTML=esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div>'}));
+ root.querySelectorAll('[data-autofill-select]').forEach(sel=>sel.addEventListener('change',()=>{const x=autoFillResults[Number(sel.dataset.autofillSelect)];if(!x)return;x.selectedSku=sel.value;if(x.targetColumn){if(!x.originalCode||x.overwrite)x.output[x.targetColumn]=sel.value||x.originalCode}else if(x.filledColumn)x.output[x.filledColumn]=sel.value||'';if(sel.value){x.status='Đã chọn mã thủ công';x.reason='Mã được người dùng chọn để xuất Excel.'}else if(!x.autoApproved){x.status=x.suggestions&&x.suggestions.length?'Chờ chọn mã khi xuất file':'Không có gợi ý phù hợp';}const statusCell=sel.closest('tr').lastElementChild;if(statusCell)statusCell.innerHTML=esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div>'}));
 }
 function exportAutoFill(){if(!autoFillResults.length||typeof XLSX==='undefined'){alert('Hãy chạy rà soát trước khi xuất Excel.');return}const rows=autoFillResults.map(x=>x.output);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows),'Da dien ma');XLSX.writeFile(wb,'matchma-tu-dien-ma-giu-nguyen-stt.xlsx')}
 
