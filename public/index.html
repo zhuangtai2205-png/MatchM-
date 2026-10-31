@@ -1355,6 +1355,58 @@ body[data-theme] .badge.good{background:#eaf5ef!important;color:#638d78!importan
 body[data-theme] .badge.review{background:#faf2e3!important;color:#9a8051!important}
 body[data-theme] .badge.none{background:#f8ebee!important;color:#a87885!important}
 
+
+/* MatchMa gentle pastel palette refresh — all themes */
+body[data-theme="ocean"]{
+ --ink:#496b7a!important;--muted:#829eaa!important;--bg:#f1f8fa!important;
+ --surface:#fbfeff!important;--ui-surface:#f8fcfd!important;--ui-border:#d8e9ee!important;
+ --ui-accent:#91c4d3!important;--accent:#91c4d3!important;
+}
+body[data-theme="pink"]{
+ --ink:#806579!important;--muted:#b49aaa!important;--bg:#fcf5f8!important;
+ --surface:#fffafd!important;--ui-surface:#fff9fc!important;--ui-border:#f0dfe8!important;
+ --ui-accent:#d9a9c0!important;--accent:#d9a9c0!important;
+}
+body[data-theme="cat"]{
+ --ink:#74665c!important;--muted:#aa9a8f!important;--bg:#faf6f1!important;
+ --surface:#fffdf9!important;--ui-surface:#fffaf5!important;--ui-border:#eee3d8!important;
+ --ui-accent:#cbb09a!important;--accent:#cbb09a!important;
+}
+body[data-theme="forest"],body[data-theme="bear"]{
+ --ink:#5e7564!important;--muted:#91a294!important;--bg:#f3f8f1!important;
+ --surface:#fcfefb!important;--ui-surface:#f9fcf7!important;--ui-border:#e0eadc!important;
+ --ui-accent:#a9c3a7!important;--accent:#a9c3a7!important;
+}
+body[data-theme="retro"]{
+ --ink:#66616a!important;--muted:#99929a!important;--bg:#f6f4f5!important;
+ --surface:#fffdfd!important;--ui-surface:#fbf9fa!important;--ui-border:#e5dfe4!important;
+ --ui-accent:#c5b1bf!important;--accent:#c5b1bf!important;
+}
+body[data-theme="vampire"]{
+ --ink:#695b66!important;--muted:#a296a0!important;--bg:#f7f3f6!important;
+ --surface:#fffafd!important;--ui-surface:#fcf8fb!important;--ui-border:#e9dfe6!important;
+ --ui-accent:#c5aab9!important;--accent:#c5aab9!important;
+}
+body[data-theme="minimal"]{
+ --ink:#555b60!important;--muted:#92999e!important;--bg:#f7f8f8!important;
+ --surface:#ffffff!important;--ui-surface:#fcfcfc!important;--ui-border:#e7e9ea!important;
+ --ui-accent:#aebbc1!important;--accent:#aebbc1!important;
+}
+body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .card,
+body[data-theme] .sidebar,body[data-theme] .app-header,body[data-theme] .page{
+ border-color:var(--ui-border)!important;
+}
+body[data-theme] .btn,body[data-theme] .navbtn.active,body[data-theme] .badge{
+ filter:saturate(.58)!important;
+}
+body[data-theme] .btn-primary,body[data-theme] .navbtn.active{
+ background-color:color-mix(in srgb,var(--ui-accent) 28%,white)!important;
+ color:var(--ink)!important;border-color:var(--ui-border)!important;
+}
+body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .card{
+ box-shadow:0 3px 14px rgba(75,85,90,.045)!important;
+}
+
 </style>
 
 <style id="matchma-layout-stability">
