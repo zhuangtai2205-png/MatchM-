@@ -3265,7 +3265,83 @@ function renderAutoFillPreview(){
  root.innerHTML='<table><thead><tr><th>Dòng nguồn</th><th>STT gốc</th><th>Tên hàng</th><th>Mã đề xuất</th><th>Tên chuẩn</th><th>Điểm</th><th>Chọn mã để xuất</th><th>Trạng thái / ghi chú</th></tr></thead><tbody>'+rows.map((x,i)=>{const options=(x.suggestions||[]).map(c=>'<option value="'+esc(c.m.sku)+'" '+(x.selectedSku===c.m.sku?'selected':'')+'>'+esc(c.m.sku+' · '+c.m.name+' ('+Math.round(c.score*100)+'%)')+'</option>').join('');const disabled=(!options)||(x.originalCode&&!x.overwrite);return '<tr><td>'+x.sourceIndex+'</td><td>'+esc(x.stt)+'</td><td>'+esc(x.name)+'</td><td>'+esc(x.sku||'—')+'</td><td>'+esc(x.masterName||'—')+'</td><td>'+x.score+'%</td><td><select data-autofill-select="'+i+'" '+(disabled?'disabled':'')+'><option value="">— Không chọn —</option>'+options+'</select></td><td>'+esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div></td></tr>'}).join('')+'</tbody></table>'+(autoFillResults.length>100?'<p class="hint">Đang xem 100 dòng đầu trong tổng '+autoFillResults.length+' dòng; file Excel sẽ có đầy đủ các dòng.</p>':'');
  root.querySelectorAll('[data-autofill-select]').forEach(sel=>sel.addEventListener('change',()=>{const x=autoFillResults[Number(sel.dataset.autofillSelect)];if(!x)return;x.selectedSku=sel.value;if(x.targetColumn){if(!x.originalCode||x.overwrite)x.output[x.targetColumn]=sel.value||x.originalCode}else if(x.filledColumn)x.output[x.filledColumn]=sel.value||'';if(sel.value){x.status='Đã chọn mã thủ công';x.reason='Mã được người dùng chọn để xuất Excel.'}else if(!x.autoApproved){x.status=x.suggestions&&x.suggestions.length?'Chờ chọn mã khi xuất file':'Không có gợi ý phù hợp';}const statusCell=sel.closest('tr').lastElementChild;if(statusCell)statusCell.innerHTML=esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div>'}));
 }
-function exportAutoFill(){if(!autoFillResults.length||typeof XLSX==='undefined'){alert('Hãy chạy rà soát trước khi xuất Excel.');return}const rows=autoFillResults.map(x=>x.output);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows),'Da dien ma');XLSX.writeFile(wb,'matchma-tu-dien-ma-giu-nguyen-stt.xlsx')}
+function exportAutoFill(){
+ if(!autoFillResults.length||typeof XLSX==='undefined'){alert('Hãy chạy rà soát trước khi xuất Excel.');return}
+ const skuCol=$('skuCol').value,nameCol=$('nameCol').value,unitCol=$('unitCol').value;
+ const sttCol=$('autoFillSttCol').value,nameSourceCol=$('autoFillNameCol').value,targetCol=$('autoFillTargetCodeCol').value;
+ const sourceSkuCol=targetCol&&autoFillHeaders.includes(targetCol)?targetCol:'';
+ const getFinalSku=x=>{
+  const outputCode=x.targetColumn?x.output[x.targetColumn]:(x.filledColumn?x.output[x.filledColumn]:'');
+  return String(x.selectedSku||outputCode||x.originalCode||'').trim();
+ };
+ const masterFor=(x,finalSku)=>{
+  if(!finalSku)return null;
+  const fromSuggestions=(x.suggestions||[]).find(c=>normalizeSku(c.m.sku)===normalizeSku(finalSku));
+  if(fromSuggestions)return fromSuggestions.m;
+  const row=masterRows.find(r=>normalizeSku(r[skuCol])===normalizeSku(finalSku));
+  return row?{sku:String(row[skuCol]||'').trim(),name:String(row[nameCol]||''),unit:unitCol?String(row[unitCol]||''):'',spec:$('specCol').value?String(row[$('specCol').value]||''):''}:null;
+ };
+ const originalRows=[['STT','SKU đề xuất','Tên sản phẩm']];
+ const compareRows=[['stt','barcode đã đổi','tên pm tân','kiot barcode','kiot tên sp','dvt']];
+ const finalRows=[['STT','SKU đề xuất','Tên sản phẩm']];
+ autoFillResults.forEach(x=>{
+  const sourceRow=autoFillRows[x.sourceIndex-1]||{};
+  const stt=sttCol?sourceRow[sttCol]:x.stt||x.sourceIndex;
+  const originalSku=sourceSkuCol?String(sourceRow[sourceSkuCol]||'').trim():String(x.originalCode||'').trim();
+  const finalSku=getFinalSku(x);
+  const chosen=masterFor(x,finalSku);
+  originalRows.push([String(stt??x.sourceIndex),originalSku,String(x.name||'')]);
+  compareRows.push([String(stt??x.sourceIndex),finalSku,String(x.name||''),chosen?String(chosen.sku||''):'',chosen?String(chosen.name||''):'',chosen?String(chosen.unit||''):'']);
+  finalRows.push([String(stt??x.sourceIndex),finalSku,String(x.name||'')]);
+ });
+ const catalogRows=[masterHeaders.length?masterHeaders.slice():Object.keys(masterRows[0]||{})];
+ masterRows.forEach(r=>catalogRows.push(catalogRows[0].map(h=>r[h]??'')));
+ const wb=XLSX.utils.book_new();
+ const makeSheet=(matrix,widths,headerFill='4472C4')=>{
+  const ws=XLSX.utils.aoa_to_sheet(matrix);
+  const endRow=Math.max(1,matrix.length),endCol=Math.max(1,matrix[0]?.length||1);
+  ws['!cols']=widths.map(w=>({wch:w}));
+  ws['!freeze']={xSplit:0,ySplit:1};
+  ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:endRow-1,c:endCol-1}})};
+  for(let c=0;c<endCol;c++){
+   const cell=XLSX.utils.encode_cell({r:0,c});
+   if(ws[cell])ws[cell].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{patternType:'solid',fgColor:{rgb:headerFill}},alignment:{vertical:'center',horizontal:'center',wrapText:true},border:{bottom:{style:'medium',color:{rgb:'244062'}}}};
+  }
+  for(let r=1;r<endRow;r++)for(let c=0;c<endCol;c++){
+   const cell=XLSX.utils.encode_cell({r,c});
+   if(!ws[cell])continue;
+   const fill=r%2===0?'F2F6FC':'FFFFFF';
+   ws[cell].s={font:{color:{rgb:'243247'}},fill:{patternType:'solid',fgColor:{rgb:fill}},alignment:{vertical:'center',wrapText:true},border:{bottom:{style:'hair',color:{rgb:'D9E2F0'}}}};
+  }
+  ws['!rows']=[{hpt:24}];
+  return ws;
+ };
+ const wsOriginal=makeSheet(originalRows,[12,22,64],'70AD47');
+ const wsCompare=makeSheet(compareRows,[10,22,58,22,64,16],'4472C4');
+ const wsCatalog=makeSheet(catalogRows,(catalogRows[0]||[]).map((h,i)=>Math.min(60,Math.max(14,String(h??'').length+8,i===1?42:14))),'548235');
+ const wsFinal=makeSheet(finalRows,[12,22,64],'4472C4');
+ [wsOriginal,wsCompare,wsCatalog,wsFinal].forEach(ws=>{ws['!margins']={left:0.25,right:0.25,top:0.5,bottom:0.5,header:0.2,footer:0.2}});
+ XLSX.utils.book_append_sheet(wb,wsOriginal,'gốc');
+ XLSX.utils.book_append_sheet(wb,wsCompare,'bảng đối chiếu');
+ XLSX.utils.book_append_sheet(wb,wsCatalog,'DanhSachSanPham');
+ XLSX.utils.book_append_sheet(wb,wsFinal,'bảng barcode mới');
+ wb.Workbook=wb.Workbook||{};
+ wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};
+ const exportName='BARCODE_STC_MOI.xlsx';
+ try{
+  const bytes=XLSX.write(wb,{bookType:'xlsx',type:'array',cellStyles:true});
+  const blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  const url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download=exportName;link.style.display='none';
+  document.body.appendChild(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1500);
+ }catch(downloadError){
+  try{XLSX.writeFile(wb,exportName)}catch(fallbackError){
+   console.error('MatchMa auto-fill export failed',downloadError,fallbackError);
+   alert('Không xuất được file Excel. Vui lòng tải lại trang và thử lại. Chi tiết: '+(fallbackError.message||downloadError.message||String(fallbackError)));
+  }
+ }
+}
 
 const I18N={
 vi:{
