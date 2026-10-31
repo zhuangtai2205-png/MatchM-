@@ -3223,7 +3223,7 @@ function runAutoFill(){
    if(brandConflict(name,m.name)){brandRejected=true;continue}
    const brandEvidence=brandIdentity(name)&&brandIdentity(m.name)?1:0;
    const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.45)continue;
-   const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),familyA=productFamily(tokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(name)==='th'&&/\b(true|milk)\b/.test(norm(name+' '+m.name))?1:0,evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
+   const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens)||variantMissing(name,m.name),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),familyA=productFamily(tokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(name)==='th'&&/\b(true|milk)\b/.test(norm(name+' '+m.name))?1:0,evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
    // Chặn cứng lỗi nguy hiểm: "cơm trắng" không bao giờ là "Revive trắng".
    const sourceNorm=norm(name),masterNorm=norm(m.name);
    const sourceWords=new Set(getTokens(name+' '+spec+' '+unit)),masterWords=new Set(m.tokens);
@@ -3239,7 +3239,7 @@ function runAutoFill(){
   suggestions.sort((a,b)=>b.rank-a.rank);
   const originalCode=target?String(row[target]||'').trim():'';
   const canFill=!!best&&best.score>=.45;
-  const autoApproved=!!(canFill&&best.score*100>=threshold&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&best.evidence>=2);
+  const autoApproved=!!(canFill&&best.score*100>=threshold&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&!brandUncertain(name,best.m.name)&&best.evidence>=2);
   let status='Không có gợi ý phù hợp',reason=name.trim()?'Không tìm thấy tên đủ tương đồng trong danh mục chuẩn':'Tên hàng trống';
   if(canFill){if(originalCode&&!overwrite){status='Có mã sẵn — giữ nguyên';reason='Không ghi đè mã gốc; xem cột mã đề xuất nếu cần thay.'}
    else if(autoApproved){status='Đã điền theo ngưỡng OK';reason=best.memorySuggestion?'Có hỗ trợ từ bộ nhớ đã xác nhận':'Cùng thương hiệu, tên đủ tương đồng và dung tích/khối lượng nằm trong sai số cho phép.'}
@@ -3579,6 +3579,16 @@ function norm(s){
  // CĐ là cách viết tắt của có đường trong tên sữa; chỉ diễn giải khi có ngữ cảnh sữa/VNM.
  const dairyContext=/\b(sua|vnm|vinamil|milk)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ');
+ // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
+ t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
+  .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
+  .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
+ // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
+ t=t.replace(/\bxanh\s+nhat\b/g,' color_xanh_nhat ')
+  .replace(/\bxanh\b/g,' color_xanh ')
+  .replace(/\bdo\b/g,' color_do ')
+  .replace(/\bbac\b/g,' color_bac ')
+  .replace(/\bvang\b/g,' color_vang ');
  // Chuẩn hóa số viết bằng chữ và các cách ghi dung tích thường gặp.
  t=t.replace(/\b(mot|1)\s*(lit|litre|liter|liters|litres|l)\b/g,' vol_1000ml ')
   .replace(/\b(mot|1)\s*(nghin|ngan)\s*ml\b/g,' vol_1000ml ')
@@ -3617,7 +3627,8 @@ function variantConflict(a,b){
  // Each entry is one product variant; words within an entry are aliases, entries are mutually exclusive.
  const variants=[
   // Các vị/loại nhân là lựa chọn loại trừ nhau, kể cả khi tên sản phẩm thuộc các dòng bánh khác nhau.
-  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay'],['chocolate','socola','socolat'],['vanilla','vani'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai']],
+  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai']],
+  [['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang']],
   [['co_duong'],['khong_duong']],
   [['co_gas'],['khong_gas']],
   [['nguyen_kem'],['tach_beo']]
@@ -3627,16 +3638,27 @@ function variantConflict(a,b){
   const right=group.findIndex(alias=>alias.some(t=>B.has(t)));
   if(left>=0&&right>=0&&left!==right)return true;
  }
- // If both names explicitly identify different known brands, don't auto-pair them.
- const brands=['beryls','masita','tns','vinamilk','vinamil','vnm','dielac','optimum','nescafe','oreo','lays','kchi'];
- const left=brands.filter(t=>A.has(t)),right=brands.filter(t=>B.has(t));
- if(left.length&&right.length){
-  const canon=x=>x==='vnm'||x==='vinamil'?'vinamilk':x==='beryls'?'beryls':x;
-  if(!left.some(x=>right.some(y=>canon(x)===canon(y))))return true;
- }
+ // Product stage/series is a hard variant: Alpha 2 != Alpha 3, 1+ != 2+, Sáng Tạo 1 != 5.
+ const stages=x=>x.filter(t=>/^stage_/.test(t));
+ const sa=stages(a),sb=stages(b);
+ if(sa.length&&sb.length&&!sa.some(x=>sb.includes(x)))return true;
+ // Known brand identities are compared by canonical brand, never by generic description words.
+ const ba=brandIdentity(a.join(' ')),bb=brandIdentity(b.join(' '));
+ if(ba&&bb&&ba!==bb)return true;
  return false;
 }
-function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))||variantConflict(a,b)}
+function variantMissing(a,b){
+ const A=new Set(getTokens(a)),B=new Set(getTokens(b));
+ const groups=[
+  ['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],
+  ['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang'],
+  ['co_duong'],['khong_duong'],['co_gas'],['khong_gas']
+ ];
+ for(const group of groups){const left=group.some(t=>A.has(t)),right=group.some(t=>B.has(t));if(left!==right)return true}
+ const sa=[...A].filter(t=>t.startsWith('stage_')),sb=[...B].filter(t=>t.startsWith('stage_'));
+ return (sa.length>0)!==(sb.length>0);
+}
+function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))||variantConflict(a,b)||variantMissing(a.join(' '),b.join(' '))}
 function sharedEvidence(a,b){
  // Count only meaningful name signals. Packaging words, short abbreviations, and SKU/year/size fragments
  // must never make unrelated products look like a match.
@@ -3694,15 +3716,41 @@ function unitConflict(a,b){
 // Brand-first matching: known abbreviations share a canonical identity; unknown brand tokens stay distinct.
 function brandIdentity(value){
  const tokens=norm(value).split(/\s+/).filter(Boolean),set=new Set(tokens);
- if(set.has('vnm')||set.has('vinamilk')||set.has('vinamil'))return 'vinamilk';
- if(set.has('th')&&(set.has('true')||set.has('milk')))return 'th';
- if(set.has('th')&&tokens[0]==='th')return 'th';
- const generic=new Set(['sua','sua_tuoi','sua_dac','sua_chua','sua_bot','sua_hat','nuoc','nuoc_ngot','nuoc_suoi','nuoc_khoang','nuoc_ep','nuoc_tang_luc','mi','mi_goi','mi_ly','dau','dau_an','dau_goi','dau_xa','gao','gao_nep','com','com_trang','banh','bot','giay','khan','nuoc_rua_chen','nuoc_giat','bot_giat','nuoc_xa_vai','co_duong','khong_duong','it_duong','co_gas','khong_gas','nguyen_kem','tach_beo']);
- return tokens.find(t=>/^[a-z]{2,}$/.test(t)&&!generic.has(t)&&!t.startsWith('vol_')&&!t.startsWith('weight_'))||'';
+ // Brand aliases: ignore document prefixes such as TPBS, SPDD, Sữa, and identify only known brands.
+ if(set.has('vnm')||set.has('vinamilk')||set.has('vinamil')||set.has('dielac')||set.has('optimum')||set.has('yokogold'))return 'vinamilk';
+ if(set.has('th'))return 'th';
+ if(set.has('nutricare')||set.has('colos24h')||set.has('metacare')||set.has('nepro'))return 'nutricare';
+ if(set.has('nutifood')||set.has('nuti')||set.has('growplus')||set.has('grow_plus'))return 'nutifood';
+ if(set.has('abbott'))return 'abbott';
+ if(set.has('pediasure'))return 'pediasure';
+ if(set.has('ensure'))return 'ensure';
+ if(set.has('similac'))return 'similac';
+ if(set.has('enfamil')||set.has('enfa'))return 'enfamil';
+ if(set.has('aptamil'))return 'aptamil';
+ if(set.has('meiji'))return 'meiji';
+ if(set.has('nescafe'))return 'nescafe';
+ if(set.has('nestle')||set.has('nan'))return 'nestle';
+ if(set.has('hipp'))return 'hipp';
+ if(set.has('gerber'))return 'gerber';
+ if(set.has('blackmores'))return 'blackmores';
+ if(set.has('friso')||set.has('frisolac'))return 'friso';
+ if(set.has('anlene'))return 'anlene';
+ if(set.has('lipton'))return 'lipton';
+ if(set.has('varnalife')||set.has('varna'))return 'varna';
+ if(set.has('ridielac'))return 'ridielac';
+ if(set.has('oreo'))return 'oreo';
+ if(set.has('lays'))return 'lays';
+ if(set.has('beryls'))return 'beryls';
+ if(set.has('masita'))return 'masita';
+ return '';
 }
 function brandConflict(a,b){
  const left=brandIdentity(a),right=brandIdentity(b);
- return (!!left||!!right)&&left!==right;
+ return !!(left&&right&&left!==right);
+}
+function brandUncertain(a,b){
+ const left=brandIdentity(a),right=brandIdentity(b);
+ return !!(left!==right&&(!left||!right));
 }
 function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function setProgress(done,total,doneFlag){const box=$('progressBox');box.classList.add('show');$('progressBar').style.width=(total?Math.round(done/total*100):0)+'%';$('progressText').textContent=doneFlag?tr('progressDone')+': '+total+' '+tr('rows'):tr('progressRunning')+' '+done+' / '+total+'…'}
@@ -3745,13 +3793,17 @@ async function runMatch(){
     const brandEvidence=brandIdentity(queryName)&&brandIdentity(m.name)?1:0;
     const nameScore=Math.min(1,similarity(queryNameTokens,m.nameTokens)+brandEvidence*.15);
     const exactSku=!!querySku&&normalizeSku(querySku)===normalizeSku(m.code);
+    // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
+    const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens);
+    const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
+    if(exactSku&&(hardVariantConflict||hardSizeConflict))continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
     const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(queryName)==='th'&&/\b(true|milk)\b/.test(norm(queryName+' '+m.name))?1:0;
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
     // Không ghép chỉ vì trùng từ loại chung như “bánh”, “thùng”, “lốc”; cần dấu hiệu tên đặc trưng hoặc SKU chính xác.
     if(!exactSku&&(nameScore<.60||evidence<2))continue;
     const familyConflict=incompatibleFamily(queryNameTokens,m.nameTokens);
-    const attributeConflict=conflictTokens(queryTokens,m.tokens);
+    const attributeConflict=conflictTokens(queryTokens,m.tokens)||variantMissing(queryName,m.name);
     const uConflict=unitConflict(queryUnit,m.unit);
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
