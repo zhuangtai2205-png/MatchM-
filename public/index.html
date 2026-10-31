@@ -1407,6 +1407,43 @@ body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .card{
  box-shadow:0 3px 14px rgba(75,85,90,.045)!important;
 }
 
+
+/* Final ultra-soft pastel palette + working sidebar collapse control */
+#sidebarCollapseToggle{display:grid!important;visibility:visible!important;opacity:1!important;cursor:pointer!important}
+@media(max-width:950px){#sidebarCollapseToggle{display:grid!important}}
+.sidebar-topline{min-height:29px!important}
+.shell.app-shell{grid-template-columns:198px minmax(0,1fr)!important;gap:12px!important}
+.sidebar{padding:8px!important;border-radius:16px!important}
+.sidebar .navbtn{min-height:34px!important;padding:7px 8px!important;font-size:11.5px!important}
+.sidebar .nav-folder{margin:3px 0!important}
+@media(min-width:951px){
+ .shell.sidebar-collapsed{grid-template-columns:54px minmax(0,1fr)!important}
+ .shell.sidebar-collapsed .sidebar{padding:6px 5px!important}
+ .shell.sidebar-collapsed .sidebar-section-heading,.shell.sidebar-collapsed .sidebar-account-copy,
+ .shell.sidebar-collapsed .sidebar-account-arrow,.shell.sidebar-collapsed .navbtn>span:not(.navicon),
+ .shell.sidebar-collapsed .navfolder-title>span:not(.navicon),.shell.sidebar-collapsed .sidebar-help,
+ .shell.sidebar-collapsed .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}
+ .shell.sidebar-collapsed .sidebar-account-shortcut{justify-content:center!important;padding:5px 0!important}
+ .shell.sidebar-collapsed .sidebar-topline{justify-content:center!important;padding:0 0 6px!important}
+ .shell.sidebar-collapsed .sidebar-toggle{transform:rotate(180deg)}
+ .shell.sidebar-collapsed .navbtn,.shell.sidebar-collapsed .navfolder-title{justify-content:center!important;padding:8px 2px!important}
+ .shell.sidebar-collapsed .navicon{width:26px!important;flex-basis:26px!important}
+ .shell.sidebar-collapsed .nav-folder-items{padding-left:0!important}
+}
+/* Make every theme visibly lighter, including controls, cards and accents */
+body[data-theme="ocean"]{--ink:#6f8790!important;--muted:#a8bbc1!important;--bg:#f8fcfd!important;--surface:#ffffff!important;--ui-surface:#fcfeff!important;--ui-border:#e9f2f4!important;--ui-accent:#c7e1e8!important;--accent:#c7e1e8!important}
+body[data-theme="pink"]{--ink:#907b88!important;--muted:#c2b1ba!important;--bg:#fffafd!important;--surface:#ffffff!important;--ui-surface:#fffefe!important;--ui-border:#f5eaf0!important;--ui-accent:#efd5e2!important;--accent:#efd5e2!important}
+body[data-theme="cat"]{--ink:#897c72!important;--muted:#bdb0a6!important;--bg:#fffdfa!important;--surface:#ffffff!important;--ui-surface:#fffefd!important;--ui-border:#f3ece5!important;--ui-accent:#eadfd4!important;--accent:#eadfd4!important}
+body[data-theme="forest"],body[data-theme="bear"]{--ink:#778b7c!important;--muted:#afbeb2!important;--bg:#fbfdf9!important;--surface:#ffffff!important;--ui-surface:#fefffd!important;--ui-border:#edf3e9!important;--ui-accent:#d8e8d5!important;--accent:#d8e8d5!important}
+body[data-theme="retro"]{--ink:#858087!important;--muted:#bcb6bc!important;--bg:#fcfbfc!important;--surface:#ffffff!important;--ui-surface:#fffefe!important;--ui-border:#f0edf0!important;--ui-accent:#e5dce3!important;--accent:#e5dce3!important}
+body[data-theme="vampire"]{--ink:#827681!important;--muted:#bcb2ba!important;--bg:#fcfafc!important;--surface:#ffffff!important;--ui-surface:#fffefe!important;--ui-border:#f0eaf0!important;--ui-accent:#e7dce5!important;--accent:#e7dce5!important}
+body[data-theme="minimal"]{--ink:#777f83!important;--muted:#b1b7ba!important;--bg:#fdfdfd!important;--surface:#ffffff!important;--ui-surface:#ffffff!important;--ui-border:#f0f1f2!important;--ui-accent:#e3e8ea!important;--accent:#e3e8ea!important}
+body[data-theme] .sidebar,body[data-theme] .app-header,body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .card,body[data-theme] .hero{background-color:var(--ui-surface)!important;border-color:var(--ui-border)!important;box-shadow:0 2px 10px rgba(90,100,105,.025)!important}
+body[data-theme] .btn,body[data-theme] .navbtn.active,body[data-theme] .navfolder-title,body[data-theme] .sidebar-account-shortcut{background-color:color-mix(in srgb,var(--ui-accent) 32%,white)!important;border-color:var(--ui-border)!important;color:var(--ink)!important;box-shadow:none!important}
+body[data-theme] .btn,body[data-theme] .navbtn.active{filter:saturate(.38)!important}
+body[data-theme] .navbtn{color:var(--ink)!important}
+body[data-theme] .sidebar-toggle{background:#fff!important;border-color:var(--ui-border)!important;color:var(--ink)!important}
+
 </style>
 
 <style id="matchma-layout-stability">
@@ -2367,7 +2404,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
   <p class="calculator-help" data-i18n="calculatorHint">Có thể bấm phím số, + − × ÷, Enter và Backspace trên bàn phím.</p>
  </div>
 </aside><div class="shell app-shell"><aside class="sidebar" id="appSidebar">
- <div class="sidebar-topline"><span class="sidebar-section-heading" data-i18n="navSectionTitle">KHÔNG GIAN LÀM VIỆC</span></div>
+ <div class="sidebar-topline"><span class="sidebar-section-heading" data-i18n="navSectionTitle">KHÔNG GIAN LÀM VIỆC</span><button type="button" class="sidebar-toggle" id="sidebarCollapseToggle" aria-label="Thu gọn thanh menu" aria-expanded="true" title="Thu gọn thanh menu">‹</button></div>
  <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản" title="Tài khoản">
   <span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span>
  </button>
