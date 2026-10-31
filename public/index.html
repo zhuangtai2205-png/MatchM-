@@ -4795,164 +4795,98 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
 })();
 </script>
 
-<style id="matchma-compact-layout">
-/* MatchMa compact layout & typography only — preserve all existing theme colors/backgrounds */
-:root{--mm-ui-font:13px;--mm-ui-small:11px}
-body{font-size:13px;line-height:1.42}
-.app-header{padding:10px clamp(14px,1.8vw,24px)!important;gap:10px!important;min-height:68px}
-.app-header .brand{gap:9px!important}
-.app-header .brand-mark{flex-basis:48px!important;width:48px!important;height:52px!important}
-.app-header .brand-copy h1{font-size:clamp(22px,2vw,28px)!important;line-height:1.05!important;margin:0!important}
-.app-header .brand-copy .subbrand{font-size:11px!important;line-height:1.25!important;margin-top:3px!important}
-.app-header .headright{flex:0 1 auto!important;gap:6px!important}
-.app-header .headright>*{min-width:0}
-.app-header .toolbar-select,.app-header .toolbar-font button{min-height:34px!important;padding:6px 9px!important;font-size:12px!important}
-.app-shell.shell{grid-template-columns:230px minmax(0,1fr)!important;gap:16px!important;padding:0 18px 28px!important;max-width:1600px!important}
-#appSidebar.sidebar{gap:6px!important;padding:9px!important;max-height:calc(100vh - 14px)!important;overflow-y:auto!important}
-#appSidebar>.sidebar-topline{padding:1px 3px 5px!important}
-#appSidebar .sidebar-section-heading{font-size:9px!important;letter-spacing:.55px!important}
-#appSidebar>.sidebar-account-shortcut{gap:8px!important;padding:8px 9px!important;min-height:42px!important}
-#appSidebar .sidebar-avatar{width:30px!important;height:30px!important;flex:0 0 30px!important}
-#appSidebar .sidebar-account-copy strong{font-size:12px!important;line-height:1.2!important}
-#appSidebar .sidebar-account-copy small{font-size:10px!important;line-height:1.2!important}
-#appSidebar>button.navbtn{min-height:36px!important;padding:7px 9px!important;gap:8px!important;font-size:12px!important;line-height:1.25!important}
-#appSidebar .navicon{flex-basis:20px!important;width:20px!important;font-size:15px!important}
-#appSidebar>details.nav-folder{margin:2px 0!important;padding:4px 6px!important}
-#appSidebar>details.nav-folder>summary.navfolder-title{min-height:34px!important;padding:7px 6px!important;font-size:10px!important;line-height:1.2!important}
-#appSidebar>details.nav-folder[open]>.nav-folder-items{gap:4px!important;padding:5px 1px 1px!important}
-#appSidebar .nav-folder-items>.navbtn{min-height:33px!important;padding:6px 7px!important;font-size:11.5px!important;line-height:1.22!important}
-#appSidebar>.sidebar-bottom{gap:5px!important;margin-top:2px!important}
-#appSidebar .sidebar-help{padding:8px!important;font-size:11px!important;line-height:1.35!important}
-.app-shell.shell>.main{padding-top:12px!important}
-.mm-ai-disclaimer{padding:8px 11px!important;margin-bottom:10px!important;font-size:11px!important;line-height:1.35!important}
-.main .hero,.main .panel{padding:17px!important;margin-bottom:12px!important;border-radius:17px!important}
-.main .hero h2{font-size:clamp(21px,2vw,27px)!important;line-height:1.2!important;margin:5px 0!important;letter-spacing:-.35px!important}
-.main .hero p,.main .panel p,.main .sectionhead p{font-size:12px!important;line-height:1.4!important}
-.main .eyebrow{font-size:10px!important;letter-spacing:.8px!important}
-.main .sectionhead{gap:10px!important;margin-bottom:10px!important}
-.main .sectionhead h2,.main .panel h2{font-size:16px!important;line-height:1.25!important;margin-bottom:4px!important}
-.main .grid,.main .grid3,.main .stats,.main .twostat{gap:10px!important}
-.main .btn,.main button.btn{min-height:34px!important;padding:7px 11px!important;font-size:12px!important;line-height:1.25!important}
-.main input,.main select,.main textarea{font-size:12px!important;line-height:1.35!important}
-.main .field{margin-bottom:9px!important}
-.main .field label{font-size:11px!important;margin-bottom:4px!important}
-.main .tablewrap{border-radius:11px!important}
-.main table{min-width:720px}
-.main th,.main td{padding:7px 9px!important;font-size:11.5px!important;line-height:1.3!important}
-.main th{font-weight:750!important}
-.main td select{padding:5px 7px!important;font-size:11px!important;min-width:95px!important}
-.main .badge{padding:3px 6px!important;font-size:10px!important}
-@media(max-width:1100px){
- .app-shell.shell{grid-template-columns:205px minmax(0,1fr)!important;gap:12px!important;padding:0 12px 22px!important}
- .app-header .headright{flex-wrap:wrap!important}
-}
-@media(max-width:850px){
- .app-shell.shell{grid-template-columns:minmax(0,1fr)!important}
- #appSidebar.sidebar{max-height:none!important}
- .app-header{align-items:flex-start!important}
-}
-@media(max-width:600px){
- .app-header .brand-mark{flex-basis:40px!important;width:40px!important;height:44px!important}
- .app-header .headright{flex:1 1 100%!important;justify-content:flex-start!important}
- .main .hero,.main .panel{padding:13px!important}
- .main th,.main td{padding:6px 7px!important}
-}
-</style>
-
-
-<style id="matchma-reference-layout">
-/* MatchMa reference layout refinement — structure only, theme tokens untouched */
-@media(min-width:1051px){
- .app-shell.shell{
-  grid-template-columns:clamp(215px,17.5vw,245px) minmax(0,1fr)!important;
-  gap:clamp(13px,1.35vw,19px)!important;
-  max-width:1800px!important;
-  padding-left:clamp(14px,1.7vw,26px)!important;
-  padding-right:clamp(14px,1.7vw,26px)!important;
-  align-items:start!important;
- }
- #appSidebar.sidebar{
-  position:sticky!important;top:12px!important;
-  height:calc(100vh - 24px)!important;
-  min-height:0!important;max-height:calc(100vh - 24px)!important;
-  overflow-x:hidden!important;overflow-y:auto!important;
-  align-self:start!important;
-  scrollbar-width:thin!important;
- }
- .app-shell.shell>.main{padding-top:12px!important}
-}
-.app-header{
- min-height:66px!important;
- padding-top:8px!important;padding-bottom:8px!important;
-}
-.app-header .headright{gap:6px!important}
-.app-header .local-pill{padding:7px 10px!important;font-size:11px!important}
-.app-shell.shell>.main>.page.active{min-width:0!important}
-.main .hero,.main .panel{margin-bottom:12px!important}
-.main .sectionhead{align-items:center!important}
-.main .stats>.stat{min-width:0!important;padding:12px!important}
-.main .stats>.stat small{font-size:10.5px!important;line-height:1.3!important}
-.main .stats>.stat b{font-size:clamp(19px,2vw,25px)!important;line-height:1.1!important}
-.main .actions{gap:7px!important;flex-wrap:wrap!important}
-.main .actions>*{margin:0!important}
-@media(max-width:1050px){
- #appSidebar.sidebar{position:relative!important;top:auto!important;height:auto!important;max-height:none!important}
-}
-</style>
-
-
-<style id="matchma-reference-frame">
-/* MatchMa compact frame layout — mirror reference proportions, retain active theme surfaces */
-@media(min-width:1051px){
- body{padding:22px 24px 28px!important}
+<style id="matchma-hybrid-14-12">
+/* MatchMa hybrid 14+12: compact enterprise shell with three-zone workspace */
+/* App shell: compact enterprise navigation + central workspace. Existing theme variables remain authoritative. */
+@media(min-width:1101px){
+ body{padding:18px 20px 24px!important}
  .app-header{
-  width:min(100%,1480px)!important;max-width:1480px!important;
-  margin:0 auto!important;padding:10px 24px!important;
-  min-height:72px!important;flex-wrap:nowrap!important;
-  border-radius:18px 18px 0 0!important;
-  box-sizing:border-box!important
+  width:min(100%,1540px)!important;max-width:1540px!important;margin:0 auto!important;
+  min-height:68px!important;padding:9px 20px!important;box-sizing:border-box!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
  }
- .app-header .brand-mark{flex-basis:50px!important;width:50px!important;height:54px!important}
- .app-header .headright{flex:0 1 auto!important;flex-wrap:nowrap!important;gap:7px!important}
+ .app-header .brand{gap:10px!important;min-width:0!important}
+ .app-header .brand-mark{flex:0 0 46px!important;width:46px!important;height:48px!important}
+ .app-header .brand-copy h1{font-size:25px!important;line-height:1.05!important;margin:0!important}
+ .app-header .brand-copy .subbrand{font-size:11px!important;line-height:1.2!important;margin-top:3px!important}
+ .app-header .headright{gap:7px!important;flex:0 1 auto!important;flex-wrap:nowrap!important}
  .app-shell.shell{
-  width:min(100%,1480px)!important;max-width:1480px!important;
-  margin:0 auto!important;padding:0 0 20px!important;
-  grid-template-columns:238px minmax(0,1fr)!important;
-  gap:0!important;align-items:stretch!important;
+  width:min(100%,1540px)!important;max-width:1540px!important;margin:0 auto!important;
+  padding:0!important;gap:0!important;
+  grid-template-columns:224px minmax(0,1fr)!important;align-items:stretch!important;
  }
  #appSidebar.sidebar{
-  position:relative!important;top:auto!important;align-self:stretch!important;
-  height:calc(100vh - 122px)!important;min-height:620px!important;
-  max-height:none!important;overflow-y:auto!important;
-  border-radius:0 0 0 18px!important;
-  padding:16px 12px!important;gap:8px!important
+  position:sticky!important;top:12px!important;align-self:start!important;
+  height:calc(100vh - 112px)!important;max-height:calc(100vh - 112px)!important;
+  min-height:560px!important;overflow:auto!important;
+  padding:12px 10px!important;gap:6px!important;
  }
  .app-shell.shell>.main{
-  min-height:calc(100vh - 122px)!important;
-  padding:20px 22px 24px!important;
-  border-radius:0 0 18px 0!important;
-  overflow-x:hidden!important
+  min-width:0!important;min-height:calc(100vh - 112px)!important;
+  padding:16px 18px 22px!important;overflow-x:hidden!important;
  }
- .main .hero,.main .panel{margin-bottom:14px!important}
 }
-.app-header .brand-copy h1{font-size:clamp(22px,2vw,27px)!important;line-height:1.05!important}
-.app-header .subbrand{font-size:11px!important;line-height:1.25!important}
-#appSidebar .sidebar-section-heading{font-size:10px!important;letter-spacing:.6px!important}
-#appSidebar .navbtn{min-height:38px!important;padding:8px 10px!important;gap:9px!important;font-size:12px!important;line-height:1.25!important}
-#appSidebar .navfolder-title{min-height:36px!important;padding:8px 9px!important;font-size:10px!important}
-#appSidebar .nav-folder-items>.navbtn{min-height:35px!important;padding:7px 9px!important;font-size:11.5px!important}
-.main .hero{padding:20px!important}
-.main .hero h2{font-size:clamp(22px,2.2vw,30px)!important;line-height:1.16!important}
-.main .panel{padding:16px!important}
-.main .sectionhead h2,.main .panel h2{font-size:16px!important;line-height:1.25!important}
-.main .sectionhead p,.main .panel p,.main .hero p{font-size:12px!important;line-height:1.42!important}
-.main th,.main td{padding:7px 9px!important;font-size:11.5px!important;line-height:1.3!important}
-@media(max-width:1050px){
+/* Enterprise compact type scale; no background, color, shadow, logo, or theme overrides. */
+body{font-size:13px!important;line-height:1.42!important}
+.app-header .headright>*{min-width:0}
+.app-header .toolbar-select,.app-header .toolbar-font button{min-height:33px!important;padding:6px 9px!important;font-size:11.5px!important}
+#appSidebar .sidebar-topline{padding:3px 6px 6px!important}
+#appSidebar .sidebar-section-heading{font-size:9px!important;letter-spacing:.55px!important}
+#appSidebar .sidebar-account-shortcut{min-height:42px!important;padding:7px 8px!important;gap:8px!important}
+#appSidebar .sidebar-avatar{width:29px!important;height:29px!important;flex:0 0 29px!important}
+#appSidebar .sidebar-account-copy strong{font-size:11.5px!important;line-height:1.2!important}
+#appSidebar .sidebar-account-copy small{font-size:10px!important;line-height:1.2!important}
+#appSidebar .navbtn{min-height:35px!important;padding:7px 9px!important;gap:8px!important;font-size:11.5px!important;line-height:1.22!important}
+#appSidebar .navicon{width:19px!important;flex:0 0 19px!important;font-size:14px!important}
+#appSidebar .nav-folder{margin:2px 0!important}
+#appSidebar .navfolder-title{min-height:32px!important;padding:6px 8px!important;font-size:9.5px!important;line-height:1.2!important}
+#appSidebar .nav-folder-items{gap:3px!important;padding:4px 0 2px 5px!important}
+#appSidebar .nav-folder-items .navbtn{min-height:32px!important;padding:6px 8px!important;font-size:11px!important}
+#appSidebar .sidebar-bottom{gap:5px!important}
+#appSidebar .sidebar-help{padding:8px!important;font-size:10.5px!important;line-height:1.35!important}
+.main .mm-ai-disclaimer{padding:8px 10px!important;margin-bottom:10px!important;font-size:10.5px!important;line-height:1.35!important}
+.main .hero{padding:18px!important;margin-bottom:12px!important}
+.main .hero h2{font-size:clamp(21px,2vw,28px)!important;line-height:1.18!important;margin:4px 0!important}
+.main .hero p,.main .panel p,.main .sectionhead p{font-size:11.5px!important;line-height:1.4!important}
+.main .eyebrow{font-size:9.5px!important;letter-spacing:.65px!important}
+.main .panel{padding:14px!important;margin-bottom:11px!important}
+.main .sectionhead{gap:8px!important;margin-bottom:9px!important}
+.main .sectionhead h2,.main .panel h2{font-size:15px!important;line-height:1.24!important}
+.main .stats{gap:8px!important}
+.main .stat{padding:10px 11px!important;min-width:0!important}
+.main .stat small{font-size:10px!important;line-height:1.25!important}
+.main .stat b{font-size:21px!important;line-height:1.1!important}
+.main .grid,.main .grid3{gap:9px!important}
+.main .btn{min-height:32px!important;padding:6px 10px!important;font-size:11.5px!important;line-height:1.25!important}
+.main .field{margin-bottom:8px!important}
+.main .field label{font-size:10.5px!important;margin-bottom:4px!important}
+.main input,.main select,.main textarea{font-size:11.5px!important;line-height:1.3!important}
+.main .tablewrap{max-width:100%!important;overflow:auto!important}
+.main th,.main td{padding:6px 8px!important;font-size:11px!important;line-height:1.28!important}
+.main .badge,.main .pill{font-size:10px!important;padding:3px 6px!important}
+/* Three-zone working feel: primary workspace, adjacent tools, and supporting cards.
+   Apply only to existing dashboard/help grids; operational forms keep their original flow. */
+#page-overview .stats{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+#page-overview .overview-account-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+#page-overview .overview-analytics{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:10px!important}
+#page-intro .intro-menu-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+#page-intro .intro-help-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:9px!important}
+#page-intro .intro-steps li{gap:10px!important;padding:9px 0!important}
+#page-intro .intro-steps li p{font-size:11px!important;line-height:1.35!important}
+@media(max-width:1100px){
  body{padding:0!important}
- .app-header{width:100%!important;max-width:none!important;margin:0!important;border-radius:0!important;flex-wrap:wrap!important}
- .app-shell.shell{width:100%!important;max-width:none!important}
- .app-shell.shell>.main{padding:14px!important}
- #appSidebar.sidebar{border-radius:14px!important}
+ .app-header{width:100%!important;max-width:none!important;min-height:0!important;flex-wrap:wrap!important}
+ .app-shell.shell{width:100%!important;max-width:none!important;grid-template-columns:205px minmax(0,1fr)!important;gap:10px!important;padding:0 10px 18px!important}
+ #appSidebar.sidebar{position:relative!important;top:auto!important;height:auto!important;max-height:none!important;min-height:0!important}
+ .app-shell.shell>.main{padding:12px!important}
+ #page-overview .overview-analytics{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #page-intro .intro-menu-grid,#page-intro .intro-help-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+ .app-shell.shell{grid-template-columns:minmax(0,1fr)!important}
+ #page-overview .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ #page-overview .overview-account-grid,#page-overview .overview-analytics,
+ #page-intro .intro-menu-grid,#page-intro .intro-help-grid{grid-template-columns:minmax(0,1fr)!important}
 }
 </style>
 
