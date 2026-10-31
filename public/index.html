@@ -3708,9 +3708,17 @@ function getMeasureMap(value){
 }
 function measureConflict(a,b){
  const A=getMeasureMap(a),B=getMeasureMap(b);
- for(const key of Object.keys(A))if(B[key]){
-  const av=A[key],bv=B[key];
-  if(!av.every(x=>bv.some(y=>Math.abs(x-y)<=Math.max(.001,Math.max(x,y)*.10))))return true;
+ const aVol=!!A.volume,aWeight=!!A.weight,bVol=!!B.volume,bWeight=!!B.weight;
+ // A volume item must not match a weight-only item (e.g. 180ml vs 52g).
+ if((aVol&&bWeight&&!bVol)||(aWeight&&bVol&&!bWeight))return true;
+ // If one side states a physical size and the other side has no comparable size, require manual review.
+ if((aVol||aWeight)&&!(bVol||bWeight))return true;
+ if((bVol||bWeight)&&!(aVol||aWeight))return true;
+ for(const key of ['volume','weight']){
+  if(A[key]&&B[key]){
+   const av=A[key],bv=B[key];
+   if(!av.every(x=>bv.some(y=>Math.abs(x-y)<=Math.max(.001,Math.max(x,y)*.10))))return true;
+  }
  }
  return false;
 }
