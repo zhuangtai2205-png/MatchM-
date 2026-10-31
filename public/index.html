@@ -3823,7 +3823,7 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=familyConflict?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    const rank=(familyConflict||hardVariantConflict)?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
