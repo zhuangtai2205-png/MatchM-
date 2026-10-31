@@ -5034,4 +5034,71 @@ body{font-size:13px!important;line-height:1.42!important}
 }
 </style>
 
+<!-- MatchMa final sidebar + pale theme correction -->
+<style id="matchma-final-sidebar-palette-correction">
+/* Final override: this block is intentionally last so the compact layout wins over legacy rules. */
+@media (min-width: 761px){
+ .app-shell.shell{grid-template-columns:198px minmax(0,1fr)!important;gap:12px!important}
+ .app-shell.shell.sidebar-collapsed{grid-template-columns:54px minmax(0,1fr)!important}
+ #appSidebar.sidebar{width:auto!important;min-width:0!important;overflow-x:hidden!important}
+ #sidebarCollapseToggle.sidebar-toggle{display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important;z-index:20!important;place-items:center!important;flex:0 0 28px!important;width:28px!important;height:28px!important;min-width:28px!important;border-radius:9px!important;cursor:pointer!important}
+ #appSidebar .sidebar-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:5px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-topline{justify-content:center!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-section-heading,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-copy,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-arrow,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navbtn>span:not(.navicon),
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title>span:not(.navicon),
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-help,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-shortcut,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navbtn,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title{justify-content:center!important;padding-left:2px!important;padding-right:2px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder-items{padding-left:0!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .navicon{width:26px!important;flex:0 0 26px!important}
+}
+@media(max-width:760px){
+ .app-shell.shell{grid-template-columns:minmax(0,1fr)!important}
+ #sidebarCollapseToggle{display:none!important}
+}
+/* Pale, low-saturation surfaces across every theme; retain each theme's motif and identity. */
+body[data-theme="ocean"]{--ink:#637d87!important;--muted:#9eafb5!important;--bg:#fbfeff!important;--surface:#ffffff!important;--ui-surface:#fdfeff!important;--ui-border:#edf3f5!important;--ui-accent:#e2f0f3!important;--accent:#e2f0f3!important}
+body[data-theme="pink"]{--ink:#887985!important;--muted:#b7aab2!important;--bg:#fffdfd!important;--surface:#ffffff!important;--ui-surface:#fffefe!important;--ui-border:#f4edf1!important;--ui-accent:#f6e8ee!important;--accent:#f6e8ee!important}
+body[data-theme="cat"]{--ink:#82786f!important;--muted:#b5aaa1!important;--bg:#fffefd!important;--surface:#ffffff!important;--ui-surface:#fffefd!important;--ui-border:#f1ece7!important;--ui-accent:#f2ebe4!important;--accent:#f2ebe4!important}
+body[data-theme="forest"],body[data-theme="bear"]{--ink:#718174!important;--muted:#a8b4a8!important;--bg:#fcfefb!important;--surface:#ffffff!important;--ui-surface:#fefffd!important;--ui-border:#edf2eb!important;--ui-accent:#e9f1e6!important;--accent:#e9f1e6!important}
+body[data-theme="vampire"]{--ink:#786b78!important;--muted:#b0a4b0!important;--bg:#fdfbfe!important;--surface:#ffffff!important;--ui-surface:#fffefe!important;--ui-border:#f1eaf2!important;--ui-accent:#f1e8f2!important;--accent:#f1e8f2!important}
+body[data-theme="retro"]{--ink:#77736b!important;--muted:#aaa69d!important;--bg:#fdfdfc!important;--surface:#ffffff!important;--ui-surface:#fffefd!important;--ui-border:#efeee9!important;--ui-accent:#f0eee8!important;--accent:#f0eee8!important}
+body[data-theme="minimal"]{--ink:#555b60!important;--muted:#92999e!important;--bg:#ffffff!important;--surface:#ffffff!important;--ui-surface:#ffffff!important;--ui-border:#eeeeee!important;--ui-accent:#f4f5f5!important;--accent:#f4f5f5!important}
+body[data-theme] .app-header,body[data-theme] #appSidebar.sidebar,
+body[data-theme] .hero,body[data-theme] .panel,body[data-theme] .stat,
+body[data-theme] .card,body[data-theme] .mini,body[data-theme] .nav-folder,
+body[data-theme] .navfolder-title,body[data-theme] .tablewrap{
+ background-color:color-mix(in srgb,var(--surface,#fff) 96%,var(--ui-accent,#eee) 4%)!important;
+ border-color:var(--ui-border)!important;
+}
+body[data-theme] .btn-primary,body[data-theme] .navbtn.active,
+body[data-theme] .sidebar-toggle,body[data-theme] .badge{
+ background-color:color-mix(in srgb,var(--ui-accent) 55%,white)!important;
+ border-color:var(--ui-border)!important;color:var(--ink)!important;
+}
+body[data-theme] .navbtn:hover,body[data-theme] .navfolder-title:hover{
+ background-color:color-mix(in srgb,var(--ui-accent) 35%,white)!important;
+}
+body[data-theme] input,body[data-theme] select,body[data-theme] textarea{
+ background-color:#fff!important;border-color:var(--ui-border)!important;
+}
+body[data-theme] .hero,body[data-theme] .panel,body[data-theme] .stat,
+body[data-theme] .card,body[data-theme] #appSidebar.sidebar{
+ box-shadow:0 2px 10px rgba(75,85,90,.025)!important;
+}
+body[data-theme="ocean"]::before,body[data-theme="pink"]::before,
+body[data-theme="cat"]::before,body[data-theme="forest"]::before,
+body[data-theme="bear"]::before,body[data-theme="vampire"]::before,
+body[data-theme="retro"]::before{opacity:.055!important}
+body[data-theme="ocean"]::after,body[data-theme="pink"]::after,
+body[data-theme="cat"]::after,body[data-theme="forest"]::after,
+body[data-theme="bear"]::after,body[data-theme="vampire"]::after,
+body[data-theme="retro"]::after{opacity:.12!important}
+</style>
+
 </body></html>
