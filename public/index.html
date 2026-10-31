@@ -5101,4 +5101,67 @@ body[data-theme="bear"]::after,body[data-theme="vampire"]::after,
 body[data-theme="retro"]::after{opacity:.12!important}
 </style>
 
+<!-- MatchMa sidebar overlap and actual pale-surface fix -->
+<style id="matchma-sidebar-overlap-and-pale-theme-fix">
+/* Sidebar collapsed state: show only centered icons; hide all folder children. */
+@media(min-width:761px){
+ .app-shell.shell{grid-template-columns:206px minmax(0,1fr)!important;gap:12px!important}
+ .app-shell.shell.sidebar-collapsed{grid-template-columns:58px minmax(0,1fr)!important}
+ #appSidebar.sidebar{box-sizing:border-box!important;min-width:0!important;max-width:100%!important;overflow-x:hidden!important}
+ #appSidebar .sidebar-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:4px!important;min-height:32px!important}
+ #appSidebar #sidebarCollapseToggle{display:grid!important;position:relative!important;inset:auto!important;flex:0 0 30px!important;width:30px!important;height:30px!important;min-width:30px!important;max-width:30px!important;margin:0!important;padding:0!important;place-items:center!important;line-height:1!important;z-index:5!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar{padding:8px 5px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-topline{justify-content:center!important;padding:0!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-section-heading,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-copy,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-arrow,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navbtn>span:not(.navicon),
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title>span,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-help,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder-items{display:none!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder{margin:3px 0!important;padding:0!important;border:0!important;background:transparent!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title{display:flex!important;justify-content:center!important;align-items:center!important;min-height:36px!important;height:36px!important;padding:0!important;font-size:0!important;overflow:hidden!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title:before{font-size:17px!important;line-height:1!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder[data-nav-group="catalog"] .navfolder-title:before{content:"▦"}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder[data-nav-group="matching"] .navfolder-title:before{content:"⌕"}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder[data-nav-group="review"] .navfolder-title:before{content:"◎"}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder[data-nav-group="community"] .navfolder-title:before{content:"♧"}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-shortcut,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navbtn{display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;width:100%!important;min-width:0!important;height:38px!important;min-height:38px!important;margin:2px 0!important;padding:0!important;gap:0!important;overflow:hidden!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-avatar{margin:0!important;flex:0 0 28px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .navicon{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 28px!important;width:28px!important;min-width:28px!important;margin:0!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-bottom{gap:3px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn{height:38px!important}
+}
+@media(max-width:760px){#sidebarCollapseToggle{display:none!important}}
+/* Real pale surfaces: override hard-coded theme backgrounds as well as variables. */
+body[data-theme="ocean"]{--ink:#667e87!important;--muted:#aab9be!important;--bg:#fcfeff!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#edf3f5!important;--ui-accent:#eaf4f6!important;--accent:#eaf4f6!important;background:#fcfeff!important;background-image:linear-gradient(145deg,#fcfeff,#f9fcfd)!important}
+body[data-theme="pink"]{--ink:#887985!important;--muted:#b9adb4!important;--bg:#fffefe!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#f4edf1!important;--ui-accent:#f8eff3!important;--accent:#f8eff3!important;background:#fffefe!important;background-image:linear-gradient(145deg,#fffefe,#fdfafb)!important}
+body[data-theme="cat"]{--ink:#81786f!important;--muted:#b8aea5!important;--bg:#fffefd!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#f1ece7!important;--ui-accent:#f6f1eb!important;--accent:#f6f1eb!important;background:#fffefd!important;background-image:linear-gradient(145deg,#fffefd,#fcfaf7)!important}
+body[data-theme="forest"],body[data-theme="bear"]{--ink:#718174!important;--muted:#acb8ac!important;--bg:#fdfffc!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#edf2eb!important;--ui-accent:#eff5ec!important;--accent:#eff5ec!important;background:#fdfffc!important;background-image:linear-gradient(145deg,#fdfffc,#f9fcf8)!important}
+body[data-theme="vampire"]{--ink:#796e7a!important;--muted:#b4aab5!important;--bg:#fffefe!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#f1ebf2!important;--ui-accent:#f7f1f8!important;--accent:#f7f1f8!important;background:#fffefe!important;background-image:linear-gradient(145deg,#fffefe,#fcfafd)!important}
+body[data-theme="retro"]{--ink:#77737a!important;--muted:#b0abb0!important;--bg:#fefefe!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#efedf0!important;--ui-accent:#f4f2f4!important;--accent:#f4f2f4!important;background:#fefefe!important;background-image:linear-gradient(145deg,#fefefe,#fafafa)!important}
+body[data-theme="minimal"]{--ink:#555b60!important;--muted:#9ba1a5!important;--bg:#fff!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#eeeeee!important;--ui-accent:#f6f7f7!important;--accent:#f6f7f7!important;background:#fff!important;background-image:none!important}
+body[data-theme] .app-header,
+body[data-theme] #appSidebar.sidebar,
+body[data-theme] .hero,body[data-theme] .panel,body[data-theme] .stat,
+body[data-theme] .card,body[data-theme] .mini,body[data-theme] .nav-folder,
+body[data-theme] .navfolder-title,body[data-theme] .tablewrap{
+ background-color:#fff!important;border-color:var(--ui-border)!important;
+}
+body[data-theme] .hero{background-image:linear-gradient(120deg,#fff,#fdfdfd)!important}
+body[data-theme] .btn-primary,body[data-theme] .navbtn.active,
+body[data-theme] #sidebarCollapseToggle{
+ background-color:var(--ui-accent)!important;color:var(--ink)!important;
+ border-color:var(--ui-border)!important;filter:none!important;
+}
+body[data-theme] .navbtn:hover,body[data-theme] .navfolder-title:hover{background-color:#fafafa!important}
+body[data-theme] input,body[data-theme] select,body[data-theme] textarea{background:#fff!important;border-color:var(--ui-border)!important}
+body[data-theme] .panel,body[data-theme] .stat,body[data-theme] .card,
+body[data-theme] #appSidebar.sidebar{box-shadow:0 2px 9px rgba(70,75,80,.025)!important}
+body[data-theme]::before{opacity:.035!important}
+body[data-theme]::after{opacity:.07!important}
+</style>
+
 </body></html>
