@@ -5338,4 +5338,43 @@ body[data-theme="forest"] .navbtn.active,body[data-theme="bear"] .navbtn.active{
 #themeSelect option{color:#354d50!important;background:#fff!important}
 </style>
 
+
+<style id="matchma-all-themes-translucent-pastel">
+/* Unified translucent pastel system: keep each theme's identity through a very soft tint. */
+body[data-theme]{color:#586b70!important;background-color:#f8fbfa!important;background-image:linear-gradient(135deg,var(--mm-pastel-a,#f8fbfa),var(--mm-pastel-b,#f4f8f7))!important;background-attachment:fixed!important}
+body[data-theme="ocean"]{--mm-pastel-a:#eefaff;--mm-pastel-b:#effaf6;--ink:#526a72!important;--muted:#81969d!important}
+body[data-theme="pink"]{--mm-pastel-a:#fff4f8;--mm-pastel-b:#fff8fb;--ink:#76586a!important;--muted:#a58b99!important;--purple:#d9a9c1!important}
+body[data-theme="cat"]{--mm-pastel-a:#fff9f0;--mm-pastel-b:#fffaf5;--ink:#756354!important;--muted:#a29180!important;--purple:#d7b99e!important}
+body[data-theme="forest"],body[data-theme="bear"]{--mm-pastel-a:#f2f8f1;--mm-pastel-b:#f8fbf6;--ink:#5e7162!important;--muted:#8b9b8e!important;--purple:#b9ceb9!important}
+body[data-theme="vampire"]{--mm-pastel-a:#f8f2f8;--mm-pastel-b:#fbf6f8;--ink:#665966!important;--muted:#958798!important;--purple:#d0bfd3!important;--frame:#e8dfe9!important;--green:#b8d8c9!important;--amber:#e7d4ad!important;--red:#dfb9c3!important}
+body[data-theme="retro"]{--mm-pastel-a:#f6f5f0;--mm-pastel-b:#fbfaf6;--ink:#62625e!important;--muted:#96958d!important;--purple:#c9c8bd!important}
+body[data-theme="minimal"]{--mm-pastel-a:#f5f8f9;--mm-pastel-b:#fafbfb;--ink:#59666c!important;--muted:#89969b!important;--purple:#c5d0d4!important}
+body[data-theme]::before,body[data-theme]::after{opacity:.025!important}
+body[data-theme] .app-header,
+body[data-theme] #appSidebar.sidebar,
+body[data-theme] .page,
+body[data-theme] .hero,
+body[data-theme] .panel,
+body[data-theme] .stat,
+body[data-theme] .mini,
+body[data-theme] .nav-folder,
+body[data-theme] .navfolder-title,
+body[data-theme] .tablewrap,
+body[data-theme] .upload,
+body[data-theme] .card,
+body[data-theme] .notice,
+body[data-theme] .summary-card{background-color:rgba(255,255,255,.56)!important;background-image:none!important;border-color:rgba(170,190,190,.28)!important;box-shadow:0 3px 14px rgba(75,95,95,.035)!important;backdrop-filter:blur(14px) saturate(115%)!important;-webkit-backdrop-filter:blur(14px) saturate(115%)!important}
+body[data-theme] .page{background-color:rgba(255,255,255,.28)!important}
+body[data-theme] .hero,body[data-theme] .panel{background-color:rgba(255,255,255,.48)!important}
+body[data-theme] .navbtn,body[data-theme] .navbtn.active,body[data-theme] .navbtn:hover,
+body[data-theme] .sidebar-account-shortcut,body[data-theme] .sidebar-help,
+body[data-theme] .btn.alt,body[data-theme] .toolbar-select,
+body[data-theme] .toolbar-font button{background:rgba(255,255,255,.46)!important;background-image:none!important;color:var(--ink)!important;border-color:rgba(160,185,185,.3)!important;box-shadow:none!important;backdrop-filter:blur(10px)!important}
+body[data-theme] .btn:not(.alt){background:rgba(174,204,199,.62)!important;color:#425f61!important;border-color:rgba(145,180,175,.35)!important;box-shadow:none!important}
+body[data-theme] input,body[data-theme] select,body[data-theme] textarea{background:rgba(255,255,255,.62)!important;color:var(--ink)!important;border-color:rgba(165,190,190,.34)!important}
+body[data-theme] #themeSelect{background:rgba(255,255,255,.7)!important;color:var(--ink)!important;-webkit-text-fill-color:var(--ink)!important}
+body[data-theme] #themeSelect option{background:#fff!important;color:#465b60!important}
+body[data-theme] .sidebar .navicon{color:var(--ink)!important}
+</style>
+
 </body></html>
