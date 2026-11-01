@@ -3857,7 +3857,7 @@ function productStage(value){
  t=t.replace(/\b\d+\s*[x×]\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l)?\b/g,' ');
  t=t.replace(/\b\d+\s*(?:hop|thung|carton|box|chai|lon|pack)\b/g,' ');
  // Enfagrow A+ NeuroPro uses an un-suffixed stage number (3/4), not "Stage 3".
- const enfagrow=[...t.matchAll(/\benfagrow(?:_a)?_neuropro\s+([1-4])\b/g)].map(m=>m[1]);
+ const enfagrow=[...t.matchAll(/\benfagrow(?:_a)?_neuropro[_\s]+([1-4])\b/g)].map(m=>m[1]);
  if(enfagrow.length)return enfagrow[enfagrow.length-1];
  const tagged=[...t.matchAll(/\bstage_([1-4])\b/g)].map(m=>m[1]);
  if(tagged.length)return tagged[tagged.length-1];
