@@ -3331,7 +3331,7 @@ function exportAutoFill(){
  const catalogUnitLetter=catalogUnitIndex>=0?XLSX.utils.encode_col(catalogUnitIndex):'';
  const catalogLastRow=Math.max(2,catalogRows.length);
  const catalogSkuRange="'DanhSachSanPham'!$"+catalogSkuLetter+"$2:$"+catalogSkuLetter+"$"+catalogLastRow;
- const lookupFormula=(returnLetter,rr)=>'IF(B'+rr+'="","",IFERROR(INDEX(\\'DanhSachSanPham\\'!$'+returnLetter+'$2:$'+returnLetter+'$'+catalogLastRow+',MATCH(B'+rr+','+catalogSkuRange+',0)),""))';
+ const lookupFormula=(returnLetter,rr)=>`IF(B${rr}="","",IFERROR(INDEX('DanhSachSanPham'!${returnLetter}$2:${returnLetter}${catalogLastRow},MATCH(B${rr},${catalogSkuRange},0)),""))`;
  for(let rr=2;rr<=compareRows.length;rr++){
   const setFormula=(address,formula,cached)=>{
    wsCompare[address]={t:'str',f:formula,v:String(cached??'')};
@@ -3339,8 +3339,8 @@ function exportAutoFill(){
   setFormula('D'+rr,lookupFormula(catalogSkuLetter,rr),compareRows[rr-1][3]);
   setFormula('E'+rr,lookupFormula(catalogNameLetter,rr),compareRows[rr-1][4]);
   if(catalogUnitLetter)setFormula('F'+rr,lookupFormula(catalogUnitLetter,rr),compareRows[rr-1][5]);
-  const finalSkuFormula='IF(\\'bảng đối chiếu\\'!D'+rr+'="","",\\'bảng đối chiếu\\'!D'+rr+')';
-  const finalNameFormula='IF(\\'bảng đối chiếu\\'!E'+rr+'="","",\\'bảng đối chiếu\\'!E'+rr+')';
+  const finalSkuFormula=`IF('bảng đối chiếu'!D${rr}="", "", 'bảng đối chiếu'!D${rr})`;
+  const finalNameFormula=`IF('bảng đối chiếu'!E${rr}="", "", 'bảng đối chiếu'!E${rr})`;
   wsFinal['B'+rr]={t:'str',f:finalSkuFormula,v:String(finalRows[rr-1][1]??'')};
   wsFinal['C'+rr]={t:'str',f:finalNameFormula,v:String(finalRows[rr-1][2]??'')};
  }
