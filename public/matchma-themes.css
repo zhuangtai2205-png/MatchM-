@@ -85,3 +85,8 @@ body[data-theme="kitty"]:after{background:radial-gradient(ellipse at 15% 100%,#e
 body[data-theme="galaxy"] .main .hero,body[data-theme="galaxy"] .main .panel{color:var(--mm-ink)!important}
 body[data-theme="galaxy"] .main .hero p,body[data-theme="galaxy"] .main .panel p,body[data-theme="galaxy"] .main .field label{color:var(--mm-muted)!important}
 @media(prefers-reduced-motion:reduce){#themeScene .theme-drift{animation:none!important}}
+
+/* Re-enable only the new scenic decoration layer after legacy decorative pseudo-elements are neutralized. */
+body:before{content:""!important;display:block!important;position:fixed!important;inset:0!important;z-index:-2!important;pointer-events:none!important}
+body:after{content:""!important;display:block!important;position:fixed!important;left:0!important;right:0!important;bottom:0!important;z-index:-1!important;pointer-events:none!important}
+.main .page:before,.main .page:after,.main .panel:after,#appSidebar .navbtn.active:after{content:none!important;display:none!important}
