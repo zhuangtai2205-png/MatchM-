@@ -5222,4 +5222,73 @@ body[data-theme="ocean"] .upload{background:#fbfcfc!important;border-color:#dce8
 body[data-theme="ocean"] .theme-drift{opacity:.035!important}
 </style>
 
+
+<style id="matchma-hard-final-layout-theme-fix">
+/* Put decorative scene behind the entire application; it must never sit over navigation or controls. */
+#themeScene{position:fixed!important;inset:0!important;z-index:-1!important;opacity:.035!important;pointer-events:none!important;overflow:hidden!important}
+#catClickFX{z-index:1!important;pointer-events:none!important}
+.app-header,.app-shell,#appSidebar,.main{position:relative!important;z-index:2!important}
+#appSidebar{isolation:isolate!important;overflow-x:hidden!important}
+#appSidebar *{max-width:100%}
+@media(min-width:761px){
+ .app-shell.shell{display:grid!important;grid-template-columns:210px minmax(0,1fr)!important;align-items:start!important;gap:14px!important}
+ .app-shell.shell.sidebar-collapsed{grid-template-columns:58px minmax(0,1fr)!important}
+ #appSidebar.sidebar{display:flex!important;flex-direction:column!important;align-items:stretch!important;position:sticky!important;top:8px!important;width:100%!important;min-width:0!important;height:calc(100vh - 90px)!important;max-height:calc(100vh - 90px)!important;overflow-y:auto!important;overflow-x:hidden!important;padding:9px!important;gap:5px!important}
+ #appSidebar .sidebar-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;flex:0 0 34px!important;height:34px!important;min-height:34px!important}
+ #sidebarCollapseToggle{display:grid!important;visibility:visible!important;opacity:1!important;position:relative!important;inset:auto!important;z-index:10!important;flex:0 0 30px!important;width:30px!important;height:30px!important;min-width:30px!important;max-width:30px!important;margin:0!important;padding:0!important;place-items:center!important}
+ .app-shell.sidebar-collapsed #appSidebar{padding:8px 5px!important}
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-topline{justify-content:center!important}
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-section-heading,
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-account-copy,
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-account-arrow,
+ .app-shell.sidebar-collapsed #appSidebar .navbtn>span:not(.navicon),
+ .app-shell.sidebar-collapsed #appSidebar .navfolder-title>span,
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-help,
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}
+ .app-shell.sidebar-collapsed #appSidebar .nav-folder-items,
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-help-content{display:none!important;visibility:hidden!important}
+ .app-shell.sidebar-collapsed #appSidebar .nav-folder{display:block!important;height:auto!important;min-height:0!important;margin:2px 0!important;padding:0!important;border:0!important;background:transparent!important;overflow:hidden!important}
+ .app-shell.sidebar-collapsed #appSidebar .navfolder-title{display:flex!important;align-items:center!important;justify-content:center!important;width:100%!important;height:38px!important;min-height:38px!important;margin:0!important;padding:0!important;overflow:hidden!important;font-size:0!important}
+ .app-shell.sidebar-collapsed #appSidebar .navfolder-title:before{font-size:16px!important;line-height:1!important}
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-account-shortcut,
+ .app-shell.sidebar-collapsed #appSidebar .navbtn,
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn{display:flex!important;align-items:center!important;justify-content:center!important;position:relative!important;box-sizing:border-box!important;width:100%!important;height:40px!important;min-height:40px!important;max-height:40px!important;flex:0 0 40px!important;margin:2px 0!important;padding:0!important;gap:0!important;overflow:hidden!important}
+ .app-shell.sidebar-collapsed #appSidebar .sidebar-avatar{display:grid!important;place-items:center!important;width:28px!important;height:28px!important;min-width:28px!important;flex:0 0 28px!important;margin:0!important}
+ .app-shell.sidebar-collapsed #appSidebar .navicon{display:inline-flex!important;align-items:center!important;justify-content:center!important;width:28px!important;height:28px!important;min-width:28px!important;flex:0 0 28px!important;margin:0!important;font-size:18px!important}
+}
+@media(max-width:760px){#sidebarCollapseToggle{display:none!important}}
+/* Pale neutral/pastel canvas and surfaces. Override legacy per-theme gradients and opaque cards. */
+body[data-theme]{background:#fafcfc!important;background-image:linear-gradient(145deg,#fcfdfd 0%,#f8fafb 58%,#f7faf8 100%)!important;color:#596b70!important}
+body[data-theme]::before,body[data-theme]::after{opacity:.025!important}
+body[data-theme] .app-header,
+body[data-theme] .sidebar,
+body[data-theme] .page,
+body[data-theme] .hero,
+body[data-theme] .panel,
+body[data-theme] .stat,
+body[data-theme] .mini,
+body[data-theme] .nav-folder,
+body[data-theme] .navfolder-title,
+body[data-theme] .tablewrap{background:#fff!important;background-image:none!important;border-color:#edf0f1!important;box-shadow:0 2px 9px rgba(70,85,90,.035)!important;color:#596b70!important}
+body[data-theme] .page{background:#fbfcfc!important}
+body[data-theme] .hero{background:#fdfefe!important}
+body[data-theme] .navbtn,
+body[data-theme] .navbtn.active,
+body[data-theme] .navbtn:hover,
+body[data-theme] .sidebar-account-shortcut,
+body[data-theme] .sidebar-help,
+body[data-theme] .toolbar-select,
+body[data-theme] .toolbar-font button,
+body[data-theme] .btn.alt{background:#f3f7f7!important;background-image:none!important;color:#60777d!important;border-color:#e8eeee!important;box-shadow:none!important}
+body[data-theme] .btn{background:#b8cfd2!important;color:#fff!important;box-shadow:none!important}
+body[data-theme] input,body[data-theme] select,body[data-theme] textarea{background:#fff!important;border-color:#e8eeee!important;color:#596b70!important}
+body[data-theme] .upload{background:#fbfcfc!important;border-color:#e4ecee!important}
+body[data-theme] #themeScene .theme-drift{opacity:.035!important;filter:saturate(.2)!important}
+body[data-theme="ocean"]{--ink:#596b70!important;--muted:#8b9a9e!important;--purple:#a9c5c9!important;--frame:#e8eff0!important;--bg:#fafcfc!important;--surface:#fff!important;--ui-surface:#fff!important;--ui-border:#edf0f1!important;--ui-accent:#e9f1f2!important}
+body[data-theme="pink"]{--ink:#766873!important;--muted:#a99ba4!important;--purple:#d9bdca!important;--bg:#fffafb!important;--surface:#fff!important}
+body[data-theme="forest"],body[data-theme="bear"]{--ink:#657466!important;--muted:#98a69a!important;--purple:#c4d2c2!important;--bg:#fbfcfa!important;--surface:#fff!important}
+body[data-theme="vampire"]{--ink:#716b78!important;--muted:#a39aa9!important;--purple:#d0c5d7!important;--bg:#fcfafc!important;--surface:#fff!important}
+body[data-theme="retro"]{--ink:#656565!important;--muted:#999!important;--purple:#d0d0d0!important;--bg:#fbfbfa!important;--surface:#fff!important}
+</style>
+
 </body></html>
