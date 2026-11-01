@@ -5570,4 +5570,58 @@ body[data-theme="retro"],body[data-theme="minimal"]{--header-band:rgba(250,250,2
  .app-shell.shell{width:100%!important;max-width:none!important;margin:0!important;padding:0 24px 30px!important}
 }
 </style>
+
+<style id="matchma-theme-menu-icons-20261101">
+/* Restore a distinct illustrated icon for every navigation destination. */
+#appSidebar .navicon{
+ width:29px!important;min-width:29px!important;height:29px!important;flex:0 0 29px!important;
+ display:grid!important;place-items:center!important;position:relative!important;
+ border-radius:10px!important;font-size:0!important;line-height:1!important;
+ background:var(--nav-icon-bg,rgba(255,255,255,.62))!important;
+ border:1px solid var(--nav-icon-border,rgba(130,150,170,.22))!important;
+ box-shadow:0 2px 5px rgba(50,60,80,.07)!important;
+}
+#appSidebar .navicon::before{display:none!important;content:none!important;background:none!important}
+#appSidebar .navicon::after{display:block!important;font-size:19px!important;line-height:1!important;filter:drop-shadow(0 1px 1px rgba(40,40,50,.12))}
+#appSidebar .navbtn{gap:10px!important;min-height:42px!important}
+#appSidebar .navfolder-title{gap:8px!important}
+#appSidebar .navfolder-title::before{display:inline-grid;place-items:center;flex:0 0 25px;width:25px;height:25px;border-radius:8px;background:var(--nav-icon-bg,rgba(255,255,255,.65));border:1px solid var(--nav-icon-border,rgba(130,150,170,.2));font-size:16px;line-height:1}
+#appSidebar [data-nav-group="data"]>.navfolder-title::before{content:"📂"}
+#appSidebar [data-nav-group="reconcile"]>.navfolder-title::before{content:"⚖️"}
+#appSidebar [data-nav-group="tools"]>.navfolder-title::before{content:"🧰"}
+#appSidebar .navbtn[data-page="intro"] .navicon::after{content:"🐱"}
+#appSidebar .navbtn[data-page="overview"] .navicon::after{content:"📊"}
+#appSidebar .navbtn[data-page="workspace"] .navicon::after{content:"⭐"}
+#appSidebar .navbtn[data-page="catalog"] .navicon::after{content:"📚"}
+#appSidebar .navbtn[data-page="memory"] .navicon::after{content:"☁️"}
+#appSidebar .navbtn[data-page="run"] .navicon::after{content:"🔍"}
+#appSidebar .navbtn[data-page="results"] .navicon::after{content:"✅"}
+#appSidebar .navbtn[data-page="debitcredit"] .navicon::after{content:"🪙"}
+#appSidebar .navbtn[data-page="invoicecompare"] .navicon::after{content:"🧾"}
+#appSidebar .navbtn[data-page="platforms"] .navicon::after{content:"🛒"}
+#appSidebar .navbtn[data-page="autofill"] .navicon::after{content:"🏷️"}
+#appSidebar .navbtn[data-page="stockforecast"] .navicon::after{content:"📦"}
+#appSidebar .navbtn[data-page="settings"] .navicon::after{content:"⚙️"}
+#appSidebar .sidebar-account-avatar{font-size:20px!important}
+#appSidebar .sidebar-account-shortcut .sidebar-avatar{background:var(--nav-icon-bg,rgba(255,255,255,.7))!important;border-color:var(--nav-icon-border,rgba(130,150,170,.3))!important}
+#appSidebar .navbtn.active .navicon{transform:translateY(-1px);box-shadow:0 3px 9px rgba(60,70,90,.13)!important}
+#appSidebar .navicon{transition:transform .18s ease,background .18s ease}
+#appSidebar .navbtn:hover .navicon{transform:scale(1.08) rotate(-3deg)}
+/* Each theme gets its own icon tile colors and illustration treatment. */
+body[data-theme="pink"]{--nav-icon-bg:#fff0f6;--nav-icon-border:#f2bfd5}
+body[data-theme="pink"] #appSidebar .navicon::after{filter:drop-shadow(0 1px 1px #d98eae55)}
+body[data-theme="ocean"]{--nav-icon-bg:#eaf8fc;--nav-icon-border:#b9dfe9}
+body[data-theme="ocean"] #appSidebar .navicon::after{filter:drop-shadow(0 1px 1px #63a6bd55)}
+body[data-theme="cat"]{--nav-icon-bg:#f5efff;--nav-icon-border:#d9c9ef}
+body[data-theme="cat"] #appSidebar .navicon::after{filter:drop-shadow(0 1px 1px #987fc455)}
+body[data-theme="bear"],body[data-theme="forest"]{--nav-icon-bg:#eff8e9;--nav-icon-border:#c8dfbd}
+body[data-theme="bear"] #appSidebar .navicon::after,body[data-theme="forest"] #appSidebar .navicon::after{filter:drop-shadow(0 1px 1px #71966a55)}
+body[data-theme="vampire"]{--nav-icon-bg:#f3eafa;--nav-icon-border:#d4c0e1}
+body[data-theme="vampire"] #appSidebar .navicon::after{filter:drop-shadow(0 1px 1px #73548766)}
+body[data-theme="retro"]{--nav-icon-bg:#f2f2ef;--nav-icon-border:#c9cbc8}
+body[data-theme="retro"] #appSidebar .navicon::after{filter:grayscale(1) contrast(1.1)}
+body[data-theme="minimal"]{--nav-icon-bg:#f1f5f4;--nav-icon-border:#d3dfdc}
+body[data-theme="minimal"] #appSidebar .navicon::after{filter:saturate(.55)}
+@media(max-width:760px){#appSidebar .navicon{width:27px!important;height:27px!important;flex-basis:27px!important}}
+</style>
 </body></html>
