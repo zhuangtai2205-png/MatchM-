@@ -5377,4 +5377,81 @@ body[data-theme] #themeSelect option{background:#fff!important;color:#465b60!imp
 body[data-theme] .sidebar .navicon{color:var(--ink)!important}
 </style>
 
+
+<style id="matchma-glass-studio-20261101">
+/* GLASS STUDIO: shared translucent workspace frame, theme-specific scenery. */
+body{min-height:100vh!important;background-attachment:fixed!important}
+#themeScene{position:fixed!important;inset:0!important;z-index:0!important;pointer-events:none!important;opacity:.28!important;overflow:hidden!important}
+.app-header,.app-shell,.main,#appSidebar{position:relative!important;z-index:2!important}
+.app-header{
+ background:rgba(255,255,255,.62)!important;
+ border:1px solid rgba(255,255,255,.78)!important;
+ border-bottom:1px solid rgba(160,190,195,.28)!important;
+ border-radius:0 0 20px 20px!important;
+ box-shadow:0 8px 28px rgba(70,100,110,.07)!important;
+ backdrop-filter:blur(18px) saturate(125%)!important;
+ -webkit-backdrop-filter:blur(18px) saturate(125%)!important;
+}
+.app-shell{gap:16px!important;align-items:start!important}
+#appSidebar.sidebar{
+ background:rgba(255,255,255,.58)!important;
+ border:1px solid rgba(255,255,255,.82)!important;
+ border-radius:22px!important;
+ box-shadow:0 12px 34px rgba(60,90,100,.075)!important;
+ backdrop-filter:blur(20px) saturate(130%)!important;
+ -webkit-backdrop-filter:blur(20px) saturate(130%)!important;
+}
+.main{min-width:0!important}
+.main .page{
+ background:rgba(255,255,255,.68)!important;
+ border:1px solid rgba(255,255,255,.86)!important;
+ border-radius:24px!important;
+ box-shadow:0 14px 40px rgba(60,90,100,.065)!important;
+ backdrop-filter:blur(18px) saturate(120%)!important;
+ -webkit-backdrop-filter:blur(18px) saturate(120%)!important;
+}
+.main .hero,.main .panel,.main .stat,.main .mini,.main .tablewrap,.main .filterbox,.main .result-card{
+ background:rgba(255,255,255,.76)!important;
+ border:1px solid rgba(255,255,255,.92)!important;
+ border-radius:17px!important;
+ box-shadow:0 5px 18px rgba(60,90,100,.045)!important;
+}
+.main input,.main select,.main textarea{
+ background:rgba(255,255,255,.88)!important;
+ border:1px solid rgba(150,180,188,.34)!important;
+}
+.navbtn,.sidebar-account-shortcut,.toolbar-select,.toolbar-font button{
+ border-radius:13px!important;
+ transition:background .2s ease,border-color .2s ease,transform .2s ease!important;
+}
+.navbtn.active{box-shadow:inset 3px 0 0 var(--purple),0 3px 12px rgba(60,90,100,.06)!important}
+.btn{border-radius:13px!important;box-shadow:0 5px 14px rgba(65,105,115,.12)!important}
+body::before{
+ content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.48;
+ background:
+ radial-gradient(ellipse at 8% 12%,var(--glass-glow-a,rgba(175,225,232,.34)) 0,transparent 34%),
+ radial-gradient(ellipse at 92% 18%,var(--glass-glow-b,rgba(205,220,245,.30)) 0,transparent 32%),
+ radial-gradient(ellipse at 72% 94%,var(--glass-glow-c,rgba(205,238,222,.28)) 0,transparent 35%);
+}
+body[data-theme="ocean"]{--glass-glow-a:rgba(125,216,230,.34);--glass-glow-b:rgba(145,190,225,.28);--glass-glow-c:rgba(145,225,205,.30);background:linear-gradient(135deg,#eaf8fa,#f4f9fb 52%,#eaf7f3)!important}
+body[data-theme="pink"]{--glass-glow-a:rgba(250,174,207,.36);--glass-glow-b:rgba(236,193,222,.32);--glass-glow-c:rgba(255,220,225,.26);background:linear-gradient(135deg,#fff0f5,#fbf4fa 52%,#fff6f1)!important}
+body[data-theme="cat"]{--glass-glow-a:rgba(203,185,238,.34);--glass-glow-b:rgba(176,208,238,.30);--glass-glow-c:rgba(245,211,229,.30);background:linear-gradient(135deg,#f4effb,#f0f6fb 54%,#fff4f8)!important}
+body[data-theme="bear"],body[data-theme="forest"]{--glass-glow-a:rgba(177,218,172,.36);--glass-glow-b:rgba(204,225,178,.30);--glass-glow-c:rgba(166,211,185,.28);background:linear-gradient(135deg,#f0f7ed,#f6f8ef 52%,#edf7f0)!important}
+body[data-theme="vampire"]{--glass-glow-a:rgba(192,174,216,.32);--glass-glow-b:rgba(213,190,218,.30);--glass-glow-c:rgba(180,183,218,.24);background:linear-gradient(135deg,#f2eef7,#f8f3f8 52%,#f0f1f8)!important}
+body[data-theme="retro"]{--glass-glow-a:rgba(190,190,190,.24);--glass-glow-b:rgba(220,220,220,.26);--glass-glow-c:rgba(180,190,190,.20);background:linear-gradient(135deg,#f2f2ef,#fafaf8 52%,#eeeeeb)!important}
+body[data-theme="minimal"]{--glass-glow-a:rgba(200,211,216,.24);--glass-glow-b:rgba(220,224,226,.22);--glass-glow-c:rgba(199,216,210,.20);background:linear-gradient(135deg,#f5f7f7,#fbfcfc 52%,#f1f5f3)!important}
+body[data-theme="ocean"] #appSidebar,body[data-theme="ocean"] .main .page{background:rgba(247,253,254,.72)!important;border-color:rgba(255,255,255,.9)!important}
+body[data-theme="pink"] #appSidebar,body[data-theme="pink"] .main .page{background:rgba(255,250,253,.74)!important}
+body[data-theme="cat"] #appSidebar,body[data-theme="cat"] .main .page{background:rgba(251,249,255,.74)!important}
+body[data-theme="bear"] #appSidebar,body[data-theme="bear"] .main .page,body[data-theme="forest"] #appSidebar,body[data-theme="forest"] .main .page{background:rgba(250,253,248,.74)!important}
+body[data-theme="vampire"] #appSidebar,body[data-theme="vampire"] .main .page{background:rgba(251,249,254,.74)!important}
+body[data-theme="retro"] #appSidebar,body[data-theme="retro"] .main .page,body[data-theme="minimal"] #appSidebar,body[data-theme="minimal"] .main .page{background:rgba(255,255,255,.78)!important}
+@media(max-width:760px){
+ .app-header{border-radius:0 0 15px 15px!important}
+ .main .page{border-radius:17px!important}
+ #appSidebar.sidebar{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
+}
+@media(prefers-reduced-motion:reduce){.navbtn,.sidebar-account-shortcut,.toolbar-select,.toolbar-font button{transition:none!important}}
+</style>
+
 </body></html>
