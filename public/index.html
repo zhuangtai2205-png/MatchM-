@@ -3222,7 +3222,7 @@ function runAutoFill(){
   for(const m of candidates.values()){
    if(brandConflict(name,m.name)){brandRejected=true;continue}
    const brandEvidence=brandIdentity(name)&&brandIdentity(m.name)?1:0;
-   const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.45)continue;
+   const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.60)continue;
    const familyConflict=incompatibleFamily(tokens,m.nameTokens),attributeConflict=conflictTokens(allTokens,m.tokens)||variantMissing(name,m.name),uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),familyA=productFamily(tokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(name)==='th'&&/\b(true|milk)\b/.test(norm(name+' '+m.name))?1:0,evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
    // Chặn cứng lỗi nguy hiểm: "cơm trắng" không bao giờ là "Revive trắng".
    const sourceNorm=norm(name),masterNorm=norm(m.name);
@@ -3230,7 +3230,7 @@ function runAutoFill(){
    const hasRice=(words,txt)=>['com','com_trang','gao','gao_nep','gao_trang'].some(t=>words.has(t))||/cơm\s+trắng|com\s+trang|gạo\s+trắng|gao\s+trang/i.test(txt);
    const hasRevive=(words,txt)=>words.has('revive')||/\brevive\b/i.test(txt);
    const riceVsDrink=(hasRice(sourceWords,name+' '+spec)&&hasRevive(masterWords,m.name))||(hasRevive(sourceWords,name+' '+spec)&&hasRice(masterWords,m.name));
-   if(familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<1)continue;
+   if(brandUncertain(name,m.name)||familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<2)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const variantBonus=hasExplicitVariant(name)&&!variantMissing(name,m.name)?.25:0;
    const rank=score+variantBonus-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
@@ -3320,16 +3320,30 @@ function exportAutoFill(){
  const wsCompare=makeSheet(compareRows,[10,22,58,22,64,16],'4472C4');
  const wsCatalog=makeSheet(catalogRows,(catalogRows[0]||[]).map((h,i)=>Math.min(60,Math.max(14,String(h??'').length+8,i===1?42:14))),'548235');
  const wsFinal=makeSheet(finalRows,[12,22,64],'4472C4');
- // Excel formulas stay visible in the formula bar and look up the selected SKU in the exported catalog.
- const catalogSkuIndex=Math.max(0,masterHeaders.indexOf(skuCol));
- const catalogNameIndex=Math.max(0,masterHeaders.indexOf(nameCol));
+ // Công thức Excel tra cứu theo SKU đã chọn trong danh mục được Duplicate.
+ // Dùng INDEX/MATCH tương thích Excel; không ghi kết quả tra cứu thành giá trị tĩnh.
+ const catalogSkuIndex=masterHeaders.indexOf(skuCol);
+ const catalogNameIndex=masterHeaders.indexOf(nameCol);
  const catalogUnitIndex=unitCol?masterHeaders.indexOf(unitCol):-1;
+ if(catalogSkuIndex<0||catalogNameIndex<0)throw new Error('Không xác định được cột SKU/tên trong danh mục xuất.');
  const catalogSkuLetter=XLSX.utils.encode_col(catalogSkuIndex);
  const catalogNameLetter=XLSX.utils.encode_col(catalogNameIndex);
  const catalogUnitLetter=catalogUnitIndex>=0?XLSX.utils.encode_col(catalogUnitIndex):'';
+ const catalogLastRow=Math.max(2,catalogRows.length);
+ const catalogSkuRange="'DanhSachSanPham'!$"+catalogSkuLetter+"$2:$"+catalogSkuLetter+"$"+catalogLastRow;
+ const lookupFormula=(returnLetter,rr)=>'IF(B'+rr+'="","",IFERROR(INDEX(\\'DanhSachSanPham\\'!$'+returnLetter+'$2:$'+returnLetter+'$'+catalogLastRow+',MATCH(B'+rr+','+catalogSkuRange+',0)),""))';
  for(let rr=2;rr<=compareRows.length;rr++){
-  const skuCell='B'+rr;
-  const formulaCell=(col,letter)=>{if(!letter)return;const addr=col+rr;wsCompare[addr]={t:'str',f:'IFERROR(INDEX(\'DanhSachSanPham\'!
+  const setFormula=(address,formula,cached)=>{
+   wsCompare[address]={t:'str',f:formula,v:String(cached??'')};
+  };
+  setFormula('D'+rr,lookupFormula(catalogSkuLetter,rr),compareRows[rr-1][3]);
+  setFormula('E'+rr,lookupFormula(catalogNameLetter,rr),compareRows[rr-1][4]);
+  if(catalogUnitLetter)setFormula('F'+rr,lookupFormula(catalogUnitLetter,rr),compareRows[rr-1][5]);
+  const finalSkuFormula='IF(\\'bảng đối chiếu\\'!D'+rr+'="","",\\'bảng đối chiếu\\'!D'+rr+')';
+  const finalNameFormula='IF(\\'bảng đối chiếu\\'!E'+rr+'="","",\\'bảng đối chiếu\\'!E'+rr+')';
+  wsFinal['B'+rr]={t:'str',f:finalSkuFormula,v:String(finalRows[rr-1][1]??'')};
+  wsFinal['C'+rr]={t:'str',f:finalNameFormula,v:String(finalRows[rr-1][2]??'')};
+ }
  [wsOriginal,wsCompare,wsCatalog,wsFinal].forEach(ws=>{ws['!margins']={left:0.25,right:0.25,top:0.5,bottom:0.5,header:0.2,footer:0.2}});
  XLSX.utils.book_append_sheet(wb,wsOriginal,'gốc');
  XLSX.utils.book_append_sheet(wb,wsCompare,'bảng đối chiếu');
