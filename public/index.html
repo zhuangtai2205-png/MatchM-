@@ -3292,7 +3292,7 @@ function exportAutoFill(){
   const chosen=masterFor(x,finalSku);
   originalRows.push([String(stt??x.sourceIndex),originalSku,String(x.name||'')]);
   compareRows.push([String(stt??x.sourceIndex),finalSku,String(x.name||''),chosen?String(chosen.sku||''):'',chosen?String(chosen.name||''):'',chosen?String(chosen.unit||''):'']);
-  finalRows.push([String(stt??x.sourceIndex),finalSku,String(x.name||'')]);
+  finalRows.push([String(stt??x.sourceIndex),chosen?String(chosen.sku||''):finalSku,chosen?String(chosen.name||''):'']);
  });
  const catalogRows=[masterHeaders.length?masterHeaders.slice():Object.keys(masterRows[0]||{})];
  masterRows.forEach(r=>catalogRows.push(catalogRows[0].map(h=>r[h]??'')));
@@ -3854,6 +3854,8 @@ function brandIdentity(value){
  if(set.has('metacare'))return 'metacare';
  if(set.has('nepro'))return 'nepro';
  if(set.has('nutifood')||set.has('nuti')||set.has('growplus')||set.has('grow_plus'))return 'nutifood';
+ if(set.has('nutren'))return 'nutren';
+ if(set.has('glucerna'))return 'glucerna';
  if(set.has('abbott'))return 'abbott';
  if(set.has('pediasure'))return 'pediasure';
  if(set.has('ensure'))return 'ensure';
