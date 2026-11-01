@@ -2404,41 +2404,29 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
   <p class="calculator-help" data-i18n="calculatorHint">Có thể bấm phím số, + − × ÷, Enter và Backspace trên bàn phím.</p>
  </div>
 </aside><div class="shell app-shell"><aside class="sidebar" id="appSidebar">
- <div class="sidebar-topline"><span class="sidebar-section-heading" data-i18n="navSectionTitle">KHÔNG GIAN LÀM VIỆC</span><button type="button" class="sidebar-toggle" id="sidebarCollapseToggle" aria-label="Thu gọn thanh menu" aria-expanded="true" title="Thu gọn thanh menu">‹</button></div>
- <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản" title="Tài khoản">
-  <span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span>
- </button>
- <button class="navbtn active" data-page="intro" title="Giới thiệu & hướng dẫn"><span class="navicon" aria-hidden="true">ⓘ</span><span data-i18n="navIntro">Giới thiệu & hướng dẫn</span></button>
- <button class="navbtn" data-page="overview" title="Tổng quan"><span class="navicon" aria-hidden="true"></span><span data-i18n="navOverview">Tổng quan</span></button>
- <button class="navbtn" data-page="workspace" title="Không gian của tôi"><span class="navicon" aria-hidden="true">▣</span><span>Không gian của tôi</span></button>
- <details class="nav-folder" data-nav-group="catalog" open>
-  <summary class="navfolder-title"><span data-i18n="navGroupCatalog">DANH MỤC & BỘ NHỚ</span><span class="folder-chevron">⌄</span></summary>
-  <div class="nav-folder-items">
-   <button class="navbtn" data-page="catalog" title="Danh mục chuẩn"><span class="navicon" aria-hidden="true"></span><span data-i18n="navCatalog">Danh mục chuẩn</span></button>
-   <button class="navbtn" data-page="memory" title="Bộ nhớ xác nhận"><span class="navicon" aria-hidden="true"></span><span data-i18n="navMemory">Bộ nhớ xác nhận</span></button>
-  </div>
- </details>
- <details class="nav-folder" data-nav-group="matching" open>
-  <summary class="navfolder-title"><span data-i18n="navGroupMatch">SO KHỚP SẢN PHẨM</span><span class="folder-chevron">⌄</span></summary>
-  <div class="nav-folder-items">
-   <button class="navbtn" data-page="run" title="Rà soát dữ liệu"><span class="navicon" aria-hidden="true"></span><span data-i18n="navRun">Rà soát dữ liệu</span></button>
-   <button class="navbtn" data-page="results" title="Kết quả đối chiếu"><span class="navicon" aria-hidden="true"></span><span data-i18n="navResults">Kết quả đối chiếu</span></button>
-  </div>
- </details>
- <details class="nav-folder" data-nav-group="tools" open>
-  <summary class="navfolder-title"><span data-i18n="navGroupTools">TRA CỨU & ĐIỀN MÃ</span><span class="folder-chevron">⌄</span></summary>
-  <div class="nav-folder-items">
-   <button class="navbtn" data-page="platforms" title="Kiểm tra trên sàn"><span class="navicon" aria-hidden="true"></span><span data-i18n="navPlatforms">Kiểm tra trên sàn</span></button>
-   <button class="navbtn" data-page="autofill" title="Điền mã từ file gốc"><span class="navicon" aria-hidden="true"></span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
-  </div>
- </details>
- <button class="navbtn" data-page="debitcredit" title="Dò Nợ Có"><span class="navicon" aria-hidden="true">⇄</span><span>Dò Nợ Có</span></button>
- <button class="navbtn" data-page="invoicecompare" title="So sánh hóa đơn"><span class="navicon" aria-hidden="true"></span><span>So sánh 2 file hóa đơn</span></button> <button class="navbtn" data-page="stockforecast" title="Dự báo tồn kho"><span class="navicon" aria-hidden="true"></span><span data-i18n="navStockForecast">Dự báo tồn kho</span></button>
- <div class="sidebar-bottom">
-  <button class="navbtn" data-page="settings" title="Cài đặt"><span class="navicon" aria-hidden="true"></span><span data-i18n="navSettings">Cài đặt</span></button>
-  
-  <details class="sidebar-help"><summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary><div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div></details>
- </div>
+ <div class="sidebar-topline"><span class="sidebar-section-heading">MENU CHÍNH</span><button type="button" class="sidebar-toggle" id="sidebarCollapseToggle" aria-label="Thu gọn thanh menu" aria-expanded="true" title="Thu gọn thanh menu">‹</button></div>
+ <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản" title="Tài khoản"><span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span></button>
+ <div class="nav-group-label">BẮT ĐẦU</div>
+ <button class="navbtn active" data-page="intro" title="Giới thiệu & hướng dẫn"><span class="navicon">ⓘ</span><span data-i18n="navIntro">Giới thiệu & hướng dẫn</span></button>
+ <button class="navbtn" data-page="overview" title="Tổng quan"><span class="navicon">⌂</span><span data-i18n="navOverview">Tổng quan</span></button>
+ <button class="navbtn" data-page="workspace" title="Không gian của tôi"><span class="navicon">▣</span><span>Không gian của tôi</span></button>
+ <details class="nav-folder" data-nav-group="data" open><summary class="navfolder-title"><span>DỮ LIỆU & DANH MỤC</span><span class="folder-chevron">⌄</span></summary><div class="nav-folder-items">
+  <button class="navbtn" data-page="catalog" title="Danh mục chuẩn"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục chuẩn</span></button>
+  <button class="navbtn" data-page="memory" title="Bộ nhớ xác nhận"><span class="navicon">▧</span><span data-i18n="navMemory">Bộ nhớ xác nhận</span></button>
+ </div></details>
+ <details class="nav-folder" data-nav-group="reconcile" open><summary class="navfolder-title"><span>ĐỐI CHIẾU & KẾT QUẢ</span><span class="folder-chevron">⌄</span></summary><div class="nav-folder-items">
+  <button class="navbtn" data-page="run" title="Rà soát dữ liệu"><span class="navicon">⌕</span><span data-i18n="navRun">Rà soát dữ liệu</span></button>
+  <button class="navbtn" data-page="results" title="Kết quả đối chiếu"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả đối chiếu</span></button>
+  <button class="navbtn" data-page="debitcredit" title="Dò Nợ Có"><span class="navicon">⇄</span><span>Dò Nợ Có</span></button>
+  <button class="navbtn" data-page="invoicecompare" title="So sánh 2 file hóa đơn"><span class="navicon">⇆</span><span>So sánh 2 file hóa đơn</span></button>
+ </div></details>
+ <details class="nav-folder" data-nav-group="tools" open><summary class="navfolder-title"><span>CÔNG CỤ HỖ TRỢ</span><span class="folder-chevron">⌄</span></summary><div class="nav-folder-items">
+  <button class="navbtn" data-page="platforms" title="Kiểm tra trên sàn"><span class="navicon">⌖</span><span data-i18n="navPlatforms">Kiểm tra trên sàn</span></button>
+  <button class="navbtn" data-page="autofill" title="Điền mã từ file gốc"><span class="navicon">✎</span><span data-i18n="navAutoFill">Điền mã từ file gốc</span></button>
+  <button class="navbtn" data-page="stockforecast" title="Dự báo tồn kho"><span class="navicon">▥</span><span data-i18n="navStockForecast">Dự báo tồn kho</span></button>
+ </div></details>
+ <div class="sidebar-bottom"><button class="navbtn" data-page="settings" title="Cài đặt"><span class="navicon">⚙</span><span data-i18n="navSettings">Cài đặt</span></button>
+ <details class="sidebar-help"><summary><span class="help-question">?</span><span data-i18n="helpTitle">Trợ giúp & quy tắc</span></summary><div class="sidebar-help-content"><p data-i18n="sideNote">Mã/SKU trống trong danh mục chuẩn sẽ không bao giờ được đưa vào ứng viên ghép.</p><p data-i18n="helpDesc">Hãy kiểm tra cột, quy cách và đơn vị trước khi xác nhận kết quả.</p><button type="button" class="btn alt" data-goto="settings" data-i18n="helpOpenSettings">Mở cài đặt →</button></div></details></div>
 </aside>
 <main class="main">
  <div class="mm-ai-disclaimer" role="note"><strong>⚠ Lưu ý về AI:</strong> MatchMã có thể sử dụng thuật toán và gợi ý tự động/AI để hỗ trợ đối chiếu. Kết quả không bảo đảm chính xác tuyệt đối, không thay thế kiểm tra nghiệp vụ. Hãy xác minh SKU/mã hàng, tên, quy cách, dung tích, đơn vị và thuộc tính mâu thuẫn trước khi xác nhận hoặc xuất dữ liệu.</div>
@@ -5452,6 +5440,30 @@ body[data-theme="retro"] #appSidebar,body[data-theme="retro"] .main .page,body[d
  #appSidebar.sidebar{backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important}
 }
 @media(prefers-reduced-motion:reduce){.navbtn,.sidebar-account-shortcut,.toolbar-select,.toolbar-font button{transition:none!important}}
+</style>
+
+
+<style id="matchma-menu-groups-theme-art">
+/* Clear navigation hierarchy */
+#appSidebar .nav-group-label{font-size:10px;font-weight:800;letter-spacing:.12em;color:var(--muted,#87999e);padding:12px 10px 4px;margin-top:3px}
+#appSidebar .nav-folder{margin:5px 0!important;padding:5px!important;border:1px solid rgba(130,160,170,.12)!important;border-radius:15px!important;background:rgba(255,255,255,.26)!important}
+#appSidebar .navfolder-title{font-size:11px!important;font-weight:800!important;letter-spacing:.045em!important;padding:8px 9px!important}
+#appSidebar .nav-folder-items{display:grid!important;gap:3px!important;padding:3px 0 2px 5px!important}
+#appSidebar .nav-folder-items .navbtn{min-height:37px!important}
+#appSidebar .sidebar-bottom{margin-top:auto!important;padding-top:12px!important}
+#appSidebar .navbtn{min-height:39px!important}
+#appSidebar .nav-group-label{transition:opacity .15s}
+.app-shell.sidebar-collapsed #appSidebar .nav-group-label{display:none!important}
+/* Subtle theme watermark art behind the glass panels, never over controls. */
+body[data-theme]::after{position:fixed!important;z-index:0!important;pointer-events:none!important;inset:auto 2vw 2vh auto!important;width:min(34vw,420px)!important;height:min(34vw,420px)!important;display:grid!important;place-items:center!important;font-size:clamp(130px,24vw,330px)!important;line-height:1!important;opacity:.055!important;filter:saturate(.55)!important;content:"✧"!important}
+body[data-theme="ocean"]::after{content:"〰"!important;color:#4aabbc!important}
+body[data-theme="pink"]::after{content:"🌸"!important;opacity:.07!important}
+body[data-theme="cat"]::after{content:"🐾"!important;opacity:.055!important}
+body[data-theme="forest"]::after,body[data-theme="bear"]::after{content:"🌿"!important;color:#6c9a70!important}
+body[data-theme="vampire"]::after{content:"☾"!important;color:#78658f!important}
+body[data-theme="retro"]::after{content:"✳"!important;color:#858585!important}
+body[data-theme="minimal"]::after{content:"◌"!important;color:#91a4a7!important}
+@media(max-width:760px){body[data-theme]::after{font-size:160px!important;opacity:.035!important}}
 </style>
 
 </body></html>
