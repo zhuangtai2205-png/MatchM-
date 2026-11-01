@@ -3230,7 +3230,7 @@ function runAutoFill(){
    const hasRice=(words,txt)=>['com','com_trang','gao','gao_nep','gao_trang'].some(t=>words.has(t))||/cơm\s+trắng|com\s+trang|gạo\s+trắng|gao\s+trang/i.test(txt);
    const hasRevive=(words,txt)=>words.has('revive')||/\brevive\b/i.test(txt);
    const riceVsDrink=(hasRice(sourceWords,name+' '+spec)&&hasRevive(masterWords,m.name))||(hasRevive(sourceWords,name+' '+spec)&&hasRice(masterWords,m.name));
-   if(familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||evidence<1)continue;
+   if(familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<1)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const variantBonus=hasExplicitVariant(name)&&!variantMissing(name,m.name)?.25:0;
    const rank=score+variantBonus-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
@@ -3781,6 +3781,11 @@ function getMeasureMap(value){
  const packRe=/\b(\d+(?:\.\d+)?)\s*(lon|can|chai|bottle|hop|box|thung|carton|goi|pack|tui|bag|vi|blister|cai|chiec|pcs|piece|cuon|roll)\b/g;
  while((m=packRe.exec(s))!==null)push('pack:'+unitGroup(m[2]),parseFloat(m[1]));
  return map;
+}
+function incompatibleMeasureType(a,b){
+ const A=getMeasureMap(a),B=getMeasureMap(b);
+ // Chặn ghép khác bản chất quy cách: dung tích ml/l không thể ghép với khối lượng g/kg.
+ return (A.volume&&B.weight&&!B.volume)||(A.weight&&B.volume&&!B.weight);
 }
 function measureConflict(a,b){
  const A=getMeasureMap(a),B=getMeasureMap(b);
