@@ -3230,7 +3230,7 @@ function runAutoFill(){
    const hasRice=(words,txt)=>['com','com_trang','gao','gao_nep','gao_trang'].some(t=>words.has(t))||/cơm\s+trắng|com\s+trang|gạo\s+trắng|gao\s+trang/i.test(txt);
    const hasRevive=(words,txt)=>words.has('revive')||/\brevive\b/i.test(txt);
    const riceVsDrink=(hasRice(sourceWords,name+' '+spec)&&hasRevive(masterWords,m.name))||(hasRevive(sourceWords,name+' '+spec)&&hasRice(masterWords,m.name));
-   if(familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<1)continue;
+   if(familyConflict||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<1)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const variantBonus=hasExplicitVariant(name)&&!variantMissing(name,m.name)?.25:0;
    const rank=score+variantBonus-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
@@ -3667,7 +3667,7 @@ function norm(s){
  const dairyContext=/\b(sua|vnm|vinamil|milk|cnm)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ').replace(/\b(k\s*\.?\s*d|kd)\b/g,' khong_duong ');
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
- t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
+ t=t.replace(/\b(\d+)\s*\+(?=\s|$|[^a-z0-9_])/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
   .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|nangrow|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b(?![.,]\d)/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
  // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
@@ -3915,7 +3915,7 @@ async function runMatch(){
     // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
     const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens);
     const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
-    if(exactSku&&(hardVariantConflict||hardSizeConflict))continue;
+    if(hardVariantConflict||variantMissing(queryName,m.name)||hardSizeConflict)continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
     const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(queryName)==='th'&&/\b(true|milk)\b/.test(norm(queryName+' '+m.name))?1:0;
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
@@ -3927,7 +3927,8 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=(familyConflict||hardVariantConflict)?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    if(familyConflict)continue;
+    const rank=nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
@@ -5158,7 +5159,7 @@ function norm(s){
  const dairyContext=/\b(sua|vnm|vinamil|milk|cnm)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ').replace(/\b(k\s*\.?\s*d|kd)\b/g,' khong_duong ');
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
- t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
+ t=t.replace(/\b(\d+)\s*\+(?=\s|$|[^a-z0-9_])/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
   .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|nangrow|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b(?![.,]\d)/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
  // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
@@ -5406,7 +5407,7 @@ async function runMatch(){
     // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
     const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens);
     const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
-    if(exactSku&&(hardVariantConflict||hardSizeConflict))continue;
+    if(hardVariantConflict||variantMissing(queryName,m.name)||hardSizeConflict)continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
     const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(queryName)==='th'&&/\b(true|milk)\b/.test(norm(queryName+' '+m.name))?1:0;
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
@@ -5418,7 +5419,8 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=(familyConflict||hardVariantConflict)?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    if(familyConflict)continue;
+    const rank=nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
@@ -6649,7 +6651,7 @@ function norm(s){
  const dairyContext=/\b(sua|vnm|vinamil|milk|cnm)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ').replace(/\b(k\s*\.?\s*d|kd)\b/g,' khong_duong ');
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
- t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
+ t=t.replace(/\b(\d+)\s*\+(?=\s|$|[^a-z0-9_])/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
   .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|nangrow|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b(?![.,]\d)/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
  // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
@@ -6897,7 +6899,7 @@ async function runMatch(){
     // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
     const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens);
     const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
-    if(exactSku&&(hardVariantConflict||hardSizeConflict))continue;
+    if(hardVariantConflict||variantMissing(queryName,m.name)||hardSizeConflict)continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
     const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(queryName)==='th'&&/\b(true|milk)\b/.test(norm(queryName+' '+m.name))?1:0;
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
@@ -6909,7 +6911,8 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=(familyConflict||hardVariantConflict)?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    if(familyConflict)continue;
+    const rank=nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
@@ -8140,7 +8143,7 @@ function norm(s){
  const dairyContext=/\b(sua|vnm|vinamil|milk|cnm)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ').replace(/\b(k\s*\.?\s*d|kd)\b/g,' khong_duong ');
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
- t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
+ t=t.replace(/\b(\d+)\s*\+(?=\s|$|[^a-z0-9_])/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
   .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|nangrow|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b(?![.,]\d)/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
  // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
@@ -8388,7 +8391,7 @@ async function runMatch(){
     // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
     const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens);
     const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
-    if(exactSku&&(hardVariantConflict||hardSizeConflict))continue;
+    if(hardVariantConflict||variantMissing(queryName,m.name)||hardSizeConflict)continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
     const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(queryName)==='th'&&/\b(true|milk)\b/.test(norm(queryName+' '+m.name))?1:0;
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
@@ -8400,7 +8403,8 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=(familyConflict||hardVariantConflict)?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    if(familyConflict)continue;
+    const rank=nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
@@ -9637,7 +9641,7 @@ function norm(s){
  const dairyContext=/\b(sua|vnm|vinamil|milk|cnm)\b/.test(t);
  if(dairyContext)t=t.replace(/\b(c\s*\.?\s*d|cd)\b/g,' co_duong ').replace(/\b(k\s*\.?\s*d|kd)\b/g,' khong_duong ');
  // Chuẩn hóa giai đoạn/đời sản phẩm trước khi bỏ dấu câu: 0+, 1+, 2+, 0-1 tuổi, Alpha 2...
- t=t.replace(/\b(\d+)\s*\+\b/g,' stage_$1 ')
+ t=t.replace(/\b(\d+)\s*\+(?=\s|$|[^a-z0-9_])/g,' stage_$1 ')
   .replace(/\b(\d+)\s*[-–]\s*(\d+)\s*(?:tuoi|thang|year|years|y)?\b/g,' stage_$1_$2 ')
   .replace(/\b(alpha|optipro(?:\s+plus)?|grow\s*plus|growplus|nangrow|colos(?:\w+)?|colostrum|immunel|nepro|sang\s+tao|nan\s+optipro\s+plus)\s+(\d+)\b(?![.,]\d)/g,(_,line,n)=>' '+line.replace(/\s+/g,'_')+' stage_'+n+' ');
  // Chuẩn hóa màu sắc thường dùng như biến thể sản phẩm.
@@ -9885,7 +9889,7 @@ async function runMatch(){
     // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
     const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens);
     const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
-    if(exactSku&&(hardVariantConflict||hardSizeConflict))continue;
+    if(hardVariantConflict||variantMissing(queryName,m.name)||hardSizeConflict)continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
     const familyA=productFamily(queryNameTokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(queryName)==='th'&&/\b(true|milk)\b/.test(norm(queryName+' '+m.name))?1:0;
     const evidence=sharedEvidence(queryNameTokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
@@ -9897,7 +9901,8 @@ async function runMatch(){
     const pConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     const skuMismatch=!!querySku&&normalizeSku(querySku)!==normalizeSku(m.code);
     const memorySuggestion=savedMemory.some(x=>x.key===pairKey(queryName)&&normalizeSku(x.sku)===normalizeSku(m.code));
-    const rank=(familyConflict||hardVariantConflict)?-1:nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
+    if(familyConflict)continue;
+    const rank=nameScore+(exactSku?1.5:0)-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
     if(rank>bestRank) {bestRank=rank;best={m,score:nameScore,evidence,exactSku,familyConflict,conflict:attributeConflict,unitConflict:uConflict,packConflict:pConflict,skuMismatch,memorySuggestion}}
    }
    const eligibleMatch=!!(best&&(best.exactSku||best.score>=.45)&&!best.familyConflict);
