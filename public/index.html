@@ -3739,6 +3739,11 @@ function variantConflict(a,b){
   const right=group.findIndex(alias=>alias.some(t=>B.has(t)));
   if(left>=0&&right>=0&&left!==right)return true;
  }
+ // Explicit formula-milk variants/lines must not collapse because their barcode is shared.
+ const colostrumA=A.has('colostrum'),colostrumB=B.has('colostrum');
+ if(colostrumA!==colostrumB && (A.has('metacare')||B.has('metacare')))return true;
+ const totalProtectionA=A.has('total')&&A.has('protection'),totalProtectionB=B.has('total')&&B.has('protection');
+ if(totalProtectionA!==totalProtectionB && (A.has('similac')||B.has('similac')))return true;
  // Ensure product lines are distinct: Ensure Gold is not Ensure Vanilla/Original.
  const ensureA=brandIdentity(a.join(' '))==='ensure',ensureB=brandIdentity(b.join(' '))==='ensure';
  if(ensureA&&ensureB){
@@ -3834,7 +3839,12 @@ function productLineKey(value){
   ['enfamil_neuropro',/\benfamil\s+(?:a\s+)?neuropro\b/],
   ['ensure_gold',/\bensure\s+gold\b/],
   ['growplus_sn',/\bgrowplus\s+sn\b|\bgrow\s+plus\s+sn\b/],
-  ['dielac_growplus',/\bdielac\s+growplus\b/]
+  ['dielac_growplus',/\bdielac\s+growplus\b/],
+  ['metacare_colostrum',/\bmetacare\b.*\bcolostrum\b|\bcolostrum\b.*\bmetacare\b/],
+  ['metacare_standard',/\bmetacare\b/],
+  ['similac_total_protection',/\bsimilac\b.*\btotal\s+protection\b|\btotal\s+protection\b.*\bsimilac\b/],
+  ['similac_standard',/\bsimilac\b/],
+  ['enfagrow_neuropro',/\benfagrow\b.*\bneuropro\b/]
  ];
  for(const [key,re] of rules)if(re.test(t))return key;
  return '';
@@ -3846,6 +3856,9 @@ function productStage(value){
  t=t.replace(/\b\d+(?:\.\d+)?\s*(?:g|kg|ml|l)\b/g,' ');
  t=t.replace(/\b\d+\s*[x×]\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l)?\b/g,' ');
  t=t.replace(/\b\d+\s*(?:hop|thung|carton|box|chai|lon|pack)\b/g,' ');
+ // Enfagrow A+ NeuroPro uses an un-suffixed stage number (3/4), not "Stage 3".
+ const enfagrow=[...t.matchAll(/\benfagrow(?:_a)?_neuropro\s+([1-4])\b/g)].map(m=>m[1]);
+ if(enfagrow.length)return enfagrow[enfagrow.length-1];
  const tagged=[...t.matchAll(/\bstage_([1-4])\b/g)].map(m=>m[1]);
  if(tagged.length)return tagged[tagged.length-1];
  const plain=[...t.matchAll(/\b([1-4])\b/g)].map(m=>m[1]);
