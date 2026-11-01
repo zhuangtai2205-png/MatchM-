@@ -5502,4 +5502,42 @@ body[data-theme="minimal"]::after{content:"◌"!important;color:#91a4a7!importan
  .app-shell.shell{width:100%!important;max-width:none!important;margin:0!important}
 }
 </style>
+
+<style id="matchma-header-fullbleed-20261101">
+/* Restore a full-bleed, clearly separated header band like the original layout. */
+@media (min-width:761px){
+ html,body{width:100%!important;max-width:none!important;margin:0!important}
+ header.app-header{
+  display:flex!important;
+  width:100%!important;max-width:none!important;
+  min-height:88px!important;
+  margin:0!important;
+  padding:10px 26px!important;
+  box-sizing:border-box!important;
+  background:rgba(255,255,255,.82)!important;
+  border:0!important;
+  border-bottom:2px solid rgba(125,155,150,.34)!important;
+  border-radius:0!important;
+  box-shadow:0 3px 14px rgba(60,85,80,.06)!important;
+  backdrop-filter:blur(16px) saturate(120%)!important;
+  -webkit-backdrop-filter:blur(16px) saturate(120%)!important;
+ }
+ .app-shell.shell{
+  width:100%!important;max-width:none!important;
+  margin:0!important;padding:0 24px 30px!important;
+  grid-template-columns:minmax(0,250px) minmax(0,1fr)!important;
+ }
+ .app-shell.shell.sidebar-collapsed{
+  grid-template-columns:minmax(0,62px) minmax(0,1fr)!important;
+ }
+}
+@media(max-width:760px){
+ header.app-header{
+  width:100%!important;max-width:none!important;margin:0!important;
+  background:rgba(255,255,255,.84)!important;
+  border:0!important;border-bottom:1px solid rgba(125,155,150,.3)!important;
+  border-radius:0!important;
+ }
+}
+</style>
 </body></html>
