@@ -3331,7 +3331,7 @@ function exportAutoFill(){
  const catalogUnitLetter=catalogUnitIndex>=0?XLSX.utils.encode_col(catalogUnitIndex):'';
  const catalogLastRow=Math.max(2,catalogRows.length);
  const catalogSkuRange="'DanhSachSanPham'!$"+catalogSkuLetter+"$2:$"+catalogSkuLetter+"$"+catalogLastRow;
- const lookupFormula=(returnLetter,rr)=>`IF(B${rr}="","",IFERROR(INDEX('DanhSachSanPham'!${returnLetter}$2:${returnLetter}${catalogLastRow},MATCH(B${rr},${catalogSkuRange},0)),""))`;
+ const lookupFormula=(returnLetter,rr)=>`IF(B${rr}="","",IFERROR(INDEX('DanhSachSanPham'!$${returnLetter}$2:$${returnLetter}$${catalogLastRow},MATCH(B${rr},${catalogSkuRange},0)),""))`;
  for(let rr=2;rr<=compareRows.length;rr++){
   const setFormula=(address,formula,cached)=>{
    wsCompare[address]={t:'str',f:formula,v:String(cached??'')};
