@@ -5652,4 +5652,28 @@ body[data-theme="bear"],body[data-theme="forest"] #appSidebar .navicon::after{fi
 body[data-theme="vampire"] #appSidebar .navicon::after{filter:hue-rotate(255deg) saturate(.8) drop-shadow(0 2px 2px #8d6ca655)!important}
 body[data-theme="retro"] #appSidebar .navicon::after{filter:grayscale(1) contrast(1.1)!important}
 body[data-theme="minimal"] #appSidebar .navicon::after{filter:saturate(.55)!important}
+</style><style id="matchma-single-menu-icon-cleanup">
+/* One icon only: suppress legacy text glyphs, theme decorations and duplicated pseudo icons. */
+#appSidebar .navbtn::before,#appSidebar .navbtn::after,
+#appSidebar .navicon::before{content:none!important;display:none!important;background:none!important}
+#appSidebar .navicon{
+ position:relative!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;
+ width:34px!important;height:34px!important;min-width:34px!important;flex:0 0 34px!important;
+ margin:0 9px 0 0!important;padding:0!important;overflow:visible!important;
+ color:transparent!important;font-size:0!important;line-height:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+#appSidebar .navicon > *{display:none!important}
+#appSidebar .navicon::after{
+ content:""!important;display:block!important;position:absolute!important;inset:1px!important;
+ width:32px!important;height:32px!important;margin:auto!important;
+ background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;
+ font-size:0!important;line-height:0!important;
+}
+#appSidebar .navbtn{display:flex!important;align-items:center!important;min-height:46px!important;gap:0!important}
+#appSidebar .navbtn>span:not(.navicon){display:inline-flex!important;align-items:center!important;min-width:0!important}
+#appSidebar .navfolder-title::before{content:none!important;display:none!important}
+#appSidebar .navfolder-title{gap:0!important}
+#appSidebar .navbtn:hover .navicon{transform:translateY(-1px)!important}
+#appSidebar .navbtn.active .navicon{transform:scale(1.04)!important}
 </style></body></html>
