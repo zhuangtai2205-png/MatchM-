@@ -2226,7 +2226,7 @@ table td,table th{border-color:#eceaf0}
 input,select,textarea{border-color:#e3e0e9}
 input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);border-color:#aaa4c8}
 @media(max-width:760px){.resulttools input.search,.resulttools select{flex:1 1 100%;min-width:0;max-width:none}#resultCount{margin-left:0}.filterbox{padding:10px}.app-shell.shell{gap:12px!important}}
-</style><link rel="stylesheet" href="/social.css?v=23"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
+</style><link rel="stylesheet" href="/social.css?v=23"><link rel="stylesheet" href="/matchma-themes.css?v=1"></head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
   <span class="brand-mark" aria-label="Logo MatchMã" role="img"><img class="brand-logo-img" src="/matchma-logo.png?v=50" alt="Logo MatchMã"></span>
@@ -2237,7 +2237,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
  </div>
  <div class="headright">
   <span class="local-pill"><i></i><span data-i18n="privateNote">Xử lý file ngay trên trình duyệt</span></span>
-  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="ocean" data-i18n="themeOcean">🌊 Biển xanh</option><option value="retro" data-i18n="themeRetro">◼ Đen trắng retro</option><option value="pink" data-i18n="themePink">🌸 Hồng Sakura</option><option value="vampire" data-i18n="themeVampire">🦇 Vampire</option><option value="cat" data-i18n="themeCat">🐱 Mèo</option><option value="bear">🐻 Gấu rừng</option><option value="minimal">◻ Tối giản</option></select></label>
+  <label class="toolbar-select theme-pick" title="Chọn giao diện"><span aria-hidden="true">✿</span><select id="themeSelect" aria-label="Chọn giao diện"><option value="sakura">🌸 01. Hồng Sakura</option><option value="sky">☁️ 02. Xanh Mây</option><option value="lavender">💜 03. Tím Lavender</option><option value="mint">🍃 04. Xanh Mint</option><option value="peach">🌅 05. Đào Hoàng Hôn</option><option value="autumn">🍁 06. Thu Lá Phong</option><option value="candysea">🌊 07. Biển Kẹo Ngọt</option><option value="galaxy">🌙 08. Đêm Ngân Hà</option><option value="rainbow">🌈 09. Cầu Vồng</option><option value="kitty">🐱 10. MatchMã Kitty</option></select></label>
   <div class="toolbar-font" role="group" aria-label="Font size"><button type="button" id="fontDown" title="Giảm cỡ chữ" aria-label="Giảm cỡ chữ">A−</button><button type="button" id="fontReset" title="Cỡ chữ mặc định" aria-label="Cỡ chữ mặc định" aria-pressed="true">A</button><button type="button" id="fontUp" title="Tăng cỡ chữ" aria-label="Tăng cỡ chữ">A+</button></div>
   <label class="toolbar-select language-pick" title="Ngôn ngữ"><span aria-hidden="true">文</span><select id="quickLang" aria-label="Language"><option value="vi">🇻🇳 Tiếng Việt</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="zh-TW">🇹🇼 繁體中文</option><option value="zh-CN">🇨🇳 简体中文</option></select></label>
 
@@ -3024,9 +3024,11 @@ function themeDoodleSvg(theme,index=0){
   '<path d="M7 13 L16 8 L19 18 L29 18 L32 8 L41 13 L39 33 Q24 43 9 33Z" fill="#9fbc7d" stroke="#536e43"/><path d="M13 23 Q18 18 21 23 M27 23 Q30 18 35 23 M19 31 Q24 35 29 31" fill="none" stroke="#536e43"/>'
  ];
  const collection={ocean,retro,pink,vampire,cat,bear};
- const drawing=(collection[theme]||collection.ocean)[variant];
+ const themeAliases={sky:'ocean',candysea:'ocean',lavender:'pink',mint:'bear',peach:'pink',autumn:'bear',galaxy:'vampire',rainbow:'pink',kitty:'cat',sakura:'pink'};
+ const drawingTheme=themeAliases[theme]||theme;
+ const drawing=(collection[drawingTheme]||collection.ocean)[variant];
  const accents={ocean:'#277f9b',retro:'#4d514c',pink:'#b85d8d',vampire:'#d06b91',cat:'#966b58',bear:'#4d7950'};
- const accent=accents[theme]||accents.ocean;
+ const accent=accents[drawingTheme]||accents.ocean;
  return start+'<g transform="'+transform+'">'+drawing+'</g><path d="M5 5l2 2m34 34 2 2" fill="none" stroke="'+accent+'" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>'+end;
 }
 function themeFishSvg(index=0){
@@ -3041,7 +3043,8 @@ function updateThemeDecorations(theme){
   vampire:{overview:'🦇',intro:'🕸️',catalog:'🕸️',run:'🗡️',results:'🕯️',memory:'🦇',platforms:'🎃',autofill:'☠️',stockforecast:'🩸',account:'🦇',settings:'🕷️'},
   cat:{overview:'🐈',intro:'🐾',catalog:'🐟',run:'🐾',results:'🐈‍⬛',memory:'🧶',platforms:'🐠',autofill:'🦴',stockforecast:'🐟',account:'🐈',settings:'🐾'},forest:{overview:'🌲',intro:'🍃',catalog:'🐻',run:'🐾',results:'🍄',memory:'🍯',platforms:'🌿',autofill:'🌲',stockforecast:'🪵',account:'🐻',settings:'🍃'},minimal:{overview:'○',intro:'◌',catalog:'□',run:'↗',results:'✓',memory:'◇',platforms:'⌕',autofill:'↔',stockforecast:'▥',account:'○',settings:'⚙'},bear:{overview:'',intro:'🐾',catalog:'🐟',run:'',results:'🐾',memory:'🍯',platforms:'🐟',autofill:'🌲',stockforecast:'🐟',account:'',settings:'🍃'}
  };
- document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&iconMaps[theme][page]){icon.innerHTML=themeDoodleSvg(theme,Math.max(0,Object.keys(iconMaps[theme]).indexOf(page)));icon.setAttribute('aria-hidden','true')}});
+ const iconAliases={sakura:'pink',sky:'ocean',lavender:'pink',mint:'forest',peach:'pink',autumn:'forest',candysea:'ocean',galaxy:'vampire',rainbow:'pink',kitty:'cat'};const iconTheme=iconMaps[theme]?theme:(iconAliases[theme]||'ocean');const activeIcons=iconMaps[iconTheme]||iconMaps.ocean;
+ document.querySelectorAll('.navbtn').forEach(b=>{const icon=b.querySelector('.navicon'),page=b.dataset.page;if(icon&&page&&activeIcons[page]){icon.innerHTML=themeDoodleSvg(theme,Math.max(0,Object.keys(activeIcons).indexOf(page)));icon.setAttribute('aria-hidden','true')}});
  document.querySelectorAll('.intro-step-icon,.intro-guide-illustration,.intro-notice-art,.upload .bigicon,.tile-icon,.folder-icon,.summary-icon,.result-icon,[data-art-icon]').forEach((icon,i)=>{icon.innerHTML=themeDoodleSvg(theme,i+1);icon.setAttribute('aria-hidden','true')});
 
 }
@@ -3114,8 +3117,8 @@ function initCalculatorWidget(){
 /* Entertainment feature removed: no bear widget initializer. */
 
 const THEME_KEY='matchma-theme-v3';
-function applyTheme(name){const valid=['ocean','retro','pink','vampire','cat','forest','minimal','bear'].includes(name)?name:'ocean';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
-function initTheme(){let saved='forest';try{saved=localStorage.getItem(THEME_KEY)||'forest'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
+function applyTheme(name){const aliases={ocean:'candysea',retro:'autumn',pink:'sakura',vampire:'galaxy',cat:'kitty',forest:'mint',minimal:'lavender',bear:'kitty'};const requested=aliases[name]||name;const valid=['sakura','sky','lavender','mint','peach','autumn','candysea','galaxy','rainbow','kitty'].includes(requested)?requested:'sakura';document.body.dataset.theme=valid;if($('themeSelect'))$('themeSelect').value=valid;updateThemeDecorations(valid);updateThemeScene(valid);try{localStorage.setItem(THEME_KEY,valid)}catch(e){}}
+function initTheme(){let saved='sakura';try{saved=localStorage.getItem(THEME_KEY)||'sakura'}catch(e){}applyTheme(saved);$('themeSelect').addEventListener('change',e=>{applyTheme(e.target.value);if($('quickSettings'))$('quickSettings').open=false})}
 function guessStt(headers){return headers.find(x=>/^(stt|s\.?t\.?t\.?|no\.?|serial|số thứ tự|so thu tu|index|row id)$/i.test(String(x).trim()))||guess(headers,/\bstt\b|số thứ tự|so thu tu|serial number|^no\.?$/i)||''}
 function initPlatformAudit(){
  $('platformFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);platformSourceHeaders=d.headers;platformSourceRows=d.rows.map((row,i)=>({row:{...row},sourceIndex:i+1,status:'todo',sourceResults:[]}));platformPage=1;fillSelect('platformNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('platformIdCol',d.headers,guessStt(d.headers),true);$('platformFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng. STT/ID nguồn sẽ không bị chỉnh sửa.';$('buildPlatformAudit').disabled=!d.headers.length;$('runPlatformAudit').disabled=!d.headers.length;$('exportPlatformAudit').disabled=true;platformBuilt=false;renderPlatformAudit()}catch(err){alert(err.message||'Không đọc được file');}});
