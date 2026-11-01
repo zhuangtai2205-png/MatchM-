@@ -2407,15 +2407,15 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
  <div class="sidebar-topline"><span class="sidebar-section-heading">MENU CHÍNH</span><button type="button" class="sidebar-toggle" id="sidebarCollapseToggle" aria-label="Thu gọn thanh menu" aria-expanded="true" title="Thu gọn thanh menu">‹</button></div>
  <button class="sidebar-account-shortcut" id="sidebarAccountShortcut" type="button" data-page="account" aria-label="Mở tài khoản" title="Tài khoản"><span class="sidebar-avatar" id="sidebarAccountAvatar">♙</span><span class="sidebar-account-copy"><strong data-i18n="navAccount">Tài khoản</strong><small id="sidebarAccountName">Chưa đăng nhập</small></span><span class="sidebar-account-arrow">↗</span></button>
  <div class="nav-group-label">BẮT ĐẦU</div>
- <button class="navbtn active" data-page="intro" title="Giới thiệu & hướng dẫn"><span class="navicon">ⓘ</span><span data-i18n="navIntro">Giới thiệu & hướng dẫn</span></button>
- <button class="navbtn" data-page="overview" title="Tổng quan"><span class="navicon">⌂</span><span data-i18n="navOverview">Tổng quan</span></button>
- <button class="navbtn" data-page="workspace" title="Không gian của tôi"><span class="navicon">▣</span><span>Không gian của tôi</span></button>
+ <button class="navbtn active" data-page="intro" title="Giới thiệu & hướng dẫn"><span class="navicon" aria-hidden="true"></span><span data-i18n="navIntro">Giới thiệu & hướng dẫn</span></button>
+ <button class="navbtn" data-page="overview" title="Tổng quan"><span class="navicon" aria-hidden="true"></span><span data-i18n="navOverview">Tổng quan</span></button>
+ <button class="navbtn" data-page="workspace" title="Không gian của tôi"><span class="navicon" aria-hidden="true"></span><span>Không gian của tôi</span></button>
  <details class="nav-folder" data-nav-group="data" open><summary class="navfolder-title"><span>DỮ LIỆU & DANH MỤC</span><span class="folder-chevron">⌄</span></summary><div class="nav-folder-items">
-  <button class="navbtn" data-page="catalog" title="Danh mục chuẩn"><span class="navicon">▤</span><span data-i18n="navCatalog">Danh mục chuẩn</span></button>
-  <button class="navbtn" data-page="memory" title="Bộ nhớ xác nhận"><span class="navicon">▧</span><span data-i18n="navMemory">Bộ nhớ xác nhận</span></button>
+  <button class="navbtn" data-page="catalog" title="Danh mục chuẩn"><span class="navicon" aria-hidden="true"></span><span data-i18n="navCatalog">Danh mục chuẩn</span></button>
+  <button class="navbtn" data-page="memory" title="Bộ nhớ xác nhận"><span class="navicon" aria-hidden="true"></span><span data-i18n="navMemory">Bộ nhớ xác nhận</span></button>
  </div></details>
  <details class="nav-folder" data-nav-group="reconcile" open><summary class="navfolder-title"><span>ĐỐI CHIẾU & KẾT QUẢ</span><span class="folder-chevron">⌄</span></summary><div class="nav-folder-items">
-  <button class="navbtn" data-page="run" title="Rà soát dữ liệu"><span class="navicon">⌕</span><span data-i18n="navRun">Rà soát dữ liệu</span></button>
+  <button class="navbtn" data-page="run" title="Rà soát dữ liệu"><span class="navicon" aria-hidden="true"></span><span data-i18n="navRun">Rà soát dữ liệu</span></button>
   <button class="navbtn" data-page="results" title="Kết quả đối chiếu"><span class="navicon">☷</span><span data-i18n="navResults">Kết quả đối chiếu</span></button>
   <button class="navbtn" data-page="debitcredit" title="Dò Nợ Có"><span class="navicon">⇄</span><span>Dò Nợ Có</span></button>
   <button class="navbtn" data-page="invoicecompare" title="So sánh 2 file hóa đơn"><span class="navicon">⇆</span><span>So sánh 2 file hóa đơn</span></button>
@@ -5676,4 +5676,25 @@ body[data-theme="minimal"] #appSidebar .navicon::after{filter:saturate(.55)!impo
 #appSidebar .navfolder-title{gap:0!important}
 #appSidebar .navbtn:hover .navicon{transform:translateY(-1px)!important}
 #appSidebar .navbtn.active .navicon{transform:scale(1.04)!important}
+</style><style id="matchma-final-nav-icon-replacement">
+/* Definitively replace legacy pseudo folder icons, not layer a second icon on top. */
+body #appSidebar .navbtn .navicon,
+body[data-theme] #appSidebar .navbtn .navicon{
+ width:34px!important;height:34px!important;min-width:34px!important;flex:0 0 34px!important;
+ display:block!important;position:relative!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;font-size:0!important;color:transparent!important;
+}
+body #appSidebar .navbtn .navicon::before,
+body[data-theme] #appSidebar .navbtn .navicon::before{
+ content:none!important;display:none!important;width:0!important;height:0!important;
+ background:none!important;background-image:none!important;filter:none!important;
+}
+body #appSidebar .navbtn .navicon::after,
+body[data-theme] #appSidebar .navbtn .navicon::after{
+ content:""!important;display:block!important;position:absolute!important;
+ inset:0!important;width:32px!important;height:32px!important;margin:auto!important;
+ background-position:center!important;background-repeat:no-repeat!important;background-size:contain!important;
+}
+body #appSidebar .nav-folder-title .navfolder-tab-icon,
+body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
 </style></body></html>
