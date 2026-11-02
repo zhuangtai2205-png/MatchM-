@@ -119,3 +119,20 @@ body:after{content:""!important;display:block!important;position:fixed!important
 body[data-theme="galaxy"]{--mm-ink:#40304f;--mm-muted:#786589;--mm-surface:rgba(255,251,255,.94);--mm-soft:#f3eaff;--mm-line:#d9c9ee}
 body[data-theme="galaxy"] .app-header,body[data-theme="galaxy"] #appSidebar.sidebar,body[data-theme="galaxy"] .main,body[data-theme="galaxy"] .main .page,body[data-theme="galaxy"] .main .hero,body[data-theme="galaxy"] .main .panel{background:rgba(255,251,255,.94)!important;color:#40304f!important}
 @media(max-width:950px){.app-shell.shell{grid-template-columns:minmax(0,1fr)!important}.app-header{min-height:0!important}.app-shell.shell{padding:0 8px 20px!important}body:after{height:120px!important;opacity:.65!important}}
+
+/* Fine decorative landmarks and compact dashboard card styling. */
+body:after{
+ background-image:
+ url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 260'%3E%3Cg opacity='.82' stroke='%238e617f' stroke-width='5' stroke-linejoin='round'%3E%3Cpath fill='%23d99ab9' d='M130 210h160v-48H130zM110 162h200l-18-18H128zM125 140l85-42 85 42zM165 162v48m90-48v48M150 210h120'/%3E%3Cpath fill='%23b9a0c8' d='M1320 220h120v-45h-120zM1300 175h160l-16-16h-128zM1310 157l70-38 70 38zM1350 175v45m55-45v45'/%3E%3C/g%3E%3Cg fill='%2378a889' opacity='.75'%3E%3Cpath d='M380 230q-40-65-12-100q40 10 28 55q20-55 60-55q5 50-42 80zM1180 230q-40-65-12-100q40 10 28 55q20-55 60-55q5 50-42 80z'/%3E%3C/g%3E%3C/svg%3E"),
+ var(--mm-scenery)!important;
+ background-position:center bottom!important;background-repeat:no-repeat!important;background-size:100% 100%,100% 100%!important
+}
+.page#page-overview .stats{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+.page#page-overview .stat{min-height:64px!important;padding:10px 14px!important;border-radius:15px!important;display:flex!important;flex-direction:column!important;justify-content:center!important;background:linear-gradient(110deg,var(--mm-surface),color-mix(in srgb,var(--mm-soft) 56%,white))!important}
+.page#page-overview .stat small{font-size:12px!important;font-weight:800!important;color:var(--mm-ink)!important}
+.page#page-overview .stat b{font-size:24px!important;line-height:1.05!important;color:var(--mm-accent)!important}
+.page#page-overview .stat.good b{color:#2e9b70!important}
+.page#page-overview .stat.review b{color:#e35c62!important}
+.page#page-overview .hero{padding:14px 18px!important}
+.page#page-overview .hero h2{font-size:clamp(18px,1.6vw,24px)!important}
+@media(max-width:700px){.page#page-overview .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
