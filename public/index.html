@@ -2432,7 +2432,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid rgba(139,132,180,.2);b
   <div class="field"><label for="autoFillTargetCodeCol">Cột mã cần điền trong file gốc (tuỳ chọn)</label><select id="autoFillTargetCodeCol" disabled><option value="">— Thêm cột SKU được điền —</option></select></div>
  </div>
  <label class="checkline"><input type="checkbox" id="autoFillOverwrite"> Cho phép ghi đè mã đã có (chỉ áp dụng cho cột mã được chọn)</label>
- <div class="actions"><button class="btn" id="runAutoFill" disabled>Rà soát và điền mã</button><button class="btn alt" id="exportAutoFill" disabled>Xuất Excel đã điền mã ↓</button></div>
+ <div class="field" style="max-width:420px;margin-top:12px"><label for="autoFillExportName">Tên file kết quả khi tải về</label><input id="autoFillExportName" type="text" value="BARCODE_STC_MOI" maxlength="120" placeholder="Nhập tên file muốn lưu"></div><div class="actions"><button class="btn" id="runAutoFill" disabled>Rà soát và điền mã</button><button class="btn alt" id="exportAutoFill" disabled>Xuất Excel đã điền mã ↓</button></div>
  <div id="autoFillSummary" class="hint">Cần tải danh mục chuẩn có SKU và file gốc trước khi chạy.</div>
  </div>
  <div class="panel"><div class="sectionhead"><div><h2>3. Xem trước file sau rà soát</h2><p>Hiển thị STT nguồn, mã đề xuất, điểm tương đồng và trạng thái điền. Excel xuất ra giữ nguyên thứ tự dòng ban đầu.</p></div></div><div id="autoFillPreview" class="empty">Chưa chạy rà soát.</div></div>
@@ -3351,7 +3351,9 @@ function exportAutoFill(){
  XLSX.utils.book_append_sheet(wb,wsFinal,'bảng barcode mới');
  wb.Workbook=wb.Workbook||{};
  wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};
- const exportName='BARCODE_STC_MOI.xlsx';
+ const rawExportName=String($('autoFillExportName')?.value||'BARCODE_STC_MOI').trim();
+ const safeExportName=rawExportName.replace(/[\\/:*?\"<>|]+/g,'_').replace(/[. ]+$/,'').trim()||'BARCODE_STC_MOI';
+ const exportName=(safeExportName.toLowerCase().endsWith('.xlsx')?safeExportName:safeExportName+'.xlsx');
  try{
   const bytes=XLSX.write(wb,{bookType:'xlsx',type:'array',cellStyles:true});
   const blob=new Blob([bytes],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
