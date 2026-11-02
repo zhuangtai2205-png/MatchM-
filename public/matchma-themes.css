@@ -136,3 +136,34 @@ body:after{
 .page#page-overview .hero{padding:14px 18px!important}
 .page#page-overview .hero h2{font-size:clamp(18px,1.6vw,24px)!important}
 @media(max-width:700px){.page#page-overview .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* Navigation repair: visible collapse control and a distinct icon for every destination. */
+#sidebarCollapseToggle{display:grid!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;place-items:center!important;flex:0 0 26px!important;width:26px!important;height:26px!important}
+.sidebar-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:5px!important}
+@media(min-width:951px){
+ .shell.sidebar-collapsed{grid-template-columns:64px minmax(0,1fr)!important}
+ .shell.sidebar-collapsed #appSidebar.sidebar{width:64px!important;min-width:64px!important;overflow:visible!important}
+ .shell.sidebar-collapsed .navbtn{min-height:38px!important;min-width:44px!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:7px 3px!important;margin:3px auto!important}
+ .shell.sidebar-collapsed .navicon{display:grid!important;place-items:center!important;width:28px!important;height:26px!important;flex:0 0 28px!important;opacity:1!important;visibility:visible!important}
+ .shell.sidebar-collapsed .navicon:before{display:block!important;visibility:visible!important;opacity:1!important}
+ .shell.sidebar-collapsed .nav-folder{display:block!important;margin:4px 0!important;padding:1px!important}
+ .shell.sidebar-collapsed .navfolder-title{display:flex!important;justify-content:center!important;align-items:center!important;min-height:36px!important;padding:5px 0!important;font-size:0!important}
+ .shell.sidebar-collapsed .navfolder-title:before{content:"📁"!important;display:block!important;font-size:19px!important;line-height:1!important}
+ .shell.sidebar-collapsed .nav-folder-items{display:block!important;padding:2px 0!important}
+ .shell.sidebar-collapsed .sidebar-topline{justify-content:center!important}
+ .shell.sidebar-collapsed .sidebar-section-heading{display:none!important}
+ .shell.sidebar-collapsed .sidebar-toggle{display:grid!important}
+}
+.navbtn[data-page="intro"] .navicon:before{content:"🏠"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="overview"] .navicon:before{content:"📊"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="workspace"] .navicon:before{content:"⭐"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="catalog"] .navicon:before{content:"📂"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="memory"] .navicon:before{content:"📘"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="run"] .navicon:before{content:"🔎"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="results"] .navicon:before{content:"💠"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="platforms"] .navicon:before{content:"🌐"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="autofill"] .navicon:before{content:"🏷️"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="debitcredit"] .navicon:before{content:"⇄"!important;background:none!important;font:20px/1 system-ui!important;color:var(--mm-accent)!important}
+.navbtn[data-page="invoicecompare"] .navicon:before{content:"🧾"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="stockforecast"] .navicon:before{content:"📦"!important;background:none!important;font:18px/1 system-ui!important}
+.navbtn[data-page="settings"] .navicon:before{content:"⚙️"!important;background:none!important;font:18px/1 system-ui!important}
