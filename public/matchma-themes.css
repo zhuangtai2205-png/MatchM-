@@ -167,3 +167,97 @@ body:after{
 .navbtn[data-page="invoicecompare"] .navicon:before{content:"🧾"!important;background:none!important;font:18px/1 system-ui!important}
 .navbtn[data-page="stockforecast"] .navicon:before{content:"📦"!important;background:none!important;font:18px/1 system-ui!important}
 .navbtn[data-page="settings"] .navicon:before{content:"⚙️"!important;background:none!important;font:18px/1 system-ui!important}
+
+
+/* MatchMa navigation v3: reliable compact sidebar + theme-aware icon treatment.
+   Scoped to navigation only; does not touch any page/business logic. */
+@media (min-width:951px){
+  .app-shell.shell.sidebar-collapsed{
+    grid-template-columns:68px minmax(0,1fr)!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar.sidebar{
+    box-sizing:border-box!important;width:68px!important;min-width:68px!important;
+    max-width:68px!important;padding:8px 5px!important;overflow:visible!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-topline{
+    justify-content:center!important;min-height:34px!important;padding:0!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-section-heading,
+  .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-shortcut,
+  .app-shell.shell.sidebar-collapsed #appSidebar .navbtn>span:not(.navicon),
+  .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title>span,
+  .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-bottom,
+  .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-help,
+  .app-shell.shell.sidebar-collapsed #appSidebar .sidefoot{
+    display:none!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .navbtn{
+    display:flex!important;box-sizing:border-box!important;width:48px!important;
+    min-width:48px!important;max-width:48px!important;height:42px!important;
+    min-height:42px!important;margin:4px auto!important;padding:5px!important;
+    align-items:center!important;justify-content:center!important;gap:0!important;
+    overflow:visible!important;border-radius:13px!important;text-align:center!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .navicon{
+    display:grid!important;place-items:center!important;position:relative!important;
+    width:32px!important;height:32px!important;min-width:32px!important;
+    margin:0!important;opacity:1!important;visibility:visible!important;
+    font-size:0!important;line-height:1!important;border-radius:11px!important;
+    color:var(--mm-icon-ink,var(--mm-accent,#a66a9a))!important;
+    background:var(--mm-icon-bg,#fff0f7)!important;
+    border:1px solid var(--mm-icon-border,#f0c9dd)!important;
+    box-shadow:0 2px 7px color-mix(in srgb,var(--mm-accent,#d77ea8) 16%,transparent)!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .navicon:before{
+    display:block!important;visibility:visible!important;opacity:1!important;
+    font:19px/1 system-ui!important;color:var(--mm-icon-ink,var(--mm-accent,#a66a9a))!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder{
+    display:block!important;width:100%!important;margin:4px 0!important;
+    padding:0!important;border:0!important;background:transparent!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title{
+    display:flex!important;justify-content:center!important;align-items:center!important;
+    box-sizing:border-box!important;width:48px!important;height:38px!important;
+    min-height:38px!important;margin:3px auto!important;padding:0!important;
+    border-radius:12px!important;font-size:0!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title:before{
+    content:"✿"!important;display:block!important;font:19px/1 system-ui!important;
+    color:var(--mm-accent,#d77ea8)!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title .folder-chevron,
+  .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder-items .navbtn>span:not(.navicon){
+    display:none!important;
+  }
+  .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder-items{
+    display:block!important;padding:0!important;
+  }
+  .app-shell.shell.sidebar-collapsed #sidebarCollapseToggle{
+    display:grid!important;flex:0 0 32px!important;width:32px!important;height:32px!important;
+    margin:0 auto!important;border-radius:11px!important;font-size:19px!important;
+    position:relative!important;z-index:5!important;
+  }
+}
+/* Icon tiles inherit each theme's palette; symbols stay recognizable per destination. */
+#appSidebar .navicon{
+  display:inline-grid!important;place-items:center!important;flex:0 0 27px!important;
+  width:27px!important;height:27px!important;border-radius:9px!important;
+  color:var(--mm-icon-ink,var(--mm-accent,#a66a9a))!important;
+  background:var(--mm-icon-bg,#fff0f7)!important;
+  border:1px solid var(--mm-icon-border,#f0c9dd)!important;
+}
+#appSidebar .navicon:before{color:var(--mm-icon-ink,var(--mm-accent,#a66a9a))!important}
+#appSidebar .navbtn.active .navicon{box-shadow:0 2px 8px color-mix(in srgb,var(--mm-accent,#d77ea8) 20%,transparent)!important}
+body[data-theme="sakura"]{--mm-icon-ink:#a94779;--mm-icon-bg:#fff0f7;--mm-icon-border:#f3c4dc}
+body[data-theme="sky"]{--mm-icon-ink:#397ca8;--mm-icon-bg:#edf8ff;--mm-icon-border:#c5e4f5}
+body[data-theme="lavender"]{--mm-icon-ink:#8055b0;--mm-icon-bg:#f5efff;--mm-icon-border:#dfcff5}
+body[data-theme="mint"]{--mm-icon-ink:#39805d;--mm-icon-bg:#effaf1;--mm-icon-border:#c9e8d0}
+body[data-theme="peach"]{--mm-icon-ink:#b96b45;--mm-icon-bg:#fff4ec;--mm-icon-border:#f4d2bb}
+body[data-theme="autumn"]{--mm-icon-ink:#a95c32;--mm-icon-bg:#fff3e7;--mm-icon-border:#efd0b5}
+body[data-theme="candysea"]{--mm-icon-ink:#3287a9;--mm-icon-bg:#edfbff;--mm-icon-border:#c3e9f4}
+body[data-theme="galaxy"]{--mm-icon-ink:#8a60b6;--mm-icon-bg:#f7f0ff;--mm-icon-border:#dfcef3}
+body[data-theme="rainbow"]{--mm-icon-ink:#9a5ba1;--mm-icon-bg:#fff2fa;--mm-icon-border:#edcfe9}
+body[data-theme="kitty"]{--mm-icon-ink:#b45483;--mm-icon-bg:#fff0f7;--mm-icon-border:#f1c7dc}
+/* Keep the per-theme icon color treatment visible in both expanded and compact modes. */
+#appSidebar .navbtn:hover .navicon{transform:translateY(-1px);transition:transform .15s ease}
