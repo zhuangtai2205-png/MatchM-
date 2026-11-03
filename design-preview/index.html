@@ -101,6 +101,56 @@ body[data-theme="puppy"]{--hero-character:"🐶";--page-art:url("data:image/svg+
 body[data-theme="ghost"]{--hero-character:"👻";--page-art:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='180'%3E%3Cg fill='none' stroke='%23958bc3' stroke-width='2' opacity='.3'%3E%3Cpath d='M20 70V45q0-25 24-25t24 25v25l-12-8-12 8-12-8zM140 125V100q0-25 24-25t24 25v25l-12-8-12 8-12-8zM105 22l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z'/%3E%3C/g%3E%3C/svg%3E")}
 body[data-theme="fox"]{--hero-character:"🦊";--page-art:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='180'%3E%3Cg fill='none' stroke='%23c58a58' stroke-width='2' opacity='.3'%3E%3Cpath d='M20 60l-6-38 35 20 35-20-6 38M145 110q-14-24-28-5q15 8 20 27q10-19 25-27q-14-19-28 5zM160 20l5 10 11 2-8 8 2 11-10-5-10 5 2-11-8-8 11-2z'/%3E%3C/g%3E%3C/svg%3E")}
 @media(max-width:850px){.themegrid{grid-template-columns:repeat(2,minmax(145px,1fr))}}
+
+/* Layout refinement v2: compact header, aligned title/theme control, calmer dashboard */
+header,.intro,main{max-width:1500px;padding-left:30px;padding-right:30px}
+header{padding-top:15px;padding-bottom:10px;min-height:68px}
+.brand img{width:42px;height:42px}
+.brand b{font-size:18px}
+.intro{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:18px;align-items:center;padding-top:7px;padding-bottom:15px}
+.intro .themebar{grid-column:1;grid-row:1/3;align-self:center;margin:0;z-index:5}
+.intro h1{grid-column:2;grid-row:1;margin:0 0 3px;font-size:clamp(22px,2.4vw,30px);line-height:1.15}
+.intro p{grid-column:2;grid-row:2;margin:0;font-size:12px}
+.themebar{border-radius:14px;padding:7px 9px;box-shadow:2px 2px 0 var(--line)}
+.themebar-title{gap:7px}
+.themebar-title button{font-size:10px;padding:7px 10px}
+.themebar .themegrid{position:absolute;top:calc(100% + 8px);left:0;width:min(410px,82vw);max-width:none;padding:10px;background:var(--paper);border:1px solid var(--ink);border-radius:14px;box-shadow:4px 5px 0 var(--line);z-index:20}
+.themebar.open .themegrid{display:grid}
+main{padding-bottom:32px}
+.mock{grid-template-columns:205px minmax(0,1fr);gap:16px;min-height:660px;padding:14px;border-radius:20px;box-shadow:4px 5px 0 var(--line)}
+.sidebar{padding:12px 9px;gap:5px}
+.nav{min-height:41px;padding:7px 8px;gap:9px;font-size:11px}
+.nav .ico{width:30px;height:30px}
+.content{padding:5px 7px}
+.top{margin:0 2px 12px;font-size:10px}
+.welcome{padding:18px 21px;border-radius:15px;box-shadow:2px 3px 0 var(--pink)}
+.welcome h2{font-size:clamp(20px,2vw,26px)}
+.metrics{gap:9px;margin:12px 0}
+.metric{padding:11px 12px;border-radius:12px;box-shadow:1px 2px 0 var(--line)}
+.metric b{font-size:21px}
+.panel{padding:13px;border-radius:13px;box-shadow:1px 2px 0 var(--line)}
+.tablewrap{margin-top:10px}
+th,td{padding:9px 11px}
+.note{margin:10px 2px;font-size:10px}
+body.collapsed .mock{grid-template-columns:66px minmax(0,1fr)}
+body.collapsed .sidebar{padding-left:5px;padding-right:5px}
+body.collapsed .nav{width:44px}
+body.collapsed .nav .ico{width:30px;height:30px}
+.mock:after{right:14px;bottom:10px;width:145px;height:120px;opacity:.20}
+@media(max-width:850px){
+ header,.intro,main{padding-left:18px;padding-right:18px}
+ .mock{grid-template-columns:180px minmax(0,1fr)}
+ .intro{column-gap:12px}
+}
+@media(max-width:620px){
+ header,.intro,main{padding-left:12px;padding-right:12px}
+ .intro{grid-template-columns:1fr;row-gap:7px}
+ .intro .themebar{grid-column:1;grid-row:1;justify-self:start}
+ .intro h1{grid-column:1;grid-row:2;margin:2px 0 0}
+ .intro p{grid-column:1;grid-row:3}
+ .mock{grid-template-columns:1fr}
+}
+
 </style></head><body data-theme="bear"><header><div class="brand"><img src="https://raw.githubusercontent.com/zhuangtai2205-png/MatchM-/main/public/matchma-logo.png" alt="Logo MatchMã"><div><b>MatchMã · Theme Atelier</b><small>cute handmade · giữ nguyên nhận diện</small></div></div><div class="safe">✦ DEMO RIÊNG · KHÔNG SỬA WEB CHÍNH</div></header>
 <section class="intro"><div class="themebar"><div class="themebar-title"><span class="theme-sticker">✿</span><button type="button" id="themeToggle">CHỦ ĐỀ ▾</button></div><div class="themegrid">
 <button class="theme" data-theme="bear" aria-pressed="true"><span class="thumb bear">🐻</span><span><b>Bear Picnic</b><small>Gấu · dã ngoại</small></span></button>
