@@ -2883,12 +2883,43 @@ function exportStockForecast(){
  if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
  if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
  const mapRows=list=>list.map(p=>({[tr('skuCodeLabel')]:p.displaySku,[tr('productNameLabel')]:p.displayName,[tr('openingStockLabel')]:p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),[tr('monthPurchaseLabel')]:p.purchaseQty,[tr('monthSalesLabel')]:p.salesQty,[tr('closingStockLabel')]:p.projected===null?'':p.projected,[tr('statusLabel')]:forecastStatusLabel(p.status),'Phân loại mua/bán/tồn':forecastActivityLabel(p),'Có trong file mua vào':p.purchaseRows>0?'Có':'Không','Có trong file bán ra':p.salesRows>0?'Có':'Không','Có trong file tồn đầu kỳ':p.inStock?'Có':'Không','Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,[tr('replacementLabel')]:p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'',[tr('notesLabel')]:p.issueText}));
+ const warningRaw=parseForecastQuantity($('forecastAlertThreshold').value);
+ const warningThreshold=Math.max(0,warningRaw===null?0:warningRaw);
  const wb=XLSX.utils.book_new();
- const negRows=mapRows(stockForecastResults.filter(p=>p.status==='negative'));
- const allRows=mapRows(stockForecastResults);
- XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(negRows),'SKU am cuoi thang');
- XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(allRows),'Tong hop');
- const exportName=matchmaChooseExcelFilename('matchma-chot-so-cuoi-thang.xlsx');if(!exportName)return;XLSX.writeFile(wb,exportName);
+ const addForecastSheet=(list,sheetName)=>{
+  const rows=mapRows(list);
+  const ws=XLSX.utils.json_to_sheet(rows);
+  if(rows.length){
+   const headers=Object.keys(rows[0]);
+   const openingCol=headers.indexOf(tr('openingStockLabel'));
+   const purchaseCol=headers.indexOf(tr('monthPurchaseLabel'));
+   const salesCol=headers.indexOf(tr('monthSalesLabel'));
+   const closingCol=headers.indexOf(tr('closingStockLabel'));
+   const statusCol=headers.indexOf(tr('statusLabel'));
+   list.forEach((p,i)=>{
+    if(p.projected===null||openingCol<0||purchaseCol<0||salesCol<0||closingCol<0)return;
+    const excelRow=i+2;
+    const ref=col=>XLSX.utils.encode_col(col)+excelRow;
+    const closingCell=XLSX.utils.encode_cell({r:i+1,c:closingCol});
+    ws[closingCell]={t:'n',f:ref(openingCol)+'+'+ref(purchaseCol)+'-'+ref(salesCol)};
+    if(statusCol>=0){
+     const statusCell=XLSX.utils.encode_cell({r:i+1,c:statusCol});
+     const negative=forecastStatusLabel('negative'),zero=forecastStatusLabel('zero'),low=forecastStatusLabel('low'),ok=forecastStatusLabel('ok');
+     const closingRef=ref(closingCol);
+     const q=String(warningThreshold);
+     const quote=value=>'"'+String(value).replace(/"/g,'""')+'"';
+     ws[statusCell]={t:'str',f:'IF('+closingRef+'<0,'+quote(negative)+',IF('+closingRef+'=0,'+quote(zero)+',IF('+closingRef+'<='+q+','+quote(low)+','+quote(ok)+')))'}; 
+    }
+   });
+  }
+  XLSX.utils.book_append_sheet(wb,ws,sheetName);
+ };
+ addForecastSheet(stockForecastResults.filter(p=>p.status==='negative'),'SKU am cuoi thang');
+ addForecastSheet(stockForecastResults,'Tong hop');
+ wb.Workbook=wb.Workbook||{};
+ wb.Workbook.CalcPr={calcMode:'auto',fullCalcOnLoad:true,forceFullCalc:true};
+ const exportName=matchmaChooseExcelFilename('matchma-chot-so-cuoi-thang.xlsx');if(!exportName)return;
+ XLSX.writeFile(wb,exportName);
 }
 
 /* Two-file invoice reconciliation */
