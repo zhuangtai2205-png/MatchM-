@@ -151,6 +151,25 @@ body.collapsed .nav .ico{width:30px;height:30px}
  .mock{grid-template-columns:1fr}
 }
 
+
+/* v3: theme selector anchored at the top-left; menu icons presented as die-cut stickers */
+header{display:flex;align-items:center;justify-content:flex-start;gap:16px;flex-wrap:wrap}
+header .themebar{order:0;flex:0 0 auto;margin:0;max-width:210px;padding:6px 8px;border-radius:14px}
+header .brand{order:1;flex:1 1 auto;min-width:220px}
+header .safe{order:2;margin-left:auto}
+header .themebar-title{margin:0;gap:6px}
+header .themebar-title button{font-size:10px;padding:7px 10px}
+header .themebar-title .theme-sticker{width:27px;height:27px;border-radius:9px}
+header .themegrid{position:absolute;top:calc(100% + 8px);left:0;width:min(410px,82vw);max-width:none;padding:10px;background:var(--paper);border:1px solid var(--ink);border-radius:14px;box-shadow:4px 5px 0 var(--line);z-index:30}
+header .themebar.open .themegrid{display:grid}
+.intro{display:block;padding-top:12px;padding-bottom:15px}
+.intro h1{margin:0 0 4px;font-size:clamp(22px,2.4vw,30px)}
+.intro p{margin:0;font-size:12px}
+.nav .ico{width:34px;height:34px;flex:none;display:grid;place-items:center;border:3px solid #fff!important;border-radius:11px 14px 10px 13px!important;background:var(--soft)!important;box-shadow:0 2px 0 var(--line),0 0 0 1px color-mix(in srgb,var(--ink) 24%,transparent);font-size:22px!important;line-height:1;filter:drop-shadow(1px 2px 1px #66516a35)!important;transform:rotate(-4deg)}
+.nav:nth-of-type(3n) .ico{transform:rotate(4deg);border-radius:14px 10px 13px 11px!important}
+.nav.active .ico{background:#fff!important;box-shadow:0 2px 0 var(--pink),0 0 0 1px var(--ink)}
+body.collapsed .nav .ico{width:34px;height:34px}
+@media(max-width:620px){header{gap:8px}header .themebar{order:0}header .brand{order:1;min-width:0}header .safe{order:2;margin-left:0}.intro{padding-top:10px}}
 </style></head><body data-theme="bear"><header><div class="brand"><img src="https://raw.githubusercontent.com/zhuangtai2205-png/MatchM-/main/public/matchma-logo.png" alt="Logo MatchMã"><div><b>MatchMã · Theme Atelier</b><small>cute handmade · giữ nguyên nhận diện</small></div></div><div class="safe">✦ DEMO RIÊNG · KHÔNG SỬA WEB CHÍNH</div></header>
 <section class="intro"><div class="themebar"><div class="themebar-title"><span class="theme-sticker">✿</span><button type="button" id="themeToggle">CHỦ ĐỀ ▾</button></div><div class="themegrid">
 <button class="theme" data-theme="bear" aria-pressed="true"><span class="thumb bear">🐻</span><span><b>Bear Picnic</b><small>Gấu · dã ngoại</small></span></button>
@@ -181,5 +200,5 @@ document.getElementById("themeToggle").addEventListener("click",()=>document.que
 document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.theme;document.body.dataset.theme=key;document.querySelector(".themebar").classList.remove("open");document.querySelectorAll(".theme").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.getElementById("themeHeading").textContent=themes[key].name+" ♡";document.getElementById("themeDesc").textContent=themes[key].desc;paintIcons(key)}));
 document.getElementById("collapse").addEventListener("click",()=>{document.body.classList.toggle("collapsed");document.getElementById("collapse").textContent=document.body.classList.contains("collapsed")?"›":"‹"});
 document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));b.classList.add("active")}));
-paintIcons("bear");
+const themebar=document.querySelector(".themebar");document.querySelector("header").insertBefore(themebar,document.querySelector("header").firstChild);paintIcons("bear");
 </script></body></html></body></html>
