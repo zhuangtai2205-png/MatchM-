@@ -3640,8 +3640,8 @@ document.querySelectorAll('.nav-folder[data-nav-group]').forEach(group=>{
  try{const saved=localStorage.getItem(key);if(saved!==null)group.open=saved==='1'}catch(e){}
  group.addEventListener('toggle',()=>{try{localStorage.setItem(key,group.open?'1':'0')}catch(e){}});
 });
-const appShell=document.querySelector('.shell'),sidebarToggle=$('sidebarCollapseToggle');
-function setSidebarCollapsed(collapsed){if(!appShell||!sidebarToggle)return;appShell.classList.toggle('sidebar-collapsed',!!collapsed);sidebarToggle.setAttribute('aria-expanded',String(!collapsed));sidebarToggle.setAttribute('aria-label',collapsed?'Mở rộng thanh menu':'Thu gọn thanh menu');sidebarToggle.title=collapsed?'Mở rộng thanh menu':'Thu gọn thanh menu';sidebarToggle.textContent=collapsed?'›':'‹';try{localStorage.setItem('matchma-sidebar-collapsed',collapsed?'1':'0')}catch(e){}}
+const sidebarElement=$('appSidebar'),appShell=sidebarElement?sidebarElement.closest('.app-shell.shell'):document.querySelector('.app-shell.shell'),sidebarToggle=$('sidebarCollapseToggle');
+function setSidebarCollapsed(collapsed){if(!appShell||!sidebarToggle)return;const state=!!collapsed;appShell.classList.toggle('sidebar-collapsed',state);document.body.classList.toggle('matchma-sidebar-collapsed',state);sidebarToggle.setAttribute('aria-expanded',String(!state));sidebarToggle.setAttribute('aria-label',state?'Mở rộng thanh menu':'Thu gọn thanh menu');sidebarToggle.title=state?'Mở rộng thanh menu':'Thu gọn thanh menu';sidebarToggle.textContent=state?'›':'‹';try{localStorage.setItem('matchma-sidebar-collapsed',state?'1':'0')}catch(e){}}
 if(sidebarToggle){let collapsed=false;try{collapsed=localStorage.getItem('matchma-sidebar-collapsed')==='1'}catch(e){}setSidebarCollapsed(collapsed);sidebarToggle.addEventListener('click',()=>setSidebarCollapsed(!appShell.classList.contains('sidebar-collapsed')))}
 
 const quickSettingsPanel=$('quickSettings');
