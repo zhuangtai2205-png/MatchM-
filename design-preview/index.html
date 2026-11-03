@@ -281,8 +281,36 @@ puppy:{name:"Puppy Post",desc:"Cún con, phong thư và những tấm thiệp v�
 ghost:{name:"Ghost Candy",desc:"Những bé ma hiền lành, kẹo ngọt và ánh sao.",palette:["#c7b9e9","#e9b7d0","#b7d9e6","#d8c0ef","#f0d59b","#b7c8e9","#d7b4dc"]},
 fox:{name:"Fox Autumn",desc:"Cáo cam, lá mùa thu và tông màu ấm áp.",palette:["#e4ad7b","#c9b58d","#b7cfaa","#d99a78","#e7c98e","#c6a4a0","#a8c4b4"]}
 };
+
+/* Theme-specific menu icon packs: semantic line icons with a distinct hand-drawn character for each theme */
+const menuIconBase=[
+  '<path d="M5 15L16 5l11 10v12H7V15M12 27v-8h8v8" fill="none"/>',
+  '<rect x="7" y="5" width="18" height="23" rx="3" fill="none"/><path d="M11 11h10M11 16h10M11 21h7M11 2h10" fill="none"/>',
+  '<circle cx="14" cy="14" r="8" fill="none"/><path d="m20 20 7 7M11 14h6M14 11v6" fill="none"/>',
+  '<path d="M5 10h22l-3 15H8zM3 10h26M11 15l4 4 7-7" fill="none"/>',
+  '<rect x="5" y="6" width="22" height="21" rx="4" fill="none"/><path d="M10 3v6M22 3v6M5 12h22M10 17h4M18 17h4M10 22h4" fill="none"/>',
+  '<path d="M16 27S4 19 5 11c1-6 8-8 11-2 3-6 10-4 11 2 1 8-11 16-11 16z" fill="none"/><path d="m11 15 3 3 7-7" fill="none"/>',
+  '<path d="M16 4l2.5 7.5L26 14l-7.5 2.5L16 24l-2.5-7.5L6 14l7.5-2.5z" fill="none"/><path d="M7 25l1 3 3 1-3 1-1 3-1-3-3-1 3-1z" fill="none"/>'
+];
+const themeIconStyle={
+ bear:{a:"#d9a47d",b:"#8da77e",orn:'<circle cx="24" cy="8" r="4" fill="var(--theme-a)"/><circle cx="24" cy="8" r="1.5" fill="#fff"/>',frame:'<path d="M7 4q-5 0-5 5v14q0 5 5 5" fill="none"/>'},
+ cat:{a:"#c69bca",b:"#b7d7e8",orn:'<path d="M20 11l1-7 5 5 5-5 1 7" fill="var(--theme-a)"/><path d="M22 14h1m4 0h1" stroke="#fff" stroke-width="1.5"/>',frame:'<path d="M5 5q-4 5 0 10M27 5q4 5 0 10" fill="none"/>'},
+ vampire:{a:"#a78ac7",b:"#d7a2c7",orn:'<path d="M20 8q-5-7-8-2l5 7 4-2 4 2 5-7q-4-5-10 2z" fill="var(--theme-a)"/>',frame:'<path d="M6 5l-3 4 3 4M26 5l3 4-3 4" fill="none"/>'},
+ bunny:{a:"#e9a9bd",b:"#c4ddcf",orn:'<path d="M22 11Q17 0 20 0q5 0 5 10M27 10Q28-1 31 2q3 3-1 10" fill="var(--theme-a)"/>',frame:'<path d="M5 7q-3 7 2 11M27 7q3 7-2 11" fill="none"/>'},
+ frog:{a:"#8fbd83",b:"#b6d9a6",orn:'<circle cx="22" cy="7" r="4" fill="var(--theme-a)"/><circle cx="29" cy="7" r="4" fill="var(--theme-a)"/><circle cx="22" cy="7" r="1.5" fill="#fff"/><circle cx="29" cy="7" r="1.5" fill="#fff"/>',frame:'<path d="M4 9q4-8 8 0M20 9q4-8 8 0" fill="none"/>'},
+ puppy:{a:"#d5ad8a",b:"#a9c6e5",orn:'<path d="M21 5q-8-5-7 4 2 5 8 3 6 2 8-3 1-9-9-4z" fill="var(--theme-a)"/><circle cx="21" cy="9" r="1.5" fill="#fff"/>',frame:'<path d="M5 7q-5 5 1 10M27 7q5 5-1 10" fill="none"/>'},
+ ghost:{a:"#b6a8df",b:"#c9e5e4",orn:'<path d="M20 13V6q0-6 5-6t5 6v7l-3-2-2 2-2-2z" fill="var(--theme-a)"/>',frame:'<path d="M5 7q-3 5 1 9M27 7q3 5-1 9" fill="none"/>'},
+ fox:{a:"#d99460",b:"#c6b17f",orn:'<path d="M20 12l1-11 7 7 7-7 1 11q-8 7-16 0z" fill="var(--theme-a)"/>',frame:'<path d="M5 7l-3 8 7-2M27 7l3 8-7-2" fill="none"/>'}
+};
+function applyThemeMenuIcons(key){
+ const skin=themeIconStyle[key]||themeIconStyle.bear;
+ document.querySelectorAll(".sidebar .nav .ico").forEach((el,index)=>{
+   el.innerHTML='<svg viewBox="0 0 36 36" aria-hidden="true" style="width:36px;height:36px;overflow:visible;--theme-a:'+skin.a+';--theme-b:'+skin.b+'"><path d="M18 2.5c8.6 0 15.5 6.9 15.5 15.5S26.6 33.5 18 33.5 2.5 26.6 2.5 18 9.4 2.5 18 2.5z" fill="var(--theme-b)" stroke="var(--ink)" stroke-width="1.35"/>'+menuIconBase[index]+'<g transform="translate(0 0)" stroke="var(--ink)" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round">'+skin.orn+'</g><g stroke="var(--ink)" stroke-width="1.1" opacity=".7">'+skin.frame+'</g></svg>';
+ });
+}
+applyThemeMenuIcons(document.body.dataset.theme);
 document.getElementById("themeToggle").addEventListener("click",()=>document.querySelector(".themebar").classList.toggle("open"));
-document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.theme;document.body.dataset.theme=key;document.querySelector(".themebar").classList.remove("open");document.querySelectorAll(".theme").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.getElementById("themeHeading").textContent=themes[key].name+" ♡";document.getElementById("themeDesc").textContent=themes[key].desc}));
+document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.theme;document.body.dataset.theme=key;applyThemeMenuIcons(key);document.querySelector(".themebar").classList.remove("open");document.querySelectorAll(".theme").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.getElementById("themeHeading").textContent=themes[key].name+" ♡";document.getElementById("themeDesc").textContent=themes[key].desc}));
 document.getElementById("collapse").addEventListener("click",()=>{document.body.classList.toggle("collapsed");document.getElementById("collapse").textContent=document.body.classList.contains("collapsed")?"›":"‹"});
 document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));b.classList.add("active")}));
 const themebar=document.querySelector(".themebar");document.querySelector("header").appendChild(themebar);
