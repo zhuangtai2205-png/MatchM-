@@ -238,6 +238,25 @@ body[data-theme="puppy"] .nav .ico svg{filter:hue-rotate(155deg) saturate(.88)!i
 body[data-theme="ghost"] .nav .ico svg{filter:hue-rotate(205deg) saturate(.82)!important}
 body[data-theme="fox"] .nav .ico svg{filter:hue-rotate(-32deg) saturate(1.02)!important}
 
+/* FIX v7: force theme-specific color treatment on the complete menu icon (including inline SVG fills) */
+body[data-theme="bear"] .sidebar .nav .ico{filter:none!important}
+body[data-theme="cat"] .sidebar .nav .ico{filter:hue-rotate(42deg) saturate(1.12)!important}
+body[data-theme="vampire"] .sidebar .nav .ico{filter:hue-rotate(78deg) saturate(.92)!important}
+body[data-theme="bunny"] .sidebar .nav .ico{filter:hue-rotate(-22deg) saturate(1.18)!important}
+body[data-theme="frog"] .sidebar .nav .ico{filter:hue-rotate(105deg) saturate(1.08)!important}
+body[data-theme="puppy"] .sidebar .nav .ico{filter:hue-rotate(165deg) saturate(1.05)!important}
+body[data-theme="ghost"] .sidebar .nav .ico{filter:hue-rotate(225deg) saturate(.95)!important}
+body[data-theme="fox"] .sidebar .nav .ico{filter:hue-rotate(-38deg) saturate(1.2)!important}
+body[data-theme] .sidebar .nav .ico svg{filter:none!important}
+body[data-theme="bear"] .sidebar .nav .ico svg path[fill],body[data-theme="bear"] .sidebar .nav .ico svg rect[fill],body[data-theme="bear"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="cat"] .sidebar .nav .ico svg path[fill],body[data-theme="cat"] .sidebar .nav .ico svg rect[fill],body[data-theme="cat"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="vampire"] .sidebar .nav .ico svg path[fill],body[data-theme="vampire"] .sidebar .nav .ico svg rect[fill],body[data-theme="vampire"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="bunny"] .sidebar .nav .ico svg path[fill],body[data-theme="bunny"] .sidebar .nav .ico svg rect[fill],body[data-theme="bunny"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="frog"] .sidebar .nav .ico svg path[fill],body[data-theme="frog"] .sidebar .nav .ico svg rect[fill],body[data-theme="frog"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="puppy"] .sidebar .nav .ico svg path[fill],body[data-theme="puppy"] .sidebar .nav .ico svg rect[fill],body[data-theme="puppy"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="ghost"] .sidebar .nav .ico svg path[fill],body[data-theme="ghost"] .sidebar .nav .ico svg rect[fill],body[data-theme="ghost"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+body[data-theme="fox"] .sidebar .nav .ico svg path[fill],body[data-theme="fox"] .sidebar .nav .ico svg rect[fill],body[data-theme="fox"] .sidebar .nav .ico svg circle[fill]{stroke:var(--ink)}
+
 </style></head><body data-theme="bear"><header><div class="brand"><img src="https://raw.githubusercontent.com/zhuangtai2205-png/MatchM-/main/public/matchma-logo.png" alt="Logo MatchMã"><div><b>MatchMã · Theme Atelier</b><small>cute handmade · giữ nguyên nhận diện</small></div></div><div class="safe">✦ DEMO RIÊNG · KHÔNG SỬA WEB CHÍNH</div></header>
 <section class="intro"><div class="themebar"><div class="themebar-title"><span class="theme-sticker">✿</span><button type="button" id="themeToggle">CHỦ ĐỀ ▾</button></div><div class="themegrid">
 <button class="theme" data-theme="bear" aria-pressed="true"><span class="thumb bear">✿</span><span><b>Bear Picnic</b><small>Gấu nhỏ · picnic</small></span></button>
