@@ -189,6 +189,22 @@ header .themebar.open .themegrid{display:grid}
 .nav.active .ico{background:transparent!important;box-shadow:none!important}
 body.collapsed .nav .ico{width:38px;height:38px}
 @media(max-width:620px){header{gap:8px;flex-wrap:wrap}header .brand{order:0;flex:1 1 55%}header .safe{order:1}header .themebar{order:2;margin-left:auto}.intro{padding-top:10px}}
+
+/* v5: final placement and visible hand-drawn die-cut sticker treatment */
+header{position:relative;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:14px!important}
+header .brand{order:0!important;flex:1 1 auto!important;margin:0 auto 0 0!important}
+header .safe{order:1!important;margin:0!important}
+header .themebar{order:2!important;margin-left:auto!important;position:relative!important;flex:0 0 auto!important}
+header .themebar-title{justify-content:flex-end}
+header .themegrid{right:0!important;left:auto!important}
+.nav .ico{width:40px!important;height:40px!important;display:grid!important;place-items:center!important;overflow:visible!important}
+.nav .ico svg{width:38px!important;height:38px!important;overflow:visible!important;filter:drop-shadow(0 0 0 #fff) drop-shadow(1px 2px 1px #55495855)!important}
+.nav .ico svg>path:first-child{stroke:#fff!important;stroke-width:3.4!important}
+.nav .ico svg path,.nav .ico svg circle,.nav .ico svg rect,.nav .ico svg ellipse{stroke-linecap:round;stroke-linejoin:round}
+.nav.active .ico{transform:rotate(-5deg) scale(1.08)!important}
+body.collapsed .nav .ico{width:40px!important;height:40px!important}
+@media(max-width:620px){header .themebar{order:2!important;margin-left:auto!important}header .themegrid{right:0!important;left:auto!important}}
+
 </style></head><body data-theme="bear"><header><div class="brand"><img src="https://raw.githubusercontent.com/zhuangtai2205-png/MatchM-/main/public/matchma-logo.png" alt="Logo MatchMã"><div><b>MatchMã · Theme Atelier</b><small>cute handmade · giữ nguyên nhận diện</small></div></div><div class="safe">✦ DEMO RIÊNG · KHÔNG SỬA WEB CHÍNH</div></header>
 <section class="intro"><div class="themebar"><div class="themebar-title"><span class="theme-sticker">✿</span><button type="button" id="themeToggle">CHỦ ĐỀ ▾</button></div><div class="themegrid">
 <button class="theme" data-theme="bear" aria-pressed="true"><span class="thumb bear">🐻</span><span><b>Bear Picnic</b><small>Gấu · dã ngoại</small></span></button>
