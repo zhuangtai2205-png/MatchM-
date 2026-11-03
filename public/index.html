@@ -3738,7 +3738,7 @@ function norm(s){
   .replace(/\b(mot|1)\s*(nghin|ngan)\s*ml\b/g,' vol_1000ml ')
   .replace(/\b(1)\s*l\b/g,' vol_1000ml ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*(?:liters?|litres?|lit|l)\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'ml ')
-  .replace(/\b(\d+(?:[.,]\d+)?)\s*ml\b/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.')))+'ml ')
+  .replace(/\b(\d+(?:[.,]\d+)?)\s*ml(?=\s*(?:x|×)\s*\d+|\s|$|[),;])/g,(_,n)=>' vol_'+Math.round(parseFloat(n.replace(',','.')))+'ml ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*kg\b/g,(_,n)=>' weight_'+Math.round(parseFloat(n.replace(',','.'))*1000)+'g ')
   .replace(/\b(\d+(?:[.,]\d+)?)\s*g\b/g,(_,n)=>' weight_'+Math.round(parseFloat(n.replace(',','.')))+'g ');
  return t.replace(/[^a-z0-9_.]+/g,' ').trim();
@@ -3773,7 +3773,7 @@ function variantConflict(a,b){
   // Các vị/loại nhân là lựa chọn loại trừ nhau, kể cả khi tên sản phẩm thuộc các dòng bánh khác nhau.
   [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai']],
   [['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang']],
-  [['co_duong'],['khong_duong']],
+  [['co_duong'],['khong_duong'],['it_duong']],
   [['co_gas'],['khong_gas']],
   [['nguyen_kem'],['tach_beo']]
  ];
@@ -3813,17 +3813,24 @@ function variantMissing(a,b){
  const groups=[
   ['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],
   ['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang'],
-  ['co_duong'],['khong_duong'],['co_gas'],['khong_gas']
+  ['co_duong'],['khong_duong'],['it_duong'],['co_gas'],['khong_gas']
  ];
  for(const group of groups){const left=group.some(t=>A.has(t)),right=group.some(t=>B.has(t));if(left!==right)return true}
  if(brandIdentity(a)==='ensure'&&brandIdentity(b)==='ensure'){
   const lineGroups=[['gold'],['vanilla','vani'],['original']];
   for(const group of lineGroups){const left=group.some(t=>A.has(t)),right=group.some(t=>B.has(t));if(left!==right)return true}
  }
+ // Nếu một tên có thuộc tính mô tả quan trọng mà tên còn lại không ghi, không tự ghép.
+ const descriptiveGroups=[
+  ['huong_dau','dau_tay'],['huong_cam','cam'],['huong_nho','nho'],['huong_xoai','xoai'],
+  ['socola','chocolate','socolat'],['huong_vani','vani','vanilla'],['nguyen_chat','vi_tu_nhien'],
+  ['giam_beo','tach_beo'],['khong_lactoza'],['cao_dam'],['loi_khuan'],['bo_sung_sua_non']
+ ];
+ for(const group of descriptiveGroups){const left=group.some(t=>A.has(t)),right=group.some(t=>B.has(t));if(left!==right)return true}
  const sa=[...A].filter(t=>t.startsWith('stage_')),sb=[...B].filter(t=>t.startsWith('stage_'));
  return (sa.length>0)!==(sb.length>0);
 }
-function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))||variantConflict(a,b)||variantMissing(a.join(' '),b.join(' '))}
+function conflictTokens(a,b){const A=new Set(a),B=new Set(b);return [['co_duong','khong_duong'],['co_duong','it_duong'],['khong_duong','it_duong'],['co_gas','khong_gas'],['nguyen_kem','tach_beo']].some(([x,y])=>(A.has(x)&&B.has(y))||(A.has(y)&&B.has(x)))||variantConflict(a,b)||variantMissing(a.join(' '),b.join(' '))}
 function sharedEvidence(a,b){
  // Count only meaningful name signals. Packaging words, short abbreviations, and SKU/year/size fragments
  // must never make unrelated products look like a match.
@@ -3852,7 +3859,7 @@ function normalizeSku(value){return String(value??'').toUpperCase().replace(/[\s
 function getMeasureMap(value){
  const s=plainText(value).replace(/,/g,'.'),map={};
  const push=(k,v)=>{if(!map[k])map[k]=[];map[k].push(v)};
- const physical=/\b(\d+(?:\.\d+)?)\s*(milliliters?|millilitres?|ml|liters?|litres?|lit|l|kilograms?|kg|grams?|gram|gr|g)\b/g;
+ const physical=/\b(\d+(?:\.\d+)?)\s*(milliliters?|millilitres?|ml|liters?|litres?|lit|l|kilograms?|kg|grams?|gram|gr|g)(?=\s*(?:x|×)\s*\d+|\s|$|[),;])/g;
  let m;
  while((m=physical.exec(s))!==null){
   const n=parseFloat(m[1]),u=m[2];
