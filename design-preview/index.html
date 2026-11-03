@@ -170,6 +170,25 @@ header .themebar.open .themegrid{display:grid}
 .nav.active .ico{background:#fff!important;box-shadow:0 2px 0 var(--pink),0 0 0 1px var(--ink)}
 body.collapsed .nav .ico{width:34px;height:34px}
 @media(max-width:620px){header{gap:8px}header .themebar{order:0}header .brand{order:1;min-width:0}header .safe{order:2;margin-left:0}.intro{padding-top:10px}}
+
+/* v4: drawn sticker menu icons; theme selector aligned at header right */
+header{display:flex;align-items:center;gap:14px;justify-content:space-between}
+header .brand{order:0;margin-right:auto;flex:1 1 auto}
+header .safe{order:1;margin-left:0}
+header .themebar{order:2;flex:0 0 auto;width:auto;max-width:210px;margin:0;padding:6px 8px;border-radius:14px}
+header .themebar-title{margin:0;gap:6px}
+header .themebar-title button{font-size:10px;padding:7px 10px}
+header .themebar-title .theme-sticker{width:27px;height:27px;border-radius:9px}
+header .themegrid{position:absolute;top:calc(100% + 8px);right:0;left:auto;width:min(410px,82vw);max-width:none;padding:10px;background:var(--paper);border:1px solid var(--ink);border-radius:14px;box-shadow:4px 5px 0 var(--line);z-index:30}
+header .themebar.open .themegrid{display:grid}
+.intro{display:block;padding-top:12px;padding-bottom:15px}
+.intro h1{margin:0 0 4px;font-size:clamp(22px,2.4vw,30px)}
+.intro p{margin:0;font-size:12px}
+.nav .ico{width:38px;height:38px;flex:none;display:grid;place-items:center;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;transform:none!important;filter:drop-shadow(1px 2px 1px #66516a35)!important}
+.nav .ico svg{width:36px;height:36px;overflow:visible}
+.nav.active .ico{background:transparent!important;box-shadow:none!important}
+body.collapsed .nav .ico{width:38px;height:38px}
+@media(max-width:620px){header{gap:8px;flex-wrap:wrap}header .brand{order:0;flex:1 1 55%}header .safe{order:1}header .themebar{order:2;margin-left:auto}.intro{padding-top:10px}}
 </style></head><body data-theme="bear"><header><div class="brand"><img src="https://raw.githubusercontent.com/zhuangtai2205-png/MatchM-/main/public/matchma-logo.png" alt="Logo MatchMã"><div><b>MatchMã · Theme Atelier</b><small>cute handmade · giữ nguyên nhận diện</small></div></div><div class="safe">✦ DEMO RIÊNG · KHÔNG SỬA WEB CHÍNH</div></header>
 <section class="intro"><div class="themebar"><div class="themebar-title"><span class="theme-sticker">✿</span><button type="button" id="themeToggle">CHỦ ĐỀ ▾</button></div><div class="themegrid">
 <button class="theme" data-theme="bear" aria-pressed="true"><span class="thumb bear">🐻</span><span><b>Bear Picnic</b><small>Gấu · dã ngoại</small></span></button>
@@ -185,20 +204,43 @@ body.collapsed .nav .ico{width:34px;height:34px}
 <div class="content"><div class="top"><span>Workspace　/　Tổng quan</span><span>Xin chào! <i class="avatar">M</i></span></div><section class="welcome"><div class="eyebrow">✦ MATCHMÃ WORKSPACE ✦</div><h2>Mọi dữ liệu, rõ ràng trong một nơi.</h2><p>Một góc làm việc gọn gàng, thân thiện để theo dõi đối chiếu, sản phẩm và tồn kho.</p></section><div class="metrics"><div class="metric"><span>Dữ liệu đã xử lý</span><b>1,284</b><small>↗ 12.8% tháng này</small></div><div class="metric"><span>Sản phẩm đã khớp</span><b>968</b><small>✿ Hoàn tất đối chiếu</small></div><div class="metric"><span>Phiếu cần kiểm tra</span><b>24</b><small>♡ Chờ bạn xem lại</small></div><div class="metric"><span>Tỷ lệ chính xác</span><b>98.6%</b><small>✧ Độ tin cậy cao</small></div></div><section class="panel"><div class="panelhead"><b>✿ Bắt đầu công việc</b><small>Thao tác nhanh</small></div><div class="upload"><div class="uploadicon">↥</div><div><b>Nhập dữ liệu Excel</b><small>Kéo thả tệp hoặc chọn từ máy tính · XLSX, XLS, CSV</small></div><button class="cta">Chọn tệp mẫu</button></div><div class="tablewrap"><table><thead><tr><th>HOẠT ĐỘNG GẦN ĐÂY</th><th>THỜI GIAN</th><th>TRẠNG THÁI</th></tr></thead><tbody><tr><td>Đối chiếu công nợ tháng 10</td><td>Hôm nay, 09:42</td><td><span class="tag">Hoàn tất</span></td></tr><tr><td>Rà soát danh mục sản phẩm</td><td>Hôm qua, 16:18</td><td><span class="tag">Hoàn tất</span></td></tr><tr><td>Dự báo tồn kho quý IV</td><td>Hôm qua, 14:05</td><td><span class="tag">Đã lưu</span></td></tr></tbody></table></div></section><p class="note" id="note">Logo MatchMã gốc được giữ nguyên. Bấm nút mũi tên ở sidebar để thu gọn menu, icon vẫn hiển thị.</p></div></section></main>
 <script>
 const themes={
-bear:{name:"Bear Picnic",desc:"Gấu nhỏ, picnic và những nét vẽ tay ấm áp.",icons:["🐻","📒","🔎","🧺","🍯","♡","🌼"]},
-cat:{name:"Cat Café",desc:"Mèo con, ly cà phê và giấy ghi chú đáng yêu.",icons:["🐱","🐾","🔍","☕","🐟","😺","🎀"]},
-vampire:{name:"Sweet Vampire",desc:"Ma cà rồng tí hon, trăng sao và sắc tím gothic dịu.",icons:["🦇","📜","🔮","🩸","🌙","🖤","🕯️"]},
-bunny:{name:"Bunny Bakery",desc:"Thỏ trắng, bánh ngọt và cửa tiệm pastel.",icons:["🐰","🧁","🥕","🥐","🍰","💗","🎀"]},
-frog:{name:"Frog Garden",desc:"Ếch xanh, lá non, nấm nhỏ và khu vườn tươi mát.",icons:["🐸","🌿","🔍","🍃","🍄","🌱","🌼"]},
-puppy:{name:"Puppy Post",desc:"Cún con, phong thư và những tấm thiệp vẽ tay.",icons:["🐶","✉️","🔎","📦","📅","💌","🖍️"]},
-ghost:{name:"Ghost Candy",desc:"Những bé ma hiền lành, kẹo ngọt và ánh sao.",icons:["👻","📓","🔍","🍬","🗓️","💜","✨"]},
-fox:{name:"Fox Autumn",desc:"Cáo cam, lá mùa thu và tông màu ấm áp.",icons:["🦊","🍂","🔎","🧾","📦","🧡","🍁"]}
+bear:{name:"Bear Picnic",desc:"Gấu nhỏ, picnic và những nét vẽ tay ấm áp.",palette:["#e9a8c4","#a9d9c7","#f2d28d","#a9c7e8","#c9b5e8","#e7b49b","#a7c8bd"]},
+cat:{name:"Cat Café",desc:"Mèo con, ly cà phê và giấy ghi chú đáng yêu.",palette:["#d9a7cf","#b7d7e8","#c69b78","#efc0a7","#b6c9a8","#d8a8b8","#b7a9dc"]},
+vampire:{name:"Sweet Vampire",desc:"Ma cà rồng tí hon, trăng sao và sắc tím gothic dịu.",palette:["#b8a0d8","#d5b4ca","#9b8bbd","#d7a2a7","#b2a9d6","#c3b4dc","#8f83ac"]},
+bunny:{name:"Bunny Bakery",desc:"Thỏ trắng, bánh ngọt và cửa tiệm pastel.",palette:["#e9b2c9","#f0d49b","#c5d9b7","#e8b79e","#c9b9e7","#e9a9b8","#b9d9d2"]},
+frog:{name:"Frog Garden",desc:"Ếch xanh, lá non, nấm nhỏ và khu vườn tươi mát.",palette:["#a9d5a0","#b9dfc7","#d8c28d","#a9d8ce","#d5b7a3","#b8d28e","#d7dfad"]},
+puppy:{name:"Puppy Post",desc:"Cún con, phong thư và những tấm thiệp vẽ tay.",palette:["#b4cbe5","#e6b69c","#c4d9bd","#d8b5dc","#efcf91","#b5d8d3","#d9aebd"]},
+ghost:{name:"Ghost Candy",desc:"Những bé ma hiền lành, kẹo ngọt và ánh sao.",palette:["#c7b9e9","#e9b7d0","#b7d9e6","#d8c0ef","#f0d59b","#b7c8e9","#d7b4dc"]},
+fox:{name:"Fox Autumn",desc:"Cáo cam, lá mùa thu và tông màu ấm áp.",palette:["#e4ad7b","#c9b58d","#b7cfaa","#d99a78","#e7c98e","#c6a4a0","#a8c4b4"]}
 };
-const menuLabels=["Tổng quan","Rà soát dữ liệu","Điền mã sản phẩm","Dò công nợ","Dự báo tồn kho","Trợ lý","Cài đặt"];
-function paintIcons(key){const icons=themes[key].icons;document.querySelectorAll(".nav .ico").forEach((el,i)=>{el.textContent=icons[i]||"✿";el.style.fontSize="23px";el.style.border="0";el.style.background="transparent";el.style.filter="drop-shadow(1px 2px 0 #ffffffaa)"});}
+function stickerSvg(i,color,key){
+ const ink="#554958", fill=color;
+ const paths=[
+ '<path d="M7 16 16 7l9 9v11H7z" fill="__C__" stroke="__I__" stroke-width="1.8" stroke-linejoin="round"/><path d="M13 27v-7h6v7M5 16l11-11 11 11" fill="none" stroke="__I__" stroke-width="1.8" stroke-linecap="round"/>',
+ '<rect x="7" y="5" width="18" height="23" rx="3" fill="__C__" stroke="__I__" stroke-width="1.8"/><path d="M12 11h9M12 16h9M12 21h6M11 3h10" fill="none" stroke="__I__" stroke-width="1.8" stroke-linecap="round"/>',
+ '<circle cx="14" cy="14" r="8" fill="__C__" stroke="__I__" stroke-width="1.8"/><path d="m20 20 7 7M11 14h6M14 11v6" fill="none" stroke="__I__" stroke-width="1.8" stroke-linecap="round"/>',
+ '<path d="M5 10h21l-3 15H8z" fill="__C__" stroke="__I__" stroke-width="1.8"/><path d="M3 13h25M10 10 8 5M21 10l3-5M11 18l3 3 7-7" fill="none" stroke="__I__" stroke-width="1.8" stroke-linecap="round"/>',
+ '<rect x="5" y="7" width="22" height="20" rx="4" fill="__C__" stroke="__I__" stroke-width="1.8"/><path d="M10 4v6M22 4v6M5 13h22M10 18h4M18 18h4M10 23h4" fill="none" stroke="__I__" stroke-width="1.8" stroke-linecap="round"/>',
+ '<path d="M16 27S5 20 6 12c1-6 7-7 10-2 3-5 9-4 10 2 1 8-10 15-10 15z" fill="__C__" stroke="__I__" stroke-width="1.8"/><path d="m11 16 3 3 7-7" fill="none" stroke="__I__" stroke-width="1.8" stroke-linecap="round"/>',
+ '<path d="m16 4 3.5 7.5L27 15l-7.5 3.5L16 26l-3.5-7.5L5 15l7.5-3.5z" fill="__C__" stroke="__I__" stroke-width="1.8" stroke-linejoin="round"/><circle cx="25" cy="6" r="2" fill="#fff" stroke="__I__" stroke-width="1.2"/>'
+ ];
+ const faces={
+ bear:'<circle cx="25" cy="7" r="4" fill="#f5d7b8" stroke="#554958" stroke-width="1.2"/><circle cx="22" cy="4" r="2.5" fill="#f5d7b8" stroke="#554958" stroke-width="1.2"/><circle cx="28" cy="4" r="2.5" fill="#f5d7b8" stroke="#554958" stroke-width="1.2"/>',
+ cat:'<path d="m21 10 1-6 4 4 4-4 1 6" fill="#f4c6d9" stroke="#554958" stroke-width="1.2"/>',
+ vampire:'<path d="m21 5 4 4 4-4-1 9h-6z" fill="#b8a0d8" stroke="#554958" stroke-width="1.2"/>',
+ bunny:'<ellipse cx="23" cy="6" rx="2" ry="5" fill="#f4d4df" stroke="#554958" stroke-width="1.2"/><ellipse cx="28" cy="6" rx="2" ry="5" fill="#f4d4df" stroke="#554958" stroke-width="1.2"/>',
+ frog:'<circle cx="23" cy="7" r="3" fill="#b8dca5" stroke="#554958" stroke-width="1.2"/><circle cx="29" cy="7" r="3" fill="#b8dca5" stroke="#554958" stroke-width="1.2"/>',
+ puppy:'<path d="M22 5q-6-2-5 6l6 3M28 5q6-2 5 6l-6 3" fill="#d7b18f" stroke="#554958" stroke-width="1.2"/>',
+ ghost:'<path d="M21 13V7q0-5 5-5t5 5v6l-3-2-2 2-2-2z" fill="#fff" stroke="#554958" stroke-width="1.2"/>',
+ fox:'<path d="m20 11 1-8 5 5 5-5 1 8" fill="#e8a56f" stroke="#554958" stroke-width="1.2"/>'
+ };
+ const body=paths[i].replaceAll("__C__",fill).replaceAll("__I__",ink);
+ return '<svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 2c8 0 15 7 15 15S25 32 17 32 2 25 2 17 9 2 17 2" fill="#fff" stroke="#fff" stroke-width="3"/>'+body+faces[key]+'</svg>';
+}
+function paintIcons(key){document.querySelectorAll(".nav .ico").forEach((el,i)=>{el.innerHTML=stickerSvg(i,themes[key].palette[i],key);el.style.fontSize="";el.style.border="0";el.style.background="transparent";el.style.filter="";});}
 document.getElementById("themeToggle").addEventListener("click",()=>document.querySelector(".themebar").classList.toggle("open"));
 document.querySelectorAll(".theme").forEach(b=>b.addEventListener("click",()=>{const key=b.dataset.theme;document.body.dataset.theme=key;document.querySelector(".themebar").classList.remove("open");document.querySelectorAll(".theme").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.getElementById("themeHeading").textContent=themes[key].name+" ♡";document.getElementById("themeDesc").textContent=themes[key].desc;paintIcons(key)}));
 document.getElementById("collapse").addEventListener("click",()=>{document.body.classList.toggle("collapsed");document.getElementById("collapse").textContent=document.body.classList.contains("collapsed")?"›":"‹"});
 document.querySelectorAll(".nav").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".nav").forEach(x=>x.classList.remove("active"));b.classList.add("active")}));
-const themebar=document.querySelector(".themebar");document.querySelector("header").insertBefore(themebar,document.querySelector("header").firstChild);paintIcons("bear");
+const themebar=document.querySelector(".themebar");document.querySelector("header").appendChild(themebar);paintIcons("bear");
 </script></body></html></body></html>
