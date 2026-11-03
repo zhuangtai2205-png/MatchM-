@@ -290,3 +290,58 @@ body[data-theme="kitty"]{--mm-icon-ink:#b45483;--mm-icon-bg:#fff0f7;--mm-icon-bo
   display:grid!important;visibility:visible!important;opacity:1!important;
  }
 }
+
+
+/* Final icon/theme correction: use the theme-specific SVG inserted by updateThemeDecorations().
+   Remove legacy emoji pseudo-elements which were covering the real artwork. */
+#appSidebar .navicon:before,
+#appSidebar .navbtn .navicon:before{
+ content:none!important;display:none!important;
+}
+#appSidebar .navicon{
+ overflow:visible!important;font-size:0!important;line-height:0!important;
+}
+#appSidebar .navicon svg{
+ display:block!important;width:23px!important;height:23px!important;
+ max-width:23px!important;max-height:23px!important;overflow:visible!important;
+}
+#appSidebar .navbtn.active .navicon{
+ background:var(--mm-icon-bg,var(--mm-soft))!important;
+ border-color:var(--mm-accent)!important;
+}
+@media(min-width:951px){
+ body.matchma-sidebar-collapsed .app-shell.shell{
+  display:grid!important;grid-template-columns:68px minmax(0,1fr)!important;
+  gap:12px!important;
+ }
+ body.matchma-sidebar-collapsed .app-shell.shell #appSidebar.sidebar{
+  grid-column:1!important;grid-row:1!important;box-sizing:border-box!important;
+  width:68px!important;min-width:68px!important;max-width:68px!important;
+  min-height:0!important;overflow-x:hidden!important;padding:8px 5px!important;
+ }
+ body.matchma-sidebar-collapsed .app-shell.shell>.main{
+  grid-column:2!important;grid-row:1!important;min-width:0!important;
+ }
+ body.matchma-sidebar-collapsed #appSidebar .nav-folder-items{display:block!important}
+ body.matchma-sidebar-collapsed #appSidebar .navfolder-title{
+  font-size:0!important;justify-content:center!important;padding:4px 0!important;
+ }
+ body.matchma-sidebar-collapsed #appSidebar .navfolder-title:before{
+  content:"✿"!important;display:block!important;font-size:19px!important;
+ }
+ body.matchma-sidebar-collapsed #appSidebar .navfolder-title>span{display:none!important}
+ body.matchma-sidebar-collapsed #appSidebar .navbtn{
+  display:flex!important;width:48px!important;min-width:48px!important;
+  max-width:48px!important;height:42px!important;min-height:42px!important;
+  margin:4px auto!important;padding:4px!important;justify-content:center!important;
+ }
+ body.matchma-sidebar-collapsed #appSidebar .navicon{
+  display:grid!important;width:32px!important;height:32px!important;
+  min-width:32px!important;visibility:visible!important;opacity:1!important;
+ }
+ body.matchma-sidebar-collapsed #sidebarCollapseToggle{
+  display:grid!important;visibility:visible!important;opacity:1!important;
+  width:32px!important;height:32px!important;margin:0 auto!important;
+ }
+}
+/* Theme palette controls icon tile colors; SVG artwork itself changes in JS for all 10 themes. */
