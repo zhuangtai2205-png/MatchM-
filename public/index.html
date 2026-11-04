@@ -4043,7 +4043,7 @@ function renderManualSkuLookup(){
   const sku=String(r[skuKey]||'').trim(),name=String(r[nameKey]||''),spec=specKey?String(r[specKey]||''):'',unit=unitKey?String(r[unitKey]||''):'';
   const nNorm=norm(name+' '+spec+' '+unit),skuNorm=normalizeSku(sku),nt=[...new Set(getTokens(name+' '+spec+' '+unit))];
   const exactSku=skuNorm===qSku,exactName=norm(name)===qNorm,contains=nNorm.includes(qNorm)||qNorm.includes(norm(name));
-  const score=exactSku?1:exactName?1:Math.max(similarity(qt,nt),contains?.94:0);
+  const score=exactSku?1:exactName?1:Math.max(similarity(qt,nt),contains ? .94 : 0);
   const conflict=variantConflict(qt,nt)||productLineMismatch(q,name)||incompatibleFamily(qt,nt);
   return {sku,name,spec,unit,score,exactSku,exactName,conflict,index:i};
  }).filter(x=>x.exactSku||x.exactName||x.score>=.12).sort((a,b)=>(a.exactSku?-1:0)-(b.exactSku?-1:0)||(a.exactName?-1:0)-(b.exactName?-1:0)||b.score-a.score||a.index-b.index).slice(0,60);
