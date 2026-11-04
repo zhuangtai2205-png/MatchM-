@@ -4555,7 +4555,7 @@ function variantConflict(a,b){
  // Each entry is one product variant; words within an entry are aliases, entries are mutually exclusive.
  const variants=[
   // Các vị/loại nhân là lựa chọn loại trừ nhau, kể cả khi tên sản phẩm thuộc các dòng bánh khác nhau.
-  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai']],
+  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],['cheese','pho_mai','phomai'],['banana','chuoi'],['blueberry','viet_quat','vietquat'],['dark'],['white'],['milk'],['bittersweet'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai'],['banana','chuoi'],['blueberry','viet_quat','vietquat'],['dark'],['white'],['milk'],['bittersweet']],
   [['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang']],
   [['co_duong'],['khong_duong'],['it_duong']],
   [['co_gas'],['khong_gas']],
@@ -4678,7 +4678,11 @@ function productLineKey(value){
   ['metacare_standard',/\bmetacare\b/],
   ['similac_total_protection',/\bsimilac\b.*\btotal\s+protection\b|\btotal\s+protection\b.*\bsimilac\b/],
   ['similac_standard',/\bsimilac\b/],
-  ['enfagrow_neuropro',/\benfagrow\b.*\bneuropro\b/]
+  ['enfagrow_neuropro',/\benfagrow\b.*\bneuropro\b/],
+  ['nestle_milo',/\bmilo\b/],
+  ['nestle_koko_krunch',/\bkoko\s*krunch\b|\bkoko_krunch\b/],
+  ['nunest_gold',/\bnunest\b.*\bgold\b/],
+  ['nunest_dong_trung_ha_thao',/\bnunest\b.*\b(dong\s+trung\s+ha\s+thao|dong_trung_ha_thao)\b/]
  ];
  for(const [key,re] of rules)if(re.test(t))return key;
  return '';
