@@ -282,87 +282,20 @@ ghost:{name:"Ghost Candy",desc:"Những bé ma hiền lành, kẹo ngọt và á
 fox:{name:"Fox Autumn",desc:"Cáo cam, lá mùa thu và tông màu ấm áp.",palette:["#e4ad7b","#c9b58d","#b7cfaa","#d99a78","#e7c98e","#c6a4a0","#a8c4b4"]}
 };
 
-/* Eight genuinely different hand-drawn menu icon packs.
-   Each pack uses its own illustrated objects, not a shared icon with theme ornaments. */
-const themeMenuPacks = {
- bear: [
-  '<path d="M5 25L8 12l10-7 10 7 3 13-8 5H12z" fill="#f0c9a9"/><path d="M8 12l-3-5 8 2M28 12l3-5-8 2M12 25l6-7 6 7M18 18v12" fill="none"/><circle cx="18" cy="12" r="3" fill="#d99c78"/>',
-  '<rect x="8" y="5" width="20" height="26" rx="3" fill="#dce9d4"/><path d="M13 11h10M13 17h8M13 23h6M10 3h16" fill="none"/><circle cx="24" cy="25" r="4" fill="#e9b8a0"/>',
-  '<circle cx="15" cy="15" r="8" fill="#f4d99d"/><path d="M21 21l8 8M11 15q4-6 8 0M13 18h4" fill="none"/><path d="M7 6q-3-4-5 0M23 6q3-4 5 0" fill="none"/>',
-  '<path d="M5 12h26l-3 15H9z" fill="#c7ddc5"/><path d="M10 12q0-9 8-9t8 9M13 20l4 4 7-8" fill="none"/><path d="M7 15l-3 3 4 2" fill="none"/>',
-  '<rect x="5" y="7" width="26" height="23" rx="4" fill="#f5e2b6"/><path d="M11 3v8M25 3v8M5 14h26M11 19h5M11 24h3" fill="none"/><circle cx="24" cy="23" r="3" fill="#d99c78"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 4 3-4q8-4 9 4 1 8-12 16z" fill="#eab7c7"/><circle cx="13" cy="15" r="2" fill="#fff"/><path d="M18 18q3 3 6 0" fill="none"/>',
-  '<circle cx="18" cy="18" r="10" fill="#e7d5b6"/><path d="M18 4v5M18 27v5M4 18h5M27 18h5M11 11l3 3M22 22l3 3M25 11l-3 3M14 22l-3 3" fill="none"/><circle cx="18" cy="18" r="3" fill="#b2c99f"/>'
- ],
- cat: [
-  '<path d="M5 29V13l7-8 6 7 7-7 6 8v16z" fill="#ead8ed"/><path d="M5 14h26M13 29v-8h10v8M14 15l-2 3m12-3 2 3" fill="none"/><circle cx="18" cy="17" r="2" fill="#c49bc0"/>',
-  '<path d="M8 5h20v26H8z" fill="#f4e7f1"/><path d="M12 11h12M12 16h8M12 22h10M12 27h6" fill="none"/><path d="M24 5l4 4" fill="none"/><circle cx="24" cy="24" r="4" fill="#d8b6d4"/>',
-  '<path d="M8 8h15a6 6 0 0 1 0 12H8z" fill="#c8dce8"/><path d="M23 11q9-2 7 6-1 4-7 3M10 8q2-5 6-3" fill="none"/><path d="M13 13q3-3 6 0M15 17h3M11 24h16" fill="none"/>',
-  '<path d="M7 12h22l-2 18H9z" fill="#e9c7d9"/><path d="M12 12q0-8 6-8t6 8M13 21q5-5 10 0" fill="none"/><circle cx="18" cy="20" r="2" fill="#b78db4"/>',
-  '<rect x="5" y="7" width="26" height="23" rx="3" fill="#e6dff2"/><path d="M11 3v8M25 3v8M5 14h26M11 19h4M11 24h4" fill="none"/><path d="M21 20q4-5 7 0" fill="none"/>',
-  '<path d="M18 28S6 20 7 13q1-7 8-3l3 4 3-4q7-4 8 3 1 7-11 15z" fill="#e6bdd7"/><path d="M9 16h4m10 0h4M14 20q4 3 8 0" fill="none"/>',
-  '<circle cx="18" cy="18" r="9" fill="#d9e7e9"/><path d="M18 4v5M18 27v5M4 18h5M27 18h5M11 11l3 3M22 22l3 3M25 11l-3 3M14 22l-3 3" fill="none"/><path d="M14 17q4-4 8 0" fill="none"/>'
- ],
- vampire: [
-  '<path d="M5 29V14l6-7 7 5 7-5 6 7v15z" fill="#d8c6e7"/><path d="M5 14l13 7 13-7M13 29V20h10v9M18 21l-3 8h6z" fill="none"/><circle cx="18" cy="13" r="3" fill="#b49acb"/>',
-  '<path d="M8 5h20v26H8z" fill="#eee3f1"/><path d="M12 11h12M12 16h10M12 21h7M12 26h10" fill="none"/><path d="M22 5l6 6-6 1z" fill="#c4a9d3"/>',
-  '<path d="M8 16q0-10 10-10t10 10q0 6-10 6T8 16z" fill="#e7d7ee"/><path d="M18 22v7M14 29h8M11 14l4 3m8-3-4 3" fill="none"/><path d="M18 3v4M5 16h4M27 16h4" fill="none"/>',
-  '<path d="M6 13l12-8 12 8-4 16H10z" fill="#d9c3df"/><path d="M6 13l12 8 12-8M13 21l5 4 5-4" fill="none"/><path d="M15 13l3 4 3-4" fill="#fff1f1"/>',
-  '<circle cx="18" cy="19" r="11" fill="#e8dced"/><path d="M18 3v5M18 30v3M3 19h5M28 19h5M11 12l3 3m8 8 3 3M25 12l-3 3m-8 8-3 3" fill="none"/><path d="M14 20q4-6 8 0" fill="none"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 5 3-5q8-4 9 4 1 8-12 16z" fill="#d8c2e2"/><path d="M13 16l3 5 2-3 2 3 3-5" fill="none"/>',
-  '<path d="M18 5l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#d6c6e8"/><circle cx="18" cy="16" r="3" fill="#a68bbd"/><path d="M5 5l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="none"/>'
- ],
- bunny: [
-  '<path d="M5 29V14l7-7 6 5 7-5 6 7v15z" fill="#f4dce5"/><path d="M5 14h26M12 29v-8h12v8M14 14q-4-9 0-10t4 9M21 13q-1-10 3-9t1 10" fill="none"/>',
-  '<rect x="8" y="5" width="20" height="26" rx="3" fill="#fff0f3"/><path d="M12 11h12M12 16h10M12 22h12M12 27h7" fill="none"/><path d="M22 5q0-5 3-4t1 5" fill="none"/>',
-  '<path d="M8 27l5-18h10l5 18z" fill="#f1d7a2"/><path d="M13 9q0-7 5-7t5 7M13 17h10M15 22q3-3 6 0" fill="none"/><path d="M18 13v4" fill="none"/>',
-  '<path d="M6 13h24l-3 17H9z" fill="#f4c9d7"/><path d="M12 13q0-8 6-8t6 8M12 21q6-8 12 0M15 24h6" fill="none"/><circle cx="18" cy="18" r="2" fill="#fff4e6"/>',
-  '<rect x="5" y="7" width="26" height="23" rx="4" fill="#f9e6c8"/><path d="M11 3v8M25 3v8M5 14h26M11 19h5M20 19h5M11 24h5" fill="none"/><path d="M22 24l3-3 3 3" fill="none"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 5 3-5q8-4 9 4 1 8-12 16z" fill="#f2bfd0"/><path d="M12 16q3-4 6 0 3-4 6 0M14 21q4 3 8 0" fill="none"/>',
-  '<path d="M18 5c-8 0-13 6-13 13s5 13 13 13 13-6 13-13S26 5 18 5z" fill="#dcebdc"/><path d="M18 3v5M18 28v5M3 18h5M28 18h5M11 11l4 4m6 6 4 4M25 11l-4 4m-6 6-4 4" fill="none"/>'
- ],
- frog: [
-  '<path d="M5 29V16q0-9 13-9t13 9v13z" fill="#cce4b9"/><circle cx="11" cy="9" r="5" fill="#a8d18e"/><circle cx="25" cy="9" r="5" fill="#a8d18e"/><path d="M5 17h26M13 29v-7h10v7M13 18q5 5 10 0" fill="none"/>',
-  '<rect x="8" y="5" width="20" height="26" rx="3" fill="#e4efcf"/><path d="M12 11h12M12 16h9M12 22h12M12 27h7" fill="none"/><path d="M23 5q-1-5 3-4" fill="none"/>',
-  '<path d="M18 5q-8 0-8 9t8 9q8 0 8-9t-8-9z" fill="#d8e7a9"/><path d="M10 14h16M18 23v7M14 30h8" fill="none"/><circle cx="14" cy="11" r="2" fill="#fff"/><circle cx="22" cy="11" r="2" fill="#fff"/>',
-  '<path d="M6 12h24l-4 17H10z" fill="#b9dfc8"/><path d="M12 12q0-7 6-7t6 7M12 21q6 5 12 0M18 5V2" fill="none"/><path d="M14 18l4 3 4-3" fill="none"/>',
-  '<path d="M5 8h26v22H5z" fill="#e3efc9"/><path d="M11 4v8M25 4v8M5 15h26M11 21h5M20 21h5" fill="none"/><path d="M12 26q6-6 12 0" fill="none"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 5 3-5q8-4 9 4 1 8-12 16z" fill="#b7dfc5"/><path d="M12 17q3-4 6 0 3-4 6 0M14 22q4 3 8 0" fill="none"/>',
-  '<circle cx="18" cy="18" r="11" fill="#d7e9b8"/><path d="M18 4v5M18 27v5M4 18h5M27 18h5M11 11l3 3m8 8 3 3M25 11l-3 3m-8 8-3 3" fill="none"/><path d="M13 18q5-6 10 0" fill="none"/>'
- ],
- puppy: [
-  '<path d="M5 29V14l7-8 6 6 7-6 6 8v15z" fill="#d8e6f4"/><path d="M5 14h26M12 29v-8h12v8M7 7q-5-4-4 5l5 5M29 7q5-4 4 5l-5 5" fill="none"/>',
-  '<path d="M8 5h20v26H8z" fill="#f1e4d5"/><path d="M12 11h12M12 16h9M12 22h12M12 27h7" fill="none"/><path d="M22 5l6 6-6 1z" fill="#d3b08f"/>',
-  '<path d="M8 8h20v17H8z" fill="#dce9f5"/><path d="M12 13h12M12 18h8M18 25v5M13 30h10" fill="none"/><circle cx="24" cy="21" r="4" fill="#e7c39e"/>',
-  '<path d="M6 12h24l-3 17H9z" fill="#c7d8eb"/><path d="M12 12q0-8 6-8t6 8M12 21h12M15 17l3 4 3-4" fill="none"/><path d="M18 4v-2" fill="none"/>',
-  '<rect x="5" y="7" width="26" height="23" rx="3" fill="#e8e4f1"/><path d="M11 3v8M25 3v8M5 14h26M11 20h5M20 20h5M11 25h5" fill="none"/><path d="M22 24l3-3 3 3" fill="none"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 5 3-5q8-4 9 4 1 8-12 16z" fill="#c8d9ed"/><path d="M13 15q-4-5-6 0t6 5M23 15q4-5 6 0t-6 5M15 23h6" fill="none"/>',
-  '<circle cx="18" cy="18" r="10" fill="#dce8f2"/><path d="M18 4v5M18 27v5M4 18h5M27 18h5M11 11l3 3m8 8 3 3M25 11l-3 3m-8 8-3 3" fill="none"/><path d="M13 17q5-4 10 0M15 22h6" fill="none"/>'
- ],
- ghost: [
-  '<path d="M5 29V15q0-10 13-10t13 10v14l-6-4-7 4-7-4z" fill="#e4def5"/><path d="M5 15h26M12 29v-8h12v8M13 16h2m6 0h2M15 21q3 3 6 0" fill="none"/>',
-  '<rect x="8" y="5" width="20" height="26" rx="5" fill="#eee8fb"/><path d="M12 11h12M12 16h10M12 22h12M12 27h7" fill="none"/><circle cx="24" cy="25" r="3" fill="#d4c6ef"/>',
-  '<path d="M18 4v19M18 4q-8 0-8 8t8 8q8 0 8-8t-8-8z" fill="#d7c9f0"/><path d="M18 23v7M13 30h10M14 12h1m6 0h1M15 17q3 2 6 0" fill="none"/>',
-  '<path d="M6 13h24l-3 16H9z" fill="#cce7e8"/><path d="M12 13q0-7 6-7t6 7M12 20q6-5 12 0M15 24h6" fill="none"/><circle cx="18" cy="17" r="2" fill="#fff"/>',
-  '<circle cx="18" cy="18" r="12" fill="#eee4fb"/><path d="M18 3v5M18 28v5M3 18h5M28 18h5M11 11l3 3m8 8 3 3M25 11l-3 3m-8 8-3 3" fill="none"/><path d="M14 18q4-5 8 0" fill="none"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 5 3-5q8-4 9 4 1 8-12 16z" fill="#d9d1f1"/><path d="M13 16h2m6 0h2M15 21q3 3 6 0" fill="none"/>',
-  '<path d="M18 5l3 8 8 3-8 3-3 8-3-8-8-3 8-3z" fill="#e8dff8"/><circle cx="18" cy="16" r="3" fill="#b8addd"/><path d="M5 5l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="none"/>'
- ],
- fox: [
-  '<path d="M5 29V14L7 5l11 7L29 5l2 9v15z" fill="#f0d0ad"/><path d="M7 5l11 7 11-7M5 14h26M12 29v-8h12v8M14 17l4 5 4-5" fill="none"/>',
-  '<rect x="8" y="5" width="20" height="26" rx="2" fill="#f4e6ca"/><path d="M12 11h12M12 16h8M12 22h12M12 27h6" fill="none"/><path d="M23 5l5 5-5 1" fill="#d9ad7c"/>',
-  '<path d="M18 4l11 11-11 11L7 15z" fill="#e6c391"/><path d="M18 4v22M7 15h22M18 26v5M13 31h10" fill="none"/><circle cx="18" cy="15" r="4" fill="#fff0d8"/>',
-  '<path d="M6 13h24l-3 16H9z" fill="#d6dfc2"/><path d="M12 13q0-8 6-8t6 8M12 21l6-5 6 5M18 16v9" fill="none"/><path d="M10 25l-3 4m19-4 3 4" fill="none"/>',
-  '<rect x="5" y="7" width="26" height="23" rx="3" fill="#f1dfbd"/><path d="M11 3v8M25 3v8M5 14h26M11 20h5M20 20h5M11 25h5" fill="none"/><path d="M23 24l3-4 2 4" fill="none"/>',
-  '<path d="M18 29S5 21 6 13q1-8 9-4l3 5 3-5q8-4 9 4 1 8-12 16z" fill="#efc4a1"/><path d="M12 17l4 4 2-3 2 3 4-4M14 24l4-2 4 2" fill="none"/>',
-  '<path d="M18 4l4 9 9 4-9 4-4 9-4-9-9-4 9-4z" fill="#e9d5a8"/><path d="M18 11l3 6-3 6-3-6z" fill="#c98d5e"/><path d="M5 5l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="none"/>'
- ]
-};
+/* Clean, conventional menu icons shared by every theme. Theme CSS recolors them. */
+const standardMenuIcons = [
+ '<rect x="5" y="5" width="10" height="10" rx="1.8"/><rect x="21" y="5" width="10" height="10" rx="1.8"/><rect x="5" y="21" width="10" height="10" rx="1.8"/><rect x="21" y="21" width="10" height="10" rx="1.8"/>',
+ '<rect x="5" y="5" width="26" height="26" rx="2.5"/><path d="M5 13h26M5 21h26M14 13v18M23 13v18"/>',
+ '<circle cx="14" cy="14" r="8"/><path d="m20 20 8 8M11 14h6M14 11v6"/>',
+ '<path d="M5 9h26l-2 20H7L5 9Z"/><path d="M11 9a5 5 0 0 1 10 0M12 18l4 4 8-8"/>',
+ '<rect x="5" y="6" width="26" height="25" rx="2.5"/><path d="M11 3v6M25 3v6M5 13h26M11 19h5M20 19h5M11 25h5"/>',
+ '<circle cx="16" cy="11" r="5"/><path d="M6 30c.8-5.2 4.4-8 10-8s9.2 2.8 10 8M25 8h6M28 5v6"/>',
+ '<circle cx="16" cy="16" r="10"/><path d="M16 10v6l4 3M24 4l4 4"/>'
+];
 function applyThemeMenuIcons(key){
- const pack=themeMenuPacks[key]||themeMenuPacks.bear;
  document.querySelectorAll(".sidebar .nav .ico").forEach((el,index)=>{
-  const art=pack[index]||pack[0];
-  el.innerHTML='<svg viewBox="0 0 36 36" aria-hidden="true" style="width:36px;height:36px;overflow:visible"><g stroke="var(--ink)" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">'+art+'</g></svg>';
+  const art=standardMenuIcons[index]||standardMenuIcons[0];
+  el.innerHTML='<svg viewBox="0 0 36 36" aria-hidden="true" style="width:25px;height:25px;overflow:visible;filter:none;transform:none"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+art+'</g></svg>';
  });
 }
 applyThemeMenuIcons(document.body.dataset.theme);
