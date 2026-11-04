@@ -4552,37 +4552,44 @@ function incompatibleFamily(a,b){const fa=productFamily(a),fb=productFamily(b);r
 // Explicit product variants must never be treated as equivalent merely because package sizes/numbers match.
 function variantConflict(a,b){
  const A=new Set(a),B=new Set(b);
- // Each entry is one product variant; words within an entry are aliases, entries are mutually exclusive.
- const variants=[
-  // Các vị/loại nhân là lựa chọn loại trừ nhau, kể cả khi tên sản phẩm thuộc các dòng bánh khác nhau.
-  [['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],['cheese','pho_mai','phomai'],['banana','chuoi'],['blueberry','viet_quat','vietquat'],['dark'],['white'],['milk'],['bittersweet'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc'],['cheese','pho_mai','phomai'],['banana','chuoi'],['blueberry','viet_quat','vietquat'],['dark'],['white'],['milk'],['bittersweet']],
-  [['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang']],
+ // Mỗi nhóm dưới đây là một chiều biến thể độc lập. Không gộp thành một nhóm
+ // vì sản phẩm có thể đồng thời là Almond + Dark/White/Milk.
+ const dimensions=[
+  [['apple','tao'],['raisin','raisins','nho_kho'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['banana','chuoi'],['blueberry','viet_quat','vietquat'],['chicken','ga'],['beef','bo'],['shrimp','tom'],['spicy','cay','caymxc']],
+  [['dark'],['white'],['milk'],['bittersweet']],
   [['co_duong'],['khong_duong'],['it_duong']],
   [['co_gas'],['khong_gas']],
-  [['nguyen_kem'],['tach_beo']]
+  [['nguyen_kem'],['tach_beo']],
+  [['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang']]
  ];
- for(const group of variants){
+ for(const group of dimensions){
   const left=group.findIndex(alias=>alias.some(t=>A.has(t)));
   const right=group.findIndex(alias=>alias.some(t=>B.has(t)));
   if(left>=0&&right>=0&&left!==right)return true;
  }
- // Explicit formula-milk variants/lines must not collapse because their barcode is shared.
+ // Các thuộc tính này không đối lập nhau nhưng nếu chỉ một tên nêu rõ,
+ // không được tự động coi hai sản phẩm là cùng biến thể.
+ const presenceGroups=[
+  ['almond','hanh_nhan'],['chocolate','socola','socolat'],
+  ['vanilla','vani'],['cheese','pho_mai','phomai']
+ ];
+ for(const group of presenceGroups){
+  const left=group.some(t=>A.has(t)),right=group.some(t=>B.has(t));
+  if(left!==right)return true;
+ }
  const colostrumA=A.has('colostrum'),colostrumB=B.has('colostrum');
  if(colostrumA!==colostrumB && (A.has('metacare')||B.has('metacare')))return true;
  const totalProtectionA=A.has('total')&&A.has('protection'),totalProtectionB=B.has('total')&&B.has('protection');
  if(totalProtectionA!==totalProtectionB && (A.has('similac')||B.has('similac')))return true;
- // Ensure product lines are distinct: Ensure Gold is not Ensure Vanilla/Original.
  const ensureA=brandIdentity(a.join(' '))==='ensure',ensureB=brandIdentity(b.join(' '))==='ensure';
  if(ensureA&&ensureB){
   const lineGroups=[['gold'],['vanilla','vani'],['original']];
   const ea=lineGroups.findIndex(g=>g.some(t=>A.has(t))),eb=lineGroups.findIndex(g=>g.some(t=>B.has(t)));
   if(ea>=0&&eb>=0&&ea!==eb)return true;
  }
- // Product stage/series is a hard variant: Alpha 2 != Alpha 3, 1+ != 2+, Sáng Tạo 1 != 5.
  const stages=x=>x.filter(t=>/^stage_/.test(t));
  const sa=stages(a),sb=stages(b);
  if(sa.length&&sb.length&&!sa.some(x=>sb.includes(x)))return true;
- // Known brand identities are compared by canonical brand, never by generic description words.
  const ba=brandIdentity(a.join(' ')),bb=brandIdentity(b.join(' '));
  if(ba&&bb&&ba!==bb)return true;
  return false;
@@ -4590,12 +4597,15 @@ function variantConflict(a,b){
 function hasExplicitVariant(value){
  const T=new Set(getTokens(value));
  return [...T].some(t=>t.startsWith('stage_')||t.startsWith('color_'))||
-  ['apple','tao','raisin','raisins','nho_kho','almond','hanh_nhan','orange','cam','strawberry','dau_tay','dau','grape','nho','chocolate','socola','socolat','vanilla','vani','co_duong','khong_duong','co_gas','khong_gas','nguyen_kem','tach_beo'].some(t=>T.has(t));
+  ['apple','tao','raisin','raisins','nho_kho','almond','hanh_nhan','orange','cam','strawberry','dau_tay','dau','grape','nho','chocolate','socola','socolat','vanilla','vani','banana','chuoi','blueberry','viet_quat','vietquat','dark','white','milk','bittersweet','cheese','pho_mai','phomai','co_duong','khong_duong','co_gas','khong_gas','nguyen_kem','tach_beo'].some(t=>T.has(t));
 }
 function variantMissing(a,b){
  const A=new Set(getTokens(a)),B=new Set(getTokens(b));
  const groups=[
-  ['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],['vanilla','vani'],
+  ['apple','tao'],['raisin','raisins','nho_kho'],['almond','hanh_nhan'],['orange','cam'],
+  ['strawberry','dau_tay','dau'],['grape','nho'],['chocolate','socola','socolat'],
+  ['vanilla','vani'],['cheese','pho_mai','phomai'],['banana','chuoi'],
+  ['blueberry','viet_quat','vietquat'],['dark'],['white'],['milk'],['bittersweet'],
   ['color_do'],['color_bac'],['color_xanh'],['color_xanh_nhat'],['color_vang'],
   ['co_duong'],['khong_duong'],['it_duong'],['co_gas'],['khong_gas']
  ];
@@ -4604,7 +4614,6 @@ function variantMissing(a,b){
   const lineGroups=[['gold'],['vanilla','vani'],['original']];
   for(const group of lineGroups){const left=group.some(t=>A.has(t)),right=group.some(t=>B.has(t));if(left!==right)return true}
  }
- // Nếu một tên có thuộc tính mô tả quan trọng mà tên còn lại không ghi, không tự ghép.
  const descriptiveGroups=[
   ['huong_dau','dau_tay'],['huong_cam','cam'],['huong_nho','nho'],['huong_xoai','xoai'],
   ['socola','chocolate','socolat'],['huong_vani','vani','vanilla'],['nguyen_chat','vi_tu_nhien'],
