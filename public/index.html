@@ -4086,7 +4086,7 @@ function runAutoFill(){
    const hasRice=(words,txt)=>['com','com_trang','gao','gao_nep','gao_trang'].some(t=>words.has(t))||/cơm\s+trắng|com\s+trang|gạo\s+trắng|gao\s+trang/i.test(txt);
    const hasRevive=(words,txt)=>words.has('revive')||/\brevive\b/i.test(txt);
    const riceVsDrink=(hasRice(sourceWords,name+' '+spec)&&hasRevive(masterWords,m.name))||(hasRevive(sourceWords,name+' '+spec)&&hasRice(masterWords,m.name));
-   if(brandUncertain(name,m.name)||familyConflict||lineMismatch||stageMismatch||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<2)continue;
+   if(brandUncertain(name,m.name)||familyConflict||lineMismatch||stageMismatch||criticalProductMismatch(name+' '+spec,m.name+' '+m.spec)||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<2)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const variantBonus=hasExplicitVariant(name)&&!variantMissing(name,m.name)?.25:0;
    const rank=score+variantBonus-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
@@ -4728,6 +4728,22 @@ function productLineKey(value){
  for(const [key,re] of rules)if(re.test(t))return key;
  return '';
 }
+// Critical identity guard: exact barcode/SKU never overrides these explicit product distinctions.
+function criticalProductMismatch(a,b){
+ const canon=v=>String(v??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ');
+ const x=canon(a),y=canon(b);
+ const has=(s,re)=>re.test(' '+s+' ');
+ const paired=re=>has(x,re)!==has(y,re);
+ if(paired(/\b(pho mai|phomai|cheese)\b/))return true;
+ if(paired(/\b(viet quat|blueberry)\b/)||paired(/\b(chuoi|banana)\b/))return true;
+ const line=s=>/\bnestle\b/.test(s)?(/\bmilo\b/.test(s)?'nestle_milo':/\bkoko krunch\b/.test(s)?'nestle_koko_krunch':''):'';
+ const lx=line(x),ly=line(y);if(lx&&ly&&lx!==ly)return true;
+ const nunest=s=>/\bnunest\b/.test(s)?(/\bgold\b/.test(s)?'nunest_gold':/\bdong trung ha thao\b/.test(s)?'nunest_dong_trung_ha_thao':''):'';
+ const nx=nunest(x),ny=nunest(y);if(nx&&ny&&nx!==ny)return true;
+ const chocolate=s=>['dark','white','milk','bittersweet'].find(v=>new RegExp('\\b'+v+'\\b').test(s))||'';
+ const cx=chocolate(x),cy=chocolate(y);if(cx!==cy&&(cx||cy))return true;
+ return false;
+}
 function productLineMismatch(a,b){const x=productLineKey(a),y=productLineKey(b);return !!(x&&y&&x!==y)}
 function productLineUncertain(a,b){const x=productLineKey(a),y=productLineKey(b);return !!(x!==y&&(!x||!y))}
 function productStage(value){
@@ -4852,7 +4868,7 @@ async function runMatch(){
     const nameScore=Math.min(1,similarity(queryNameTokens,m.nameTokens)+brandEvidence*.15);
     const exactSku=!!querySku&&normalizeSku(querySku)===normalizeSku(m.code);
     // Exact SKU is supporting evidence only; it cannot override contradictory product stage, variant, or size.
-    const hardVariantConflict=variantConflict(queryNameTokens,m.nameTokens)||productLineMismatch(queryName,m.name)||productStageMismatch(queryName+' '+querySpec,m.name+' '+m.spec);
+    const hardVariantConflict=criticalProductMismatch(queryName+' '+querySpec,m.name+' '+m.spec)||variantConflict(queryNameTokens,m.nameTokens)||productLineMismatch(queryName,m.name)||productStageMismatch(queryName+' '+querySpec,m.name+' '+m.spec);
     const hardSizeConflict=measureConflict(queryName+' '+querySpec,m.name+' '+m.spec);
     if(hardVariantConflict||variantMissing(queryName,m.name)||hardSizeConflict)continue;
     // A verified same-brand signal counts as evidence; it never overrides variant or size conflicts.
