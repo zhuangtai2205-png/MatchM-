@@ -3206,12 +3206,6 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
  </div>
 </section>
 <section class="page" id="page-autofill">
- <div class="panel" id="manualSkuLookup">
-  <div class="sectionhead"><div><h2>🔎 Dò và gắn mã trực tiếp</h2><p>Tra cứu ngay trong danh mục chuẩn đã nạp. Không cần tải file sản phẩm cần dò.</p></div><span class="pill" id="manualSkuCatalogCount">0 mã trong danh mục</span></div>
-  <div class="resulttools"><input id="manualSkuQuery" class="search" type="search" placeholder="Nhập tên sản phẩm, mã vạch hoặc SKU để dò…" autocomplete="off"><button type="button" class="btn alt" id="manualSkuClear">Xóa tìm kiếm</button></div>
-  <div id="manualSkuLookupInfo" class="hint">Hãy nạp danh mục chuẩn tại mục “Danh mục” một lần để bắt đầu tra cứu.</div>
-  <div id="manualSkuLookupResults" class="empty">Nhập từ khóa để tìm mã trong danh mục chuẩn.</div>
- </div>
  <div class="sectionhead"><div><h2>⇧ Rà soát và tự điền mã từ file gốc</h2><p>Ghép tên sản phẩm với danh mục chuẩn đã tải ở mục “Danh mục”, sau đó xuất lại Excel theo đúng thứ tự dòng của file gốc.</p></div></div>
  <div class="panel"><h2>1. Tải file nguồn</h2><label class="upload"><span class="bigicon">📑</span><strong>Chọn file gốc cần điền mã</strong><input id="autoFillFile" type="file" accept=".csv,.xlsx,.xls"></label><div class="template-row"><span>File mẫu: STT, tên sản phẩm, quy cách, ĐVT, SKU</span><button class="btn alt sample-download" data-sample="autofill">Tải file mẫu ↓</button></div><div id="autoFillFileInfo" class="hint">Chưa tải file.</div><div class="rule">STT và các cột nguồn được giữ nguyên thứ tự; ứng dụng không sắp xếp dòng. Mã đề xuất và thông tin rà soát sẽ nằm ở cột bổ sung. Nếu chọn cột mã có sẵn, ứng dụng chỉ điền ô trống trừ khi bạn bật ghi đè.</div></div>
  <div class="panel"><h2>2. Chọn các cột</h2><div class="grid">
@@ -3225,7 +3219,7 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
  <div class="field" style="max-width:420px;margin-top:12px"><label for="autoFillExportName">Tên file kết quả khi tải về</label><input id="autoFillExportName" type="text" value="BARCODE_STC_MOI" maxlength="120" placeholder="Nhập tên file muốn lưu"></div><div class="actions"><button class="btn" id="runAutoFill" disabled>Rà soát và điền mã</button><button class="btn alt" id="exportAutoFill" disabled>Xuất Excel đã điền mã ↓</button></div>
  <div id="autoFillSummary" class="hint">Cần tải danh mục chuẩn có SKU và file gốc trước khi chạy.</div>
  </div>
- <div class="panel"><div class="sectionhead"><div><h2>3. Xem trước file sau rà soát</h2><p>Hiển thị STT nguồn, mã đề xuất, điểm tương đồng và trạng thái điền. Excel xuất ra giữ nguyên thứ tự dòng ban đầu.</p></div></div><div id="autoFillPreview" class="empty">Chưa chạy rà soát.</div></div>
+ <div class="panel"><div class="sectionhead"><div><h2>3. Kết quả rà soát và điền mã</h2><p>Lọc trực tiếp các dòng kết quả sau khi chạy; bộ lọc chỉ thay đổi phần đang xem, không thay đổi dữ liệu xuất Excel.</p></div></div><div class="resulttools"><input class="search" id="autoFillResultSearch" type="search" placeholder="Lọc kết quả theo STT, tên hàng, SKU hoặc ghi chú…"><select id="autoFillResultStatus" aria-label="Lọc trạng thái kết quả"><option value="all">Tất cả kết quả</option><option value="Đã điền theo ngưỡng OK">Đã tự điền</option><option value="Chờ chọn mã khi xuất file">Chờ chọn mã</option><option value="Đã chọn mã thủ công">Đã chọn thủ công</option><option value="Có mã sẵn — giữ nguyên">Có mã sẵn — giữ nguyên</option><option value="Không có gợi ý phù hợp">Không có gợi ý</option><option value="Không ghép — khác thương hiệu">Khác thương hiệu</option></select><button type="button" class="btn alt" id="autoFillResultClear">Xóa lọc</button></div><div id="autoFillResultCount" class="hint">Chưa có kết quả để lọc.</div><div id="autoFillPreview" class="empty">Chưa chạy rà soát.</div></div>
 </section>
 
 <section class="page" id="page-invoicecompare">
@@ -4029,33 +4023,10 @@ function exportPlatformAudit(){
  sourceCols.forEach(c=>{const r=(x.sourceResults||[]).find(v=>v.source===c.key)||{};row[c.status]=r.status==='found'?'Có sản phẩm':r.status==='not_found'?'Không tìm thấy':r.status==='unverified'?'Chưa kiểm tra được':'Chưa kiểm tra';row[c.search]=r.searchUrl||(fallback.find(v=>v.key===c.key)||{}).url||'';row[c.product]=r.productUrl||'';row[c.title]=r.productTitle||'';row[c.note]=r.message||''});return row});
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows,{header:[...headers,statusCol,queryCol,checkedCol,...sourceCols.flatMap(c=>[c.status,c.search,c.product,c.title,c.note])]}),'Ra soat san');const exportName=matchmaChooseExcelFilename('matchma-ra-soat-san.xlsx');if(!exportName)return;XLSX.writeFile(wb,exportName);
 }
-function renderManualSkuLookup(){
- const input=$('manualSkuQuery'),root=$('manualSkuLookupResults'),info=$('manualSkuLookupInfo'),count=$('manualSkuCatalogCount');
- if(!input||!root||!info||!count)return;
- const skuKey=$('skuCol')?.value||'',nameKey=$('nameCol')?.value||'',specKey=$('specCol')?.value||'',unitKey=$('unitCol')?.value||'';
- const catalog=masterRows.filter(r=>String(r[skuKey]||'').trim()&&String(r[nameKey]||'').trim());
- count.textContent=catalog.length.toLocaleString('vi-VN')+' mã trong danh mục';
- if(!catalog.length){info.textContent='Chưa có danh mục chuẩn hợp lệ. Hãy nạp danh mục có cột SKU và tên hàng trong mục “Danh mục”; không cần tải file cần dò.';root.className='empty';root.textContent='Chưa có dữ liệu để tra cứu.';return}
- const q=String(input.value||'').trim();
- if(!q){info.textContent='Danh mục đã sẵn sàng. Nhập tên hàng, mã vạch hoặc SKU; kết quả sẽ hiện ngay bên dưới.';root.className='empty';root.textContent='Đang chờ từ khóa tìm kiếm.';return}
- const qNorm=norm(q),qSku=normalizeSku(q),qt=[...new Set(getTokens(q))];
- const ranked=catalog.map((r,i)=>{
-  const sku=String(r[skuKey]||'').trim(),name=String(r[nameKey]||''),spec=specKey?String(r[specKey]||''):'',unit=unitKey?String(r[unitKey]||''):'';
-  const nNorm=norm(name+' '+spec+' '+unit),skuNorm=normalizeSku(sku),nt=[...new Set(getTokens(name+' '+spec+' '+unit))];
-  const exactSku=skuNorm===qSku,exactName=norm(name)===qNorm,contains=nNorm.includes(qNorm)||qNorm.includes(norm(name));
-  const score=exactSku?1:exactName?1:Math.max(similarity(qt,nt),contains ? .94 : 0);
-  const conflict=variantConflict(qt,nt)||productLineMismatch(q,name)||incompatibleFamily(qt,nt);
-  return {sku,name,spec,unit,score,exactSku,exactName,conflict,index:i};
- }).filter(x=>x.exactSku||x.exactName||x.score>=.12).sort((a,b)=>(a.exactSku?-1:0)-(b.exactSku?-1:0)||(a.exactName?-1:0)-(b.exactName?-1:0)||b.score-a.score||a.index-b.index).slice(0,60);
- info.textContent='Tìm thấy '+ranked.length.toLocaleString('vi-VN')+' kết quả phù hợp'+(ranked.length===60?' (đang hiển thị tối đa 60 dòng).':'')+'. Mã chỉ là gợi ý tra cứu; kiểm tra tên, quy cách và thuộc tính trước khi gắn.';
- if(!ranked.length){root.className='empty';root.textContent='Không tìm thấy sản phẩm phù hợp trong danh mục hiện tại.';return}
- root.className='tablewrap';
- root.innerHTML='<table><thead><tr><th>SKU / Mã vạch</th><th>Tên sản phẩm chuẩn</th><th>Quy cách</th><th>ĐVT</th><th>Độ phù hợp</th><th>Kiểm tra</th></tr></thead><tbody>'+ranked.map(x=>'<tr><td><b>'+esc(x.sku)+'</b></td><td>'+esc(x.name)+'</td><td>'+esc(x.spec||'—')+'</td><td>'+esc(x.unit||'—')+'</td><td>'+(Math.round(x.score*100))+'%'+(x.exactSku?' · Trùng mã':x.exactName?' · Trùng tên':'')+'</td><td>'+(x.conflict?'<span class="badge review">Có khác biệt cần xem</span>':'<span class="badge good">Không thấy xung đột rõ</span>')+'</td></tr>').join('')+'</tbody></table>';
-}
 function initAutoFill(){
- $('manualSkuQuery').addEventListener('input',renderManualSkuLookup);
- $('manualSkuClear').addEventListener('click',()=>{$('manualSkuQuery').value='';renderManualSkuLookup();$('manualSkuQuery').focus()});
- renderManualSkuLookup();
+ $('autoFillResultSearch').addEventListener('input',renderAutoFillPreview);
+ $('autoFillResultStatus').addEventListener('change',renderAutoFillPreview);
+ $('autoFillResultClear').addEventListener('click',()=>{$('autoFillResultSearch').value='';$('autoFillResultStatus').value='all';renderAutoFillPreview();$('autoFillResultSearch').focus()});
  $('autoFillFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);autoFillRows=d.rows.map(row=>({...row}));autoFillHeaders=d.headers;autoFillResults=[];fillSelect('autoFillSttCol',d.headers,guessStt(d.headers),true);fillSelect('autoFillNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('autoFillSpecCol',d.headers,guess(d.headers,/quy cách|quy cach|spec|dung tích|dung tich|size|pack/i),true);fillSelect('autoFillUomCol',d.headers,guess(d.headers,/đvt|dvt|đơn vị|don vi|unit|uom|dv tính|dv tinh/i),true);fillAutoFillTargets(d.headers);$('autoFillFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng, giữ nguyên thứ tự đọc từ file.';$('exportAutoFill').disabled=true;$('autoFillSummary').textContent=masterRows.length?'Đã có danh mục chuẩn. Kiểm tra cột tên và bấm rà soát.':'Hãy tải danh mục chuẩn tại mục “Danh mục” trước khi chạy.';updateAutoFillButton()}catch(err){alert(err.message||'Không đọc được file');}});
  ['autoFillNameCol','autoFillSttCol','autoFillSpecCol','autoFillUomCol','autoFillTargetCodeCol','autoFillOverwrite'].forEach(id=>$(id).addEventListener('change',updateAutoFillButton));
  $('runAutoFill').addEventListener('click',runAutoFill);$('exportAutoFill').addEventListener('click',exportAutoFill);
@@ -4116,9 +4087,13 @@ function runAutoFill(){
  $('autoFillSummary').textContent='Đã rà '+autoFillResults.length+' dòng, thứ tự nguồn được giữ nguyên. Có gợi ý: '+autoFillResults.filter(x=>x.sku).length+' · đủ điều kiện tự điền theo ngưỡng: '+autoFillResults.filter(x=>x.status==='Đã điền theo ngưỡng OK').length+' · cần kiểm tra: '+autoFillResults.filter(x=>x.status==='Chờ chọn mã khi xuất file').length+'.';
 }
 function renderAutoFillPreview(){
- const root=$('autoFillPreview');if(!autoFillResults.length){root.className='empty';root.textContent='Chưa chạy rà soát.';return}
- root.className='tablewrap';const rows=autoFillResults.slice(0,100);
- root.innerHTML='<table><thead><tr><th>Dòng nguồn</th><th>STT gốc</th><th>Tên hàng</th><th>Mã đề xuất</th><th>Tên chuẩn</th><th>Điểm</th><th>Chọn mã để xuất</th><th>Trạng thái / ghi chú</th></tr></thead><tbody>'+rows.map((x,i)=>{const options=(x.suggestions||[]).map(c=>'<option value="'+esc(c.m.sku)+'" '+(x.selectedSku===c.m.sku?'selected':'')+'>'+esc(c.m.sku+' · '+c.m.name+' ('+Math.round(c.score*100)+'%)')+'</option>').join('');const disabled=(!options)||(x.originalCode&&!x.overwrite);return '<tr><td>'+x.sourceIndex+'</td><td>'+esc(x.stt)+'</td><td>'+esc(x.name)+'</td><td>'+esc(x.sku||'—')+'</td><td>'+esc(x.masterName||'—')+'</td><td>'+x.score+'%</td><td><select data-autofill-select="'+i+'" '+(disabled?'disabled':'')+'><option value="">— Không chọn —</option>'+options+'</select></td><td>'+esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div></td></tr>'}).join('')+'</tbody></table>'+(autoFillResults.length>100?'<p class="hint">Đang xem 100 dòng đầu trong tổng '+autoFillResults.length+' dòng; file Excel sẽ có đầy đủ các dòng.</p>':'');
+ const root=$('autoFillPreview'),count=$('autoFillResultCount');if(!autoFillResults.length){root.className='empty';root.textContent='Chưa chạy rà soát.';count.textContent='Chưa có kết quả để lọc.';return}
+ const q=String($('autoFillResultSearch')?.value||'').trim().toLocaleLowerCase('vi'),status=$('autoFillResultStatus')?.value||'all';
+ const filtered=autoFillResults.filter(x=>(!q||[x.stt,x.name,x.originalCode,x.sku,x.masterName,x.status,x.reason].some(v=>String(v??'').toLocaleLowerCase('vi').includes(q)))&&(status==='all'||x.status===status));
+ count.textContent='Đang hiển thị '+filtered.length.toLocaleString('vi-VN')+' / '+autoFillResults.length.toLocaleString('vi-VN')+' dòng kết quả.';
+ if(!filtered.length){root.className='empty';root.textContent='Không có dòng kết quả phù hợp với bộ lọc.';return}
+ root.className='tablewrap';const rows=filtered.slice(0,100);
+ root.innerHTML='<table><thead><tr><th>Dòng nguồn</th><th>STT gốc</th><th>Tên hàng</th><th>Mã đề xuất</th><th>Tên chuẩn</th><th>Điểm</th><th>Chọn mã để xuất</th><th>Trạng thái / ghi chú</th></tr></thead><tbody>'+rows.map(x=>{const i=autoFillResults.indexOf(x),options=(x.suggestions||[]).map(c=>'<option value="'+esc(c.m.sku)+'" '+(x.selectedSku===c.m.sku?'selected':'')+'>'+esc(c.m.sku+' · '+c.m.name+' ('+Math.round(c.score*100)+'%)')+'</option>').join('');const disabled=(!options)||(x.originalCode&&!x.overwrite);return '<tr><td>'+x.sourceIndex+'</td><td>'+esc(x.stt)+'</td><td>'+esc(x.name)+'</td><td>'+esc(x.sku||'—')+'</td><td>'+esc(x.masterName||'—')+'</td><td>'+x.score+'%</td><td><select data-autofill-select="'+i+'" '+(disabled?'disabled':'')+'><option value="">— Không chọn —</option>'+options+'</select></td><td>'+esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div></td></tr>'}).join('')+'</tbody></table>'+(autoFillResults.length>100?'<p class="hint">Đang xem 100 dòng đầu trong tổng '+autoFillResults.length+' dòng; file Excel sẽ có đầy đủ các dòng.</p>':'');
  root.querySelectorAll('[data-autofill-select]').forEach(sel=>sel.addEventListener('change',()=>{const x=autoFillResults[Number(sel.dataset.autofillSelect)];if(!x)return;x.selectedSku=sel.value;if(x.targetColumn){if(!x.originalCode||x.overwrite)x.output[x.targetColumn]=sel.value||x.originalCode}else if(x.filledColumn)x.output[x.filledColumn]=sel.value||'';if(sel.value){x.status='Đã chọn mã thủ công';x.reason='Mã được người dùng chọn để xuất Excel.'}else if(!x.autoApproved){x.status=x.suggestions&&x.suggestions.length?'Chờ chọn mã khi xuất file':'Không có gợi ý phù hợp';}const statusCell=sel.closest('tr').lastElementChild;if(statusCell)statusCell.innerHTML=esc(x.status)+'<div class="muted">'+esc(x.reason)+'</div>'}));
 }
 function exportAutoFill(){
