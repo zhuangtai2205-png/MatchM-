@@ -3010,6 +3010,71 @@ body #appSidebar .nav-folder-title .navfolder-tab-icon,
 body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
 
 </style>
+<style id="preview-handmade-layout">
+/* PREVIEW INTEGRATION — presentation only; production DOM, IDs and scripts remain intact */
+body{font-family:Nunito,"Be Vietnam Pro",system-ui,sans-serif!important}
+body:before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='220' viewBox='0 0 260 220'%3E%3Cg fill='none' stroke='%239b80a8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M29 36c8-12 20-12 28 0-8 12-20 12-28 0zM43 22v28M29 36h28M171 28l4 10 10 4-10 4-4 10-4-10-10-4 10-4zM212 126c-10-8-20 5-10 14l10 9 10-9c10-9 0-22-10-14zM48 151l25-25 10 10-25 25-12 3zM70 126l10-10 10 10-10 10M143 168q14-22 28 0q-14 22-28 0zM157 151v34M143 168h28M104 47l13 0 0 18-13 0zM109 42h13v5h-13z'/%3E%3C/g%3E%3C/svg%3E");background-repeat:repeat;background-size:260px 220px}
+header.app-header{max-width:1400px!important;min-height:68px!important;margin:12px auto 10px!important;padding:8px 22px!important;gap:14px!important}
+.app-header .brand{gap:10px!important}
+.app-header .brand-mark{width:48px!important;height:48px!important;flex:0 0 48px!important;border-radius:14px!important}
+.app-header .brand-copy h1{display:block!important;font:800 21px/1.1 Nunito,sans-serif!important;letter-spacing:-.4px!important;margin:0!important}
+.app-header .subbrand{display:flex!important;align-items:center;gap:6px!important;font-size:10px!important;opacity:.82}
+.app-header .headright{gap:8px!important;flex-wrap:wrap}
+.app-shell.shell{max-width:1400px!important;grid-template-columns:220px minmax(0,1fr)!important;gap:14px!important;padding:0 22px 38px!important}
+#appSidebar.sidebar{position:sticky!important;top:12px!important;align-self:start!important;display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:5px!important;min-width:0!important;padding:12px 10px!important;border:1.4px solid rgba(91,72,111,.25)!important;border-radius:18px!important;box-shadow:3px 4px 0 rgba(120,96,140,.12)!important;overflow:visible!important}
+#appSidebar .sidebar-topline{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:6px!important}
+#sidebarCollapseToggle{display:flex!important;align-items:center!important;justify-content:center!important;width:30px!important;height:29px!important;flex:0 0 30px!important;border:1px solid rgba(91,72,111,.3)!important;border-radius:9px!important;background:rgba(255,255,255,.9)!important;box-shadow:1px 2px 0 rgba(120,96,140,.12)!important}
+#appSidebar .sidebar-account-shortcut{border-radius:12px!important;margin:2px 0 5px!important}
+#appSidebar .navbtn{min-height:39px!important;padding:7px 9px!important;margin:1px 0!important;gap:9px!important;border-radius:11px!important;font-weight:750!important}
+#appSidebar .navicon{width:34px!important;height:34px!important;flex:0 0 34px!important;display:grid!important;place-items:center!important;border:1.2px solid rgba(91,72,111,.28)!important;border-radius:10px!important;background:rgba(255,255,255,.86)!important;box-shadow:1px 2px 0 rgba(120,96,140,.12)!important;font-size:18px!important}
+#appSidebar .navbtn.active{box-shadow:2px 2px 0 rgba(120,96,140,.18)!important}
+#appSidebar .nav-folder{margin:2px 0!important;border-radius:11px!important}
+#appSidebar .navfolder-title{padding:8px 9px!important;border-radius:10px!important}
+#appSidebar .nav-folder-items{padding:2px 0 3px 7px!important}
+.app-shell .main{min-width:0!important}
+.app-shell .page.active{animation:fade .18s ease!important}
+.app-shell .hero,.app-shell .panel{border:1.2px solid rgba(91,72,111,.16)!important;border-radius:17px!important;box-shadow:3px 4px 0 rgba(120,96,140,.10)!important}
+.app-shell .hero{padding:21px!important}
+.app-shell .panel{padding:17px!important}
+.app-shell .stats{gap:10px!important}
+.app-shell .stat{border:1.1px solid rgba(91,72,111,.16)!important;border-radius:14px!important;box-shadow:2px 3px 0 rgba(120,96,140,.09)!important}
+.app-shell .tablewrap{border:1px solid rgba(91,72,111,.2)!important;border-radius:12px!important}
+.app-shell th{font-weight:800!important}
+.app-shell .btn,.app-shell button{transition:transform .14s ease,box-shadow .14s ease}
+.app-shell .btn:hover{transform:translateY(-1px)}
+/* Keep the existing eight theme identities and their theme JS; only soften shared surfaces. */
+@media(min-width:951px){
+ .app-shell.shell.sidebar-collapsed{grid-template-columns:68px minmax(0,1fr)!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar{align-items:center!important;padding:9px 6px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-topline{justify-content:center!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-section-heading,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-copy,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-arrow,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navbtn>span:not(.navicon),
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title>span:not(.navicon),
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-help,
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .sidebar-account-shortcut,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navbtn,
+ .app-shell.shell.sidebar-collapsed #appSidebar .navfolder-title{justify-content:center!important;padding:6px 2px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder-items{display:none!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .navicon{width:36px!important;height:36px!important;flex-basis:36px!important}
+ .app-shell.shell.sidebar-collapsed #appSidebar .nav-folder{width:100%!important}
+}
+@media(max-width:950px){
+ .app-shell.shell{grid-template-columns:minmax(0,1fr)!important;padding-left:14px!important;padding-right:14px!important}
+ #appSidebar.sidebar{position:relative!important;top:auto!important;display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;max-height:none!important}
+ #appSidebar .navbtn{width:auto!important;flex:0 1 auto!important}
+ #appSidebar .nav-folder{flex:0 1 auto!important}
+}
+@media(max-width:650px){
+ header.app-header{padding:8px 12px!important;flex-wrap:wrap!important}
+ .app-header .brand-copy h1{font-size:18px!important}
+ .app-shell.shell{padding-left:10px!important;padding-right:10px!important}
+ #appSidebar .navbtn{font-size:12px!important}
+ .app-shell .stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
