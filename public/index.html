@@ -3206,6 +3206,12 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
  </div>
 </section>
 <section class="page" id="page-autofill">
+ <div class="panel" id="manualSkuLookup">
+  <div class="sectionhead"><div><h2>🔎 Dò và gắn mã trực tiếp</h2><p>Tra cứu ngay trong danh mục chuẩn đã nạp. Không cần tải file sản phẩm cần dò.</p></div><span class="pill" id="manualSkuCatalogCount">0 mã trong danh mục</span></div>
+  <div class="resulttools"><input id="manualSkuQuery" class="search" type="search" placeholder="Nhập tên sản phẩm, mã vạch hoặc SKU để dò…" autocomplete="off"><button type="button" class="btn alt" id="manualSkuClear">Xóa tìm kiếm</button></div>
+  <div id="manualSkuLookupInfo" class="hint">Hãy nạp danh mục chuẩn tại mục “Danh mục” một lần để bắt đầu tra cứu.</div>
+  <div id="manualSkuLookupResults" class="empty">Nhập từ khóa để tìm mã trong danh mục chuẩn.</div>
+ </div>
  <div class="sectionhead"><div><h2>⇧ Rà soát và tự điền mã từ file gốc</h2><p>Ghép tên sản phẩm với danh mục chuẩn đã tải ở mục “Danh mục”, sau đó xuất lại Excel theo đúng thứ tự dòng của file gốc.</p></div></div>
  <div class="panel"><h2>1. Tải file nguồn</h2><label class="upload"><span class="bigicon">📑</span><strong>Chọn file gốc cần điền mã</strong><input id="autoFillFile" type="file" accept=".csv,.xlsx,.xls"></label><div class="template-row"><span>File mẫu: STT, tên sản phẩm, quy cách, ĐVT, SKU</span><button class="btn alt sample-download" data-sample="autofill">Tải file mẫu ↓</button></div><div id="autoFillFileInfo" class="hint">Chưa tải file.</div><div class="rule">STT và các cột nguồn được giữ nguyên thứ tự; ứng dụng không sắp xếp dòng. Mã đề xuất và thông tin rà soát sẽ nằm ở cột bổ sung. Nếu chọn cột mã có sẵn, ứng dụng chỉ điền ô trống trừ khi bạn bật ghi đè.</div></div>
  <div class="panel"><h2>2. Chọn các cột</h2><div class="grid">
@@ -4023,7 +4029,33 @@ function exportPlatformAudit(){
  sourceCols.forEach(c=>{const r=(x.sourceResults||[]).find(v=>v.source===c.key)||{};row[c.status]=r.status==='found'?'Có sản phẩm':r.status==='not_found'?'Không tìm thấy':r.status==='unverified'?'Chưa kiểm tra được':'Chưa kiểm tra';row[c.search]=r.searchUrl||(fallback.find(v=>v.key===c.key)||{}).url||'';row[c.product]=r.productUrl||'';row[c.title]=r.productTitle||'';row[c.note]=r.message||''});return row});
  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(rows,{header:[...headers,statusCol,queryCol,checkedCol,...sourceCols.flatMap(c=>[c.status,c.search,c.product,c.title,c.note])]}),'Ra soat san');const exportName=matchmaChooseExcelFilename('matchma-ra-soat-san.xlsx');if(!exportName)return;XLSX.writeFile(wb,exportName);
 }
+function renderManualSkuLookup(){
+ const input=$('manualSkuQuery'),root=$('manualSkuLookupResults'),info=$('manualSkuLookupInfo'),count=$('manualSkuCatalogCount');
+ if(!input||!root||!info||!count)return;
+ const skuKey=$('skuCol')?.value||'',nameKey=$('nameCol')?.value||'',specKey=$('specCol')?.value||'',unitKey=$('unitCol')?.value||'';
+ const catalog=masterRows.filter(r=>String(r[skuKey]||'').trim()&&String(r[nameKey]||'').trim());
+ count.textContent=catalog.length.toLocaleString('vi-VN')+' mã trong danh mục';
+ if(!catalog.length){info.textContent='Chưa có danh mục chuẩn hợp lệ. Hãy nạp danh mục có cột SKU và tên hàng trong mục “Danh mục”; không cần tải file cần dò.';root.className='empty';root.textContent='Chưa có dữ liệu để tra cứu.';return}
+ const q=String(input.value||'').trim();
+ if(!q){info.textContent='Danh mục đã sẵn sàng. Nhập tên hàng, mã vạch hoặc SKU; kết quả sẽ hiện ngay bên dưới.';root.className='empty';root.textContent='Đang chờ từ khóa tìm kiếm.';return}
+ const qNorm=norm(q),qSku=normalizeSku(q),qt=[...new Set(getTokens(q))];
+ const ranked=catalog.map((r,i)=>{
+  const sku=String(r[skuKey]||'').trim(),name=String(r[nameKey]||''),spec=specKey?String(r[specKey]||''):'',unit=unitKey?String(r[unitKey]||''):'';
+  const nNorm=norm(name+' '+spec+' '+unit),skuNorm=normalizeSku(sku),nt=[...new Set(getTokens(name+' '+spec+' '+unit))];
+  const exactSku=skuNorm===qSku,exactName=norm(name)===qNorm,contains=nNorm.includes(qNorm)||qNorm.includes(norm(name));
+  const score=exactSku?1:exactName?1:Math.max(similarity(qt,nt),contains?.94:0);
+  const conflict=variantConflict(qt,nt)||productLineMismatch(q,name)||incompatibleFamily(qt,nt);
+  return {sku,name,spec,unit,score,exactSku,exactName,conflict,index:i};
+ }).filter(x=>x.exactSku||x.exactName||x.score>=.12).sort((a,b)=>(a.exactSku?-1:0)-(b.exactSku?-1:0)||(a.exactName?-1:0)-(b.exactName?-1:0)||b.score-a.score||a.index-b.index).slice(0,60);
+ info.textContent='Tìm thấy '+ranked.length.toLocaleString('vi-VN')+' kết quả phù hợp'+(ranked.length===60?' (đang hiển thị tối đa 60 dòng).':'')+'. Mã chỉ là gợi ý tra cứu; kiểm tra tên, quy cách và thuộc tính trước khi gắn.';
+ if(!ranked.length){root.className='empty';root.textContent='Không tìm thấy sản phẩm phù hợp trong danh mục hiện tại.';return}
+ root.className='tablewrap';
+ root.innerHTML='<table><thead><tr><th>SKU / Mã vạch</th><th>Tên sản phẩm chuẩn</th><th>Quy cách</th><th>ĐVT</th><th>Độ phù hợp</th><th>Kiểm tra</th></tr></thead><tbody>'+ranked.map(x=>'<tr><td><b>'+esc(x.sku)+'</b></td><td>'+esc(x.name)+'</td><td>'+esc(x.spec||'—')+'</td><td>'+esc(x.unit||'—')+'</td><td>'+(Math.round(x.score*100))+'%'+(x.exactSku?' · Trùng mã':x.exactName?' · Trùng tên':'')+'</td><td>'+(x.conflict?'<span class="badge review">Có khác biệt cần xem</span>':'<span class="badge good">Không thấy xung đột rõ</span>')+'</td></tr>').join('')+'</tbody></table>';
+}
 function initAutoFill(){
+ $('manualSkuQuery').addEventListener('input',renderManualSkuLookup);
+ $('manualSkuClear').addEventListener('click',()=>{$('manualSkuQuery').value='';renderManualSkuLookup();$('manualSkuQuery').focus()});
+ renderManualSkuLookup();
  $('autoFillFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);autoFillRows=d.rows.map(row=>({...row}));autoFillHeaders=d.headers;autoFillResults=[];fillSelect('autoFillSttCol',d.headers,guessStt(d.headers),true);fillSelect('autoFillNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('autoFillSpecCol',d.headers,guess(d.headers,/quy cách|quy cach|spec|dung tích|dung tich|size|pack/i),true);fillSelect('autoFillUomCol',d.headers,guess(d.headers,/đvt|dvt|đơn vị|don vi|unit|uom|dv tính|dv tinh/i),true);fillAutoFillTargets(d.headers);$('autoFillFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng, giữ nguyên thứ tự đọc từ file.';$('exportAutoFill').disabled=true;$('autoFillSummary').textContent=masterRows.length?'Đã có danh mục chuẩn. Kiểm tra cột tên và bấm rà soát.':'Hãy tải danh mục chuẩn tại mục “Danh mục” trước khi chạy.';updateAutoFillButton()}catch(err){alert(err.message||'Không đọc được file');}});
  ['autoFillNameCol','autoFillSttCol','autoFillSpecCol','autoFillUomCol','autoFillTargetCodeCol','autoFillOverwrite'].forEach(id=>$(id).addEventListener('change',updateAutoFillButton));
  $('runAutoFill').addEventListener('click',runAutoFill);$('exportAutoFill').addEventListener('click',exportAutoFill);
