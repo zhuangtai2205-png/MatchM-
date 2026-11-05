@@ -3010,6 +3010,29 @@ body #appSidebar .nav-folder-title .navfolder-tab-icon,
 body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
 
 </style>
+
+<style id="matchma-japanese-animal-themes-v1">
+/* Japanese animal themes: presentation-only overrides; application logic is untouched. */
+body[data-theme="ocean"]{--ink:#294653;--muted:#6b8790;--purple:#4b9caf;--frame:#c7e9e9;background:linear-gradient(145deg,#eefbfa,#f4f8ff 55%,#eaf8f5)!important}
+body[data-theme="retro"]{--ink:#4d5149;--muted:#85877d;--purple:#8b9a76;--frame:#dce4d2;background:linear-gradient(145deg,#f6faef,#f0f7eb 55%,#fbf7ed)!important}
+body[data-theme="pink"]{--ink:#68465b;--muted:#98778b;--purple:#cf83a9;--frame:#f2d4e3;background:linear-gradient(145deg,#fff3f8,#fceefa 55%,#fff7f1)!important}
+body[data-theme="vampire"]{--ink:#51445f;--muted:#8b7a99;--purple:#9b83b9;--frame:#e1d6ed;background:linear-gradient(145deg,#f7f1ff,#f4f0fb 55%,#fff4f8)!important}
+body[data-theme="cat"]{--ink:#655044;--muted:#978274;--purple:#c58d69;--frame:#efddce;background:linear-gradient(145deg,#fff7ef,#fff3f1 55%,#f8f4eb)!important}
+body[data-theme="forest"]{--ink:#405b45;--muted:#7c927d;--purple:#83a77b;--frame:#d6e8d0;background:linear-gradient(145deg,#f1faef,#f5f9ee 55%,#eef8f5)!important}
+body[data-theme="minimal"]{--ink:#4c5661;--muted:#87919a;--purple:#8c9eae;--frame:#dce4eb;background:linear-gradient(145deg,#f5f9fc,#f4f7fb 55%,#f1f8f7)!important}
+body[data-theme="bear"]{--ink:#4b594e;--muted:#879486;--purple:#91a987;--frame:#dce8d5;background:linear-gradient(145deg,#f4faed,#f2f8f0 55%,#fdf8ed)!important}
+body[data-theme] .sidebar,body[data-theme] .page,body[data-theme] .hero,body[data-theme] .panel,body[data-theme] .stat{background-color:rgba(255,255,255,.88)!important;box-shadow:0 8px 24px rgba(75,100,110,.07)!important}
+body[data-theme] .page{border-color:var(--frame)!important}
+body[data-theme] .sidebar{border:1px solid var(--frame)!important}
+body[data-theme] .navbtn.active{background:color-mix(in srgb,var(--purple) 15%,white)!important;color:var(--ink)!important}
+body[data-theme] .navbtn:hover{background:color-mix(in srgb,var(--purple) 9%,white)!important}
+body[data-theme] .btn{background:var(--purple)!important}
+body[data-theme] .navicon{font-size:20px!important;width:30px!important;flex:0 0 30px!important}
+#sidebarCollapseToggle{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:34px!important;width:34px!important;height:34px!important;border-radius:11px!important;background:rgba(255,255,255,.8)!important;border:1px solid var(--frame)!important;color:var(--ink)!important;cursor:pointer!important}
+@media(min-width:951px){.shell.app-shell.sidebar-collapsed{grid-template-columns:64px minmax(0,1fr)!important}.shell.app-shell.sidebar-collapsed #appSidebar{width:64px!important;min-width:64px!important}.shell.app-shell.sidebar-collapsed #appSidebar .navbtn{min-height:42px!important;height:42px!important}.shell.app-shell.sidebar-collapsed #appSidebar .nav-folder-items{padding:0!important}.shell.app-shell.sidebar-collapsed #appSidebar .nav-folder{width:100%!important}.shell.app-shell.sidebar-collapsed #appSidebar .navfolder-title{min-height:30px!important}.shell.app-shell.sidebar-collapsed #appSidebar .navicon{display:inline-flex!important;align-items:center!important;justify-content:center!important}.shell.app-shell.sidebar-collapsed #appSidebar .sidebar-toggle{display:inline-flex!important}}
+body[data-theme] #themeScene{opacity:.42!important}
+body[data-theme] .theme-drift{filter:none!important}
+</style>
 </head><body><div id="catClickFX" aria-hidden="true"></div><div id="themeScene" aria-hidden="true"></div>
 <header class="app-header">
  <div class="brand">
@@ -5749,6 +5772,40 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   }
  }catch(exportError){console.error('MatchMa export build failed',exportError);alert('Không tạo được file Excel kết quả: '+(exportError&&exportError.message?exportError.message:String(exportError)));}
  });
+})();
+</script>
+
+<script id="matchma-japanese-animal-theme-labels-v1">
+(function(){
+ const names={ocean:'鯉 Koi Garden',retro:'狸 Tanuki Paper',pink:'桜猫 Sakura Cat',vampire:'狐 Kitsune Night',cat:'餅兎 Mochi Usagi',forest:'柴犬 Shiba Forest',minimal:'鶴 Crane Zen',bear:'熊 Panda Matcha'};
+ const nav={
+  ocean:{intro:'🎐',overview:'🐟',workspace:'🌊',catalog:'鯉',memory:'🫧',run:'🎏',results:'🐠',platforms:'🪷',autofill:'🧧',debitcredit:'🐚',invoicecompare:'📘',stockforecast:'🌱',account:'🪸'},
+  retro:{intro:'🍂',overview:'🦝',workspace:'🏮',catalog:'📜',memory:'🍵',run:'🧮',results:'🪭',platforms:'🛍️',autofill:'🧧',debitcredit:'🪙',invoicecompare:'📚',stockforecast:'🌾',account:'狸'},
+  pink:{intro:'🌸',overview:'🐈',workspace:'🎀',catalog:'🌺',memory:'💗',run:'🐾',results:'🌷',platforms:'🛍️',autofill:'🧵',debitcredit:'🌼',invoicecompare:'💌',stockforecast:'🌱',account:'🐱'},
+  vampire:{intro:'🌙',overview:'🦊',workspace:'⛩️',catalog:'🦋',memory:'🔮',run:'🗡️',results:'🪭',platforms:'🏮',autofill:'🧧',debitcredit:'🦇',invoicecompare:'📜',stockforecast:'🌘',account:'狐'},
+  cat:{intro:'🍡',overview:'🐰',workspace:'🥛',catalog:'🥕',memory:'🧶',run:'🐇',results:'🌷',platforms:'🍵',autofill:'🎐',debitcredit:'🐾',invoicecompare:'📒',stockforecast:'🌱',account:'兎'},
+  forest:{intro:'🌿',overview:'🐕',workspace:'🌳',catalog:'🍄',memory:'🍯',run:'🐾',results:'🌼',platforms:'🛍️',autofill:'🌾',debitcredit:'🪵',invoicecompare:'📗',stockforecast:'🌱',account:'柴'},
+  minimal:{intro:'🕊️',overview:'鶴',workspace:'☁️',catalog:'📖',memory:'🪶',run:'✒️',results:'✓',platforms:'⌕',autofill:'↔',debitcredit:'◇',invoicecompare:'▤',stockforecast:'▥',account:'🕊️'},
+  bear:{intro:'🍵',overview:'🐼',workspace:'🎋',catalog:'🍃',memory:'🍡',run:'🐾',results:'🐼',platforms:'🛍️',autofill:'🎍',debitcredit:'🪙',invoicecompare:'📗',stockforecast:'🌱',account:'熊'}
+ };
+ function paint(){
+  const t=document.body.dataset.theme||'ocean';
+  const sel=document.getElementById('themeSelect');
+  if(sel)Array.from(sel.options).forEach(o=>{if(names[o.value])o.textContent=({ocean:'🎏 ',retro:'🦝 ',pink:'🌸 ',vampire:'🦊 ',cat:'🐰 ',forest:'🐕 ',minimal:'🕊️ ',bear:'🐼 '})[o.value]+names[o.value]});
+  document.querySelectorAll('#appSidebar .navbtn').forEach(b=>{
+   const page=b.dataset.page;const icon=b.querySelector('.navicon');
+   if(icon&&nav[t]&&nav[t][page])icon.textContent=nav[t][page];
+  });
+  document.querySelectorAll('#appSidebar .nav-folder').forEach((folder,i)=>{
+   const label=folder.querySelector('.navfolder-title span');
+   if(label)label.textContent=({ocean:['鯉の池','Koi Garden'],retro:['狸の書斎','Tanuki'],pink:['桜の小径','Sakura'],vampire:['狐の夜','Kitsune'],cat:['餅兎の部屋','Mochi'],forest:['柴犬の森','Shiba'],minimal:['鶴の庭','Crane'],bear:['熊猫茶屋','Panda']})[t][i]||label.textContent;
+  });
+  const scene=document.getElementById('themeScene');
+  if(scene){const motifs={ocean:['🎏','🐟','🪷','🌊','🐠'],retro:['🦝','🍂','🏮','🍵','📜'],pink:['🐈','🌸','🎀','🌷','🌺'],vampire:['🦊','🌙','⛩️','🦋','🏮'],cat:['🐰','🍡','🥕','🌷','🍵'],forest:['🐕','🌿','🍄','🌳','🍯'],minimal:['🕊️','☁️','🪶','🌾','🪷'],bear:['🐼','🎋','🍵','🍡','🌿']}[t];scene.replaceChildren();motifs.concat(motifs).forEach((m,i)=>{const e=document.createElement('span');e.className='theme-drift';e.textContent=m;e.style.cssText='position:absolute;left:'+((i*17+7)%94)+'%;top:'+((i*23+9)%85)+'%;font-size:'+(16+i%3*5)+'px;opacity:.16;pointer-events:none';scene.appendChild(e)})}
+ }
+ paint();
+ const s=document.getElementById('themeSelect');if(s)s.addEventListener('change',()=>requestAnimationFrame(paint));
+ const b=document.getElementById('sidebarCollapseToggle');if(b)b.addEventListener('click',()=>{const shell=document.querySelector('.shell.app-shell');if(shell)requestAnimationFrame(()=>{const collapsed=shell.classList.contains('sidebar-collapsed');b.setAttribute('aria-expanded',String(!collapsed));b.title=collapsed?'Mở rộng thanh menu':'Thu gọn thanh menu'})});
 })();
 </script>
 </body></html>
