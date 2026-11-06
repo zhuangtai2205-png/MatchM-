@@ -3285,7 +3285,7 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
    <div class="stat"><small data-i18n="forecastMissingCount">SKU thiếu trong tồn đầu kỳ</small><b id="forecastMissing">0</b></div>
   </div>
   <div id="forecastActivitySummary" class="panel" style="margin:12px 0;padding:14px"><strong>So sánh mua vào · bán ra · tồn đầu kỳ</strong><div id="forecastActivityCounts" class="stats" style="margin-top:10px"></div><p class="hint">Dựa trên việc SKU có xuất hiện trong từng file, không dựa riêng vào số lượng. Bấm từng nhóm để lọc kết quả.</p></div>
-  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…" data-i18n-placeholder="forecastSearchPlaceholder"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="negative" selected data-i18n="forecastFilterNegative">Chỉ SKU âm cuối tháng</option><option value="all" data-i18n="forecastFilterAll">Tất cả SKU</option><option value="low" data-i18n="forecastFilterLow">Hết tồn / sắp hết</option><option value="noStock" data-i18n="forecastFilterMissing">Thiếu trong tồn đầu kỳ</option><option value="issue" data-i18n="forecastFilterIssue">Thiếu SKU hoặc lỗi số lượng</option><option value="purchaseNoStock">Có mua, không có tồn đầu kỳ</option><option value="salesNoStock">Có bán, không có tồn đầu kỳ</option><option value="purchaseNoSales">Có mua, không có bán</option><option value="salesNoPurchase">Có bán, không có mua</option><option value="newProduct">Sản phẩm mới (có giao dịch, chưa có tồn đầu kỳ)</option></select></div>
+  <div class="resulttools"><input id="forecastSearch" class="search" type="text" placeholder="Tìm mã hoặc tên hàng…" data-i18n-placeholder="forecastSearchPlaceholder"><select id="forecastFilter" aria-label="Lọc kết quả dự báo"><option value="negative" selected data-i18n="forecastFilterNegative">Chỉ SKU âm cuối tháng</option><option value="all" data-i18n="forecastFilterAll">Tất cả SKU</option><option value="low" data-i18n="forecastFilterLow">Hết tồn / sắp hết</option><option value="noStock" data-i18n="forecastFilterMissing">Thiếu trong tồn đầu kỳ</option><option value="issue" data-i18n="forecastFilterIssue">Thiếu SKU hoặc lỗi số lượng</option><option value="purchaseNoStock">Có mua, không có tồn đầu kỳ</option><option value="salesNoStock">Có bán, không có tồn đầu kỳ</option><option value="purchaseNoSales">Có mua, không có bán</option><option value="salesNoPurchase">Có bán, không có mua</option><option value="newProduct">Sản phẩm mới (có giao dịch, chưa có tồn đầu kỳ)</option><option value="purchaseHasStock">SKU mua có tồn đầu kỳ</option><option value="purchaseNoStockAny">SKU mua không có tồn đầu kỳ</option><option value="salesHasStock">SKU bán có tồn đầu kỳ</option><option value="salesNoStockAny">SKU bán không có tồn đầu kỳ</option></select></div>
   <div id="forecastOutput" class="empty" data-i18n="forecastOutputEmpty">Chưa có kết quả. Tải đủ ba file rồi tính tồn cuối tháng.</div>
   <div class="pager"><button class="btn alt" id="forecastPrev" disabled data-i18n="prev">← Trước</button><span id="forecastPageInfo">Trang 0/0</span><button class="btn alt" id="forecastNext" disabled data-i18n="next">Tiếp →</button></div>
  </div>
@@ -3624,7 +3624,11 @@ function renderForecastActivityCounts(){
   ['salesNoStock','Có bán · không tồn',p=>p.salesRows>0&&!p.inStock],
   ['purchaseNoSales','Có mua · không bán',p=>p.purchaseRows>0&&p.salesRows===0],
   ['salesNoPurchase','Có bán · không mua',p=>p.salesRows>0&&p.purchaseRows===0],
-  ['newProduct','Sản phẩm mới',p=>!p.inStock&&(p.purchaseRows>0||p.salesRows>0)]
+  ['newProduct','Sản phẩm mới',p=>!p.inStock&&(p.purchaseRows>0||p.salesRows>0)],
+  ['purchaseHasStock','SKU mua · có tồn',p=>p.purchaseRows>0&&p.inStock],
+  ['purchaseNoStockAny','SKU mua · không tồn',p=>p.purchaseRows>0&&!p.inStock],
+  ['salesHasStock','SKU bán · có tồn',p=>p.salesRows>0&&p.inStock],
+  ['salesNoStockAny','SKU bán · không tồn',p=>p.salesRows>0&&!p.inStock]
  ];
  root.innerHTML=groups.map(([key,label,test])=>'<button type="button" class="stat" data-forecast-activity="'+key+'" style="cursor:pointer;text-align:left"><small>'+label+'</small><b>'+stockForecastResults.filter(test).length+'</b></button>').join('');
  root.querySelectorAll('[data-forecast-activity]').forEach(btn=>btn.addEventListener('click',()=>{$('forecastFilter').value=btn.dataset.forecastActivity;stockForecastPage=1;renderStockForecast()}));
@@ -3647,6 +3651,10 @@ function renderStockForecast(){
   if(filter==='noStock'&&!p.assumedOpeningZero)return false;
   if(filter==='issue'&&p.status!=='issue'&&p.status!=='noKey')return false;
   if(['purchaseNoStock','salesNoStock','purchaseNoSales','salesNoPurchase','newProduct'].includes(filter)&&forecastActivityClass(p)!==filter)return false;
+  if(filter==='purchaseHasStock'&&!(p.purchaseRows>0&&p.inStock))return false;
+  if(filter==='purchaseNoStockAny'&&!(p.purchaseRows>0&&!p.inStock))return false;
+  if(filter==='salesHasStock'&&!(p.salesRows>0&&p.inStock))return false;
+  if(filter==='salesNoStockAny'&&!(p.salesRows>0&&!p.inStock))return false;
   return true;
  });
  const pages=Math.max(1,Math.ceil(rows.length/stockForecastPageSize));if(stockForecastPage>pages)stockForecastPage=pages;
