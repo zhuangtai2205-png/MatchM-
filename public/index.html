@@ -3674,13 +3674,14 @@ function forecastNumber(n){return Number.isFinite(n)?Number(n.toFixed(4)).toLoca
 function exportStockForecast(){
  if(!stockForecastBuilt||!stockForecastResults.length){alert('Hãy chạy dự báo trước khi xuất Excel.');return}
  if(typeof XLSX==='undefined'){alert(tr('libErr'));return}
- const mapRows=list=>list.map(p=>({[tr('skuCodeLabel')]:p.displaySku,[tr('productNameLabel')]:p.displayName,[tr('openingStockLabel')]:p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),[tr('monthPurchaseLabel')]:p.purchaseQty,[tr('monthSalesLabel')]:p.salesQty,[tr('closingStockLabel')]:p.projected===null?'':p.projected,[tr('statusLabel')]:forecastStatusLabel(p.status),'Phân loại mua/bán/tồn':forecastActivityLabel(p),'Có trong file mua vào':p.purchaseRows>0?'Có':'Không','Có trong file bán ra':p.salesRows>0?'Có':'Không','Có trong file tồn đầu kỳ':p.inStock?'Có':'Không','Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,[tr('replacementLabel')]:p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'',[tr('notesLabel')]:p.issueText}));
+ const mapRows=list=>list.map(p=>({[tr('skuCodeLabel')]:p.displaySku,[tr('productNameLabel')]:p.displayName,[tr('openingStockLabel')]:p.inStock&&!p.badStockQty?p.stockQty:(p.assumedOpeningZero&&p.projected!==null?0:''),[tr('monthPurchaseLabel')]:p.purchaseQty,[tr('monthSalesLabel')]:p.salesQty,[tr('closingStockLabel')]:p.projected===null?'':p.projected,[tr('statusLabel')]:forecastStatusLabel(p.status),'Phân loại mua/bán/tồn':forecastActivityLabel(p),'Có trong file mua vào':p.purchaseRows>0?'Có':'Không','Có trong file bán ra':p.salesRows>0?'Có':'Không','Có trong file tồn đầu kỳ':p.inStock?'Có':'Không','SKU mua có tồn đầu kỳ':p.purchaseRows>0&&p.inStock?'Có':'Không','SKU mua không có tồn đầu kỳ':p.purchaseRows>0&&!p.inStock?'Có':'Không','SKU bán có tồn đầu kỳ':p.salesRows>0&&p.inStock?'Có':'Không','SKU bán không có tồn đầu kỳ':p.salesRows>0&&!p.inStock?'Có':'Không','Số dòng tồn đầu kỳ':p.stockRows,'Số dòng mua vào':p.purchaseRows,'Số dòng bán ra':p.salesRows,[tr('replacementLabel')]:p.status==='negative'?(p.replacementSuggestion||tr('replacementNone')):'',[tr('notesLabel')]:p.issueText}));
  const warningRaw=parseForecastQuantity($('forecastAlertThreshold').value);
  const warningThreshold=Math.max(0,warningRaw===null?0:warningRaw);
  const wb=XLSX.utils.book_new();
  const addForecastSheet=(list,sheetName)=>{
   const rows=mapRows(list);
   const ws=XLSX.utils.json_to_sheet(rows);
+  if(ws['!ref'])ws['!autofilter']={ref:ws['!ref']};
   if(rows.length){
    const headers=Object.keys(rows[0]);
    const openingCol=headers.indexOf(tr('openingStockLabel'));
