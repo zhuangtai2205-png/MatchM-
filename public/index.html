@@ -5609,12 +5609,18 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(adj._adjustedPair||adj.payments.length)continue;
    const descText=invoiceDescription(adj);
    const referencedTokens=(descText.match(/[A-Z0-9]+/g)||[]).filter(t=>/[0-9]/.test(t));
-   const candidates=invoices.filter(inv=>{
+   let candidates=invoices.filter(inv=>{
     if(inv===adj||inv._adjustedPair||Math.abs(inv.total+adj.total)>=0.005)return false;
     if(!canPairByDate(inv,adj)||invoiceAccount(inv)!==invoiceAccount(adj))return false;
     if(referencedTokens.length&&invoiceHasAdjustmentWords(adj)&&!referencedTokens.includes(inv.numberToken))return false;
     return true;
    });
+   // When equal-value originals are ambiguous, prefer the uniquely unpaid one.
+   // Do not offset an invoice already settled by UNC/PC while another remains unpaid.
+   if(candidates.length>1){
+    const unpaidCandidates=candidates.filter(inv=>!inv.payments.length);
+    if(unpaidCandidates.length===1)candidates=unpaidCandidates;
+   }
    if(candidates.length===1){
     const counterpart=candidates[0],color=pairColors[colorIndex++%pairColors.length];
     adj._adjustedPair=counterpart;counterpart._adjustedPair=adj;adj._adjustedColor=counterpart._adjustedColor=color;
