@@ -5494,6 +5494,29 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(mixedMatch)return mixedMatch;
    return uniqueSubset(items,target,getAmount,maxItems,targetDate);
   }
+  // Exact one-to-one settlement for repeated equal-value PN and UNC vouchers.
+  // When several invoices and bank payments have the same amount, pair them
+  // chronologically (oldest unpaid PN with oldest unassigned UNC), once each.
+  // This avoids treating duplicate amounts as ambiguous and leaving every row unmatched.
+  for(const type of ['UNC','PC']){
+   const chronological=(a,b)=>{
+    const da=dateValue(a.date),db=dateValue(b.date);
+    if(Number.isFinite(da)&&Number.isFinite(db)&&da!==db)return da-db;
+    if(Number.isFinite(da)!==Number.isFinite(db))return Number.isFinite(da)?-1:1;
+    return (a.rec?._idx??a.rows?.[0]?._idx??0)-(b.rec?._idx??b.rows?.[0]?._idx??0);
+   };
+   const orderedPayments=payments.filter(p=>p.type===type&&!p.invoices.length&&p.tokens.length===0&&p.amount>0.005).sort(chronological);
+   for(const p of orderedPayments){
+    const candidates=invoices.filter(inv=>
+     !inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&
+     within60Days(inv.date,p.date)&&Math.abs(inv.total-p.amount)<=0.005
+    ).sort(chronological);
+    if(!candidates.length)continue;
+    const inv=candidates[0];
+    p.invoices.push(inv);
+    inv.payments.push(p);
+   }
+  }
   // If text references include a misleading/old PN number, recover only when there is
   // one unique amount-exact group containing at least one explicitly referenced PN.
   // This prevents an incorrect extra token from blocking the remaining PN (e.g. 1056 + 1058).
