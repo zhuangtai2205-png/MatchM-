@@ -5715,8 +5715,8 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const lastCol=XLSX.utils.encode_col(statusCol);for(let rr=0;rr<(ws['!ref']?XLSX.utils.decode_range(ws['!ref']).e.r+1:0);rr++){for(const cc of [4,5,6,resultCol]){const cell=XLSX.utils.encode_cell({r:rr,c:cc});if(ws[cell]&&typeof ws[cell].v==='number')ws[cell].z=moneyFormat;}}
   const formulaNumber=value=>{if(typeof value==='number')return Number.isFinite(value)?value:0;let t=String(value??'').trim().replace(/\s/g,'').replace(/[^0-9,.-]/g,'');if(!t)return 0;const comma=t.lastIndexOf(','),dot=t.lastIndexOf('.');if(comma>=0&&dot>=0){t=comma>dot?t.replace(/\./g,'').replace(',','.'):t.replace(/,/g,'');}else if(comma>=0){const tail=t.length-comma-1;t=tail===3&&/^[-+]?\d{1,3}(,\d{3})+$/.test(t)?t.replace(/,/g,''):t.replace(',','.');}else if(dot>=0){const tail=t.length-dot-1;t=tail===3&&/^[-+]?\d{1,3}(\.\d{3})+$/.test(t)?t.replace(/\./g,''):t;}const n=Number(t);return Number.isFinite(n)?n:0;};
   const setFormula=(cell,formula,value)=>{if(!ws[cell])ws[cell]={t:'n',v:0};ws[cell].t='n';ws[cell].f=String(formula).replace(/^=/,'');ws[cell].v=formulaNumber(value);ws[cell].z=moneyFormat;};
-  // Recreate the workbook's original row-level formulas: PN total in G and
-  // payment-vs-linked-PN difference in K. Do not copy G's formula into K on payment rows.
+  // G contains the PN's calculated total. K contains only the final reconciliation
+  // difference; never duplicate a PN total into the result column.
   const exportExcelRow=new Map(resultRows.map((rec,i)=>[rec,dataStart+i]));
   const exportModel=window.__dcExportModel||{};
   const invoices=exportModel.invoices||[],payments=exportModel.payments||[];
@@ -5729,7 +5729,25 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const debitRefs=rows.map(r=>'E'+r),creditRefs=rows.map(r=>'F'+r);
    const formula='SUM('+creditRefs.join(',')+')-SUM('+debitRefs.join(',')+')';
    setFormula('G'+excelRow,formula,inv.total);
-   setFormula('K'+excelRow,formula,inv.total);
+  });
+  // Build the same connected PN-payment groups used by the on-screen result.
+  const parent=new Map();
+  const find=x=>{if(!parent.has(x))parent.set(x,x);let p=parent.get(x);if(p!==x){p=find(p);parent.set(x,p);}return p;};
+  const unite=(a,b)=>{const ra=find(a),rb=find(b);if(ra!==rb)parent.set(rb,ra);};
+  payments.forEach(p=>(p.invoices||[]).forEach(inv=>unite(inv,p)));
+  const groups=new Map();
+  invoices.forEach(inv=>{const root=find(inv);if(!groups.has(root))groups.set(root,{invoices:[],payments:[]});groups.get(root).invoices.push(inv);});
+  payments.forEach(p=>{if(!p.invoices||!p.invoices.length)return;const root=find(p);if(!groups.has(root))groups.set(root,{invoices:[],payments:[]});groups.get(root).payments.push(p);});
+  groups.forEach(group=>{
+   const invoiceRows=group.invoices.map(inv=>invoiceAnchorRow.get(inv)).filter(Boolean);
+   const paymentRows=group.payments.map(p=>exportExcelRow.get(p.rec)).filter(Boolean);
+   if(!invoiceRows.length||!paymentRows.length)return;
+   const anchor=group.invoices[0].rows&&group.invoices[0].rows[0];
+   const anchorRow=anchor&&exportExcelRow.get(anchor);
+   if(!anchorRow)return;
+   const formula='SUM('+paymentRows.map(r=>'E'+r).join(',')+')-SUM('+invoiceRows.map(r=>'G'+r).join(',')+')';
+   const value=group.payments.reduce((sum,p)=>sum+p.amount,0)-group.invoices.reduce((sum,inv)=>sum+inv.total,0);
+   setFormula('K'+anchorRow,formula,value);
   });
   payments.forEach(payment=>{
    const rec=payment.rec,excelRow=exportExcelRow.get(rec);
