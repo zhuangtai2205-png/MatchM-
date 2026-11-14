@@ -5898,8 +5898,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     setFormula('K'+excelRow,'E'+excelRow,payment.amount);
     return;
    }
-   const formula='E'+excelRow+'-SUM('+linkedRows.map(r=>'G'+r).join(',')+')';
-   setFormula('K'+excelRow,formula,payment.amount-(payment.invoices||[]).reduce((sum,inv)=>sum+inv.total,0));
+   // A payment already linked to PN has no separate KẾT QUẢ on the web screen.
+   // Keep its export cell blank; the final difference belongs only to the PN group anchor.
+   // Writing a second payment-level difference here duplicated/misrepresented the web result.
   });
   const totalExcelRow=topRows.length+resultRows.length+3;
   setFormula('E'+totalExcelRow,'SUM(E'+dataStart+':E'+dataEnd+')',totalDebit);
