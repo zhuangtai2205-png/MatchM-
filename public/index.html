@@ -5801,7 +5801,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    } else compP.forEach(p=>{p.rec.status='ok';p.rec.result=''});
   }
   // Purchases with no payment link are marked as unpaid.
-  for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows[0].totalPN=inv.total;inv.rows[0].result=inv.total;inv.rows[0].status='chưa thanh toán';}}
+  for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows[0].totalPN=inv.grossTotal;inv.rows[0].result=inv.total;inv.rows[0].status='chưa thanh toán';}}
   // UNC and cash-payment vouchers that cannot be matched to a PN are surfaced separately.
   // Không tô màu các phiếu PN chưa có UNC; chỉ ghi trạng thái để dễ rà soát.
   for(const p of payments){if(!p.invoices.length){p.rec.result=p.amount;p.rec.status='unc/phiếu chi không có pn';delete p.rec._color}}
@@ -5928,7 +5928,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   setFormula('F'+totalExcelRow,'SUM(F'+dataStart+':F'+dataEnd+')',totalCredit);
   const netExcelRow=totalExcelRow+1;setFormula('E'+netExcelRow,'E'+totalExcelRow+'-F'+totalExcelRow,ledgerDiff);
   const allPnExcelRow=netExcelRow+1;setFormula('E'+allPnExcelRow,'SUM(G'+dataStart+':G'+dataEnd+')',invoicesTotalForExport());
-  const unpaidExcelRow=allPnExcelRow+1;setFormula('E'+unpaidExcelRow,'SUMIFS(G'+dataStart+':G'+dataEnd+',A'+dataStart+':A'+dataEnd+',"PN*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"chưa thanh toán")',summary.unpaid);
+  const unpaidExcelRow=allPnExcelRow+1;setFormula('E'+unpaidExcelRow,'SUMIFS(K'+dataStart+':K'+dataEnd+',A'+dataStart+':A'+dataEnd+',"PN*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"chưa thanh toán")',summary.unpaid);
   const noPnExcelRow=unpaidExcelRow+1;setFormula('E'+noPnExcelRow,'SUMIFS(E'+dataStart+':E'+dataEnd+',A'+dataStart+':A'+dataEnd+',"UNC*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"unc/phiếu chi không có pn")+SUMIFS(E'+dataStart+':E'+dataEnd+',A'+dataStart+':A'+dataEnd+',"PC*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"unc/phiếu chi không có pn")',summary.noPN);
   const oddExcelRow=noPnExcelRow+1;
   const oddFormula=matchedDifferenceCells.length?matchedDifferenceCells.map(cell=>'ABS('+cell+')').join('+'):'0';
