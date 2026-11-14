@@ -5722,6 +5722,17 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    });
    p.invoices=keep||[];
   }
+  // Rebuild the reverse links from the final payment allocation.
+  // Earlier matching passes can replace p.invoices without removing every stale
+  // inv.payments reference. Those stale reverse links merge unrelated PN/UNC
+  // into one connected component and make one UNC reduce a different PN.
+  invoices.forEach(inv=>{inv.payments=[];});
+  payments.forEach(p=>{
+   const unique=[];
+   (p.invoices||[]).forEach(inv=>{if(inv&&invoices.includes(inv)&&!unique.includes(inv))unique.push(inv);});
+   p.invoices=unique;
+   unique.forEach(inv=>{inv.payments.push(p);});
+  });
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
   let oddAmount=0;
   const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
