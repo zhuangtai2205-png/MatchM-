@@ -5866,6 +5866,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const groups=new Map();
   invoices.forEach(inv=>{const root=find(inv);if(!groups.has(root))groups.set(root,{invoices:[],payments:[]});groups.get(root).invoices.push(inv);});
   payments.forEach(p=>{if(!p.invoices||!p.invoices.length)return;const root=find(p);if(!groups.has(root))groups.set(root,{invoices:[],payments:[]});groups.get(root).payments.push(p);});
+  // Track one result cell per matched group so the DƯ LẺ summary excludes
+  // unpaid PN and UNC/PC vouchers that have no PN.
+  const matchedDifferenceCells=[];
   groups.forEach(group=>{
    const invoiceRows=group.invoices.map(inv=>invoiceAnchorRow.get(inv)).filter(Boolean);
    const paymentRows=group.payments.map(p=>exportExcelRow.get(p.rec)).filter(Boolean);
@@ -5876,12 +5879,25 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const formula='SUM('+paymentRows.map(r=>'E'+r).join(',')+')-SUM('+invoiceRows.map(r=>'G'+r).join(',')+')';
    const value=group.payments.reduce((sum,p)=>sum+p.amount,0)-group.invoices.reduce((sum,inv)=>sum+inv.total,0);
    setFormula('K'+anchorRow,formula,value);
+   matchedDifferenceCells.push('K'+anchorRow);
   });
+  // Each unpaid PN has its own formula result (PN total), and remains classified
+  // separately from a matched group with a small residual.
+  invoices.forEach(inv=>{
+   if(inv.payments&&inv.payments.length)return;
+   const anchor=inv.rows&&inv.rows[0],excelRow=anchor&&exportExcelRow.get(anchor);
+   if(!excelRow||inv._adjustedPair)return;
+   setFormula('K'+excelRow,'G'+excelRow,inv.total);
+  });
+  // Each unmatched UNC/PC keeps its own amount as the result, not part of DƯ LẺ.
   payments.forEach(payment=>{
    const rec=payment.rec,excelRow=exportExcelRow.get(rec);
    if(!excelRow)return;
    const linkedRows=[...new Set((payment.invoices||[]).map(inv=>invoiceAnchorRow.get(inv)).filter(Boolean))];
-   if(!linkedRows.length)return;
+   if(!linkedRows.length){
+    setFormula('K'+excelRow,'E'+excelRow,payment.amount);
+    return;
+   }
    const formula='E'+excelRow+'-SUM('+linkedRows.map(r=>'G'+r).join(',')+')';
    setFormula('K'+excelRow,formula,payment.amount-(payment.invoices||[]).reduce((sum,inv)=>sum+inv.total,0));
   });
@@ -5892,7 +5908,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const allPnExcelRow=netExcelRow+1;setFormula('E'+allPnExcelRow,'SUM(G'+dataStart+':G'+dataEnd+')',invoicesTotalForExport());
   const unpaidExcelRow=allPnExcelRow+1;setFormula('E'+unpaidExcelRow,'SUMIFS(G'+dataStart+':G'+dataEnd+',A'+dataStart+':A'+dataEnd+',"PN*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"chưa thanh toán")',summary.unpaid);
   const noPnExcelRow=unpaidExcelRow+1;setFormula('E'+noPnExcelRow,'SUMIFS(E'+dataStart+':E'+dataEnd+',A'+dataStart+':A'+dataEnd+',"UNC*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"unc/phiếu chi không có pn")+SUMIFS(E'+dataStart+':E'+dataEnd+',A'+dataStart+':A'+dataEnd+',"PC*",'+lastCol+dataStart+':'+lastCol+dataEnd+',"unc/phiếu chi không có pn")',summary.noPN);
-  const oddExcelRow=noPnExcelRow+1;setFormula('E'+oddExcelRow,'E'+totalExcelRow+'-F'+totalExcelRow,ledgerDiff);
+  const oddExcelRow=noPnExcelRow+1;
+  const oddFormula=matchedDifferenceCells.length?matchedDifferenceCells.map(cell=>'ABS('+cell+')').join('+'):'0';
+  setFormula('E'+oddExcelRow,oddFormula,summary.oddAmount);
+  const finalDiffExcelRow=oddExcelRow+1;
+  setFormula('E'+finalDiffExcelRow,'E'+totalExcelRow+'-F'+totalExcelRow,ledgerDiff);
   ws['!cols']=exportHeaders.map((h,i)=>{const vals=exportRows.map(r=>String(r[i]??''));const header=String(h??'');const maxLen=Math.max(header.length,...vals.slice(0,300).map(v=>v.length));let w=Math.min(24,Math.max(5,maxLen+1));if(i===2)w=Math.min(30,Math.max(12,maxLen+1));if(i===6)w=14;if(i===resultCol)w=12;if(i===statusCol)w=22;if(i>=outputHeaders.length-2)w=Math.min(30,Math.max(16,maxLen+1));if(i===4||i===5)w=Math.min(16,Math.max(10,maxLen+1));return {wch:w};});
   const headerRow=topRows.length+1;for(let c=0;c<exportHeaders.length;c++){const cell=XLSX.utils.encode_cell({r:headerRow-1,c});if(ws[cell])ws[cell].s={font:{bold:true,color:{rgb:'FFFFFF'}},fill:{patternType:'solid',fgColor:{rgb:'4472C4'}},alignment:{vertical:'center',wrapText:true}};}
   resultRows.forEach((rec,i)=>{const rr=topRows.length+1+i;const statusKey=norm(rec.status);const voucherStatus=(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')?norm((resultRows.find(x=>x._invoiceKey&&x._invoiceKey===rec._invoiceKey&&['CHUA THANH TOAN','UNC/PHIEU CHI KHONG CO PN'].includes(norm(x.status)))||rec).status):statusKey);const unmatchedPayment=statusKey==='UNC/PHIEU CHI KHONG CO PN';const noFillStatus=statusKey==='CHUA THANH TOAN'||unmatchedPayment||voucherStatus==='CHUA THANH TOAN'||voucherStatus==='UNC/PHIEU CHI KHONG CO PN';const amountColor=voucherStatus==='CHUA THANH TOAN'?'C00000':(voucherStatus==='UNC/PHIEU CHI KHONG CO PN'?'008000':'');for(let c=0;c<exportHeaders.length;c++){const cell=XLSX.utils.encode_cell({r:rr,c});if(ws[cell]&&noFillStatus){const style={...(ws[cell].s||{})};delete style.fill;if(unmatchedPayment)style.font={...(style.font||{}),color:{rgb:'008000'}};ws[cell].s=style;}else if(ws[cell]&&rec._color&&c>=4){ws[cell].s={...(ws[cell].s||{}),fill:{patternType:'solid',fgColor:{rgb:rec._color}},alignment:{vertical:'center',wrapText:true},border:{bottom:{style:'thin',color:{rgb:'FFFFFF'}}}};}if(ws[cell]&&amountColor&&!unmatchedPayment&&[4,5,6,resultCol].includes(c)){ws[cell].s={...(ws[cell].s||{}),font:{...(ws[cell].s?.font||{}),color:{rgb:amountColor}}};}}const statusCell=XLSX.utils.encode_cell({r:rr,c:statusCol});if(ws[statusCell])ws[statusCell].s={...(ws[statusCell].s||{}),font:{...(ws[statusCell].s?.font||{}),bold:true,color:{rgb:rec.status==='ok'?'26734D':(String(rec.status).toLowerCase().startsWith('dư lẻ')?'9A6700':(rec.status==='BÙ TRỪ HĐ ĐIỀU CHỈNH'?'635588':'9C0006'))}}};});
