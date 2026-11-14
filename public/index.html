@@ -5425,6 +5425,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(candidates.length>1){
     const unpaidCandidates=candidates.filter(inv=>!inv.payments.length);
     if(unpaidCandidates.length===1)candidates=unpaidCandidates;
+    else{
+     const dated=candidates.map(inv=>({inv,gap:Math.abs(dateValue(inv.date)-dateValue(adj.date))})).sort((a,b)=>a.gap-b.gap);
+     if(Number.isFinite(dated[0].gap)&&(!Number.isFinite(dated[1].gap)||dated[1].gap-dated[0].gap>=86400000))candidates=[dated[0].inv];
+    }
    }
    if(candidates.length===1){
     const counterpart=candidates[0],color=pairColors[colorIndex++%pairColors.length];
