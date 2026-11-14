@@ -5413,6 +5413,39 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    }
    p.invoices.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p)});
   }
+  // Guard explicit multi-PN references against allocating more money than the UNC contains.
+  // A bank payment may settle several PN only when their combined total is supported
+  // by the payment amount. If the description lists extra/old PN numbers, retain only
+  // one uniquely near-exact PN; otherwise leave the UNC for manual review.
+  for(const p of explicitPayments){
+   if(p.invoices.length<2)continue;
+   const linked=p.invoices.slice();
+   const linkedTotal=linked.reduce((sum,inv)=>sum+inv.total,0);
+   if(linkedTotal<=p.amount+1.000001)continue;
+   const near=linked.map(inv=>({inv,diff:Math.abs(inv.total-p.amount)}))
+    .filter(x=>x.diff<=1000.000001).sort((a,b)=>a.diff-b.diff);
+   let keep=null;
+   if(near.length&&(!near[1]||near[1].diff-near[0].diff>0.005))keep=[near[0].inv];
+   if(!keep){
+    let solutions=[],nodes=0;
+    const ordered=linked.slice().sort((a,b)=>b.total-a.total);
+    const walk=(at,sum,chosen)=>{
+     if(++nodes>100000) return;
+     if(chosen.length&&Math.abs(sum-p.amount)<=1.000001){solutions.push(chosen.slice());return;}
+     if(at>=ordered.length||sum>p.amount+1.000001||solutions.length>1)return;
+     for(let i=at;i<ordered.length;i++){chosen.push(ordered[i]);walk(i+1,sum+ordered[i].total,chosen);chosen.pop();if(solutions.length>1)return;}
+    };
+    walk(0,0,[]);
+    if(solutions.length===1)keep=solutions[0];
+   }
+   if(!keep){
+    linked.forEach(inv=>{inv.payments=inv.payments.filter(existing=>existing!==p)});
+    p.invoices=[];
+   }else{
+    linked.filter(inv=>!keep.includes(inv)).forEach(inv=>{inv.payments=inv.payments.filter(existing=>existing!==p)});
+    p.invoices=keep;
+   }
+  }
   // Link documented advance payments to the later PN when a settlement UNC explicitly
   // says it is paying the invoice after deducting an advance (e.g. "DA UNG TRUOC 240").
   // An advance may pre-date the invoice, so this rule intentionally allows up to 60 days
