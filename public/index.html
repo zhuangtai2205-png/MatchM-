@@ -5688,6 +5688,39 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     // Equal and opposite vouchers net to zero and are excluded from unpaid totals.
    }
   }
+  // Final allocation integrity check: run AFTER every explicit, amount-based and
+  // partial-payment pass. Earlier passes may add links after the first explicit-reference
+  // guard, so validate the final graph before calculating connected-group balances.
+  // A single UNC/PC may cover multiple PN only when those PN totals fit the payment.
+  for(const p of payments){
+   if(p.invoices.length<2)continue;
+   const linked=p.invoices.slice();
+   const linkedTotal=linked.reduce((sum,inv)=>sum+inv.total,0);
+   if(linkedTotal<=p.amount+1.000001)continue;
+   const near=linked.map(inv=>({inv,diff:Math.abs(inv.total-p.amount)}))
+    .filter(x=>x.diff<=1000.000001).sort((a,b)=>a.diff-b.diff);
+   let keep=null;
+   if(near.length&&(!near[1]||near[1].diff-near[0].diff>0.005))keep=[near[0].inv];
+   if(!keep){
+    const ordered=linked.slice().sort((a,b)=>b.total-a.total);
+    let solutions=[],nodes=0;
+    const walk=(at,sum,chosen)=>{
+     if(++nodes>100000)return;
+     if(chosen.length&&Math.abs(sum-p.amount)<=1.000001){solutions.push(chosen.slice());return;}
+     if(at>=ordered.length||sum>p.amount+1.000001||solutions.length>1)return;
+     for(let i=at;i<ordered.length;i++){
+      chosen.push(ordered[i]);walk(i+1,sum+ordered[i].total,chosen);chosen.pop();
+      if(solutions.length>1)return;
+     }
+    };
+    walk(0,0,[]);
+    if(solutions.length===1)keep=solutions[0];
+   }
+   linked.filter(inv=>!keep||!keep.includes(inv)).forEach(inv=>{
+    inv.payments=inv.payments.filter(existing=>existing!==p);
+   });
+   p.invoices=keep||[];
+  }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
   let oddAmount=0;
   const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
