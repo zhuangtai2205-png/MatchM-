@@ -5356,7 +5356,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  }
  function paymentType(value){const code=String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').toUpperCase().replace(/[^A-Z0-9]/g,'');return code.startsWith('UNC')?'UNC':(code.startsWith('PC')||code.startsWith('PHIEUCHI')||code==='CHI'?'PC':'');}function isPaymentCode(value){return !!paymentType(value);}
  function compute(records){
-  const invoiceMap=new Map(),payments=[];
+  const invoiceMap=new Map(),payments=[],pktMap=new Map();
   const dateCol=Number.isInteger(window.__dcDateCol)?window.__dcDateCol:8;
   // Prefer the header-detected date column, but if it is blank/non-date (some ledgers
   // contain an extra account/source column such as BN1/PNA), detect the actual date
@@ -5378,9 +5378,26 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   };
   records.forEach((rec,idx)=>{const r=rec.base;const code=norm(r[0]).replace(/ /g,'').toUpperCase();const no=String(r[1]??'').trim();const debit=num(r[4]),credit=num(r[5]);const docDate=dateAt(r);const dateKey=dateValue(docDate);const key=code+'|'+norm(no)+'|'+(Number.isFinite(dateKey)?dateKey:'NO_DATE');rec.result='';rec.status='ok';rec.totalPN='';rec._idx=idx;if(code.startsWith('PN')&&no)rec._invoiceKey=key;
    if(code.startsWith('PN')&&no){if(!invoiceMap.has(key))invoiceMap.set(key,{key,code,no,numberToken:norm(no).replace(/ /g,''),rows:[],total:0,payments:[],date:docDate});const inv=invoiceMap.get(key);inv.rows.push(rec);inv.total+=credit-debit;}
+   if(code.startsWith('PKT')&&no){const pktKey=norm(no)+'|'+(Number.isFinite(dateKey)?dateKey:'NO_DATE');if(!pktMap.has(pktKey))pktMap.set(pktKey,{key:pktKey,no,numberToken:norm(no).replace(/ /g,''),rows:[],total:0,date:docDate,invoice:null});const pkt=pktMap.get(pktKey);pkt.rows.push(rec);pkt.total+=debit-credit;}
    const pType=paymentType(code);if(pType)payments.push({rec,code:String(r[0]??''),type:pType,amount:debit,tokens:extractInvoiceTokens(r[2]),date:docDate,invoices:[]});
   });
   const invoices=[...invoiceMap.values()];
+  // PKT is a reward/discount voucher, not a payment. Deduct its debit-credit total
+  // from the PN with the same voucher number before matching UNC/PC.
+  const pktGroups=[...pktMap.values()];
+  invoices.forEach(inv=>{inv.grossTotal=inv.total;inv.pktTotal=0;inv.pktRows=[];});
+  for(const pkt of pktGroups){
+   const candidates=invoices.filter(inv=>inv.numberToken===pkt.numberToken&&(()=>{const a=dateValue(inv.date),b=dateValue(pkt.date);return !Number.isFinite(a)||!Number.isFinite(b)||Math.abs(a-b)<=60*86400000;})());
+   let chosen=null;
+   if(candidates.length===1)chosen=candidates[0];
+   else if(candidates.length>1){
+    const dated=candidates.map(inv=>({inv,gap:Math.abs(dateValue(inv.date)-dateValue(pkt.date))})).sort((a,b)=>a.gap-b.gap);
+    if(Number.isFinite(dated[0].gap)&&(!Number.isFinite(dated[1].gap)||dated[1].gap-dated[0].gap>=86400000))chosen=dated[0].inv;
+   }
+   if(chosen){chosen.pktTotal+=pkt.total;chosen.pktRows.push(...pkt.rows);pkt.invoice=chosen;pkt.rows.forEach(rec=>{rec.status='PKT KHẤU TRỪ PN '+chosen.no;rec._filterPN='PN'+chosen.no;});}
+   else pkt.rows.forEach(rec=>{rec.status='PKT CHƯA GHÉP ĐƯỢC PN';});
+  }
+  invoices.forEach(inv=>{inv.total=roundMoney(inv.grossTotal-inv.pktTotal);});
   // Global priority: resolve all UNC payments before any PC payment can claim a PN.
   payments.sort((a,b)=>a.type===b.type?0:(a.type==='UNC'?-1:1));
   // Resolve explicit invoice references in UNC descriptions.
@@ -5693,7 +5710,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const descText=invoiceDescription(adj);
    const referencedTokens=(descText.match(/[A-Z0-9]+/g)||[]).filter(t=>/[0-9]/.test(t));
    let candidates=invoices.filter(inv=>{
-    if(inv===adj||inv._adjustedPair||Math.abs(inv.total+adj.total)>1.000001)return false;
+    if(inv===adj||inv._adjustedPair||inv.payments.length||Math.abs(inv.total+adj.total)>1.000001)return false;
     if(!canPairByDate(inv,adj)||invoiceAccount(inv)!==invoiceAccount(adj))return false;
     if(referencedTokens.length&&invoiceHasAdjustmentWords(adj)&&!referencedTokens.includes(inv.numberToken))return false;
     return true;
@@ -5708,9 +5725,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     const counterpart=candidates[0],color=pairColors[colorIndex++%pairColors.length];
     adj._adjustedPair=counterpart;counterpart._adjustedPair=adj;adj._adjustedColor=counterpart._adjustedColor=color;
     counterpart.rows.forEach(rec=>{rec.status='BÙ TRỪ HĐ ĐIỀU CHỈNH';rec.result='';rec._color=color;rec.totalPN='';});
-    counterpart.rows[0].totalPN=counterpart.total;
-    // Keep any already-linked PC/UNC attached to the paid PN and mark it OK as part of the adjustment offset.
-    counterpart.payments.forEach(p=>{p.rec.status='BÙ TRỪ HĐ ĐIỀU CHỈNH';p.rec.result='';p.rec._color=color;});
+    counterpart.rows[0].totalPN=counterpart.grossTotal;
     adj.rows.forEach(rec=>{rec.status='BÙ TRỪ HĐ ĐIỀU CHỈNH';rec.result='';rec._color=color;rec.totalPN='';});
     // Equal and opposite vouchers net to zero and are excluded from unpaid totals.
    }
@@ -5770,7 +5785,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const invoiceTotal=compI.reduce((sum,x)=>sum+x.total,0),paymentTotal=compP.reduce((sum,x)=>sum+x.amount,0),diff=paymentTotal-invoiceTotal;
    const pairColor=pairColors[colorIndex++%pairColors.length];
    // Chỉ tô màu khi nhóm đã ghép được ít nhất một UNC; phiếu PN chưa thanh toán để no fill.
-   compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';if(compP.length)rec._color=pairColor;else delete rec._color;});inv.rows[0].totalPN=inv.total});
+   compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';if(compP.length)rec._color=pairColor;else delete rec._color;});inv.rows[0].totalPN=inv.grossTotal});
    if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
    if(!compP.length){anchor.result=invoiceTotal;anchor.status='chưa thanh toán';compI.slice(1).forEach(inv=>{inv.rows[0].status='chưa thanh toán';delete inv.rows[0]._color})}
@@ -5819,7 +5834,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   }
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status,rec._filterPN||'',rec._filterPayment||'']);rec.output=output;return rec});
   window.__dcExportModel={invoices,payments};
-  window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.total));
+  window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.grossTotal));
   summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>0.005).length,oddAmount};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');$('dcOddAmount').textContent=fmt(summary.oddAmount);
  }
@@ -5856,7 +5871,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const excelRow=exportExcelRow.get(anchor);
    const debitRefs=rows.map(r=>'E'+r),creditRefs=rows.map(r=>'F'+r);
    const formula='SUM('+creditRefs.join(',')+')-SUM('+debitRefs.join(',')+')';
-   setFormula('G'+excelRow,formula,inv.total);
+   setFormula('G'+excelRow,formula,inv.grossTotal);
   });
   // Build the same connected PN-payment groups used by the on-screen result.
   const parent=new Map();
@@ -5876,7 +5891,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    const anchor=group.invoices[0].rows&&group.invoices[0].rows[0];
    const anchorRow=anchor&&exportExcelRow.get(anchor);
    if(!anchorRow)return;
-   const formula='SUM('+paymentRows.map(r=>'E'+r).join(',')+')-SUM('+invoiceRows.map(r=>'G'+r).join(',')+')';
+   const pktRows=[...new Set(group.invoices.flatMap(inv=>inv.pktRows||[]))].map(rec=>exportExcelRow.get(rec)).filter(Boolean);
+   const pktDebit=pktRows.length?'SUM('+pktRows.map(r=>'E'+r).join(',')+')':'0';
+   const pktCredit=pktRows.length?'SUM('+pktRows.map(r=>'F'+r).join(',')+')':'0';
+   const formula='SUM('+paymentRows.map(r=>'E'+r).join(',')+')-SUM('+invoiceRows.map(r=>'G'+r).join(',')+')+'+pktDebit+'-'+pktCredit;
    const value=group.payments.reduce((sum,p)=>sum+p.amount,0)-group.invoices.reduce((sum,inv)=>sum+inv.total,0);
    setFormula('K'+anchorRow,formula,value);
    matchedDifferenceCells.push('K'+anchorRow);
@@ -5887,7 +5905,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(inv.payments&&inv.payments.length)return;
    const anchor=inv.rows&&inv.rows[0],excelRow=anchor&&exportExcelRow.get(anchor);
    if(!excelRow||inv._adjustedPair)return;
-   setFormula('K'+excelRow,'G'+excelRow,inv.total);
+   const pktRows=(inv.pktRows||[]).map(rec=>exportExcelRow.get(rec)).filter(Boolean);
+   const pktDebit=pktRows.length?'SUM('+pktRows.map(r=>'E'+r).join(',')+')':'0';
+   const pktCredit=pktRows.length?'SUM('+pktRows.map(r=>'F'+r).join(',')+')':'0';
+   setFormula('K'+excelRow,'G'+excelRow+'-'+pktDebit+'+'+pktCredit,inv.total);
   });
   // Each unmatched UNC/PC keeps its own amount as the result, not part of DƯ LẺ.
   payments.forEach(payment=>{
