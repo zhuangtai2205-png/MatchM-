@@ -5439,6 +5439,52 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     // Equal and opposite vouchers net to zero and are excluded from unpaid totals.
    }
   }
+  // Support one original PN being offset by TWO adjustment/return PN.
+  // Only accept an exact three-voucher net (1 positive + 2 negative), same account,
+  // within 60 days, with no payment/PKT/already-paired voucher and no ambiguous alternative.
+  const negativeAdjustments=invoices.filter(inv=>inv.total < -0.005 && !(inv.pktTotal>0.005) && !inv.payments.length && !inv._adjustedPair);
+  const positiveOpenInvoices=invoices.filter(inv=>inv.total > 0.005 && !(inv.pktTotal>0.005) && !inv.payments.length && !inv._adjustedPair);
+  const adjustmentCombos=[];
+  for(const original of positiveOpenInvoices){
+   const pool=negativeAdjustments.filter(adj=>invoiceAccount(adj)===invoiceAccount(original)&&canPairByDate(adj,original));
+   const matches=[];
+   for(let a=0;a<pool.length;a++)for(let b=a+1;b<pool.length;b++){
+    const first=pool[a],second=pool[b];
+    if(!canPairByDate(first,second))continue;
+    if(Math.abs(original.total+first.total+second.total)>1.000001)continue;
+    const explicitTarget=adj=>{
+     const desc=invoiceDescription(adj);
+     if(!invoiceHasAdjustmentWords(adj))return true;
+     const tokens=(desc.match(/[A-Z0-9]+/g)||[]).filter(t=>/[0-9]/.test(t));
+     return !tokens.length||tokens.includes(original.numberToken);
+    };
+    if(!explicitTarget(first)||!explicitTarget(second))continue;
+    matches.push([first,second]);
+   }
+   if(matches.length===1)adjustmentCombos.push({original,adjustments:matches[0]});
+  }
+  // Do not consume an adjustment PN if it could belong to more than one original.
+  for(const combo of adjustmentCombos){
+   const [first,second]=combo.adjustments;
+   const usedElsewhere=adjustmentCombos.some(other=>other!==combo&&
+    (other.adjustments.includes(first)||other.adjustments.includes(second)));
+   if(usedElsewhere||combo.original._adjustedPair||first._adjustedPair||second._adjustedPair)continue;
+   const color=pairColors[colorIndex++%pairColors.length];
+   const group=[combo.original,first,second];
+   group.forEach(inv=>{
+    inv._adjustedPair=group.filter(other=>other!==inv);
+    inv._adjustedColor=color;
+    inv.rows.forEach(rec=>{
+     rec.status='BÙ TRỪ HĐ ĐIỀU CHỈNH';
+     rec.result='';
+     rec._color=color;
+     rec.totalPN='';
+     rec.adjustmentNote='Bù trừ 1 PN '+combo.original.no+' với 2 PN '+first.no+' và '+second.no+
+      ' ( '+Math.abs(combo.original.total).toLocaleString('vi-VN')+' - '+Math.abs(first.total).toLocaleString('vi-VN')+' - '+Math.abs(second.total).toLocaleString('vi-VN')+' = 0 )';
+    });
+    inv.rows[0].totalPN=inv.grossTotal;
+   });
+  }
   // Global priority: resolve all UNC payments before any PC payment can claim a PN.
   payments.sort((a,b)=>a.type===b.type?0:(a.type==='UNC'?-1:1));
   // Resolve explicit invoice references in UNC descriptions.
