@@ -5816,6 +5816,13 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(candidates.length&&(!candidates[1]||candidates[1].diff-candidates[0].diff>0.005)){const chosen=candidates[0].inv;p.invoices.push(chosen);chosen.payments.push(p);}
   }
   // Deploy sync marker: final Dò nợ allocation validation is included in this build.
+  // Exact-value duplicate-PN tie-break: choose one nearest PN; on same-day ties use source order.
+  for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005).sort((a,b)=>(dateValue(a.date)-dateValue(b.date))||((a.rec?._idx??0)-(b.rec?._idx??0)))){
+   const claimed=inv=>payments.some(other=>other!==p&&(other.invoices||[]).includes(inv));
+   const exact=invoices.filter(inv=>!inv._adjustedPair&&!claimed(inv)&&inv.total>0.005&&within60Days(inv.date,p.date)&&Math.abs(inv.total-p.amount)<=0.005)
+    .sort((a,b)=>(Math.abs(dateValue(a.date)-dateValue(p.date))-Math.abs(dateValue(b.date)-dateValue(p.date)))||((a.rows?.[0]?._idx??0)-(b.rows?.[0]?._idx??0)));
+   if(exact.length)p.invoices.push(exact[0]);
+  }
   // Final allocation integrity check: run AFTER every explicit, amount-based and
   // partial-payment pass. Earlier passes may add links after the first explicit-reference
   // guard, so validate the final graph before calculating connected-group balances.
