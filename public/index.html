@@ -5811,8 +5811,13 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    while(queue.length){const item=queue.shift();if(item.type==='i'){const inv=item.obj;compI.push(inv);for(const p of inv.payments){const pk=p.rec._idx;if(!visitedP.has(pk)){visitedP.add(pk);queue.push({type:'p',obj:p})}}}else{const p=item.obj;compP.push(p);for(const inv of p.invoices){if(!visitedI.has(inv.key)){visitedI.add(inv.key);queue.push({type:'i',obj:inv})}}}}
    const invoiceTotal=compI.reduce((sum,x)=>sum+x.total,0),paymentTotal=compP.reduce((sum,x)=>sum+x.amount,0),diff=paymentTotal-invoiceTotal;
    const pairColor=pairColors[colorIndex++%pairColors.length];
-   // Chỉ tô màu khi nhóm đã ghép được ít nhất một UNC; phiếu PN chưa thanh toán để no fill.
-   compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';if(compP.length)rec._color=pairColor;else delete rec._color;});inv.rows[0].totalPN=inv.grossTotal});
+   // Keep each connected PN-PKT-UNC group in one shared color.
+   // A PN with a linked PKT is colored together with that PKT even before payment.
+   const hasLinkedPkt=compI.some(inv=>(inv.pktRows||[]).length>0);
+   const colorGroup=compP.length>0||hasLinkedPkt;
+   compI.forEach(inv=>{inv.rows.forEach(rec=>{rec.status='ok';rec.totalPN='';if(colorGroup)rec._color=pairColor;else delete rec._color;});inv.rows[0].totalPN=inv.grossTotal;
+    (inv.pktRows||[]).forEach(rec=>{rec._color=pairColor;});
+   });
    if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
    if(!compP.length){anchor.result=invoiceTotal;anchor.status=invoiceTotal< -0.005?(compI.some(inv=>inv.pktTotal>0.005)?'PKT VƯỢT PN - KIỂM TRA':'PN ĐIỀU CHỈNH CHƯA CÓ PN ĐỐI ỨNG'):(invoiceTotal<=0.005&&compI.some(inv=>inv.pktTotal>0.005)?'đã khấu trừ PKT':'chưa thanh toán');compI.slice(1).forEach(inv=>{inv.rows[0].status=anchor.status;delete inv.rows[0]._color})}
