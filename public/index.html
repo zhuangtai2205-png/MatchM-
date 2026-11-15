@@ -5671,12 +5671,24 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     const amount=Number(amountKey);
     const ps=exactPayments.filter(p=>Math.abs(p.amount-amount)<=0.005);
     const invs=exactInvoices.filter(inv=>Math.abs(inv.total-amount)<=0.005);
-    if(ps.length<2||ps.length!==invs.length)continue;
+    if(!ps.length||!invs.length)continue;
+    ps.sort(chronological);
+    invs.sort(chronological);
+    // If there are fewer equal-value payments than equal-value PN, allocate
+    // deterministically in source/chronological order (FIFO). This avoids
+    // leaving an exact-value UNC unmatched merely because two same-day PN
+    // happen to have identical totals. Extra PN remain unpaid for review.
+    if(ps.length<invs.length){
+     const count=ps.length;
+     const pairs=ps.map((p,i)=>({p,inv:invs[i]}));
+     if(!pairs.every(({p,inv})=>within60Days(inv.date,p.date)))continue;
+     pairs.forEach(({p,inv})=>{p.invoices.push(inv);inv.payments.push(p)});
+     continue;
+    }
+    if(ps.length!==invs.length)continue;
     // Only resolve a repeated-value group when every PN can legally pair with
     // every payment. Otherwise keep the group for manual review.
     if(!ps.every(p=>invs.every(inv=>within60Days(inv.date,p.date))))continue;
-    ps.sort(chronological);
-    invs.sort(chronological);
     ps.forEach((p,i)=>{
      const inv=invs[i];
      p.invoices.push(inv);
