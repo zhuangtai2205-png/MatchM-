@@ -5394,6 +5394,25 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     const dated=candidates.map(inv=>({inv,gap:Math.abs(dateValue(inv.date)-dateValue(pkt.date))})).sort((a,b)=>a.gap-b.gap);
     if(Number.isFinite(dated[0].gap)&&(!Number.isFinite(dated[1].gap)||dated[1].gap-dated[0].gap>=86400000))chosen=dated[0].inv;
    }
+   // If the PKT number differs from the PN number, allow a strictly verified
+   // fallback: the PN balance after this PKT must equal one dated UNC/PC exactly,
+   // and only one PN may satisfy the condition. This handles separate numbering
+   // sequences without relying on description similarity or a guessed nearest PN.
+   if(!chosen){
+    const deduction=Math.abs(pkt.total);
+    const exactCandidates=invoices.filter(inv=>{
+     if(inv.pktGroups.length||!Number.isFinite(dateValue(inv.date))||!Number.isFinite(dateValue(pkt.date)))return false;
+     const pnPktGap=Math.abs(dateValue(inv.date)-dateValue(pkt.date));
+     if(pnPktGap>60*86400000)return false;
+     const balance=roundMoney(inv.grossTotal-deduction);
+     if(balance<=0)return false;
+     return payments.some(pay=>{
+      if(!Number.isFinite(dateValue(pay.date))||Math.abs(dateValue(pay.date)-dateValue(inv.date))>60*86400000)return false;
+      return Math.abs(roundMoney(pay.amount)-balance)<=1;
+     });
+    });
+    if(exactCandidates.length===1)chosen=exactCandidates[0];
+   }
    if(chosen){pkt.deduction=Math.abs(pkt.total);chosen.pktTotal+=pkt.deduction;chosen.pktRows.push(...pkt.rows);chosen.pktGroups.push(pkt);pkt.invoice=chosen;pkt.rows.forEach(rec=>{rec.status='PKT KHẤU TRỪ PN '+chosen.no;rec._filterPN='PN'+chosen.no;});}
    else pkt.rows.forEach(rec=>{rec.status='PKT CHƯA GHÉP ĐƯỢC PN';});
   }
