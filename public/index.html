@@ -5654,9 +5654,9 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    return uniqueSubset(items,target,getAmount,maxItems,targetDate);
   }
   // Exact one-to-one settlement for repeated equal-value PN and UNC vouchers.
-  // When several invoices and bank payments have the same amount, pair them
-  // chronologically (oldest unpaid PN with oldest unassigned UNC), once each.
-  // This avoids treating duplicate amounts as ambiguous and leaving every row unmatched.
+  // If the counts of identical-value PN and UNC/PC vouchers are equal, and every
+  // cross-pair satisfies the 60-day rule, pair them chronologically. This handles
+  // repeated equal amounts without mistaking a balanced 2-PN/2-UNC set for ambiguity.
   for(const type of ['UNC','PC']){
    const chronological=(a,b)=>{
     const da=dateValue(a.date),db=dateValue(b.date);
@@ -5664,14 +5664,32 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     if(Number.isFinite(da)!==Number.isFinite(db))return Number.isFinite(da)?-1:1;
     return (a.rec?._idx??a.rows?.[0]?._idx??0)-(b.rec?._idx??b.rows?.[0]?._idx??0);
    };
+   const exactPayments=payments.filter(p=>p.type===type&&!p.invoices.length&&p.tokens.length===0&&p.amount>0.005);
+   const exactInvoices=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005);
+   const amountKeys=[...new Set(exactPayments.map(p=>Number(p.amount).toFixed(2)))];
+   for(const amountKey of amountKeys){
+    const amount=Number(amountKey);
+    const ps=exactPayments.filter(p=>Math.abs(p.amount-amount)<=0.005);
+    const invs=exactInvoices.filter(inv=>Math.abs(inv.total-amount)<=0.005);
+    if(ps.length<2||ps.length!==invs.length)continue;
+    // Only resolve a repeated-value group when every PN can legally pair with
+    // every payment. Otherwise keep the group for manual review.
+    if(!ps.every(p=>invs.every(inv=>within60Days(inv.date,p.date))))continue;
+    ps.sort(chronological);
+    invs.sort(chronological);
+    ps.forEach((p,i)=>{
+     const inv=invs[i];
+     p.invoices.push(inv);
+     inv.payments.push(p);
+    });
+   }
+   // Preserve the original unique one-to-one behavior for non-repeated amounts.
    const orderedPayments=payments.filter(p=>p.type===type&&!p.invoices.length&&p.tokens.length===0&&p.amount>0.005).sort(chronological);
    for(const p of orderedPayments){
     const candidates=invoices.filter(inv=>
      !inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&
      within60Days(inv.date,p.date)&&Math.abs(inv.total-p.amount)<=0.005
     );
-    // For duplicate-value PN, select the invoice closest in date to this payment,
-    // not simply the oldest invoice. This keeps adjacent settlements paired correctly.
     candidates.sort((a,b)=>{
      const da=Math.abs(dateValue(a.date)-dateValue(p.date));
      const db=Math.abs(dateValue(b.date)-dateValue(p.date));
@@ -5679,10 +5697,19 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
      return chronological(a,b);
     });
     if(!candidates.length)continue;
+    if(candidates.length>1){
+     const firstGap=Math.abs(dateValue(candidates[0].date)-dateValue(p.date));
+     const secondGap=Math.abs(dateValue(candidates[1].date)-dateValue(p.date));
+     if(Number.isFinite(firstGap)&&Number.isFinite(secondGap)&&Math.abs(secondGap-firstGap)<86400000)continue;
+    }
     const inv=candidates[0];
-    const firstGap=Math.abs(dateValue(inv.date)-dateValue(p.date));
-    const secondGap=candidates[1]?Math.abs(dateValue(candidates[1].date)-dateValue(p.date)):Infinity;
-    if(candidates[1]&&Number.isFinite(firstGap)&&Number.isFinite(secondGap)&&Math.abs(secondGap-firstGap)<86400000)continue;
+    // If another same-value payment could also claim this sole PN, do not
+    // arbitrarily give it to the first UNC/PC; leave both sides for review.
+    const competingPayments=payments.some(other=>
+     other!==p&&other.type===type&&!other.invoices.length&&other.tokens.length===0&&
+     other.amount>0.005&&Math.abs(other.amount-p.amount)<=0.005&&within60Days(inv.date,other.date)
+    );
+    if(competingPayments)continue;
     p.invoices.push(inv);
     inv.payments.push(p);
    }
