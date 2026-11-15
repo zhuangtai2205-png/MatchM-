@@ -5377,7 +5377,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    return r[dateCol];
   };
   records.forEach((rec,idx)=>{const r=rec.base;const code=norm(r[0]).replace(/ /g,'').toUpperCase();const no=String(r[1]??'').trim();const debit=num(r[4]),credit=num(r[5]);const docDate=dateAt(r);const dateKey=dateValue(docDate);const key=code+'|'+norm(no)+'|'+(Number.isFinite(dateKey)?dateKey:'NO_DATE');rec.result='';rec.status='ok';rec.totalPN='';rec._idx=idx;if(code.startsWith('PN')&&no)rec._invoiceKey=key;
-   if(code.startsWith('PN')&&no){if(!invoiceMap.has(key))invoiceMap.set(key,{key,code,no,numberToken:norm(no).replace(/ /g,''),rows:[],total:0,payments:[],date:docDate});const inv=invoiceMap.get(key);inv.rows.push(rec);inv.total+=credit-debit;}
+   if(code.startsWith('PN')&&no){if(!invoiceMap.has(key))invoiceMap.set(key,{key,code,no,numberToken:norm(no).replace(/ /g,''),rows:[],total:0,payments:[],date:docDate});const inv=invoiceMap.get(key);inv.rows.push(rec);const accountCode=String(r[3]??'').replace(/[^0-9]/g,'');/* VAT input account 13311 is added to the PN payable total in the opposite ledger direction; 156/1561 keeps credit-debit so returns/adjustments retain their sign. */inv.total+=(accountCode==='13311'?debit-credit:credit-debit);}
    if(code.startsWith('PKT')&&no){const pktKey=norm(no)+'|'+(Number.isFinite(dateKey)?dateKey:'NO_DATE');if(!pktMap.has(pktKey))pktMap.set(pktKey,{key:pktKey,no,numberToken:norm(no).replace(/ /g,''),rows:[],total:0,date:docDate,invoice:null});const pkt=pktMap.get(pktKey);pkt.rows.push(rec);pkt.total+=debit-credit;}
    const pType=paymentType(code);if(pType)payments.push({rec,code:String(r[0]??''),type:pType,amount:debit,tokens:extractInvoiceTokens(r[2]),date:docDate,invoices:[]});
   });
