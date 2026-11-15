@@ -5869,6 +5869,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   });
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
   let oddAmount=0;
+  // A voucher may contain several source rows (for example TK 1561 and VAT 13311).
+  // Keep the calculated amount on its anchor row to avoid double-counting, but
+  // propagate the reconciliation status to every original row of that voucher.
+  const setInvoiceStatus=(inv,status)=>{(inv.rows||[]).forEach(rec=>{rec.status=status;});};
   const visitedI=new Set(invoices.filter(inv=>inv._adjustedPair).map(inv=>inv.key)),visitedP=new Set();
   for(const start of invoices){
    if(visitedI.has(start.key))continue;
@@ -5885,20 +5889,23 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    });
    if(compP.length)compP.forEach(p=>{p.rec._color=pairColor;});
    const anchor=compI[0].rows[0];anchor.result=roundMoney(diff);
-   if(!compP.length){anchor.result=invoiceTotal;anchor.status=invoiceTotal< -0.005?(compI.some(inv=>inv.pktTotal>0.005)?'PKT VƯỢT PN - KIỂM TRA':'PN ĐIỀU CHỈNH CHƯA CÓ PN ĐỐI ỨNG'):(invoiceTotal<=0.005&&compI.some(inv=>inv.pktTotal>0.005)?'đã khấu trừ PKT':'chưa thanh toán');compI.slice(1).forEach(inv=>{inv.rows[0].status=anchor.status;delete inv.rows[0]._color})}
+   if(!compP.length){
+    anchor.result=invoiceTotal;
+    anchor.status=invoiceTotal< -0.005?(compI.some(inv=>inv.pktTotal>0.005)?'PKT VƯỢT PN - KIỂM TRA':'PN ĐIỀU CHỈNH CHƯA CÓ PN ĐỐI ỨNG'):(invoiceTotal<=0.005&&compI.some(inv=>inv.pktTotal>0.005)?'đã khấu trừ PKT':'chưa thanh toán');
+    compI.forEach(inv=>setInvoiceStatus(inv,anchor.status));
+   }
    else if(Math.abs(diff)>0.005){
     const absDiff=Math.abs(diff),pct=invoiceTotal>0?absDiff/invoiceTotal*100:0;
     oddAmount+=absDiff;
     const direction=diff<0?'THIẾU':'DƯ';
     const note='DƯ LẺ - '+direction+' '+fmt(absDiff)+' ('+pct.toFixed(2).replace('.',',')+'%)';
-    anchor.status=note;
-    compI.slice(1).forEach(inv=>{inv.rows[0].status=note});
+    compI.forEach(inv=>setInvoiceStatus(inv,note));
     // Flag every payment in a mismatched group and show signed shortage/surplus and percentage.
     compP.forEach(p=>{p.rec.status=note;p.rec.result=''});
    } else compP.forEach(p=>{p.rec.status='ok';p.rec.result=''});
   }
   // Purchases with no payment link are marked as unpaid.
-  for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows[0].totalPN=inv.grossTotal;inv.rows[0].result=inv.total;inv.rows[0].status='chưa thanh toán';}}
+  for(const inv of invoices){if(!inv.payments.length&&!inv._adjustedPair){inv.rows[0].totalPN=inv.grossTotal;inv.rows[0].result=inv.total;setInvoiceStatus(inv,'chưa thanh toán');}}
   // UNC and cash-payment vouchers that cannot be matched to a PN are surfaced separately.
   // Không tô màu các phiếu PN chưa có UNC; chỉ ghi trạng thái để dễ rà soát.
   for(const p of payments){if(!p.invoices.length){p.rec.result=p.amount;p.rec.status='unc/phiếu chi không có pn';delete p.rec._color}}
