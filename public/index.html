@@ -5327,7 +5327,22 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   const dateCol=baseHeaders.findIndex(h=>{const n=debtHeaderNorm(h);return n.includes('NGAY CT')||n.includes('NGAY CHUNG TU');});
   window.__dcDateCol=dateCol>=0?dateCol:8;
   const rows=[];
-  for(let r=hi+1;r<matrix.length;r++){const raw=matrix[r]||[];if(isBlankRow(raw))continue;rows.push({sourceRow:r+1,base:keep.map(i=>raw[i]??'')})}
+  // Carry voucher identifiers onto continuation lines in ledger exports.
+  // Many accounting sheets write Mã CT/Số CTừ only on the first line of a
+  // multi-account voucher (e.g. PN merchandise line followed by VAT 13311).
+  // Without this normalization the VAT row is silently excluded from PN totals.
+  let lastVoucherCode='',lastVoucherNo='';
+  for(let r=hi+1;r<matrix.length;r++){
+   const raw=matrix[r]||[];if(isBlankRow(raw))continue;
+   const base=keep.map(i=>raw[i]??'');
+   const code=String(base[0]??'').trim(),no=String(base[1]??'').trim();
+   const hasAmounts=String(base[4]??'').trim()!==''||String(base[5]??'').trim()!=='';
+   if(code&&no){lastVoucherCode=code;lastVoucherNo=no;}
+   else if(!code&&!no&&lastVoucherCode&&lastVoucherNo&&hasAmounts){
+    base[0]=lastVoucherCode;base[1]=lastVoucherNo;
+   }
+   rows.push({sourceRow:r+1,base});
+  }
   const h=uniqueHeaders(baseHeaders);
   outputHeaders=h.slice(0,6).concat(['TỔNG TIỀN PN'],h.slice(6),['KẾT QUẢ','TỔNG KẾT','BỘ LỌC PN','BỘ LỌC UNC/PC']);
   topRows=matrix.slice(0,hi).filter(r=>!isBlankRow(r)).map(r=>{const arr=(r||[]).filter((v,i)=>!annotated||!(rawHeaders[i]&&(['KET QUA','TONG KET'].includes(norm(rawHeaders[i]))))&&!(annotated&&rawHeaders[i]&&(['BO LOC PN','BO LOC UNC PC'].includes(norm(rawHeaders[i]))))&&!(annotated&&i===6&&!String(rawHeaders[i]??'').trim()));return arr.slice(0,6).concat([''],arr.slice(6),['',''])});
