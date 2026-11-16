@@ -5777,13 +5777,18 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    // the payment unmatched for manual review rather than creating a cross-PN group.
    if(!p.invoices.length){
     const wholeCandidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date)&&Math.abs(inv.total-p.amount)<=1000.000001)
-     .map(inv=>({inv,gap:Math.abs(dateValue(inv.date)-dateValue(p.date))}))
-     .sort((a,b)=>a.gap-b.gap);
+     .map(inv=>({inv,diff:Math.abs(inv.total-p.amount),gap:Math.abs(dateValue(inv.date)-dateValue(p.date)),sourceIndex:inv.rows?.[0]?._idx??0}))
+     // Amount agreement is the primary evidence; date proximity is only a tie-break.
+     .sort((a,b)=>a.diff-b.diff||a.gap-b.gap||a.sourceIndex-b.sourceIndex);
     if(wholeCandidates.length){
-     if(wholeCandidates.length===1||!Number.isFinite(wholeCandidates[0].gap)||!Number.isFinite(wholeCandidates[1].gap)||wholeCandidates[1].gap-wholeCandidates[0].gap>=86400000){
-      const chosen=wholeCandidates[0].inv;
+     const best=wholeCandidates[0],second=wholeCandidates[1];
+     const uniqueAmount=!second||second.diff-best.diff>0.005;
+     const uniqueDate=!!second&&Math.abs(second.diff-best.diff)<=0.005&&Number.isFinite(best.gap)&&Number.isFinite(second.gap)&&second.gap-best.gap>=86400000;
+     if(uniqueAmount||uniqueDate){
+      const chosen=best.inv;
       p.invoices.push(chosen);chosen.payments.push(p);
      }
+     // If the closest amount/date evidence is still tied, keep it for manual review.
      continue;
     }
    }
