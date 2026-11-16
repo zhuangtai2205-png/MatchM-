@@ -5827,12 +5827,6 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     if(subset){subset.forEach(inv=>{if(!inv.payments.includes(p))inv.payments.push(p);if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
   }
-  // Keep a unique near-amount PN as a review candidate instead of saying no PN exists.
-  // Any non-zero difference remains DƯ LẺ; this fallback never marks it OK.
-  for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
-   const candidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date)).map(inv=>({inv,diff:Math.abs(inv.total-p.amount)})).filter(x=>x.diff<=10000.000001).sort((a,b)=>a.diff-b.diff);
-   if(candidates.length&&(!candidates[1]||candidates[1].diff-candidates[0].diff>0.005)){const chosen=candidates[0].inv;p.invoices.push(chosen);chosen.payments.push(p);}
-  }
   // Deploy sync marker: final Dò nợ allocation validation is included in this build.
   // Exact-value duplicate-PN tie-break: choose one nearest PN; on same-day ties use source order.
   for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005).sort((a,b)=>(dateValue(a.date)-dateValue(b.date))||((a.rec?._idx??0)-(b.rec?._idx??0)))){
@@ -5885,6 +5879,22 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    p.invoices=unique;
    unique.forEach(inv=>{inv.payments.push(p);});
   });
+  // Re-evaluate unmatched near-amount pairs only AFTER rebuilding both sides
+  // of the allocation graph. Earlier passes can leave stale inv.payments links
+  // when a tentative multi-PN payment is rejected; checking before the rebuild
+  // incorrectly hides an otherwise unique PN from this rounding-review fallback.
+  // A non-zero difference stays DƯ LẺ and is never silently marked OK.
+  for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
+   const candidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date))
+    .map(inv=>({inv,diff:Math.abs(inv.total-p.amount)}))
+    .filter(x=>x.diff<=10000.000001)
+    .sort((a,b)=>a.diff-b.diff||Math.abs(dateValue(a.inv.date)-dateValue(p.date))-Math.abs(dateValue(b.inv.date)-dateValue(p.date)));
+   if(candidates.length&&(!candidates[1]||candidates[1].diff-candidates[0].diff>0.005)){
+    const chosen=candidates[0].inv;
+    p.invoices.push(chosen);
+    chosen.payments.push(p);
+   }
+  }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
   let oddAmount=0;
   // A voucher may contain several source rows (for example TK 1561 and VAT 13311).
