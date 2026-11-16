@@ -5884,22 +5884,39 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // when a tentative multi-PN payment is rejected; checking before the rebuild
   // incorrectly hides an otherwise unique PN from this rounding-review fallback.
   // A non-zero difference stays DƯ LẺ and is never silently marked OK.
-  // Final one-to-one rounding reconciliation. Resolve only after every other
-  // allocation and integrity check has finished, so a later pass cannot erase
-  // these links. Rank by smallest amount difference, then nearest date, then
-  // original source order (FIFO) for genuinely equal candidates, matching the
-  // deterministic rule already used for repeated exact-value vouchers.
+  // Final reconciliation of still-unmatched UNC/PC against BOTH unpaid PN
+  // and the remaining balance of a PN that already has a partial payment.
+  // The previous fallback only considered inv.payments.length===0, which
+  // discarded valid settlements whenever an earlier pass had linked only part
+  // of the PN. Shared payments are excluded because their per-PN allocation is
+  // not knowable from the ledger and must not be guessed.
   const finalNearPayments=payments.filter(p=>!p.invoices.length&&p.amount>0.005)
    .sort((a,b)=>(dateValue(a.date)-dateValue(b.date))||((a.rec?._idx??0)-(b.rec?._idx??0)));
   for(const p of finalNearPayments){
-   const candidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date))
-    .map(inv=>({inv,diff:Math.abs(inv.total-p.amount),dateGap:Math.abs(dateValue(inv.date)-dateValue(p.date)),sourceIndex:inv.rows?.[0]?._idx??0}))
+   const candidates=invoices.filter(inv=>{
+     if(inv._adjustedPair||inv.total<=0.005||!within60Days(inv.date,p.date))return false;
+     if(inv.payments.some(existing=>existing.invoices.length!==1))return false;
+     const alreadyPaid=inv.payments.reduce((sum,existing)=>sum+existing.amount,0);
+     const remaining=roundMoney(inv.total-alreadyPaid);
+     return remaining>0.005;
+    })
+    .map(inv=>{
+     const alreadyPaid=inv.payments.reduce((sum,existing)=>sum+existing.amount,0);
+     const remaining=roundMoney(inv.total-alreadyPaid);
+     return {inv,remaining,diff:Math.abs(remaining-p.amount),dateGap:Math.abs(dateValue(inv.date)-dateValue(p.date)),sourceIndex:inv.rows?.[0]?._idx??0};
+    })
     .filter(x=>x.diff<=10000.000001)
     .sort((a,b)=>a.diff-b.diff||a.dateGap-b.dateGap||a.sourceIndex-b.sourceIndex);
    if(!candidates.length)continue;
+   // If two different PN have the same amount/date evidence, do not guess.
+   // FIFO is used only when the amount and date score are tied and the PN
+   // source rows establish an unambiguous source order for repeated vouchers.
    const best=candidates[0];
-   // If amount and date are equally close, preserve FIFO source order instead
-   // of leaving a valid one-to-one rounding pair unlinked. Never reuse a PN.
+   const equallyRanked=candidates.filter(x=>Math.abs(x.diff-best.diff)<=0.005&&Math.abs(x.dateGap-best.dateGap)<86400000);
+   if(equallyRanked.length>1){
+    const sourceRows=equallyRanked.map(x=>x.sourceIndex);
+    if(new Set(sourceRows).size!==sourceRows.length)continue;
+   }
    const chosen=best.inv;
    p.invoices.push(chosen);
    chosen.payments.push(p);
