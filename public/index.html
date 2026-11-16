@@ -5884,16 +5884,25 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   // when a tentative multi-PN payment is rejected; checking before the rebuild
   // incorrectly hides an otherwise unique PN from this rounding-review fallback.
   // A non-zero difference stays DƯ LẺ and is never silently marked OK.
-  for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
+  // Final one-to-one rounding reconciliation. Resolve only after every other
+  // allocation and integrity check has finished, so a later pass cannot erase
+  // these links. Rank by smallest amount difference, then nearest date, then
+  // original source order (FIFO) for genuinely equal candidates, matching the
+  // deterministic rule already used for repeated exact-value vouchers.
+  const finalNearPayments=payments.filter(p=>!p.invoices.length&&p.amount>0.005)
+   .sort((a,b)=>(dateValue(a.date)-dateValue(b.date))||((a.rec?._idx??0)-(b.rec?._idx??0)));
+  for(const p of finalNearPayments){
    const candidates=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&within60Days(inv.date,p.date))
-    .map(inv=>({inv,diff:Math.abs(inv.total-p.amount)}))
+    .map(inv=>({inv,diff:Math.abs(inv.total-p.amount),dateGap:Math.abs(dateValue(inv.date)-dateValue(p.date)),sourceIndex:inv.rows?.[0]?._idx??0}))
     .filter(x=>x.diff<=10000.000001)
-    .sort((a,b)=>a.diff-b.diff||Math.abs(dateValue(a.inv.date)-dateValue(p.date))-Math.abs(dateValue(b.inv.date)-dateValue(p.date)));
-   if(candidates.length&&(!candidates[1]||candidates[1].diff-candidates[0].diff>0.005)){
-    const chosen=candidates[0].inv;
-    p.invoices.push(chosen);
-    chosen.payments.push(p);
-   }
+    .sort((a,b)=>a.diff-b.diff||a.dateGap-b.dateGap||a.sourceIndex-b.sourceIndex);
+   if(!candidates.length)continue;
+   const best=candidates[0];
+   // If amount and date are equally close, preserve FIFO source order instead
+   // of leaving a valid one-to-one rounding pair unlinked. Never reuse a PN.
+   const chosen=best.inv;
+   p.invoices.push(chosen);
+   chosen.payments.push(p);
   }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
   let oddAmount=0;
