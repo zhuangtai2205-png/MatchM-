@@ -51,3 +51,10 @@
 @media(max-width:980px){#mmWorkspaceNav{padding:0 14px}.mm-nav-shell{padding:6px}.mm-nav-mark{display:none}.app-header{padding:12px 14px 10px!important}.app-shell.shell{padding:0 14px 30px!important;grid-template-columns:72px minmax(0,1fr)!important}.app-shell #appSidebar .sidebar-section-heading,.app-shell #appSidebar .sidebar-account-copy,.app-shell #appSidebar .sidebar-account-arrow,.app-shell #appSidebar .navbtn>span:not(.navicon),.app-shell #appSidebar .navfolder-title,.app-shell #appSidebar .sidebar-help{display:none!important}.app-shell #appSidebar .navbtn{justify-content:center;padding:8px 3px}.app-shell #appSidebar .nav-folder-items{display:grid!important}}
 @media(max-width:650px){#mmWorkspaceNav{padding:0 10px;margin-bottom:9px}.mm-nav-shell{min-height:46px;border-radius:13px}.mm-nav-tools{display:none}.mm-nav-group>summary{padding:8px 9px;font-size:11px}.mm-nav-menu{position:fixed;top:auto;left:10px;right:10px;min-width:0;max-width:none}.app-header{align-items:flex-start!important;gap:8px!important}.app-header .headright{max-width:100%;justify-content:flex-end}.app-shell.shell{padding:0 10px 22px!important;grid-template-columns:58px minmax(0,1fr)!important;gap:9px!important}.app-shell #appSidebar.sidebar{padding:6px!important}.app-shell #appSidebar .navicon{width:29px;height:29px}.main .hero,.main .panel{border-radius:15px!important}}
 @media(prefers-reduced-motion:reduce){.mm-nav-group>summary,.main .page{transition:none!important;animation:none!important}}
+
+/* Single navigation system: horizontal menu is primary; legacy sidebar is hidden. */
+#appSidebar{display:none!important}
+.app-shell.shell,.app-shell.sidebar-collapsed{grid-template-columns:minmax(0,1fr)!important}
+.app-shell.shell{gap:0!important}
+.mm-nav-tools{display:none!important}
+@media(max-width:980px){.app-shell.shell,.app-shell.sidebar-collapsed{grid-template-columns:minmax(0,1fr)!important}}
