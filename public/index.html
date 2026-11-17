@@ -3244,7 +3244,7 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
  <div id="dcResultsPanel" class="panel" hidden>
   <div class="sectionhead"><div><h2>2. Kết quả trên toàn bộ dữ liệu</h2><p>Giữ nguyên các cột nguồn; thêm Tổng tiền PN, KẾT QUẢ và TỔNG KẾT theo bố cục file làm thủ công.</p></div></div>
   <div class="stats"><div class="stat"><small>Số phiếu PN</small><b id="dcCount">0</b></div><div class="stat"><small>Tổng tiền chưa thanh toán</small><b id="dcUnpaid">0</b></div><div class="stat"><small>UNC / phiếu chi chưa tìm thấy PN</small><b id="dcNoPN">0</b></div><div class="stat review"><small>Phiếu dư lẻ</small><b id="dcOdd">0</b></div><div class="stat review"><small>TỔNG TIỀN DƯ LẺ</small><b id="dcOddAmount">0.00</b></div></div>
-  <div class="resulttools"><input class="search" id="dcSearch" type="text" placeholder="Tìm mã phiếu, số chứng từ, diễn giải hoặc tài khoản…"><select id="dcStatusFilter" aria-label="Lọc trạng thái"><option value="all">Tất cả trạng thái</option><option value="ok">ok</option><option value="dư lẻ">dư lẻ</option><option value="chưa thanh toán">chưa thanh toán</option><option value="unc/phiếu chi không có pn">UNC / phiếu chi không có PN</option><option value="BÙ TRỪ HĐ ĐIỀU CHỈNH">Điều chỉnh đối ứng</option></select></div>
+  <div class="resulttools"><input class="search" id="dcSearch" type="text" placeholder="Tìm mã phiếu, số chứng từ, diễn giải hoặc tài khoản…"><select id="dcStatusFilter" aria-label="Lọc trạng thái"><option value="all">Tất cả trạng thái</option><option value="ok">ok</option><option value="dư lẻ">dư lẻ (chênh lệch ≤ 10.000)</option><option value="lệch dư">lệch dư (&gt; 10.000)</option><option value="lệch thiếu">lệch thiếu (&gt; 10.000)</option><option value="chưa thanh toán">chưa thanh toán</option><option value="unc/phiếu chi không có pn">UNC / phiếu chi không có PN</option><option value="BÙ TRỪ HĐ ĐIỀU CHỈNH">Điều chỉnh đối ứng</option></select></div>
   <div id="dcResultCount" class="hint"></div>
   <div id="dcResults" class="tablewrap"><div class="empty">Chưa có kết quả.</div></div>
  </div>
@@ -5927,6 +5927,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    chosen.payments.push(p);
   }
   // Connected groups allow one payment to cover several invoices and several payments to cover one invoice.
+  const SMALL_RESIDUAL_LIMIT=10000;
   let oddAmount=0;
   // A voucher may contain several source rows (for example TK 1561 and VAT 13311).
   // Keep the calculated amount on its anchor row to avoid double-counting, but
@@ -5955,9 +5956,10 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    }
    else if(Math.abs(diff)>0.005){
     const absDiff=Math.abs(diff),pct=invoiceTotal>0?absDiff/invoiceTotal*100:0;
-    oddAmount+=absDiff;
     const direction=diff<0?'THIẾU':'DƯ';
-    const note='DƯ LẺ - '+direction+' '+fmt(absDiff)+' ('+pct.toFixed(2).replace('.',',')+'%)';
+    const smallResidual=absDiff<=SMALL_RESIDUAL_LIMIT;
+    if(smallResidual)oddAmount+=absDiff;
+    const note=(smallResidual?'DƯ LẺ - ':'LỆCH ')+direction+' '+fmt(absDiff)+' ('+pct.toFixed(2).replace('.',',')+'%)';
     compI.forEach(inv=>setInvoiceStatus(inv,note));
     // Flag every payment in a mismatched group and show signed shortage/surplus and percentage.
     compP.forEach(p=>{p.rec.status=note;p.rec.result=''});
@@ -5980,7 +5982,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    invoices:p.invoices.map(inv=>({no:String(inv.no??''),total:roundMoney(inv.total)})),
    pnTotal:roundMoney(p.invoices.reduce((sum,inv)=>sum+inv.total,0)),
    difference:roundMoney(p.amount-p.invoices.reduce((sum,inv)=>sum+inv.total,0)),
-   status:p.invoices.length?(()=>{const pn=p.invoices.reduce((sum,inv)=>sum+inv.total,0),diff=p.amount-pn,abs=Math.abs(diff),pct=pn>0?abs/pn*100:0;return abs<=0.005?'ok':'DƯ LẺ - '+(diff<0?'THIẾU ':'DƯ ')+fmt(abs)+' ('+pct.toFixed(2).replace('.',',')+'%)'})():'unc/phiếu chi không có pn'
+   status:p.invoices.length?(()=>{const pn=p.invoices.reduce((sum,inv)=>sum+inv.total,0),diff=p.amount-pn,abs=Math.abs(diff),pct=pn>0?abs/pn*100:0;const direction=diff<0?'THIẾU ':'DƯ ';return abs<=0.005?'ok':(abs<=SMALL_RESIDUAL_LIMIT?'DƯ LẺ - ':'LỆCH ')+direction+fmt(abs)+' ('+pct.toFixed(2).replace('.',',')+'%)'})():'unc/phiếu chi không có pn'
   }));
   // Cross-linked Excel filter fields: leave a counterpart blank when no real match exists.
   const docLabel=(code,no)=>String(code??'').trim().replace(/\s+/g,'')+String(no??'').trim().replace(/\s+/g,'');
@@ -5998,12 +6000,12 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   resultRows=records.map(rec=>{const base=rec.base;const output=base.slice(0,6).concat([rec.totalPN],base.slice(6),[rec.result,rec.status,rec._filterPN||'',rec._filterPayment||'']);rec.output=output;return rec});
   window.__dcExportModel={invoices,payments,pktGroups};
   window.__dcInvoiceTotals=invoices.filter(inv=>!inv._adjustedPair).map(inv=>Math.max(0,inv.grossTotal));
-  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>inv.payments.length&&Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total)>0.005).length,oddAmount};
+  summary={count:invoices.length,unpaid:invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair).reduce((s,inv)=>s+Math.max(0,inv.total),0),noPN:payments.filter(p=>!p.invoices.length).reduce((s,p)=>s+p.amount,0),odd:invoices.filter(inv=>{if(!inv.payments.length)return false;const d=Math.abs(inv.payments.reduce((s,p)=>s+p.amount,0)-inv.total);return d>0.005&&d<=SMALL_RESIDUAL_LIMIT}).length,oddAmount};
   $('dcCount').textContent=summary.count.toLocaleString('vi-VN');$('dcUnpaid').textContent=fmt(summary.unpaid);$('dcNoPN').textContent=fmt(summary.noPN);$('dcOdd').textContent=summary.odd.toLocaleString('vi-VN');$('dcOddAmount').textContent=fmt(summary.oddAmount);
  }
  function render(){
   const q=$('dcSearch').value.trim().toLowerCase(),status=$('dcStatusFilter').value;
-  const list=resultRows.filter(rec=>(!q||rec.output.some(v=>String(v??'').toLowerCase().includes(q)))&&(status==='all'||(status==='dư lẻ'?String(rec.status).toLowerCase().startsWith('dư lẻ'):String(rec.status).toLowerCase()===status)));
+  const list=resultRows.filter(rec=>(!q||rec.output.some(v=>String(v??'').toLowerCase().includes(q)))&&(status==='all'||(status==='dư lẻ'?String(rec.status).toLowerCase().startsWith('dư lẻ'):status==='lệch dư'?String(rec.status).toLowerCase().startsWith('lệch dư'):status==='lệch thiếu'?String(rec.status).toLowerCase().startsWith('lệch thiếu'):String(rec.status).toLowerCase()===status)));
   $('dcResultCount').textContent='Hiển thị '+list.length.toLocaleString('vi-VN')+' / '+resultRows.length.toLocaleString('vi-VN')+' dòng dữ liệu.';
   if(!list.length){$('dcResults').innerHTML='<div class="empty">Không có dòng phù hợp bộ lọc.</div>';return}
   $('dcResults').innerHTML='<table><thead><tr>'+outputHeaders.map(h=>'<th>'+escHtml(h)+'</th>').join('')+'</tr></thead><tbody>'+list.map(rec=>'<tr>'+rec.output.map((v,i)=>{const resultCol=outputHeaders.indexOf('KẾT QUẢ'),statusCol=outputHeaders.indexOf('TỔNG KẾT');const isMoneyColumn=[4,5,6,resultCol].includes(i);const shown=isMoneyColumn&&v!==''&&v!==null&&v!==undefined&&Number.isFinite(Number(v))?fmt(Number(v)):v;const val=(i===statusCol&&v)?'<span class="badge '+(v==='ok'?'good':(String(v).toLowerCase().startsWith('dư lẻ')?'review':(v==='BÙ TRỪ HĐ ĐIỀU CHỈNH'?'rejected':'none')))+'">'+escHtml(v)+'</span>'+(rec.adjustmentNote?'<div class="hint" title="'+escHtml(rec.adjustmentNote)+'">'+escHtml(rec.adjustmentNote)+'</div>':''):escHtml(shown===null||shown===undefined?'':shown);const statusKey=norm(rec.status);const voucherStatus=(String(rec.base[0]??'').trim().toUpperCase().startsWith('PN')?norm((resultRows.find(x=>x._invoiceKey&&x._invoiceKey===rec._invoiceKey&&['CHUA THANH TOAN','UNC/PHIEU CHI KHONG CO PN'].includes(norm(x.status)))||rec).status):statusKey);const amountColor=voucherStatus==='CHUA THANH TOAN'?'#C00000':(voucherStatus==='UNC/PHIEU CHI KHONG CO PN'?'#008000':'');const tint=rec._color&&i>=4?'background:#'+rec._color+';':'';const moneyStyle=amountColor&&isMoneyColumn?'color:'+amountColor+';':'';return '<td style="'+tint+moneyStyle+'">'+val+'</td>'}).join('')+'</tr>').join('')+'</tbody></table>';
