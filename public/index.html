@@ -5671,10 +5671,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(mixedMatch)return mixedMatch;
    return uniqueSubset(items,target,getAmount,maxItems,targetDate);
   }
-  // Exact one-to-one settlement for repeated equal-value PN and UNC vouchers.
-  // If the counts of identical-value PN and UNC/PC vouchers are equal, and every
-  // cross-pair satisfies the 60-day rule, pair them chronologically. This handles
-  // repeated equal amounts without mistaking a balanced 2-PN/2-UNC set for ambiguity.
+  // FIFO exact-value settlement: process UNC before PC, then pair each payment
+  // with the oldest still-unpaid PN of the same amount inside the 60-day window.
+  // Do not require the entire file-wide duplicate group to have equal counts or
+  // every cross-pair to satisfy 60 days; those global checks caused valid local
+  // PN/UNC pairs to remain unmatched when other same-value vouchers existed elsewhere.
   for(const type of ['UNC','PC']){
    const chronological=(a,b)=>{
     const da=dateValue(a.date),db=dateValue(b.date);
@@ -5682,64 +5683,16 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     if(Number.isFinite(da)!==Number.isFinite(db))return Number.isFinite(da)?-1:1;
     return (a.rec?._idx??a.rows?.[0]?._idx??0)-(b.rec?._idx??b.rows?.[0]?._idx??0);
    };
-   const exactPayments=payments.filter(p=>p.type===type&&!p.invoices.length&&p.tokens.length===0&&p.amount>0.005);
-   const exactInvoices=invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005);
-   const amountKeys=[...new Set(exactPayments.map(p=>Number(p.amount).toFixed(2)))];
-   for(const amountKey of amountKeys){
-    const amount=Number(amountKey);
-    const ps=exactPayments.filter(p=>Math.abs(p.amount-amount)<=0.005);
-    const invs=exactInvoices.filter(inv=>Math.abs(inv.total-amount)<=0.005);
-    if(!ps.length||!invs.length)continue;
-    ps.sort(chronological);
-    invs.sort(chronological);
-    // If there are fewer equal-value payments than equal-value PN, allocate
-    // deterministically in source/chronological order (FIFO). This avoids
-    // leaving an exact-value UNC unmatched merely because two same-day PN
-    // happen to have identical totals. Extra PN remain unpaid for review.
-    if(ps.length<invs.length){
-     const count=ps.length;
-     const pairs=ps.map((p,i)=>({p,inv:invs[i]}));
-     if(!pairs.every(({p,inv})=>within60Days(inv.date,p.date)))continue;
-     pairs.forEach(({p,inv})=>{p.invoices.push(inv);inv.payments.push(p)});
-     continue;
-    }
-    if(ps.length!==invs.length)continue;
-    // Only resolve a repeated-value group when every PN can legally pair with
-    // every payment. Otherwise keep the group for manual review.
-    if(!ps.every(p=>invs.every(inv=>within60Days(inv.date,p.date))))continue;
-    ps.forEach((p,i)=>{
-     const inv=invs[i];
-     p.invoices.push(inv);
-     inv.payments.push(p);
-    });
-   }
-   // Preserve the original unique one-to-one behavior for non-repeated amounts.
-   const orderedPayments=payments.filter(p=>p.type===type&&!p.invoices.length&&p.tokens.length===0&&p.amount>0.005).sort(chronological);
+   const orderedPayments=payments
+    .filter(p=>p.type===type&&!p.invoices.length&&p.amount>0.005)
+    .sort(chronological);
    for(const p of orderedPayments){
-    const candidates=invoices.filter(inv=>
-     !inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&
-     within60Days(inv.date,p.date)&&Math.abs(inv.total-p.amount)<=0.005
-    );
-    candidates.sort((a,b)=>{
-     const da=Math.abs(dateValue(a.date)-dateValue(p.date));
-     const db=Math.abs(dateValue(b.date)-dateValue(p.date));
-     if(Number.isFinite(da)&&Number.isFinite(db)&&da!==db)return da-db;
-     return chronological(a,b);
-    });
+    const candidates=invoices
+     .filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005&&
+      Math.abs(inv.total-p.amount)<=0.005&&within60Days(inv.date,p.date))
+     .sort(chronological);
     if(!candidates.length)continue;
-    if(candidates.length>1){
-     const firstGap=Math.abs(dateValue(candidates[0].date)-dateValue(p.date));
-     const secondGap=Math.abs(dateValue(candidates[1].date)-dateValue(p.date));
-     if(Number.isFinite(firstGap)&&Number.isFinite(secondGap)&&Math.abs(secondGap-firstGap)<86400000)continue;
-    }
     const inv=candidates[0];
-    // If another same-value payment could also claim this sole PN, do not
-    // arbitrarily give it to the first UNC/PC; leave both sides for review.
-    const competingPayments=payments.some(other=>
-     other!==p&&other.type===type&&!other.invoices.length&&other.tokens.length===0&&
-     other.amount>0.005&&Math.abs(other.amount-p.amount)<=0.005&&within60Days(inv.date,other.date)
-    );
-    if(competingPayments)continue;
     p.invoices.push(inv);
     inv.payments.push(p);
    }
@@ -5837,7 +5790,11 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
   for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005).sort((a,b)=>(dateValue(a.date)-dateValue(b.date))||((a.rec?._idx??0)-(b.rec?._idx??0)))){
    const claimed=inv=>payments.some(other=>other!==p&&(other.invoices||[]).includes(inv));
    const exact=invoices.filter(inv=>!inv._adjustedPair&&!claimed(inv)&&inv.total>0.005&&within60Days(inv.date,p.date)&&Math.abs(inv.total-p.amount)<=0.005)
-    .sort((a,b)=>(Math.abs(dateValue(a.date)-dateValue(p.date))-Math.abs(dateValue(b.date)-dateValue(p.date)))||((a.rows?.[0]?._idx??0)-(b.rows?.[0]?._idx??0)));
+    .sort((a,b)=>{
+     const da=dateValue(a.date),db=dateValue(b.date);
+     if(Number.isFinite(da)&&Number.isFinite(db)&&da!==db)return da-db;
+     return (a.rows?.[0]?._idx??0)-(b.rows?.[0]?._idx??0);
+    });
    if(exact.length)p.invoices.push(exact[0]);
   }
   // Final allocation integrity check: run AFTER every explicit, amount-based and
