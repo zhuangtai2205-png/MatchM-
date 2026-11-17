@@ -27,7 +27,7 @@
   const top=document.createElement('div');top.className='mm-nav-shell';
   const mark=document.createElement('div');mark.className='mm-nav-mark';mark.innerHTML='<span>🌸</span><span>WORKSPACE</span>';
   const items=document.createElement('div');items.className='mm-nav-items';
-  const direct=sel=>[...sidebar.querySelectorAll('.navbtn[data-page]')].filter(b=>sel.includes(b.dataset.page));
+  const direct=sel=>[...sidebar.querySelectorAll('.navbtn[data-page],.sidebar-account-shortcut[data-page]')].filter(b=>sel.includes(b.dataset.page));
   const sections=[
    ['Bắt đầu','🏠',direct(['intro','overview','workspace'])],
    ...[...sidebar.querySelectorAll('.nav-folder[data-nav-group]')].map(g=>[(g.querySelector('summary')?.textContent||'Công cụ').trim(),'🌿',[...g.querySelectorAll('.navbtn[data-page]')]]),
@@ -41,7 +41,7 @@
   tools.append(collapse);
   top.append(mark,items,tools);shell.append(top);header.insertAdjacentElement('afterend',shell);
   const sync=()=>{
-   const active=sidebar.querySelector('.navbtn.active[data-page]')?.dataset.page||'intro';
+   const active=document.querySelector('.page.active')?.id.replace(/^page-/,'')||sidebar.querySelector('.navbtn.active[data-page]')?.dataset.page||'intro';
    groups.forEach(g=>{
     const current=g.pages.includes(active);g.node.classList.toggle('mm-current',current);
     g.node.querySelectorAll('.mm-nav-link').forEach(a=>{
@@ -50,7 +50,8 @@
     });
    });
   };
-  new MutationObserver(sync).observe(sidebar,{subtree:true,attributes:true,attributeFilter:['class']});sync();
+  new MutationObserver(sync).observe(document.querySelector('.main')||sidebar,{subtree:true,attributes:true,attributeFilter:['class']});new MutationObserver(sync).observe(sidebar,{subtree:true,attributes:true,attributeFilter:['class']});sync();
+  try{if(localStorage.getItem('matchma-sidebar-collapsed')===null)document.getElementById('sidebarCollapseToggle')?.click()}catch(e){}
   document.addEventListener('click',e=>{if(!shell.contains(e.target))shell.querySelectorAll('details[open]').forEach(d=>d.open=false)});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')shell.querySelectorAll('details[open]').forEach(d=>d.open=false)});
  };
