@@ -1,0 +1,53 @@
+/* MatchMã Japanese × Modular × Data-first workspace layer — UI only */
+:root{--mm-accent:var(--purple,#8170c9);--mm-ink:var(--ink,#342e4c);--mm-line:rgba(126,108,164,.16);--mm-card:rgba(255,255,255,.84)}
+.app-header{max-width:1600px!important;padding:16px 24px 12px!important;position:relative;z-index:30}
+.app-header .brand-mark{border-radius:15px!important}
+.app-header .headright{gap:7px!important;flex-wrap:wrap}
+#mmWorkspaceNav{max-width:1600px;margin:0 auto 14px;padding:0 24px;position:relative;z-index:25}
+.mm-nav-shell{display:flex;align-items:center;gap:8px;min-height:54px;padding:7px 10px;border:1px solid rgba(255,255,255,.9);border-radius:18px;background:rgba(255,255,255,.72);box-shadow:0 8px 24px rgba(77,61,111,.07);backdrop-filter:blur(16px)}
+.mm-nav-mark{display:flex;align-items:center;gap:8px;padding:0 10px 0 5px;white-space:nowrap;color:var(--mm-ink);font-size:12px;font-weight:900;letter-spacing:.04em}
+.mm-nav-mark span:first-child{display:grid;place-items:center;width:29px;height:29px;border-radius:10px;background:linear-gradient(135deg,#f8e1ed,#e9e3ff);font-size:16px}
+.mm-nav-items{display:flex;align-items:center;gap:5px;min-width:0;overflow-x:auto;scrollbar-width:thin;flex:1}
+.mm-nav-group{position:relative;flex:0 0 auto}
+.mm-nav-group>summary{list-style:none;display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid transparent;border-radius:12px;color:#625b76;font-size:12px;font-weight:800;white-space:nowrap;cursor:pointer;transition:background .16s,border-color .16s,color .16s}
+.mm-nav-group>summary::-webkit-details-marker{display:none}
+.mm-nav-group>summary:after{content:"⌄";font-size:12px;color:#958ba9}
+.mm-nav-group[open]>summary,.mm-nav-group>summary:hover{background:#f5f1fc;border-color:#e9e2f4;color:#574b83}
+.mm-nav-group.mm-current>summary{background:#eee8fb;border-color:#ded4f3;color:#57468e}
+.mm-nav-group-icon{display:grid;place-items:center;width:23px;height:23px;border-radius:8px;background:#f6eaf2;font-size:14px}
+.mm-nav-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:228px;max-width:min(310px,calc(100vw - 32px));padding:7px;border:1px solid #e9e1f2;border-radius:15px;background:rgba(255,255,255,.97);box-shadow:0 16px 40px rgba(55,43,84,.16);display:grid;gap:3px;z-index:100}
+.mm-nav-link{display:flex;align-items:center;gap:10px;width:100%;padding:10px 11px;border:0;border-radius:10px;background:transparent;color:#5e5870;text-align:left;font-size:12px;font-weight:750;cursor:pointer}
+.mm-nav-link:hover{background:#f7f3fc;color:#584a8b}
+.mm-nav-link[aria-current=page]{background:#eee8fb;color:#57468e}
+.mm-nav-link-icon{display:grid;place-items:center;width:27px;height:27px;border-radius:9px;background:#f4f0fa;font-size:14px;flex:0 0 27px}
+.mm-nav-status{margin-left:auto;padding:4px 7px;border-radius:99px;background:#e6f5ec;color:#397755;font-size:10px;font-weight:900}
+.mm-nav-tools{display:flex;align-items:center;gap:6px;margin-left:auto;padding-left:8px;border-left:1px solid var(--mm-line)}
+.mm-nav-tools button{width:34px;height:34px;border:1px solid #eee7f5;border-radius:10px;background:#fff;color:#6a6080;font-weight:900}
+.mm-nav-tools button:hover{background:#f5f0fc}
+.app-shell.shell{max-width:1600px!important;padding:0 24px 40px!important;grid-template-columns:220px minmax(0,1fr);gap:16px!important}
+.app-shell.sidebar-collapsed{grid-template-columns:72px minmax(0,1fr)!important}
+#appSidebar.sidebar{border:1px solid rgba(255,255,255,.9)!important;border-radius:19px!important;background:rgba(255,255,255,.74)!important;box-shadow:0 8px 24px rgba(77,61,111,.055)!important;padding:10px!important;top:10px!important}
+#sidebarCollapseToggle{display:inline-flex!important;align-items:center;justify-content:center;width:29px;height:29px;border:1px solid #ebe4f3;border-radius:9px;background:#fff;color:#74658f;font-size:18px;font-weight:800}
+.sidebar-collapsed #appSidebar .sidebar-section-heading,.sidebar-collapsed #appSidebar .sidebar-account-copy,.sidebar-collapsed #appSidebar .sidebar-account-arrow,.sidebar-collapsed #appSidebar .navbtn>span:not(.navicon),.sidebar-collapsed #appSidebar .navfolder-title,.sidebar-collapsed #appSidebar .sidebar-help,.sidebar-collapsed #appSidebar .sidebar-bottom .navbtn>span:not(.navicon){display:none!important}
+.sidebar-collapsed #appSidebar .sidebar-topline{justify-content:center;padding:3px 0 8px}
+.sidebar-collapsed #appSidebar .sidebar-account-shortcut{justify-content:center;padding:8px 2px;margin-bottom:7px}
+.sidebar-collapsed #appSidebar .navbtn{justify-content:center;min-height:42px;padding:8px 3px;gap:0}
+.sidebar-collapsed #appSidebar .navicon{display:grid;place-items:center;width:32px;height:32px;margin:0;font-size:17px}
+.sidebar-collapsed #appSidebar .nav-folder{margin:3px 0}
+.sidebar-collapsed #appSidebar .nav-folder-items{display:grid!important;gap:2px}
+.sidebar-collapsed #appSidebar .nav-folder:not([open]) .nav-folder-items{display:grid!important}
+.sidebar-collapsed #appSidebar .sidebar-bottom{margin-top:8px}
+.main{min-width:0}
+.main .hero,.main .panel{border:1px solid rgba(255,255,255,.92)!important;border-radius:19px!important;box-shadow:0 9px 28px rgba(75,61,108,.055)!important}
+.main .hero{padding:clamp(18px,2.2vw,28px)!important}
+.main .panel{padding:clamp(15px,1.8vw,22px)!important}
+.main .stat,.main .mini{border:1px solid #eee8f5!important;border-radius:15px!important;box-shadow:0 4px 14px rgba(75,61,108,.035)}
+.main .tablewrap{border:1px solid #e9e3f0!important;border-radius:13px!important;box-shadow:0 4px 16px rgba(75,61,108,.035)}
+.main table th{background:#f7f4fb!important;color:#625a77!important}
+.main .btn{border-radius:11px!important}
+.main input,.main select,.main textarea{border-radius:10px}
+.main .sectionhead{gap:12px}
+.main .sectionhead h2,.main .panel h2{letter-spacing:-.025em}
+@media(max-width:980px){#mmWorkspaceNav{padding:0 14px}.mm-nav-shell{padding:6px}.mm-nav-mark{display:none}.app-header{padding:12px 14px 10px!important}.app-shell.shell{padding:0 14px 30px!important;grid-template-columns:72px minmax(0,1fr)!important}.app-shell #appSidebar .sidebar-section-heading,.app-shell #appSidebar .sidebar-account-copy,.app-shell #appSidebar .sidebar-account-arrow,.app-shell #appSidebar .navbtn>span:not(.navicon),.app-shell #appSidebar .navfolder-title,.app-shell #appSidebar .sidebar-help{display:none!important}.app-shell #appSidebar .navbtn{justify-content:center;padding:8px 3px}.app-shell #appSidebar .nav-folder-items{display:grid!important}}
+@media(max-width:650px){#mmWorkspaceNav{padding:0 10px;margin-bottom:9px}.mm-nav-shell{min-height:46px;border-radius:13px}.mm-nav-tools{display:none}.mm-nav-group>summary{padding:8px 9px;font-size:11px}.mm-nav-menu{position:fixed;top:auto;left:10px;right:10px;min-width:0;max-width:none}.app-header{align-items:flex-start!important;gap:8px!important}.app-header .headright{max-width:100%;justify-content:flex-end}.app-shell.shell{padding:0 10px 22px!important;grid-template-columns:58px minmax(0,1fr)!important;gap:9px!important}.app-shell #appSidebar.sidebar{padding:6px!important}.app-shell #appSidebar .navicon{width:29px;height:29px}.main .hero,.main .panel{border-radius:15px!important}}
+@media(prefers-reduced-motion:reduce){.mm-nav-group>summary,.main .page{transition:none!important;animation:none!important}}
