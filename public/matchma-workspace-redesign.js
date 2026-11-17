@@ -17,7 +17,7 @@
     const page=b.dataset.page;if(!page)return;
     const a=document.createElement('button');a.type='button';a.className='mm-nav-link';a.dataset.page=page;
     const icon=document.createElement('span');icon.className='mm-nav-link-icon';
-    const source=b.querySelector('.navicon');icon.textContent=(source?.textContent||'').trim()||'✿';
+    const source=b.querySelector('.navicon');icon.innerHTML=(source?.innerHTML||'').trim()||'✿';
     const name=document.createElement('span');name.textContent=(b.querySelector('[data-i18n]')?.textContent||b.querySelector('span:last-child')?.textContent||b.textContent||'').trim();
     a.append(icon,name);a.addEventListener('click',()=>{b.click();d.open=false;});
     menu.append(a);
@@ -30,7 +30,7 @@
   const direct=sel=>[...sidebar.querySelectorAll('.navbtn[data-page],.sidebar-account-shortcut[data-page]')].filter(b=>sel.includes(b.dataset.page));
   const sections=[
    ['Bắt đầu','🏠',direct(['intro','overview','workspace'])],
-   ...[...sidebar.querySelectorAll('.nav-folder[data-nav-group]')].map(g=>[(g.querySelector('summary')?.textContent||'Công cụ').trim(),'🌿',[...g.querySelectorAll('.navbtn[data-page]')]]),
+   ...[...sidebar.querySelectorAll('.nav-folder[data-nav-group]')].map(g=>[(g.querySelector('summary')?.textContent||'Công cụ').replace('⌄','').trim(),'🌿',[...g.querySelectorAll('.navbtn[data-page]')]]),
    ['Nghiệp vụ','📊',direct(['debitcredit','invoicecompare','stockforecast'])],
    ['Cá nhân','🌷',direct(['account','settings'])]
   ];
