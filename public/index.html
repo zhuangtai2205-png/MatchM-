@@ -5627,7 +5627,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    if(pool.length<2)return null;
    const suffix=Array(pool.length+1).fill(0);
    for(let i=pool.length-1;i>=0;i--)suffix[i]=suffix[i+1]+pool[i].amount;
-   let best=null,bestDiff=Infinity,bestDateScore=Infinity,tied=false,nodes=0;
+   let best=null,bestDiff=Infinity,bestDateScore=Infinity,bestSourceOrder=null,tied=false,nodes=0;
    const NODE_LIMIT=4000000,TOLERANCE=1.000001,TIE_EPSILON=0.005;
    const dateScore=chosen=>{
     const targetMs=dateValue(targetDate);
@@ -5636,15 +5636,24 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
     for(const x of chosen){const ms=dateValue(x.item.date);if(!Number.isFinite(ms))return Number.POSITIVE_INFINITY;score+=Math.abs(ms-targetMs);}
     return score;
    };
+   const sourceOrder=chosen=>chosen.map(x=>x.item.rec?._idx??x.item.rows?.[0]?._idx??0).sort((a,b)=>a-b);
+   const earlierSource=(a,b)=>{
+    if(!b)return true;
+    for(let i=0;i<Math.min(a.length,b.length);i++){if(a[i]!==b[i])return a[i]<b[i];}
+    return a.length<b.length;
+   };
    function dfs(start,sum,chosen){
     if(++nodes>NODE_LIMIT)return;
     const diff=Math.abs(sum-targetNumber);
     const hasUNC=chosen.some(x=>x.item.type==='UNC'),hasPC=chosen.some(x=>x.item.type==='PC');
     if(chosen.length>=2&&diff<=TOLERANCE&&(!requireMixed||(hasUNC&&hasPC))){
-     const ds=dateScore(chosen);
-     if(diff<bestDiff-TIE_EPSILON||(Math.abs(diff-bestDiff)<=TIE_EPSILON&&ds<bestDateScore)){
-      bestDiff=diff;bestDateScore=ds;best=chosen.slice();tied=false;
-     }else if(Math.abs(diff-bestDiff)<=TIE_EPSILON&&Math.abs(ds-bestDateScore)<1){tied=true;}
+     const ds=dateScore(chosen),so=sourceOrder(chosen);
+     if(diff<bestDiff-TIE_EPSILON||
+       (Math.abs(diff-bestDiff)<=TIE_EPSILON&&(ds<bestDateScore-1||
+        (Math.abs(ds-bestDateScore)<1&&earlierSource(so,bestSourceOrder)))){
+      bestDiff=diff;bestDateScore=ds;bestSourceOrder=so;best=chosen.slice();tied=false;
+     }else if(Math.abs(diff-bestDiff)<=TIE_EPSILON&&Math.abs(ds-bestDateScore)<1&&
+       !earlierSource(so,bestSourceOrder)&&!earlierSource(bestSourceOrder,so)){tied=true;}
     }
     if(chosen.length>=maxItems||start>=pool.length||sum>=targetNumber+TOLERANCE)return;
     if(sum+suffix[start]<targetNumber-TOLERANCE)return;
@@ -5767,7 +5776,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
    groupChanged=false;
    for(const inv of invoices.filter(inv=>!inv.payments.length&&!inv._adjustedPair&&inv.total>0.005)){
     const available=payments.filter(p=>!p.invoices.length&&p.amount>0.005&&within60Days(inv.date,p.date));
-    const subset=preferredPaymentSubset(available,inv.total,p=>p.amount,14,inv.date);
+    const subset=preferredPaymentSubset(available,inv.total,p=>p.amount,20,inv.date);
     if(subset){inv.payments.push(...subset);subset.forEach(p=>{if(!p.invoices.includes(inv))p.invoices.push(inv)});groupChanged=true;}
    }
    for(const p of payments.filter(p=>!p.invoices.length&&p.amount>0.005)){
