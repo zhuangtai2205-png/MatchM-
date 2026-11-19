@@ -5650,7 +5650,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
      const ds=dateScore(chosen),so=sourceOrder(chosen);
      if(diff<bestDiff-TIE_EPSILON||
        (Math.abs(diff-bestDiff)<=TIE_EPSILON&&(ds<bestDateScore-1||
-        (Math.abs(ds-bestDateScore)<1&&earlierSource(so,bestSourceOrder)))){
+        (Math.abs(ds-bestDateScore)<1&&earlierSource(so,bestSourceOrder))))){
       bestDiff=diff;bestDateScore=ds;bestSourceOrder=so;best=chosen.slice();tied=false;
      }else if(Math.abs(diff-bestDiff)<=TIE_EPSILON&&Math.abs(ds-bestDateScore)<1&&
        !earlierSource(so,bestSourceOrder)&&!earlierSource(bestSourceOrder,so)){tied=true;}
