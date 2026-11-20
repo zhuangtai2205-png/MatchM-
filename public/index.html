@@ -5370,7 +5370,7 @@ header{width:100%!important;max-width:none!important;margin-inline:0!important;p
  }
  function within60Days(invoiceDate,paymentDate){
   const a=dateValue(invoiceDate),b=dateValue(paymentDate);
-  return Number.isFinite(a)&&Number.isFinite(b)&&b>=a&&b-a<=60*86400000;
+  return Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(b-a)<=60*86400000;
  }
  function paymentType(value){const code=String(value??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').toUpperCase().replace(/[^A-Z0-9]/g,'');return code.startsWith('UNC')?'UNC':(code.startsWith('PC')||code.startsWith('PHIEUCHI')||code==='CHI'?'PC':'');}function isPaymentCode(value){return !!paymentType(value);}
  function compute(records){
