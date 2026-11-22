@@ -4764,7 +4764,7 @@ function measureConflict(a,b){
  for(const key of ['volume','weight']){
   if(A[key]&&B[key]){
    const av=A[key],bv=B[key];
-   if(!av.every(x=>bv.some(y=>Math.abs(x-y)<=Math.max(.001,Math.max(x,y)*.10))))return true;
+   if(!av.every(x=>bv.some(y=>Math.abs(x-y)<=20)))return true;
   }
  }
  return false;
