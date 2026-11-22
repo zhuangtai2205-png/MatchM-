@@ -4737,19 +4737,19 @@ function criticalProductMismatch(a,b){
  // Explicit commercial product lines/flavours: a shared barcode or high text score
  // must not merge different named variants.
  const identityGroups=[
-  [/\\b(dau gao lut|rice bran)\\b/,/\\b(dau dau nanh|dau nanh|soybean oil)\\b/,/\\b(dau huong duong|sunflower oil)\\b/,/\\b(dau olive|olive oil)\\b/],
-  [/\\bfroot loops\\b/,/\\bcoco pops\\b/,/\\bcoco galaxy\\b/],
-  [/\\b(nha dam|aloe vera)\\b/,/\\b(trai cay|fruit)\\b/],
-  [/\\bprobi\\b/,/\\bsusu\\b/],
-  [/\\bcolos24h\\b/,/\\bsmarta grow\\b/],
-  [/\\b(ahh cheese|cheese cream coated snack)\\b/,/\\b(cheese wafer|wafer)\\b/],
-  [/\\b(kem dau|strawberry cream)\\b/,/\\b(dau co thach|strawberry jelly)\\b/],
-  [/\\bfucoidan\\b/,/\\bnhan sam\\b/],
-  [/\\btrung ca tuyet\\b/,/\\b(tom|ca com)\\b/,/\\bkimchi\\b/],
-  [/\\bloacker quadratini\\b/,/\\bloacker italian specialities\\b/],
-  [/\\bmi ly modern\\b/,/\\bde nhat pho\\b/,/\\bde nhat thit bam\\b/],
-  [/\\blau thai\\b/,/\\bpho bo\\b/,/\\bthit bam\\b/],
-  [/\\bsttt\\b/,/\\btustc\\b/]
+  [/\b(dau gao lut|rice bran)\b/,/\b(dau dau nanh|dau nanh|soybean oil)\b/,/\b(dau huong duong|sunflower oil)\b/,/\b(dau olive|olive oil)\b/],
+  [/\bfroot loops\b/,/\bcoco pops\b/,/\bcoco galaxy\b/],
+  [/\b(nha dam|aloe vera)\b/,/\b(trai cay|fruit)\b/],
+  [/\bprobi\b/,/\bsusu\b/],
+  [/\bcolos24h\b/,/\bsmarta grow\b/],
+  [/\b(ahh cheese|cheese cream coated snack)\b/,/\b(cheese wafer|wafer)\b/],
+  [/\b(kem dau|strawberry cream)\b/,/\b(dau co thach|strawberry jelly)\b/],
+  [/\bfucoidan\b/,/\bnhan sam\b/],
+  [/\btrung ca tuyet\b/,/\b(tom|ca com)\b/,/\bkimchi\b/],
+  [/\bloacker quadratini\b/,/\bloacker italian specialities\b/],
+  [/\bmi ly modern\b/,/\bde nhat pho\b/,/\bde nhat thit bam\b/],
+  [/\blau thai\b/,/\bpho bo\b/,/\bthit bam\b/],
+  [/\bsttt\b/,/\btustc\b/]
  ];
  for(const group of identityGroups){
   const ix=group.findIndex(re=>re.test(x)),iy=group.findIndex(re=>re.test(y));
@@ -4757,34 +4757,34 @@ function criticalProductMismatch(a,b){
  }
  // Brand-specific lines must be present on both sides and identical.
  const namedLines=[
-  [/\\bsanest\\b/,/\\bfucoidan\\b/],
-  [/\\b(nutricare|colos24h)\\b/,/\\b(smarta grow|colos24h grow)\\b/]
+  [/\bsanest\b/,/\bfucoidan\b/],
+  [/\b(nutricare|colos24h)\b/,/\b(smarta grow|colos24h grow)\b/]
  ];
  for(const [brandRe,lineRe] of namedLines){
   if(brandRe.test(x)&&brandRe.test(y)&&lineRe.test(x)!==lineRe.test(y))return true;
  }
  // Diaper/underwear sizes and ColosBaby package grade letters are identity attributes.
- const diaperContext=/\\b(caryn|unidry|ta quan|ta dan|diaper|pants)\\b/;
+ const diaperContext=/\b(caryn|unidry|ta quan|ta dan|diaper|pants)\b/;
  if(diaperContext.test(x+' '+y)){
-  const sizeRe=/\\b(xxxl|xxl|xl|l|m|s)\\s*\\d{1,3}\\b/g;
+  const sizeRe=/\b(xxxl|xxl|xl|l|m|s)\s*\d{1,3}\b/g;
   const sx=[...x.matchAll(sizeRe)].map(m=>m[1]).join(',');
   const sy=[...y.matchAll(sizeRe)].map(m=>m[1]).join(',');
   if(sx&&sy&&sx!==sy)return true;
  }
- if(/\\bcolosbaby\\b/.test(x)&&/\\bcolosbaby\\b/.test(y)){
-  const gx=(x.match(/-\\s*(m|s)\\b/)||[])[1]||'';
-  const gy=(y.match(/-\\s*(m|s)\\b/)||[])[1]||'';
+ if(/\bcolosbaby\b/.test(x)&&/\bcolosbaby\b/.test(y)){
+  const gx=(x.match(/-\s*(m|s)\b/)||[])[1]||'';
+  const gy=(y.match(/-\s*(m|s)\b/)||[])[1]||'';
   if(gx&&gy&&gx!==gy)return true;
  }
  // Explicit age stage such as 0+ and 1+.
- const ageX=(x.match(/\\b([0-3])\\s*\\+/)||[])[1]||'';
- const ageY=(y.match(/\\b([0-3])\\s*\\+/)||[])[1]||'';
+ const ageX=(x.match(/\b([0-3])\s*\+/)||[])[1]||'';
+ const ageY=(y.match(/\b([0-3])\s*\+/)||[])[1]||'';
  if(ageX&&ageY&&ageX!==ageY)return true;
  // Multipack count is SKU-defining even when total net weight is similar.
- const packRe=/\\b(\\d+)\\s*[x×]\\s*\\d+(?:\\.\\d+)?\\s*(?:g|gr|kg|ml)\\b/;
+ const packRe=/\b(\d+)\s*[x×]\s*\d+(?:\.\d+)?\s*(?:g|gr|kg|ml)\b/;
  const packX=(x.match(packRe)||[])[1]||'',packY=(y.match(packRe)||[])[1]||'';
  if(packX&&packY&&packX!==packY)return true;
- const containerRe=/\\b(\\d+)\\s*(lon|lo|chai|hop|hộp|lọ)\\b/;
+ const containerRe=/\b(\d+)\s*(lon|lo|chai|hop|hop|lo)\b/;
  const countX=(x.match(containerRe)||[])[1]||'',countY=(y.match(containerRe)||[])[1]||'';
  if(countX&&countY&&countX!==countY)return true;
  return false;
