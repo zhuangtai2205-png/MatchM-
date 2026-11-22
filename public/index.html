@@ -3220,7 +3220,7 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
  <div class="field" style="max-width:420px;margin-top:12px"><label for="autoFillExportName">Tên file kết quả khi tải về</label><input id="autoFillExportName" type="text" value="BARCODE_STC_MOI" maxlength="120" placeholder="Nhập tên file muốn lưu"></div><div class="actions"><button class="btn" id="runAutoFill" disabled>Rà soát và điền mã</button><button class="btn alt" id="exportAutoFill" disabled>Xuất Excel đã điền mã ↓</button></div>
  <div id="autoFillSummary" class="hint">Cần tải danh mục chuẩn có SKU và file gốc trước khi chạy.</div>
  </div>
- <div class="panel"><div class="sectionhead"><div><h2>3. Kết quả rà soát và điền mã</h2><p>Lọc trực tiếp các dòng kết quả sau khi chạy; bộ lọc chỉ thay đổi phần đang xem, không thay đổi dữ liệu xuất Excel.</p></div></div><div class="resulttools"><input class="search" id="autoFillResultSearch" type="search" placeholder="Lọc kết quả theo STT, tên hàng, SKU hoặc ghi chú…"><select id="autoFillResultStatus" aria-label="Lọc trạng thái kết quả"><option value="all">Tất cả kết quả</option><option value="Đã tự điền mã phù hợp">Đã tự điền</option><option value="Có mã sẵn — giữ nguyên">Có mã sẵn — giữ nguyên</option><option value="Không có gợi ý phù hợp">Không có gợi ý</option><option value="Không ghép — khác thương hiệu">Khác thương hiệu</option></select><button type="button" class="btn alt" id="autoFillResultClear">Xóa lọc</button></div><div id="autoFillResultCount" class="hint">Chưa có kết quả để lọc.</div><div id="autoFillPreview" class="empty">Chưa chạy rà soát.</div></div>
+ <div class="panel"><div class="sectionhead"><div><h2>3. Kết quả rà soát và điền mã</h2><p>Lọc trực tiếp các dòng kết quả sau khi chạy; bộ lọc chỉ thay đổi phần đang xem, không thay đổi dữ liệu xuất Excel.</p></div></div><div class="resulttools"><input class="search" id="autoFillResultSearch" type="search" placeholder="Lọc kết quả theo STT, tên hàng, SKU hoặc ghi chú…"><select id="autoFillResultStatus" aria-label="Lọc trạng thái kết quả"><option value="all">Tất cả kết quả</option><option value="Đã điền theo ngưỡng OK">Đã tự điền</option><option value="Có mã sẵn — giữ nguyên">Có mã sẵn — giữ nguyên</option><option value="Không có gợi ý phù hợp">Không có gợi ý</option><option value="Không ghép — khác thương hiệu">Khác thương hiệu</option></select><button type="button" class="btn alt" id="autoFillResultClear">Xóa lọc</button></div><div id="autoFillResultCount" class="hint">Chưa có kết quả để lọc.</div><div id="autoFillPreview" class="empty">Chưa chạy rà soát.</div></div>
 </section>
 
 <section class="page" id="page-invoicecompare">
@@ -4075,7 +4075,7 @@ function runAutoFill(){
    const hasRice=(words,txt)=>['com','com_trang','gao','gao_nep','gao_trang'].some(t=>words.has(t))||/cơm\s+trắng|com\s+trang|gạo\s+trắng|gao\s+trang/i.test(txt);
    const hasRevive=(words,txt)=>words.has('revive')||/\brevive\b/i.test(txt);
    const riceVsDrink=(hasRice(sourceWords,name+' '+spec)&&hasRevive(masterWords,m.name))||(hasRevive(sourceWords,name+' '+spec)&&hasRice(masterWords,m.name));
-   if(brandUncertain(name,m.name)||familyConflict||lineMismatch||stageMismatch||criticalProductMismatch(name+' '+spec,m.name+' '+m.spec)||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<2)continue;
+   if(brandUncertain(name,m.name)||familyConflict||lineMismatch||stageMismatch||criticalProductMismatch(name+' '+spec,m.name+' '+m.spec)||riceVsDrink||variantConflict(allTokens,m.tokens)||variantMissing(name,m.name)||measureConflict(name+' '+spec,m.name+' '+m.spec)||incompatibleMeasureType(name+' '+spec,m.name+' '+m.spec)||evidence<1)continue;
    const memorySuggestion=savedMemory.some(x=>x.key===pairKey(name)&&normalizeSku(x.sku)===normalizeSku(m.sku));
    const variantBonus=hasExplicitVariant(name)&&!variantMissing(name,m.name)?.25:0;
    const rank=score+variantBonus-(attributeConflict?.15:0)-(uConflict?.12:0)-(pConflict?.12:0)+(memorySuggestion?2:0);
@@ -4085,7 +4085,7 @@ function runAutoFill(){
   suggestions.sort((a,b)=>b.rank-a.rank);
   const originalCode=target?String(row[target]||'').trim():'';
   const canFill=!!best&&best.score>=.45;
-  const autoApproved=!!(canFill&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&!brandUncertain(name,best.m.name)&&best.evidence>=2);
+  const autoApproved=!!(canFill&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&best.evidence>=1);
   let status='Không có gợi ý phù hợp',reason=name.trim()?'Không tìm thấy tên đủ tương đồng trong danh mục chuẩn':'Tên hàng trống';
   if(canFill){if(originalCode&&!overwrite){status='Có mã sẵn — giữ nguyên';reason='Không ghi đè mã gốc; xem cột mã đề xuất nếu cần thay.'}
    else if(autoApproved){status='Đã điền theo ngưỡng OK';reason=best.memorySuggestion?'Có hỗ trợ từ bộ nhớ đã xác nhận':'Cùng thương hiệu, tên đủ tương đồng và dung tích/khối lượng nằm trong sai số cho phép.'}
