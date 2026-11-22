@@ -4067,7 +4067,7 @@ function runAutoFill(){
   for(const m of candidates.values()){
    if(brandConflict(name,m.name)){brandRejected=true;continue}
    const brandEvidence=brandIdentity(name)&&brandIdentity(m.name)?1:0;
-   const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.60)continue;
+   const score=Math.min(1,similarity(tokens,m.nameTokens)+brandEvidence*.15);if(score<.45)continue;
    const familyConflict=incompatibleFamily(tokens,m.nameTokens),lineMismatch=productLineMismatch(name,m.name),lineUncertain=productLineUncertain(name,m.name),stageMismatch=productStageMismatch(name+' '+spec,m.name+' '+m.spec),stageUncertain=productStageUncertain(name+' '+spec,m.name+' '+m.spec),attributeConflict=conflictTokens(allTokens,m.tokens)||variantMissing(name,m.name)||lineUncertain||stageUncertain,uConflict=unitConflict(unit,m.unit),pConflict=measureConflict(name+' '+spec,m.name+' '+m.spec),familyA=productFamily(tokens),familyB=productFamily(m.nameTokens),familyEvidence=familyA&&familyA===familyB?1:0,brandAliasEvidence=brandEvidence&&brandIdentity(name)==='th'&&/\b(true|milk)\b/.test(norm(name+' '+m.name))?1:0,evidence=sharedEvidence(tokens,m.nameTokens)+brandEvidence+familyEvidence+brandAliasEvidence;
    // Chặn cứng lỗi nguy hiểm: "cơm trắng" không bao giờ là "Revive trắng".
    const sourceNorm=norm(name),masterNorm=norm(m.name);
