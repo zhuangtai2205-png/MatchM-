@@ -4085,11 +4085,11 @@ function runAutoFill(){
   suggestions.sort((a,b)=>b.rank-a.rank);
   const originalCode=target?String(row[target]||'').trim():'';
   const canFill=!!best&&best.score>=.45;
-  const autoApproved=!!(canFill&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&best.evidence>=1);
+  const autoApproved=!!(canFill&&!best.attributeConflict&&!best.pConflict&&best.evidence>=1);
   let status='Không có gợi ý phù hợp',reason=name.trim()?'Không tìm thấy tên đủ tương đồng trong danh mục chuẩn':'Tên hàng trống';
   if(canFill){if(originalCode&&!overwrite){status='Có mã sẵn — giữ nguyên';reason='Không ghi đè mã gốc; xem cột mã đề xuất nếu cần thay.'}
    else if(autoApproved){status='Đã điền theo ngưỡng OK';reason=best.memorySuggestion?'Có hỗ trợ từ bộ nhớ đã xác nhận':'Cùng thương hiệu, tên đủ tương đồng và dung tích/khối lượng nằm trong sai số cho phép.'}
-   else {status='Không tự điền — không đạt điều kiện an toàn';reason=best.pConflict?'Dung tích/khối lượng lệch quá 10%; không tự điền, hãy chọn mã phù hợp.':best.uConflict?'Đơn vị tính khác nhau; không tự điền, hãy chọn mã.':best.attributeConflict?'Có thuộc tính đối lập; không tự điền mã.':'Điểm hoặc bằng chứng chưa đủ để tự xác nhận; hãy chọn mã.'}
+   else {status='Không tự điền — không đạt điều kiện an toàn';reason=best.pConflict?'Dung tích/khối lượng lệch quá 10%; không tự điền, hãy chọn mã phù hợp.':best.uConflict?'Đơn vị bán khác nhau nhưng không chặn mã khi quy cách sản phẩm phù hợp.':best.attributeConflict?'Có thuộc tính đối lập; không tự điền mã.':'Điểm hoặc bằng chứng chưa đủ để tự xác nhận; hãy chọn mã.'}
   }else if(brandRejected){status='Không ghép — khác thương hiệu';reason='Tên thương hiệu không trùng; hệ thống không ghép khác thương hiệu.'}
   const output={...row};
   const selectedSku=autoApproved?best.m.sku:(originalCode&&!overwrite?originalCode:'');
