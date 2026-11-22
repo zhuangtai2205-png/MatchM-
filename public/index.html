@@ -3215,6 +3215,7 @@ body #appSidebar .navfolder-title .navfolder-tab-icon{display:none!important}
   <div class="field"><label for="autoFillUomCol">Cột ĐVT (nếu có)</label><select id="autoFillUomCol" disabled><option value="">— Không chọn —</option></select></div>
   <div class="field"><label for="autoFillTargetCodeCol">Cột mã cần điền trong file gốc (tuỳ chọn)</label><select id="autoFillTargetCodeCol" disabled><option value="">— Thêm cột SKU được điền —</option></select></div>
  </div>
+ <div class="field" style="max-width:520px;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:12px"><label for="autoFillThreshold">Ngưỡng tương đồng để tự động điền mã: <strong><span id="autoFillThresholdValue">90</span>%</strong></label><input id="autoFillThreshold" type="range" min="50" max="100" step="5" value="90" style="width:100%"><div class="muted" style="font-size:12px">Đạt ngưỡng mới tự điền; dưới ngưỡng sẽ đưa vào danh sách chờ chọn mã. Điều kiện khác thương hiệu, sai quy cách hoặc thuộc tính mâu thuẫn vẫn bị chặn.</div><button type="button" class="btn alt" id="applyAutoFillThreshold" style="margin-top:8px">Áp dụng ngưỡng cho Điền mã</button></div>
  <label class="checkline"><input type="checkbox" id="autoFillOverwrite"> Cho phép ghi đè mã đã có (chỉ áp dụng cho cột mã được chọn)</label>
  <div class="field" style="max-width:420px;margin-top:12px"><label for="autoFillExportName">Tên file kết quả khi tải về</label><input id="autoFillExportName" type="text" value="BARCODE_STC_MOI" maxlength="120" placeholder="Nhập tên file muốn lưu"></div><div class="actions"><button class="btn" id="runAutoFill" disabled>Rà soát và điền mã</button><button class="btn alt" id="exportAutoFill" disabled>Xuất Excel đã điền mã ↓</button></div>
  <div id="autoFillSummary" class="hint">Cần tải danh mục chuẩn có SKU và file gốc trước khi chạy.</div>
@@ -3343,7 +3344,7 @@ function matchmaChooseExcelFilename(defaultName){
 }
 </script>
 <script>
-let masterRows=[],checkRows=[],out=[],masterHeaders=[],checkHeaders=[],currentPage=1,pageSize=50,threshold=80,lang='vi',running=false,savedMemory=[];
+let masterRows=[],checkRows=[],out=[],masterHeaders=[],checkHeaders=[],currentPage=1,pageSize=50,threshold=80,autoFillThreshold=90,lang='vi',running=false,savedMemory=[];
 let platformSourceRows=[],platformSourceHeaders=[],platformPage=1,platformPageSize=30,platformBuilt=false,autoFillRows=[],autoFillHeaders=[],autoFillResults=[],autoFillTargetOptions=[];
 let stockForecastFiles={purchase:null,sales:null,stock:null},stockForecastResults=[],stockForecastPage=1,stockForecastPageSize=50,stockForecastKeyModeTouched=false,stockForecastBuilt=false;
 let supabaseClient=null,accountUser=null,accountSubscription=null,cloudBusy=false;const SUPABASE_CONFIG_KEY='matchma-supabase-config-v1';
@@ -4045,6 +4046,7 @@ function initAutoFill(){
  $('autoFillResultClear').addEventListener('click',()=>{$('autoFillResultSearch').value='';$('autoFillResultStatus').value='all';renderAutoFillPreview();$('autoFillResultSearch').focus()});
  $('autoFillFile').addEventListener('change',async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;try{const d=await readFile(f);autoFillRows=d.rows.map(row=>({...row}));autoFillHeaders=d.headers;autoFillResults=[];fillSelect('autoFillSttCol',d.headers,guessStt(d.headers),true);fillSelect('autoFillNameCol',d.headers,guess(d.headers,/tên|ten|name|product|sản phẩm|item/i)||'',false);fillSelect('autoFillSpecCol',d.headers,guess(d.headers,/quy cách|quy cach|spec|dung tích|dung tich|size|pack/i),true);fillSelect('autoFillUomCol',d.headers,guess(d.headers,/đvt|dvt|đơn vị|don vi|unit|uom|dv tính|dv tinh/i),true);fillAutoFillTargets(d.headers);$('autoFillFileInfo').textContent='Đã tải '+f.name+' · '+d.rows.length+' dòng, giữ nguyên thứ tự đọc từ file.';$('exportAutoFill').disabled=true;$('autoFillSummary').textContent=masterRows.length?'Đã có danh mục chuẩn. Kiểm tra cột tên và bấm rà soát.':'Hãy tải danh mục chuẩn tại mục “Danh mục” trước khi chạy.';updateAutoFillButton()}catch(err){alert(err.message||'Không đọc được file');}});
  ['autoFillNameCol','autoFillSttCol','autoFillSpecCol','autoFillUomCol','autoFillTargetCodeCol','autoFillOverwrite'].forEach(id=>$(id).addEventListener('change',updateAutoFillButton));
+ $('autoFillThreshold').addEventListener('input',()=>{$('autoFillThresholdValue').textContent=$('autoFillThreshold').value});$('applyAutoFillThreshold').addEventListener('click',()=>{autoFillThreshold=Number($('autoFillThreshold').value)||90;if(autoFillResults.length)runAutoFill();else $('autoFillSummary').textContent='Đã đặt ngưỡng tự điền mã riêng: '+autoFillThreshold+'%. Tải file và chạy rà soát để áp dụng.'});
  $('runAutoFill').addEventListener('click',runAutoFill);$('exportAutoFill').addEventListener('click',exportAutoFill);
 }
 function fillAutoFillTargets(headers){const s=$('autoFillTargetCodeCol');s.innerHTML='';const first=document.createElement('option');first.value='';first.textContent='— Thêm cột SKU được điền —';s.appendChild(first);const targets=headers.filter(h=>/(sku|mã hàng|ma hang|mã sp|ma sp|item code|product code|code hàng|code$)/i.test(h)&&!/(stt|số thứ tự|serial|row id)/i.test(h));targets.forEach(h=>{const o=document.createElement('option');o.value=h;o.textContent=h;s.appendChild(o)});if(targets.length)s.value=targets[0];s.disabled=!headers.length}
@@ -4083,7 +4085,7 @@ function runAutoFill(){
   suggestions.sort((a,b)=>b.rank-a.rank);
   const originalCode=target?String(row[target]||'').trim():'';
   const canFill=!!best&&best.score>=.45;
-  const autoApproved=!!(canFill&&best.score*100>=threshold&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&!brandUncertain(name,best.m.name)&&best.evidence>=2);
+  const autoApproved=!!(canFill&&best.score*100>=autoFillThreshold&&!best.attributeConflict&&!best.uConflict&&!best.pConflict&&!brandUncertain(name,best.m.name)&&best.evidence>=2);
   let status='Không có gợi ý phù hợp',reason=name.trim()?'Không tìm thấy tên đủ tương đồng trong danh mục chuẩn':'Tên hàng trống';
   if(canFill){if(originalCode&&!overwrite){status='Có mã sẵn — giữ nguyên';reason='Không ghi đè mã gốc; xem cột mã đề xuất nếu cần thay.'}
    else if(autoApproved){status='Đã điền theo ngưỡng OK';reason=best.memorySuggestion?'Có hỗ trợ từ bộ nhớ đã xác nhận':'Cùng thương hiệu, tên đủ tương đồng và dung tích/khối lượng nằm trong sai số cho phép.'}
